@@ -1,0 +1,97 @@
+---
+packages:
+  darwin:
+    brews:
+    - 'git'
+    - 'coreutils'
+    - 'findutils'
+    - 'age'
+    - 'glow'
+    - 'gnupg'
+    - 'gum'
+    - 'htmlq'
+    - 'mas'
+    - 'fastfetch'
+    - 'yudai/gotty/gotty'
+    - 'knqyf263/pet/pet'
+    - 'rmlint'
+    - 'yazi'
+    - 'btop'
+    - 'micro'
+    - 'starship'
+    - 'dnote'
+    - 'watson'
+    - 'snyk'
+    - 'koekeishiya/formulae/yabai'
+    - 'pinentry-mac'
+    - 'pipx'
+    - 'python@3.12'
+    - 'volta'
+    - 'zx'
+    - 'docker'
+    casks:
+    - 'google-chrome'
+    - 'alacritty'
+    - 'obsidian'
+    - 'warp'
+
+
+    cargo:
+    - 'zellij'
+
+    binary:mac:
+    - 'https://releases.arc.net/release/Arc-latest.dmg'
+    - 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh)"'
+    - 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
+    - 'https://download.typora.io/mac/Typora.dmg'
+    - 'https://github.com/agata/dl.biscuit/releases/latest'
+    - 'https://raindrop.io/r/app/macos-arm'
+    - 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
+    - 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
+    - 'https://app.warp.dev/get_warp'
+
+    pip:
+    - 'ps_mem'
+
+
+    # if OS.mac?
+    # brew "coreutils"
+    # brew "findutils"
+    # brew "m-cli"
+    # end
+    # brew "age"
+    # # Ensure macOS Bash gets upgraded to 5+
+    # brew "bash"
+    # brew "expect"
+    # brew "fzf"
+    # brew "gawk"
+    # brew "git-delta"
+    # brew "glow"
+    # brew "gnupg"
+    # brew "go"
+    # brew "gsed"
+    # brew "gum"
+    # brew "htmlq"
+    # brew "jq"
+    # brew "mas"
+    # brew "moreutils"
+    # brew "m4"
+    # brew "node"
+    # brew "openssh"
+    # brew "pinentry-mac"
+    # brew "pipx"
+    # brew "pkg-config"
+    # brew "progress"
+    # brew "python@3.11"
+    # brew "python@3.12"
+    # brew "ruby"
+    # brew "rust"
+    # tap "go-task/tap"
+    # brew "go-task/tap/go-task"
+    # brew "volta"
+    # brew "yarn"
+    # brew "yq"
+    # brew "zx"
+    # cask "docker"
+    # cask "java@beta" unless system "/usr/libexec/java_home --failfast"
+    # cask "macfuse"
