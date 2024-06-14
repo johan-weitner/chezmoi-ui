@@ -1,0 +1,56 @@
+import = [
+    "~/.config/alacritty/themes/themes/coolnight.toml"
+]
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+dimensions = { columns = 120, lines = 92 }
+position = { x = 2740, y = 0 }
+padding.x = 10
+padding.y = 10
+decorations = "Buttonless" # "Full" | "None" | "Transparent" | "Buttonless"
+
+#decorations = "Buttonless"
+opacity = 0.8
+blur = true
+
+#option_as_alt = "Both"
+
+[cursor]
+style = "Block"
+# blinking = "On"
+blink_interval = 750
+blink_timeout = 5
+
+[font]
+normal.family = "MesloLGM Nerd Font Mono"
+# normal = { family = "MesloLGM Nerd Font Mono" }
+# bold = { family = "MesloLGM Nerd Font Mono" }91
+# italic = { family = "MesloLGM Nerd Font Mono", style = "italic" }
+# bold_italic = { family = "MesloLGM Nerd Font Mono", style = "italic" }
+size = 15.0
+offset = { x = 0, y = 3 }
+builtin_box_drawing = true
+
+[selection]
+  save_to_clipboard = true
+  semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[mouse]
+bindings = [
+{ mouse = "Right", mods = "Control", action = "Paste" },
+{ mouse = "Right", action = "Paste" },
+]
+
+[keyboard]
+bindings = [
+  { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "Left", mods = "Alt", chars = "\u001BB" },        # Move cursor left by word
+  { key = "Right", mods = "Alt", chars = "\u001BF" },       # Move cursor right by word
+  { key = "Left", mods = "Command", chars = "\u001bOH" },   # Move cursor to beginning of line
+  { key = "Right", mods = "Command", chars = "\u001bOF" },  # Move cursor to end of line
+  { key = "Backspace", mods = "Command", chars = "\u0015" } # Delete line
+]
+
