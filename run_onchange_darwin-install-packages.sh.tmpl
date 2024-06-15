@@ -10,3 +10,11 @@ cask {{ . | quote }}
 {{ end -}}
 EOF
 {{ end -}}
+
+{{ range .packages.darwin.binary.mac -}}
+# fetch quote via curl and save under a temporary file name
+# then run the binary
+curl -sL {{ . | quote }} -o /tmp/{{ .filename }}
+chmod +x /tmp/{{ .filename }}
+/tmp/{{ .filename }}
+{{ end -}}
