@@ -82,7 +82,7 @@ packages:
     # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     node:
-    - node-gyp@latest
+    # - node-gyp@latest
     - '@builder.io/ai-shell'
     - 'aicommits'
     - aifiles
