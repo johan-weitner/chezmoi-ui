@@ -39,7 +39,7 @@ packages:
     cargo:
     - 'zellij'
 
-    binary:mac:
+    binary-mac:
     - 'https://releases.arc.net/release/Arc-latest.dmg'
     - 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
     - 'https://download.typora.io/mac/Typora.dmg'
@@ -48,10 +48,10 @@ packages:
     - 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
     - 'https://app.warp.dev/get_warp'
 
-    script:mac:
+    script-mac:
     - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
 
-    latest:mac:
+    latest-mac:
     - 'https://github.com/agata/dl.biscuit/releases/latest'
 
     pip:
