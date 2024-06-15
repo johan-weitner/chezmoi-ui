@@ -39,7 +39,7 @@ packages:
     cargo:
     - 'zellij'
 
-    binary-mac:
+    binaryMac:
     - 'https://releases.arc.net/release/Arc-latest.dmg'
     - 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
     - 'https://download.typora.io/mac/Typora.dmg'
