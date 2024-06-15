@@ -42,3 +42,14 @@ rm "{{ $binary.name }}"
 {{ range .packages.darwin.scripts -}}
 sh -c "$(curl -fsSL {{ . | quote }})"
 {{ end -}}
+
+echo "Installing Node LTS..."
+volta install node
+
+echo "Installing PNPM..."
+volta install pnpm
+
+{{ range .packages.darwin.scripts -}}
+echo "Installing Node application {{ . | quote }}..."
+npm install -g "{{ . | quote }}"
+{{ end -}}
