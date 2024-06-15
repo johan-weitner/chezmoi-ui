@@ -11,10 +11,15 @@ cask {{ . | quote }}
 EOF
 {{ end -}}
 
+
+# Given the following yaml structure:
+#   binaryMac:
+#    - 'Arc Browser':
+#      name: 'Arc-latest.dmg'
+#      url: 'https://releases.arc.net/release/Arc-latest.dmg'
+# Loop through binaryMac, fetch {{url}} with curl and execute {{name}}
 {{ range .packages.darwin.binaryMac -}}
-# fetch quote via curl and save under a temporary file name
-# then run the binary
-curl -sL {{ .url }}
-chmod +x ./{{ name }}
-./{{ name }}
+curl -sL {{ .url }} -o {{ .name }}
+open {{ .name }}
 {{ end -}}
+
