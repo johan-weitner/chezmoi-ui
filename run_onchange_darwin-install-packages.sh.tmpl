@@ -14,7 +14,7 @@ EOF
 {{ range .packages.darwin.binaryMac -}}
 # fetch quote via curl and save under a temporary file name
 # then run the binary
-curl -sL {{ . | quote }} -o /tmp/installer
-chmod +x /tmp/installer
-/tmp/installer
+curl -sL {{ .url }}
+chmod +x ./{{ name }}
+./{{ name }}
 {{ end -}}
