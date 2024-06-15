@@ -7,6 +7,8 @@ packages:
     - 'findutils'
     - 'age'
     - 'glow'
+    - 'bat'
+    - 'lsd'
     - 'gnupg'
     - 'gum'
     - 'htmlq'
@@ -19,6 +21,7 @@ packages:
     - 'micro'
     - 'starship'
     - 'watson'
+    - 'lazygit'
     - 'snyk-cli'
     - 'koekeishiya/formulae/yabai'
     - 'pinentry-mac'
@@ -39,24 +42,24 @@ packages:
     - 'zellij'
 
     binaryMac:
-    - 'Arc':
-      name: 'Arc-latest.dmg'
-      url: 'https://releases.arc.net/release/Arc-latest.dmg'
-    - 'GitButler':
-      name: 'GitButler.dmg'
-      url: 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
-    - Typora:
-      name: 'Typora.dmg'
-      url: 'https://download.typora.io/mac/Typora.dmg'
-    # - Raindrop:
-    #   name: 'Raindrop.dmg'
-    #   url: 'https://raindrop.io/r/app/macos-arm'
-    - FleetingNotes:
-      name: 'FleetingNotesMac.dmg'
-      url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
-    # - Obsidian:
-    #   name: 'Obsidian.dmg'
-    #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
+    # - 'Arc':
+    #   name: 'Arc-latest.dmg'
+    #   url: 'https://releases.arc.net/release/Arc-latest.dmg'
+    # - 'GitButler':
+    #   name: 'GitButler.dmg'
+    #   url: 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
+    # - Typora:
+    #   name: 'Typora.dmg'
+    #   url: 'https://download.typora.io/mac/Typora.dmg'
+    # - FleetingNotes:
+    #   name: 'FleetingNotesMac.dmg'
+    #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
+    # # - Raindrop:
+    # #   name: 'Raindrop.dmg'
+    # #   url: 'https://raindrop.io/r/app/macos-arm'
+    # # - Obsidian:
+    # #   name: 'Obsidian.dmg'
+    # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     node:
     - tldr
