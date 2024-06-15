@@ -21,13 +21,15 @@ volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $
 
 echo "Volume: $volume"
 
-app_path=$(find "$volume" -name "*.App" -maxdepth 1)
+app_path=$(find "$volume" -name "*.app" -maxdepth 1)
+echo "App path: $app_path"
 
 if [ -n "$app_path" ]; then
     echo "Copying $app_path to /Applications"
     cp -R "$app_path" /Applications/
 else
     echo "No .app file found in $volume"
+    ls -l $volume
 fi
 
 echo "Unmounting $volume"
