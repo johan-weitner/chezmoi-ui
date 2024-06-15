@@ -24,7 +24,7 @@ packages:
     - 'lazygit'
     - 'snyk-cli'
     - 'koekeishiya/formulae/yabai'
-    - 'oh-my-posh'
+    - 'jandedobbeleer/oh-my-posh/oh-my-posh'
     - 'pinentry-mac'
     - 'pipx'
     - 'python@3.12'
@@ -32,11 +32,30 @@ packages:
     - 'zx'
     - 'docker'
     - tldr
+    - zoxide
+    - neovim
+    - act
+    - age
+    - gofireflyio/aiac/aiac
+    - pandoc
+    - exiftool
+    - poppler
+    - csvkit
+    - vldmrkl/formulae/airdrop-cli
+    - asciinema
+    - asdf
+    - ripgrep
+    - bat-extras
+    - git-extras
+    - bfg
     casks:
     - 'google-chrome'
     - 'alacritty'
     - 'obsidian'
     - 'warp'
+    - 'adobe-creative-cloud'
+    - alt-tab
+    - beekeeper-studio
 
 
     cargo:
@@ -63,12 +82,18 @@ packages:
     # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     node:
-    - tldr
+    - '@builder.io/ai-shell'
+    - 'aicommits'
+    - aifiles
+    - '@appnest/readm'
 
 
 
     scripts:
     - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
+
+    git:
+      - 'git clone https://github.com/NvChad/starter ~/.config/nvim && nvim'
 
     latest-mac:
     - 'https://github.com/agata/dl.biscuit/releases/latest'
@@ -76,5 +101,11 @@ packages:
     pip:
     - 'ps_mem'
 
+    pipx:
+      - ansible
+      - ansibler
+      - ansibleconnect
 
-    # cask "macfuse"
+
+    gem:
+      - bashly
