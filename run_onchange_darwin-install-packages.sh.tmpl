@@ -18,8 +18,9 @@ EOF
 #      name: 'Arc-latest.dmg'
 #      url: 'https://releases.arc.net/release/Arc-latest.dmg'
 # Loop through binaryMac, fetch {{url}} with curl and execute {{name}}
-{{ range .packages.darwin.binaryMac -}}
-curl -sL {{ .url }} -o {{ .name }}
-open {{ .name }}
+
+{{ range $app, $binary := .packages.darwin.binaryMac -}}
+curl -sL {{ $binary.url }} -o {{ $binary.name }}
+open {{ $binary.name }}
 {{ end -}}
 
