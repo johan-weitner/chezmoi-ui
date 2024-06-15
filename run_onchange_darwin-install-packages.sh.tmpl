@@ -39,3 +39,6 @@ rm "{{ $binary.name }}"
 
 {{ end -}}
 
+{{ range .packages.darwin.scripts -}}
+sh -c "$(curl -fsSL {{ . | quote }})"
+{{ end -}}

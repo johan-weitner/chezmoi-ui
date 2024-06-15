@@ -27,6 +27,7 @@ packages:
     - 'volta'
     - 'zx'
     - 'docker'
+    - tldr
     casks:
     - 'google-chrome'
     - 'alacritty'
@@ -47,20 +48,24 @@ packages:
     - Typora:
       name: 'Typora.dmg'
       url: 'https://download.typora.io/mac/Typora.dmg'
-    - Raindrop:
-      name: 'Raindrop.dmg'
-      url: 'https://raindrop.io/r/app/macos-arm'
+    # - Raindrop:
+    #   name: 'Raindrop.dmg'
+    #   url: 'https://raindrop.io/r/app/macos-arm'
     - FleetingNotes:
       name: 'FleetingNotesMac.dmg'
       url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
-    - Obsidian:
-      name: 'Obsidian.dmg'
-      url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
+    # - Obsidian:
+    #   name: 'Obsidian.dmg'
+    #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
+
+    node:
+    - tldr
 
 
 
-    script-mac:
-    - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
+    scripts:
+    - zsh-navigation-tools:
+      url: 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
 
     latest-mac:
     - 'https://github.com/agata/dl.biscuit/releases/latest'
@@ -69,46 +74,4 @@ packages:
     - 'ps_mem'
 
 
-    # sh -c "$(curl -fsSL
-
-    # if OS.mac?
-    # brew "coreutils"
-    # brew "findutils"
-    # brew "m-cli"
-    # end
-    # brew "age"
-    # # Ensure macOS Bash gets upgraded to 5+
-    # brew "bash"
-    # brew "expect"
-    # brew "fzf"
-    # brew "gawk"
-    # brew "git-delta"
-    # brew "glow"
-    # brew "gnupg"
-    # brew "go"
-    # brew "gsed"
-    # brew "gum"
-    # brew "htmlq"
-    # brew "jq"
-    # brew "mas"
-    # brew "moreutils"
-    # brew "m4"
-    # brew "node"
-    # brew "openssh"
-    # brew "pinentry-mac"
-    # brew "pipx"
-    # brew "pkg-config"
-    # brew "progress"
-    # brew "python@3.11"
-    # brew "python@3.12"
-    # brew "ruby"
-    # brew "rust"
-    # tap "go-task/tap"
-    # brew "go-task/tap/go-task"
-    # brew "volta"
-    # brew "yarn"
-    # brew "yq"
-    # brew "zx"
-    # cask "docker"
-    # cask "java@beta" unless system "/usr/libexec/java_home --failfast"
     # cask "macfuse"
