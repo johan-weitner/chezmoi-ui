@@ -49,7 +49,7 @@ volta install node
 echo "Installing PNPM..."
 volta install pnpm
 
-{{ range .packages.darwin.scripts -}}
+{{ range .packages.darwin.node -}}
 echo "Installing Node application {{ . | quote }}..."
 npm install -g "{{ . | quote }}"
 {{ end -}}
