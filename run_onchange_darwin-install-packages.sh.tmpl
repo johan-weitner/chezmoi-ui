@@ -44,12 +44,12 @@ sh -c "$(curl -fsSL {{ . | quote }})"
 {{ end -}}
 
 # If Node isn't installed, install it using volta
-if! volta list | grep -q node; then
+if [[! volta list | grep -q node]]; then
   echo "Installing Node LTS..."
   volta install node
 fi
 
-if! volta list | grep -q pnpm; then
+if [[! volta list | grep -q pnpm]]; then
   echo "Installing PNPM..."
   volta install pnpm
 fi
