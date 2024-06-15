@@ -43,14 +43,16 @@ rm "{{ $binary.name }}"
 sh -c "$(curl -fsSL {{ . | quote }})"
 {{ end -}}
 
-echo "Installing Node LTS..."
-volta install node
+# If Node isn't installed, install it using volta
+if! volta list | grep -q node; then
+  echo "Installing Node LTS..."
+  volta install node
+fi
 
-echo "Installing PNPM..."
-volta install pnpm
-
-echo "Set CPU arch..."
-npm config set arch arm64
+if! volta list | grep -q pnpm; then
+  echo "Installing PNPM..."
+  volta install pnpm
+fi
 
 {{ range .packages.darwin.node -}}
 if npm list -g --depth=0 | grep -q "{{ . | quote }}"; then
