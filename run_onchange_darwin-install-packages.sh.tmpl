@@ -56,13 +56,12 @@ sh -c "$(curl -fsSL {{ . | quote }})"
 
 echo ""
 echo "Setting up Node and PNPM..."
-# If Node isn't installed, install it using volta
-if [[! volta list | grep -q node]]; then
+if ! volta which node &> /dev/null; then
   echo "Installing Node LTS..."
   volta install node
 fi
 
-if [[! volta list | grep -q pnpm]]; then
+if ! volta which pnpm &> /dev/null; then
   echo "Installing PNPM..."
   volta install pnpm
 fi
