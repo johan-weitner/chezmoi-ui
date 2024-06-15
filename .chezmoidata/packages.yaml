@@ -24,6 +24,7 @@ packages:
     - 'lazygit'
     - 'snyk-cli'
     - 'koekeishiya/formulae/yabai'
+    - 'jandedobbeleer/oh-my-posh/oh-my-posh'
     - 'pinentry-mac'
     - 'pipx'
     - 'python@3.12'
