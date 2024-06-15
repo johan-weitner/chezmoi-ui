@@ -21,7 +21,7 @@ volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $
 
 echo "Volume: $volume"
 
-app_path=$(find "/Volumes/{{ $binary.name }}" -name "*.App" -maxdepth 1)
+app_path=$(find "$volume" -name "*.App" -maxdepth 1)
 
 if [ -n "$app_path" ]; then
     echo "Copying $app_path to /Applications"
