@@ -54,6 +54,8 @@ npm config set arch arm64
 
 {{ range .packages.darwin.node -}}
 if npm list -g --depth=0 | grep -q "{{ . | quote }}"; then
+  echo "{{ . | quote }} is already installed. Skipping..."
+else
   echo "Installing Node application {{ . | quote }}..."
   npm install -g "{{ . | quote }}"
 fi
