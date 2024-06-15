@@ -95,7 +95,7 @@ packages:
     - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
 
     git:
-      - 'git clone https://github.com/NvChad/starter ~/.config/nvim && nvim'
+      - 'https://github.com/NvChad/starter ~/.config/nvim'
 
     latest-mac:
     - 'https://github.com/agata/dl.biscuit/releases/latest'

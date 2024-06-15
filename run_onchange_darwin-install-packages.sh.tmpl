@@ -1,6 +1,9 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
+
+echo ""
+echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
 brew {{ . | quote }}
@@ -12,6 +15,9 @@ EOF
 {{ end -}}
 
 
+
+echo ""
+echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
 echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
 curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
@@ -39,10 +45,17 @@ rm "{{ $binary.name }}"
 
 {{ end -}}
 
+
+
+echo ""
+echo "Installing packages by shellscript..."
 {{ range .packages.darwin.scripts -}}
 sh -c "$(curl -fsSL {{ . | quote }})"
 {{ end -}}
 
+
+echo ""
+echo "Setting up Node and PNPM..."
 # If Node isn't installed, install it using volta
 if [[! volta list | grep -q node]]; then
   echo "Installing Node LTS..."
@@ -54,6 +67,9 @@ if [[! volta list | grep -q pnpm]]; then
   volta install pnpm
 fi
 
+
+echo ""
+echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
 if npm list -g --depth=0 | grep -q "{{ . | quote }}"; then
   echo "{{ . | quote }} is already installed. Skipping..."
@@ -63,7 +79,16 @@ else
 fi
 {{ end -}}
 
-
+echo ""
+echo "Installing cargo packages..."
 {{ range .packages.darwin.cargo -}}
+echo "Installing {{ . | quote }}..."
 cargo install "{{ . | quote }}"
+{{ end -}}
+
+echo ""
+echo "Fetching Git repos..."
+{{ range .packages.darwin.git -}}
+echo "Installing {{ . | quote }}..."
+git clone "{{ . | quote }}"
 {{ end -}}
