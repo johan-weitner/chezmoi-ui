@@ -87,6 +87,7 @@ packages:
     - aifiles
     - '@appnest/readme'
     - osx-tag
+    - bitly-cli-client
 
 
 
