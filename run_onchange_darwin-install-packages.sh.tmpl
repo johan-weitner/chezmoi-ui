@@ -49,6 +49,9 @@ volta install node
 echo "Installing PNPM..."
 volta install pnpm
 
+echo "Set CPU arch..."
+npm config set arch arm64
+
 {{ range .packages.darwin.node -}}
 echo "Installing Node application {{ . | quote }}..."
 npm install -g "{{ . | quote }}"
