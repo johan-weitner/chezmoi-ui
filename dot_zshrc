@@ -1,8 +1,9 @@
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
-# [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
+[[ -f ~/.zsh/plugins.zsh ]] && source ~/.zsh/plugins.zsh
 [[ -f ~/.zsh/env.zsh ]] && source ~/.zsh/env.zsh
 [[ -f ~/.zsh/completion.zsh ]] && source ~/.zsh/completion.zsh
+# [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
 # [[ -f ~/.zsh/nvm.zsh ]] && source ~/.zsh/nvm.zsh
 # [[ -f ~/.zsh/wsl2fix.zsh ]] && source ~/.zsh/wsl2fix.zsh
 # [[ -f ~/.zsh/goto.zsh ]] && source ~/.zsh/goto.zsh
@@ -15,7 +16,7 @@ Second row
 # eval "$(starship init zsh)"
 
 # Load oh-my-posh
-eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/atomic.omp.json)" # 1_shell, atomic
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/1_shell.omp.json)" # 1_shell, atomic
 #  1_shell.omp.json                halflife.omp.json           poshmon.omp.json
 #  agnoster.minimal.omp.json       honukai.omp.json            powerlevel10k_classic.omp.json
 #  agnoster.omp.json               hotstick.minimal.omp.json   powerlevel10k_lean.omp.json

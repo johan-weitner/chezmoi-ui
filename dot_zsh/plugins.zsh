@@ -1,0 +1,1 @@
+eval "$(lua $(brew --prefix z.lua)/share/z.lua/z.lua --init zsh)"
