@@ -62,3 +62,8 @@ else
   npm install -g "{{ . | quote }}"
 fi
 {{ end -}}
+
+
+{{ range .packages.darwin.cargo -}}
+cargo install -g "{{ . | quote }}"
+{{ end -}}

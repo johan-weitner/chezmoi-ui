@@ -93,7 +93,6 @@ packages:
 
     scripts:
     - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
-    - 'https://sh.rustup.rs'
 
     git:
       - 'git clone https://github.com/NvChad/starter ~/.config/nvim && nvim'
