@@ -27,7 +27,7 @@ if [ -n "$app_path" ]; then
     echo "Copying $app_path to /Applications"
     cp -R "$app_path" /Applications/
 else
-    echo "No .app file found in {{ $volume }}"
+    echo "No .app file found in $volume"
 fi
 
 echo "Unmounting $volume"
