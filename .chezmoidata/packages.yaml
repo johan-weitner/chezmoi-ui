@@ -86,6 +86,7 @@ packages:
     - 'aicommits'
     - aifiles
     - '@appnest/readme'
+    - osx-tag
 
 
 
