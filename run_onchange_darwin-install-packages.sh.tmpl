@@ -23,7 +23,7 @@ echo "Volume: $volume"
 
 app_path=$(find "/Volumes/{{ $binary.name }}" -name "*.app" -maxdepth 1)
 
-if [ -n "{{ $app_path }}" ]; then
+if [ -n "$app_path" ]; then
     echo "Copying {{ $app_path }} to /Applications"
     cp -R "{{ $app_path }}" /Applications/
 else
