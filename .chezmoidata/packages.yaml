@@ -64,8 +64,7 @@ packages:
 
 
     scripts:
-    - zsh-navigation-tools:
-      url: 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
+    - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
 
     latest-mac:
     - 'https://github.com/agata/dl.biscuit/releases/latest'
