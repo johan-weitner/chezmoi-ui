@@ -12,13 +12,6 @@ EOF
 {{ end -}}
 
 
-# Given the following yaml structure:
-#   binaryMac:
-#    - 'Arc Browser':
-#      name: 'Arc-latest.dmg'
-#      url: 'https://releases.arc.net/release/Arc-latest.dmg'
-# Loop through binaryMac, fetch {{url}} with curl and execute {{name}}
-
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
 curl -sL {{ $binary.url }} -o {{ $binary.name }}
 open {{ $binary.name }}
