@@ -13,28 +13,29 @@ EOF
 
 
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
-output_path="/tmp/{{ $binary.name }}"
-
-# Download the file using curl
 echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
-curl -sL "{{ $binary.url }}" -o "$output_path"
+curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
 
-echo "Mounting {{ $output_path }}"
-volume=$(hdiutil attach "$output_path" | grep '/Volumes/' | awk '{ print $3 }')
+echo "Mounting {{ $binary.name }}"
+volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{{ print $3 }}')
 
-app_path=$(find "$volume" -name "*.app" -maxdepth 1)
+echo "Volume: $volume"
 
-if [ -n "$app_path" ]; then
-    echo "Copying $app_path to /Applications"
-    cp -R "$app_path" /Applications/
+app_path=$(find "{{ $volume }}" -name "*.app" -maxdepth 1)
+
+if [ -n "{{ $app_path }}" ]; then
+    echo "Copying {{ $app_path }} to /Applications"
+    cp -R "{{ $app_path }}" /Applications/
 else
-    echo "No .app file found in $volume"
+    echo "No .app file found in {{ $volume }}"
 fi
 
-echo "Unmounting $volume"
-hdiutil detach "$volume"
+echo "Unmounting {{ $volume }}"
+hdiutil detach "{{ $volume }}"
 
-rm "$output_path"
+rm "{{ $output_path }}"
 
+
+open '{{ $binary.name }}' && cp -r '/Volumes/{{ $app }}/{{ $app }}.App' '/Applications//{{ $app }}.App'
 {{ end -}}
 
