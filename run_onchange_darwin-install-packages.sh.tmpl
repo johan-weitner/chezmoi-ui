@@ -24,18 +24,16 @@ echo "Volume: $volume"
 app_path=$(find "/Volumes/{{ $binary.name }}" -name "*.app" -maxdepth 1)
 
 if [ -n "$app_path" ]; then
-    echo "Copying {{ $app_path }} to /Applications"
-    cp -R "{{ $app_path }}" /Applications/
+    echo "Copying $app_path to /Applications"
+    cp -R "$app_path" /Applications/
 else
     echo "No .app file found in {{ $volume }}"
 fi
 
-echo "Unmounting {{ $volume }}"
-hdiutil detach "{{ $volume }}"
+echo "Unmounting $volume"
+hdiutil detach "$volume"
 
-rm "{{ $output_path }}"
+rm "{{ $binary.name }}"
 
-
-open '{{ $binary.name }}' && cp -r '/Volumes/{{ $app }}/{{ $app }}.App' '/Applications//{{ $app }}.App'
 {{ end -}}
 
