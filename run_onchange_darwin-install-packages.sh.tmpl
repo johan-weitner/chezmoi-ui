@@ -53,6 +53,8 @@ echo "Set CPU arch..."
 npm config set arch arm64
 
 {{ range .packages.darwin.node -}}
-echo "Installing Node application {{ . | quote }}..."
-npm install -g "{{ . | quote }}"
+if npm list -g --depth=0 | grep -q "{{ . | quote }}"; then
+  echo "Installing Node application {{ . | quote }}..."
+  npm install -g "{{ . | quote }}"
+fi
 {{ end -}}

@@ -87,7 +87,7 @@ packages:
     - 'aicommits'
     - aifiles
     - '@appnest/readme'
-    - osx-tag # node-gyp throws during installation - no ARM support?
+    # - osx-tag # node-gyp throws during installation - no ARM support?
     - bitly-cli-client
 
 
