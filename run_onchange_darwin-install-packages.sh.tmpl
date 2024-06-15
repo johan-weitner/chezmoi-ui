@@ -13,7 +13,7 @@ EOF
 
 
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
-curl -sL {{ $binary.url }} -o {{ $binary.name }} -o './tmp/{{ $binary.name }}'
-open './tmp/{{ $binary.name }}'
+curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
+open '{{ $binary.name }}'
 {{ end -}}
 
