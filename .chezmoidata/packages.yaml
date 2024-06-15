@@ -85,7 +85,7 @@ packages:
     - '@builder.io/ai-shell'
     - 'aicommits'
     - aifiles
-    - '@appnest/readm'
+    - '@appnest/readme'
 
 
 
