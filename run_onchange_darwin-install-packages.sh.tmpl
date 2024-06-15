@@ -17,7 +17,7 @@ echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
 curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
 
 echo "Mounting {{ $binary.name }}"
-volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{{ print $3 }}')
+volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $3 }')
 
 echo "Volume: $volume"
 
