@@ -65,5 +65,5 @@ fi
 
 
 {{ range .packages.darwin.cargo -}}
-cargo install -g "{{ . | quote }}"
+cargo install "{{ . | quote }}"
 {{ end -}}
