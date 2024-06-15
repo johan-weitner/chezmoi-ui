@@ -38,7 +38,7 @@ packages:
     - 'zellij'
 
     binaryMac:
-    - 'Arc Browser':
+    - 'Arc':
       name: 'Arc-latest.dmg'
       url: 'https://releases.arc.net/release/Arc-latest.dmg'
     - 'GitButler':

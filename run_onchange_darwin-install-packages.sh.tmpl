@@ -14,6 +14,6 @@ EOF
 
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
 curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
-open '{{ $binary.name }}'
+open '{{ $binary.name }}' && cp -r '/Volumes/{{ $app }}/{{ $app }}.App' '/Applications//{{ $app }}.App'
 {{ end -}}
 
