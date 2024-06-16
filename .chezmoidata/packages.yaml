@@ -104,7 +104,7 @@ packages:
     # https://downloads.1password.com/mac/1Password.zip
 
     mas:
-      - 497799835 # XCode
+      - 497799835
 
 
     node:
@@ -124,8 +124,8 @@ packages:
 
 
     scripts:
-    - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
-    - 'https://raw.githubusercontent.com/tmrts/boilr/master/install'
+    - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
+    - "https://raw.githubusercontent.com/tmrts/boilr/master/install"
 
     git:
     - 'https://github.com/NvChad/starter ~/.config/nvim'

@@ -1,11 +1,13 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
-# Prerequisites
+
+echo "Installing prerequisites"
+echo ""
+echo "Installing XCode..."
 brew install sebsto/macos/xcodeinstall
 
 
-# Tap
 echo ""
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
