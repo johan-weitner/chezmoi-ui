@@ -15,6 +15,7 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ end -}}
 
 
+
 echo ""
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
@@ -25,7 +26,6 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
     cask {{ . | quote }}
   {{ end -}}
   EOF
-{{ end -}}
 
 
 
