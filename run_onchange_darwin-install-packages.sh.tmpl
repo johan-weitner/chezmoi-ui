@@ -50,7 +50,11 @@ rm "{{ $binary.name }}"
 echo ""
 echo "Installing packages by shellscript..."
 {{ range .packages.darwin.scripts -}}
-sh -c "$(curl -fsSL {{ . | quote }})"
+if ! which {{ . | quote }} &> /dev/null; then
+  sh -c "$(curl -fsSL {{ . | quote }})"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
 {{ end -}}
 
 
@@ -59,43 +63,62 @@ echo "Setting up Node and PNPM..."
 if ! volta which node &> /dev/null; then
   echo "Installing Node LTS..."
   volta install node
+else
+  echo "Node already installed at version $(node -v)"
 fi
 
 if ! volta which pnpm &> /dev/null; then
   echo "Installing PNPM..."
   volta install pnpm
+else
+  echo "PNPM already installed at version $(pnpm -v)"
 fi
 
 
 echo ""
 echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
-if npm list -g --depth=0 | grep -q "{{ . | quote }}"; then
+if which {{ . | quote }} &> /dev/null; then
   echo "{{ . | quote }} is already installed. Skipping..."
 else
   echo "Installing Node application {{ . | quote }}..."
   npm install -g "{{ . | quote }}"
 fi
+echo ""
 {{ end -}}
+
 
 echo ""
 echo "Installing cargo packages..."
 {{ range .packages.darwin.cargo -}}
-echo "Installing {{ . | quote }}..."
-cargo install "{{ . | quote }}"
+if ! which {{ . | quote }} &> /dev/null; then
+  echo "Installing {{ . | quote }}..."
+  cargo install "{{ . | quote }}"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
 {{ end -}}
+
 
 echo ""
 echo "Fetching Git repos..."
 {{ range .packages.darwin.git -}}
-echo "Installing {{ . | quote }}..."
-git clone "{{ . | quote }}"
+if ! which {{ . | quote }} &> /dev/null; then
+  echo "Installing {{ . | quote }}..."
+  git clone "{{ . | quote }}"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
 {{ end -}}
 
 
 echo""
 echo  "Installing Go repos..."
 {{ range .packages.darwin.go -}}
-echo "Installing {{ . | quote }}..."
-go install "{{ . | quote }}"
+if ! which {{ . | quote }} &> /dev/null; then
+  echo "Installing {{ . | quote }}..."
+  go install "{{ . | quote }}"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
 {{ end -}}
