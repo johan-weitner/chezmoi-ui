@@ -1,6 +1,11 @@
 ---
 packages:
   darwin:
+    pre:
+      brew:
+      - sebsto/macos/xcodeinstall
+
+
     brews:
     - 'git'
     - 'coreutils'
@@ -96,6 +101,9 @@ packages:
     # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     # https://downloads.1password.com/mac/1Password.zip
+
+    mas:
+      - 497799835 # XCode
 
 
     node:
