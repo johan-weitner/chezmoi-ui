@@ -8,9 +8,6 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
   {{ range .packages.darwin.pre.brews -}}
     brew {{ . | quote }}
   {{ end -}}
-  {{ range .packages.darwin.pre.casks -}}
-    cask {{ . | quote }}
-  {{ end -}}
   EOF
 {{ end -}}
 
@@ -26,6 +23,7 @@ brew bundle --no-lock --file=/dev/stdin <<EOF
     cask {{ . | quote }}
   {{ end -}}
   EOF
+{{ end -}}
 
 
 
