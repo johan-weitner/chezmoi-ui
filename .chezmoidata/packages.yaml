@@ -48,13 +48,28 @@ packages:
     - bat-extras
     - git-extras
     - bfg
+    - 1password
+    - 1password-cli
+    - blackhole-2ch
+    - brew-gem
+    - oven-sh/bun/bun
+    - cheat
+    - ctop
+    - curlie
+    - linka-cloud/tap/d2vm
+    - dasel
     casks:
-    - 'google-chrome'
     - 'alacritty'
-    - 'obsidian'
     - 'warp'
-    - 'adobe-creative-cloud'
     - alt-tab
+    - browserosaurus
+    - cakebrew
+    - chatgpt
+    - copilot-for-xcode
+    - cryptomator
+    # - 'google-chrome'
+    # - 'adobe-creative-cloud'
+    # - 'obsidian'
 
 
     cargo:
@@ -80,6 +95,9 @@ packages:
     # #   name: 'Obsidian.dmg'
     # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
+    # https://downloads.1password.com/mac/1Password.zip
+
+
     node:
     # - node-gyp@latest
     - '@builder.io/ai-shell'
@@ -88,6 +106,11 @@ packages:
     - '@appnest/readme'
     # - osx-tag # node-gyp throws during installation - no ARM support?
     - bitly-cli-client
+    - '@capacitor/core'
+    - '@capacitor/cli'
+    - cloudflare-cli
+    - commitizen
+    - "@commitlint/cli"
 
 
 
@@ -95,7 +118,7 @@ packages:
     - 'https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh'
 
     git:
-      - 'https://github.com/NvChad/starter ~/.config/nvim'
+    - 'https://github.com/NvChad/starter ~/.config/nvim'
 
     latest-mac:
     - 'https://github.com/agata/dl.biscuit/releases/latest'
@@ -104,10 +127,14 @@ packages:
     - 'ps_mem'
 
     pipx:
-      - ansible
-      - ansibler
-      - ansibleconnect
+    - ansible
+    - ansibler
+    - ansibleconnect
 
 
     gem:
-      - bashly
+    - bashly
+
+
+    go:
+    - 'github.com/tmrts/boilr@latest'

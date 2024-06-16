@@ -91,3 +91,11 @@ echo "Fetching Git repos..."
 echo "Installing {{ . | quote }}..."
 git clone "{{ . | quote }}"
 {{ end -}}
+
+
+echo""
+echo  "Installing Go repos..."
+{{ range .packages.darwin.go -}}
+echo "Installing {{ . | quote }}..."
+go install "{{ . | quote }}"
+{{ end -}}
