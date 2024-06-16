@@ -40,6 +40,7 @@ echo "Installing XCode..."
 brew install sebsto/macos/xcodeinstall
 fi
 
+brew update
 
 echo ""
 echo "Installing Homebrew packages..."
@@ -115,7 +116,7 @@ fi
 
 echo ""
 echo "Installing NPM packages..."
-{{ range $ix, $app := .packages.darwin.node2 -}}
+{{ range $ix, $app := .packages.darwin.node -}}
 if ! which {{ $app.name }} &> /dev/null; then
 echo "Downloading {{ $app.pkg }}..."
 pnpm add -g {{ $app.pkg }}

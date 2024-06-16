@@ -65,6 +65,12 @@ packages:
     - "dasel"
     - "syncthing"
     - "yohamta/tap/dagu"
+    - "clipboard"
+    - "cmake"
+    - "doctl"
+    - "duf"
+    - "dust"
+    - "envchain"
     casks:
     - "alacritty"
     - "warp"
@@ -74,6 +80,8 @@ packages:
     - "chatgpt"
     - "copilot-for-xcode"
     - "cryptomator"
+    - "devtoys"
+    - "docker"
     # - "google-chrome"
     # - "adobe-creative-cloud"
     # - "obsidian"
@@ -107,20 +115,6 @@ packages:
       - 497799835
 
     node:
-    # - node-gyp@latest
-    - '@builder.io/ai-shell'
-    - 'aicommits'
-    - aifiles
-    - '@appnest/readme'
-    # - osx-tag # node-gyp throws during installation - no ARM support?
-    - bitly-cli-client
-    - '@capacitor/core'
-    - '@capacitor/cli'
-    - cloudflare-cli
-    - commitizen
-    - '@commitlint/cli'
-
-    node2:
     - ai-shell:
       name: ai-shell
       pkg: "@builder.io/ai-shell"
@@ -151,6 +145,16 @@ packages:
     - commitlint:
       name: commitlint
       pkg: "@commitlint/cli"
+    - dat:
+      name: dat
+      pkg: "dat"
+    - deviceframe:
+      name: dframe
+      pkg: "deviceframe"
+    - emma:
+      name: emma
+      pkg: "emma-cli"
+
 
     scripts:
     - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
