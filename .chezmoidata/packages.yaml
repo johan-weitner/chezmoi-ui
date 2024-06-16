@@ -6,7 +6,6 @@ packages:
       - sebsto/macos/xcodeinstall
       casks:
 
-
     brews:
     - "git"
     - "coreutils"
@@ -79,7 +78,6 @@ packages:
     # - "adobe-creative-cloud"
     # - "obsidian"
 
-
     cargo:
     - zellij
 
@@ -108,7 +106,6 @@ packages:
     mas:
       - 497799835
 
-
     node:
     # - node-gyp@latest
     - '@builder.io/ai-shell'
@@ -123,7 +120,37 @@ packages:
     - commitizen
     - '@commitlint/cli'
 
-
+    node2:
+    - ai-shell:
+      name: ai
+      pkg: "@builder.io/ai-shell"
+    - aicommits:
+      name: aicommits
+      pkg: "aicommits"
+    - aifiles:
+      name: aifiles
+      pkg: "aifiles"
+    - readme:
+      name: readme
+      pkg: "@appnest/readme"
+    - bitly-cli-client:
+      name: bitly-cli-client
+      pkg: "bitly-cli-client"
+    - capacitorcore:
+      name: capacitor
+      pkg: "@capacitor/core"
+    - capacitorcli:
+      name: capacitor
+      pkg: "@capacitor/cli"
+    - cloudflare-cli:
+      name: cloudflare
+      pkg: "cloudflare-cli"
+    - commitizen:
+      name: commitizen
+      pkg: "commitizen"
+    - commitlint:
+      name: commitlint
+      pkg: "@commitlint/cli"
 
     scripts:
     - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
@@ -145,9 +172,7 @@ packages:
     - ansibleconnect
     - cookiecutter
 
-
     gem:
     - bashly
-
 
     go:

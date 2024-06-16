@@ -111,22 +111,14 @@ else
   echo "PNPM already installed at version $(pnpm -v)"
 fi
 
-
 echo ""
 echo "Installing NPM packages..."
-{{ range .packages.darwin.node -}}
-
-  echo "Installing Node application {{ . | quote }}..."
-  npm uninstall -g "{{ . | quote }}"
-  pnpm add -g "{{ . | quote }}"
-
-echo ""
+{{ range $ix, $app := .packages.darwin.node2 -}}
+echo "Downloading {{ $app.pkg }}..."
+if ! which {{ $app.name }} &> /dev/null; then
+pnpm add -g {{ $app.pkg }}
+fi
 {{ end -}}
-
-string="@builder.io/ai-shell"
-substring=${string##*/}
-echo "$substring"
-
 
 echo ""
 echo "Installing cargo packages..."
