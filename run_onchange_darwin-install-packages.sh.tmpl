@@ -97,14 +97,14 @@ fi
 
 echo ""
 echo "Setting up Node and PNPM..."
-if ! volta which node &> /dev/null; then
+if ! which node &> /dev/null; then
   echo "Installing Node LTS..."
   volta install node
 else
   echo "Node already installed at version $(node -v)"
 fi
 
-if ! volta which pnpm &> /dev/null; then
+if ! which pnpm &> /dev/null; then
   echo "Installing PNPM..."
   volta install pnpm
 else
