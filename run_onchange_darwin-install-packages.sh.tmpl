@@ -12,16 +12,10 @@ echo ""
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
   {{ range .packages.darwin.brews -}}
-    #rawstring=$(echo {{ . | quote }} | tr -d \")
-    #if ! which $(rawstring) &> /dev/null; then
-      brew {{ . | quote }}
-    #fi
+    brew {{ . | quote }}
   {{ end -}}
   {{ range .packages.darwin.casks -}}
-    #rawstring=$(echo {{ . | quote }} | tr -d \")
-   # if ! which $(rawstring) &> /dev/null; then
-      cask {{ . | quote }}
-    #fi
+    cask {{ . | quote }}
   {{ end -}}
   EOF
 {{ end -}}
