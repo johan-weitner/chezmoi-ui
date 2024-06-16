@@ -122,7 +122,7 @@ packages:
 
     node2:
     - ai-shell:
-      name: ai
+      name: ai-shell
       pkg: "@builder.io/ai-shell"
     - aicommits:
       name: aicommits
@@ -134,7 +134,7 @@ packages:
       name: readme
       pkg: "@appnest/readme"
     - bitly-cli-client:
-      name: bitly-cli-client
+      name: bitly
       pkg: "bitly-cli-client"
     - capacitorcore:
       name: capacitor
@@ -143,10 +143,10 @@ packages:
       name: capacitor
       pkg: "@capacitor/cli"
     - cloudflare-cli:
-      name: cloudflare
+      name: cfcli
       pkg: "cloudflare-cli"
     - commitizen:
-      name: commitizen
+      name: cz
       pkg: "commitizen"
     - commitlint:
       name: commitlint
