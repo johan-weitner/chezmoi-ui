@@ -5,13 +5,13 @@
 echo ""
 echo "Installing pre-requisites..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
-{{ range .packages.darwin.pre.brews -}}
-brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.pre.casks -}}
-cask {{ . | quote }}
-{{ end -}}
-EOF
+  {{ range .packages.darwin.pre.brews -}}
+    brew {{ . | quote }}
+  {{ end -}}
+  {{ range .packages.darwin.pre.casks -}}
+    cask {{ . | quote }}
+  {{ end -}}
+  EOF
 {{ end -}}
 
 
@@ -19,13 +19,13 @@ EOF
 echo ""
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
-{{ range .packages.darwin.brews -}}
-brew {{ . | quote }}
-{{ end -}}
-{{ range .packages.darwin.casks -}}
-cask {{ . | quote }}
-{{ end -}}
-EOF
+  {{ range .packages.darwin.brews -}}
+    brew {{ . | quote }}
+  {{ end -}}
+  {{ range .packages.darwin.casks -}}
+    cask {{ . | quote }}
+  {{ end -}}
+  EOF
 {{ end -}}
 
 
