@@ -86,7 +86,8 @@ echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
 fullstring = "{{  . | quote }}"
 substring=${fullstring##*/}
-if which $(substring | tr -d \') &> /dev/null; then
+echo "Substring: $(substring)"
+if which {{ . | quote }} &> /dev/null; then
   echo "{{ . | quote }} is already installed. Skipping..."
 else
   echo "Installing Node application {{ . | quote }}..."
