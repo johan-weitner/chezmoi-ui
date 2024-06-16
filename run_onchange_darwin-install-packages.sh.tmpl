@@ -157,3 +157,23 @@ fi
 #   echo "{{ . | quote }} already installed - skipping"
 # fi
 # {{ end -}}
+
+echo ""
+echo "Installing packages by pip..."
+{{ range .packages.darwin.pip -}}
+if ! which {{ . | quote }} &> /dev/null; then
+  pip install {{ . | quote }}
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
+{{ end -}}
+
+echo ""
+echo "Installing packages by pipx..."
+{{ range .packages.darwin.pipx -}}
+if ! which {{ . | quote }} &> /dev/null; then
+  pipx install {{ . | quote }}
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
+{{ end -}}
