@@ -115,12 +115,11 @@ fi
 echo ""
 echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
-if which {{ . | quote }} &> /dev/null; then
-  echo "{{ . | quote }} is already installed. Skipping..."
-else
+
   echo "Installing Node application {{ . | quote }}..."
-  npm install -g "{{ . | quote }}"
-fi
+  npm uninstall -g "{{ . | quote }}"
+  pnpm add -g "{{ . | quote }}"
+
 echo ""
 {{ end -}}
 
