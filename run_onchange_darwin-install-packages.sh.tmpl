@@ -35,8 +35,10 @@ echo ""
 
 echo "Installing prerequisites"
 echo ""
+if ! which xcodeinstall &> /dev/null; then
 echo "Installing XCode..."
 brew install sebsto/macos/xcodeinstall
+fi
 
 
 echo ""
