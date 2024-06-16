@@ -64,6 +64,8 @@ packages:
     - curlie
     - linka-cloud/tap/d2vm
     - dasel
+    - syncthing
+    - yohamta/tap/dagu
     casks:
     - 'alacritty'
     - 'warp'
@@ -126,6 +128,7 @@ packages:
     scripts:
     - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
     - "https://raw.githubusercontent.com/tmrts/boilr/master/install"
+    - "https://coder.com/install.sh"
 
     git:
     - 'https://github.com/NvChad/starter ~/.config/nvim'
@@ -140,6 +143,7 @@ packages:
     - ansible
     - ansibler
     - ansibleconnect
+    - cookiecutter
 
 
     gem:

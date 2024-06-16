@@ -13,9 +13,11 @@ echo ""
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
+brew tap {{ . | quote }}
 brew {{ . | quote }}
 {{ end -}}
 {{ range .packages.darwin.casks -}}
+brew tap {{ . | quote }}
 cask {{ . | quote }}
 {{ end -}}
 EOF
