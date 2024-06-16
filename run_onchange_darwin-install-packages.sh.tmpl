@@ -116,8 +116,8 @@ fi
 echo ""
 echo "Installing NPM packages..."
 {{ range $ix, $app := .packages.darwin.node2 -}}
-echo "Downloading {{ $app.pkg }}..."
 if ! which {{ $app.name }} &> /dev/null; then
+echo "Downloading {{ $app.pkg }}..."
 pnpm add -g {{ $app.pkg }}
 fi
 {{ end -}}
