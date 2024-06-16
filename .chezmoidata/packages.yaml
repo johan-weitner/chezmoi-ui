@@ -4,6 +4,7 @@ packages:
     pre:
       brews:
       - sebsto/macos/xcodeinstall
+      casks:
 
 
     brews:
