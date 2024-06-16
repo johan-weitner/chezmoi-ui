@@ -1,6 +1,7 @@
 {{ if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 
+fastfetch
 
 echo "Installing prerequisites"
 echo ""
@@ -84,10 +85,6 @@ fi
 echo ""
 echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
-fullstring={{  . | quote }}
-substring=${fullstring##*/}
-echo "Fullstring: $(fullstring)"
-echo "Substring: $(substring)"
 if which {{ . | quote }} &> /dev/null; then
   echo "{{ . | quote }} is already installed. Skipping..."
 else
