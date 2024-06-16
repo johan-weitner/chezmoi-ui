@@ -2,7 +2,7 @@
 packages:
   darwin:
     pre:
-      brew:
+      brews:
       - sebsto/macos/xcodeinstall
 
 
