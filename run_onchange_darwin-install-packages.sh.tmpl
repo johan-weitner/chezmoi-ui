@@ -90,7 +90,7 @@ fi
 echo ""
 echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
-substring=${{{ . | quote }}##*/}
+substring=${{ . | quote }##*/}
 if which $(substring) &> /dev/null; then
   echo "{{ . | quote }} is already installed. Skipping..."
 else
