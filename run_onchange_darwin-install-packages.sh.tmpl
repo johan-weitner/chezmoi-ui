@@ -84,9 +84,9 @@ fi
 echo ""
 echo "Installing NPM packages..."
 {{ range .packages.darwin.node -}}
-fullstring = {{  . | quote }}
+fullstring = "{{  . | quote }}"
 substring=${fullstring##*/}
-if which $(substring) &> /dev/null; then
+if which $(substring | tr -d \') &> /dev/null; then
   echo "{{ . | quote }} is already installed. Skipping..."
 else
   echo "Installing Node application {{ . | quote }}..."
@@ -94,6 +94,10 @@ else
 fi
 echo ""
 {{ end -}}
+
+string="@builder.io/ai-shell"
+substring=${string##*/}
+echo "$substring"
 
 
 echo ""
