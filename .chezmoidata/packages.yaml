@@ -87,7 +87,7 @@ packages:
     # - obsidian
 
     cargo:
-    - zellij
+    # - zellij
 
     binaryMac:
     # - 'Arc':
