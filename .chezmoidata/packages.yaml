@@ -97,9 +97,9 @@ packages:
     # - 'GitButler':
     #   name: 'GitButler.dmg'
     #   url: 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
-    # - Typora:
-    #   name: 'Typora.dmg'
-    #   url: 'https://download.typora.io/mac/Typora.dmg'
+    - Typora:
+      name: 'Typora.dmg'
+      url: 'https://download.typora.io/mac/Typora.dmg'
     # - FleetingNotes:
     #   name: 'FleetingNotesMac.dmg'
     #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'

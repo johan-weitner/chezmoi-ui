@@ -59,15 +59,16 @@ EOF
 echo ""
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
+volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $3 }')
+app_path=$(find "$volume" -name "*.app" -maxdepth 1)
+
+if [ -d $app_path ]; then
+echo "{{ $binary.name }} already installed. Skipping..."
+else
 echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
 curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
 
 echo "Mounting {{ $binary.name }}"
-volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $3 }')
-
-echo "Volume: $volume"
-
-app_path=$(find "$volume" -name "*.app" -maxdepth 1)
 echo "App path: $app_path"
 
 if [ -n "$app_path" ]; then
@@ -82,7 +83,7 @@ echo "Unmounting $volume"
 hdiutil detach "$volume"
 
 rm "{{ $binary.name }}"
-
+fi
 {{ end -}}
 
 
