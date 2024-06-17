@@ -59,32 +59,30 @@ EOF
 echo ""
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
+echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
+curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
 
+echo "Mounting {{ $binary.name }}"
 volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $3 }')
+
+echo "Volume: $volume"
+
 app_path=$(find "$volume" -name "*.app" -maxdepth 1)
+echo "App path: $app_path"
 
-if [ -d $app_path ]; then
-  echo "{{ $binary.name }} already installed. Skipping..."
+if [ -n "$app_path" ]; then
+    echo "Copying $app_path to /Applications"
+    cp -R "$app_path" /Applications/
 else
-  echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
-  curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
-
-  echo "Mounting {{ $binary.name }}"
-  echo "App path: $app_path"
-
-  if [ -n "$app_path" ]; then
-      echo "Copying $app_path to /Applications"
-      cp -R "$app_path" /Applications/
-  else
-      echo "No .app file found in $volume"
-      ls -l $volume
-  fi
-
-  echo "Unmounting $volume"
-  hdiutil detach "$volume"
-
-  rm "{{ $binary.name }}"
+    echo "No .app file found in $volume"
+    ls -l $volume
 fi
+
+echo "Unmounting $volume"
+hdiutil detach "$volume"
+
+rm "{{ $binary.name }}"
+
 {{ end -}}
 
 
