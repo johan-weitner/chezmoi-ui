@@ -46,16 +46,16 @@ packages:
     - exiftool
     - poppler
     - csvkit
-    - vldmrkl/formulae/airdrop-cli
+    # - vldmrkl/formulae/airdrop-cli
     - asciinema
     - asdf
     - ripgrep
     - bat-extras
     - git-extras
     - bfg
-    - 1password
-    - 1password-cli
-    - blackhole-2ch
+    # - 1password
+    # - 1password-cli
+    # - blackhole-2ch
     - brew-gem
     - oven-sh/bun/bun
     - cheat
