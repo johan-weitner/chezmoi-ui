@@ -63,26 +63,26 @@ volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $
 app_path=$(find "$volume" -name "*.app" -maxdepth 1)
 
 if [ -d $app_path ]; then
-echo "{{ $binary.name }} already installed. Skipping..."
+  echo "{{ $binary.name }} already installed. Skipping..."
 else
-echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
-curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
+  echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
+  curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
 
-echo "Mounting {{ $binary.name }}"
-echo "App path: $app_path"
+  echo "Mounting {{ $binary.name }}"
+  echo "App path: $app_path"
 
-if [ -n "$app_path" ]; then
-    echo "Copying $app_path to /Applications"
-    cp -R "$app_path" /Applications/
-else
-    echo "No .app file found in $volume"
-    ls -l $volume
-fi
+  if [ -n "$app_path" ]; then
+      echo "Copying $app_path to /Applications"
+      cp -R "$app_path" /Applications/
+  else
+      echo "No .app file found in $volume"
+      ls -l $volume
+  fi
 
-echo "Unmounting $volume"
-hdiutil detach "$volume"
+  echo "Unmounting $volume"
+  hdiutil detach "$volume"
 
-rm "{{ $binary.name }}"
+  rm "{{ $binary.name }}"
 fi
 {{ end -}}
 
