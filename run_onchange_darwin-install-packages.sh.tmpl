@@ -68,7 +68,7 @@ else
   echo "Mounting {{ $binary.dmg }}"
   volume=$(hdiutil attach "{{ $binary.dmg }}" | grep '/Volumes/' | awk '{ print $3 }')
 
-  app_path=$(find "$volume" -name "{{ $binary.name }}" -maxdepth 1)
+  app_path=$(find "$volume" -name "{{ $binary.dmg }}" -maxdepth 1)
   echo "App path: $app_path"
 
   if [ -n "$app_path" ]; then
