@@ -82,6 +82,7 @@ packages:
     - cryptomator
     - devtoys
     - docker
+    - visual-studio-code
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
