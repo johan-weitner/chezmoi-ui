@@ -59,11 +59,11 @@ EOF
 echo ""
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
-echo "Downloading {{ $binary.name }} from {{ $binary.url }}"
-curl -sL {{ $binary.url }} -o {{ $binary.name }} -o '{{ $binary.name }}'
+echo "Downloading {{ $binary.dmg }} from {{ $binary.url }}"
+curl -sL {{ $binary.url }} -o {{ $binary.name }}
 
-echo "Mounting {{ $binary.name }}"
-volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $3 }')
+echo "Mounting {{ $binary.dmg }}"
+volume=$(hdiutil attach "{{ $binary.dmg }}" | grep '/Volumes/' | awk '{ print $3 }')
 
 echo "Volume: $volume"
 
