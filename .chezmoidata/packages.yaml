@@ -71,6 +71,27 @@ packages:
     - duf
     - dust
     - envchain
+    - eza
+    - fcp
+    - fd
+    - fdupes
+    - figlet
+    - fzf
+    - gcc
+    - gh
+    - gitleaks
+    - glab
+    - glow
+    - gtop
+    - gum
+    - hoard
+    - howdoi
+    - htop
+    - http-prompt
+    - httpie
+    - hub
+    - hugo
+    - ideviceinstaller
     casks:
     - alacritty
     - warp
@@ -83,6 +104,15 @@ packages:
     - devtoys
     - docker
     - visual-studio-code
+    - espanso
+    - eul
+    - firefox
+    - https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb
+    - google-cloud-sdk
+    - gitify
+    - google-chrome
+    - hammerspoon
+    - http-toolkit
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
@@ -103,24 +133,107 @@ packages:
       dmg: 'Typora.dmg'
       name: Typora
       url: 'https://download.typora.io/mac/Typora.dmg'
-    - Biscuit:
-      dmg: "Biscuit-1.2.29-arm64.dmg"
-      name: Biscuit
-      url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
+    # - Biscuit:
+    #   dmg: "Biscuit-1.2.29-arm64.dmg"
+    #   name: Biscuit
+    #   url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
     # - FleetingNotes:
     #   dmg: 'FleetingNotesMac.dmg'
     #   name: "Fleeting Notes"
     #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
-    # # - Raindrop:
-    # #   dmg: 'Raindrop.dmg'
-    # #   name: Raindrop
-    # #   url: 'https://raindrop.io/r/app/macos-arm'
-    # # - Obsidian:
-    # #   dmg: 'Obsidian.dmg'
-    # #   name: Obsidian
-    # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
+    # - Raindrop:
+    #   dmg: 'Raindrop.dmg'
+    #   name: Raindrop
+    #   url: 'https://raindrop.io/r/app/macos-arm'
+    # - Obsidian:
+    #   dmg: 'Obsidian.dmg'
+    #   name: Obsidian
+    #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     # https://downloads.1password.com/mac/1Password.zip
+
+# 1Password
+# Actions For Obsidian
+# Adobe Creative Cloud
+# Alfred 5
+# Amethyst
+# Amphetamine
+# AppFlowy
+# Aquarius
+# Arc
+# Audio Hijack
+# Backblaze
+# balenaEtcher
+# BankID
+# Bartender 5
+# Bear
+# Biscuit
+# Blackmagic Disk Speed Test
+# Blackmagic Proxy Generator
+# Blackmagic RAW
+# ChatGPT
+# ChatMate for Facebook
+# Code Snippets AI
+# Cody
+# Copilot
+# Cryptomator
+# DaisyDisk
+# Dash
+# Deepdwn
+# DiffusionBee
+# Draw Things
+# DriveDx
+# Dropover
+# Fiddler
+# Filters for Photos
+# Folder Peek
+# Folder Tidy
+# GitButler
+# GitHub Desktop
+# Goodnotes
+# Hand Mirror
+# HandBrake
+# HTTPie
+# jdk-22.0.1.jdk
+# kitty
+# Later
+# LM Studio
+# MacGPT
+# MacWhisper
+# Magenta Studio
+# Magnet
+# MenubarX
+# Microsoft Edge
+# Microsoft Word
+# Movavi Screen Recorder 22
+# MPV
+# Noize
+# Numi
+# OBS
+# Obsidian
+# Ollama
+# Parallels Desktop
+# Parallels Toolbox
+# Post Haste
+# PowerShell
+# Raindrop.io
+# Raycast
+# Replay
+# Scribe
+# Shortery
+# Slack
+# Sourcetree
+# Strflow
+# Syncthing
+# TagSpaces
+# Tailscale
+# Todoist
+# Typora
+# VLC
+# Zotero
+
+
+
 
     mas:
       # - 497799835
@@ -166,6 +279,15 @@ packages:
     - emma:
       name: emma
       pkg: "emma-cli"
+    - fkill:
+      name: fkill
+      pkg: fkill-cli
+    - git-open:
+      name: git-open
+      pkg: git-open
+    - husky:
+      name: husky
+      pkg: husky
 
 
     scripts:
