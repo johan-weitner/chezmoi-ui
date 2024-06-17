@@ -1,9 +1,8 @@
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
-# [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
 [[ -f ~/.zsh/env.zsh ]] && source ~/.zsh/env.zsh
 [[ -f ~/.zsh/completion.zsh ]] && source ~/.zsh/completion.zsh
-# [[ -f ~/.zsh/nvm.zsh ]] && source ~/.zsh/nvm.zsh
+# [[ -f ~/.zsh/starship.zsh ]] && source ~/.zsh/starship.zsh
 # [[ -f ~/.zsh/wsl2fix.zsh ]] && source ~/.zsh/wsl2fix.zsh
 # [[ -f ~/.zsh/goto.zsh ]] && source ~/.zsh/goto.zsh
 
@@ -64,11 +63,6 @@ eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/atomic.o
 # Load Direnv
 eval "$(direnv hook zsh)"
 
-# Enable Apple Silicon Homebrew
-if [ -f "/opt/homebrew/bin/brew" ]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -86,15 +80,3 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # zsh-syntax-highlighting
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
 echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrcsource /Users/johanweitner/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-source ~/.profile
-
-
-
-# pnpm
-export PNPM_HOME="/Users/johanweitner/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
