@@ -85,7 +85,11 @@ rm "{{ $binary.name }}"
 
 {{ end -}}
 
-
+echo ""
+echo "Install apps from AppStore..."
+{{ range .packages.darwin.pipx -}}
+mas install {{ . | quote }}
+{{ end -}}
 
 echo ""
 echo "Installing packages by shellscript..."
