@@ -159,7 +159,6 @@ packages:
 
     scripts:
     - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
-    - "https://raw.githubusercontent.com/tmrts/boilr/master/install"
     - "https://coder.com/install.sh"
 
     git:
