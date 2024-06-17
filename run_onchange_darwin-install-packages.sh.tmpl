@@ -47,12 +47,12 @@ echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
 if ! which {{ . | quote }} &> /dev/null; then
-  brew {{ . | quote }}
+brew {{ . | quote }}
 fi
 {{ end -}}
 {{ range .packages.darwin.casks -}}
 if ! which {{ . | quote }} &> /dev/null; then
-  cask {{ . | quote }}
+cask {{ . | quote }}
 fi
 {{ end -}}
 EOF
