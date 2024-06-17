@@ -41,50 +41,50 @@ packages:
     - "neovim"
     - "act"
     - "age"
-    - "gofireflyio/aiac/aiac"
-    - "pandoc"
-    - "exiftool"
-    - "poppler"
-    - "csvkit"
-    - "vldmrkl/formulae/airdrop-cli"
-    - "asciinema"
-    - "asdf"
-    - "ripgrep"
-    - "bat-extras"
-    - "git-extras"
-    - "bfg"
-    - "1password"
-    - "1password-cli"
-    - "blackhole-2ch"
-    - "brew-gem"
-    - "oven-sh/bun/bun"
-    - "cheat"
-    - "ctop"
-    - "curlie"
-    - "linka-cloud/tap/d2vm"
-    - "dasel"
-    - "syncthing"
-    - "yohamta/tap/dagu"
-    - "clipboard"
-    - "cmake"
-    - "doctl"
-    - "duf"
-    - "dust"
-    - "envchain"
+    - gofireflyio/aiac/aiac
+    - pandoc
+    - exiftool
+    - poppler
+    - csvkit
+    - vldmrkl/formulae/airdrop-cli
+    - asciinema
+    - asdf
+    - ripgrep
+    - bat-extras
+    - git-extras
+    - bfg
+    - 1password
+    - 1password-cli
+    - blackhole-2ch
+    - brew-gem
+    - oven-sh/bun/bun
+    - cheat
+    - ctop
+    - curlie
+    - linka-cloud/tap/d2vm
+    - dasel
+    - syncthing
+    - yohamta/tap/dagu
+    - clipboard
+    - cmake
+    - doctl
+    - duf
+    - dust
+    - envchain
     casks:
-    - "alacritty"
-    - "warp"
-    - "alt-tab"
-    - "browserosaurus"
-    - "cakebrew"
-    - "chatgpt"
-    - "copilot-for-xcode"
-    - "cryptomator"
-    - "devtoys"
-    - "docker"
-    # - "google-chrome"
-    # - "adobe-creative-cloud"
-    # - "obsidian"
+    - alacritty
+    - warp
+    - alt-tab
+    - browserosaurus
+    - cakebrew
+    - chatgpt
+    - copilot-for-xcode
+    - cryptomator
+    - devtoys
+    - docker
+    # - google-chrome
+    # - adobe-creative-cloud
+    # - obsidian
 
     cargo:
     - zellij
