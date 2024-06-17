@@ -62,8 +62,8 @@ echo "Installing binary images..."
 echo "Downloading {{ $binary.dmg }} from {{ $binary.url }}"
 curl -sL {{ $binary.url }} -o {{ $binary.name }}
 
-echo "Mounting {{ $binary.dmg }}"
-volume=$(hdiutil attach "{{ $binary.dmg }}" | grep '/Volumes/' | awk '{ print $3 }')
+echo "Mounting {{ $binary.name }}"
+volume=$(hdiutil attach "{{ $binary.name }}" | grep '/Volumes/' | awk '{ print $3 }')
 
 echo "Volume: $volume"
 
