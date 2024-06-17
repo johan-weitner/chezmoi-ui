@@ -114,7 +114,7 @@ packages:
     mas:
       # - 497799835
       - 441258766
-      - 663592361
+
     node:
     - ai-shell:
       name: ai-shell
