@@ -112,7 +112,8 @@ packages:
     # https://downloads.1password.com/mac/1Password.zip
 
     mas:
-      - 497799835
+      # - 497799835
+      - 441258766
 
     node:
     - ai-shell:
