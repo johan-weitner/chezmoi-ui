@@ -113,6 +113,7 @@ packages:
     - google-chrome
     - hammerspoon
     - http-toolkit
+    - raycast
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
