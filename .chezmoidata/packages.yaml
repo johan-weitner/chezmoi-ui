@@ -92,25 +92,32 @@ packages:
 
     binaryMac:
     # - 'Arc':
-    #   name: 'Arc-latest.dmg'
+    #   name: Arc
+    #   dmg: 'Arc-latest.dmg'
     #   url: 'https://releases.arc.net/release/Arc-latest.dmg'
     # - 'GitButler':
-    #   name: 'GitButler.dmg'
+    #   dmg: 'GitButler.dmg'
+    #   name: 'GitButler'
     #   url: 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
     - Typora:
-      name: 'Typora.dmg'
+      dmg: 'Typora.dmg'
+      name: Typora
       url: 'https://download.typora.io/mac/Typora.dmg'
     - Biscuit:
-      name: "Biscuit.dmg"
+      dmg: "Biscuit-1.2.29-arm64.dmg"
+      name: Biscuit
       url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
     # - FleetingNotes:
-    #   name: 'FleetingNotesMac.dmg'
+    #   dmg: 'FleetingNotesMac.dmg'
+    #   name: "Fleeting Notes"
     #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
     # # - Raindrop:
-    # #   name: 'Raindrop.dmg'
+    # #   dmg: 'Raindrop.dmg'
+    # #   name: Raindrop
     # #   url: 'https://raindrop.io/r/app/macos-arm'
     # # - Obsidian:
-    # #   name: 'Obsidian.dmg'
+    # #   dmg: 'Obsidian.dmg'
+    # #   name: Obsidian
     # #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     # https://downloads.1password.com/mac/1Password.zip
