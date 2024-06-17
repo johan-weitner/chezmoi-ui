@@ -54,6 +54,8 @@ cask {{ . | quote }}
 EOF
 {{ end -}}
 
+
+
 echo ""
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
@@ -83,11 +85,7 @@ rm "{{ $binary.name }}"
 
 {{ end -}}
 
-echo ""
-echo "Install apps from AppStore..."
-{{ range .packages.darwin.mas -}}
-mas install {{ . | quote }}
-{{ end -}}
+
 
 echo ""
 echo "Installing packages by shellscript..."
