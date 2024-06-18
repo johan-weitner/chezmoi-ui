@@ -45,6 +45,7 @@ alias h="hoard"
 alias hn="hoard new"
 alias hl="hoard list"
 alias hp="hoard pick"
+alias hsync="chezmoi re-add ~/.config/hoard/trove.yml && chezmoi git commit && chezmoi git push"
 
 # Zsh Navigation Tools
 alias nc="n-cd"
