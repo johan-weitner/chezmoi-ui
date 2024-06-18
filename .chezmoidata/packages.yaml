@@ -114,6 +114,7 @@ packages:
     - hammerspoon
     - http-toolkit
     - raycast
+    - duplicacy-cli
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
