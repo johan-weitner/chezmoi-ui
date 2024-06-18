@@ -117,66 +117,83 @@ fi
 
 echo ""
 echo "Installing NPM packages..."
+empty = true
 {{ range $ix, $app := .packages.darwin.node -}}
 if ! which {{ $app.name }} &> /dev/null; then
+empty = false
 echo "Downloading {{ $app.pkg }}..."
 pnpm add -g {{ $app.pkg }}
 fi
+if empty echo "All NPM packages already installed."
 {{ end -}}
 
 echo ""
 echo "Installing cargo packages..."
 {{ range .packages.darwin.cargo -}}
 if ! which {{ . | quote }} &> /dev/null; then
+empty = false
   echo "Installing {{ . | quote }}..."
   cargo install "{{ . | quote }}"
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
+if empty echo "All Cargo packages already installed."
 {{ end -}}
 
 
 echo ""
 echo "Fetching Git repos..."
+empty = true
 {{ range .packages.darwin.git -}}
 if ! which {{ . | quote }} &> /dev/null; then
+empty = false
   echo "Installing {{ . | quote }}..."
   git clone "{{ . | quote }}"
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
+if empty echo "All Git repos already installed."
 {{ end -}}
 
 
 # echo""
 # echo  "Installing Go repos..."
+empty = true
 # {{ range .packages.darwin.go -}}
 # if ! which {{ . | quote }} &> /dev/null; then
+# empty = false
 #   echo "Installing {{ . | quote }}..."
 #   go install "{{ . | quote }}"
 # else
 #   echo "{{ . | quote }} already installed - skipping"
 # fi
+# if empty echo "All Go repos already installed."
 # {{ end -}}
 
 echo ""
 echo "Installing packages by pip..."
+empty = true
 {{ range .packages.darwin.pip -}}
 if ! which {{ . | quote }} &> /dev/null; then
+  empty = false
   pip install {{ . | quote }}
 else
   echo "{{ . | quote }} already installed - skipping"
-fi
+pip
+if empty echo "All NPM packages already installed."
 {{ end -}}
 
 echo ""
 echo "Installing packages by pipx..."
+empty = true
 {{ range .packages.darwin.pipx -}}
 if ! which {{ . | quote }} &> /dev/null; then
+  empty = false
   pipx install {{ . | quote }}
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
+if empty echo "All pipx packages already installed."
 {{ end -}}
 
 source ~/.zshrc
