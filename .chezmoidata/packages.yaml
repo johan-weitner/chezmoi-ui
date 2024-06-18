@@ -243,6 +243,8 @@ packages:
       # - 497799835
       - 441258766
       - 1388020431 # DevCleaner for XCode
+      - 1532419400 # Meeting Bar - https://apps.apple.com/app/id1532419400
+      - 1085114709 # Parallels Desktop
 
     node:
     - ai-shell:
