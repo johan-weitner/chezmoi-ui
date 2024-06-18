@@ -118,6 +118,8 @@ packages:
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
+    taps:
+    - Hyde46/hoard
 
     cargo:
     # - zellij
@@ -240,6 +242,7 @@ packages:
     mas:
       # - 497799835
       - 441258766
+      - 1388020431 # DevCleaner for XCode
 
     node:
     - ai-shell:
