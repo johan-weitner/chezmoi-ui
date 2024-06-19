@@ -42,6 +42,14 @@ fi
 
 brew update
 
+
+echo ""
+echo "Tapping Homebrew repos..."
+{{ range .packages.darwin.taps -}}
+brew tap {{ . | quote }}
+{{ end -}}
+
+
 echo ""
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
