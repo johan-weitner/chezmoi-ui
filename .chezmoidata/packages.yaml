@@ -144,10 +144,23 @@ packages:
     - virtualenv
     - w3m
     - watchman
-    # - //microsoft-office
-    # //openjdk
-    #- microsoft-edge
-    #- ios-deploy:
+    - zsh-completions
+    - whalebrew
+    - wifi-password
+    - charmbracelet/tap/wishlist
+    - xcodesorg/made/xcodes
+    - yamllint
+    - yank
+    - yj
+    - you-get
+    - youtube-dl
+    - yq
+    - yt-dlp
+    - ncruces/tap/zenity
+    # - microsoft-office
+    # - openjdk
+    # - microsoft-edge
+    # - ios-deploy:
     casks:
     - alacritty
     - warp
@@ -170,7 +183,7 @@ packages:
     - hammerspoon
     - http-toolkit
     - raycast
-    - duplicacy-cliiina
+    - duplicacy-cli
     - keycastr
     - pieces
     - logi-options-plus
@@ -183,19 +196,20 @@ packages:
     - pb
     - plex
     - postman
-    - zsh-completions
     - qlcolorcode
     - responsively
     - runjs
     - slack
     - vlc
+    - wireshark
+    # - zoom
     # - vscodium
     # - virtualbox
     # - visual-studio
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
-    #//ipfs
+    # - ipfs
     taps:
     - Hyde46/hoard
 
@@ -318,7 +332,7 @@ packages:
 
 
     mas:
-      # - 497799835
+      # - 497799835 # XCode (full)
       - 441258766
       - 1388020431 # DevCleaner for XCode
       - 1532419400 # Meeting Bar - https://apps.apple.com/app/id1532419400
@@ -373,6 +387,30 @@ packages:
     - husky:
       name: husky
       pkg: husky
+
+    # json-server
+    # lighthouse
+    # meta
+    # @vercel/ncc
+    # ndb
+    # nodemon
+    # npkill
+    # npm-check
+    # npm-check-updates
+    # oclif
+    # opencommit
+    # package-size
+    # playwright
+    # psi
+    # semantic-release
+    # serve
+    # share-cli
+    # syncpack
+    # terminalizer
+    # @rafaelrinaldi/whereami
+    # wipe-modules
+    # //ios-sim:
+    # //ipfs-deploy
 
 
     scripts:

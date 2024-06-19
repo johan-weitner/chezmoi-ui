@@ -124,7 +124,7 @@ empty = false
 echo "Downloading {{ $app.pkg }}..."
 pnpm add -g {{ $app.pkg }}
 fi
-if empty echo "All NPM packages already installed."
+if empty echo "All NPM packages already installed." fi
 {{ end -}}
 
 echo ""
