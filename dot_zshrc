@@ -1,3 +1,6 @@
+autoload -Uz compinit
+compinit
+
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
 [[ -f ~/.zsh/env.zsh ]] && source ~/.zsh/env.zsh
@@ -11,7 +14,7 @@
 # eval "$(starship init zsh)"
 
 # Load oh-my-posh
-eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/atomic.omp.json)" # 1_shell, atomic
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/atomic.omp.json)"
 #  1_shell.omp.json                halflife.omp.json           poshmon.omp.json
 #  agnoster.minimal.omp.json       honukai.omp.json            powerlevel10k_classic.omp.json
 #  agnoster.omp.json               hotstick.minimal.omp.json   powerlevel10k_lean.omp.json
@@ -67,6 +70,9 @@ eval "$(direnv hook zsh)"
 # Init Zoxide
 eval "$(zoxide init zsh)"
 
+# Source Powerline
+# source ~/.zsh/powerline.zsh
+
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
     print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
@@ -97,3 +103,7 @@ echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> 
   zstyle ':completion::complete:n-kill::bits' matcher 'r:|=** l:|=*'
   ### END ###
 
+
+# Hishtory Config:
+export PATH="$PATH:/Users/johanweitner/.hishtory"
+source /Users/johanweitner/.hishtory/config.zsh
