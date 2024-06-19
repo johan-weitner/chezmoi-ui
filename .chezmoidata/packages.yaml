@@ -98,7 +98,7 @@ packages:
     - jo
     - jq
     - noahgorstein/tap/jqp
-    - krita
+    # - krita
     - libimobiledevice
     - litecli
     - mackup
@@ -110,7 +110,7 @@ packages:
     - mise
     - mkcert
     - nb
-    - orbstack
+    # - orbstack
     - ots
     - packer
     - privoxy
@@ -119,7 +119,7 @@ packages:
     - ripgrep
     - rm-improved
     - sd
-    - secretive
+    # - secretive
     - getsentry/tools/sentry-cli
     - serverless
     - shc
