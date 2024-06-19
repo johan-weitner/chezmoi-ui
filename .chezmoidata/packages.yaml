@@ -92,6 +92,62 @@ packages:
     - hub
     - hugo
     - ideviceinstaller
+    - guumaster/tap/hostctl
+    - hurl
+    - jc
+    - jo
+    - jq
+    - noahgorstein/tap/jqp
+    - krita
+    - libimobiledevice
+    - litecli
+    - mackup
+    - clintmod/formulas/macprefs
+    - magic-wormhole
+    - mailcatcher
+    - makeself
+    - miller
+    - mise
+    - mkcert
+    - nb
+    - orbstack
+    - ots
+    - packer
+    - privoxy
+    - procs
+    - pup
+    - ripgrep
+    - rm-improved
+    - sd
+    - secretive
+    - getsentry/tools/sentry-cli
+    - serverless
+    - shc
+    - shellcheck
+    - sqlite
+    - abhimanyu003/sttr/sttr
+    - svgo
+    - t-rec
+    - tailscale
+    - task
+    - taskd
+    - tasksh
+    - thefuck
+    - tig
+    - tmate
+    - tmux
+    - awk
+    - gnu-sed
+    - perl
+    - tmuxinator
+    - tree
+    - virtualenv
+    - w3m
+    - watchman
+    # - //microsoft-office
+    # //openjdk
+    #- microsoft-edge
+    #- ios-deploy:
     casks:
     - alacritty
     - warp
@@ -114,10 +170,32 @@ packages:
     - hammerspoon
     - http-toolkit
     - raycast
-    - duplicacy-cli
+    - duplicacy-cliiina
+    - keycastr
+    - pieces
+    - logi-options-plus
+    - microsoft-teams
+    - mitmproxy
+    - mockoon
+    - obs
+    - obsidian
+    - openinterminal
+    - pb
+    - plex
+    - postman
+    - zsh-completions
+    - qlcolorcode
+    - responsively
+    - runjs
+    - slack
+    - vlc
+    # - vscodium
+    # - virtualbox
+    # - visual-studio
     # - google-chrome
     # - adobe-creative-cloud
     # - obsidian
+    #//ipfs
     taps:
     - Hyde46/hoard
 
