@@ -426,7 +426,7 @@ packages:
     - 'https://github.com/agata/dl.biscuit/releases/latest'
 
     pip:
-    - 'ps_mem'
+    # - 'ps_mem'
 
     pipx:
     - ansible

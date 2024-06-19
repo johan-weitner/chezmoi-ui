@@ -189,20 +189,20 @@ empty=true
 # echo "All Go repos already installed."
 # fi
 
-echo ""
-echo "Installing packages by pip..."
-empty=true
-{{ range .packages.darwin.pip -}}
-if ! which {{ . | quote }} &> /dev/null; then
-  empty=false
-  pip install {{ . | quote }}
-else
-  echo "{{ . | quote }} already installed - skipping"
-fi
-{{ end -}}
-if $empty; then
-echo "All NPM packages already installed."
-fi
+# echo ""
+# echo "Installing packages by pip..."
+# empty=true
+# {{ range .packages.darwin.pip -}}
+# if ! which {{ . | quote }} &> /dev/null; then
+#   empty=false
+#   pip install {{ . | quote }}
+# else
+#   echo "{{ . | quote }} already installed - skipping"
+# fi
+# {{ end -}}
+# if $empty; then
+# echo "All NPM packages already installed."
+# fi
 
 echo ""
 echo "Installing packages by pipx..."
@@ -219,4 +219,4 @@ if $empty; then
 echo "All pipx packages already installed."
 fi
 
-source ~/.zshrc
+# source ~/.zshrc
