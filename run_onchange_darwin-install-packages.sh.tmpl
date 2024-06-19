@@ -198,7 +198,7 @@ if ! which {{ . | quote }} &> /dev/null; then
   pip install {{ . | quote }}
 else
   echo "{{ . | quote }} already installed - skipping"
-pip
+fi
 {{ end -}}
 if $empty; then
 echo "All NPM packages already installed."
