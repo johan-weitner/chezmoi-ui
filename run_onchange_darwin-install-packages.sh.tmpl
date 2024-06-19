@@ -140,6 +140,7 @@ fi
 
 
 echo ""
+empty=true
 echo "Installing cargo packages..."
 {{ range .packages.darwin.cargo -}}
 if ! which {{ . | quote }} &> /dev/null; then
@@ -149,8 +150,10 @@ empty=false
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
-if $empty; then echo "All Cargo packages already installed."
 {{ end -}}
+if $empty; then
+echo "All Cargo packages already installed."
+fi
 
 
 echo ""
@@ -164,8 +167,10 @@ empty=false
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
-if $empty; then echo "All Git repos already installed."
 {{ end -}}
+if $empty; then
+echo "All Git repos already installed."
+fi
 
 
 # echo""
@@ -179,8 +184,10 @@ empty=true
 # else
 #   echo "{{ . | quote }} already installed - skipping"
 # fi
-# if $empty; then echo "All Go repos already installed."
 # {{ end -}}
+# if $empty; then
+# echo "All Go repos already installed."
+# fi
 
 echo ""
 echo "Installing packages by pip..."
@@ -192,8 +199,10 @@ if ! which {{ . | quote }} &> /dev/null; then
 else
   echo "{{ . | quote }} already installed - skipping"
 pip
-if $empty; then echo "All NPM packages already installed."
 {{ end -}}
+if $empty; then
+echo "All NPM packages already installed."
+fi
 
 echo ""
 echo "Installing packages by pipx..."
@@ -205,7 +214,9 @@ if ! which {{ . | quote }} &> /dev/null; then
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
-if $empty; then echo "All pipx packages already installed."
 {{ end -}}
+if $empty; then
+echo "All pipx packages already installed."
+fi
 
 source ~/.zshrc
