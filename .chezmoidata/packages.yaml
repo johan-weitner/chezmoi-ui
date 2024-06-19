@@ -147,7 +147,6 @@ packages:
     - zsh-completions
     - whalebrew
     - wifi-password
-    - charmbracelet/tap/wishlist
     - xcodesorg/made/xcodes
     - yamllint
     - yank
@@ -212,6 +211,8 @@ packages:
     # - ipfs
     taps:
     - Hyde46/hoard
+    - xcodesorg/made
+    - ncruces/tap
 
     cargo:
     # - zellij
@@ -247,6 +248,7 @@ packages:
     #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     # https://downloads.1password.com/mac/1Password.zip
+    # https://orbstack.dev/download/stable/latest/arm64
 
 # 1Password
 # Actions For Obsidian
