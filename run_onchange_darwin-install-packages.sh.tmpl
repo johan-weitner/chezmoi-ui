@@ -31,7 +31,7 @@ echo ".................    ....:::::::::......  ..................
 ..........   :=*%#***********++***-=#%%%%*+**: .............
 .............   .--=++************+#%%#*+-..  ..............
 ................    ...::--=====----::.    ................. install.mac"
-echo ""
+printf "\n\n"
 
 echo "Installing prerequisites"
 echo ""
@@ -43,14 +43,14 @@ fi
 brew update
 
 
-echo ""
+printf "\n\n"
 echo "Tapping Homebrew repos..."
 {{ range .packages.darwin.taps -}}
 brew tap {{ . | quote }}
 {{ end -}}
 
 
-echo ""
+printf "\n\n"
 echo "Installing Homebrew packages..."
 brew bundle --no-lock --file=/dev/stdin <<EOF
 {{ range .packages.darwin.brews -}}
@@ -64,7 +64,7 @@ EOF
 
 
 
-echo ""
+printf "\n\n"
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
 if [ -d /Applications/{{ $binary.name }} ]; then
@@ -96,7 +96,7 @@ fi
 
 
 
-echo ""
+printf "\n\n"
 echo "Installing packages by shellscript..."
 {{ range .packages.darwin.scripts -}}
 if ! which {{ . | quote }} &> /dev/null; then
@@ -106,8 +106,7 @@ else
 fi
 {{ end -}}
 
-echo ""
-echo ""
+printf "\n\n"
 echo "Setting up Node and PNPM..."
 if ! which node &> /dev/null; then
   echo "Installing Node LTS..."
@@ -123,7 +122,7 @@ else
   echo "PNPM already installed at version $(pnpm -v)"
 fi
 
-echo ""
+printf "\n\n"
 echo "Installing NPM packages..."
 empty=true
 {{ range $ix, $app := .packages.darwin.node -}}
@@ -139,7 +138,7 @@ fi
 
 
 
-echo ""
+printf "\n\n"
 empty=true
 echo "Installing cargo packages..."
 {{ range .packages.darwin.cargo -}}
@@ -156,7 +155,7 @@ echo "All Cargo packages already installed."
 fi
 
 
-echo ""
+printf "\n\n"
 echo "Fetching Git repos..."
 empty=true
 {{ range .packages.darwin.git -}}
@@ -173,7 +172,7 @@ echo "All Git repos already installed."
 fi
 
 
-# echo""
+# printf "\n\n"
 # echo  "Installing Go repos..."
 empty=true
 # {{ range .packages.darwin.go -}}
@@ -189,7 +188,7 @@ empty=true
 # echo "All Go repos already installed."
 # fi
 
-# echo ""
+# printf "\n\n"
 # echo "Installing packages by pip..."
 # empty=true
 # {{ range .packages.darwin.pip -}}
@@ -204,7 +203,7 @@ empty=true
 # echo "All NPM packages already installed."
 # fi
 
-echo ""
+printf "\n\n"
 echo "Installing packages by pipx..."
 empty=true
 {{ range .packages.darwin.pipx -}}
