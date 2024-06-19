@@ -127,13 +127,15 @@ echo ""
 echo "Installing NPM packages..."
 empty=true
 {{ range $ix, $app := .packages.darwin.node -}}
-if ! which {{ $app.name }} &> /dev/null; then
-empty=false
-echo "Downloading {{ $app.pkg }}..."
-pnpm add -g {{ $app.pkg }}
-fi
+  if ! which {{ $app.name }} &> /dev/null; then
+    empty=false
+    echo "Downloading {{ $app.pkg }}..."
+    pnpm add -g {{ $app.pkg }}
+  fi
 {{ end -}}
-if $empty; then echo "All NPM packages already installed." fi
+if $empty; then
+echo "All NPM packages already installed."
+fi
 
 
 
