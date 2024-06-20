@@ -4,129 +4,121 @@ packages:
     pre:
       brews:
       - sebsto/macos/xcodeinstall
+      - gomplate
+      - volta
       casks:
 
     brews:
-    - git
-    - coreutils
-    - findutils
-    - age
-    - glow
-    - bat
-    - lsd
-    - gnupg
-    - gum
-    - htmlq
-    - mas
-    - fastfetch
-    - knqyf263/pet
-    - rmlint
-    - yazi
-    - btop
-    - micro
-    - starship
-    - watson
-    - lazygit
-    - snyk-cli
-    - koekeishiya/formulae/yabai
-    - jandedobbeleer/oh-my-posh/oh-my-posh
-    - pinentry-mac
-    - pipx
-    - python@3.12
-    - volta
-    - zx
-    - docker
-    - tldr
-    - zoxide
-    - neovim
+    - abhimanyu003/sttr/sttr
     - act
     - age
-    - gofireflyio/aiac/aiac
-    - pandoc
-    - exiftool
-    - poppler
-    - csvkit
-    # - vldmrkl/formulae/airdrop-cli
+    - age
     - asciinema
     - asdf
-    - ripgrep
+    - awk
+    - bat
     - bat-extras
-    - git-extras
     - bfg
-    # - 1password
-    # - 1password-cli
-    # - blackhole-2ch
     - brew-gem
-    - oven-sh/bun/bun
+    - btop
     - cheat
-    - ctop
-    - curlie
-    - linka-cloud/tap/d2vm
-    - dasel
-    - syncthing
-    - yohamta/tap/dagu
+    - clintmod/formulas/macprefs
     - clipboard
     - cmake
+    - coreutils
+    - csvkit
+    - ctop
+    - curlie
+    - dasel
+    - docker
     - doctl
     - duf
     - dust
     - envchain
+    - exiftool
     - eza
+    - fastfetch
     - fcp
     - fd
     - fdupes
     - figlet
+    - findutils
     - fzf
     - gcc
+    - getsentry/tools/sentry-cli
     - gh
+    - git
+    - git-extras
     - gitleaks
     - glab
     - glow
+    - glow
+    - gnu-sed
+    - gnupg
+    - gofireflyio/aiac/aiac
     - gtop
     - gum
+    - gum
+    - guumaster/tap/hostctl
     - hoard
     - howdoi
+    - htmlq
     - htop
     - http-prompt
     - httpie
     - hub
     - hugo
-    - ideviceinstaller
-    - guumaster/tap/hostctl
     - hurl
+    - ideviceinstaller
+    - jandedobbeleer/oh-my-posh/oh-my-posh
     - jc
     - jo
     - jq
-    - noahgorstein/tap/jqp
-    # - krita
+    - knqyf263/pet
+    - koekeishiya/formulae/yabai
+    - lazygit
     - libimobiledevice
+    - linka-cloud/tap/d2vm
     - litecli
+    - lsd
     - mackup
-    - clintmod/formulas/macprefs
     - magic-wormhole
     - mailcatcher
     - makeself
+    - mas
+    - micro
     - miller
     - mise
     - mkcert
     - nb
-    # - orbstack
+    - ncruces/tap/zenity
+    - neovim
+    - noahgorstein/tap/jqp
     - ots
+    - oven-sh/bun/bun
     - packer
+    - pandoc
+    - perl
+    - pinentry-mac
+    - pipx
+    - poppler
     - privoxy
     - procs
     - pup
+    - python@3.12
+    - ripgrep
     - ripgrep
     - rm-improved
+    - rmlint
     - sd
-    # - secretive
-    - getsentry/tools/sentry-cli
     - serverless
     - shc
     - shellcheck
+    - snyk-cli
     - sqlite
-    - abhimanyu003/sttr/sttr
+    - starship
     - svgo
+    - syncthing
     - t-rec
     - tailscale
     - task
@@ -134,32 +126,41 @@ packages:
     - tasksh
     - thefuck
     - tig
+    - tldr
     - tmate
     - tmux
-    - awk
-    - gnu-sed
-    - perl
     - tmuxinator
     - tree
     - virtualenv
     - w3m
     - watchman
-    - zsh-completions
+    - watson
     - whalebrew
     - wifi-password
     - xcodesorg/made/xcodes
     - yamllint
     - yank
+    - yazi
     - yj
+    - yohamta/tap/dagu
     - you-get
     - youtube-dl
     - yq
     - yt-dlp
-    - ncruces/tap/zenity
+    - zoxide
+    - zsh-completions
+    - zx
     # - microsoft-office
     # - openjdk
     # - microsoft-edge
     # - ios-deploy:
+    # - secretive
+    # - orbstack
+    # - krita
+    # - 1password
+    # - 1password-cli
+    # - blackhole-2ch
+    # - vldmrkl/formulae/airdrop-cli
     casks:
     - alacritty
     - warp
@@ -218,127 +219,375 @@ packages:
     # - zellij
 
     binaryMac:
-    # - 'Arc':
-    #   name: Arc
-    #   dmg: 'Arc-latest.dmg'
-    #   url: 'https://releases.arc.net/release/Arc-latest.dmg'
-    # - 'GitButler':
-    #   dmg: 'GitButler.dmg'
-    #   name: 'GitButler'
-    #   url: 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
-    # - Typora:
-    #   dmg: 'Typora.dmg'
-    #   name: Typora
-    #   url: 'https://download.typora.io/mac/Typora.dmg'
-    # - Biscuit:
-    #   dmg: "Biscuit-1.2.29-arm64.dmg"
-    #   name: Biscuit
-    #   url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
-    # - FleetingNotes:
-    #   dmg: 'FleetingNotesMac.dmg'
-    #   name: "Fleeting Notes"
-    #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
-    # - Raindrop:
-    #   dmg: 'Raindrop.dmg'
-    #   name: Raindrop
-    #   url: 'https://raindrop.io/r/app/macos-arm'
-    # - Obsidian:
-    #   dmg: 'Obsidian.dmg'
-    #   name: Obsidian
-    #   url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
+    - 'Arc':
+      name: Arc
+      dmg: 'Arc-latest.dmg'
+      url: 'https://releases.arc.net/release/Arc-latest.dmg'
+    - 'GitButler':
+      dmg: 'GitButler.dmg'
+      name: 'GitButler'
+      url: 'https://app.gitbutler.com/downloads/release/darwin/aarch64/dmg'
+    - Typora:
+      dmg: 'Typora.dmg'
+      name: Typora
+      url: 'https://download.typora.io/mac/Typora.dmg'
+    - Biscuit:
+      dmg: "Biscuit-1.2.29-arm64.dmg"
+      name: Biscuit
+      url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
+    - FleetingNotes:
+      dmg: 'FleetingNotesMac.dmg'
+      name: "Fleeting Notes"
+      url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
+    - Raindrop:
+      dmg: 'Raindrop.dmg'
+      name: Raindrop
+      url: 'https://raindrop.io/r/app/macos-arm'
+    - Obsidian:
+      dmg: 'Obsidian.dmg'
+      name: Obsidian
+      url: 'https://github.com/obsidianmd/obsidian-releases/releases/download/v1.6.3/Obsidian-1.6.3-universal.dmg'
 
     # https://downloads.1password.com/mac/1Password.zip
     # https://orbstack.dev/download/stable/latest/arm64
 
-# 1Password
-# Actions For Obsidian
-# Adobe Creative Cloud
-# Alfred 5
-# Amethyst
-# Amphetamine
-# AppFlowy
-# Aquarius
-# Arc
-# Audio Hijack
-# Backblaze
-# balenaEtcher
-# BankID
-# Bartender 5
-# Bear
-# Biscuit
-# Blackmagic Disk Speed Test
-# Blackmagic Proxy Generator
-# Blackmagic RAW
-# ChatGPT
-# ChatMate for Facebook
-# Code Snippets AI
-# Cody
-# Copilot
-# Cryptomator
-# DaisyDisk
-# Dash
-# Deepdwn
-# DiffusionBee
-# Draw Things
-# DriveDx
-# Dropover
-# Fiddler
-# Filters for Photos
-# Folder Peek
-# Folder Tidy
-# GitButler
-# GitHub Desktop
-# Goodnotes
-# Hand Mirror
-# HandBrake
-# HTTPie
-# jdk-22.0.1.jdk
-# kitty
-# Later
-# LM Studio
-# MacGPT
-# MacWhisper
-# Magenta Studio
-# Magnet
-# MenubarX
-# Microsoft Edge
-# Microsoft Word
-# Movavi Screen Recorder 22
-# MPV
-# Noize
-# Numi
-# OBS
-# Obsidian
-# Ollama
-# Parallels Desktop
-# Parallels Toolbox
-# Post Haste
-# PowerShell
-# Raindrop.io
-# Raycast
-# Replay
-# Scribe
-# Shortery
-# Slack
-# Sourcetree
-# Strflow
-# Syncthing
-# TagSpaces
-# Tailscale
-# Todoist
-# Typora
-# VLC
-# Zotero
+
+
+
+    desktop:
+    - 1Password
+    - Actions For Obsidian
+    - Adobe Creative Cloud
+    - Alfred 5
+    - Amethyst
+    - Amphetamine
+    - AppFlowy
+    - Aquarius
+    - Arc
+    - Audio Hijack
+    - Backblaze
+    - balenaEtcher
+    - BankID
+    - Bartender 5
+    - Bear
+    - Biscuit
+    - Blackmagic Disk Speed Test
+    - Blackmagic Proxy Generator
+    - Blackmagic RAW
+    - ChatGPT
+    - ChatMate for Facebook
+    - Code Snippets AI
+    - Cody
+    - Copilot
+    - Cryptomator
+    - DaisyDisk
+    - Dash
+    - DevCleaner for XCode (1388020431)
+    - Deepdwn
+    - DiffusionBee
+    - Draw Things
+    - DriveDx
+    - Dropover
+    - Fiddler
+    - Filters for Photos
+    - Folder Peek
+    - Folder Tidy
+    - GitButler
+    - GitHub Desktop
+    - Goodnotes
+    - Hand Mirror
+    - HandBrake
+    - HTTPie
+    - jdk-22.0.1.jdk
+    - kitty
+    - Later
+    - LM Studio
+    - MacGPT
+    - MacWhisper
+    - Magenta Studio
+    - Magnet
+    - Meeting Bar (1532419400)
+    - MenubarX
+    - Microsoft Edge
+    - Microsoft Word
+    - Movavi Screen Recorder
+    - MPV
+    - Noize
+    - Numi
+    - OBS
+    - Obsidian
+    - Ollama
+    - Parallels Desktop (1085114709)
+    - Parallels Toolbox
+    - Post Haste
+    - PowerShell
+    - Raindrop.io
+    - Raycast
+    - Replay
+    - Scribe
+    - Shortery
+    - Slack
+    - Sourcetree
+    - Strflow
+    - Syncthing
+    - TagSpaces
+    - Tailscale
+    - Todoist
+    - Typora
+    - VLC
+    - XCode (497799835)
+    - Zotero
 
 
 
 
     mas:
-      # - 497799835 # XCode (full)
-      - 441258766
-      - 1388020431 # DevCleaner for XCode
-      - 1532419400 # Meeting Bar - https://apps.apple.com/app/id1532419400
-      - 1085114709 # Parallels Desktop
+    - 1Password:
+      name: 1Password
+      appStoreId: 1Password
+    - ActionsForObsidian:
+      name: Actions For Obsidian
+      appStoreId: Actions For Obsidian
+    - ACC:
+      name: Adobe Creative Cloud
+      appStoreId: Adobe Creative Cloud
+    - Alfred:
+      name: Alfred 5
+      appStoreId: Alfred 5
+    - Amethyst:
+      name: Amethyst
+      appStoreId: Amethyst
+    - Amphetamine:
+      name: Amphetamine
+      appStoreId: Amphetamine
+    - AppFlowy:
+      name: AppFlowy
+      appStoreId: AppFlowy
+    - Aquarius:
+      name: Aquarius
+      appStoreId: Aquarius
+    - Arc:
+      name: Arc
+      appStoreId: Arc
+    - AudioHijack:
+      name: Audio Hijack
+      appStoreId: Audio Hijack
+    - Backblaze:
+      name: Backblaze
+      appStoreId: Backblaze
+    - balenaEtcher:
+      name: balenaEtcher
+      appStoreId: balenaEtcher
+    - BankID:
+      name: BankID
+      appStoreId: BankID
+    - Bartender:
+      name: Bartender 5
+      appStoreId: Bartender 5
+    - Bear:
+      name: Bear
+      appStoreId: Bear
+    - Biscuit:
+      name: Biscuit
+      appStoreId: Biscuit
+    - BlackmagicDiskSpeedTest:
+      name: Blackmagic Disk Speed Test
+      appStoreId: Blackmagic Disk Speed Test
+    - BlackmagicProxyGenerator:
+      name: Blackmagic Proxy Generator
+      appStoreId: Blackmagic Proxy Generator
+    - BlackmagicRAW:
+      name: Blackmagic RAW
+      appStoreId: Blackmagic RAW
+    - ChatGPT:
+      name: ChatGPT
+      appStoreId: ChatGPT
+    - ChatMateforFacebook:
+      name: ChatMate for Facebook
+      appStoreId: ChatMate for Facebook
+    - CodeSnippetsAI:
+      name: Code Snippets AI
+      appStoreId: Code Snippets AI
+    - Cody:
+      name: Cody
+      appStoreId: Cody
+    - Copilot:
+      name: Copilot
+      appStoreId: Copilot
+    - Cryptomator:
+      name: Cryptomator
+      appStoreId: Cryptomator
+    - DaisyDisk:
+      name: DaisyDisk
+      appStoreId: DaisyDisk
+    - Dash:
+      name: Dash
+      appStoreId: Dash
+    - DevCleaner:
+      name: DevCleaner for XCode
+      appStoreId: 1388020431
+    - Deepdwn:
+      name: Deepdwn
+      appStoreId: Deepdwn
+    - DiffusionBee:
+      name: DiffusionBee
+      appStoreId: DiffusionBee
+    - DrawThings:
+      name: Draw Things
+      appStoreId: Draw Things
+    - DriveDx:
+      name: DriveDx
+      appStoreId: DriveDx
+    - Dropover:
+      name: Dropover
+      appStoreId: Dropover
+    - Fiddler:
+      name: Fiddler
+      appStoreId: Fiddler
+    - FiltersforPhotos:
+      name: Filters for Photos
+      appStoreId: Filters for Photos
+    - FolderPeek:
+      name: Folder Peek
+      appStoreId: Folder Peek
+    - FolderTidy:
+      name: Folder Tidy
+      appStoreId: Folder Tidy
+    - GitButler:
+      name: GitButler
+      appStoreId: GitButler
+    - GitHubDesktop:
+      name: GitHub Desktop
+      appStoreId: GitHub Desktop
+    - Goodnotes:
+      name: Goodnotes
+      appStoreId: Goodnotes
+    - HandMirror:
+      name: Hand Mirror
+      appStoreId: Hand Mirror
+    - HandBrake:
+      name: HandBrake
+      appStoreId: HandBrake
+    - HTTPie:
+      name: HTTPie
+      appStoreId: HTTPie
+    - JDK:
+      name: jdk-22.0.1.jdk
+      appStoreId: jdk-22.0.1.jdk
+    - kitty:
+      name: kitty
+      appStoreId: kitty
+    - Later:
+      name: Later
+      appStoreId: Later
+    - LMStudio:
+      name: LM Studio
+      appStoreId: LM Studio
+    - MacGPT:
+      name: MacGPT
+      appStoreId: MacGPT
+    - MacWhisper:
+      name: MacWhisper
+      appStoreId: MacWhisper
+    - MagentaStudio:
+      name: Magenta Studio
+      appStoreId: Magenta Studio
+    - Magnet:
+      name: Magnet
+      appStoreId: Magnet
+    - MeetingBar:
+      name: Meeting Bar
+      appStoreId: 1532419400
+    - MenubarX:
+      name: MenubarX
+      appStoreId: MenubarX
+    - MicrosoftEdge:
+      name: Microsoft Edge
+      appStoreId: Microsoft Edge
+    - MicrosoftWord:
+      name: Microsoft Word
+      appStoreId: Microsoft Word
+    - MovaviScreenRecorder:
+      name: Movavi Screen Recorder
+      appStoreId: Movavi Screen Recorder
+    - MPV:
+      name: MPV
+      appStoreId: MPV
+    - Noize:
+      name: Noize
+      appStoreId: Noize
+    - Numi:
+      name: Numi
+      appStoreId: Numi
+    - OBS:
+      name: OBS
+      appStoreId: OBS
+    - Obsidian:
+      name: Obsidian
+      appStoreId: Obsidian
+    - Ollama:
+      name: Ollama
+      appStoreId: Ollama
+    - ParallelsDesktop:
+      name: Parallels Desktop
+      appStoreId:
+    - ParallelsToolbox:
+      name: Parallels Toolbox
+      appStoreId: Parallels Toolbox
+    - PostHaste:
+      name: Post Haste
+      appStoreId: Post Haste
+    - PowerShell:
+      name: PowerShell
+      appStoreId: PowerShell
+    - Raindrop:
+      name: Raindrop.io
+      appStoreId: Raindrop.io
+    - Raycast:
+      name: Raycast
+      appStoreId: Raycast
+    - Replay:
+      name: Replay
+      appStoreId: Replay
+    - Scribe:
+      name: Scribe
+      appStoreId: Scribe
+    - Shortery:
+      name: Shortery
+      appStoreId: Shortery
+    - Slack:
+      name: Slack
+      appStoreId: Slack
+    - Sourcetree:
+      name: Sourcetree
+      appStoreId: Sourcetree
+    - Strflow:
+      name: Strflow
+      appStoreId: Strflow
+    - Syncthing:
+      name: Syncthing
+      appStoreId: Syncthing
+    - TagSpaces:
+      name: TagSpaces
+      appStoreId: TagSpaces
+    - Tailscale:
+      name: Tailscale
+      appStoreId: Tailscale
+    - Todoist:
+      name: Todoist
+      appStoreId: Todoist
+    - Typora:
+      name: Typora
+      appStoreId: Typora
+    - VLC:
+      name: VLC
+      appStoreId: VLC
+    - XCode (497799835):
+      name: XCode (497799835)
+      appStoreId: XCode (497799835)
+    - Zotero:
+      name: Zotero
+      appStoreId: Zotero
 
     node:
     - ai-shell:

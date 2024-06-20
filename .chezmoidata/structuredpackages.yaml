@@ -1,0 +1,246 @@
+- 1Password:
+    name: 1Password
+    appStoreId: 1Password
+- Actions For Obsidian:
+    name: Actions For Obsidian
+    appStoreId: Actions For Obsidian
+- Adobe Creative Cloud:
+    name: Adobe Creative Cloud
+    appStoreId: Adobe Creative Cloud
+- Alfred 5:
+    name: Alfred 5
+    appStoreId: Alfred 5
+- Amethyst:
+    name: Amethyst
+    appStoreId: Amethyst
+- Amphetamine:
+    name: Amphetamine
+    appStoreId: Amphetamine
+- AppFlowy:
+    name: AppFlowy
+    appStoreId: AppFlowy
+- Aquarius:
+    name: Aquarius
+    appStoreId: Aquarius
+- Arc:
+    name: Arc
+    appStoreId: Arc
+- Audio Hijack:
+    name: Audio Hijack
+    appStoreId: Audio Hijack
+- Backblaze:
+    name: Backblaze
+    appStoreId: Backblaze
+- BankID:
+    name: BankID
+    appStoreId: BankID
+- Bartender 5:
+    name: Bartender 5
+    appStoreId: Bartender 5
+- Bear:
+    name: Bear
+    appStoreId: Bear
+- Biscuit:
+    name: Biscuit
+    appStoreId: Biscuit
+- Blackmagic Disk Speed Test:
+    name: Blackmagic Disk Speed Test
+    appStoreId: Blackmagic Disk Speed Test
+- Blackmagic Proxy Generator:
+    name: Blackmagic Proxy Generator
+    appStoreId: Blackmagic Proxy Generator
+- Blackmagic RAW:
+    name: Blackmagic RAW
+    appStoreId: Blackmagic RAW
+- ChatGPT:
+    name: ChatGPT
+    appStoreId: ChatGPT
+- ChatMate for Facebook:
+    name: ChatMate for Facebook
+    appStoreId: ChatMate for Facebook
+- Code Snippets AI:
+    name: Code Snippets AI
+    appStoreId: Code Snippets AI
+- Cody:
+    name: Cody
+    appStoreId: Cody
+- Copilot:
+    name: Copilot
+    appStoreId: Copilot
+- Cryptomator:
+    name: Cryptomator
+    appStoreId: Cryptomator
+- DaisyDisk:
+    name: DaisyDisk
+    appStoreId: DaisyDisk
+- Dash:
+    name: Dash
+    appStoreId: Dash
+- Deepdwn:
+    name: Deepdwn
+    appStoreId: Deepdwn
+- DevCleaner for XCode (1388020431):
+    name: DevCleaner for XCode (1388020431)
+    appStoreId: DevCleaner for XCode (1388020431)
+- DiffusionBee:
+    name: DiffusionBee
+    appStoreId: DiffusionBee
+- Draw Things:
+    name: Draw Things
+    appStoreId: Draw Things
+- DriveDx:
+    name: DriveDx
+    appStoreId: DriveDx
+- Dropover:
+    name: Dropover
+    appStoreId: Dropover
+- Fiddler:
+    name: Fiddler
+    appStoreId: Fiddler
+- Filters for Photos:
+    name: Filters for Photos
+    appStoreId: Filters for Photos
+- Folder Peek:
+    name: Folder Peek
+    appStoreId: Folder Peek
+- Folder Tidy:
+    name: Folder Tidy
+    appStoreId: Folder Tidy
+- GitButler:
+    name: GitButler
+    appStoreId: GitButler
+- GitHub Desktop:
+    name: GitHub Desktop
+    appStoreId: GitHub Desktop
+- Goodnotes:
+    name: Goodnotes
+    appStoreId: Goodnotes
+- HTTPie:
+    name: HTTPie
+    appStoreId: HTTPie
+- Hand Mirror:
+    name: Hand Mirror
+    appStoreId: Hand Mirror
+- HandBrake:
+    name: HandBrake
+    appStoreId: HandBrake
+- LM Studio:
+    name: LM Studio
+    appStoreId: LM Studio
+- Later:
+    name: Later
+    appStoreId: Later
+- MPV:
+    name: MPV
+    appStoreId: MPV
+- MacGPT:
+    name: MacGPT
+    appStoreId: MacGPT
+- MacWhisper:
+    name: MacWhisper
+    appStoreId: MacWhisper
+- Magenta Studio:
+    name: Magenta Studio
+    appStoreId: Magenta Studio
+- Magnet:
+    name: Magnet
+    appStoreId: Magnet
+- Meeting Bar (1532419400):
+    name: Meeting Bar (1532419400)
+    appStoreId: Meeting Bar (1532419400)
+- MenubarX:
+    name: MenubarX
+    appStoreId: MenubarX
+- Microsoft Edge:
+    name: Microsoft Edge
+    appStoreId: Microsoft Edge
+- Microsoft Word:
+    name: Microsoft Word
+    appStoreId: Microsoft Word
+- Movavi Screen Recorder:
+    name: Movavi Screen Recorder
+    appStoreId: Movavi Screen Recorder
+- Noize:
+    name: Noize
+    appStoreId: Noize
+- Numi:
+    name: Numi
+    appStoreId: Numi
+- OBS:
+    name: OBS
+    appStoreId: OBS
+- Obsidian:
+    name: Obsidian
+    appStoreId: Obsidian
+- Ollama:
+    name: Ollama
+    appStoreId: Ollama
+- Parallels Desktop (1085114709):
+    name: Parallels Desktop (1085114709)
+    appStoreId: Parallels Desktop (1085114709)
+- Parallels Toolbox:
+    name: Parallels Toolbox
+    appStoreId: Parallels Toolbox
+- Post Haste:
+    name: Post Haste
+    appStoreId: Post Haste
+- PowerShell:
+    name: PowerShell
+    appStoreId: PowerShell
+- Raindrop.io:
+    name: Raindrop.io
+    appStoreId: Raindrop.io
+- Raycast:
+    name: Raycast
+    appStoreId: Raycast
+- Replay:
+    name: Replay
+    appStoreId: Replay
+- Scribe:
+    name: Scribe
+    appStoreId: Scribe
+- Shortery:
+    name: Shortery
+    appStoreId: Shortery
+- Slack:
+    name: Slack
+    appStoreId: Slack
+- Sourcetree:
+    name: Sourcetree
+    appStoreId: Sourcetree
+- Strflow:
+    name: Strflow
+    appStoreId: Strflow
+- Syncthing:
+    name: Syncthing
+    appStoreId: Syncthing
+- TagSpaces:
+    name: TagSpaces
+    appStoreId: TagSpaces
+- Tailscale:
+    name: Tailscale
+    appStoreId: Tailscale
+- Todoist:
+    name: Todoist
+    appStoreId: Todoist
+- Typora:
+    name: Typora
+    appStoreId: Typora
+- VLC:
+    name: VLC
+    appStoreId: VLC
+- XCode (497799835):
+    name: XCode (497799835)
+    appStoreId: XCode (497799835)
+- Zotero:
+    name: Zotero
+    appStoreId: Zotero
+- balenaEtcher:
+    name: balenaEtcher
+    appStoreId: balenaEtcher
+- jdk-22.0.1.jdk:
+    name: jdk-22.0.1.jdk
+    appStoreId: jdk-22.0.1.jdk
+- kitty:
+    name: kitty
+    appStoreId: kitty
