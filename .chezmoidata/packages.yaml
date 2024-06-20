@@ -62,7 +62,7 @@ packages:
     - ctop
     - curlie
     - dasel
-    - docker
+    # - docker
     - doctl
     - duf
     - dust
@@ -205,20 +205,19 @@ packages:
     - docker
     - visual-studio-code
     - espanso
-    - eul
     - firefox
     - https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb
-    - google-cloud-sdk
+    # - google-cloud-sdk
     - gitify
-    - google-chrome
+    # - google-chrome
     - hammerspoon
     - http-toolkit
     - raycast
     - duplicacy-cli
     - keycastr
     - pieces
-    - logi-options-plus
-    - microsoft-teams
+    # - logi-options-plus
+    # - microsoft-teams
     - mitmproxy
     - mockoon
     - obs
