@@ -8,6 +8,31 @@ packages:
       - volta
       casks:
 
+    taps:
+    - Hyde46/hoard
+    - xcodesorg/made
+    - ncruces/tap
+    - abhimanyu003/sttr
+    - charmbracelet/tap
+    - coder/coder
+    - gofireflyio/aiac
+    - homebrew/bundle
+    - homebrew/cask-fonts
+    - hpedrorodrigues/tools
+    - hudochenkov/sshpass
+    - hyde46/hoard
+    - jandedobbeleer/oh-my-posh
+    - jesseduffield/lazygit
+    - knqyf263/pet
+    - koekeishiya/formulae
+    - linka-cloud/tap
+    - macos-fuse-t/cask
+    - oven-sh/bun
+    - sebsto/macos
+    - tbckr/tap
+    - thezoraiz/ascii-image-converter
+    - xwmx/taps
+    - yohamta/tap
     brews:
     - abhimanyu003/sttr/sttr
     - act
@@ -208,15 +233,10 @@ packages:
     # - visual-studio
     # - google-chrome
     # - adobe-creative-cloud
-    # - obsidian
     # - ipfs
-    taps:
-    - Hyde46/hoard
-    - xcodesorg/made
-    - ncruces/tap
 
     cargo:
-    # - zellij
+    - zellij
 
     binaryMac:
     - 'Arc':

@@ -40,9 +40,10 @@ if ! which xcodeinstall &> /dev/null; then
 echo "Installing XCode..."
 brew install sebsto/macos/xcodeinstall
 fi
+echo "Deploying package manager Bin:"
+cp ./bin/bin /opt/homebrew/bin/
 
 brew update
-
 
 printf "\n\n"
 echo "Tapping Homebrew repos..."
@@ -220,3 +221,8 @@ echo "All pipx packages already installed."
 fi
 
 # source ~/.zshrc
+
+printf "\n\n"
+echo "Done. Probably reboot to finish setup."
+echo "The font Essential Pragmata Pro is available (encrypted) in ./assets"
+echo "If you're Johan you know how to decrypt it"
