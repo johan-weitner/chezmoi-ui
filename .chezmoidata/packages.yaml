@@ -13,6 +13,9 @@ packages:
 # Set up VSCode Sync
 # Try installing with "bin"
 # Better detection for binaqry installs
+# Meslo font: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip
+
+
 
 
     taps:
@@ -215,6 +218,11 @@ packages:
     - raycast
     - duplicacy-cli
     - keycastr
+    - font-meslo-for-powerlevel10k
+    - font-meslo-for-powerline
+    - font-meslo-lg
+    - font-meslo-lg-dz
+    - font-meslo-lg-nerd-font
     - pieces
     # - logi-options-plus
     # - microsoft-teams
