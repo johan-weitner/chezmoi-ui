@@ -3,10 +3,17 @@ packages:
   darwin:
     pre:
       brews:
-      - sebsto/macos/xcodeinstall
+      # - sebsto/macos/xcodeinstall
       - gomplate
       - volta
       casks:
+
+# GMail pw, email, name, github-user, github-token
+# Set up 1Password
+# Set up VSCode Sync
+# Try installing with "bin"
+# Better detection for binaqry installs
+
 
     taps:
     - Hyde46/hoard
@@ -23,7 +30,6 @@ packages:
     - hyde46/hoard
     - jandedobbeleer/oh-my-posh
     - jesseduffield/lazygit
-    - knqyf263/pet
     - koekeishiya/formulae
     - linka-cloud/tap
     - macos-fuse-t/cask
@@ -100,7 +106,6 @@ packages:
     - jc
     - jo
     - jq
-    - knqyf263/pet
     - koekeishiya/formulae/yabai
     - lazygit
     - libimobiledevice

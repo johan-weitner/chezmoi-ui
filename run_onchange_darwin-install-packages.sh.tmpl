@@ -61,6 +61,28 @@ fi
 echo "Deploying package manager Bin:"
 cp ./bin/bin /opt/homebrew/bin/
 
+{{ range .packages.darwin.pre.brews -}}
+if ! which {{ . | quote }} &> /dev/null; then
+  brew install {{ . | quote }}
+fi
+{{ end -}}
+
+printf "\n\n"
+echo "Setting up Node and PNPM..."
+if ! which node &> /dev/null; then
+  echo "Installing Node LTS..."
+  volta install node
+else
+  echo "Node already installed at version $(node -v)"
+fi
+
+if ! which pnpm &> /dev/null; then
+  echo "Installing PNPM..."
+  volta install pnpm
+else
+  echo "PNPM already installed at version $(pnpm -v)"
+fi
+
 brew update
 
 printf "\n\n"
@@ -127,21 +149,7 @@ fi
 {{ end -}}
 
 
-printf "\n\n"
-echo "Setting up Node and PNPM..."
-if ! which node &> /dev/null; then
-  echo "Installing Node LTS..."
-  volta install node
-else
-  echo "Node already installed at version $(node -v)"
-fi
 
-if ! which pnpm &> /dev/null; then
-  echo "Installing PNPM..."
-  volta install pnpm
-else
-  echo "PNPM already installed at version $(pnpm -v)"
-fi
 
 
 printf "\n\n"
