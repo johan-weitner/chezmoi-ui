@@ -202,7 +202,7 @@ packages:
     - copilot-for-xcode
     - cryptomator
     - devtoys
-    - docker
+    # - docker
     - visual-studio-code
     - espanso
     - firefox
