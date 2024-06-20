@@ -14,6 +14,6 @@ fi
 
 # Decrypt the Age key using Age
 echo "Decrypting Age key..."
-age --decrypt --identity /path/to/your/identity/file "$ENCRYPTED_KEY_PATH" > "$DECRYPTED_KEY_PATH"
+age --decrypt --recipient "age18dmz95jkyghr7e0zl6nc0q2x90awtmnj23vfdwzfl30t6pw34ulskp2wv0" "$ENCRYPTED_KEY_PATH" > "$DECRYPTED_KEY_PATH"
 
 echo "Age key decrypted and stored at $DECRYPTED_KEY_PATH"
