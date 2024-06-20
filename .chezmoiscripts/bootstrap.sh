@@ -12,13 +12,13 @@ if ! command -v chezmoi &> /dev/null; then
     brew install chezmoi
 fi
 
-# Apply Chezmoi configuration
-echo "Applying Chezmoi configuration..."
-chezmoi init
-
 # Decrypt the Age key
 echo "Decrypting Age key..."
 source decrypt-age-key.sh
+
+# Apply Chezmoi configuration
+echo "Applying Chezmoi configuration..."
+chezmoi init
 
 # Now that the Age key is decrypted, re-apply Chezmoi configuration to use the decrypted key
 echo "Re-applying Chezmoi configuration with decrypted Age key..."
