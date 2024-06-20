@@ -272,95 +272,6 @@ packages:
     # https://orbstack.dev/download/stable/latest/arm64
 
 
-
-
-    desktop:
-    - 1Password
-    - Actions For Obsidian
-    - Adobe Creative Cloud
-    - Alfred 5
-    - Amethyst
-    - Amphetamine
-    - AppFlowy
-    - Aquarius
-    - Arc
-    - Audio Hijack
-    - Backblaze
-    - balenaEtcher
-    - BankID
-    - Bartender 5
-    - Bear
-    - Biscuit
-    - Blackmagic Disk Speed Test
-    - Blackmagic Proxy Generator
-    - Blackmagic RAW
-    - ChatGPT
-    - ChatMate for Facebook
-    - Code Snippets AI
-    - Cody
-    - Copilot
-    - Cryptomator
-    - DaisyDisk
-    - Dash
-    - DevCleaner for XCode (1388020431)
-    - Deepdwn
-    - DiffusionBee
-    - Draw Things
-    - DriveDx
-    - Dropover
-    - Fiddler
-    - Filters for Photos
-    - Folder Peek
-    - Folder Tidy
-    - GitButler
-    - GitHub Desktop
-    - Goodnotes
-    - Hand Mirror
-    - HandBrake
-    - HTTPie
-    - jdk-22.0.1.jdk
-    - kitty
-    - Later
-    - LM Studio
-    - MacGPT
-    - MacWhisper
-    - Magenta Studio
-    - Magnet
-    - Meeting Bar (1532419400)
-    - MenubarX
-    - Microsoft Edge
-    - Microsoft Word
-    - Movavi Screen Recorder
-    - MPV
-    - Noize
-    - Numi
-    - OBS
-    - Obsidian
-    - Ollama
-    - Parallels Desktop (1085114709)
-    - Parallels Toolbox
-    - Post Haste
-    - PowerShell
-    - Raindrop.io
-    - Raycast
-    - Replay
-    - Scribe
-    - Shortery
-    - Slack
-    - Sourcetree
-    - Strflow
-    - Syncthing
-    - TagSpaces
-    - Tailscale
-    - Todoist
-    - Typora
-    - VLC
-    - XCode (497799835)
-    - Zotero
-
-
-
-
     mas:
     - 1Password:
       name: 1Password
@@ -658,31 +569,75 @@ packages:
     - husky:
       name: husky
       pkg: husky
-
-    # json-server
-    # lighthouse
-    # meta
-    # @vercel/ncc
-    # ndb
-    # nodemon
-    # npkill
-    # npm-check
-    # npm-check-updates
-    # oclif
-    # opencommit
-    # package-size
-    # playwright
-    # psi
-    # semantic-release
-    # serve
-    # share-cli
-    # syncpack
-    # terminalizer
-    # @rafaelrinaldi/whereami
-    # wipe-modules
-    # //ios-sim:
-    # //ipfs-deploy
-
+    - whereami:
+      name: whereami
+      pkg: "@rafaelrinaldi/whereami"
+    - ncc:
+        name: ncc
+        pkg: "@vercel/ncc"
+    - jsonserver:
+        name: json-server
+        pkg: json-server
+    - lighthouse:
+        name: lighthouse
+        pkg: lighthouse
+    - meta:
+        name: meta
+        pkg: meta
+    - ndb:
+        name: ndb
+        pkg: ndb
+    - nodemon:
+        name: nodemon
+        pkg: nodemon
+    - npkill:
+        name: npkill
+        pkg: npkill
+    - npmcheck:
+        name: npm-check
+        pkg: npm-check
+    - npmcheckupdates:
+        name: npm-check-updates
+        pkg: npm-check-updates
+    - oclif:
+        name: oclif
+        pkg: oclif
+    - opencommit:
+        name: opencommit
+        pkg: opencommit
+    - packagesize:
+        name: package-size
+        pkg: package-size
+    - playwright:
+        name: playwright
+        pkg: playwright
+    - psi:
+        name: psi
+        pkg: psi
+    - semanticrelease:
+        name: semantic-release
+        pkg: semantic-release
+    - serve:
+        name: serve
+        pkg: serve
+    - sharecli:
+        name: share-cli
+        pkg: share-cli
+    - syncpack:
+        name: syncpack
+        pkg: syncpack
+    - terminalizer:
+        name: terminalizer
+        pkg: terminalizer
+    - wipemodules:
+        name: wipe-modules
+        pkg: wipe-modules
+    # - ios-sim:
+    #     name: ios-sim
+    #     pkg: ios-sim
+    # - ipfsdeploy:
+    #     name: ipfs-deploy
+    #     pkg: ipfs-deploy
 
     scripts:
     - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
@@ -690,9 +645,6 @@ packages:
 
     git:
     - 'https://github.com/NvChad/starter ~/.config/nvim'
-
-    latest-mac:
-    - 'https://github.com/agata/dl.biscuit/releases/latest'
 
     pip:
     # - 'ps_mem'
@@ -707,3 +659,8 @@ packages:
     - bashly
 
     go:
+
+
+
+    latest-mac:
+      - 'https://github.com/agata/dl.biscuit/releases/latest'
