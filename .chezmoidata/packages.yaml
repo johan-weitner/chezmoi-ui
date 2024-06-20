@@ -33,6 +33,7 @@ packages:
     - thezoraiz/ascii-image-converter
     - xwmx/taps
     - yohamta/tap
+    - noahgorstein/tap
     brews:
     - abhimanyu003/sttr/sttr
     - act
