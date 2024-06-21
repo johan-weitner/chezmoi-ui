@@ -14,7 +14,7 @@ compinit
 # eval "$(starship init zsh)"
 
 # Load oh-my-posh
-eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/atomic.omp.json)"
+eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/$OMP_THEME.omp.json)"
 #  1_shell.omp.json                halflife.omp.json           poshmon.omp.json
 #  agnoster.minimal.omp.json       honukai.omp.json            powerlevel10k_classic.omp.json
 #  agnoster.omp.json               hotstick.minimal.omp.json   powerlevel10k_lean.omp.json
@@ -105,5 +105,5 @@ echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> 
 
 
 # Hishtory Config:
-export PATH="$PATH:/Users/johanweitner/.hishtory"
-source /Users/johanweitner/.hishtory/config.zsh
+export PATH="$PATH:$HOME/.hishtory"
+source $HOME/.hishtory/config.zsh

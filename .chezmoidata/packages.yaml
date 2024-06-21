@@ -14,7 +14,7 @@ packages:
 
 # GMail pw, email, name, github-user, github-token
 # Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
-# Set up VSCode Sync: code --sync on
+# Set up VSCode Sync: code --sync on # https://vscode-sync.trafficmanager.net/v1/manifest
 # Try installing with "bin"
 # Better detection for binary installs
 # Fix Hishtory
@@ -195,8 +195,6 @@ packages:
     # - secretive
     # - orbstack
     # - krita
-    # - 1password
-    # - 1password-cli
     # - blackhole-2ch
     # - vldmrkl/formulae/airdrop-cli
     casks:
