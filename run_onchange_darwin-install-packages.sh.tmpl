@@ -149,8 +149,9 @@ else
   echo "Downloading {{ $binary.dmg }} from {{ $binary.url }}"
   curl -sL {{ $binary.url }} -o {{ $binary.dmg }}
 
-  echo "Mounting {{ $binary.dmg }}"
-  volume=$(hdiutil attach "{{ $binary.dmg }}" | grep '/Volumes/' | awk '{ print $3 }')
+  img=$(fd "^{{ $binary.name }}")
+  echo "Mounting {{ $img }}"
+  volume=$(hdiutil attach "{{ $img }}" | grep '/Volumes/' | awk '{ print $3 }')
 
   app_path=$(find "$volume" -name "*.app" -maxdepth 1)
   echo "App path: $app_path"

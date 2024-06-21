@@ -277,7 +277,7 @@ packages:
       name: "Fleeting Notes"
       url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
     - Raindrop:
-      dmg: 'Raindrop.dmg'
+      dmg: 'Raindrop-arm64.dmg'
       name: 'Raindrop.io'
       url: 'https://raindrop.io/r/app/macos-arm'
     - Obsidian:
