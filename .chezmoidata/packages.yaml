@@ -9,12 +9,12 @@ packages:
       casks:
 
 # GMail pw, email, name, github-user, github-token
-# Set up 1Password
-# Set up VSCode Sync
+# Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
+# Set up VSCode Sync: code --sync on
 # Try installing with "bin"
 # Better detection for binary installs
 # Fix Hishtory
-
+#
 
 
 

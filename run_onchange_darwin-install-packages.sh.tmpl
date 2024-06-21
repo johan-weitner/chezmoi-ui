@@ -250,6 +250,30 @@ fi
 
 # source ~/.zshrc
 
+
+
+# GMail pw, email, name, github-user, github-token
+# Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
+# Set up VSCode Sync: code --sync on
+# Try installing with "bin"
+# Better detection for binary installs
+# Fix Hishtory
+#
+
+
+
+printf "\n\n"
+echo "Begin authenticating with 1Password..."
+curl -sL $ < $HOME/.config/vault/op.url
+
+
+printf "\n\n"
+echo "Starting VSCode Sync..."
+code --sync on
+
+
+
+
 printf "\n\n"
 echo "Done. Probably reboot to finish setup."
 echo "The font Essential Pragmata Pro is available (encrypted) in ./assets"
