@@ -2,7 +2,7 @@
 packages:
   darwin:
     pre:
-      1Password: https://downloads.1password.com/mac/1Password.zip
+      onepassword: https://downloads.1password.com/mac/1Password.zip
       brews:
       # - sebsto/macos/xcodeinstall
       - gomplate
