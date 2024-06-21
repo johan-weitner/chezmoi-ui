@@ -65,7 +65,7 @@ echo "Installing  1Password..."
 wget {{ .packages.darwin.pre.onepassword }}
 # Unzip package
 unzip 1Password.zip
-exec "1Password Installer.app"
+./1Password\ Installer.app/Contents/MacOS/1Password\ Installer
 
 {{ range .packages.darwin.pre.brews -}}
 if ! which {{ . | quote }} &> /dev/null; then
