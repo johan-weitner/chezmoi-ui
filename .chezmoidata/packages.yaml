@@ -188,6 +188,7 @@ packages:
     - yt-dlp
     - zoxide
     - zsh-completions
+    - zsh-syntax-highlighting
     - zx
     # - microsoft-office
     # - openjdk
