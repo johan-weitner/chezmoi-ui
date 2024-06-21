@@ -8,6 +8,7 @@ packages:
       - gomplate
       - volta
       - wget
+      - 1password-cli
       casks:
 
 
