@@ -143,8 +143,8 @@ EOF
 printf "\n\n"
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
-app=$(fd "^{{ $binary.name }}" /Applications)
-if [ -d $app ]; then
+# app=$(fd "^{{ $binary.name }} /Applications")
+if [ -d /Applications/{{ $binary.name }}.app ]; then
   echo "{{ $binary.name }} already installed. Skipping..."
 else
   echo "Downloading {{ $binary.dmg }} from {{ $binary.url }}"
