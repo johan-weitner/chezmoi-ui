@@ -2,11 +2,13 @@
 packages:
   darwin:
     pre:
+      1Password: https://downloads.1password.com/mac/1Password.zip
       brews:
       # - sebsto/macos/xcodeinstall
       - gomplate
       - volta
       casks:
+
 
 # GMail pw, email, name, github-user, github-token
 # Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
@@ -27,7 +29,7 @@ packages:
     - coder/coder
     - gofireflyio/aiac
     - homebrew/bundle
-    - homebrew/cask-fonts
+    # - homebrew/cask-fonts
     - hpedrorodrigues/tools
     - hudochenkov/sshpass
     - hyde46/hoard

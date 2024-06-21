@@ -61,6 +61,12 @@ fi
 echo "Deploying package manager Bin:"
 cp ./bin/bin /opt/homebrew/bin/
 
+echo "Installing  1Password..."
+wget {{ .packages.darwin.pre.1password }}
+# Unzip package
+unzip 1Password.zip
+exec "1Password Installer.app"
+
 {{ range .packages.darwin.pre.brews -}}
 if ! which {{ . | quote }} &> /dev/null; then
   brew install {{ . | quote }}
