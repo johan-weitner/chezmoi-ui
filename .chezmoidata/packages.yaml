@@ -21,7 +21,6 @@ packages:
 #
 
 
-
     taps:
     - Hyde46/hoard
     - xcodesorg/made
@@ -70,6 +69,7 @@ packages:
     - ctop
     - curlie
     - dasel
+    - direnv
     # - docker
     - doctl
     - duf
@@ -648,6 +648,13 @@ packages:
     scripts:
     - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
     - "https://coder.com/install.sh"
+
+    commands:
+    - hishtory:
+      name: hishtory
+      cmd:
+        - curl https://hishtory.dev/install.py | python3 -
+        - hishtory init $HISHTORY_SECRET
 
     git:
     - 'https://github.com/NvChad/starter ~/.config/nvim'
