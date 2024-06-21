@@ -192,7 +192,6 @@ echo "Installing packages by command..."
     {{ range $command := $app.cmd -}}
       {{ $command }}
     {{ end -}}
-    pnpm add -g {{ $app.pkg }}
   fi
 {{ end -}}
 
