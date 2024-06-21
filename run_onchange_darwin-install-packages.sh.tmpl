@@ -185,6 +185,19 @@ fi
 
 
 
+printf "\n\n"
+echo "Installing packages by command..."
+{{ range $ix, $app :=  .packages.darwin.commands -}}
+if ! which {{ $app.name }} &> /dev/null; then
+  {{ range $command := $app.cmd -}}
+  {{ if $command -}}
+  {{ $command }}
+  {{ end -}}
+  pnpm add -g {{ $app.pkg }}
+fi
+{{ end -}}
+
+
 
 
 printf "\n\n"
