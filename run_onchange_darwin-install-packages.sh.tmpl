@@ -76,7 +76,7 @@ wget {{ .packages.darwin.pre.onepassword }}
 printf "\n\n"
 echo "Unpacking 1Password archive..."
 unzip 1Password.zip
-rm 1Password.zip
+rm -f 1Password.zip
 
 printf "\n\n"
 echo "Starting 1Password installer..."
