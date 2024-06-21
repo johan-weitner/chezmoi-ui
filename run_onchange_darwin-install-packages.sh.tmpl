@@ -62,6 +62,12 @@ fi
 echo "Deploying package manager Bin:"
 cp ./bin/bin /opt/homebrew/bin/
 
+# Rust and Cargo Setup
+printf "\n\n"
+echo "Installing Rust and Cargo..."
+$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+
+printf "\n\n"
 {{ range .packages.darwin.pre.brews -}}
 if ! which {{ . | quote }} &> /dev/null; then
   brew install {{ . | quote }}
@@ -69,23 +75,27 @@ fi
 {{ end -}}
 
 
-echo "Setting up  1Password..."
-echo "Fetching 1Password archive..."
-wget {{ .packages.darwin.pre.onepassword }}
+# 1Password Setup
+if [ -d /Applications/1Password.app ]; then
+  echo "1Password already installed. Skipping..."
+else
+  echo "Setting up 1Password..."
+  echo "Fetching 1Password archive..."
+  wget {{ .packages.darwin.pre.onepassword }}
 
-printf "\n\n"
-echo "Unpacking 1Password archive..."
-unzip 1Password.zip
-rm -f 1Password.zip
+  printf "\n\n"
+  echo "Unpacking 1Password archive..."
+  unzip 1Password.zip
+  rm -f 1Password.zip
 
-printf "\n\n"
-echo "Starting 1Password installer..."
-./1Password\ Installer.app/Contents/MacOS/1Password\ Installer
+  printf "\n\n"
+  echo "Starting 1Password installer..."
+  ./1Password\ Installer.app/Contents/MacOS/1Password\ Installer
 
-printf "\n\n"
-echo "Authenticating account..."
-open "$(cat $HOME/.config/vault/op.url)"
-
+  printf "\n\n"
+  echo "Authenticating account..."
+  open "$(cat $HOME/.config/vault/op.url)"
+fi
 
 printf "\n\n"
 echo "Setting up Node and PNPM..."
@@ -269,22 +279,9 @@ echo "All pipx packages already installed."
 fi
 
 
-source ~/.zshrc
-zoxide import --from=autojump /opt/homebrew/Cellar/autojump/22.5.3_3/share/autojump/" --merge
-source ~/.zshrc
-
-
-# GMail pw, email, name, github-user, github-token
-# Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
-# Set up VSCode Sync: code --sync on
-# Try installing with "bin"
-# Better detection for binary installs
-# Fix Hishtory
-#
-
-
-
-
+# source ~/.zshrc
+# zoxide import --from=autojump /opt/homebrew/Cellar/autojump/22.5.3_3/share/autojump/" --merge
+# source ~/.zshrc
 
 printf "\n\n"
 echo "Starting VSCode Sync..."

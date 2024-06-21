@@ -267,10 +267,10 @@ packages:
       dmg: 'Typora.dmg'
       name: Typora
       url: 'https://download.typora.io/mac/Typora.dmg'
-    - Biscuit:
-      dmg: "Biscuit-1.2.29-arm64.dmg"
-      name: Biscuit
-      url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
+    # - Biscuit:
+    #   dmg: "Biscuit-1.2.29-arm64.dmg"
+    #   name: Biscuit
+    #   url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
     - FleetingNotes:
       dmg: 'FleetingNotesMac.dmg'
       name: "Fleeting Notes"
