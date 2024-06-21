@@ -268,8 +268,10 @@ if $empty; then
 echo "All pipx packages already installed."
 fi
 
-# source ~/.zshrc
 
+source ~/.zshrc
+zoxide import --from=autojump /opt/homebrew/Cellar/autojump/22.5.3_3/share/autojump/" --merge
+source ~/.zshrc
 
 
 # GMail pw, email, name, github-user, github-token
