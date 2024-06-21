@@ -1,3 +1,9 @@
+# Loop through and source all shellscript files located in $HOME/.zsh/functions/
+for file in $HOME/.zsh/functions/*.sh; do
+source $file
+done
+
+
 # Colormap
 function colormap() {
   for i in {0..255}; do print -Pn "%K{$i}  %k%F{$i}${(l:3::0:)i}%f " ${${(M)$((i%6)):#3}:+$'\n'}; done

@@ -272,10 +272,10 @@ packages:
     #   dmg: "Biscuit-1.2.29-arm64.dmg"
     #   name: Biscuit
     #   url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
-    - FleetingNotes:
-      dmg: 'FleetingNotesMac.dmg'
-      name: "Fleeting Notes"
-      url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
+    # - FleetingNotes:
+    #   dmg: 'FleetingNotesMac.dmg'
+    #   name: "Fleeting Notes"
+    #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
     - Raindrop:
       dmg: 'Raindrop.dmg'
       name: Raindrop
