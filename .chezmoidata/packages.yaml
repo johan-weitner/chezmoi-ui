@@ -270,15 +270,15 @@ packages:
       url: 'https://download.typora.io/mac/Typora.dmg'
     # - Biscuit:
     #   dmg: "Biscuit-1.2.29-arm64.dmg"
-    #   name: Biscuit
+    #   name: 'Biscuit'
     #   url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
-    # - FleetingNotes:
-    #   dmg: 'FleetingNotesMac.dmg'
-    #   name: "Fleeting Notes"
-    #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
+    - FleetingNotes:
+      dmg: 'Fleeting Notes Mac.dmg'
+      name: "Fleeting Notes"
+      url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
     - Raindrop:
       dmg: 'Raindrop.dmg'
-      name: Raindrop
+      name: 'Raindrop.io'
       url: 'https://raindrop.io/r/app/macos-arm'
     - Obsidian:
       dmg: 'Obsidian.dmg'
