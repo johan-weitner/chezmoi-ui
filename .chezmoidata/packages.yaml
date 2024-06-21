@@ -12,8 +12,8 @@ packages:
 # Set up 1Password
 # Set up VSCode Sync
 # Try installing with "bin"
-# Better detection for binaqry installs
-# Meslo font: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip
+# Better detection for binary installs
+# Fix Hishtory
 
 
 
