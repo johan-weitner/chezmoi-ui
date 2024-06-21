@@ -125,7 +125,7 @@ EOF
 {{ end -}}
 
 
-# Alt. check: fd "^{ $binary.name }}" # eg. find strings beginning with {{ $binary.name }}
+# Alt. check: fd "^$binary.name" # eg. find strings beginning with $binary.name
 printf "\n\n"
 echo "Installing binary images..."
 {{ range $app, $binary := .packages.darwin.binaryMac -}}
