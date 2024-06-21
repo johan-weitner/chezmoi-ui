@@ -64,9 +64,12 @@ cp ./bin/bin /opt/homebrew/bin/
 
 # Rust and Cargo Setup
 printf "\n\n"
-echo "Installing Rust and Cargo..."
-# curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-$HOME/.local/share/chezmoi/bin/rustup-init.sh -y
+if command -v cargo &> /dev/null; then
+  echo "Cargo is already installed at $(cargo --version). Skipping..."
+else
+  echo "Installing Rustup and Cargo..."
+  $HOME/.local/share/chezmoi/bin/rustup-init.sh -y
+fi
 
 printf "\n\n"
 {{ range .packages.darwin.pre.brews -}}
