@@ -166,6 +166,7 @@ else
   echo "Unmounting $volume"
   hdiutil detach "$volume"
   rm "{{ $binary.dmg }}"
+  printf "\n"
 fi
 
 {{ end -}}
