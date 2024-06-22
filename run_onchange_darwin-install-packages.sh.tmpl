@@ -59,8 +59,9 @@ if ! which xcodeinstall &> /dev/null; then
 echo "Installing XCode..."
 brew install sebsto/macos/xcodeinstall
 fi
-echo "Deploying package manager Bin:"
+echo "Deploying package manager Bin..."
 cp ./bin/bin /opt/homebrew/bin/
+echo "Done."
 
 # Rust and Cargo Setup
 printf "\n\n"
@@ -191,7 +192,7 @@ else
 fi
 {{ end -}}
 if $empty; then
-echo "All NPM packages already installed."
+echo "All packages already installed."
 fi
 
 
@@ -205,7 +206,7 @@ echo "Installing packages by command..."
   fi
 {{ end -}}
 if $empty; then
-echo "All NPM packages already installed."
+echo "All packages already installed."
 fi
 
 
