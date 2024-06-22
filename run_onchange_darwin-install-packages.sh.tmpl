@@ -120,11 +120,14 @@ fi
 printf "\n\n"
 brew update
 
-printf "\n\n"
-echo "Tapping Homebrew repos..."
-{{ range .packages.darwin.taps -}}
-brew tap {{ . | quote }}
-{{ end -}}
+if ! [ -f $HOME/.local/share/chezmoi/firstrun ]; then
+  printf "\n\n"
+  echo "Tapping Homebrew repos..."
+  {{ range .packages.darwin.taps -}}
+  brew tap {{ . | quote }}
+  {{ end -}}
+  touch $HOME/.local/share/chezmoi/firstrun
+fi
 
 
 printf "\n\n"
@@ -305,7 +308,6 @@ fi
 printf "\n\n"
 echo "Starting VSCode Sync..."
 code --sync on
-
 
 
 
