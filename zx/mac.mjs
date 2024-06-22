@@ -37,7 +37,11 @@ const doTaps = () => {
   }
 };
 
-
+const installPreReqs = () => {
+  pre.forEach((item) => {
+    console.log(`Installing ${item}`);
+  });
+};
 
 
 
