@@ -34,17 +34,4 @@ echo ".................    ....:::::::::......  ..................
 ................    ...::--=====----::.    ................."
 
 
-printf "\n\n"
-
-LOGFILE="./install-log-$(date +"%Y-%m-%d %H:%M:%S").log"
-
-log() {
-    echo "$(date +"%Y-%m-%d %H:%M:%S") - $1" | tee -a "$LOGFILE"
-}
-
-exec > >(tee -a "$LOGFILE") 2>&1
-
-log "Installation started..."
-
-
 
