@@ -30,17 +30,27 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://$GITHUB_TOKEN@githu
 
 ###############
 
-sudo apt update
+# LINUX:
 
-sudo apt install git nano
+sudo apt update && sudo apt install git nano zsh
+chsh -s $(which zsh) # Reboot?
 
-echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# Set up Homebrew (unsupported on Linux for ARM)
+# echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/johanweitner/.bashrc
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/johanweitner/.bashrc
+# Set up Flatpak
+sudo apt install flatpak
+sudo apt install gnome-software-plugin-flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Set up asdf
+git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
+echo ". \"$HOME/.asdf/asdf.sh\"" >> $HOME/.zshrc
+echo ". \"$HOME/.asdf/completions/asdf.bash\"" >> $HOME/.zshrc
 
-brew install chezmoi
+apk add chezmoi
 brew install gomplate
 brew install volta
 brew install wget
