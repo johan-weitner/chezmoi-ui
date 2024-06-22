@@ -198,11 +198,13 @@ fi
 
 printf "\n\n"
 echo "Installing packages by command..."
+empty=true
 {{ range $ix, $app :=  .packages.darwin.commands -}}
   if ! which {{ $app.name }} &> /dev/null; then
     {{ range $command := $app.cmd -}}
       {{ $command }}
     {{ end -}}
+    empty=false
   fi
 {{ end -}}
 if $empty; then
