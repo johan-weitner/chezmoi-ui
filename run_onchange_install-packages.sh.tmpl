@@ -50,6 +50,7 @@ if [ "$os" == "Linux" ]; then
   echo "Linux"
 elif [ "$os" == "Darwin" ]; then
   echo "MacOS"
+  exec ./zx/mac.mjs
 elif [ "$os" == "Windows" ]; then
   echo "Windows"
 fi
