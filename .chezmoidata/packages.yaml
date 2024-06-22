@@ -1,27 +1,6 @@
 ---
 packages:
-  darwin:
-    pre:
-      onepassword: https://downloads.1password.com/mac/1Password.zip
-      brews:
-      # - sebsto/macos/xcodeinstall
-      - gomplate
-      - volta
-      - wget
-      - 1password-cli
-      casks:
-
-
-# GMail pw, email, name, github-user, github-token
-# Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
-# Set up VSCode Sync: code --sync on # https://vscode-sync.trafficmanager.net/v1/manifest
-# Try installing with "bin"
-# Better detection for binary installs
-# Fix Hishtory
-#
-
-
-    taps:
+  taps:
     - Hyde46/hoard
     - xcodesorg/made
     - ncruces/tap
@@ -46,6 +25,36 @@ packages:
     - xwmx/taps
     - yohamta/tap
     - noahgorstein/tap
+  linux:
+    pre:
+      onepassword: https://downloads.1password.com/linux/debian/amd64/stable/1password-latest.deb
+      brews:
+      # - gomplate
+      - volta
+      - wget
+      - 1password-cli
+  darwin:
+    pre:
+      onepassword: https://downloads.1password.com/mac/1Password.zip
+      brews:
+      # - sebsto/macos/xcodeinstall
+      - gomplate
+      - volta
+      - wget
+      - 1password-cli
+      casks:
+
+
+# GMail pw, email, name, github-user, github-token
+# Set up 1Password: OP_SERVICE_ACCOUNT_TOKEN - ~/.config/vault/op_token (encrypted) - https://developer.1password.com/docs/service-accounts/use-with-1password-cli
+# Set up VSCode Sync: code --sync on # https://vscode-sync.trafficmanager.net/v1/manifest
+# Try installing with "bin"
+# Better detection for binary installs
+# Fix Hishtory
+#
+
+
+
     brews:
     - abhimanyu003/sttr/sttr
     - act

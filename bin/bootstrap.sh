@@ -13,13 +13,15 @@ if ! command -v chezmoi &> /dev/null; then
 fi
 
 # Decrypt the Age key
-echo "Decrypting Age key..."
-source decrypt-age-key.sh
+# echo "Decrypting Age key..."
+# source decrypt-age-key.sh
 
 # Apply Chezmoi configuration
-echo "Applying Chezmoi configuration..."
-chezmoi init
+# echo "Applying Chezmoi configuration..."
+# chezmoi init
 
-# Now that the Age key is decrypted, re-apply Chezmoi configuration to use the decrypted key
-echo "Re-applying Chezmoi configuration with decrypted Age key..."
-chezmoi apply
+# # Now that the Age key is decrypted, re-apply Chezmoi configuration to use the decrypted key
+# echo "Re-applying Chezmoi configuration with decrypted Age key..."
+# chezmoi apply
+
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply https://$GITHUB_TOKEN@github.com/johan-weitner/dotfiles.git

@@ -124,7 +124,7 @@ brew update
 if ! [ -f $HOME/.local/share/chezmoi/firstrun ]; then
   printf "\n\n"
   echo "Tapping Homebrew repos..."
-  {{ range .packages.darwin.taps -}}
+  {{ range .packages.taps -}}
   brew tap {{ . | quote }}
   {{ end -}}
   touch $HOME/.local/share/chezmoi/firstrun
