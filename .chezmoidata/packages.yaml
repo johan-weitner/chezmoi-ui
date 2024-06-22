@@ -654,7 +654,7 @@ packages:
     - hishtory:
       name: hishtory
       cmd:
-        - curl https://hishtory.dev/install.py | python3 -
+        - wget https://hishtory.dev/install.py | python3 -
         - hishtory init $HISHTORY_SECRET
 
     git:

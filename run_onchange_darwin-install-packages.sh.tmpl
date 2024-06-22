@@ -181,14 +181,18 @@ fi
 
 printf "\n\n"
 echo "Installing packages by shellscript..."
+empty=true
 {{ range .packages.darwin.scripts -}}
 if ! which {{ . | quote }} &> /dev/null; then
+  empty=false
   sh -c "$(curl -fsSL {{ . | quote }})"
 else
   echo "{{ . | quote }} already installed - skipping"
 fi
 {{ end -}}
-
+if $empty; then
+echo "All NPM packages already installed."
+fi
 
 
 printf "\n\n"
@@ -200,7 +204,9 @@ echo "Installing packages by command..."
     {{ end -}}
   fi
 {{ end -}}
-
+if $empty; then
+echo "All NPM packages already installed."
+fi
 
 
 
@@ -308,10 +314,6 @@ fi
 printf "\n\n"
 echo "Starting VSCode Sync..."
 code --sync on
-
-if ! [ -f $HOME/.local/share/chezmoi/firstrun ]; then
-  touch $HOME/.local/share/chezmoi/firstrun
-fi
 
 printf "\n\n"
 echo "Done. Probably reboot to finish setup."
