@@ -46,11 +46,13 @@ exec > >(tee -a "$LOGFILE") 2>&1
 log "Installation started..."
 
 os=$(uname)
+cwd=$HOME/.local/share/chezmoi
+
 if [ "$os" == "Linux" ]; then
   echo "Linux"
 elif [ "$os" == "Darwin" ]; then
   echo "MacOS"
-  exec ./zx/mac.mjs
+  exec $cwd/zx/mac.mjs
 elif [ "$os" == "Windows" ]; then
   echo "Windows"
 fi
