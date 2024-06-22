@@ -10,6 +10,8 @@ const packagesYamlPath = path.join(__dirname, '..', '.chezmoidata', 'packages.ya
 const packagesYaml = fs.readFileSync(packagesYamlPath, 'utf8');
 const yamlPkgs = YAML.parse(packagesYaml);
 
+console.log(yamlPkgs);
+
 // const desktopApps = yamlPkgs.packages.darwin.desktop.sort();
 // const structuredArray = [];
 
@@ -34,19 +36,19 @@ const yamlPkgs = YAML.parse(packagesYaml);
 
 // console.log(JSON.stringify(brewsArr, null, 2));
 
-const n2 = yamlPkgs.packages.darwin.node2.sort();
-const strucutredN2 = [];
-n2.forEach(element => {
-  strucutredN2.push({
-    [element]: {
-      name: element,
-      pkg: element
-    }
-  });
-});
+// const n2 = yamlPkgs.packages.darwin.node2.sort();
+// const strucutredN2 = [];
+// n2.forEach(element => {
+//   strucutredN2.push({
+//     [element]: {
+//       name: element,
+//       pkg: element
+//     }
+//   });
+// });
 
-const n2Yaml = YAML.stringify(strucutredN2);
-const n2YamlPath = path.join(__dirname, '..', '.chezmoidata',
-  'structuredn2.yaml');
-fs.writeFileSync(n2YamlPath, n2Yaml);
-console.log('Structured YAML written to:', n2YamlPath);
+// const n2Yaml = YAML.stringify(strucutredN2);
+// const n2YamlPath = path.join(__dirname, '..', '.chezmoidata',
+//   'structuredn2.yaml');
+// fs.writeFileSync(n2YamlPath, n2Yaml);
+// console.log('Structured YAML written to:', n2YamlPath);
