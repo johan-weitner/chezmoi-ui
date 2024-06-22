@@ -45,4 +45,12 @@ exec > >(tee -a "$LOGFILE") 2>&1
 
 log "Installation started..."
 
-echo "Insert OS check"
+os=$(uname)
+if [ "$os" == "Linux" ]; then
+  echo "Linux"
+elif [ "$os" == "Darwin" ]; then
+  echo "MacOS"
+elif [ "$os" == "Windows" ]; then
+  echo "Windows"
+fi
+
