@@ -69,12 +69,12 @@ log "Installation started..."
 os=$(uname)
 cwd=$HOME/.local/share/chezmoi
 
-if [ "$os" = "Linux" ]; then
+if [[ "$os" == "Linux" ]]; then
   echo "Linux"
-elif [ "$os" = "Darwin" ]; then
+elif [[ "$os" == "Darwin" ]]; then
   echo "MacOS"
   prepMac()
-elif [ "$os" = "Windows" ]; then
+elif [[ "$os" == "Windows" ]]; then
   echo "Windows"
 else
   echo "Unknown OS"
