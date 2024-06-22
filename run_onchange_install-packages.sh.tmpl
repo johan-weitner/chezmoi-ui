@@ -47,21 +47,21 @@ os=$(uname)
 cwd=$HOME/.local/share/chezmoi
 
 prepMac() {
-  # Ensure Homebrew is installed
-  # if ! command -v brew &> /dev/null; then
-  #   log "Homebrew is not installed. Installing..."
-  #   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  # fi
+  Ensure Homebrew is installed
+  if ! command -v brew &> /dev/null; then
+    log "Homebrew is not installed. Installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
 
-  # # Ensure Chezmoi is installed
-  # if ! command -v chezmoi &> /dev/null; then
-  #   log "Chezmoi is not installed. Installing..."
-  #   brew install chezmoi
-  #   if ! command -v chezmoi &> /dev/null; then
-  #     log "Failed to install Chezmoi. Exiting..."
-  #     exit 1
-  #   fi
-  # fi
+  # Ensure Chezmoi is installed
+  if ! command -v chezmoi &> /dev/null; then
+    log "Chezmoi is not installed. Installing..."
+    brew install chezmoi
+    if ! command -v chezmoi &> /dev/null; then
+      log "Failed to install Chezmoi. Exiting..."
+      exit 1
+    fi
+  fi
 
   if ! [ -f "$HOME/.config/vault/key.age" ]; then
     log "Decryption key missing - exiting..."
