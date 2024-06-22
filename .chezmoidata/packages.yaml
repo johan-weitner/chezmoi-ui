@@ -251,7 +251,7 @@ packages:
     - responsively
     - runjs
     - slack
-    - vlc
+    # - vlc
     - wireshark
     # - zoom
     # - vscodium
