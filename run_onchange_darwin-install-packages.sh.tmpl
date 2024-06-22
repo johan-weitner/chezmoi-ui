@@ -309,7 +309,9 @@ printf "\n\n"
 echo "Starting VSCode Sync..."
 code --sync on
 
-
+if ! [ -f $HOME/.local/share/chezmoi/firstrun ]; then
+  touch $HOME/.local/share/chezmoi/firstrun
+fi
 
 printf "\n\n"
 echo "Done. Probably reboot to finish setup."
