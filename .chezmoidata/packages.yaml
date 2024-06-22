@@ -233,7 +233,7 @@ packages:
     - mitmproxy
     - mockoon
     - obs
-    - obsidian
+    # - obsidian
     - openinterminal
     - pb
     - plex
@@ -272,14 +272,14 @@ packages:
     #   dmg: "Biscuit-1.2.29-arm64.dmg"
     #   name: 'Biscuit'
     #   url: "https://github.com/agata/dl.biscuit/releases/download/v1.2.29/Biscuit-1.2.29-arm64.dmg"
-    - FleetingNotes:
-      dmg: 'Fleeting Notes Mac.dmg'
-      name: "Fleeting Notes"
-      url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
-    - Raindrop:
-      dmg: 'Raindrop-arm64.dmg'
-      name: 'Raindrop.io'
-      url: 'https://raindrop.io/r/app/macos-arm'
+    # - FleetingNotes:
+    #   dmg: 'Fleeting Notes Mac.dmg'
+    #   name: "Fleeting Notes"
+    #   url: 'https://github.com/fleetingnotes/fleeting-notes-flutter/releases/latest/download/FleetingNotesMac.dmg'
+    # - Raindrop:
+    #   dmg: 'Raindrop-arm64.dmg'
+    #   name: 'Raindrop.io'
+    #   url: 'https://raindrop.io/r/app/macos-arm'
     - Obsidian:
       dmg: 'Obsidian.dmg'
       name: Obsidian
