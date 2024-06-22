@@ -25,7 +25,7 @@ const firstrunPath = path.join(os.homedir(), '.local', 'share', 'chezmoi', 'firs
 if (fs.existsSync(firstrunPath)) {
   firstRun = false;
 }
-console.log('First run: ', firstRun);
+// console.log('First run: ', firstRun);
 
 
 const doTaps = () => {

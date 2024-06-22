@@ -1,0 +1,324 @@
+{{ if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+printf "\n\n\n"
+
+echo ".................    ....:::::::::......  ..................
+.............   ..:::----------------:::....   .............
+...........  ..:---==-:..   ..   ...        ...  ...........
+........  .:=+=+===:.                       ..::............
+....... .-+****++=.                            .............
+.....  -+*******=.                                  ........
+.... .+********-.                                     ......
+... :*********-                                        .....
+.. -**********:                           . ..          ....
+. :***********:                       .---=-----:.        ..
+ .************:                     . :+**+==-----:    ..:..
+ =*+**********:                      :+*++**+=+----.  .---.:
+.*************-                   ..-+*++++++**=--=:   :--:.
+-*************+        ....       -**********+===-:... .---.
+-*************+:      :=++=--:.: :+**=:::::::::...      :--.
+-**************+.    .-=+*****+-=**+*:                  .--.
+-***************=.    .--+*++*****++*-:::::.. .:::.  ...:--.
+:***************+.     :--++**++**********+---+**#*: .-=---
+ =**************+:   .------=**+******+++++=+=-+****: .---.
+ :****************+: -----+=-=+**+***********=-=++==:  :=: .
+. -***************+.:--==+++--=++**********+++==--:  :---. .
+.. -***********+*=.:--+*****=----+***+******+=:... .:---. ..
+... -**++==+**+*+.:--+*******=----=+****+*+*+=-:   .---. ...
+.... .:..:+#*+#%=-----==+****+------==++*****==:  :--:. ....
+.....   *@@%%#%%+=++=--=+*****+=---:..:---=+++-.  :-. ......
+........:+%@@%%%****+++*******+=--=-:+#+==-. .       .......
+........  .=#%@@#+++*********=-==++-=#%%****=.   ...........
+..........   :=*%#***********++***-=#%%%%*+**: .............
+.............   .--=++************+#%%#*+-..  ..............
+................    ...::--=====----::.    .................
+ ___ ___  ____    __    ____ ____   ___________  ____ _     _
+|   |   |/    |  /  ]  |    |    \ / ___|      |/    | |   | |
+| _   _ |  o  | /  /    |  ||  _  (   \_|      |  o  | |   | |
+|  \_/  |     |/  /     |  ||  |  |\__  |_|  |_|     | |___| |___
+|   |   |  _  /   \_ __ |  ||  |  |/  \ | |  | |  _  |     |     |
+|   |   |  |  \     |  ||  ||  |  |\    | |  | |  |  |     |     |
+|___|___|__|__|\____|__|____|__|__| \___| |__| |__|__|_____|_____|"
+
+
+printf "\n\n"
+
+LOGFILE="./install-log-$(date +"%Y-%m-%d %H:%M:%S").log"
+
+log() {
+    echo "$(date +"%Y-%m-%d %H:%M:%S") - $1" | tee -a "$LOGFILE"
+}
+
+exec > >(tee -a "$LOGFILE") 2>&1
+
+log "Installation started..."
+
+echo "Installing prerequisites"
+echo ""
+if ! which xcodeinstall &> /dev/null; then
+echo "Installing XCode..."
+brew install sebsto/macos/xcodeinstall
+fi
+echo "Deploying package manager Bin..."
+cp ./bin/bin /opt/homebrew/bin/
+echo "Done."
+
+# Rust and Cargo Setup
+printf "\n\n"
+if command -v cargo &> /dev/null; then
+  echo "Cargo is already installed at $(cargo --version). Skipping..."
+else
+  echo "Installing Rustup and Cargo..."
+  $HOME/.local/share/chezmoi/bin/rustup-init.sh -y
+fi
+
+printf "\n\n"
+{{ range .packages.darwin.pre.brews -}}
+if ! which {{ . | quote }} &> /dev/null; then
+  brew install {{ . | quote }}
+fi
+{{ end -}}
+
+
+# 1Password Setup
+if [ -d /Applications/1Password.app ]; then
+  echo "1Password already installed. Skipping..."
+else
+  echo "Setting up 1Password..."
+  echo "Fetching 1Password archive..."
+  wget {{ .packages.darwin.pre.onepassword }}
+
+  printf "\n\n"
+  echo "Unpacking 1Password archive..."
+  unzip 1Password.zip
+  rm -f 1Password.zip
+
+  printf "\n\n"
+  echo "Starting 1Password installer..."
+  ./1Password\ Installer.app/Contents/MacOS/1Password\ Installer
+
+  printf "\n\n"
+  echo "Authenticating account..."
+  open "$(cat $HOME/.config/vault/op.url)"
+fi
+
+printf "\n\n"
+echo "Setting up Node and PNPM..."
+if ! which node &> /dev/null; then
+  echo "Installing Node LTS..."
+  volta install node
+else
+  echo "Node already installed at version $(node -v)"
+fi
+
+if ! which pnpm &> /dev/null; then
+  echo "Installing PNPM..."
+  volta install pnpm
+else
+  echo "PNPM already installed at version $(pnpm -v)"
+fi
+
+printf "\n\n"
+brew update
+
+if ! [ -f $HOME/.local/share/chezmoi/firstrun ]; then
+  printf "\n\n"
+  echo "Tapping Homebrew repos..."
+  {{ range .packages.taps -}}
+  brew tap {{ . | quote }}
+  {{ end -}}
+  touch $HOME/.local/share/chezmoi/firstrun
+fi
+
+
+printf "\n\n"
+echo "Installing Homebrew packages..."
+brew bundle --no-lock --file=/dev/stdin <<EOF
+{{ range .packages.darwin.brews -}}
+brew {{ . | quote }}
+{{ end -}}
+{{ range .packages.darwin.casks -}}
+cask {{ . | quote }}
+{{ end -}}
+EOF
+{{ end -}}
+
+
+# Alt. check: fd "^$binary.name" # eg. find strings beginning with $binary.name
+printf "\n\n"
+echo "Installing binary images..."
+{{ range $app, $binary := .packages.darwin.binaryMac -}}
+# app=$(fd "^{{ $binary.name }} /Applications")
+if [ -d /Applications/{{ $binary.name }}.app ]; then
+  echo "{{ $binary.name }} already installed. Skipping..."
+else
+  echo "Downloading {{ $binary.dmg }} from {{ $binary.url }}"
+  curl -sL {{ $binary.url }} -o {{ $binary.dmg }}
+
+  img=$(fd "^{{ $binary.name }}")
+  echo "Mounting $img"
+  volume=$(hdiutil attach "$img" | grep '/Volumes/' | awk '{ print $3 }')
+
+  app_path=$(find "$volume" -name "*.app" -maxdepth 1)
+  echo "App path: $app_path"
+
+  if [ -n "$app_path" ]; then
+      echo "Copying $app_path to /Applications"
+      cp -R "$app_path" /Applications/
+  else
+      echo "No .app file found in $volume"
+      ls -l $volume
+  fi
+
+  echo "Unmounting $volume"
+  hdiutil detach "$volume"
+  rm "{{ $binary.dmg }}"
+  printf "\n"
+fi
+
+{{ end -}}
+
+
+
+printf "\n\n"
+echo "Installing packages by shellscript..."
+empty=true
+{{ range .packages.darwin.scripts -}}
+if ! which {{ . | quote }} &> /dev/null; then
+  empty=false
+  sh -c "$(curl -fsSL {{ . | quote }})"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
+{{ end -}}
+if $empty; then
+echo "All packages already installed."
+fi
+
+
+printf "\n\n"
+echo "Installing packages by command..."
+empty=true
+{{ range $ix, $app :=  .packages.darwin.commands -}}
+  if ! which {{ $app.name }} &> /dev/null; then
+    {{ range $command := $app.cmd -}}
+      {{ $command }}
+    {{ end -}}
+    empty=false
+  fi
+{{ end -}}
+if $empty; then
+echo "All packages already installed."
+fi
+
+
+
+printf "\n\n"
+echo "Installing NPM packages..."
+empty=true
+{{ range $ix, $app := .packages.darwin.node -}}
+  if ! which {{ $app.name }} &> /dev/null; then
+    empty=false
+    echo "Downloading {{ $app.pkg }}..."
+    pnpm add -g {{ $app.pkg }}
+  fi
+{{ end -}}
+if $empty; then
+echo "All NPM packages already installed."
+fi
+
+
+
+printf "\n\n"
+empty=true
+echo "Installing cargo packages..."
+{{ range .packages.darwin.cargo -}}
+if ! which {{ . | quote }} &> /dev/null; then
+empty=false
+  echo "Installing {{ . | quote }}..."
+  cargo install "{{ . | quote }}"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
+{{ end -}}
+if $empty; then
+echo "All Cargo packages already installed."
+fi
+
+
+printf "\n\n"
+echo "Fetching Git repos..."
+empty=true
+{{ range .packages.darwin.git -}}
+if ! which {{ . | quote }} &> /dev/null; then
+empty=false
+  echo "Installing {{ . | quote }}..."
+  git clone "{{ . | quote }}"
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
+{{ end -}}
+if $empty; then
+echo "All Git repos already installed."
+fi
+
+
+# printf "\n\n"
+# echo  "Installing Go repos..."
+empty=true
+# {{ range .packages.darwin.go -}}
+# if ! which {{ . | quote }} &> /dev/null; then
+# empty=false
+#   echo "Installing {{ . | quote }}..."
+#   go install "{{ . | quote }}"
+# else
+#   echo "{{ . | quote }} already installed - skipping"
+# fi
+# {{ end -}}
+# if $empty; then
+# echo "All Go repos already installed."
+# fi
+
+# printf "\n\n"
+# echo "Installing packages by pip..."
+# empty=true
+# {{ range .packages.darwin.pip -}}
+# if ! which {{ . | quote }} &> /dev/null; then
+#   empty=false
+#   pip install {{ . | quote }}
+# else
+#   echo "{{ . | quote }} already installed - skipping"
+# fi
+# {{ end -}}
+# if $empty; then
+# echo "All NPM packages already installed."
+# fi
+
+printf "\n\n"
+echo "Installing packages by pipx..."
+empty=true
+{{ range .packages.darwin.pipx -}}
+if ! which {{ . | quote }} &> /dev/null; then
+  empty=false
+  pipx install {{ . | quote }}
+else
+  echo "{{ . | quote }} already installed - skipping"
+fi
+{{ end -}}
+if $empty; then
+echo "All pipx packages already installed."
+fi
+
+
+# source ~/.zshrc
+# zoxide import --from=autojump /opt/homebrew/Cellar/autojump/22.5.3_3/share/autojump/" --merge
+# source ~/.zshrc
+
+printf "\n\n"
+echo "Starting VSCode Sync..."
+code --sync on
+
+printf "\n\n"
+echo "Done. Probably reboot to finish setup."
+echo "The font Essential Pragmata Pro is available (encrypted) in ./assets"
+echo "If you're Johan you know how to decrypt it"

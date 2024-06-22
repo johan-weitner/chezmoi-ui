@@ -48,7 +48,10 @@ flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.f
 # Set up asdf
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.14.0
 echo ". \"$HOME/.asdf/asdf.sh\"" >> $HOME/.zshrc
-echo ". \"$HOME/.asdf/completions/asdf.bash\"" >> $HOME/.zshrc
+# echo ". \"$HOME/.asdf/completions/asdf.bash\"" >> $HOME/.zshrc
+
+# Set up Node and PNPM
+flatpak install node
 
 apk add chezmoi
 brew install gomplate

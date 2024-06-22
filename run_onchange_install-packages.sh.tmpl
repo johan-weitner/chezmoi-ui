@@ -43,6 +43,27 @@ log() {
 
 exec > >(tee -a "$LOGFILE") 2>&1
 
+prepMac() {
+  # # Ensure Homebrew is installed
+  # if ! command -v brew &> /dev/null; then
+  #   echo "Homebrew is not installed. Installing..."
+  #   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # fi
+
+  # # Ensure Chezmoi is installed
+  # if ! command -v chezmoi &> /dev/null; then
+  #     echo "Chezmoi is not installed. Installing..."
+  #     brew install chezmoi
+  # fi
+
+  if ! [ -f $HOME/.config/vault/key.age ]; then
+    echo "Decryption key missing - exiting..."
+    exit 1
+  else
+    exec "$cwd/zx/mac.mjs"
+  fi
+}
+
 log "Installation started..."
 
 os=$(uname)
@@ -52,8 +73,10 @@ if [ "$os" == "Linux" ]; then
   echo "Linux"
 elif [ "$os" == "Darwin" ]; then
   echo "MacOS"
-  exec $cwd/zx/mac.mjs
+  prepMac()
 elif [ "$os" == "Windows" ]; then
   echo "Windows"
+else
+  echo "Unknown OS"
 fi
 
