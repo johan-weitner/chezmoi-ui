@@ -33,6 +33,10 @@ packages:
       - volta
       - wget
       - 1password-cli
+  windows:
+    pre:
+      - volta
+      - 1password-cli
   darwin:
     pre:
       onepassword: https://downloads.1password.com/mac/1Password.zip
@@ -264,7 +268,7 @@ packages:
     cargo:
     - zellij
 
-    binaryMac:
+    binaries:
     - Arc:
       name: Arc
       dmg: 'Arc-latest.dmg'
@@ -656,8 +660,12 @@ packages:
     #     pkg: ipfs-deploy
 
     scripts:
-    - "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
-    - "https://coder.com/install.sh"
+    - zsh:
+      name: zsh
+      script: "https://raw.githubusercontent.com/z-shell/zsh-navigation-tools/main/doc/install.sh"
+    - Coder:
+      name: Coder
+      script: "https://coder.com/install.sh"
 
     commands:
     - hishtory:
@@ -667,7 +675,9 @@ packages:
         - hishtory init $HISHTORY_SECRET
 
     git:
-    - 'https://github.com/NvChad/starter ~/.config/nvim'
+    - NVim:
+      name: NVim
+      repo: 'https://github.com/NvChad/starter ~/.config/nvim'
 
     pip:
     # - 'ps_mem'
@@ -677,6 +687,7 @@ packages:
     - ansibler
     - ansibleconnect
     - cookiecutter
+    - matrix-rain
 
     gem:
     - bashly
@@ -685,5 +696,5 @@ packages:
 
 
 
-    latest-mac:
-      - 'https://github.com/agata/dl.biscuit/releases/latest'
+    # latest-mac:
+    #   - 'https://github.com/agata/dl.biscuit/releases/latest'
