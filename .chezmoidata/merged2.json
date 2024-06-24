@@ -1,0 +1,3459 @@
+[
+  {
+    "1Password": {
+      "_name": "1Password",
+      "_bin": "1Password",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "1password-cli": {
+      "_name": "1password-cli",
+      "_bin": "1password-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Actions For Obsidian": {
+      "_name": "Actions For Obsidian",
+      "_bin": "Actions For Obsidian",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Alfred 5": {
+      "_name": "Alfred 5",
+      "_bin": "Alfred 5",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Amphetamine": {
+      "_name": "Amphetamine",
+      "_bin": "Amphetamine",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Arc": {
+      "_name": "Arc",
+      "_bin": "Arc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Bear": {
+      "_name": "Bear",
+      "_bin": "Bear",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Blackmagic Disk Speed Test": {
+      "_name": "Blackmagic Disk Speed Test",
+      "_bin": "Blackmagic Disk Speed Test",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Blackmagic Proxy Generator": {
+      "_name": "Blackmagic Proxy Generator",
+      "_bin": "Blackmagic Proxy Generator",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Blackmagic RAW": {
+      "_name": "Blackmagic RAW",
+      "_bin": "Blackmagic RAW",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ChatMate for Facebook": {
+      "_name": "ChatMate for Facebook",
+      "_bin": "ChatMate for Facebook",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {},
+  {
+    "DaisyDisk": {
+      "_name": "DaisyDisk",
+      "_bin": "DaisyDisk",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Deepdwn": {
+      "_name": "Deepdwn",
+      "_bin": "Deepdwn",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "DevCleaner for XCode": {
+      "_name": "DevCleaner for XCode",
+      "_bin": "DevCleaner for XCode",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "DiffusionBee": {
+      "_name": "DiffusionBee",
+      "_bin": "DiffusionBee",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Draw Things": {
+      "_name": "Draw Things",
+      "_bin": "Draw Things",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Dropover": {
+      "_name": "Dropover",
+      "_bin": "Dropover",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "File Drawer": {
+      "_name": "File Drawer",
+      "_bin": "File Drawer",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Filters for Photos": {
+      "_name": "Filters for Photos",
+      "_bin": "Filters for Photos",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Folder Peek": {
+      "_name": "Folder Peek",
+      "_bin": "Folder Peek",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Folder Tidy": {
+      "_name": "Folder Tidy",
+      "_bin": "Folder Tidy",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "GitButler": {
+      "_name": "GitButler",
+      "_bin": "GitButler",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Goodnotes": {
+      "_name": "Goodnotes",
+      "_bin": "Goodnotes",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Hand Mirror": {
+      "_name": "Hand Mirror",
+      "_bin": "Hand Mirror",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Magnet": {
+      "_name": "Magnet",
+      "_bin": "Magnet",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Meeting Bar": {
+      "_name": "Meeting Bar",
+      "_bin": "Meeting Bar",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "MenubarX": {
+      "_name": "MenubarX",
+      "_bin": "MenubarX",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Microsoft Word": {
+      "_name": "Microsoft Word",
+      "_bin": "Microsoft Word",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "NVim": {
+      "_name": "NVim",
+      "_bin": "NVim",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {},
+  {
+    "Parallels Desktop": {
+      "_name": "Parallels Desktop",
+      "_bin": "Parallels Desktop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Scribe": {
+      "_name": "Scribe",
+      "_bin": "Scribe",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Shortery": {
+      "_name": "Shortery",
+      "_bin": "Shortery",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {},
+  {
+    "Strflow": {
+      "_name": "Strflow",
+      "_bin": "Strflow",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Super Snippets - Code Organizer": {
+      "_name": "Super Snippets - Code Organizer",
+      "_bin": "Super Snippets - Code Organizer",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {},
+  {
+    "Todoist": {
+      "_name": "Todoist",
+      "_bin": "Todoist",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Typora": {
+      "_name": "Typora",
+      "_bin": "Typora",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "XCode (497799835)": {
+      "_name": "XCode (497799835)",
+      "_bin": "XCode (497799835)",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "abhimanyu003/sttr/sttr": {
+      "_name": "abhimanyu003/sttr/sttr",
+      "_bin": "abhimanyu003/sttr/sttr",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "act": {
+      "_bin": "act",
+      "_desc": "[Act](https://github.com/nektos/act) Run GitHub actions locally",
+      "_docs": "https://github.com/nektos/act#example-commands",
+      "_github": "https://github.com/nektos/act",
+      "_home": "https://github.com/nektos/act",
+      "_name": "Act",
+      "_short": "act is a tool that allows you to run GitHub Actions locally.                                                                                                                                              ",
+      "brew": "act",
+      "choco": "act-cli",
+      "go": "github.com/nektos/act@",
+      "nix": "nixpkgs.act",
+      "port": "act",
+      "scoop": "act",
+      "yay": "act"
+    }
+  },
+  {
+    "age": {
+      "_name": "age",
+      "_bin": "age",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ai-shell": {
+      "_bin": "ai",
+      "_desc": "The repository at https://github.com/BuilderIO/ai-shell appears to be related to a project called \"ai-shell\" by BuilderIO. It seems to be a shell script that provides various AI-related functionalities \nor tools. Without further details or examining the repository, it's likely designed to assist with tasks related to artificial intelligence within a shell environment. For more specific information, you\nmay want to explore the repository's documentation, code, and README file.                                                                                                                                ",
+      "_github": "https://github.com/BuilderIO/ai-shell",
+      "_name": "AI Shell",
+      "_short": "ai-shell is a tool that enhances your shell with AI capabilities, allowing for intelligent auto-completions and suggestions while working in the terminal.                                                ",
+      "npm": "@builder.io/ai-shell"
+    }
+  },
+  {
+    "aicommits": {
+      "_bin": "aicommits",
+      "_desc": "The repository at https://github.com/Nutlope/aicommits appears to be a project related to artificial intelligence commits. It likely contains code, documentation, or resources related to AI development \nor version control of AI projects. To get a more detailed understanding, you can explore the repository's contents, such as the README file, code files, and any documentation provided.                  ",
+      "_github": "https://github.com/Nutlope/aicommits",
+      "_name": "AI Commits",
+      "_short": "aicommits is a tool for analyzing and visualizing AI-related commits on GitHub.                                                                                                                           ",
+      "brew": "aicommits",
+      "npm": "aicommits"
+    }
+  },
+  {
+    "aifiles": {
+      "_bin": "aifiles",
+      "_deps": [
+        "pandoc",
+        "exiftool",
+        "poppler",
+        "csvkit"
+      ],
+      "_desc": "Repository Description:                                                                                                                                                                                   \n\nThe repository at https://github.com/jjuliano/aifiles contains a collection of AI-related files. These files likely include code, models, datasets, or other resources related to artificial intelligence.\nIt seems to be a valuable resource for individuals interested in AI development, research, or learning. You can explore the repository to access and utilize the AI files provided by the owner.          ",
+      "_github": "https://github.com/jjuliano/aifiles",
+      "_name": "AI Files",
+      "_short": "aifiles is a repository containing various AI-related files and resources.                                                                                                                                ",
+      "_todo": "Implement this when XDG spec is supported so we can store configs in ~/.config",
+      "npm": "aifiles"
+    }
+  },
+  {
+    "alacritty": {
+      "_name": "alacritty",
+      "_bin": "alacritty",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "alt-tab": {
+      "_app": "AltTab.app",
+      "_bin": "alt-tab",
+      "_desc": "alt-tab-macos is a tool created by lwouis on GitHub. It enhances the macOS app switcher by providing a more Windows-like experience with Alt-Tab functionality. This tool allows users to cycle through   \nopen applications using the Alt-Tab key combination, making it easier to switch between apps quickly. It is designed to improve productivity and streamline the app-switching process on macOS systems.   \nUsers looking for a more efficient way to navigate between applications may find this tool useful.                                                                                                        ",
+      "_github": "https://github.com/lwouis/alt-tab-macos",
+      "_name": "Alt+Tab for macOS that works like alt+tab on Windows",
+      "_short": "alt-tab-macos is a tool that brings Windows-like alt-tab functionality to MacOS, allowing users to switch between applications more easily.                                                               ",
+      "cask": "alt-tab"
+    }
+  },
+  {
+    "ansible": {
+      "_bin": "ansible",
+      "_desc": "[Ansible](https://www.ansible.com/) Ansible is a radically simple IT automation platform that makes your applications and systems easier to deploy and maintain",
+      "_docs": "https://docs.ansible.com/",
+      "_github": "https://github.com/ansible/ansible",
+      "_home": "https://www.ansible.com/",
+      "_name": "Ansible",
+      "_post:pipx": "pipx inject ansible PyObjC PyObjC-core docker lxml netaddr pexpect python-vagrant pywinrm requests-credssp watchdog",
+      "_short": "Ansible is an open-source automation tool that simplifies IT orchestration, configuration management, and application deployment.                                                                         ",
+      "pipx": "ansible"
+    }
+  },
+  {
+    "ansibleconnect": {
+      "_bin": "ansibleconnect",
+      "_deps": [
+        "sshpass",
+        "tmux"
+      ],
+      "_desc": "[ansibleconnect](https://github.com/psykulsk/ansibleconnect) allows you to connect to all hosts from the inventory with one command",
+      "_docs": "https://github.com/psykulsk/ansibleconnect",
+      "_github": "https://github.com/psykulsk/ansibleconnect",
+      "_home": "https://github.com/psykulsk/ansibleconnect",
+      "_name": "Ansibleconnect",
+      "_short": "ansibleconnect is a repository for Ansible playbooks and roles created by psykulsk.                                                                                                                       ",
+      "pipx": "ansibleconnect"
+    }
+  },
+  {
+    "ansibler": {
+      "_bin": "ansibler",
+      "_desc": "Megabyte Labs Python project used to extract test information from Molecule and save it as JSON that can be rendered into charts",
+      "_docs": "https://pypi.org/project/ansibler/",
+      "_github": "https://github.com/megabyte-labs/ansibler",
+      "_home": "https://pypi.org/project/ansibler/",
+      "_name": "Ansibler",
+      "_short": "Ansibler is a tool for managing Ansible playbooks and roles in a structured way.                                                                                                                          ",
+      "pipx": "ansibler"
+    }
+  },
+  {
+    "asciinema": {
+      "_bin": "asciinema",
+      "_desc": "[Asciinema](https://asciinema.org) allows you to record and share your terminal sessions, the simple way",
+      "_docs": "https://asciinema.org/docs/",
+      "_github": "https://github.com/asciinema/asciinema",
+      "_home": "https://asciinema.org/",
+      "_name": "asciinema",
+      "_short": "asciinema is a tool for recording and sharing terminal sessions.                                                                                                                                          ",
+      "apk": "asciinema",
+      "apt": "asciinema",
+      "brew": "asciinema",
+      "dnf": "asciinema",
+      "pacman": "asciinema",
+      "pipx": "asciinema"
+    }
+  },
+  {
+    "asdf": {
+      "_bin": "asdf",
+      "_deprecated": "ASDF is currently installed via a script rather than in the software definitions.",
+      "_desc": "[asdf](https://asdf-vm.com/#/) is a CLI tool that can manage multiple language runtime versions on a per-project basis or globally. It is like gvm, nvm, rbenv, and pyenv all in one. This role installs asdf on Linux or macOS.",
+      "_docs": "https://asdf-vm.com/guide/introduction.html",
+      "_github": "https://github.com/asdf-vm/asdf",
+      "_home": "https://asdf-vm.com/",
+      "_name": "asdf-vm",
+      "_short": "asdf is a tool for managing multiple runtime versions like Node.js, Ruby, Python, etc., in a single environment.                                                                                          "
+    }
+  },
+  {
+    "autojump": {
+      "_name": "autojump",
+      "_bin": "autojump",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "awk": {
+      "_name": "awk",
+      "_bin": "awk",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "bashly": {
+      "_bin": "bashly",
+      "_desc": "Bashly is a tool that helps in creating Bash command-line applications with ease. It allows developers to define the structure of their command-line interface using a simple configuration file, which is\nthen used to generate the necessary Bash scripts. This simplifies the process of building complex command-line applications in Bash by abstracting away the repetitive tasks involved in handling         \narguments, flags, and commands. Bashly also provides features like auto-generated help menus, error handling, and tab completion. It is a useful tool for developers looking to create robust command-line\napplications in Bash efficiently.                                                                                                                                                                         ",
+      "_github": "https://github.com/DannyBen/bashly",
+      "_name": "Bashly",
+      "_short": "bashly is a tool for creating Bash command-line applications with ease.                                                                                                                                   ",
+      "gem": "bashly"
+    }
+  },
+  {
+    "bat": {
+      "_bin": "bat",
+      "_desc": "[bat](https://github.com/sharkdp/bat) is a cat(1) clone with syntax highlighting and Git integration.",
+      "_github": "https://github.com/sharkdp/bat",
+      "_name": "bat",
+      "_short": "bat is a cat(1) clone with syntax highlighting and Git integration.                                                                                                                                       ",
+      "apk": "bat",
+      "apt": "bat",
+      "brew": "bat",
+      "cargo": "bat",
+      "choco": "bat",
+      "pacman": "bat",
+      "pkg": "bat",
+      "port": "bat",
+      "scoop": "bat",
+      "zypper": "bat"
+    }
+  },
+  {
+    "bat-extras": {
+      "_bin": "batman",
+      "_desc": "bat-extras is a collection of additional scripts and utilities that extend the functionality of the bat command-line tool. These extras include features like syntax highlighting for more file types,    \nintegration with version control systems like Git, and additional customization options. It enhances the user experience when viewing and working with files in the terminal using bat. You can find more \ndetails and installation instructions on the GitHub repository: bat-extras.                                                                                                                               ",
+      "_github": "https://github.com/eth-p/bat-extras",
+      "_name": "Bat Extras",
+      "_short": "bat-extras is a collection of additional scripts and functions for the bat command-line tool, enhancing its functionality on Unix-like systems.                                                           ",
+      "brew": "bat-extras",
+      "emerge": "sys-apps/bat-extras",
+      "pacman": "bat-extras"
+    }
+  },
+  {
+    "bfg": {
+      "_bin": "bfg",
+      "_desc": "BFG Repo-Cleaner is a tool designed to remove large or problematic files from Git repositories. It's particularly useful for cleaning up repositories before sharing or migrating them. The tool operates \nmuch faster than Git's built-in filter-branch and offers a simpler syntax for specifying files to be removed. It can help reduce the size of repositories by eliminating unwanted files and history,      \nmaking them more manageable. BFG Repo-Cleaner is commonly used for tasks like removing sensitive data, large binaries, or other unwanted files from Git history.                                          ",
+      "_docs": "https://rtyley.github.io/bfg-repo-cleaner/",
+      "_github": "https://github.com/rtyley/bfg-repo-cleaner",
+      "_home": "https://rtyley.github.io/bfg-repo-cleaner/",
+      "_name": "BFG Repo Cleaner",
+      "_short": "BFG Repo-Cleaner is a fast, simpler alternative to git-filter-branch for removing large files or sensitive data from Git repositories.                                                                    ",
+      "brew": "bfg",
+      "choco": "bfg-repo-cleaner",
+      "port": "bfg"
+    }
+  },
+  {
+    "bitly": {
+      "_bin": "bitly",
+      "_desc": "Shorten links with Bitly in your terminal!",
+      "_github": "https://github.com/xxczaki/bitly-cli-client",
+      "_name": "bitly",
+      "_short": "bitly-cli-client is a command-line interface (CLI) tool for shortening URLs using the Bitly service.                                                                                                      ",
+      "npm": "bitly-cli-client"
+    }
+  },
+  {
+    "brew-gem": {
+      "_bin": "brew-gem",
+      "_desc": "brew-gem is a tool that allows you to install Ruby gems as Homebrew formulae on macOS. This simplifies managing Ruby gems by integrating them into Homebrew, a popular package manager for macOS. By using\nbrew-gem, you can easily install, update, and remove Ruby gems using Homebrew commands, providing a more streamlined approach to managing Ruby dependencies on your system. It helps in keeping your Ruby \nenvironment organized and easily maintainable.                                                                                                                                                            ",
+      "_github": "https://github.com/sportngin/brew-gem",
+      "_name": "Homebrew RubyGems",
+      "_short": "brew-gem is a Homebrew tap for installing Ruby gems as formulae.                                                                                                                                          ",
+      "brew": "brew-gem"
+    }
+  },
+  {
+    "browserosaurus": {
+      "_app": "Browserosaurus.app",
+      "_bin": null,
+      "_desc": "The browser prompter for macOS",
+      "_docs": "https://github.com/will-stone/browserosaurus",
+      "_github": "https://github.com/will-stone/browserosaurus",
+      "_home": "https://browserosaurus.com/",
+      "_name": "Browserosaurus",
+      "_short": "Browserosaurus is a macOS app that allows you to choose which browser to open links with.                                                                                                                 ",
+      "cask": "browserosaurus"
+    }
+  },
+  {
+    "btop": {
+      "_name": "btop",
+      "_bin": "btop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cakebrew": {
+      "_app": "Cakebrew.app",
+      "_bin": null,
+      "_desc": "Manage your Homebrew formulas with style using Cakebrew.",
+      "_docs": "https://www.cakebrew.com/",
+      "_github": "https://github.com/brunophilipe/Cakebrew",
+      "_home": "http://www.cakebrew.com/",
+      "_name": "Cakebrew",
+      "_short": "Cakebrew is a graphical user interface for Homebrew package manager on macOS. It provides a convenient way to manage packages and software installations through a visual interface.                      ",
+      "cask": "cakebrew"
+    }
+  },
+  {
+    "capacitor": {
+      "_bin": "cap",
+      "_desc": "Capacitor is an open-source cross-platform native runtime for web applications. Developed by the Ionic Team, it allows developers to build web apps that can run on iOS, Android, and the web with a      \nsingle codebase. Capacitor provides a consistent API for accessing native features like camera, geolocation, and notifications, making it easier to create hybrid apps. It also supports Progressive Web  \nApps (PWAs) and Electron for desktop applications. With Capacitor, developers can leverage their web development skills to create powerful, native-like experiences across multiple platforms.            ",
+      "_github": "https://github.com/ionic-team/capacitor",
+      "_name": "Capacitor",
+      "_short": "Capacitor is a cross-platform app runtime that makes it easy to build web apps that run natively on iOS, Android, and the web.                                                                            ",
+      "npm": "@capacitor/cli"
+    }
+  },
+  {
+    "cfcli": {
+      "_name": "cfcli",
+      "_bin": "cfcli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "chatgpt": {
+      "_app": "ChatGPT.app",
+      "_bin": "chatgpt",
+      "_desc": "Official ChatGPT application for desktop for macOS and fallbacks for ChatGPT desktop on other platforms",
+      "_home": "https://chatgpt.com/",
+      "_github": false,
+      "_name": "ChatGPT Official Desktop Application",
+      "cask": "chatgpt",
+      "choco": "chatgpt",
+      "snap": "chatgpt-desktop"
+    }
+  },
+  {
+    "cheat": {
+      "_bin": "cheat",
+      "_desc": "Cheat allows you to create and view interactive cheatsheets on the command-line. It was designed to help remind *nix system administrators of options for commands that they use frequently, but not frequently enough to remember.",
+      "_docker": "docker run --rm bannmann/docker-cheat",
+      "_docs": "https://github.com/cheat/cheat",
+      "_github": "https://github.com/cheat/cheat",
+      "_home": "https://github.com/cheat/cheat",
+      "_name": "Cheat",
+      "_short": "cheat is a command-line tool that allows you to create and view interactive cheatsheets for the command line.                                                                                             ",
+      "brew": "cheat",
+      "go": "github.com/cheat/cheat/cmd/cheat@latest",
+      "nix": "nixos.cheat",
+      "snap": "cheat",
+      "yay": "cheat"
+    }
+  },
+  {
+    "clintmod/formulas/macprefs": {
+      "_name": "clintmod/formulas/macprefs",
+      "_bin": "clintmod/formulas/macprefs",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "clipboard": {
+      "_bin": "cb",
+      "_desc": "The repository at https://github.com/Slackadays/Clipboard.git appears to be a Git repository hosted on GitHub. Without further details or access to the repository, I can't provide specific information  \nabout its contents. If you need more information, you may want to clone the repository locally and explore its files and commit history using Git commands.                                               ",
+      "_github": "https://github.com/Slackadays/Clipboard.git",
+      "_name": "Clipboard",
+      "_short": "This is a GitHub repository named Clipboard under the Slackadays organization.                                                                                                                            ",
+      "apk": "clipboard",
+      "brew": "clipboard",
+      "emerge": "app-misc/clipboard",
+      "flatpak": "app.getclipboard.Clipboard",
+      "nix-env": "nixpkgs.clipboard-jh",
+      "scoop": "clipboard",
+      "snap": "clipboard",
+      "xbps": "clipboard",
+      "yay": "clipboard"
+    }
+  },
+  {
+    "cmake": {
+      "_bin": "cmake",
+      "_desc": "CMake is an open-source, cross-platform family of tools designed to build, test and package software.",
+      "_docs": "https://cmake.org/documentation/",
+      "_github": "https://github.com/Kitware/CMake",
+      "_home": "https://cmake.org/",
+      "_name": "Chezmoi",
+      "_short": "CMake is an open-source cross-platform build system designed to build, test, and package software.                                                                                                        ",
+      "brew": "cmake",
+      "choco": "cmake",
+      "snap": "cmake --classic"
+    }
+  },
+  {
+    "commitlint": {
+      "_bin": "commitlint",
+      "_desc": "Lint commit messages",
+      "_docs": "https://commitlint.js.org/#/?id=documentation",
+      "_github": "https://github.com/conventional-changelog/commitlint",
+      "_home": "https://commitlint.js.org",
+      "_name": "commitlint",
+      "_short": "commitlint is a tool that enforces commit message conventions to ensure consistent and structured commit messages in a project.                                                                           ",
+      "npm": "@commitlint/cli"
+    }
+  },
+  {
+    "cookiecutter": {
+      "_bin": "cookiecutter",
+      "_desc": "A cross-platform command-line utility that creates projects from cookiecutters (project templates)",
+      "_docs": "https://cookiecutter.readthedocs.io/",
+      "_github": "https://github.com/cookiecutter/cookiecutter",
+      "_name": "cookiecutter",
+      "_short": "Cookiecutter is a tool that helps you create project templates from cookiecutters (project skeletons). It allows for easy project setup and customization by generating files and folders based on        \ntemplates.                                                                                                                                                                                                ",
+      "brew": "cookiecutter",
+      "pipx": "cookiecutter"
+    }
+  },
+  {
+    "copilot-for-xcode": {
+      "_app": "Copilot for Xcode.app",
+      "_bin": "copilot-for-xcode",
+      "_desc": "The missing GitHub Copilot, Codeium and ChatGPT Xcode Source Editor Extension",
+      "_github": "https://github.com/intitni/CopilotForXcode",
+      "_name": "CoPilot for Xcode",
+      "cask": "copilot-for-xcode"
+    }
+  },
+  {
+    "coreutils": {
+      "_bin": "chown",
+      "_bin:darwin": "gchown",
+      "_github": false,
+      "apt": "coreutils",
+      "brew": "coreutils",
+      "dnf": "coreutils",
+      "pacman": "coreutils"
+    }
+  },
+  {
+    "cryptomator": {
+      "_app": "Cryptomator.app",
+      "_bin": "cryptomator",
+      "_desc": "Cryptomator is an open-source encryption software that provides client-side encryption for your cloud storage files. It allows you to securely store your data in the cloud by encrypting it on your      \ndevice before uploading. This ensures that only you have access to your files, even if the cloud storage provider is compromised. Cryptomator supports various cloud storage services and offers a        \nuser-friendly interface for managing your encrypted files. It is available for multiple platforms, including Windows, macOS, Linux, Android, and iOS.                                                     ",
+      "_github": "https://github.com/cryptomator/cryptomator",
+      "_name": "Cryptomator                                                                                                                                                                                               ",
+      "_short": "Cryptomator is an open-source encryption software that provides client-side encryption for your cloud files.                                                                                              ",
+      "cask": "cryptomator",
+      "choco": "cryptomator",
+      "flatpak": "org.cryptomator.Cryptomator"
+    }
+  },
+  {
+    "csvkit": {
+      "_bin": "csvcut",
+      "_desc": "csvkit is a suite of command-line tools for working with CSV files. It allows you to easily manipulate and analyze CSV data using simple commands in the terminal. With csvkit, you can convert between   \nCSV, JSON, SQL, and other formats, clean and filter data, aggregate and join datasets, and more. It's a powerful tool for anyone working with CSV files who prefers command-line interfaces for data      \nprocessing. You can find more information and documentation on how to use csvkit at https://github.com/wireservice/csvkit.                                                                                ",
+      "_github": "https://github.com/wireservice/csvkit",
+      "_name": "csvkit                                                                                                                                                                                                    ",
+      "_short": "csvkit is a suite of utilities for working with CSV files in the command line.                                                                                                                            ",
+      "brew": "csvkit"
+    }
+  },
+  {
+    "ctop": {
+      "_bin": "ctop",
+      "_desc": "Top-like interface for container metrics",
+      "_github": "https://github.com/bcicen/ctop",
+      "_name": "ctop",
+      "_short": "ctop is a concise and intuitive container monitoring tool for Docker.                                                                                                                                     ",
+      "brew": "ctop",
+      "github": "github.com/bcicen/ctop",
+      "yay": "ctop-bin"
+    }
+  },
+  {
+    "curlie": {
+      "_bin": "curlie",
+      "_desc": "Curlie is a frontend to curl that adds the ease of use of httpie, without compromising on features and performance.",
+      "_docs": "https://curlie.io/",
+      "_github": "https://github.com/rs/curlie",
+      "_home": "https://curlie.io/",
+      "_name": "Curlie",
+      "_short": "curlie is a modern command-line interface for curl.                                                                                                                                                       ",
+      "brew": "curlie",
+      "go": "github.com/rs/curlie@latest",
+      "pkg": "curlie",
+      "port": "curlie",
+      "scoop": "curlie"
+    }
+  },
+  {
+    "cz": {
+      "_name": "cz",
+      "_bin": "cz",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "dasel": {
+      "_bin": "dasel",
+      "_desc": "Select, put and delete data from JSON, TOML, YAML, XML and CSV files with a single tool",
+      "_github": "https://github.com/TomWright/dasel",
+      "_name": "dasel",
+      "_short": "Dasel is a command-line tool to query and modify data in JSON, YAML, TOML, XML, and CSV files using a simple and expressive syntax.                                                                       ",
+      "brew": "dasel",
+      "github": "github.com/TomWright/dasel",
+      "go": "github.com/tomwright/dasel/cmd/dasel@master"
+    }
+  },
+  {
+    "dat": {
+      "_bin": "dat",
+      "_desc": "Peer-to-peer sharing & live syncronization of files via command line",
+      "_github": "https://github.com/datproject/dat",
+      "_name": "dat",
+      "_short": "dat is a decentralized data sharing tool for efficiently syncing and versioning files across multiple devices.                                                                                            ",
+      "github": "github.com/dat-ecosystem-archive/dat",
+      "npm": "dat@next"
+    }
+  },
+  {
+    "devtoys": {
+      "_app": "DevToys.app",
+      "_bin": "devtoys",
+      "_desc": "DevToysMac is a collection of development tools for macOS created by ObuchiYuki. It includes various utilities and scripts that can aid developers in their daily tasks. Some of the tools included are   \nfor managing Xcode projects, generating Swift code, working with Git repositories, and more. It aims to streamline development workflows and improve productivity on the macOS platform. Users can explore\nthe repository on GitHub to find detailed information about each tool and how to use them effectively.                                                                                                    ",
+      "_github": "https://github.com/ObuchiYuki/DevToysMac",
+      "_name": "DevToysMac                                                                                                                                                                                                ",
+      "_short": "DevToysMac is a collection of developer tools for MacOS, designed to enhance productivity and streamline common tasks.                                                                                    ",
+      "cask": "devtoys"
+    }
+  },
+  {
+    "dframe": {
+      "_bin": "dframe",
+      "_desc": "Put device frames around your mobile/web/progressive app screenshots",
+      "_github": "https://github.com/c0bra/deviceframe",
+      "_name": "deviceframe                                                                                                                                                                                               ",
+      "_short": "deviceframe is a tool that allows you to add device frames to screenshots easily.                                                                                                                         ",
+      "npm": "deviceframe"
+    }
+  },
+  {
+    "direnv": {
+      "_bin": "direnv",
+      "_desc": "[direnv](https://direnv.net/) is an extension for your shell. It augments existing shells with a new feature that can load and unload environment variables depending on the current directory.",
+      "_docs": "https://direnv.net/",
+      "_github": "https://github.com/direnv/direnv",
+      "_home": "https://direnv.net/",
+      "_name": "direnv",
+      "_short": "direnv is a tool that helps automate loading and unloading of environment variables based on the current directory.                                                                                       ",
+      "apt": "direnv",
+      "brew": "direnv",
+      "github": "github.com/direnv/direnv"
+    }
+  },
+  {
+    "doctl": {
+      "_bin": "doctl",
+      "_desc": "The official command line interface for the DigitalOcean API",
+      "_github": "https://github.com/digitalocean/doctl",
+      "_name": "doctl",
+      "_short": "doctl is a command-line interface for managing DigitalOcean services.                                                                                                                                     ",
+      "brew": "doctl",
+      "github": "github.com/digitalocean/doctl",
+      "pacman": "doctl",
+      "pkg": "doctl",
+      "snap": "doctl"
+    }
+  },
+  {
+    "duf": {
+      "_bin": "duf",
+      "_desc": "[duf](https://github.com/muesli/duf) is a Disk Usage/Free Utility - a better 'df' alternative. It displays a chart within your terminal that gives you an overview of hard-drive usage statistics.",
+      "_docs": "https://github.com/muesli/duf#usage",
+      "_github": "https://github.com/muesli/duf",
+      "_home": "https://github.com/muesli/duf",
+      "_name": "duf",
+      "_short": "Duf is a disk usage utility with a modern interface for visualizing disk space usage on your system.                                                                                                      ",
+      "brew": "duf",
+      "choco": "duf",
+      "github": "github.com/muesli/duf",
+      "pacman": "duf",
+      "pkg": "duf",
+      "scoop": "duf"
+    }
+  },
+  {
+    "duplicacy-cli": {
+      "_name": "duplicacy-cli",
+      "_bin": "duplicacy-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "dust": {
+      "_bin": "dust",
+      "_desc": "A more intuitive version of du in rust",
+      "_docs": "https://github.com/bootandy/dust#usage",
+      "_github": "https://github.com/bootandy/dust",
+      "_home": "https://github.com/bootandy/dust",
+      "_name": "dust",
+      "_short": "Dust is a modern alternative to du command, providing a more intuitive visualization of disk usage in a terminal.                                                                                         ",
+      "apk": "dust",
+      "brew:darwin": "dust",
+      "brew:linux": "tgotwig/linux-dust/dust",
+      "cargo": "du-dust",
+      "github": "github.com/bootandy/dust",
+      "pacman": "dust"
+    }
+  },
+  {
+    "emma": {
+      "_bin": "emma",
+      "_desc": "Advanced package search for NPM",
+      "_docs": "https://www.npmjs.com/package/emma-cli#example",
+      "_github": "https://github.com/maticzav/emma-cli",
+      "_home": "https://www.npmjs.com/package/emma-cli",
+      "_name": "Emma",
+      "_short": "emma-cli is a command-line tool for managing your email templates efficiently.                                                                                                                            ",
+      "npm": "emma-cli"
+    }
+  },
+  {
+    "envchain": {
+      "_bin": "envchain",
+      "_deps": [
+        "_envchain:deps"
+      ],
+      "_desc": "Environment variables meet macOS Keychain and gnome-keyring",
+      "_docs": "https://github.com/sorah/envchain#usage",
+      "_github": "https://github.com/sorah/envchain",
+      "_home": "https://github.com/sorah/envchain",
+      "_name": "envchain",
+      "_short": "envchain is a tool that securely stores and manages environment variables for command-line applications.                                                                                                  ",
+      "brew": "envchain",
+      "github": "github.com/sorah/envchain"
+    }
+  },
+  {
+    "espanso": {
+      "_app": "Espanso.app",
+      "_bin": "espanso",
+      "_desc": "Espanso is a cross-platform text expander tool that allows users to define abbreviations which expand into longer phrases or sentences. It helps in saving time and increasing productivity by automating \nrepetitive typing tasks. Espanso is highly customizable and supports various features like variables, snippets, and more. It is open-source and actively maintained, making it a popular choice for users \nlooking to streamline their typing workflow.                                                                                                                                                              ",
+      "_github": "https://github.com/espanso/espanso",
+      "_name": "Espanso",
+      "_post:appimage": "espanso service register && espanso start",
+      "_post:snap": "espanso service register && espanso start",
+      "_short": "Espanso is a cross-platform text expander tool that helps you type faster by replacing abbreviations with snippets of text.                                                                               ",
+      "appimage": "federico-terzi/espanso",
+      "cask": "espanso",
+      "choco": "espanso",
+      "snap": "espanso --channel=latest/edge --classic"
+    }
+  },
+  {
+    "exiftool": {
+      "_bin": "exiftool",
+      "_desc": "[exiftool](https://exiftool.org/) is a platform-independent Perl library plus a command-line application for reading, writing and editing meta information in a wide variety of files",
+      "_docs": "https://exiftool.org/exiftool_pod.html",
+      "_github": "https://github.com/exiftool/exiftool",
+      "_home": "https://exiftool.org/",
+      "_name": "exiftool",
+      "_short": "ExifTool is a powerful command-line tool for reading, writing, and editing metadata in a wide variety of files, including images, videos, and documents.                                                  ",
+      "apt": "libimage-exiftool-perl",
+      "brew": "exiftool",
+      "choco": "exiftool",
+      "dnf": "perl-Image-ExifTool.noarch",
+      "pacman": "perl-image-exiftool",
+      "port": "exiftool",
+      "scoop": "exiftool"
+    }
+  },
+  {
+    "eza": {
+      "_bin": "eza",
+      "_desc": "A modern replacement for ls. Active fork of exa.",
+      "_docs": "https://eza.rocks/",
+      "_github": "https://github.com/eza-community/eza",
+      "_home": "https://eza.rocks/",
+      "_name": "Eza",
+      "brew": "eza",
+      "cargo": "eza",
+      "emerge": "sys-apps/eza",
+      "nix-env": "eza",
+      "pacman": "eza",
+      "port": "eza",
+      "scoop": "eza",
+      "winget": "eza-community.eza",
+      "xbps-install": "eza"
+    }
+  },
+  {
+    "fastfetch": {
+      "_name": "fastfetch",
+      "_bin": "fastfetch",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fcp": {
+      "_bin": "fcp",
+      "_desc": "A significantly faster alternative to the classic Unix cp(1) command, copying large files and directories in a fraction of the time.",
+      "_docs": "https://github.com/Svetlitski/fcp#usage",
+      "_github": "https://github.com/Svetlitski/fcp",
+      "_home": "https://github.com/Svetlitski/fcp",
+      "_name": "fcp",
+      "_short": "fcp is a tool for copying files with progress bars in the terminal.                                                                                                                                       ",
+      "brew": "fcp",
+      "cargo": "fcp",
+      "nix": "unstable.fcp"
+    }
+  },
+  {
+    "fd": {
+      "_bin": "fd",
+      "_bin:apt": "fdfind",
+      "_desc": "[fd](https://github.com/sharkdp/fd) is a program that can search for files on your filesystem. It is a simple, fast, and user-friendly alternative to find. While it does not aim to support all of find's powerful functionality, it provides sensible (opinionated) defaults for a majority of use cases.",
+      "_github": "https://github.com/sharkdp/fd",
+      "_name": "fd",
+      "_short": "fd is a simple, fast and user-friendly alternative to find command, written in Rust.                                                                                                                      ",
+      "apk": "fd",
+      "apt": "fd-find",
+      "brew": "fd",
+      "cargo": "fd-find",
+      "choco": "fd",
+      "github": "github.com/sharkdp/fd",
+      "pacman": "fd",
+      "pkg": "fd",
+      "scoop": "fd"
+    }
+  },
+  {
+    "fdupes": {
+      "_bin": "fdupes",
+      "_desc": "fdupes is a program written in C that finds duplicate files in a given set of directories. It compares file sizes and MD5 signatures to determine duplicates. It offers options to automatically delete or\nhardlink duplicates, making it useful for freeing up disk space. It's a handy tool for managing cluttered file systems and organizing data efficiently. The program is open-source and available on GitHub\nfor users to download, contribute to, or customize according to their needs.                                                                                                                              ",
+      "_github": "https://github.com/adrianlopezroche/fdupes",
+      "_name": "fdupes",
+      "_short": "fdupes is a command-line tool for finding and removing duplicate files in a directory.                                                                                                                    ",
+      "apt": "fdupes",
+      "brew": "fdupes",
+      "dnf": "fdupes",
+      "pacman": "fdupes"
+    }
+  },
+  {
+    "figlet": {
+      "_bin": "figlet",
+      "_desc": "Figlet is a program that generates text banners in various typefaces, known as \"figlet fonts.\" It allows users to create ASCII art text using different font styles. The GitHub repository you mentioned, \nhttps://github.com/cmatsuoka/figlet, likely contains the source code, documentation, and possibly additional resources related to the Figlet program. Users can download, install, and customize Figlet to\ncreate visually appealing text-based designs for various purposes like banners, signs, or decorative text in terminal applications.                                                                       ",
+      "_github": "https://github.com/cmatsuoka/figlet",
+      "_name": "Figlet",
+      "_short": "Figlet is a command-line tool that generates text banners in various fonts.                                                                                                                               ",
+      "apt": "figlet",
+      "brew": "figlet",
+      "choco": "figlet",
+      "dnf": "figlet",
+      "pacman": "figlet",
+      "zypper": "figlet"
+    }
+  },
+  {
+    "findutils": {
+      "_bin": "gfind",
+      "_github": false,
+      "brew": "findutils"
+    }
+  },
+  {
+    "firefox": {
+      "_app": "Firefox.app",
+      "_bin": "firefox",
+      "_deps": [
+        "htmlq"
+      ],
+      "_desc": "[Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/), or simply Firefox, is a free and open-source web browser developed by the Mozilla Foundation and its subsidiary, the Mozilla Corporation. Firefox uses the Gecko layout engine to render web pages, which implements current and anticipated web standards.",
+      "_docs": "https://developer.mozilla.org/en-US/",
+      "_env": {
+        "FIREFOX_APPDATA": {
+          "apt": "$HOME/.mozilla/firefox",
+          "cask": "$HOME/Library/Application Support/Firefox/Profiles",
+          "choco": "TODO",
+          "dnf": "$HOME/.mozilla/firefox",
+          "flatpak": "$HOME/.var/app/org.mozilla.firefox/.mozilla/firefox",
+          "pacman": "$HOME/.mozilla/firefox",
+          "snap": "$HOME/snap/firefox/common/.mozilla/firefox"
+        }
+      },
+      "_github": false,
+      "_home": "https://www.mozilla.org/en-US/firefox/new/",
+      "_name": "Mozilla Firefox",
+      "apt": "firefox",
+      "apt:debian": "firefox-esr",
+      "cask": "firefox",
+      "choco": "firefox",
+      "dnf": "firefox",
+      "flatpak": "org.mozilla.firefox",
+      "pacman": "firefox"
+    }
+  },
+  {
+    "fkill": {
+      "_bin": "fkill",
+      "_desc": "Fabulously kill processes. Cross-platform",
+      "_github": "https://github.com/sindresorhus/fkill",
+      "_name": "fkill",
+      "_short": "fkill is a command-line tool for macOS that helps you easily kill processes by name or port.                                                                                                              ",
+      "npm": "fkill-cli"
+    }
+  },
+  {
+    "font-meslo-for-powerlevel10k": {
+      "_name": "font-meslo-for-powerlevel10k",
+      "_bin": "font-meslo-for-powerlevel10k",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-for-powerline": {
+      "_name": "font-meslo-for-powerline",
+      "_bin": "font-meslo-for-powerline",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-lg": {
+      "_name": "font-meslo-lg",
+      "_bin": "font-meslo-lg",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-lg-dz": {
+      "_name": "font-meslo-lg-dz",
+      "_bin": "font-meslo-lg-dz",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-lg-nerd-font": {
+      "_name": "font-meslo-lg-nerd-font",
+      "_bin": "font-meslo-lg-nerd-font",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fzf": {
+      "_bin": "fzf",
+      "_desc": "[fzf](https://github.com/junegunn/fzf) is a general-purpose command-line fuzzy finder. It's an interactive Unix filter for command-line that can be used with any list; files, command history, processes, hostnames, bookmarks, git commits, etc.",
+      "_docs": "https://github.com/junegunn/fzf#usage",
+      "_github": "https://github.com/junegunn/fzf",
+      "_home": "https://github.com/junegunn/fzf",
+      "_name": "fzf",
+      "_preload": true,
+      "_short": "fzf is a command-line fuzzy finder for searching and selecting items interactively.                                                                                                                       ",
+      "apk": "fzf",
+      "apt": "fzf",
+      "brew": "fzf",
+      "dnf:fedora": "fzf",
+      "nix": "nixpkgs.fzf",
+      "pacman": "fzf",
+      "pkg-freebsd": "fzf",
+      "pkg_add": "fzf",
+      "pkgin": "fzf",
+      "port": "fzf",
+      "xbps": "fzf",
+      "zypper": "fzf"
+    }
+  },
+  {
+    "gcc": {
+      "_bin": "gcc",
+      "_desc": "The link https://github.com/gcc-mirror/gcc leads to the official mirror of the GNU Compiler Collection (GCC) on GitHub. GCC is a widely used compiler for programming languages like C, C++, and Fortran. \nThis repository contains the source code for GCC, allowing developers to contribute to its development, report issues, and access the latest updates. It's a valuable resource for anyone interested in   \nunderstanding or modifying the inner workings of this essential compiler tool.                                                                                                                            ",
+      "_github": "https://github.com/gcc-mirror/gcc",
+      "_name": "GCC",
+      "_short": "The gcc-mirror/gcc repository on GitHub is a mirror of the official GCC (GNU Compiler Collection) repository.                                                                                             ",
+      "apt": "gcc",
+      "brew": "gcc",
+      "dnf": "gcc",
+      "pacman": "gcc",
+      "port": "gcc11"
+    }
+  },
+  {
+    "getsentry/tools/sentry-cli": {
+      "_name": "getsentry/tools/sentry-cli",
+      "_bin": "getsentry/tools/sentry-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gh": {
+      "_bin": "gh",
+      "_desc": "[gh](https://cli.github.com/) is GitHub on the command line. It brings pull requests, issues, and other GitHub concepts to the terminal next to where you are already working with git and your code.",
+      "_docs": "https://cli.github.com/manual/",
+      "_github": "https://github.com/cli/cli",
+      "_home": "https://cli.github.com/",
+      "_name": "Github CLI",
+      "_short": "GitHub CLI is a command-line tool that brings GitHub to your terminal.                                                                                                                                    ",
+      "brew": "gh",
+      "choco": "gh",
+      "port": "gh",
+      "scoop": "gh",
+      "winget": "GitHub.cli"
+    }
+  },
+  {
+    "git": {
+      "_bin": "git",
+      "_desc": "git/git is the official repository for the Git version control system. It contains the source code for Git, along with documentation, release notes, and other resources. Users can contribute to Git by  \nsubmitting pull requests, reporting issues, and participating in discussions. The repository is maintained by the Git community and serves as the central hub for all things related to the development   \nand improvement of Git.                                                                                                                                                                                   ",
+      "_github": "https://github.com/git/git",
+      "_name": "git                                                                                                                                                                                                       ",
+      "_short": "git/git is the official repository for the Git version control system.                                                                                                                                    ",
+      "apk": "git",
+      "apt": "git",
+      "brew": "git",
+      "dnf": "git"
+    }
+  },
+  {
+    "git-extras": {
+      "_bin": "git-extras",
+      "_desc": "[Git Extras](https://github.com/tj/git-extras) includes extra git utilities that include repo summary, repl, changelog population, author commit percentages, and more.",
+      "_github": "https://github.com/tj/git-extras",
+      "_name": "git-extras",
+      "_short": "git-extras is a collection of useful Git utilities.                                                                                                                                                       ",
+      "ansible:windows": "professormanhattan.gitextras",
+      "apt": "git-extras",
+      "brew": "git-extras",
+      "dnf": "git-extras",
+      "pacman": "git-extras"
+    }
+  },
+  {
+    "git-open": {
+      "_bin": "git-open",
+      "_desc": "Open the repo website (GitHub, GitLab, Bitbucket) in your browser",
+      "_github": "https://github.com/paulirish/git-open",
+      "_name": "git-open                                                                                                                                                                                                  ",
+      "_short": "git-open is a command-line tool that opens the GitHub page for a repository in your browser.                                                                                                              ",
+      "npm": "git-open"
+    }
+  },
+  {
+    "gitify": {
+      "_app": "Gitify.app",
+      "_bin": null,
+      "_desc": "Gitify is a macOS desktop application that provides a streamlined interface for managing GitHub notifications. It allows users to stay updated on their GitHub activities without needing to keep a       \nbrowser tab open. With Gitify, users can receive notifications, view unread notifications, mark notifications as read, and easily access their GitHub repositories. It offers a convenient way for GitHub \nusers to stay organized and informed about their projects and collaborations.                                                                                                                             ",
+      "_description": "GitHub notifications on the menu bar",
+      "_github": "https://github.com/manosim/gitify",
+      "_home": "https://github.com/manosim/gitify",
+      "_name": "Gitify",
+      "_short": "Gitify is a macOS desktop client for GitHub, providing notifications and easy access to your repositories.                                                                                                ",
+      "cask": "gitify",
+      "github": "github.com/manosim/gitify",
+      "yay": "gitify-bin"
+    }
+  },
+  {
+    "gitleaks": {
+      "_bin": "gitleaks",
+      "_desc": "Extension to scan git repos (or files) for secrets using regex and entropy",
+      "_github": "https://github.com/zricethezav/gitleaks",
+      "_name": "gitleaks",
+      "_short": "gitleaks is a tool for finding sensitive information in git repositories.                                                                                                                                 ",
+      "brew": "gitleaks",
+      "dnf:fedora": "gitleaks",
+      "github": "github.com/zricethezav/gitleaks",
+      "pkg": "gitleaks",
+      "yay": "gitleaks"
+    }
+  },
+  {
+    "glab": {
+      "_bin": "glab",
+      "_desc": "An open-source GitLab command line tool bringing GitLab's cool features to your command line",
+      "_github": "https://github.com/profclems/glab",
+      "_name": "glab",
+      "_short": "glab is a GitLab CLI tool that brings GitLab to your terminal.                                                                                                                                            ",
+      "apk": "glab",
+      "brew": "glab",
+      "github": "github.com/profclems/glab",
+      "scoop": "glab",
+      "yay": "gitlab-glab-bin"
+    }
+  },
+  {
+    "glow": {
+      "_bin": "glow",
+      "_desc": "Glow is a terminal based markdown reader designed from the ground up to bring out the beauty—and power—of the CLI",
+      "_github": "https://github.com/charmbracelet/glow",
+      "_name": "glow",
+      "_short": "Glow is a terminal markdown viewer for Unix systems.                                                                                                                                                      ",
+      "brew": "glow",
+      "github": "github.com/charmbracelet/glow",
+      "pkg": "glow",
+      "scoop": "glow",
+      "yay": "glow"
+    }
+  },
+  {
+    "gnu-sed": {
+      "_bin": "gsed",
+      "_github": false,
+      "brew": "gnu-sed"
+    }
+  },
+  {
+    "gnupg": {
+      "_name": "gnupg",
+      "_bin": "gnupg",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gofireflyio/aiac/aiac": {
+      "_name": "gofireflyio/aiac/aiac",
+      "_bin": "gofireflyio/aiac/aiac",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gomplate": {
+      "_bin": "gomplate",
+      "_desc": "A flexible commandline tool for template rendering. Supports lots of local and remote datasources.",
+      "_docker": "docker run hairyhenderson/gomplate:stable",
+      "_docs": "https://docs.gomplate.ca/",
+      "_github": "https://github.com/hairyhenderson/gomplate",
+      "_home": "https://gomplate.ca/",
+      "_name": "Gomplate",
+      "_short": "gomplate is a versatile command-line tool for manipulating text templates with data.                                                                                                                      ",
+      "apk": "gomplate",
+      "brew": "gomplate",
+      "choco": "gomplate",
+      "port": "gomplate"
+    }
+  },
+  {
+    "gtop": {
+      "_bin": "gtop",
+      "_desc": "System monitoring dashboard for terminal",
+      "_github": "https://github.com/aksakalli/gtop",
+      "_name": "gtop                                                                                                                                                                                                      ",
+      "_short": "gtop is a system monitoring dashboard for the terminal, providing real-time information on system resources like CPU, memory, and processes.                                                              ",
+      "brew": "gtop",
+      "npm": "gtop"
+    }
+  },
+  {
+    "gum": {
+      "_bin": "gum",
+      "_desc": "A tool for glamorous shell scripts. Provides styling and fancy prompts.",
+      "_docs": "https://github.com/charmbracelet/gum",
+      "_github": "https://github.com/charmbracelet/gum",
+      "_home": "https://charm.sh/",
+      "_name": "Gum",
+      "_short": "gum is a terminal framework for Go that helps in building rich and interactive command-line applications.                                                                                                 ",
+      "apk": "gum",
+      "brew": "gum",
+      "go": "github.com/charmbracelet/gum@latest",
+      "nix": "nixpkgs.gum",
+      "pacman": "gum",
+      "pkg-termux": "gum"
+    }
+  },
+  {
+    "guumaster/tap/hostctl": {
+      "_name": "guumaster/tap/hostctl",
+      "_bin": "guumaster/tap/hostctl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hammerspoon": {
+      "_app": "Hammerspoon.app",
+      "_bin": "hs",
+      "_desc": "Staggeringly powerful macOS desktop automation with Lua",
+      "_docs": "https://www.hammerspoon.org/go/",
+      "_github": "https://github.com/Hammerspoon/hammerspoon",
+      "_name": "Hammerspoon",
+      "cask": "hammerspoon"
+    }
+  },
+  {
+    "hishtory": {
+      "_bin": "hishtory",
+      "_deprecated": "Superior to other history managers but the software has some odd features to it like automatically managing ~/.bashrc and ~/.zshrc and `which hishtory` links to a non-existant location but it still works",
+      "_desc": "hishtory is a tool available on GitHub at https://github.com/ddworken/hishtory. It appears to be a project related to browsing history analysis. The tool likely allows users to analyze and visualize    \ntheir browsing history data, providing insights into their online activities. For more detailed information, you can explore the repository on GitHub.                                                    ",
+      "_github": "https://github.com/ddworken/hishtory",
+      "_name": "hiSHtory",
+      "_post": "echo y | hishtory init \"$HISHTORY_USER_SECRET\"",
+      "_short": "hishtory is a tool for tracking and visualizing your command history in the terminal.                                                                                                                     ",
+      "_todo": "Check for Homebrew version",
+      "script": "curl -sSL --compressed https://hishtory.dev/install.py | python3 -"
+    }
+  },
+  {
+    "hoard": {
+      "_bin": "hoard",
+      "_desc": "Hoard is a tool available on GitHub at https://github.com/Hyde46/hoard. It is a simple shell script designed to help users manage their dotfiles by storing them in a Git repository. Dotfiles are        \nconfiguration files for various programs in Unix-like systems. Hoard simplifies the process of backing up and syncing these files across multiple machines. Users can easily add, commit, and push changes\nto their dotfiles repository using this tool. It provides a convenient way to keep configurations consistent across different environments.                                                               ",
+      "_github": "https://github.com/Hyde46/hoard",
+      "_name": "Hoard",
+      "_short": "Hoard is a tool for managing secrets securely in macOS keychain.                                                                                                                                          ",
+      "cargo": "hoard-rs",
+      "nix-env": "hoard",
+      "pacman": "hoard",
+      "port": "hoard-cli"
+    }
+  },
+  {
+    "howdoi": {
+      "_bin": "howdoi",
+      "_desc": "howdoi is a command-line tool that provides quick answers to programming questions by searching through Stack Overflow. Users can simply type a question related to programming, and howdoi will fetch and\ndisplay relevant answers from Stack Overflow. It's a handy tool for developers looking for quick solutions or explanations without having to manually search through forums. The tool is written in Python\nand is available on GitHub for anyone to use and contribute to.                                                                                                                                           ",
+      "_github": "https://github.com/gleitz/howdoi",
+      "_name": "howdoi",
+      "_short": "howdoi is a command-line tool that instantly provides answers to programming questions by searching through Stack Overflow.                                                                               ",
+      "brew": "howdoi",
+      "pipx": "howdoi"
+    }
+  },
+  {
+    "htmlq": {
+      "_bin": "htmlq",
+      "_desc": "A lightweight and flexible command-line JSON processor for HTML",
+      "_github": "https://github.com/mgdm/htmlq",
+      "_name": "htmlq",
+      "_preload": true,
+      "_short": "htmlq is a command-line tool that allows you to query HTML using CSS selectors.                                                                                                                           ",
+      "brew": "htmlq",
+      "cargo": "htmlq",
+      "github": "github.com/mgdm/htmlq"
+    }
+  },
+  {
+    "htop": {
+      "_bin": "htop",
+      "_desc": "[htop](https://htop.dev/) is an interactive system-monitor process-viewer and process-manager. It is designed as an alternative to the Unix program top. It shows a frequently updated list of the processes running on a computer, normally ordered by the amount of CPU usage.",
+      "_docs": "https://www.man7.org/linux/man-pages/man1/htop.1.html",
+      "_github": "https://github.com/htop-dev/htop",
+      "_home": "https://htop.dev/",
+      "_name": "htop",
+      "_short": "htop is a popular interactive process viewer for Unix systems, providing a more user-friendly and feature-rich alternative to the traditional top command.                                                ",
+      "apt": "htop",
+      "brew": "htop",
+      "dnf": "htop",
+      "pacman": "htop",
+      "port": "htop"
+    }
+  },
+  {
+    "http-prompt": {
+      "_bin": "http-prompt",
+      "_desc": "HTTP Prompt is an interactive command-line HTTP client featuring autocomplete and syntax highlighting, built on HTTPie and prompt_toolkit.",
+      "_docs": "https://docs.http-prompt.com/en/latest/",
+      "_github": "https://github.com/httpie/http-prompt",
+      "_home": "https://http-prompt.com/",
+      "_name": "HTTP Prompt",
+      "_short": "http-prompt is an interactive command-line HTTP client built on top of HTTPie, allowing users to make HTTP requests with a user-friendly interface.                                                       ",
+      "brew": "http-prompt",
+      "pipx": "http-prompt"
+    }
+  },
+  {
+    "http-toolkit": {
+      "_app": "HTTP Toolkit.app",
+      "_desc": "HTTP Toolkit is an open-source tool for debugging, testing, and intercepting HTTP and HTTPS. It allows you to inspect, debug, and mock HTTP traffic between your applications and the internet. With HTTP \nToolkit, you can view and modify requests and responses, simulate network conditions, and test how your application behaves in different scenarios. It provides a user-friendly interface for monitoring  \nand analyzing HTTP traffic, making it a valuable tool for developers and system administrators working with web applications.                                                                             ",
+      "_github": "https://github.com/httptoolkit/httptoolkit",
+      "_name": "HTTP Toolkit",
+      "_short": "httptoolkit is a tool for debugging, testing, and intercepting HTTP and HTTPS traffic.                                                                                                                    ",
+      "apt": "https://github.com/httptoolkit/httptoolkit-desktop/releases/download/v1.14.8/HttpToolkit-1.14.8.deb",
+      "cask": "http-toolkit",
+      "winget": "HTTPToolKit.HTTPToolKit",
+      "yay": "httptoolkit"
+    }
+  },
+  {
+    "httpie": {
+      "_bin": "httpie",
+      "_desc": "[HTTPie](https://httpie.io/) is a terminal-based, user-friendly command-line HTTP client for the API era. It comes with JSON support, syntax highlighting, persistent sessions, wget-like downloads, plugins, and more.",
+      "_github": "https://github.com/httpie/cli",
+      "_name": "HTTPie",
+      "_short": "HTTPie is a command-line HTTP client for making requests with a simple and intuitive syntax.                                                                                                              ",
+      "_todo": "Look into https://github.com/httpie/desktop as alternative to Postman and other HTTP request clients",
+      "brew": "httpie",
+      "choco": "httpie",
+      "dnf": "httpie",
+      "pacman": "httpie",
+      "pipx": "httpie",
+      "port": "httpie",
+      "snap": "httpie"
+    }
+  },
+  {
+    "https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb": {
+      "_name": "https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb",
+      "_bin": "https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hub": {
+      "_bin": "hub",
+      "_desc": "Add GitHub support to git on the command-line",
+      "_github": "https://hub.github.com/",
+      "_name": "hub                                                                                                                                                                                                       ",
+      "_short": "GitHub CLI (https://hub.github.com/) is a command-line tool that brings GitHub to your terminal.                                                                                                          ",
+      "apt": "hub",
+      "brew": "hub",
+      "choco": "hub",
+      "dnf:fedora": "hub",
+      "pacman": "hub",
+      "pkg": "hub",
+      "scoop": "hub"
+    }
+  },
+  {
+    "hugo": {
+      "_bin": "hugo",
+      "_desc": "The world’s fastest framework for building websites.",
+      "_docs": "https://gohugo.io/documentation/",
+      "_github": "https://github.com/gohugoio/hugo",
+      "_home": "https://gohugo.io/",
+      "_name": "Hugo",
+      "_short": "Hugo is a popular static site generator written in Go.                                                                                                                                                    ",
+      "apt": "hugo",
+      "brew": "hugo",
+      "choco": "hugo",
+      "dnf": "hugo",
+      "eopkg": "hugo",
+      "go": "github.com/gohugoio/hugo@latest",
+      "pacman": "hugo",
+      "port": "hugo",
+      "scoop": "main/hugo",
+      "snap": "hugo",
+      "zypper": "hugo"
+    }
+  },
+  {
+    "hurl": {
+      "_bin": "hurl",
+      "_desc": "Hurl is an open-source command-line tool for making HTTP requests with a simple and human-readable syntax. It allows users to easily test APIs, inspect HTTP responses, and automate API testing. Hurl    \nsupports various HTTP methods, headers, query parameters, and request bodies. It is designed to be lightweight, fast, and easy to use, making it a handy tool for developers and testers working with     \nAPIs. The tool is actively maintained by the Orange Open Source community and is available for use on various platforms.                                                                                  ",
+      "_github": "https://github.com/Orange-OpenSource/hurl",
+      "_name": "hurl                                                                                                                                                                                                      ",
+      "_short": "Hurl is a command-line tool for making HTTP requests with a simple and intuitive syntax.                                                                                                                  ",
+      "brew": "hurl",
+      "cargo": "hurl",
+      "choco": "hurl",
+      "npm": "@orangeopensource/hurl",
+      "pkg-freebsd": "hurl",
+      "port": "hurl",
+      "scoop": "hurl",
+      "winget": "hurl"
+    }
+  },
+  {
+    "husky": {
+      "_bin": "husky",
+      "_desc": "Husky improves your commits and more",
+      "_github": "https://github.com/typicode/husky",
+      "_home": "https://typicode.github.io/husky/",
+      "_name": "Husky",
+      "_short": "Husky is a tool that helps to set up Git hooks easily in a project.                                                                                                                                       ",
+      "npm": "husky"
+    }
+  },
+  {
+    "ideviceinstaller": {
+      "_bin": "ideviceinstaller",
+      "_desc": "ideviceinstaller is a command-line tool that allows you to interact with iOS devices using the libimobiledevice library. It enables you to install, uninstall, and manage apps on iOS devices from the    \nterminal. This tool is particularly useful for developers and system administrators who need to automate app installations or manage apps on multiple iOS devices. It provides a convenient way to work   \nwith iOS devices without needing to use iTunes or Xcode.                                                                                                                                                  ",
+      "_github": "https://github.com/libimobiledevice/ideviceinstaller",
+      "_name": "ideviceinstaller                                                                                                                                                                                          ",
+      "_short": "ideviceinstaller is a command-line tool for installing, managing, and removing apps on iOS devices.                                                                                                       ",
+      "brew:darwin": "ideviceinstaller"
+    }
+  },
+  {
+    "jandedobbeleer/oh-my-posh/oh-my-posh": {
+      "_name": "jandedobbeleer/oh-my-posh/oh-my-posh",
+      "_bin": "jandedobbeleer/oh-my-posh/oh-my-posh",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "jc": {
+      "_bin": "jc",
+      "_desc": "jc is a command-line utility for parsing, formatting, and colorizing JSON data in the terminal. It takes JSON input and converts it into a human-readable tabular format, making it easier to read and    \nwork with JSON data in the terminal. It supports various output formats, including CSV, TSV, and JSON. jc is highly customizable, allowing users to define their own output formats and color themes. It  \nis a useful tool for developers, system administrators, and anyone working with JSON data in a terminal environment.                                                                                      ",
+      "_github": "https://github.com/kellyjonbrazil/jc",
+      "_name": "jc",
+      "_short": "jc is a command-line utility that converts the output of various command-line tools into JSON format for easier parsing and manipulation.                                                                 ",
+      "apt": "jc",
+      "brew": "jc",
+      "dnf": "jc",
+      "nix-env": "nixpkgs.jc",
+      "pacman": "jc",
+      "pipx": "jc",
+      "zypper": "jc"
+    }
+  },
+  {
+    "jo": {
+      "_bin": "jo",
+      "_desc": "[jo](https://github.com/jpmens/jo) is a free and open-source command-line tool that allows you to create JSON objects.",
+      "_github": "https://github.com/jpmens/jo",
+      "_name": "jo",
+      "_short": "jo is a command-line utility that creates JSON output from shell commands.                                                                                                                                ",
+      "apt": "jo",
+      "brew": "jo",
+      "github": "github.com/jpmens/jo",
+      "pkg": "jo",
+      "scoop": "jo",
+      "snap": "jo",
+      "yay": "jo"
+    }
+  },
+  {
+    "jq": {
+      "_bin": "jq",
+      "_desc": "[jq](https://github.com/stedolan/jq) is like sed for JSON data. You can use it to slice and filter and map and transform structured data with the same ease that sed, awk, grep and friends let you play with text.",
+      "_docs": "https://stedolan.github.io/jq/manual/",
+      "_github": "https://github.com/stedolan/jq",
+      "_home": "https://stedolan.github.io/jq",
+      "_name": "jq",
+      "_preload": true,
+      "_short": "jq is a lightweight and flexible command-line JSON processor for parsing, manipulating, and formatting JSON data efficiently.                                                                             ",
+      "apk": "jq",
+      "apt": "jq",
+      "brew": "jq",
+      "choco": "jq",
+      "dnf": "jq",
+      "github": "github.com/stedolan/jq",
+      "pkg": "jq"
+    }
+  },
+  {
+    "json-server": {
+      "_bin": "json-server",
+      "_desc": "Get a full fake REST API with zero coding in less than 30 seconds (seriously)",
+      "_docs": "https://github.com/typicode/json-server",
+      "_github": "https://github.com/typicode/json-server",
+      "_home": "https://github.com/typicode/json-server",
+      "_name": "JSON Server",
+      "_short": "json-server is a lightweight, local server that allows you to quickly create a REST API from a JSON file. It's great for prototyping and mocking API responses during development.                        ",
+      "npm": "json-server"
+    }
+  },
+  {
+    "keycastr": {
+      "_app": "KeyCastr.app",
+      "_bin": null,
+      "_desc": "Keystroke visualizer for macOS screen recordings",
+      "_docs": "https://github.com/keycastr/keycastr",
+      "_github": "https://github.com/keycastr/keycastr",
+      "_home": "https://github.com/keycastr/keycastr",
+      "_name": "Keycastr",
+      "_short": "Keycastr is a keystroke visualizer for macOS.                                                                                                                                                             ",
+      "cask": "keycastr"
+    }
+  },
+  {
+    "koekeishiya/formulae/yabai": {
+      "_name": "koekeishiya/formulae/yabai",
+      "_bin": "koekeishiya/formulae/yabai",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "lazygit": {
+      "_bin": "lazygit",
+      "_desc": "Simple terminal UI for git commands",
+      "_github": "https://github.com/jesseduffield/lazygit",
+      "_name": "lazygit                                                                                                                                                                                                   ",
+      "_short": "lazygit is a terminal-based GUI for Git with a simple interface for managing repositories.                                                                                                                ",
+      "brew": "lazygit",
+      "choco": "lazygit",
+      "eopkg": "lazygit",
+      "go": "github.com/jesseduffield/lazygit@latest",
+      "pacman": "lazygit",
+      "port": "lazygit",
+      "scoop": "lazygit",
+      "xbps": "lazygit"
+    }
+  },
+  {
+    "libimobiledevice": {
+      "_bin": null,
+      "_desc": "libimobiledevice is an open-source software library that talks the protocols to support iOS devices. It allows communication with iPhone, iPod Touch, iPad, and Apple TV devices. This library enables    \nfunctionalities like accessing the device filesystem, retrieving device information, installing/uninstalling applications, and more. It's commonly used by developers, researchers, and system            \nadministrators to interact with iOS devices from a computer running macOS, Linux, or Windows. The project is actively maintained and updated to support the latest iOS versions and devices.              ",
+      "_github": "https://github.com/libimobiledevice/libimobiledevice",
+      "_home": "https://libimobiledevice.org/",
+      "_name": "libimobiledevice                                                                                                                                                                                          ",
+      "_short": "libimobiledevice is an open-source software library that talks the protocols to support iOS devices.                                                                                                      ",
+      "brew:darwin": "libimobiledevice"
+    }
+  },
+  {
+    "lighthouse": {
+      "_bin": "lighthouse",
+      "_desc": "Lighthouse is an open-source tool from Google Chrome that helps developers improve the quality of web pages. It runs audits on web pages, generating reports on performance, accessibility, progressive   \nweb apps, SEO, and more. Developers can use Lighthouse to identify areas for improvement and optimize their websites for better user experience and search engine rankings. It can be run from the Chrome \nDevTools, as a CLI tool, or as a Node module. Lighthouse is widely used in web development for performance optimization and best practices adherence.                                                     ",
+      "_github": "https://github.com/GoogleChrome/lighthouse",
+      "_name": "Lighthouse",
+      "_short": "Lighthouse is an open-source tool from Google Chrome for improving the quality of web pages.                                                                                                              ",
+      "npm": "lighthouse"
+    }
+  },
+  {
+    "linka-cloud/tap/d2vm": {
+      "_name": "linka-cloud/tap/d2vm",
+      "_bin": "linka-cloud/tap/d2vm",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "litecli": {
+      "_bin": "litecli",
+      "_desc": "CLI for SQLite Databases with auto-completion and syntax highlighting",
+      "_docs": "https://litecli.com/features/",
+      "_github": "https://github.com/dbcli/litecli",
+      "_home": "https://litecli.com/",
+      "_name": "LiteCLI",
+      "_short": "litecli is a command-line client for SQLite databases with auto-completion and syntax highlighting.                                                                                                       ",
+      "brew": "litecli",
+      "pipx": "litecli",
+      "yay": "litecli"
+    }
+  },
+  {
+    "lsd": {
+      "_bin": "lsd",
+      "_deprecated": "Deprecated in favor of using `exa`. `lsd` may be re-introduced when Windows support is added.",
+      "_desc": "[LSD](https://github.com/Peltoche/lsd) (LSDeluxe), a clone of ls, is the next gen ls command with colorful output, file type icons, and more.",
+      "_docs": "https://github.com/lsd-rs/lsd",
+      "_github": "https://github.com/Peltoche/lsd",
+      "_home": "https://github.com/lsd-rs/lsd",
+      "_name": "LSD (LSDeluxe)",
+      "_notes": "Only the Chocolatey definition is included because LSD is only used on Windows (when `exa` is not available)",
+      "_short": "lsd is a modern replacement for ls command with more features and a colorful interface.                                                                                                                   ",
+      "apt": "lsd",
+      "brew": "lsd",
+      "cargo": "lsd",
+      "choco": "lsd",
+      "dnf": "lsd",
+      "eopkg": "lsd",
+      "pacman": "lsd",
+      "pkg-freebsd": "lsd",
+      "pkg-termux": "lsd",
+      "port": "lsd",
+      "scoop": "lsd",
+      "xbps": "lsd",
+      "zypper": "lsd"
+    }
+  },
+  {
+    "mackup": {
+      "_bin": "mackup",
+      "_desc": "[mackup](https://github.com/lra/mackup) lets you keep your application settings in sync.",
+      "_docs": "https://github.com/lra/mackup",
+      "_github": "https://github.com/lra/mackup",
+      "_home": "https://github.com/lra/mackup",
+      "_name": "mackup",
+      "_short": "Mackup is a tool that syncs application settings across multiple macOS devices using cloud storage services like Dropbox or Google Drive.                                                                 ",
+      "brew": "mackup",
+      "pipx": "mackup"
+    }
+  },
+  {
+    "magic-wormhole": {
+      "_bin": "wormhole",
+      "_desc": "Magic Wormhole is a tool that provides secure end-to-end encrypted file transfers between devices. It uses a unique approach where users generate a \"wormhole code\" that can be shared with the recipient \nto establish a secure connection for transferring files or text. This tool ensures privacy and security during the transfer process by using strong encryption techniques. Magic Wormhole is open-source  \nand available on GitHub, making it a popular choice for users looking for a simple and secure way to transfer files over the internet.                                                                    ",
+      "_github": "https://github.com/magic-wormhole/magic-wormhole",
+      "_name": "Magic Wormhole",
+      "_short": "Magic Wormhole is a tool for secure, end-to-end encrypted file transfers.                                                                                                                                 ",
+      "brew": "magic-wormhole"
+    }
+  },
+  {
+    "mailcatcher": {
+      "_bin": "mailcatcher",
+      "_desc": "MailCatcher is a simple SMTP server that catches any email sent from your application and displays it in a web interface. It's useful for testing email functionality during development without actually \nsending emails to real addresses. With MailCatcher, you can view sent emails, inspect their content, and make sure your email templates are rendering correctly. It's a handy tool for debugging and      \ntesting email-related features in your applications. You can find more details and installation instructions on its GitHub page: MailCatcher on GitHub.                                                   ",
+      "_github": "https://github.com/sj26/mailcatcher",
+      "_name": "Mail Catcher",
+      "_service": "mailcatcher",
+      "_short": "Mailcatcher is a simple SMTP server that catches all your outgoing emails during development, allowing you to view them in a web interface instead of sending them out.                                   ",
+      "brew": "mailcatcher",
+      "gem": "mailcatcher"
+    }
+  },
+  {
+    "makeself": {
+      "_bin": "makeself",
+      "_desc": "Makeself is a small shell script that generates a self-extractable compressed archive from a directory. The resulting file acts as a shell script that can extract the original archive. It's commonly    \nused for creating installation packages that can be easily distributed and run on Unix-like systems. Makeself supports various compression formats like gzip, bzip2, and xz. It provides options for      \ncustomizing the self-extracting archive's behavior, such as running commands before or after extraction. Makeself is a handy tool for packaging software or files for distribution in a user-friendly     \nmanner.                                                                                                                                                                                                   ",
+      "_github": "https://github.com/megastep/makeself",
+      "_name": "MakeSelf",
+      "_short": "Makeself is a small shell script that generates a self-extractable compressed archive from a directory. It's commonly used for creating software installation packages that can be easily distributed and \nrun on Unix-like systems.                                                                                                                                                                                 ",
+      "brew": "makeself"
+    }
+  },
+  {
+    "mas": {
+      "_bin": "mas",
+      "_desc": "[MAS CLI](https://github.com/mas-cli/mas) is a simple command line interface for the Mac App Store. Designed for scripting and automation.",
+      "_github": "https://github.com/mas-cli/mas",
+      "_name": "MAS CLI",
+      "_short": "mas is a command-line interface for the Mac App Store, allowing users to interact with the App Store from the terminal.                                                                                   ",
+      "brew:darwin": "mas",
+      "port": "mas"
+    }
+  },
+  {
+    "matrix-rain": {
+      "_name": "matrix-rain",
+      "_bin": "matrix-rain",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "meta": {
+      "_bin": "meta",
+      "_desc": "meta is a tool that helps manage multiple git repositories simultaneously. It allows you to work with a collection of repositories as if they were a single repository. With meta, you can run commands   \nacross all repositories, manage dependencies, and streamline workflows for projects that are spread across multiple repositories. It simplifies tasks like cloning, updating, and syncing multiple        \nrepositories, making it easier to work with complex projects that are divided into smaller components.                                                                                                    ",
+      "_github": "https://github.com/mateodelnorte/meta",
+      "_name": "Meta",
+      "_short": "meta is a tool that helps manage multiple git repositories simultaneously.                                                                                                                                ",
+      "npm": "meta"
+    }
+  },
+  {
+    "micro": {
+      "_name": "micro",
+      "_bin": "micro",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "miller": {
+      "_bin": "mlr",
+      "_desc": "Miller is a command line tool that allows for text processing in Unix-like systems. It is designed for working with structured text data like CSV, TSV, JSON, and XML. Miller provides various operations \nfor data manipulation such as filtering, joining, sorting, and formatting. It is particularly useful for tasks like data cleaning, transformation, and analysis. Miller is open-source and actively       \nmaintained by John Kerl. It offers a flexible and powerful way to work with structured data efficiently from the command line.                                                                            ",
+      "_github": "https://github.com/johnkerl/miller",
+      "_name": "Miller",
+      "_short": "Miller is a command line tool for processing text files in Unix-like systems.                                                                                                                             ",
+      "apt": "miller",
+      "brew": "miller",
+      "choco": "miller",
+      "dnf": "miller",
+      "port": "miller"
+    }
+  },
+  {
+    "mise": {
+      "_bin": "mise",
+      "_desc": "Mise is a tool created by jdx available on GitHub at https://github.com/jdx/mise. It is a simple script that helps in managing macOS system preferences from the command line. With Mise, you can easily  \nset and get various system preferences like dark mode, accent color, wallpaper, and more. It provides a convenient way to automate the customization of macOS settings, making it useful for system       \nadministrators and power users who prefer working with the command line interface.                                                                                                                        ",
+      "_github": "https://github.com/jdx/mise",
+      "_name": "mise",
+      "_short": "Mise is a tool for managing macOS dotfiles.                                                                                                                                                               ",
+      "apk": "mise",
+      "brew": "mise",
+      "cargo": "mise-cli",
+      "nix-env": "mise",
+      "npm": "@jdxcode/mise",
+      "port": "port"
+    }
+  },
+  {
+    "mitmproxy": {
+      "_bin": "mitmproxy",
+      "_desc": "[mitmproxy](https://mitmproxy.org/) is an interactive, SSL/TLS-capable intercepting proxy with a console interface for HTTP/1, HTTP/2, and WebSockets. It also includes mitmweb which is a web-based interface for mitmproxy.",
+      "_docs": "https://docs.mitmproxy.org/stable",
+      "_github": "https://github.com/mitmproxy/mitmproxy",
+      "_home": "https://mitmproxy.org/",
+      "_name": "mitmproxy",
+      "_short": "mitmproxy is an open-source interactive HTTPS proxy.                                                                                                                                                      ",
+      "apt": "mitmproxy",
+      "cask": "mitmproxy",
+      "choco": "mitmproxy",
+      "pacman": "mitmproxy"
+    }
+  },
+  {
+    "mkcert": {
+      "_bin": "mkcert",
+      "_desc": "A simple zero-config tool to make locally trusted development certificates with any names",
+      "_github": "https://github.com/FiloSottile/mkcert",
+      "_name": "mkcert",
+      "_short": "mkcert is a simple tool for making locally-trusted development certificates.                                                                                                                              ",
+      "brew": "mkcert",
+      "choco": "mkcert",
+      "github": "github.com/FiloSottile/mkcert",
+      "pacman": "mkcert",
+      "scoop": "mkcert"
+    }
+  },
+  {
+    "mockoon": {
+      "_app": "Mockoon.app",
+      "_bin:snap": "mockoon",
+      "_desc": "Mockoon is the easiest and quickest way to run mock APIs locally. No remote deployment, no account required, open source",
+      "_github": "https://github.com/mockoon/mockoon",
+      "_name": "Mockoon",
+      "_short": "Mockoon is an open-source API mocking tool that helps developers simulate backend services quickly and easily.                                                                                            ",
+      "cask": "mockoon",
+      "choco": "mockoon",
+      "github": "github.com/mockoon/mockoon",
+      "npm": "@mockoon/cli",
+      "snap": "mockoon",
+      "winget": "mockoon",
+      "yay": "mockoon-bin"
+    }
+  },
+  {
+    "nb": {
+      "_bin": "nb",
+      "_deps": [
+        "bat",
+        "netcat",
+        "pandoc",
+        "ripgrep",
+        "tig",
+        "w3m"
+      ],
+      "_desc": "[nb](https://xwmx.github.io/nb) is a command line and local web note‑taking, bookmarking, archiving, and knowledge base application with plain text data storage, encryption, filtering, pinning, #tagging,  search, Git-backed versioning and syncing, Pandoc-backed conversion and many more features.",
+      "_github": "https://github.com/xwmx/nb",
+      "_home": "https://xwmx.github.io/nb",
+      "_name": "nb",
+      "_short": "nb is a command-line note-taking, bookmarking, and knowledge base application for developers.                                                                                                             ",
+      "basher": "xwmx/nb",
+      "bpkg": "xwmx/nb",
+      "brew": "nb",
+      "npm": "nb.sh"
+    }
+  },
+  {
+    "ncc": {
+      "_bin": "ncc",
+      "_desc": "Compile a Node.js project into a single file. Supports TypeScript, binary addons, dynamic requires.",
+      "_github": "https://github.com/vercel/ncc",
+      "_name": "ncc                                                                                                                                                                                                       ",
+      "_short": "ncc is a tool by Vercel for compiling Node.js projects into a single file.                                                                                                                                ",
+      "brew": "ncc",
+      "npm": "@vercel/ncc"
+    }
+  },
+  {
+    "ncruces/tap/zenity": {
+      "_name": "ncruces/tap/zenity",
+      "_bin": "ncruces/tap/zenity",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ndb": {
+      "_bin": "ndb",
+      "_desc": "ndb is a tool developed by Google Chrome Labs for debugging Node.js applications. It provides an improved debugging experience by offering features like advanced code navigation, real-time code         \nexecution, and integrated debugging tools. With ndb, developers can easily inspect and debug their Node.js applications in a more efficient and user-friendly manner. It is particularly useful for       \ntroubleshooting complex Node.js projects and identifying issues quickly. The tool is open-source and available on GitHub for developers to use and contribute to.                                         ",
+      "_github": "https://github.com/GoogleChromeLabs/ndb",
+      "_name": "ndb",
+      "_short": "ndb is a tool for debugging Node.js applications, developed by Google Chrome Labs.                                                                                                                        ",
+      "npm": "ndb"
+    }
+  },
+  {
+    "neovim": {
+      "_bin": "nvim",
+      "_deps": [
+        "clangd",
+        "terraform-ls",
+        "neovim-node-host"
+      ],
+      "_desc": "[neovim](https://neovim.io/) is Vim-fork focused on extensibility and usability",
+      "_docs": "https://neovim.io/doc/general/",
+      "_github": "https://github.com/neovim/neovim",
+      "_home": "https://neovim.io/",
+      "_name": "neovim",
+      "_short": "Neovim is a highly extensible text editor based on Vim, with improved performance and features for modern development workflows.                                                                          ",
+      "apk": "neovim",
+      "apt": [
+        "neovim",
+        "python3-neovim"
+      ],
+      "brew": "neovim",
+      "choco": "neovim",
+      "dnf": [
+        "neovim",
+        "python3-neovim"
+      ],
+      "nix": "neovim",
+      "pacman": [
+        "neovim",
+        "python-pynvim"
+      ],
+      "pkg": [
+        "neovim",
+        "py27-pynvim",
+        "py36-pynvim"
+      ],
+      "port": "neovim",
+      "winget": "Neovim.Neovim",
+      "zypper": [
+        "neovim",
+        "python-neovim",
+        "python3-neovim"
+      ]
+    }
+  },
+  {
+    "noahgorstein/tap/jqp": {
+      "_name": "noahgorstein/tap/jqp",
+      "_bin": "noahgorstein/tap/jqp",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "nodemon": {
+      "_bin": "nodemon",
+      "_desc": "nodemon is a utility for Node.js that helps in automatically restarting the application when file changes in the directory are detected. It is commonly used during development to speed up the           \ndevelopment process by eliminating the need to manually restart the server after every code change. nodemon monitors the files in the directory and restarts the server whenever a change is detected,    \nmaking the development workflow more efficient. It can be easily installed via npm and configured to suit specific project requirements.                                                                  ",
+      "_github": "https://github.com/remy/nodemon",
+      "_name": "Nodemon",
+      "_short": "nodemon is a tool that helps develop Node.js applications by automatically restarting the server when file changes are detected.                                                                          ",
+      "npm": "nodemon"
+    }
+  },
+  {
+    "npkill": {
+      "_bin": "npkill",
+      "_desc": "npkill is a tool available on GitHub that helps users easily find and remove old or large node_modules directories in their projects. It provides a visual interface to select which directories to       \ndelete, helping to free up disk space by removing unnecessary dependencies. This tool can be especially useful for Node.js developers who want to clean up their projects and reclaim storage space on    \ntheir machines.                                                                                                                                                                                           ",
+      "_github": "https://github.com/voidcosmos/npkill",
+      "_name": "npkill",
+      "_short": "npkill is a tool for finding and removing old or large node_modules directories in your projects to free up disk space.                                                                                   ",
+      "npm": "npkill"
+    }
+  },
+  {
+    "npm-check": {
+      "_bin": "npm-check",
+      "_desc": "Check for outdated, incorrect, and unused dependencies.",
+      "_github": "https://github.com/dylang/npm-check",
+      "_name": "npm-check",
+      "_short": "npm-check is a tool for checking outdated, incorrect, and unused dependencies in a Node.js project.                                                                                                       ",
+      "npm": "npm-check"
+    }
+  },
+  {
+    "npm-check-updates": {
+      "_bin": "ncu",
+      "_desc": "npm-check-updates is a tool used to check for updates of npm packages in a Node.js project. It allows you to see which packages have new versions available and helps you update your package.json file   \naccordingly. This tool simplifies the process of keeping your project's dependencies up to date by providing a clear overview of available updates. It can be especially useful for projects with many    \ndependencies or for ensuring compatibility with the latest versions of packages.                                                                                                                          ",
+      "_github": "https://github.com/raineorshine/npm-check-updates",
+      "_name": "NPM Check Updates",
+      "_short": "npm-check-updates is a tool that checks for updates to npm packages in your project and helps you update them easily.                                                                                     ",
+      "npm": "npm-check-updates"
+    }
+  },
+  {
+    "null": {
+      "_name": null,
+      "_bin": null,
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "obs": {
+      "_name": "obs",
+      "_bin": "obs",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "oclif": {
+      "_bin": "oclif",
+      "_desc": "[oclif](https://oclif.io/) is a framework for building CLIs in Node.js. This framework was built out of the Heroku CLI but generalized to build any custom CLI. It's designed both for single-file CLIs with a few flag options, or for very complex CLIs that have subcommands (like git or heroku)",
+      "_docs": "https://oclif.io/docs/",
+      "_github": "https://github.com/oclif/oclif",
+      "_home": "https://oclif.io/",
+      "_name": "oclif",
+      "_short": "oclif is a Command Line Interface framework for building CLIs in Node.js.                                                                                                                                 ",
+      "npm": "oclif"
+    }
+  },
+  {
+    "opencommit": {
+      "_bin": "opencommit",
+      "_desc": "GPT CLI to auto-generate impressive commits in 1 second",
+      "_docs": "https://github.com/di-sukharev/opencommit",
+      "_github": "https://github.com/di-sukharev/opencommit",
+      "_home": "https://www.npmjs.com/package/opencommit",
+      "_name": "OpenCommit",
+      "_short": "opencommit is a tool that helps automate the process of opening GitHub issues based on commit messages.                                                                                                   ",
+      "npm": "opencommit"
+    }
+  },
+  {
+    "openinterminal": {
+      "_app": "OpenInTerminal.app",
+      "_bin": null,
+      "_desc": "Finder Toolbar app for macOS to open the current directory in Terminal, iTerm, Hyper or Alacritty",
+      "_docs": "https://github.com/Ji4n1ng/OpenInTerminal",
+      "_github": "https://github.com/Ji4n1ng/OpenInTerminal",
+      "_home": "https://github.com/Ji4n1ng/OpenInTerminal",
+      "_name": "OpenInTerminal",
+      "_short": "OpenInTerminal: A macOS Finder toolbar app to open the current directory in Terminal or iTerm.                                                                                                            ",
+      "cask": "openinterminal"
+    }
+  },
+  {
+    "ots": {
+      "_bin": "ots",
+      "_desc": "Share end-to-end encrypted secrets with others via a one-time URL",
+      "_github": "https://github.com/sniptt-official/ots",
+      "_home": "https://ots.sniptt.com/",
+      "_name": "ots",
+      "_short": "ots is a command-line tool for securely sharing secrets using one-time URLs.                                                                                                                              ",
+      "brew": "ots",
+      "github": "github.com/sniptt-official/ots",
+      "go": "github.com/sniptt-official/ots@latest"
+    }
+  },
+  {
+    "oven-sh/bun/bun": {
+      "_name": "oven-sh/bun/bun",
+      "_bin": "oven-sh/bun/bun",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "package-size": {
+      "_bin": "package-size",
+      "_desc": "Get the bundle size of an npm package",
+      "_github": "https://github.com/egoist/package-size",
+      "_name": "package-size",
+      "_short": "package-size is a tool that calculates the size of npm packages.                                                                                                                                          ",
+      "npm": "package-size"
+    }
+  },
+  {
+    "packer": {
+      "_bin": "packer",
+      "_desc": "[Packer](https://www.packer.io/) is a free and open source tool for creating golden images for multiple platforms from a single source configuration. Packer is lightweight, runs on every major operating system, and is highly performant, creating machine images for multiple platforms in parallel. It is a [HashiCorp](https://www.hashicorp.com/) product.",
+      "_docs": "https://developer.hashicorp.com/packer/docs",
+      "_github": "https://github.com/hashicorp/packer",
+      "_home": "https://www.packer.io/",
+      "_name": "Packer",
+      "_short": "Packer is an open-source tool for creating identical machine images for multiple platforms from a single source configuration.                                                                            ",
+      "apt": "packer",
+      "brew": "packer",
+      "choco": "packer",
+      "pacman": "packer"
+    }
+  },
+  {
+    "pandoc": {
+      "_bin": "pandoc",
+      "_deps": [
+        "python"
+      ],
+      "_deps:darwin": [
+        "basictex",
+        "python"
+      ],
+      "_desc": "[Pandoc](https://pandoc.org/) is a Haskell library for converting from one documentation markup format to another. If you need to convert files from one markup format into another, then look no further. Pandoc is your swiss-army knife. It converts from and to dozens of formats like HTML, markdown, docx, JSON, YAML, and CSV, to name a few.",
+      "_docs": "https://pandoc.org/getting-started.html",
+      "_github": "https://github.com/jgm/pandoc",
+      "_home": "https://pandoc.org/",
+      "_name": "Pandoc",
+      "_short": "Pandoc is a versatile tool for converting between various document formats.                                                                                                                               ",
+      "apt": "pandoc",
+      "brew": [
+        "pandoc",
+        "librsvg"
+      ],
+      "choco": [
+        "pandoc",
+        "rsvg-convert",
+        "miktex"
+      ],
+      "crew": "pandoc",
+      "dnf": "pandoc",
+      "nix": "pandoc",
+      "pacman": "pandoc",
+      "winget": "pandoc"
+    }
+  },
+  {
+    "pb": {
+      "_app": "PB for Desktop.app",
+      "_bin": "pushbullet",
+      "_desc": "pb-for-desktop is a project on GitHub created by Sidney San Martín that provides a simple and lightweight clipboard manager for macOS. It allows users to easily access and manage their clipboard        \nhistory, making it convenient to retrieve previously copied items. The tool is designed to run in the macOS menu bar, providing quick access to clipboard history without cluttering the desktop. It is   \nwritten in Swift and offers features like search functionality, customizable keyboard shortcuts, and the ability to exclude certain applications from being monitored.                                    ",
+      "_github": "https://github.com/sidneys/pb-for-desktop",
+      "_name": "Pushbullet for Desktop",
+      "_short": "pb-for-desktop is a simple clipboard manager for MacOS.                                                                                                                                                   ",
+      "appimage": "sidneys/pb-for-desktop",
+      "cask": "pb",
+      "choco": "pushbullet"
+    }
+  },
+  {
+    "perl": {
+      "_name": "perl",
+      "_bin": "perl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pieces": {
+      "_app": "Pieces.app",
+      "_bin": "pieces-for-developers",
+      "_desc": "Pieces is a first-in-kind productivity suite that optimizes developer tools and eliminates the chaos of context switching.",
+      "_docs": "https://docs.pieces.app/",
+      "_github": false,
+      "_home": "https://pieces.app/",
+      "_name": "Pieces",
+      "appinstaller": "https://builds.pieces.app/stages/production/appinstaller/pieces_for_x.appinstaller",
+      "cask": "pieces",
+      "exe": "https://builds.pieces.app/stages/production/pieces_for_x/windows-exe/download",
+      "snap": "pieces-for-developers"
+    }
+  },
+  {
+    "pinentry-mac": {
+      "_name": "pinentry-mac",
+      "_bin": "pinentry-mac",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pipx": {
+      "_bin": "pipx",
+      "_deprecated": "The `pipx` installation is handled by the `install-program` program bundled with Install Doctor.",
+      "_desc": "[pipx](https://pypi.org/project/pipx/) is a tool to help you install and run end-user applications written in Python. It's roughly similar to macOS's brew, JavaScript's npx, and Linux's apt",
+      "_docs": "https://pypa.github.io/pipx/",
+      "_github": "https://github.com/pypa/pipx",
+      "_home": "https://pypi.org/project/pipx/",
+      "_name": "pipx                                                                                                                                                                                                      ",
+      "_post:brew": "pipx ensurepath",
+      "_short": "pipx is a tool that allows you to install and run Python applications in isolated environments.                                                                                                           ",
+      "brew": "pipx"
+    }
+  },
+  {
+    "playwright": {
+      "_bin": "playwright",
+      "_desc": "[Playwright](https://playwright.dev) enables reliable end-to-end testing for modern web apps. It allows testing Chromium, Firefox and WebKit with a single API",
+      "_docs": "https://playwright.dev/docs/intro",
+      "_github": "https://github.com/Microsoft/playwright",
+      "_home": "https://playwright.dev",
+      "_name": "Playwright",
+      "_short": "Playwright is a tool for automating browsers created by Microsoft.                                                                                                                                        ",
+      "npm": "playwright"
+    }
+  },
+  {
+    "plex": {
+      "_app": "Plex.app",
+      "_bin": "plex",
+      "_desc": "[Plex](https://www.plex.tv/) is a global streaming service of free ad-supported video, with TV shows and movies from distributors such as Crackle, Warner Bros., MGM, Endemol Shine Group, Lionsgate, and Legendary. Plex is also a client–server media player system plus an ancillary software suite.",
+      "_github": false,
+      "_home": "https://www.plex.tv/",
+      "_name": "Plex",
+      "cask": "plex",
+      "choco": "plex",
+      "flatpak": "tv.plex.PlexDesktop"
+    }
+  },
+  {
+    "poppler": {
+      "_desc": "pdf2image is a Python library that converts PDF files into a sequence of PIL (Python Imaging Library) images. It provides a simple interface to extract images from PDFs, making it easier to work with   \nPDF content in image processing tasks. The library supports multiple backends for PDF rendering, such as Poppler and Ghostscript, giving users flexibility in choosing the rendering engine. This tool can\nbe useful for tasks like extracting images from PDF documents for further analysis or manipulation.                                                                                                       ",
+      "_github": "https://github.com/Belval/pdf2image",
+      "_name": "pdf2image                                                                                                                                                                                                 ",
+      "_short": "pdf2image is a Python library that converts PDF files into images.                                                                                                                                        ",
+      "brew": "poppler"
+    }
+  },
+  {
+    "postman": {
+      "_app": "Postman.app",
+      "_bin": "postman",
+      "_desc": "[Postman](https://www.postman.com/) is a collaboration platform for API development. Postman's features simplify each step of building an API and streamline collaboration so you can create better APIs — faster.",
+      "_docs": "https://learning.postman.com/docs/getting-started/introduction/",
+      "_github": "https://github.com/postmanlabs/postman-app-support",
+      "_home": "https://www.postman.com/",
+      "_name": "Postman",
+      "_short": "postman-app-support is a repository for Postman app support resources.                                                                                                                                    ",
+      "cask": "postman",
+      "choco": "postman",
+      "flatpak": "com.getpostman.Postman",
+      "snap": "postman",
+      "yay": "postman-bin"
+    }
+  },
+  {
+    "privoxy": {
+      "_bin": "privoxy",
+      "_desc": "Privoxy is a non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying web page data and HTTP headers, controlling access, and removing ads and other obnoxious Internet junk",
+      "_docs": "https://www.privoxy.org/user-manual/index.html",
+      "_github": "https://github.com/unisx/privoxy",
+      "_groups": [
+        "privoxy"
+      ],
+      "_home": "https://www.privoxy.org/",
+      "_name": "Privoxy",
+      "_service": "privoxy",
+      "_serviceEnabled": true,
+      "_short": "Privoxy is a non-caching web proxy with advanced filtering capabilities for enhancing privacy, modifying web page data, and controlling access.                                                           ",
+      "apt": "privoxy",
+      "brew": "privoxy",
+      "dnf": "privoxy",
+      "pacman": "privoxy",
+      "port": "privoxy"
+    }
+  },
+  {
+    "procs": {
+      "_bin": "procs",
+      "_desc": "A modern replacement for ps written in Rust",
+      "_github": "https://github.com/dalance/procs",
+      "_name": "procs",
+      "_short": "procs is a command-line tool for macOS that displays information about processes in a convenient and user-friendly way.                                                                                   ",
+      "apk": "procs",
+      "brew": "procs",
+      "cargo": "procs",
+      "dnf": "procs",
+      "github": "github.com/dalance/procs",
+      "pacman": "procs",
+      "scoop": "procs",
+      "snap": "procs"
+    }
+  },
+  {
+    "psi": {
+      "_bin": "psi",
+      "_desc": "Run mobile and desktop performance tests for your deployed site using Google PageSpeed Insights v5 with tidy reporting for your build process",
+      "_github": "https://github.com/GoogleChromeLabs/psi",
+      "_name": "psi",
+      "_short": "psi is a tool by Google Chrome Labs for measuring website performance.                                                                                                                                    ",
+      "npm": "psi"
+    }
+  },
+  {
+    "pup": {
+      "_bin": "pup",
+      "_desc": "[pup](https://github.com/ericchiang/pup) is a command line tool for processing HTML. It reads from stdin, prints to stdout, and allows the user to filter parts of the page using CSS selectors.",
+      "_github": "https://github.com/ericchiang/pup",
+      "_name": "pup",
+      "_short": "pup is a command line tool for parsing HTML.                                                                                                                                                              ",
+      "brew": "pup",
+      "github": "github.com/ericchiang/pup",
+      "go": "github.com/ericchiang/pup@latest"
+    }
+  },
+  {
+    "python@3.12": {
+      "_name": "python@3.12",
+      "_bin": "python@3.12",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "qlcolorcode": {
+      "_desc": "QLColorCode is a Quick Look plugin for macOS that allows you to preview the source code files with syntax highlighting directly in the Finder. It supports a wide range of programming languages and file \ntypes, making it easier to quickly glance at code files without opening them in an editor. This plugin enhances the user experience by providing a convenient way to preview code files without the need  \nto open them in a separate application.                                                                                                                                                                   ",
+      "_github": "https://github.com/n8gray/QLColorCode",
+      "_name": "QLColorCode",
+      "_short": "QLColorCode is a Quick Look plugin for syntax highlighting source code files on macOS.                                                                                                                    ",
+      "_when:cask": "! test -d \"$HOME/Library/QuickLook/QLColorCode.qlgenerator\"",
+      "cask": "qlcolorcode"
+    }
+  },
+  {
+    "raycast": {
+      "_app": "Raycast.app",
+      "_bin": null,
+      "_desc": "Everything you need to extend Raycast (the search provider for macOS)",
+      "_docs": "https://developers.raycast.com/",
+      "_env": {
+        "RAYCAST_APPDATA": {
+          "cask": "$HOME/Library/Application Support/com.raycast.macos"
+        }
+      },
+      "_github": "https://github.com/raycast/extensions",
+      "_home": "https://www.raycast.com/",
+      "_name": "Raycast",
+      "_short": "Raycast Extensions is a collection of productivity tools and scripts for the Raycast app, designed to enhance workflow efficiency on MacOS.                                                               ",
+      "cask": "raycast"
+    }
+  },
+  {
+    "readme": {
+      "_name": "readme",
+      "_bin": "readme",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "responsively": {
+      "_app": "ResponsivelyApp.app",
+      "_bin": null,
+      "_desc": "A modified web browser that helps in responsive web development",
+      "_github": "https://github.com/responsively-org/responsively-app",
+      "_name": "Responsively",
+      "_short": "Responsively App is a tool for web developers that allows them to preview how a website looks on different devices and resolutions simultaneously.                                                        ",
+      "cask": "responsively",
+      "choco": "responsively",
+      "github": "github.com/responsively-org/responsively-app"
+    }
+  },
+  {
+    "ripgrep": {
+      "_bin": "rg",
+      "_desc": "[ripgrep](https://github.com/BurntSushi/ripgrep) is a line-oriented search tool that recursively searches your current directory for a regex pattern. By default, ripgrep will respect your .gitignore and automatically skip hidden files/directories and binary files. This role also installs ripgrep-all. [ripgrep-all](https://github.com/phiresky/ripgrep-all) is just like ripgrep except it also searches in PDFs, E-Books, Office documents, zip, tar.gz, etc.",
+      "_github": "https://github.com/BurntSushi/ripgrep",
+      "_name": "ripgrep",
+      "_short": "ripgrep is a fast, line-oriented search tool that recursively searches your current directory for a regex pattern while respecting your gitignore rules.                                                  ",
+      "apt": "ripgrep",
+      "brew": "ripgrep",
+      "cargo": "ripgrep",
+      "choco": "ripgrep",
+      "dnf": "ripgrep",
+      "nix": "ripgrep",
+      "pacman": "ripgrep",
+      "pkg": "ripgrep",
+      "port": "ripgrep",
+      "scoop": "ripgrep",
+      "zypper": "ripgrep"
+    }
+  },
+  {
+    "rm-improved": {
+      "_bin": "rip",
+      "_desc": "A safe and ergonomic alternative to rm",
+      "_docs": "https://github.com/nivekuil/rip",
+      "_github": "https://github.com/nivekuil/rip",
+      "_home": "https://github.com/nivekuil/rip",
+      "_name": "rip (Rm ImProved)",
+      "_short": "rip is a tool for macOS that simplifies the process of uninstalling applications.                                                                                                                         ",
+      "brew": "rm-improved",
+      "cargo": "rm-improved",
+      "github": "github.com/nivekuil/rip",
+      "yay": "rm-improved"
+    }
+  },
+  {
+    "rmlint": {
+      "_name": "rmlint",
+      "_bin": "rmlint",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "runjs": {
+      "_app": "RunJS.app",
+      "_bin": null,
+      "_desc": "A JavaScript playground that auto-evaluates as you type",
+      "_github": "https://github.com/lukehaas/RunJS",
+      "_name": "RunJS",
+      "_short": "RunJS is a lightweight and portable JavaScript playground that allows you to quickly test and run JavaScript code in a clean and simple interface.                                                        ",
+      "cask": "runjs",
+      "choco": "runjs",
+      "github": "github.com/lukehaas/RunJS",
+      "yay": "runjs-bin"
+    }
+  },
+  {
+    "sd": {
+      "_bin": "sd",
+      "_desc": "Intuitive find & replace CLI (sed alternative)",
+      "_github": "https://github.com/chmln/sd",
+      "_name": "sd",
+      "_short": "sd is a fast, intuitive find & replace tool for the command line.                                                                                                                                         ",
+      "apk": "sd",
+      "brew": "sd",
+      "cargo": "sd",
+      "choco": "sd-cli",
+      "dnf:fedora": "sd",
+      "github": "github.com/chmln/sd",
+      "pacman": "sd",
+      "pkg": "sd"
+    }
+  },
+  {
+    "semantic-release": {
+      "_bin": "semantic-release",
+      "_desc": "[semantic-release](https://semantic-release.gitbook.io) automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the package",
+      "_docs": "https://semantic-release.gitbook.io",
+      "_github": "https://github.com/semantic-release/semantic-release",
+      "_home": "https://semantic-release.gitbook.io",
+      "_name": "semantic-release",
+      "_short": "semantic-release is a tool for automating versioning and package publishing based on commit messages.                                                                                                     ",
+      "npm": "semantic-release"
+    }
+  },
+  {
+    "serve": {
+      "_bin": "serve",
+      "_desc": "serve helps you serve a static site, single page application or just a static file (no matter if on your device or on the local network). It also provides a neat interface for listing the directory's contents",
+      "_github": "https://github.com/vercel/serve",
+      "_name": "serve",
+      "_short": "vercel/serve is a simple, zero-configuration command-line tool to serve static sites quickly.                                                                                                             ",
+      "npm": "serve"
+    }
+  },
+  {
+    "serverless": {
+      "_bin": "serverless",
+      "_desc": "Build applications with serverless architectures",
+      "_docs": "https://www.serverless.com/framework/docs",
+      "_github": "https://github.com/serverless/serverless",
+      "_home": "https://www.serverless.com/",
+      "_name": "serverless",
+      "_short": "Serverless Framework is a popular open-source tool that simplifies deploying and managing serverless applications on various cloud platforms.                                                             ",
+      "brew": "serverless",
+      "npm": "serverless"
+    }
+  },
+  {
+    "share-cli": {
+      "_name": "share-cli",
+      "_bin": "share-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "shc": {
+      "_bin": "shc",
+      "_desc": "Shell script compiler",
+      "_docs": "https://github.com/neurobin/shc",
+      "_github": "https://github.com/neurobin/shc",
+      "_home": "https://neurobin.org/projects/softwares/unix/shc/",
+      "_name": "shc",
+      "_short": "shc is a shell script compiler that converts shell scripts into C code for faster execution.                                                                                                              ",
+      "brew": "shc",
+      "port": "shc"
+    }
+  },
+  {
+    "shellcheck": {
+      "_bin": "shellcheck",
+      "_desc": "A static analysis tool for shell scripts",
+      "_docker": "docker run --rm -v \"$PWD:/mnt\" koalaman/shellcheck:stable",
+      "_docs": "https://github.com/koalaman/shellcheck/wiki/Directive",
+      "_github": "https://github.com/koalaman/shellcheck",
+      "_home": "https://www.shellcheck.net/",
+      "_name": "Shellcheck",
+      "_short": "ShellCheck is a static analysis tool for shell scripts, helping to identify and fix common issues and improve script quality.                                                                             ",
+      "apt": "shellcheck",
+      "brew": "shellcheck",
+      "cabal": "shellcheck",
+      "choco": "shellcheck",
+      "dnf": "shellcheck",
+      "emerge": "shellcheck",
+      "eopkg": "shellcheck",
+      "nix": "nixpkgs.shellcheck",
+      "pacman": "shellcheck",
+      "pkg-freebsd": "shellcheck",
+      "pkg_add": "shellcheck",
+      "port": "shellcheck",
+      "scoop": "shellcheck",
+      "snap": "shellcheck",
+      "stack": "shellcheck",
+      "zypper": "shellcheck"
+    }
+  },
+  {
+    "slack": {
+      "_app": "Slack.app",
+      "_bin": "slack",
+      "_desc": "[Slack](https://slack.com/) is a proprietary business communication platform developed by American software company Slack Technologies. Slack offers many IRC-style features, including persistent chat rooms organized by topic, private groups, and direct messaging.",
+      "_docs": "https://api.slack.com/docs",
+      "_github": "https://github.com/slackhq/SlackTextViewController",
+      "_home": "https://slack.com/",
+      "_name": "Slack",
+      "_short": "SlackTextViewController is a library for iOS that provides a chat interface similar to Slack.                                                                                                             ",
+      "cask": "slack",
+      "choco": "slack",
+      "flatpak": "com.slack.Slack",
+      "mas": 803453959,
+      "snap": "slack"
+    }
+  },
+  {
+    "snyk-cli": {
+      "_name": "snyk-cli",
+      "_bin": "snyk-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "sqlite": {
+      "_bin": "sqlite3",
+      "_desc": "SQLite is a C-language library that implements a small, fast, self-contained, high-reliability, full-featured, SQL database engine.",
+      "_docs": "https://sqlite.org/docs.html",
+      "_github": "https://github.com/sqlite/sqlite",
+      "_home": "https://sqlite.org/index.html",
+      "_name": "SQLite",
+      "_preload": true,
+      "_short": "SQLite is a lightweight, self-contained, serverless, zero-configuration, transactional SQL database engine.                                                                                               ",
+      "apt": "sqlite3",
+      "brew": null,
+      "choco": "sqlite",
+      "dnf": "sqlite",
+      "pacman": "sqlite",
+      "port": "sqlite3",
+      "scoop": "sqlite"
+    }
+  },
+  {
+    "starship": {
+      "_name": "starship",
+      "_bin": "starship",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "svgo": {
+      "_bin": "svgo",
+      "_desc": "SVG Optimizer is a Node.js-based tool for optimizing SVG vector graphics files.",
+      "_github": "https://github.com/svg/svgo",
+      "_name": "svgo",
+      "_short": "SVGO is a tool for optimizing SVG files, reducing their size without affecting quality.                                                                                                                   ",
+      "brew": "svgo",
+      "npm": "svgo"
+    }
+  },
+  {
+    "syncpack": {
+      "_bin": "syncpack",
+      "_desc": "Consistent dependency versions in large JavaScript Monorepos.",
+      "_docs": "https://jamiemason.github.io/syncpack/installation",
+      "_github": "https://github.com/JamieMason/syncpack",
+      "_home": "https://jamiemason.github.io/syncpack/",
+      "_name": "Syncpack",
+      "_short": "syncpack is a tool that keeps dependencies in sync between multiple package.json files in a project.                                                                                                      ",
+      "npm": "syncpack"
+    }
+  },
+  {
+    "syncthing": {
+      "_bin": "syncthing",
+      "_desc": "Syncthing is an open-source continuous file synchronization program that allows you to securely sync files between multiple devices. It is designed to be decentralized, giving you control over your data\nwithout relying on a central server. Syncthing uses end-to-end encryption to ensure your files are transferred securely. It supports various operating systems, including Darwin/MacOS, making it a       \nversatile solution for keeping your files in sync across different devices. You can find more information about Syncthing on its GitHub page: Syncthing GitHub Repository.                                ",
+      "_github": "https://github.com/syncthing/syncthing",
+      "_name": "Syncthing",
+      "_service": "syncthing",
+      "_serviceEnabled": true,
+      "_short": "Syncthing is an open-source continuous file synchronization program.                                                                                                                                      ",
+      "brew": "syncthing",
+      "choco": "syncthing",
+      "port": "syncthing",
+      "scoop": "syncthing"
+    }
+  },
+  {
+    "t-rec": {
+      "_bin": "t-rec",
+      "_deps:cargo": [
+        "imagemagick"
+      ],
+      "_desc": "[t-rec](https://github.com/sassman/t-rec-rs) is a blazingly fast terminal recorder that generates animated GIF images for the web written in Rust",
+      "_docs": "https://crates.io/crates/t-rec",
+      "_github": "https://github.com/sassman/t-rec-rs",
+      "_home": "https://crates.io/crates/t-rec",
+      "_name": "t-rec",
+      "_short": "t-rec-rs is a terminal-based screen recorder written in Rust.                                                                                                                                             ",
+      "brew": "t-rec",
+      "cargo": "t-rec",
+      "port": "t-rec",
+      "snap": "t-rec --classic",
+      "yay": "t-rec"
+    }
+  },
+  {
+    "tailscale": {
+      "_app": "Tailscale.app",
+      "_bin": "tailscale",
+      "_desc": "[Tailscale](https://tailscale.com/) lets you easily manage access to private resources, quickly SSH into devices on your network, and work securely from anywhere in the world.",
+      "_docs": "https://tailscale.com/kb/",
+      "_github": "https://github.com/tailscale/tailscale",
+      "_home": "https://tailscale.com/",
+      "_name": "Tailscale",
+      "_preload": true,
+      "_service:brew": "tailscale",
+      "_service:pacman": "tailscaled",
+      "_short": "Tailscale is a secure mesh VPN that makes it easy to connect your devices securely.                                                                                                                       ",
+      "brew": "tailscale",
+      "cask": "tailscale",
+      "choco": "tailscale",
+      "go": "tailscale.com/cmd/tailscale{,d}@main",
+      "mas": 1475387142,
+      "pacman": "tailscale",
+      "port": "tailscale"
+    }
+  },
+  {
+    "task": {
+      "_bin": "task",
+      "_desc": "A task runner / simpler Make alternative written in Go",
+      "_docs": "https://taskfile.dev/usage/",
+      "_github": "https://github.com/go-task/task",
+      "_home": "https://taskfile.dev",
+      "_name": "Task",
+      "_preload": true,
+      "_short": "Task is a simple task runner / build tool for Go projects.                                                                                                                                                ",
+      "brew": "go-task",
+      "choco": "go-task",
+      "github": "github.com/go-task/task",
+      "go": "github.com/go-task/task/v3/cmd/task@latest",
+      "scoop": "task"
+    }
+  },
+  {
+    "taskd": {
+      "_name": "taskd",
+      "_bin": "taskd",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tasksh": {
+      "_name": "tasksh",
+      "_bin": "tasksh",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "terminalizer": {
+      "_bin": "terminalizer",
+      "_desc": "Record your terminal and generate animated gif images or share a web player",
+      "_github": "https://github.com/faressoft/terminalizer",
+      "_home": "https://www.terminalizer.com/",
+      "_name": "terminalizer",
+      "_short": "Terminalizer is a tool for recording your terminal sessions into animated GIFs or videos.                                                                                                                 ",
+      "npm": "terminalizer"
+    }
+  },
+  {
+    "thefuck": {
+      "_bin": "fuck",
+      "_desc": "Magnificent CLI tool that corrects your previous console command whenever something fails due to misspelling.",
+      "_docs": "https://github.com/nvbn/thefuck",
+      "_github": "https://github.com/nvbn/thefuck",
+      "_home": "https://github.com/nvbn/thefuck",
+      "_name": "The Fuck",
+      "_short": "thefuck is a command-line tool that corrects your previous console command typos.                                                                                                                         ",
+      "brew": "thefuck",
+      "crew": "thefuck",
+      "pacman": "thefuck",
+      "pipx": "thefuck",
+      "pkg-freebsd": "thefuck"
+    }
+  },
+  {
+    "tig": {
+      "_bin": "tig",
+      "_desc": "Tig is an ncurses-based text-mode interface for git. It functions mainly as a Git repository browser, but can also assist in staging changes for commit at chunk level and act as a pager for output from various Git commands",
+      "_github": "https://github.com/jonas/tig",
+      "_home": "https://jonas.github.io/tig/",
+      "_name": "tig",
+      "_short": "tig is a text-mode interface for Git, allowing you to browse and interact with your Git repositories using a terminal-based interface.                                                                    ",
+      "brew": "tig",
+      "nix": "tig",
+      "pkg": "tig"
+    }
+  },
+  {
+    "tldr": {
+      "_bin": "tldr",
+      "_desc": "Simplified and community-driven man pages",
+      "_github": "https://github.com/tldr-pages/tldr",
+      "_home": "https://tldr.sh/",
+      "_name": "tldr",
+      "_short": "tldr is a simplified and community-driven man pages repository for common commands, providing concise and practical examples for quick reference.                                                         ",
+      "brew": "tldr",
+      "npm": "tldr"
+    }
+  },
+  {
+    "tmate": {
+      "_bin": "tmate",
+      "_desc": "TMate is a terminal sharing tool that allows multiple users to access and collaborate in the same terminal session remotely. It provides a secure way to share command-line access with others, making it \nuseful for pair programming, troubleshooting, and providing remote support. TMate supports various platforms and encryption methods to ensure secure communication. It is based on the tmux terminal      \nmultiplexer, offering features like session sharing, text-based chat, and the ability to invite users with a unique URL.                                                                                  ",
+      "_github": "https://github.com/tmate-io/tmate",
+      "_name": "tmate",
+      "_short": "tmate is a terminal sharing tool that allows multiple users to access and collaborate in the same terminal session remotely.                                                                              ",
+      "apt": "tmate",
+      "brew": "tmate",
+      "dnf": "tmate",
+      "emerge": "app-misc/tmate",
+      "opkg": "tmate",
+      "pacman": "tmate",
+      "pkg-freebsd": "tmate",
+      "pkg_add": "tmate",
+      "zypper": "tmate"
+    }
+  },
+  {
+    "tmux": {
+      "_bin": "tmux",
+      "_desc": "[Tmux](https://github.com/tmux/tmux/wiki) is a terminal multiplexer. It enables a number of terminals to be created, accessed, and controlled from a single screen. Tmux may be detached from a screen and continue running in the background, then later reattached.",
+      "_docs": "https://github.com/tmux/tmux/wiki",
+      "_github": "https://github.com/tmux/tmux",
+      "_name": "tmux",
+      "_short": "tmux is a terminal multiplexer for Unix-like operating systems that allows multiple terminal sessions to be accessed and controlled from a single window.                                                 ",
+      "apt": "tmux",
+      "brew": [
+        "awk",
+        "gnu-sed",
+        "perl",
+        "tmux"
+      ]
+    }
+  },
+  {
+    "tmuxinator": {
+      "_bin": "tmuxinator",
+      "_desc": "Manage complex tmux sessions easily",
+      "_docs": "https://github.com/tmuxinator/tmuxinator",
+      "_github": "https://github.com/tmuxinator/tmuxinator",
+      "_home": "https://github.com/tmuxinator/tmuxinator",
+      "_name": "Tmuxinator",
+      "_short": "Tmuxinator is a tool for managing complex tmux sessions easily through simple YAML configuration files.                                                                                                   ",
+      "brew": "tmuxinator"
+    }
+  },
+  {
+    "tree": {
+      "_bin": "tree",
+      "_desc": "[tree-cli](https://github.com/MrRaindrop/tree-cli) is a recursive directory listing program that produces a depth indented listing of files. With no arguments, tree lists the files in the current directory. When directory arguments are given, tree lists all the files and/or directories found in the given directories each in turn. Upon completion of listing all files/directories found, tree returns the total number of files and/or directories listed.",
+      "_github": "https://github.com/MrRaindrop/tree-cli",
+      "_name": "tree-cli",
+      "_short": "tree-cli is a command-line tool that generates directory trees in a visually appealing way.                                                                                                               ",
+      "apt": "tree",
+      "brew": "tree",
+      "choco": "tree",
+      "dnf": "tree",
+      "pacman": "tree"
+    }
+  },
+  {
+    "virtualenv": {
+      "_bin": "virtualenv",
+      "_desc": "Tool for creating isolated virtual python environments",
+      "_docs": "https://virtualenv.pypa.io/en/latest/",
+      "_github": "https://github.com/pypa/virtualenv",
+      "_name": "virtualenv",
+      "_short": "virtualenv is a tool to create isolated Python environments.                                                                                                                                              ",
+      "brew": "virtualenv",
+      "pipx": "virtualenv"
+    }
+  },
+  {
+    "visual-studio-code": {
+      "_name": "visual-studio-code",
+      "_bin": "visual-studio-code",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "volta": {
+      "_bin": "volta",
+      "_desc": "[Volta](https://volta.sh/) is a hassle-free Javascript Tool Manager. It is a fast, reliable and universal tool manager. It supports multiple package managers and provides extensibility hooks for site-specific customization.",
+      "_docs": "https://docs.volta.sh/",
+      "_github": "https://github.com/volta-cli/volta",
+      "_home": "https://volta.sh",
+      "_name": "Volta",
+      "_preload": true,
+      "_short": "Volta is a tool for managing JavaScript command-line tools.                                                                                                                                               ",
+      "brew": "volta",
+      "scoop": "volta"
+    }
+  },
+  {
+    "w3m": {
+      "_bin": "w3m",
+      "_desc": "w3m is a pager/text-based WWW browser. You can browse local documents and/or documents on the WWW using a terminal emulator.",
+      "_docs": "https://w3m.sourceforge.net/MANUAL",
+      "_github": "https://github.com/tats/w3m",
+      "_home": "https://tracker.debian.org/pkg/w3m",
+      "_name": "w3m",
+      "_short": "w3m is a text-based web browser for Unix-like systems.                                                                                                                                                    ",
+      "apt": "w3m",
+      "brew": "w3m",
+      "dnf": "w3m",
+      "pacman": "w3m",
+      "port": "w3m",
+      "zypper": "w3m"
+    }
+  },
+  {
+    "warp": {
+      "_app": "Cloudflare WARP.app",
+      "_bin": "warp-cli",
+      "_desc": "[Cloudflare WARP Client](https://cloudflarewarp.com/) is a free app that makes your Internet safer",
+      "_github": false,
+      "_home": "https://cloudflarewarp.com/",
+      "_name": "Cloudflare WARP Client",
+      "_preload": true,
+      "apt": "cloudflare-warp",
+      "cask": "cloudflare-warp",
+      "choco": "warp"
+    }
+  },
+  {
+    "watchman": {
+      "_bin": "watchman",
+      "_desc": "[Watchman](https://github.com/facebook/watchman), an open-source Facebook product, can be used to watch files and record when they change. It can also trigger actions when matching files change.",
+      "_github": "https://github.com/facebook/watchman",
+      "_name": "Watchman",
+      "_short": "Watchman is a tool by Facebook for watching changes in the filesystem.                                                                                                                                    ",
+      "brew": "watchman",
+      "choco": "watchman",
+      "port": "watchman",
+      "scoop": "watchman"
+    }
+  },
+  {
+    "watson": {
+      "_name": "watson",
+      "_bin": "watson",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "wget": {
+      "_bin": "wget",
+      "_desc": "The [wget](https://www.gnu.org/software/wget/) command is a command line utility for downloading files from the Internet. It supports downloading multiple files, downloading in the background, resuming downloads, limiting the bandwidth used for downloads and viewing headers.",
+      "_github": false,
+      "_home": "https://www.gnu.org/software/wget/",
+      "_name": "wget",
+      "_preload": true,
+      "apk": "wget",
+      "apt": "wget",
+      "brew": "wget",
+      "dnf": "wget"
+    }
+  },
+  {
+    "whalebrew": {
+      "_bin": "whalebrew",
+      "_desc": "Homebrew, but with Docker images (see https://github.com/whalebrew/whalebrew-packages for available packages)",
+      "_docs": "https://github.com/whalebrew/whalebrew#usage",
+      "_github": "https://github.com/whalebrew/whalebrew",
+      "_home": "https://github.com/whalebrew/whalebrew",
+      "_name": "Whalebrew",
+      "_short": "Whalebrew is a tool that allows you to create and run Docker containers as if they were native commands.                                                                                                  ",
+      "brew": "whalebrew",
+      "script:darwin": "curl -L \"https://github.com/whalebrew/whalebrew/releases/download/0.4.0/whalebrew-$(uname -s)-$(uname -m)\" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew",
+      "script:linux": "curl -L \"https://github.com/whalebrew/whalebrew/releases/download/0.4.0/whalebrew-$(uname -s)-$(uname -m)\" -o /usr/local/bin/whalebrew; chmod +x /usr/local/bin/whalebrew"
+    }
+  },
+  {
+    "whereami": {
+      "_bin": "whereami",
+      "_desc": "whereami is a command-line tool for macOS that retrieves your current location using Apple's CoreLocation framework. It provides latitude, longitude, and a human-readable address. This tool can be      \nuseful for scripting or automation tasks that require location-based information on a macOS system. It's a simple and lightweight utility that can be easily integrated into various workflows.           ",
+      "_github": "https://github.com/rafaelrinaldi/whereami",
+      "_name": "Where Am I?",
+      "_short": "whereami is a command-line tool that displays your current location using Apple's CoreLocation framework.                                                                                                 ",
+      "npm": "@rafaelrinaldi/whereami"
+    }
+  },
+  {
+    "wifi-password": {
+      "_bin": "wifi-password",
+      "_desc": "Get the password of the wifi you're on",
+      "_github": "https://github.com/rauchg/wifi-password",
+      "_name": "wifi-password",
+      "_short": "wifi-password is a simple command-line tool for retrieving the current WiFi password on macOS.                                                                                                            ",
+      "bpkg": "rauchg/wifi-password",
+      "brew:darwin": "wifi-password",
+      "npm": "wifi-password-cli"
+    }
+  },
+  {
+    "wipe-modules": {
+      "_bin": "wipe-modules",
+      "_desc": "wipe-modules is a tool available on GitHub at https://github.com/bntzio/wipe-modules. It is designed to help clean up and remove node_modules directories from your projects. This can be useful for      \nsaving disk space or starting fresh with dependencies. The tool provides options to selectively remove node_modules directories based on criteria like size, last accessed time, or a combination of both.\nIt's a handy utility for managing dependencies in Node.js projects efficiently.                                                                                                                           ",
+      "_github": "https://github.com/bntzio/wipe-modules",
+      "_name": "wipe-modules",
+      "_short": "wipe-modules is a tool that removes all node_modules directories from your project, helping to clean up unnecessary files and save disk space.                                                            ",
+      "npm": "wipe-modules"
+    }
+  },
+  {
+    "wireshark": {
+      "_app": "Wireshark.app",
+      "_bin": "wireshark-gui",
+      "_desc": "[Wireshark](https://www.wireshark.org/) is a free and open-source packet analyzer. It is used for network troubleshooting, analysis, software and communications protocol development, and education. Originally named Ethereal, the project was renamed Wireshark in May 2006 due to trademark issues.",
+      "_docs": "https://www.wireshark.org/docs/",
+      "_github": "https://github.com/wireshark/wireshark",
+      "_home": "https://www.wireshark.org/",
+      "_name": "Wireshark",
+      "_pre:cask": "#!/usr/bin/env bash\nif command -v idl2wrs > /dev/null; then brew uninstall wireshark; fi\n",
+      "_short": "Wireshark is a popular network protocol analyzer used for troubleshooting, analysis, development, and education in the networking field.                                                                  ",
+      "apt": "wireshark",
+      "cask": "wireshark",
+      "choco": "wireshark",
+      "dnf": [
+        "wireshark",
+        "wireshark-cli"
+      ],
+      "flatpak": "org.wireshark.Wireshark",
+      "pacman": [
+        "wireshark-cli",
+        "wireshark-qt"
+      ]
+    }
+  },
+  {
+    "xcodesorg/made/xcodes": {
+      "_name": "xcodesorg/made/xcodes",
+      "_bin": "xcodesorg/made/xcodes",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yamllint": {
+      "_bin": "yamllint",
+      "_desc": "A linter for YAML files. yamllint does not only check for syntax validity, but also for weirdnesses like key repetition and cosmetic problems such as lines length, trailing spaces, indentation, etc.",
+      "_github": "https://github.com/adrienverge/yamllint",
+      "_name": "yamllint",
+      "_short": "yamllint is a tool for checking YAML files for syntax errors and adherence to best practices.                                                                                                             ",
+      "brew": "yamllint",
+      "pipx": "yamllint"
+    }
+  },
+  {
+    "yank": {
+      "_bin": "yank",
+      "_bin:apt": "yank-cli",
+      "_desc": "[yank](https://github.com/mptre/yank) is a terminal agnostic solution which allows copying output from Termial easily, without the need to use Terminal multiplexers.",
+      "_github": "https://github.com/mptre/yank",
+      "_name": "yank",
+      "_short": "Yank is a tool that allows you to copy text from your terminal to your clipboard.                                                                                                                         ",
+      "apt": "yank",
+      "brew": "yank",
+      "choco": "win32yank",
+      "dnf": "yank",
+      "nix": "yank",
+      "pacman": "yank",
+      "pkg-freebsd": "yank",
+      "pkg_add": "yank",
+      "port": "yank",
+      "scoop": "win32yank",
+      "zypper": "yank"
+    }
+  },
+  {
+    "yazi": {
+      "_name": "yazi",
+      "_bin": "yazi",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yj": {
+      "_bin": "yj",
+      "_desc": "CLI program that allows you to convert between YAML, TOML, JSON, and HCL.",
+      "_docker": "docker run sclevine/yj",
+      "_docs": "https://github.com/sclevine/yj",
+      "_github": "https://github.com/sclevine/yj",
+      "_home": "https://github.com/sclevine/yj",
+      "_name": "YJ",
+      "_short": "yj is a command-line tool for parsing and manipulating YAML and JSON data easily.                                                                                                                         ",
+      "brew": "yj",
+      "go": "github.com/sclevine/yj/v5@v5.1.0"
+    }
+  },
+  {
+    "yohamta/tap/dagu": {
+      "_name": "yohamta/tap/dagu",
+      "_bin": "yohamta/tap/dagu",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "you-get": {
+      "_bin": "you-get",
+      "_desc": "You-Get is a command-line tool that allows users to download media content from various websites like YouTube, Vimeo, and others. It supports downloading videos, audio, and images by simply providing   \nthe URL of the content. You-Get is written in Python and is open-source, making it easy to customize and extend its functionality. It is a handy tool for users who prefer downloading media content for  \noffline viewing or archiving purposes.                                                                                                                                                                    ",
+      "_github": "https://github.com/soimort/you-get",
+      "_name": "You-Get",
+      "_short": "you-get is a command-line tool that downloads media content from the web, supporting various websites like YouTube, Vimeo, and more.                                                                      ",
+      "brew": "you-get",
+      "pipx": "you-get",
+      "pkg-freebsd": "you-get"
+    }
+  },
+  {
+    "youtube-dl": {
+      "_bin": "youtube-dl",
+      "_desc": "[youtube-dl](https://github.com/ytdl-org/youtube-dl) is an open-source download manager for video and audio from YouTube and over 1000 other video hosting websites. It is released under the Unlicense software license and is one of the most popular projects on GitHub.",
+      "_docs": "https://github.com/ytdl-org/youtube-dl/blob/master/README.md#readme",
+      "_github": "https://github.com/ytdl-org/youtube-dl",
+      "_home": "https://youtube-dl.org/",
+      "_name": "youtube-dl",
+      "_short": "youtube-dl is a command-line tool for downloading videos from YouTube and other websites.                                                                                                                 ",
+      "brew": "youtube-dl",
+      "pipx": "youtube-dl",
+      "port": "youtube-dl"
+    }
+  },
+  {
+    "yq": {
+      "_bin": "yq",
+      "_desc": "[yq](https://github.com/mikefarah/yq) is a free, open-source command-line YAML processor. It aims to be like [jq](https://gitlab.com/megabyte-labs/ansible-roles/jq) except for YAML files. It can read and write values to YAML files.",
+      "_docs": "https://mikefarah.gitbook.io/yq/how-it-works",
+      "_github": "https://github.com/mikefarah/yq",
+      "_home": "https://mikefarah.gitbook.io/yq/",
+      "_name": "yq",
+      "_preload": true,
+      "_short": "yq is a lightweight and portable command-line YAML processor.                                                                                                                                             ",
+      "apk": "yq",
+      "brew": "yq",
+      "choco": "yq",
+      "github": "github.com/stedolan/jq",
+      "go": "github.com/mikefarah/yq/v4@latest",
+      "snap": "yq"
+    }
+  },
+  {
+    "yt-dlp": {
+      "_bin": "yt-dlp",
+      "_desc": "To install yt-dlp, a fork of youtube-dl, you can follow these steps:                                                                                                                                      \n\n 1 Clone the Repository: Use git clone https://github.com/yt-dlp/yt-dlp.git to download the repository.                                                                                                   \n 2 Navigate to the Directory: Move into the yt-dlp directory using cd yt-dlp.                                                                                                                             \n 3 Install yt-dlp: Run sudo python3 setup.py install to install yt-dlp system-wide.                                                                                                                       \n 4 Verify Installation: To confirm the installation, run yt-dlp --version.                                                                                                                                \n\nThese steps will help you install yt-dlp on your system.                                                                                                                                                  ",
+      "_github": "https://github.com/yt-dlp/yt-dlp/wiki/Installation",
+      "_name": "YouTube Download",
+      "_short": "To install yt-dlp, visit the GitHub page and follow the installation instructions provided in the wiki section.                                                                                           ",
+      "brew": "yt-dlp",
+      "choco": "yt-dlp",
+      "pacman": "yt-dlp",
+      "pipx": "yt-dlp",
+      "port": "yt-dlp",
+      "scoop": "yt-dlp",
+      "winget": "yt-dlp"
+    }
+  },
+  {
+    "zellij": {
+      "_name": "zellij",
+      "_bin": "zellij",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zoxide": {
+      "_bin": "zoxide",
+      "_desc": "[zoxide](https://github.com/ajeetdsouza/zoxide) is a blazing fast replacement for your cd command, inspired by z and autojump",
+      "_github": "https://github.com/ajeetdsouza/zoxide",
+      "_name": "zoxide",
+      "_preload": true,
+      "_short": "zoxide is a blazing fast replacement for cd, allowing you to navigate your filesystem with ease using fuzzy matching and tracking your most used directories.                                             ",
+      "brew": "zoxide"
+    }
+  },
+  {
+    "zsh": {
+      "_bin": "zsh",
+      "_desc": "[Oh My Zsh](https://ohmyz.sh/) is a delightful, open source, community-driven framework for managing your Zsh configurations. It comes bundled with thousands of helpful functions, helpers, plugins, themes, and a few things that make you shout oh my zsh! This role also installs some CLI tools that accompany Oh My Zsh! to make it even more amazing.",
+      "_github": "https://github.com/zsh-users/zsh",
+      "_name": "Zsh",
+      "_preload": true,
+      "_short": "zsh is a powerful shell for Unix-like operating systems, offering advanced features and customization options for command-line users.                                                                     ",
+      "apt": "zsh",
+      "brew": "zsh",
+      "dnf": "zsh",
+      "pacman": "zsh",
+      "port": "zsh"
+    }
+  },
+  {
+    "zsh-completions": {
+      "_desc": "zsh-completions is a repository on GitHub maintained by the zsh-users organization. It provides a collection of completion scripts for various commands and utilities to enhance auto-completion          \ncapabilities in the zsh shell. These completion scripts help users by suggesting and completing command options, arguments, and file paths as they type commands in the terminal. The repository is       \nregularly updated to support new commands and improve existing completions, making it a valuable resource for zsh users looking to streamline their command-line experience.                              ",
+      "_github": "https://github.com/zsh-users/zsh-completions",
+      "_name": "ZSH Completions",
+      "_preload": true,
+      "_short": "zsh-completions is a repository that provides additional completion definitions for the Zsh shell, enhancing auto-completion capabilities for various commands and utilities.                             ",
+      "brew": "zsh-completions"
+    }
+  },
+  {
+    "zsh-syntax-highlighting": {
+      "_name": "zsh-syntax-highlighting",
+      "_bin": "zsh-syntax-highlighting",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zx": {
+      "_bin": "zx",
+      "_desc": "Bash is great, but when it comes to writing more complex scripts, many people prefer a more convenient programming language. JavaScript is a perfect choice, but the Node.js standard library requires additional hassle before using. The zx package provides useful wrappers around child_process, escapes arguments and gives sensible defaults.",
+      "_github": "https://github.com/google/zx",
+      "_name": "zx",
+      "_preload": true,
+      "_short": "ZX is a tool for writing better scripts with JavaScript on macOS and Linux.                                                                                                                               ",
+      "brew": "zx",
+      "npm": "zx"
+    }
+  }
+]

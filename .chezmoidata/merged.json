@@ -1,0 +1,2917 @@
+[
+  {
+    "1Password": {
+      "_name": "1Password",
+      "_bin": "1Password",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "1password-cli": {
+      "_name": "1password-cli",
+      "_bin": "1password-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Actions For Obsidian": {
+      "_name": "Actions For Obsidian",
+      "_bin": "Actions For Obsidian",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Alfred 5": {
+      "_name": "Alfred 5",
+      "_bin": "Alfred 5",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Amphetamine": {
+      "_name": "Amphetamine",
+      "_bin": "Amphetamine",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Arc": {
+      "_name": "Arc",
+      "_bin": "Arc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Bear": {
+      "_name": "Bear",
+      "_bin": "Bear",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Blackmagic Disk Speed Test": {
+      "_name": "Blackmagic Disk Speed Test",
+      "_bin": "Blackmagic Disk Speed Test",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Blackmagic Proxy Generator": {
+      "_name": "Blackmagic Proxy Generator",
+      "_bin": "Blackmagic Proxy Generator",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Blackmagic RAW": {
+      "_name": "Blackmagic RAW",
+      "_bin": "Blackmagic RAW",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ChatMate for Facebook": {
+      "_name": "ChatMate for Facebook",
+      "_bin": "ChatMate for Facebook",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Coder": {
+      "_name": "Coder",
+      "_bin": "Coder",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "DaisyDisk": {
+      "_name": "DaisyDisk",
+      "_bin": "DaisyDisk",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Deepdwn": {
+      "_name": "Deepdwn",
+      "_bin": "Deepdwn",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "DevCleaner for XCode": {
+      "_name": "DevCleaner for XCode",
+      "_bin": "DevCleaner for XCode",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "DiffusionBee": {
+      "_name": "DiffusionBee",
+      "_bin": "DiffusionBee",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Draw Things": {
+      "_name": "Draw Things",
+      "_bin": "Draw Things",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Dropover": {
+      "_name": "Dropover",
+      "_bin": "Dropover",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "File Drawer": {
+      "_name": "File Drawer",
+      "_bin": "File Drawer",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Filters for Photos": {
+      "_name": "Filters for Photos",
+      "_bin": "Filters for Photos",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Folder Peek": {
+      "_name": "Folder Peek",
+      "_bin": "Folder Peek",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Folder Tidy": {
+      "_name": "Folder Tidy",
+      "_bin": "Folder Tidy",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "GitButler": {
+      "_name": "GitButler",
+      "_bin": "GitButler",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Goodnotes": {
+      "_name": "Goodnotes",
+      "_bin": "Goodnotes",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Hand Mirror": {
+      "_name": "Hand Mirror",
+      "_bin": "Hand Mirror",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Magnet": {
+      "_name": "Magnet",
+      "_bin": "Magnet",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Meeting Bar": {
+      "_name": "Meeting Bar",
+      "_bin": "Meeting Bar",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "MenubarX": {
+      "_name": "MenubarX",
+      "_bin": "MenubarX",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Microsoft Word": {
+      "_name": "Microsoft Word",
+      "_bin": "Microsoft Word",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "NVim": {
+      "_name": "NVim",
+      "_bin": "NVim",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Obsidian": {
+      "_name": "Obsidian",
+      "_bin": "Obsidian",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Parallels Desktop": {
+      "_name": "Parallels Desktop",
+      "_bin": "Parallels Desktop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Scribe": {
+      "_name": "Scribe",
+      "_bin": "Scribe",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Shortery": {
+      "_name": "Shortery",
+      "_bin": "Shortery",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Slack": {
+      "_name": "Slack",
+      "_bin": "Slack",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Strflow": {
+      "_name": "Strflow",
+      "_bin": "Strflow",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Super Snippets - Code Organizer": {
+      "_name": "Super Snippets - Code Organizer",
+      "_bin": "Super Snippets - Code Organizer",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Tailscale": {
+      "_name": "Tailscale",
+      "_bin": "Tailscale",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Todoist": {
+      "_name": "Todoist",
+      "_bin": "Todoist",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "Typora": {
+      "_name": "Typora",
+      "_bin": "Typora",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "XCode (497799835)": {
+      "_name": "XCode (497799835)",
+      "_bin": "XCode (497799835)",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "abhimanyu003/sttr/sttr": {
+      "_name": "abhimanyu003/sttr/sttr",
+      "_bin": "abhimanyu003/sttr/sttr",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "act": {
+      "_name": "act",
+      "_bin": "act",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "age": {
+      "_name": "age",
+      "_bin": "age",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ai-shell": {
+      "_name": "ai-shell",
+      "_bin": "ai-shell",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "aicommits": {
+      "_name": "aicommits",
+      "_bin": "aicommits",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "aifiles": {
+      "_name": "aifiles",
+      "_bin": "aifiles",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "alacritty": {
+      "_name": "alacritty",
+      "_bin": "alacritty",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "alt-tab": {
+      "_name": "alt-tab",
+      "_bin": "alt-tab",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ansible": {
+      "_name": "ansible",
+      "_bin": "ansible",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ansibleconnect": {
+      "_name": "ansibleconnect",
+      "_bin": "ansibleconnect",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ansibler": {
+      "_name": "ansibler",
+      "_bin": "ansibler",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "asciinema": {
+      "_name": "asciinema",
+      "_bin": "asciinema",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "asdf": {
+      "_name": "asdf",
+      "_bin": "asdf",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "autojump": {
+      "_name": "autojump",
+      "_bin": "autojump",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "awk": {
+      "_name": "awk",
+      "_bin": "awk",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "bashly": {
+      "_name": "bashly",
+      "_bin": "bashly",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "bat": {
+      "_name": "bat",
+      "_bin": "bat",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "bat-extras": {
+      "_name": "bat-extras",
+      "_bin": "bat-extras",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "bfg": {
+      "_name": "bfg",
+      "_bin": "bfg",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "bitly": {
+      "_name": "bitly",
+      "_bin": "bitly",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "brew-gem": {
+      "_name": "brew-gem",
+      "_bin": "brew-gem",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "browserosaurus": {
+      "_name": "browserosaurus",
+      "_bin": "browserosaurus",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "btop": {
+      "_name": "btop",
+      "_bin": "btop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cakebrew": {
+      "_name": "cakebrew",
+      "_bin": "cakebrew",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "capacitor": {
+      "_name": "capacitor",
+      "_bin": "capacitor",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cfcli": {
+      "_name": "cfcli",
+      "_bin": "cfcli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "chatgpt": {
+      "_name": "chatgpt",
+      "_bin": "chatgpt",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cheat": {
+      "_name": "cheat",
+      "_bin": "cheat",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "clintmod/formulas/macprefs": {
+      "_name": "clintmod/formulas/macprefs",
+      "_bin": "clintmod/formulas/macprefs",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "clipboard": {
+      "_name": "clipboard",
+      "_bin": "clipboard",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cmake": {
+      "_name": "cmake",
+      "_bin": "cmake",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "commitlint": {
+      "_name": "commitlint",
+      "_bin": "commitlint",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cookiecutter": {
+      "_name": "cookiecutter",
+      "_bin": "cookiecutter",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "copilot-for-xcode": {
+      "_name": "copilot-for-xcode",
+      "_bin": "copilot-for-xcode",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "coreutils": {
+      "_name": "coreutils",
+      "_bin": "coreutils",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cryptomator": {
+      "_name": "cryptomator",
+      "_bin": "cryptomator",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "csvkit": {
+      "_name": "csvkit",
+      "_bin": "csvkit",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ctop": {
+      "_name": "ctop",
+      "_bin": "ctop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "curlie": {
+      "_name": "curlie",
+      "_bin": "curlie",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "cz": {
+      "_name": "cz",
+      "_bin": "cz",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "dasel": {
+      "_name": "dasel",
+      "_bin": "dasel",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "dat": {
+      "_name": "dat",
+      "_bin": "dat",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "devtoys": {
+      "_name": "devtoys",
+      "_bin": "devtoys",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "dframe": {
+      "_name": "dframe",
+      "_bin": "dframe",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "direnv": {
+      "_name": "direnv",
+      "_bin": "direnv",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "doctl": {
+      "_name": "doctl",
+      "_bin": "doctl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "duf": {
+      "_name": "duf",
+      "_bin": "duf",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "duplicacy-cli": {
+      "_name": "duplicacy-cli",
+      "_bin": "duplicacy-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "dust": {
+      "_name": "dust",
+      "_bin": "dust",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "emma": {
+      "_name": "emma",
+      "_bin": "emma",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "envchain": {
+      "_name": "envchain",
+      "_bin": "envchain",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "espanso": {
+      "_name": "espanso",
+      "_bin": "espanso",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "exiftool": {
+      "_name": "exiftool",
+      "_bin": "exiftool",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "eza": {
+      "_name": "eza",
+      "_bin": "eza",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fastfetch": {
+      "_name": "fastfetch",
+      "_bin": "fastfetch",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fcp": {
+      "_name": "fcp",
+      "_bin": "fcp",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fd": {
+      "_name": "fd",
+      "_bin": "fd",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fdupes": {
+      "_name": "fdupes",
+      "_bin": "fdupes",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "figlet": {
+      "_name": "figlet",
+      "_bin": "figlet",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "findutils": {
+      "_name": "findutils",
+      "_bin": "findutils",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "firefox": {
+      "_name": "firefox",
+      "_bin": "firefox",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fkill": {
+      "_name": "fkill",
+      "_bin": "fkill",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-for-powerlevel10k": {
+      "_name": "font-meslo-for-powerlevel10k",
+      "_bin": "font-meslo-for-powerlevel10k",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-for-powerline": {
+      "_name": "font-meslo-for-powerline",
+      "_bin": "font-meslo-for-powerline",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-lg": {
+      "_name": "font-meslo-lg",
+      "_bin": "font-meslo-lg",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-lg-dz": {
+      "_name": "font-meslo-lg-dz",
+      "_bin": "font-meslo-lg-dz",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "font-meslo-lg-nerd-font": {
+      "_name": "font-meslo-lg-nerd-font",
+      "_bin": "font-meslo-lg-nerd-font",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "fzf": {
+      "_name": "fzf",
+      "_bin": "fzf",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gcc": {
+      "_name": "gcc",
+      "_bin": "gcc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "getsentry/tools/sentry-cli": {
+      "_name": "getsentry/tools/sentry-cli",
+      "_bin": "getsentry/tools/sentry-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gh": {
+      "_name": "gh",
+      "_bin": "gh",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "git": {
+      "_name": "git",
+      "_bin": "git",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "git-extras": {
+      "_name": "git-extras",
+      "_bin": "git-extras",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "git-open": {
+      "_name": "git-open",
+      "_bin": "git-open",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gitify": {
+      "_name": "gitify",
+      "_bin": "gitify",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gitleaks": {
+      "_name": "gitleaks",
+      "_bin": "gitleaks",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "glab": {
+      "_name": "glab",
+      "_bin": "glab",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "glow": {
+      "_name": "glow",
+      "_bin": "glow",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gnu-sed": {
+      "_name": "gnu-sed",
+      "_bin": "gnu-sed",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gnupg": {
+      "_name": "gnupg",
+      "_bin": "gnupg",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gofireflyio/aiac/aiac": {
+      "_name": "gofireflyio/aiac/aiac",
+      "_bin": "gofireflyio/aiac/aiac",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gomplate": {
+      "_name": "gomplate",
+      "_bin": "gomplate",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gtop": {
+      "_name": "gtop",
+      "_bin": "gtop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "gum": {
+      "_name": "gum",
+      "_bin": "gum",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "guumaster/tap/hostctl": {
+      "_name": "guumaster/tap/hostctl",
+      "_bin": "guumaster/tap/hostctl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hammerspoon": {
+      "_name": "hammerspoon",
+      "_bin": "hammerspoon",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hishtory": {
+      "_name": "hishtory",
+      "_bin": "hishtory",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hoard": {
+      "_name": "hoard",
+      "_bin": "hoard",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "howdoi": {
+      "_name": "howdoi",
+      "_bin": "howdoi",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "htmlq": {
+      "_name": "htmlq",
+      "_bin": "htmlq",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "htop": {
+      "_name": "htop",
+      "_bin": "htop",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "http-prompt": {
+      "_name": "http-prompt",
+      "_bin": "http-prompt",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "http-toolkit": {
+      "_name": "http-toolkit",
+      "_bin": "http-toolkit",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "httpie": {
+      "_name": "httpie",
+      "_bin": "httpie",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb": {
+      "_name": "https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb",
+      "_bin": "https://raw.githubusercontent.com/Mortennn/FiScript/master/fiscript.rb",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hub": {
+      "_name": "hub",
+      "_bin": "hub",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hugo": {
+      "_name": "hugo",
+      "_bin": "hugo",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "hurl": {
+      "_name": "hurl",
+      "_bin": "hurl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "husky": {
+      "_name": "husky",
+      "_bin": "husky",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ideviceinstaller": {
+      "_name": "ideviceinstaller",
+      "_bin": "ideviceinstaller",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "jandedobbeleer/oh-my-posh/oh-my-posh": {
+      "_name": "jandedobbeleer/oh-my-posh/oh-my-posh",
+      "_bin": "jandedobbeleer/oh-my-posh/oh-my-posh",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "jc": {
+      "_name": "jc",
+      "_bin": "jc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "jo": {
+      "_name": "jo",
+      "_bin": "jo",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "jq": {
+      "_name": "jq",
+      "_bin": "jq",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "json-server": {
+      "_name": "json-server",
+      "_bin": "json-server",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "keycastr": {
+      "_name": "keycastr",
+      "_bin": "keycastr",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "koekeishiya/formulae/yabai": {
+      "_name": "koekeishiya/formulae/yabai",
+      "_bin": "koekeishiya/formulae/yabai",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "lazygit": {
+      "_name": "lazygit",
+      "_bin": "lazygit",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "libimobiledevice": {
+      "_name": "libimobiledevice",
+      "_bin": "libimobiledevice",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "lighthouse": {
+      "_name": "lighthouse",
+      "_bin": "lighthouse",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "linka-cloud/tap/d2vm": {
+      "_name": "linka-cloud/tap/d2vm",
+      "_bin": "linka-cloud/tap/d2vm",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "litecli": {
+      "_name": "litecli",
+      "_bin": "litecli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "lsd": {
+      "_name": "lsd",
+      "_bin": "lsd",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mackup": {
+      "_name": "mackup",
+      "_bin": "mackup",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "magic-wormhole": {
+      "_name": "magic-wormhole",
+      "_bin": "magic-wormhole",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mailcatcher": {
+      "_name": "mailcatcher",
+      "_bin": "mailcatcher",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "makeself": {
+      "_name": "makeself",
+      "_bin": "makeself",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mas": {
+      "_name": "mas",
+      "_bin": "mas",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "matrix-rain": {
+      "_name": "matrix-rain",
+      "_bin": "matrix-rain",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "meta": {
+      "_name": "meta",
+      "_bin": "meta",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "micro": {
+      "_name": "micro",
+      "_bin": "micro",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "miller": {
+      "_name": "miller",
+      "_bin": "miller",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mise": {
+      "_name": "mise",
+      "_bin": "mise",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mitmproxy": {
+      "_name": "mitmproxy",
+      "_bin": "mitmproxy",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mkcert": {
+      "_name": "mkcert",
+      "_bin": "mkcert",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "mockoon": {
+      "_name": "mockoon",
+      "_bin": "mockoon",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "nb": {
+      "_name": "nb",
+      "_bin": "nb",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ncc": {
+      "_name": "ncc",
+      "_bin": "ncc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ncruces/tap/zenity": {
+      "_name": "ncruces/tap/zenity",
+      "_bin": "ncruces/tap/zenity",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ndb": {
+      "_name": "ndb",
+      "_bin": "ndb",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "neovim": {
+      "_name": "neovim",
+      "_bin": "neovim",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "noahgorstein/tap/jqp": {
+      "_name": "noahgorstein/tap/jqp",
+      "_bin": "noahgorstein/tap/jqp",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "nodemon": {
+      "_name": "nodemon",
+      "_bin": "nodemon",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "npkill": {
+      "_name": "npkill",
+      "_bin": "npkill",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "npm-check": {
+      "_name": "npm-check",
+      "_bin": "npm-check",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "npm-check-updates": {
+      "_name": "npm-check-updates",
+      "_bin": "npm-check-updates",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "null": {
+      "_name": null,
+      "_bin": null,
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "obs": {
+      "_name": "obs",
+      "_bin": "obs",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "oclif": {
+      "_name": "oclif",
+      "_bin": "oclif",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "opencommit": {
+      "_name": "opencommit",
+      "_bin": "opencommit",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "openinterminal": {
+      "_name": "openinterminal",
+      "_bin": "openinterminal",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ots": {
+      "_name": "ots",
+      "_bin": "ots",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "oven-sh/bun/bun": {
+      "_name": "oven-sh/bun/bun",
+      "_bin": "oven-sh/bun/bun",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "package-size": {
+      "_name": "package-size",
+      "_bin": "package-size",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "packer": {
+      "_name": "packer",
+      "_bin": "packer",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pandoc": {
+      "_name": "pandoc",
+      "_bin": "pandoc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pb": {
+      "_name": "pb",
+      "_bin": "pb",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "perl": {
+      "_name": "perl",
+      "_bin": "perl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pieces": {
+      "_name": "pieces",
+      "_bin": "pieces",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pinentry-mac": {
+      "_name": "pinentry-mac",
+      "_bin": "pinentry-mac",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pipx": {
+      "_name": "pipx",
+      "_bin": "pipx",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "playwright": {
+      "_name": "playwright",
+      "_bin": "playwright",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "plex": {
+      "_name": "plex",
+      "_bin": "plex",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "poppler": {
+      "_name": "poppler",
+      "_bin": "poppler",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "postman": {
+      "_name": "postman",
+      "_bin": "postman",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "privoxy": {
+      "_name": "privoxy",
+      "_bin": "privoxy",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "procs": {
+      "_name": "procs",
+      "_bin": "procs",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "psi": {
+      "_name": "psi",
+      "_bin": "psi",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "pup": {
+      "_name": "pup",
+      "_bin": "pup",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "python@3.12": {
+      "_name": "python@3.12",
+      "_bin": "python@3.12",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "qlcolorcode": {
+      "_name": "qlcolorcode",
+      "_bin": "qlcolorcode",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "raycast": {
+      "_name": "raycast",
+      "_bin": "raycast",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "readme": {
+      "_name": "readme",
+      "_bin": "readme",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "responsively": {
+      "_name": "responsively",
+      "_bin": "responsively",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "ripgrep": {
+      "_name": "ripgrep",
+      "_bin": "ripgrep",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "rm-improved": {
+      "_name": "rm-improved",
+      "_bin": "rm-improved",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "rmlint": {
+      "_name": "rmlint",
+      "_bin": "rmlint",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "runjs": {
+      "_name": "runjs",
+      "_bin": "runjs",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "sd": {
+      "_name": "sd",
+      "_bin": "sd",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "semantic-release": {
+      "_name": "semantic-release",
+      "_bin": "semantic-release",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "serve": {
+      "_name": "serve",
+      "_bin": "serve",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "serverless": {
+      "_name": "serverless",
+      "_bin": "serverless",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "share-cli": {
+      "_name": "share-cli",
+      "_bin": "share-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "shc": {
+      "_name": "shc",
+      "_bin": "shc",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "shellcheck": {
+      "_name": "shellcheck",
+      "_bin": "shellcheck",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "slack": {
+      "_name": "slack",
+      "_bin": "slack",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "snyk-cli": {
+      "_name": "snyk-cli",
+      "_bin": "snyk-cli",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "sqlite": {
+      "_name": "sqlite",
+      "_bin": "sqlite",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "starship": {
+      "_name": "starship",
+      "_bin": "starship",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "svgo": {
+      "_name": "svgo",
+      "_bin": "svgo",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "syncpack": {
+      "_name": "syncpack",
+      "_bin": "syncpack",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "syncthing": {
+      "_name": "syncthing",
+      "_bin": "syncthing",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "t-rec": {
+      "_name": "t-rec",
+      "_bin": "t-rec",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tailscale": {
+      "_name": "tailscale",
+      "_bin": "tailscale",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "task": {
+      "_name": "task",
+      "_bin": "task",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "taskd": {
+      "_name": "taskd",
+      "_bin": "taskd",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tasksh": {
+      "_name": "tasksh",
+      "_bin": "tasksh",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "terminalizer": {
+      "_name": "terminalizer",
+      "_bin": "terminalizer",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "thefuck": {
+      "_name": "thefuck",
+      "_bin": "thefuck",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tig": {
+      "_name": "tig",
+      "_bin": "tig",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tldr": {
+      "_name": "tldr",
+      "_bin": "tldr",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tmate": {
+      "_name": "tmate",
+      "_bin": "tmate",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tmux": {
+      "_name": "tmux",
+      "_bin": "tmux",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tmuxinator": {
+      "_name": "tmuxinator",
+      "_bin": "tmuxinator",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "tree": {
+      "_name": "tree",
+      "_bin": "tree",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "virtualenv": {
+      "_name": "virtualenv",
+      "_bin": "virtualenv",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "visual-studio-code": {
+      "_name": "visual-studio-code",
+      "_bin": "visual-studio-code",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "volta": {
+      "_name": "volta",
+      "_bin": "volta",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "w3m": {
+      "_name": "w3m",
+      "_bin": "w3m",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "warp": {
+      "_name": "warp",
+      "_bin": "warp",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "watchman": {
+      "_name": "watchman",
+      "_bin": "watchman",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "watson": {
+      "_name": "watson",
+      "_bin": "watson",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "wget": {
+      "_name": "wget",
+      "_bin": "wget",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "whalebrew": {
+      "_name": "whalebrew",
+      "_bin": "whalebrew",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "whereami": {
+      "_name": "whereami",
+      "_bin": "whereami",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "wifi-password": {
+      "_name": "wifi-password",
+      "_bin": "wifi-password",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "wipe-modules": {
+      "_name": "wipe-modules",
+      "_bin": "wipe-modules",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "wireshark": {
+      "_name": "wireshark",
+      "_bin": "wireshark",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "xcodesorg/made/xcodes": {
+      "_name": "xcodesorg/made/xcodes",
+      "_bin": "xcodesorg/made/xcodes",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yamllint": {
+      "_name": "yamllint",
+      "_bin": "yamllint",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yank": {
+      "_name": "yank",
+      "_bin": "yank",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yazi": {
+      "_name": "yazi",
+      "_bin": "yazi",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yj": {
+      "_name": "yj",
+      "_bin": "yj",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yohamta/tap/dagu": {
+      "_name": "yohamta/tap/dagu",
+      "_bin": "yohamta/tap/dagu",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "you-get": {
+      "_name": "you-get",
+      "_bin": "you-get",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "youtube-dl": {
+      "_name": "youtube-dl",
+      "_bin": "youtube-dl",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yq": {
+      "_name": "yq",
+      "_bin": "yq",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "yt-dlp": {
+      "_name": "yt-dlp",
+      "_bin": "yt-dlp",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zellij": {
+      "_name": "zellij",
+      "_bin": "zellij",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zoxide": {
+      "_name": "zoxide",
+      "_bin": "zoxide",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zsh": {
+      "_name": "zsh",
+      "_bin": "zsh",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zsh-completions": {
+      "_name": "zsh-completions",
+      "_bin": "zsh-completions",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zsh-syntax-highlighting": {
+      "_name": "zsh-syntax-highlighting",
+      "_bin": "zsh-syntax-highlighting",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  },
+  {
+    "zx": {
+      "_name": "zx",
+      "_bin": "zx",
+      "_desc": null,
+      "_docs": null,
+      "_github": null,
+      "_home": null,
+      "_short": null
+    }
+  }
+]

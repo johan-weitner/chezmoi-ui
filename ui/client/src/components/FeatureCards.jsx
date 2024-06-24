@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import YAML from 'yaml';
 import {
   Badge,
   Group,
@@ -21,11 +22,12 @@ const FeaturesCards = (props) => {
   const theme = useMantineTheme();
   const [ key, setKey ] = useState('brews');
 
+  // Root node is the chosen OS
   const root = data[os];
   console.log('data[os]: ', root);
   const keys = Object.keys(root).filter(item => { return item !== 'pre' });
 
-
+  // Prepare subcategories for viewing
   const subCats = root && keys.map(sub => {
     return {
       title: SUBCAT[sub],
@@ -35,15 +37,58 @@ const FeaturesCards = (props) => {
     };
   });
 
+  // Extract chosen subcategory
+  const subCategory = subCats.find(subCategory => subCategory.key === key);
   console.log('subCats: ', subCats);
+  console.log('subCategory: ', subCategory);
 
+  // Strip metadata nodes from Install.Doctor array
+  const unwanted = [
+    "_envchain:deps",
+    "_kde",
+    "_misc-flatpaks",
+    "_nautilus-extensions"
+  ]
+  const { softwarePackages } = software;
+  const softwareKeys = Object.keys(softwarePackages).filter(item => !unwanted.includes(item)).sort();
+  const softwareNames = [];
+  softwareKeys.forEach(key => {
+    softwareNames.push(softwarePackages[key]?.name?.toLowerCase());
+  });
+
+  const mergedArray = [];
+  const hits = [];
+  allApps.sort().map(item => {
+    if (softwareNames.includes(item && item.toLowerCase()) || softwareKeys.includes(item && item.toLowerCase())) {
+      mergedArray.push({[item]: softwarePackages[item]});
+      hits.push(softwarePackages[item]);
+    } else {
+      mergedArray.push({
+        [item]: {
+          _name: item,
+          _bin: item,
+          _desc: null,
+          _docs: null,
+          _github: null,
+          _home: null,
+          _short: null
+        }
+      });
+    }
+  });
+  // console.log('mergedArray: ', mergedArray);
+  // console.log('mergedArrayJson: ', JSON.stringify(mergedArray, null, 2));
+  console.log('>Hits: ', JSON.stringify(hits, null, 2));
+
+
+
+  // Switch view by subcategory node
   const changeKey = key => {
     console.log(key);
     setKey(key);
   };
 
-  const subCategory = subCats.find(subCategory => subCategory.key === key);
-
+  // Chosen view/subcategory
   const currentView = (
     <Card shadow="md" radius="md" className={classes.card} padding="xl">
       <subCategory.icon
@@ -66,6 +111,7 @@ const FeaturesCards = (props) => {
     </Card>
   );
 
+  // All apps through all subcategories
   const allAppsView = (
     <Card shadow="md" radius="md" className={classes.card} padding="xl">
       <ICON.allApps
@@ -88,14 +134,7 @@ const FeaturesCards = (props) => {
     </Card>
   );
 
-  const unwanted = [
-    "_envchain:deps",
-    "_kde",
-    "_misc-flatpaks",
-    "_nautilus-extensions"
-  ]
-  const { softwarePackages } = software;
-  const softwareKeys = Object.keys(softwarePackages).filter(item => !unwanted.includes(item));
+  // List of software from Install.Doctor
   const softwareView = (
     <Card shadow="md" radius="md" className={classes.card} padding="xl">
       <ICON.allApps
@@ -106,7 +145,7 @@ const FeaturesCards = (props) => {
       <Text fz="lg" fw={500} className={classes.cardTitle} mt="md" style={{ textAlign:"left" }}>
         Install.Doctor Software List
       </Text>
-      <Card fz="sm" c="dimmed" mt="sm" style={{ textAlign:"left" }}>
+      <Card shadow="md" fz="sm" c="dimmed" mt="sm" style={{ textAlign:"left" }}>
         { softwareKeys?.length > 0 && softwareKeys.map(item => {
           return (
             <div key={ nanoid() } className={classes.itemBox}>
@@ -133,6 +172,7 @@ const FeaturesCards = (props) => {
         {allAppsView}
         {softwareView}
       </SimpleGrid>
+      <textarea style={{ width:'100%', height:'800px' }}>{ YAML.stringify(mergedArray, null, 2) }</textarea>
     </Container>
   );
 }
