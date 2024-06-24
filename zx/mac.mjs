@@ -15,7 +15,7 @@ let firstRun = true;
 const {
   packages: {
     taps,
-    linux: {
+    darwin: {
       pre
     }
   }
@@ -38,13 +38,46 @@ const doTaps = () => {
 };
 
 const installPreReqs = () => {
-  pre.forEach((item) => {
+  console.log(pre);
+  const { onepassword, brews } = pre;
+
+  brews.forEach(async (item) => {
     console.log(`Installing ${item}`);
+    await $`
+      if ! which brew &> /dev/null; then
+        brew install ${item}
+      fi
+    `;
   });
+
+
+};
+
+const installOnePassword = () => {
+  // # 1Password Setup
+  // if [ -d /Applications/1Password.app ]; then
+  //   echo "1Password already installed. Skipping..."
+  // else
+  //   echo "Setting up 1Password..."
+  //   echo "Fetching 1Password archive..."
+  //   wget {{ .packages.darwin.pre.onepassword }}
+
+  //   printf "\n\n"
+  //   echo "Unpacking 1Password archive..."
+  //   unzip 1Password.zip
+  //   rm -f 1Password.zip
+
+  //   printf "\n\n"
+  //   echo "Starting 1Password installer..."
+  //   ./1Password\ Installer.app/Contents/MacOS/1Password\ Installer
+
+  //   printf "\n\n"
+  //   echo "Authenticating account..."
+  //   open "$(cat $HOME/.config/vault/op.url)"
+  // fi
 };
 
 
 
-
-
 doTaps();
+installPreReqs();

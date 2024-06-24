@@ -46,6 +46,14 @@ exec > >(tee -a "$LOGFILE") 2>&1
 os=$(uname)
 cwd=$HOME/.local/share/chezmoi
 
+checkEncryptionKey() {
+  # Check existance of decryption key
+  if ! [ -f "$HOME/.config/vault/key.age" ]; then
+    log "Decryption key missing - exiting..."
+    exit 1
+  fi
+}
+
 prepMac() {
   # Ensure Homebrew is installed
   if ! command -v brew &> /dev/null; then
@@ -63,13 +71,16 @@ prepMac() {
     fi
   fi
 
-  if ! [ -f "$HOME/.config/vault/key.age" ]; then
-    log "Decryption key missing - exiting..."
-    exit 1
+  # Rust and Cargo Setup
+  printf "\n\n"
+  if command -v cargo &> /dev/null; then
+    echo "Cargo is already installed at $(cargo --version). Skipping..."
   else
-    log "Executing mac.mjs..."
-    "$cwd/zx/mac.mjs"
+    echo "Installing Rustup and Cargo..."
+    $HOME/.local/share/chezmoi/bin/rustup-init.sh -y
   fi
+
+  checkEncryptionKey # Script exit on missing key
 }
 
 log "Installation started..."
@@ -79,6 +90,7 @@ if [[ "$os" == "Linux" ]]; then
 elif [[ "$os" == "Darwin" ]]; then
   log "MacOS"
   prepMac
+  "$cwd/zx/mac.mjs"
 elif [[ "$os" == "Windows" ]]; then
   log "Windows"
 else
