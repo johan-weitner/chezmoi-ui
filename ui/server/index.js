@@ -31,10 +31,14 @@ const softwareYamlPath = '/Users/johanweitner/.local/share/chezmoi/.chezmoidata/
 const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
 const software = YAML.parse(softwareYaml);
 
-console.log(packages);
-console.log(software);
+const mergedYamlPath = '/Users/johanweitner/.local/share/chezmoi/.chezmoidata/merged.yml';
+const mergedYaml = fs.readFileSync(softwareYamlPath, 'utf8');
+const merged = YAML.parse(softwareYaml);
 
-let firstRun = true;
+// console.log(packages);
+// console.log(software);
+console.log(merged);
+
 const {
   packages: {
     taps,
@@ -114,6 +118,15 @@ app.get('/software', (req, res) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
 
   res.json(software);
+});
+
+app.get('/merged', (req, res) => {
+  // Set CORS headers
+  res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+  res.header('Access-Control-Allow-Methods', 'GET'); // Allow GET method
+  res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
+
+  res.json(merged);
 });
 
 

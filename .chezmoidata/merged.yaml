@@ -3683,8 +3683,8 @@
     regularly updated to support new commands and improve existing
     completions, making it a valuable resource for zsh users looking to
     streamline their command-line experience.
-  _github: https://github.com/zsh-users/zsh-completions
   _name: ZSH Completions
+  _github: https://github.com/zsh-users/zsh-completions
   _preload: true
   _short: "zsh-completions is a repository that provides additional completion
     definitions for the Zsh shell, enhancing auto-completion capabilities for

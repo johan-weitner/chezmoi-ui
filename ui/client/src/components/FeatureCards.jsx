@@ -18,9 +18,10 @@ import { ICON } from '../constants/icons';
 import SubHeader from './SubHeader';
 
 const FeaturesCards = (props) => {
-  const { data, os, allApps, software } = props;
+  const { data, os, allApps, software, merged } = props;
   const theme = useMantineTheme();
   const [ key, setKey ] = useState('brews');
+  const [ openItem, setOpenItem ] = useState(null);
 
   // Root node is the chosen OS
   const root = data[os];
@@ -159,6 +160,29 @@ const FeaturesCards = (props) => {
     </Card>
   );
 
+  // List of software from Install.Doctor
+  const mergedView = (
+    <Card shadow="md" radius="md" className={classes.card} padding="xl">
+      <ICON.allApps
+        style={{ width: rem(50), height: rem(50) }}
+        stroke={2}
+        color={theme.colors.blue[6]}
+      />
+      <Text fz="lg" fw={500} className={classes.cardTitle} mt="md" style={{ textAlign:"left" }}>
+        Merged list
+      </Text>
+      <Card shadow="md" fz="sm" c="dimmed" mt="sm" style={{ textAlign:"left" }}>
+      { merged?.length > 0 && merged.map(item => {
+          return (
+            <div key={ nanoid() } className={classes.itemBox}>
+              { item }
+            </div>
+          );
+        }) }
+      </Card>
+    </Card>
+  );
+
   return (
     <Container size="lg" py="xl" style={{ backgroundColor: "#333" }}>
       <Group justify="center">
@@ -167,10 +191,11 @@ const FeaturesCards = (props) => {
         </Badge>
       </Group>
       <SubHeader keys={ keys } changeKey={ changeKey } />
-      <SimpleGrid cols={{ base: 1, md: 3 }} spacing="sm" mt={50} className={classes.grid}>
-        {currentView}
+      <SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" mt={50} className={classes.grid}>
+        {/* {currentView}
         {allAppsView}
-        {softwareView}
+        {softwareView} */}
+        { mergedView }
       </SimpleGrid>
       <textarea style={{ width:'100%', height:'800px' }}>{ YAML.stringify(mergedArray, null, 2) }</textarea>
     </Container>

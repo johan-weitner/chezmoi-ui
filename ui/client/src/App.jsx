@@ -11,6 +11,7 @@ function App() {
   const [data, setData] = useState(null);
   const [allApps, setAllApps] = useState(null);
   const [software, setSoftware] = useState(null);
+  const [merged, setMerged] = useState(null);
   const [os, setOs] = useState(OS[0]);
 
   const switchOs = (newOs) => {
@@ -40,11 +41,21 @@ function App() {
     axios.get('http://localhost:3000/software')
     .then(response => {
       setSoftware(response.data);
+      // console.log(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+
+    axios.get('http://localhost:3000/merged')
+    .then(response => {
+      setMerged(response.data);
       console.log(response.data);
     })
     .catch(error => {
       console.error(error);
     });
+
   }, []);
 
 
@@ -52,7 +63,18 @@ function App() {
   return (
     <>
       <Header alternatives={ OS } switchOs={ switchOs } />
-      { data && allApps && software && <FeatureCards data={ data } os={ os } allApps={ allApps } software={ software } /> }
+      {
+        data &&
+        allApps &&
+        software &&
+        merged &&
+        <FeatureCards
+          data={ data }
+          os={ os }
+          allApps={ allApps }
+          software={ software }
+          merged={ merged }
+        /> }
     </>
   )
 }
