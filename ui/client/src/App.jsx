@@ -65,9 +65,6 @@ function App() {
       <Header alternatives={ OS } switchOs={ switchOs } />
       {
         data &&
-        allApps &&
-        software &&
-        merged &&
         <FeatureCards
           data={ data }
           os={ os }

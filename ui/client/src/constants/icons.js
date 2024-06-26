@@ -12,7 +12,10 @@ import {
   IconScript,
   IconBrandGolang,
   IconBrandNodejs,
-  IconWorldCode
+  IconWorldCode,
+  IconBook,
+  IconEdit,
+  IconTrash
 
 } from '@tabler/icons-react';
 
@@ -31,5 +34,8 @@ export const ICON = {
   scripts: IconScript,
   go: IconBrandGolang,
   node: IconBrandNodejs,
-  allApps: IconWorldCode
+  allApps: IconWorldCode,
+  detail: IconBook,
+  edit: IconEdit,
+  remove: IconTrash
 };

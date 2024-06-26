@@ -39,9 +39,9 @@ const Header = (props) => {
         {/* insert SVG named "logo" */}
         <img src={logo} alt="Logo" style={{ position:"absolute", left:"32px" }} />
         <h1 style={{ display: "inlineBlock", fontFamily:"Roboto", fontWeight: "normal" }}>Chezmoi UI</h1>
-        <Group gap={5} visibleFrom="xs">
+        {/* <Group gap={5} visibleFrom="xs">
           {items}
-        </Group>
+        </Group> */}
         <Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
       </Container>
     </header>
