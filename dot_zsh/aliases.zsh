@@ -45,6 +45,17 @@ alias hn="hoard new"
 alias hl="hoard list"
 alias hp="hoard pick"
 alias hsync="chezmoi re-add ~/.config/hoard/trove.yml && chezmoi git commit && chezmoi git push"
+alias mtx="matrix_rain"
+
+# Change Starship preset
+alias starship1="starship preset pastel-powerline -o ~/.config/starship.toml"
+alias starship2="starship preset tokyo-night -o ~/.config/starship.toml"
+alias starship3="starship preset gruvbox-rainbow -o ~/.config/starship.toml"
+alias starship4="starship preset jetpack -o ~/.config/starship.toml"
+alias starship5="starship preset pure-preset -o ~/.config/starship.toml"
+alias starship6="starship preset plain-text-symbols -o ~/.config/starship.toml"
+alias starship7="starship preset nerd-font-symbols -o ~/.config/starship.toml"
+
 
 # Zsh Navigation Tools
 alias nc="n-cd"
