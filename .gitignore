@@ -3,3 +3,8 @@ id/
 zx/node_modules
 firstrun
 apple.txt
+.chezmoidata/all.json
+.chezmoidata/merged.json
+.chezmoidata/merged.yaml
+.chezmoidata/merged2.json
+.chezmoidata/software.yml
