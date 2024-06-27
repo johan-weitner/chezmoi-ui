@@ -19,6 +19,11 @@ function App() {
     setOs(newOs);
   };
 
+  const saveList = (list) => {
+    localStorage.setItem('APP_LIST', JSON.stringify(list));
+    setMerged(list);
+  };
+
   useEffect(() => {
     axios.get('http://localhost:3000/')
     .then(response => {
@@ -47,7 +52,10 @@ function App() {
       console.error(error);
     });
 
-    axios.get('http://localhost:3000/merged')
+    if(localStorage.getItem('APP_LIST')) {
+      setMerged(JSON.parse(localStorage.getItem('APP_LIST')))
+    } else {
+      axios.get('http://localhost:3000/merged')
     .then(response => {
       const { data: { softwarePackages } } = response;
       const keys = Object.keys(softwarePackages);
@@ -55,14 +63,14 @@ function App() {
         softwarePackages[key].key = key;
       });
 
-
-
-      setMerged(softwarePackages);
+      saveList(softwarePackages);
       // console.log('Prepped packages: ', merged);
     })
     .catch(error => {
       console.error(error);
     });
+    }
+
 
   }, []);
 
@@ -70,10 +78,15 @@ function App() {
     // if (confirm('Are you sure?')) {
       console.log(`Delete app with key ${key}`);
       delete merged[key];
-      setMerged({...merged});
+      saveList({...merged});
     // };
   };
 
+  const saveEditedApp = (key, item) => {
+    console.log(`Saving ${key}:`, item);
+    merged[key] = item;
+    saveList({...merged});
+  };
 
   return (
     <>

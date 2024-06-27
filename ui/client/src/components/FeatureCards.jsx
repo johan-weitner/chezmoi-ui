@@ -14,6 +14,7 @@ import {
   ButtonGroup,
   Button
 } from '@mantine/core';
+import { Popover } from 'react-tiny-popover'
 import classes from './FeatureCards.module.css';
 import { SUBCAT } from '../constants/strings';
 import { ICON } from '../constants/icons';
@@ -32,6 +33,7 @@ const FeaturesCards = (props) => {
   const [ key, setKey ] = useState('brews');
   const [ openItem, setOpenItem ] = useState(null);
   const [ openItemKey, setOpenItemKey ] = useState(null);
+  const [ isPopoverOpen, setIsPopoverOpen ] = useState();
 
   // Root node is the chosen OS
   const root = data[os];
@@ -73,6 +75,8 @@ const FeaturesCards = (props) => {
     console.log('Edit item: ', openItem);
   };
 
+
+
   return (
     <Container size="lg" py="xl" style={{ backgroundColor: "#333" }}>
       {/* <FeatureHeader os={ os } changeKey={ changeKey } /> */}
@@ -84,7 +88,23 @@ const FeaturesCards = (props) => {
         { merged && <MergedView merged={ merged } theme={ theme } open={ open } deleteItem={ deleteApp} editItem={ editItem } />}
         { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteApp} editItem={ editItem } /> }
       </SimpleGrid>
-      { merged && <OutputView mergedArray={ merged } /> }
+      {/* { merged && <OutputView mergedArray={ merged } /> } */}
+      <Popover
+        isOpen={isPopoverOpen}
+        positions={['top', 'right']} // if you'd like, you can limit the positions
+        padding={10} // adjust padding here!
+        reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
+        onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
+        content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
+          <Card>
+            <div>Hi! I'm popover content. Here's my current position: {position}.</div>
+            <div>I'm {` ${nudgedLeft} `} pixels beyond my boundary horizontally!</div>
+            <div>I'm {` ${nudgedTop} `} pixels beyond my boundary vertically!</div>
+          </Card>
+        )}
+      >
+        <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>Click me!</div>
+      </Popover>
     </Container>
   );
 }
