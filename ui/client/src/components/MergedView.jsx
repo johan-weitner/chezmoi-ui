@@ -35,8 +35,8 @@ const MergedView = props => {
       <Card shadow="md" fz="sm" c="dimmed" mt="sm" className={classes.scrollContainer} style={{ textAlign:"left", overflow:"scroll", height:"calc(100vh - 150px)" }}>
       { mergedPackages?.length > 0 && mergedPackages.map(item => {
           return (
-            <div style={{ position:"relative", width:"100%" }}>
-              <button key={ nanoid() } className={classes.itemBox} onClick={e => open(e, item)} style={{ width: "100%" }}>
+            <div style={{ position:"relative", width:"100%" }} key={ nanoid() }>
+              <button className={classes.itemBox} onClick={e => open(e, item)} style={{ width: "100%" }}>
                 { item }
               </button>
               <ICON.edit

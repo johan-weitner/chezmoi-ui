@@ -13,7 +13,7 @@ const OutputView = props => {
     })
   });
 
-  return (<textarea style={{ width:'100%', height:'800px' }}>{ YAML.stringify(mergedArray, null, 2) }</textarea>);
+  return (<textarea style={{ width:'100%', height:'800px' }} defaultValue={ YAML.stringify(mergedArray, null, 2) } />);
 };
 
 export default OutputView;
