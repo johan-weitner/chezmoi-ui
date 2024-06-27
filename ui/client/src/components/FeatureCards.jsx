@@ -27,7 +27,7 @@ import DetailView from './DetailView';
 import OutputView from './OutputView.jsx';
 
 const FeaturesCards = (props) => {
-  const { data, os, allApps, software, merged } = props;
+  const { data, os, allApps, software, merged, deleteApp } = props;
   const theme = useMantineTheme();
   const [ key, setKey ] = useState('brews');
   const [ openItem, setOpenItem ] = useState(null);
@@ -60,20 +60,13 @@ const FeaturesCards = (props) => {
   const open = (e, item) => {
     e.preventDefault();
     console.log('OpenItem: ', item);
-    setOpenItem(merged.softwarePackages[item]);
+    setOpenItem(merged[item]);
     setOpenItemKey(item);
   };
 
   // deleteItem, editItem
-  const deleteItem = () => {
-    console.log('Delete item: ', openItem, 'with key: ', openItemKey);
-    // Delete from merged.softwarePackages them item with the key that equals openItem._name
-    confirm("Are you sure?", () => { delete merged.softwarePackages[openItemKey] })
-    // console.log(merged.softwarePackages);
-    try {
-      console.log(merged.softwarePackages[openItemKey]);
-    } catch (e) { console.log('Was removed') }
-    // merged.softwarePackages = merged.softwarePackages.filter(pkg => pkg._name !== openItem._name)
+  const deleteItem = (key) => {
+    confirm("Are you sure?", () => { deleteApp(openItem.key) });
   };
 
   const editItem = () => {
@@ -88,8 +81,8 @@ const FeaturesCards = (props) => {
         { allApps && <AllAppsView allApps={ allApps } theme={ theme } /> }
         { software && <InstallDoctorListView software={software} theme={ theme } /> } */}
 
-        { merged && <MergedView merged={ merged } theme={ theme } open={ open } />}
-        { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteItem } editItem={ editItem } /> }
+        { merged && <MergedView merged={ merged } theme={ theme } open={ open } deleteItem={ deleteApp} editItem={ editItem } />}
+        { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteApp} editItem={ editItem } /> }
       </SimpleGrid>
       { merged && <OutputView mergedArray={ merged } /> }
     </Container>

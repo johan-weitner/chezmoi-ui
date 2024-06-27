@@ -38,7 +38,7 @@ const DetailView = props => {
                 stroke={2}
                 color="#FFF"
               />Edit</Button>
-              <Button onClick={ () => deleteItem() }><ICON.remove
+              <Button onClick={ () => deleteItem(openItem.key) }><ICON.remove
                 style={{ width: rem(20), height: rem(20), margin:"0 10px 0 0px" }}
                 stroke={2}
                 color="#FFF"

@@ -8,7 +8,7 @@ import classes from './FeatureCards.module.css';
 import { ICON } from '../constants/icons';
 
 const MergedView = props => {
-  const { merged, theme, open } = props;
+  const { merged, theme, open, deleteItem, editItem } = props;
 
   // Strip metadata nodes from Install.Doctor array
   const unwanted = [
@@ -18,10 +18,8 @@ const MergedView = props => {
     "_nautilus-extensions"
   ]
 
-  console.log('Merged: ', merged);
-
-  const { softwarePackages } = merged;
-  const mergedKeys = Object.keys(softwarePackages).filter(item => !unwanted.includes(item)).sort();
+  console.log('merged: ', merged);
+  const mergedPackages = Object.keys(merged).filter(item => !unwanted.includes(item)).sort();
 
   // Merged list
   return (
@@ -35,11 +33,25 @@ const MergedView = props => {
         Merged list
       </Text>
       <Card shadow="md" fz="sm" c="dimmed" mt="sm" className={classes.scrollContainer} style={{ textAlign:"left", overflow:"scroll", height:"calc(100vh - 150px)" }}>
-      { mergedKeys?.length > 0 && mergedKeys.map(item => {
+      { mergedPackages?.length > 0 && mergedPackages.map(item => {
           return (
-            <button key={ nanoid() } className={classes.itemBox} onClick={e => open(e, item)}>
-              { item }
-            </button>
+            <div style={{ position:"relative", width:"100%" }}>
+              <button key={ nanoid() } className={classes.itemBox} onClick={e => open(e, item)} style={{ width: "100%" }}>
+                { item }
+              </button>
+              <ICON.edit
+                style={{ width: rem(20), height: rem(20), position:"absolute", right: "70px", top:"14px" }}
+                stroke={2}
+                color="white"
+                onClick={ () => editItem(item) }
+              />
+              <ICON.remove
+                style={{ width: rem(20), height: rem(20), position:"absolute", right: "35px", top:"14px" }}
+                stroke={2}
+                color="white"
+                onClick={ () => deleteItem(item) }
+              />
+            </div>
           );
         }) }
       </Card>

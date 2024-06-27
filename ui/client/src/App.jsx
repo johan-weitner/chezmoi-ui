@@ -49,8 +49,16 @@ function App() {
 
     axios.get('http://localhost:3000/merged')
     .then(response => {
-      setMerged(response.data);
-      console.log(response.data);
+      const { data: { softwarePackages } } = response;
+      const keys = Object.keys(softwarePackages);
+      keys.map(key => {
+        softwarePackages[key].key = key;
+      });
+
+
+
+      setMerged(softwarePackages);
+      // console.log('Prepped packages: ', merged);
     })
     .catch(error => {
       console.error(error);
@@ -58,6 +66,13 @@ function App() {
 
   }, []);
 
+  const deleteApp = key => {
+    // if (confirm('Are you sure?')) {
+      console.log(`Delete app with key ${key}`);
+      delete merged[key];
+      setMerged({...merged});
+    // };
+  };
 
 
   return (
@@ -71,6 +86,7 @@ function App() {
           allApps={ allApps }
           software={ software }
           merged={ merged }
+          deleteApp={ deleteApp }
         /> }
     </>
   )
