@@ -8,9 +8,9 @@ TERM = "xterm-256color"
 [window]
 dimensions = { columns = 120, lines = 92 }
 position = { x = 2740, y = 0 }
-padding.x = 10
-padding.y = 10
-decorations = "Buttonless" # "Full" | "None" | "Transparent" | "Buttonless"
+padding.x = 15
+padding.y = 28
+decorations = "Transparent" # "Full" | "None" | "Transparent" | "Buttonless"
 
 #decorations = "Buttonless"
 opacity = 0.8
@@ -30,7 +30,7 @@ normal.family = "MesloLGM Nerd Font Mono"
 # bold = { family = "MesloLGM Nerd Font Mono" }91
 # italic = { family = "MesloLGM Nerd Font Mono", style = "italic" }
 # bold_italic = { family = "MesloLGM Nerd Font Mono", style = "italic" }
-size = 15.0
+size = 13.0
 offset = { x = 0, y = 3 }
 builtin_box_drawing = true
 

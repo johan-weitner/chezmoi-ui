@@ -27,11 +27,11 @@ const packagesYamlPath = '/Users/johanweitner/.local/share/chezmoi/.chezmoidata/
 const packagesYaml = fs.readFileSync(packagesYamlPath, 'utf8');
 const packages = YAML.parse(packagesYaml);
 
-const softwareYamlPath = '/Users/johanweitner/.local/share/chezmoi/.chezmoidata/software.yml';
+const softwareYamlPath = '/Users/johanweitner/.local/share/chezmoi/software.yml';
 const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
 const software = YAML.parse(softwareYaml);
 
-const mergedYamlPath = '/Users/johanweitner/.local/share/chezmoi/.chezmoidata/merged.yml';
+const mergedYamlPath = '/Users/johanweitner/.local/share/chezmoi/merged.yml';
 const mergedYaml = fs.readFileSync(softwareYamlPath, 'utf8');
 const merged = YAML.parse(softwareYaml);
 
