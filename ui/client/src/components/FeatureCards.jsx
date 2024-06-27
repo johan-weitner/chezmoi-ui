@@ -6,15 +6,16 @@ import {
   Group,
   Title,
   Text,
+  Textarea,
   Card,
   SimpleGrid,
   Container,
+  Input,
   rem,
   useMantineTheme,
   ButtonGroup,
   Button
 } from '@mantine/core';
-import { Popover } from 'react-tiny-popover'
 import classes from './FeatureCards.module.css';
 import { SUBCAT } from '../constants/strings';
 import { ICON } from '../constants/icons';
@@ -89,22 +90,35 @@ const FeaturesCards = (props) => {
         { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteApp} editItem={ editItem } /> }
       </SimpleGrid>
       {/* { merged && <OutputView mergedArray={ merged } /> } */}
-      <Popover
-        isOpen={isPopoverOpen}
-        positions={['top', 'right']} // if you'd like, you can limit the positions
-        padding={10} // adjust padding here!
-        reposition={false} // prevents automatic readjustment of content position that keeps your popover content within its parent's bounds
-        onClickOutside={() => setIsPopoverOpen(false)} // handle click events outside of the popover/target here!
-        content={({ position, nudgedLeft, nudgedTop }) => ( // you can also provide a render function that injects some useful stuff!
-          <Card>
-            <div>Hi! I'm popover content. Here's my current position: {position}.</div>
-            <div>I'm {` ${nudgedLeft} `} pixels beyond my boundary horizontally!</div>
-            <div>I'm {` ${nudgedTop} `} pixels beyond my boundary vertically!</div>
-          </Card>
-        )}
-      >
-        <div onClick={() => setIsPopoverOpen(!isPopoverOpen)}>Click me!</div>
-      </Popover>
+      <Container className={classes.overlay}>
+        <Card>
+          <Text size='xl' className={classes.editDetailHeader}>Header</Text>
+          <Group display="block" className={ classes.fieldcontainer }>
+            <Text component="label" htmlFor="_name" size="sm" fw={500}>Name</Text>
+            <Input defaultValue={ null } id="_name" />
+          </Group>
+          <Group display="block" className={ classes.fieldcontainer }>
+            <Text component="label" htmlFor="_short" size="sm" fw={500}>Short desc</Text>
+            <Input defaultValue={ null } id="_short" />
+          </Group>
+          <Group display="block" className={ classes.fieldcontainer }>
+            <Text component="label" htmlFor="_desc" size="sm" fw={500}>Description</Text>
+            <Textarea defaultValue={ null } id="_desc" />
+          </Group>
+          <Group display="block" className={ classes.fieldcontainer }>
+            <Text component="label" htmlFor="_home" size="sm" fw={500}>Homepage</Text>
+            <Input defaultValue={ null } id="_home" />
+          </Group>
+          <Group display="block" className={ classes.fieldcontainer }>
+            <Text component="label" htmlFor="_docs" size="sm" fw={500}>Documentation</Text>
+            <Input defaultValue={ null } id="_docs" />
+          </Group>
+          <Group display="block" className={ classes.fieldcontainer }>
+            <Text component="label" htmlFor="_github" size="sm" fw={500}>Github</Text>
+            <Input defaultValue={ null } id="_github" />
+          </Group>
+        </Card>
+      </Container>
     </Container>
   );
 }

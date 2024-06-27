@@ -63,3 +63,31 @@ padding-top:0;
   font-size: 1.0em !important;
   margin-bottom:20px !important;
 }
+
+.overlay {
+  position:absolute;
+  top:250px;
+  left:0px;
+  right:0px;
+  border:1px solid #999;
+  background-color:#222;
+  min-height:400px;
+  box-shadow: 0px 10px 50px rgba(0,0,0,.4);
+}
+
+.overlay input,
+.overlay textarea {
+  background-color:#333;
+}
+
+.overlay div {
+  text-align:left;
+}
+
+.editDetailHeader {
+  height:50px;;
+}
+
+.fieldcontainer {
+  margin:0 0 20px 0;
+}
