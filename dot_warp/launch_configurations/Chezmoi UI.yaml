@@ -29,11 +29,11 @@ windows:
         layout:
           cwd: /Users/johanweitner/.local/share/chezmoi
         color: red
-      - title: Chezmoi Server
+      - title: SERVER
         layout:
           cwd: /Users/johanweitner/.local/share/chezmoi/ui/server
-        color: yellow
-      - title: Chezmoi Client
+        color: green
+      - title: CLIENT
         layout:
           cwd: /Users/johanweitner/.local/share/chezmoi/ui/client
         color: blue
