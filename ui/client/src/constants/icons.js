@@ -15,7 +15,9 @@ import {
   IconWorldCode,
   IconBook,
   IconEdit,
-  IconTrash
+  IconTrash,
+  IconReload,
+  IconDeviceFloppy
 
 } from '@tabler/icons-react';
 
@@ -37,5 +39,7 @@ export const ICON = {
   allApps: IconWorldCode,
   detail: IconBook,
   edit: IconEdit,
-  remove: IconTrash
+  remove: IconTrash,
+  startOver: IconReload,
+  save: IconDeviceFloppy
 };

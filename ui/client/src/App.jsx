@@ -55,7 +55,14 @@ function App() {
     if(localStorage.getItem('APP_LIST')) {
       setMerged(JSON.parse(localStorage.getItem('APP_LIST')))
     } else {
-      axios.get('http://localhost:3000/merged')
+      seedAppList();
+    }
+
+
+  }, []);
+
+  const seedAppList = () => {
+    axios.get('http://localhost:3000/merged')
     .then(response => {
       const { data: { softwarePackages } } = response;
       const keys = Object.keys(softwarePackages);
@@ -69,10 +76,7 @@ function App() {
     .catch(error => {
       console.error(error);
     });
-    }
-
-
-  }, []);
+  };
 
   const deleteApp = key => {
     // if (confirm('Are you sure?')) {
@@ -88,6 +92,29 @@ function App() {
     saveList({...merged});
   };
 
+  const saveNewDocument = () => {
+    console.log('Save new document');
+    console.log('Saving: ', merged);
+    // Post "merged" as payload to endpoint /save
+    axios.post('http://localhost:3000/save', {
+      ...merged
+    })
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+  };
+  // Content-Type
+  // application/json
+
+  const startOver = () => {
+    console.log('Start over');
+    localStorage.removeItem('APP_LIST');
+    seedAppList();
+  };
+
   return (
     <>
       <Header alternatives={ OS } switchOs={ switchOs } />
@@ -100,6 +127,8 @@ function App() {
           software={ software }
           merged={ merged }
           deleteApp={ deleteApp }
+          save={ saveNewDocument }
+          startOver={ startOver }
         /> }
     </>
   )

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import YAML from 'yaml';
+import axios from 'axios';
 import {
   Badge,
   Group,
@@ -29,7 +30,7 @@ import DetailView from './DetailView';
 import OutputView from './OutputView.jsx';
 
 const FeaturesCards = (props) => {
-  const { data, os, allApps, software, merged, deleteApp } = props;
+  const { data, os, allApps, software, merged, deleteApp, save, startOver } = props;
   const theme = useMantineTheme();
   const [ key, setKey ] = useState('brews');
   const [ openItem, setOpenItem ] = useState(null);
@@ -90,9 +91,11 @@ const FeaturesCards = (props) => {
     setIsPopoverOpen(true);
   };
 
+
+
   return (
     <Container size="lg" py="xl" style={{ backgroundColor: "#333" }}>
-      {/* <FeatureHeader os={ os } changeKey={ changeKey } /> */}
+      <FeatureHeader os={ os } changeKey={ changeKey } save={ save } startOver={ startOver } />
       <SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" mt={50} className={classes.grid}>
         {/* { subCategory && <SubcategoryView subCategory={subCategory} theme={ theme } /> }
         { allApps && <AllAppsView allApps={ allApps } theme={ theme } /> }

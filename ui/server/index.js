@@ -37,7 +37,7 @@ const merged = YAML.parse(softwareYaml);
 
 // console.log(packages);
 // console.log(software);
-console.log(merged);
+// console.log(merged);
 
 const {
   packages: {
@@ -60,7 +60,7 @@ const nullCheck = arr => {
   return arr ? arr : [];
 };
 
-console.log(brews, casks, cargo, binaries, mas, node, scripts, commands, git, pip, pipx, gem, go);
+// console.log(brews, casks, cargo, binaries, mas, node, scripts, commands, git, pip, pipx, gem, go);
 
 const allApps = [...new Set([
   ...nullCheck(prebrews),
@@ -87,10 +87,9 @@ const allApps = [...new Set([
 
 app.set('json spaces', 2);
 app.use(cors());
-//
-// Serve static files from the "public" sub-directory.
-//
-// app.use(express.static("public"));
+
+// Middleware to parse JSON bodies with increased size limit
+app.use(express.json({ limit: '10mb' })); // Adjust the limit as needed
 
 // expose "pkgs" endpoint and let it serve yamlPkgs as a JSON payload
 app.get('/', (req, res) => {
@@ -131,11 +130,9 @@ app.post('/save', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
   res.header('Access-Control-Allow-Methods', 'POST'); // Allow GET method
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
-  console.log(req.body);
-  // console.log(req.body.packages);
-  // Save payloa to yaml document on disk
-  const yaml = YAML.stringify(req.body);
-  fs.writeFileSync(`/Users/johanweitner/.local/share/chezmoi/backup_${new Date().getTime()}.yml`, yaml);
+  const yamlStr = YAML.stringify(req.body);
+  const filePath = `/Users/johanweitner/.local/share/chezmoi/backup_${new Date().getTime()}.yml`;
+  fs.writeFileSync(filePath, yamlStr, 'utf8');
   res.sendStatus(200);
 });
 
