@@ -18,7 +18,7 @@ const MergedView = props => {
     "_nautilus-extensions"
   ]
 
-  console.log('merged: ', merged);
+  // console.log('merged: ', merged);
   const mergedPackages = Object.keys(merged).filter(item => !unwanted.includes(item)).sort();
 
   // Merged list

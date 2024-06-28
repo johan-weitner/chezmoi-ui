@@ -15,7 +15,7 @@ const Header = (props) => {
   });
 
   const switchTab = (e, os) => {
-    console.log(os);
+    // console.log(os);
     setActive(os);
     switchOs(os);
   };

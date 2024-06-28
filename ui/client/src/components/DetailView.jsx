@@ -43,16 +43,16 @@ const DetailView = props => {
             </div>
 
             <Group justify="center" p="md">
-              <Button onClick={ () => editItem() }><ICON.edit
+              <Button onClick={ () => editItem() } className={ classes.editBtn } leftSection={<ICON.edit
                 style={{ width: rem(20), height: rem(20), marginRight:"10px" }}
                 stroke={2}
                 color="#FFF"
-              />Edit</Button>
-              <Button onClick={ () => deleteItem(openItem.key) }><ICON.remove
+              />}>Edit</Button>
+              <Button onClick={ () => deleteItem(openItem.key) } className={ classes.deleteBtn } leftSection={<ICON.remove
                 style={{ width: rem(20), height: rem(20), margin:"0 10px 0 0px" }}
                 stroke={2}
                 color="#FFF"
-              /> Delete</Button>
+              />}>Delete</Button>
             </Group>
           </div>
        }
@@ -62,68 +62,3 @@ const DetailView = props => {
 };
 
 export default DetailView;
-
-/*
-  darwin:
-    - whalebrew
-    - cask
-    - brew
-    - go
-    - cargo
-    - npm
-    - pipx
-    - pip
-    - gem
-    - pkg-darwin
-    - script
-    - ansible
-    - binary
-  ubuntu:
-    - snap
-    - flatpak
-    - whalebrew
-    - apt
-    - brew
-    - go
-    - cargo
-    - npm
-    - pipx
-    - pip
-    - gem
-    - appimage
-    - script
-    - ansible
-    - binary
-  windows:
-    - choco
-    - scoop
-    - winget
-    - go
-    - cargo
-    - npm
-    - pipx
-    - gem
-    - script
-    - ansible
-    - binary
-
-
-    - whalebrew
-    - apt
-    - cask
-    - brew
-    - go
-    - cargo
-    - npm
-    - pipx
-    - pip
-    - gem
-    - script
-    - choco
-    - scoop
-    - winget
-    - pkg-darwin
-    - ansible
-    - binary
-    - appstore
-*/

@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
 import Header from './components/Header';
@@ -15,7 +13,7 @@ function App() {
   const [os, setOs] = useState(OS[0]);
 
   const switchOs = (newOs) => {
-    console.log('Switching to: ' + newOs);
+    // console.log('Switching to: ' + newOs);
     setOs(newOs);
   };
 
@@ -80,27 +78,27 @@ function App() {
 
   const deleteApp = key => {
     // if (confirm('Are you sure?')) {
-      console.log(`Delete app with key ${key}`);
+      // console.log(`Delete app with key ${key}`);
       delete merged[key];
       saveList({...merged});
     // };
   };
 
   const saveEditedApp = (key, item) => {
-    console.log(`Saving ${key}:`, item);
+    // console.log(`Saving ${key}:`, item);
     merged[key] = item;
     saveList({...merged});
   };
 
   const saveNewDocument = () => {
-    console.log('Save new document');
-    console.log('Saving: ', merged);
+    // console.log('Save new document');
+    // console.log('Saving: ', merged);
     // Post "merged" as payload to endpoint /save
     axios.post('http://localhost:3000/save', {
       ...merged
     })
     .then(response => {
-      console.log(response);
+      // console.log(response);
     })
     .catch(error => {
       console.error(error);
@@ -110,9 +108,15 @@ function App() {
   // application/json
 
   const startOver = () => {
-    console.log('Start over');
+    // console.log('Start over');
     localStorage.removeItem('APP_LIST');
     seedAppList();
+  };
+
+  const updateItem = item => {
+    console.log('Update: ', item);
+    merged[item.key] = item;
+    saveList({...merged});
   };
 
   return (
@@ -129,6 +133,7 @@ function App() {
           deleteApp={ deleteApp }
           save={ saveNewDocument }
           startOver={ startOver }
+          updateItem={ updateItem }
         /> }
     </>
   )

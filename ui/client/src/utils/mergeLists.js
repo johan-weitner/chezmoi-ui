@@ -37,9 +37,9 @@ export const mergeLists = (allApps, softwarePackages) => {
       });
     }
   });
-  console.log('mergedArray: ', mergedArray);
-  console.log('mergedArrayJson: ', JSON.stringify(mergedArray, null, 2));
-  console.log('Hits: ', JSON.stringify(hits, null, 2));
+  // console.log('mergedArray: ', mergedArray);
+  // console.log('mergedArrayJson: ', JSON.stringify(mergedArray, null, 2));
+  // console.log('Hits: ', JSON.stringify(hits, null, 2));
 
   return mergedArray;
 };

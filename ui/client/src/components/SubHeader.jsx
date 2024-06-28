@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Container, Anchor, Group, Burger, Box } from '@mantine/core';
+import { Container, Anchor, Group, Button, Box } from '@mantine/core';
 import classes from './SubHeader.module.css';
 import { ICON } from '../constants/icons.js'
 
@@ -15,28 +15,30 @@ const SubHeader = (props) => {
       { icon: <ICON.save />, label: 'Save backup', action: save },
       { icon: <ICON.startOver />, label: 'Start over', action: startOver },
     ];
-
+// export type ButtonVariant = 'filled' | 'light' | 'outline' | 'transparent' | 'white' | 'subtle' | 'default' | 'gradient';
   const mainItems = links.map((item, index) => (
-    <Anchor
+    <Button
       href={item.link}
       key={item.label}
       className={classes.mainLink}
+      leftSection={ item.icon }
+      variant="transparent"
       onClick={(event) => {
         event.preventDefault();
         typeof item.action === 'function' && item.action();
       }}
     >
-      <span className={ classes.menuIcon }>{item.icon}</span> {item.label}
-    </Anchor>
+      {item.label}
+    </Button>
   ));
 
-  console.log('mainItems: ', mainItems);
+  // console.log('mainItems: ', mainItems);
 
   return (
     <header className={classes.header}>
-      <Container className={classes.inner} style={{  }}>
+      <Container className={classes.inner} style={{margin:"0"}}>
         <Box className={classes.links} visibleFrom="sm">
-          <Group gap={15} justify="flex-end" className={classes.mainLinks}>
+          <Group gap={0} justify="flex-end" className={classes.mainLinks}>
             {mainItems}
           </Group>
         </Box>

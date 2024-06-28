@@ -1,7 +1,8 @@
 .grid {
 background-color:#333;
-margin-top:10px !important;
+margin:10px 0 20px 0 !important;
 padding-top:0;
+background-color: var(--darkreader-bg--mantine-color-white);
 }
 
 .title {
@@ -107,7 +108,7 @@ padding-top:0;
 .popup,
 .popupClosed {
   position:absolute !important;
-  top:250px;
+  top:50px;
   left:300px;
   right:300px;
   border:1px solid #999;
@@ -145,7 +146,7 @@ padding-top:0;
   margin:0 0 40px 0;
 }
 .fieldcontainerHalf {
-  width:49%;
+  /* width:49%; */
 }
 
 .green {
@@ -158,4 +159,19 @@ padding-top:0;
 
 .indicatorGroup {
   margin-bottom:20px;
+}
+
+.cancelBtn {
+  background-color: #555 !important;
+}
+.editBtn {
+  background-color: var(--mantine-color-blue-filled) !important;
+}
+.deleteBtn {
+  /* background-color: var(--mantine-color-red-filled) !important; */
+  background-color: #933 !important;
+}
+.saveBtn {
+  /* background-color: var(--mantine-color-green-filled) !important; */
+  background-color: #393 !important;
 }
