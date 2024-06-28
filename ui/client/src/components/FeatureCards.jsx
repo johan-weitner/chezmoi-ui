@@ -38,6 +38,7 @@ const FeaturesCards = (props) => {
   const [ openItem, setOpenItem ] = useState(null);
   const [ openItemKey, setOpenItemKey ] = useState(null);
   const [ isPopoverOpen, setIsPopoverOpen ] = useState(false);
+  const [ delayClickHandler, setDelayClickHandler ] = useState(false);
 
   useEffect(() => {
     // Listen for ESC key press, and set isPopoverOpen to false when pressed
@@ -69,7 +70,10 @@ const FeaturesCards = (props) => {
   useHotkeys('esc', () => setIsPopoverOpen(false));
   const modalRef = useRef();
   useClickOutside(modalRef, () => {
-    if (isPopoverOpen) setIsPopoverOpen(false);
+    if (!delayClickHandler && isPopoverOpen) {
+      setIsPopoverOpen(false);
+      setDelayClickHandler(true);
+    }
 })
 
   const subCategory = subCats.find(subCategory => subCategory.key === key);
@@ -82,8 +86,10 @@ const FeaturesCards = (props) => {
   const open = (e, item) => {
     e.preventDefault();
     console.log('OpenItem: ', item);
+    setDelayClickHandler(true);
     setOpenItem(merged[item]);
     setOpenItemKey(item);
+    setTimeout(() => setDelayClickHandler(false), 3000);
   };
 
   const deleteItem = (key) => {
