@@ -46,7 +46,7 @@ const MergedView = props => {
                 onClick={ () => editItem(item) }
               /> */}
               <ICON.remove
-                style={{ width: rem(20), height: rem(20), position:"absolute", right: "20px", top:"14px" }}
+                style={{ width: rem(20), height: rem(20), position:"absolute", right: "20px", top:"14px", cursor:"pointer" }}
                 stroke={2}
                 color="white"
                 onClick={ () => deleteItem(item) }
