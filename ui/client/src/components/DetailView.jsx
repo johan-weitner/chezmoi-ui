@@ -8,6 +8,9 @@ import {
 import classes from './FeatureCards.module.css';
 import { ICON } from '../constants/icons';
 
+const markPopulated = <span className={classes.green}>✓</span>;
+const markUnPopulated = <span className={classes.red}>✗</span>;
+
 const DetailView = props => {
   const { openItem, deleteItem, editItem, theme } = props;
 
@@ -32,6 +35,11 @@ const DetailView = props => {
             </Text>
             { openItem._short && <Text className={classes.short}>{  openItem._short}</Text> }
             { openItem._desc && <Text className={classes.desc}>{  openItem._desc}</Text> }
+
+            <Text size='xs'>Homepage { openItem._home ? markPopulated : markUnPopulated }</Text>
+            <Text size='xs'>Documentation { openItem._docs ? markPopulated : markUnPopulated }</Text>
+            <Text size='xs'>Github { openItem._github ? markPopulated : markUnPopulated }</Text>
+
             <Group justify="center" p="md">
               <Button onClick={ () => editItem() }><ICON.edit
                 style={{ width: rem(20), height: rem(20), marginRight:"10px" }}

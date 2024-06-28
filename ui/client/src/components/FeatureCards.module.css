@@ -64,15 +64,21 @@ padding-top:0;
   margin-bottom:20px !important;
 }
 
-.overlay {
-  position:absolute;
+.overlay,
+.overlayClosed {
+  position:absolute !important;
   top:250px;
-  left:0px;
-  right:0px;
+  left:100px;
+  right:100px;
   border:1px solid #999;
   background-color:#222;
   min-height:400px;
-  box-shadow: 0px 10px 50px rgba(0,0,0,.4);
+  box-shadow: 0px 10px 50px rgba(0,0,0,.4)  !important;
+  display:block;
+}
+
+.overlayClosed {
+  display:none !important;
 }
 
 .overlay input,
@@ -90,4 +96,12 @@ padding-top:0;
 
 .fieldcontainer {
   margin:0 0 20px 0;
+}
+
+.green {
+  color:#393;
+}
+
+.red {
+  color:#933;
 }

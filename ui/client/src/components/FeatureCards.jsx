@@ -34,7 +34,7 @@ const FeaturesCards = (props) => {
   const [ key, setKey ] = useState('brews');
   const [ openItem, setOpenItem ] = useState(null);
   const [ openItemKey, setOpenItemKey ] = useState(null);
-  const [ isPopoverOpen, setIsPopoverOpen ] = useState();
+  const [ isPopoverOpen, setIsPopoverOpen ] = useState(false);
 
   // Root node is the chosen OS
   const root = data[os];
@@ -74,6 +74,7 @@ const FeaturesCards = (props) => {
 
   const editItem = () => {
     console.log('Edit item: ', openItem);
+    setIsPopoverOpen(true);
   };
 
 
@@ -90,35 +91,40 @@ const FeaturesCards = (props) => {
         { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteApp} editItem={ editItem } /> }
       </SimpleGrid>
       {/* { merged && <OutputView mergedArray={ merged } /> } */}
-      <Container className={classes.overlay}>
-        <Card>
-          <Text size='xl' className={classes.editDetailHeader}>Header</Text>
+
+        <Card className={ isPopoverOpen ? classes.overlay : classes.overlayClosed}>
+          <Text size='xl' className={classes.editDetailHeader}>{ openItem && openItem._name }</Text>
           <Group display="block" className={ classes.fieldcontainer }>
             <Text component="label" htmlFor="_name" size="sm" fw={500}>Name</Text>
-            <Input defaultValue={ null } id="_name" />
+            <Input defaultValue={ openItem?._name } id="_name" />
           </Group>
           <Group display="block" className={ classes.fieldcontainer }>
             <Text component="label" htmlFor="_short" size="sm" fw={500}>Short desc</Text>
-            <Input defaultValue={ null } id="_short" />
+            <Input defaultValue={ openItem?._short } id="_short" />
           </Group>
           <Group display="block" className={ classes.fieldcontainer }>
             <Text component="label" htmlFor="_desc" size="sm" fw={500}>Description</Text>
-            <Textarea defaultValue={ null } id="_desc" />
+            <Textarea defaultValue={ openItem?._desc } id="_desc" />
           </Group>
           <Group display="block" className={ classes.fieldcontainer }>
             <Text component="label" htmlFor="_home" size="sm" fw={500}>Homepage</Text>
-            <Input defaultValue={ null } id="_home" />
+            <Input defaultValue={ openItem?._home } id="_home" />
           </Group>
           <Group display="block" className={ classes.fieldcontainer }>
             <Text component="label" htmlFor="_docs" size="sm" fw={500}>Documentation</Text>
-            <Input defaultValue={ null } id="_docs" />
+            <Input defaultValue={ openItem?._docs } id="_docs" />
           </Group>
           <Group display="block" className={ classes.fieldcontainer }>
             <Text component="label" htmlFor="_github" size="sm" fw={500}>Github</Text>
-            <Input defaultValue={ null } id="_github" />
+            <Input defaultValue={ openItem?._github } id="_github" />
+          </Group>
+
+          <Group justify='center'>
+            <Button onClick={() => setIsPopoverOpen(false)}>Cancel</Button>
+            <Button>Save</Button>
           </Group>
         </Card>
-      </Container>
+
     </Container>
   );
 }

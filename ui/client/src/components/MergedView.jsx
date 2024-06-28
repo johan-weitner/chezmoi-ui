@@ -39,14 +39,14 @@ const MergedView = props => {
               <button className={classes.itemBox} onClick={e => open(e, item)} style={{ width: "100%" }}>
                 { item }
               </button>
-              <ICON.edit
+              {/* <ICON.edit
                 style={{ width: rem(20), height: rem(20), position:"absolute", right: "70px", top:"14px" }}
                 stroke={2}
                 color="white"
                 onClick={ () => editItem(item) }
-              />
+              /> */}
               <ICON.remove
-                style={{ width: rem(20), height: rem(20), position:"absolute", right: "35px", top:"14px" }}
+                style={{ width: rem(20), height: rem(20), position:"absolute", right: "20px", top:"14px" }}
                 stroke={2}
                 color="white"
                 onClick={ () => deleteItem(item) }

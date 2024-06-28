@@ -1,6 +1,16 @@
 autoload -Uz compinit
 compinit
 
+# Set up Homebrew
+if [ "$(arch)" = "arm64" ]; then
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+else
+    export HOMEBREW_PREFIX="/usr/local"
+    eval "$($HOMEBREW_PREFIX/Homebrew/bin/brew shellenv)"
+fi
+export PATH="$HOMEBREW_PREFIX/share:$PATH"
+
 [[ -f ~/.zsh/aliases.zsh ]] && source ~/.zsh/aliases.zsh
 [[ -f ~/.zsh/functions.zsh ]] && source ~/.zsh/functions.zsh
 [[ -f ~/.zsh/env.zsh ]] && source ~/.zsh/env.zsh
@@ -15,6 +25,7 @@ eval "$(starship init zsh)"
 
 # Load oh-my-posh
 # eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/$OMP_THEME.omp.json)"
+
 #  1_shell.omp.json                halflife.omp.json           poshmon.omp.json
 #  agnoster.minimal.omp.json       honukai.omp.json            powerlevel10k_classic.omp.json
 #  agnoster.omp.json               hotstick.minimal.omp.json   powerlevel10k_lean.omp.json
@@ -64,6 +75,7 @@ eval "$(starship init zsh)"
 #  catppuccin_frappe.omp.json      'Negligible theme.json'         'Rudolfs Light Theme.json'
 #  'Craver theme.json'             'oh-my-posh 1 shell.json'       sim-web.omp.json
 
+
 # Load Direnv
 eval "$(direnv hook zsh)"
 
@@ -85,7 +97,7 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # zsh-syntax-highlighting
 # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
@@ -94,17 +106,17 @@ echo "source ${(q-)PWD}/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> 
   ### ZNT's installer added snippet ###
   fpath=( "$fpath[@]" "$HOME/.config/znt/zsh-navigation-tools" )
   autoload n-aliases n-cd n-env n-functions n-history n-kill n-list n-list-draw n-list-input n-options n-panelize n-help
-  autoload znt-usetty-wrapper znt-history-widget znt-cd-widget znt-kill-widget
-  alias naliases=n-aliases ncd=n-cd nenv=n-env nfunctions=n-functions nhistory=n-history
+  autoload znt-usetty-wrapper znt-cd-widget znt-kill-widget # znt-history-widget
+  alias naliases=n-aliases ncd=n-cd nenv=n-env nfunctions=n-functions # nhistory=n-history
   alias nkill=n-kill noptions=n-options npanelize=n-panelize nhelp=n-help
-  zle -N znt-history-widget
+  # zle -N znt-history-widget
  # bindkey '^R' znt-history-widget
-  bindkey '^R' hishtory
+  # bindkey '^R' hishtory
   setopt AUTO_PUSHD HIST_IGNORE_DUPS PUSHD_IGNORE_DUPS
   zstyle ':completion::complete:n-kill::bits' matcher 'r:|=** l:|=*'
   ### END ###
 
 
 # Hishtory Config:
-export PATH="$PATH:$HOME/.hishtory"
-source $HOME/.hishtory/config.zsh
+# export PATH="$PATH:$HOME/.hishtory"
+# source $HOME/.hishtory/config.zsh
