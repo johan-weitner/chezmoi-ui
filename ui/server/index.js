@@ -94,7 +94,6 @@ app.use(cors());
 
 // expose "pkgs" endpoint and let it serve yamlPkgs as a JSON payload
 app.get('/', (req, res) => {
-  // Set CORS headers
   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
   res.header('Access-Control-Allow-Methods', 'GET'); // Allow GET method
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
@@ -103,7 +102,6 @@ app.get('/', (req, res) => {
 });
 
 app.get('/all', (req, res) => {
-  // Set CORS headers
   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
   res.header('Access-Control-Allow-Methods', 'GET'); // Allow GET method
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
@@ -112,7 +110,6 @@ app.get('/all', (req, res) => {
 });
 
 app.get('/software', (req, res) => {
-  // Set CORS headers
   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
   res.header('Access-Control-Allow-Methods', 'GET'); // Allow GET method
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
@@ -121,13 +118,28 @@ app.get('/software', (req, res) => {
 });
 
 app.get('/merged', (req, res) => {
-  // Set CORS headers
   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
   res.header('Access-Control-Allow-Methods', 'GET'); // Allow GET method
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
 
   res.json(merged);
 });
+
+
+// Endpoint for posting a payload to be saved as a yaml document on disk
+app.post('/save', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+  res.header('Access-Control-Allow-Methods', 'POST'); // Allow GET method
+  res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
+  console.log(req.body);
+  // console.log(req.body.packages);
+  // Save payloa to yaml document on disk
+  const yaml = YAML.stringify(req.body);
+  fs.writeFileSync(`/Users/johanweitner/.local/share/chezmoi/backup_${new Date().getTime()}.yml`, yaml);
+  res.sendStatus(200);
+});
+
+
 
 
 //

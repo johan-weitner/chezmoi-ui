@@ -36,9 +36,11 @@ const DetailView = props => {
             { openItem._short && <Text className={classes.short}>{  openItem._short}</Text> }
             { openItem._desc && <Text className={classes.desc}>{  openItem._desc}</Text> }
 
-            <Text size='xs'>Homepage { openItem._home ? markPopulated : markUnPopulated }</Text>
-            <Text size='xs'>Documentation { openItem._docs ? markPopulated : markUnPopulated }</Text>
-            <Text size='xs'>Github { openItem._github ? markPopulated : markUnPopulated }</Text>
+            <div className={ classes.indicatorGroup }>
+              <Text size='xs'>Homepage { openItem._home ? markPopulated : markUnPopulated }</Text>
+              <Text size='xs'>Documentation { openItem._docs ? markPopulated : markUnPopulated }</Text>
+              <Text size='xs'>Github { openItem._github ? markPopulated : markUnPopulated }</Text>
+            </div>
 
             <Group justify="center" p="md">
               <Button onClick={ () => editItem() }><ICON.edit
@@ -60,3 +62,68 @@ const DetailView = props => {
 };
 
 export default DetailView;
+
+/*
+  darwin:
+    - whalebrew
+    - cask
+    - brew
+    - go
+    - cargo
+    - npm
+    - pipx
+    - pip
+    - gem
+    - pkg-darwin
+    - script
+    - ansible
+    - binary
+  ubuntu:
+    - snap
+    - flatpak
+    - whalebrew
+    - apt
+    - brew
+    - go
+    - cargo
+    - npm
+    - pipx
+    - pip
+    - gem
+    - appimage
+    - script
+    - ansible
+    - binary
+  windows:
+    - choco
+    - scoop
+    - winget
+    - go
+    - cargo
+    - npm
+    - pipx
+    - gem
+    - script
+    - ansible
+    - binary
+
+
+    - whalebrew
+    - apt
+    - cask
+    - brew
+    - go
+    - cargo
+    - npm
+    - pipx
+    - pip
+    - gem
+    - script
+    - choco
+    - scoop
+    - winget
+    - pkg-darwin
+    - ansible
+    - binary
+    - appstore
+*/
