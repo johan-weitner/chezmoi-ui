@@ -6,8 +6,6 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useHotkeys } from 'react-hotkeys-hook';
-import SelectSearch from 'react-select-search';
-import 'react-select-search/style.css';
 import classes from './FeatureCards.module.css';
 import { SUBCAT } from '../constants/strings';
 import { ICON } from '../constants/icons';
@@ -83,12 +81,9 @@ const FeaturesCards = (props) => {
 
   return (
     <>
-      <Container size="lg" py="xl" style={{ backgroundColor: "#333", paddingTop:"1px" }}>
+      <Container size="lg" py="xl" style={{ backgroundColor: "#333", paddingTop:"0px" }}>
         <FeatureHeader os={ os } changeKey={ changeKey } save={ save } startOver={ startOver } style={{ borderRadius:"10px" }} />
-        <div className="test">
-          <h1>Product List</h1>
-        </div>
-        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" mt={50} className={classes.grid}>
+        <SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" mt={50} className={classes.grid} style={{backgroundColor:"#333"}}>
           {/* { subCategory && <SubcategoryView subCategory={subCategory} theme={ theme } /> }
           { allApps && <AllAppsView allApps={ allApps } theme={ theme } /> }
           { software && <InstallDoctorListView software={software} theme={ theme } /> } */}

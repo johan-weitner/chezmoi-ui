@@ -28,18 +28,18 @@ const DetailView = props => {
       <Card shadow="md" fz="sm" c="dimmed" mt="sm" style={{ textAlign:"left" }}>
        { openItem &&
           <div className={classes.itemBox}>
-            <Text fz="xl" fw={900} mt="sm" style={{ textAlign:"left" }}>
-            <a href={ openItem._home || openItem._github || '#' } target="_blank" style={{ fontWeight: "bold", textDecoration:"none" }}>
+            <h2 style={{ textAlign:"left", fontWeight:"normal", fontSize:"2em", margin:"0 0 10px 0" }}>
+            <a href={ openItem._home || openItem._github || '#' } target="_blank" style={{ fontWeight: "normal", textDecoration:"none" }}>
               { openItem._name || openItem._bin }
             </a>
-            </Text>
+            </h2>
             { openItem._short && <Text className={classes.short}>{  openItem._short}</Text> }
             { openItem._desc && <Text className={classes.desc}>{  openItem._desc}</Text> }
 
             <div className={ classes.indicatorGroup }>
-              <Text size='xs'>Homepage { openItem._home ? markPopulated : markUnPopulated }</Text>
-              <Text size='xs'>Documentation { openItem._docs ? markPopulated : markUnPopulated }</Text>
-              <Text size='xs'>Github { openItem._github ? markPopulated : markUnPopulated }</Text>
+              <Text size='sm'>Homepage { openItem._home ? markPopulated : markUnPopulated }</Text>
+              <Text size='sm'>Documentation { openItem._docs ? markPopulated : markUnPopulated }</Text>
+              <Text size='sm'>Github { openItem._github ? markPopulated : markUnPopulated }</Text>
             </div>
 
             <Group justify="center" p="md">

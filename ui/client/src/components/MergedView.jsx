@@ -53,7 +53,7 @@ const MergedView = props => {
         placeholder="Filter by name"
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
-        style={{ margin:"0 14px" }}
+        style={{ margin:"0 14px", backgroundColor:"#262a2b" }}
         rightSectionWidth={42}
         leftSection={<IconSearch style={{ width: rem(18), height: rem(18) }} stroke={1.5} />}
         rightSection={

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios';
+import { Toaster, toast } from 'sonner';
 import Header from './components/Header';
 import FeatureCards from './components/FeatureCards';
 import { OS } from './constants/strings';
@@ -70,9 +71,11 @@ function App() {
 
       saveList(softwarePackages);
       // console.log('Prepped packages: ', merged);
+      toast.success('List was successfully seeded');
     })
     .catch(error => {
       console.error(error);
+      toast.error(error);
     });
   };
 
@@ -81,6 +84,7 @@ function App() {
       // console.log(`Delete app with key ${key}`);
       delete merged[key];
       saveList({...merged});
+      toast.success('Item was deleted');
     // };
   };
 
@@ -88,6 +92,7 @@ function App() {
     // console.log(`Saving ${key}:`, item);
     merged[key] = item;
     saveList({...merged});
+    toast.success('Item was updated');
   };
 
   const saveNewDocument = () => {
@@ -98,10 +103,11 @@ function App() {
       ...merged
     })
     .then(response => {
-      // console.log(response);
+      toast.success('Saved current state to disk');
     })
     .catch(error => {
       console.error(error);
+      toast.error(error);
     });
   };
   // Content-Type
@@ -111,12 +117,14 @@ function App() {
     // console.log('Start over');
     localStorage.removeItem('APP_LIST');
     seedAppList();
+    toast.success('Started over and seeded list from source file');
   };
 
   const updateItem = item => {
     console.log('Update: ', item);
     merged[item.key] = item;
     saveList({...merged});
+    toast.success('Item was updated');
   };
 
   return (
@@ -135,6 +143,12 @@ function App() {
           startOver={ startOver }
           updateItem={ updateItem }
         /> }
+        <Toaster
+          theme="dark"
+          richColors
+          closeButton
+          pauseWhenPageIsHidden
+        />
     </>
   )
 }

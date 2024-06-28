@@ -181,3 +181,9 @@ background-color: var(--darkreader-bg--mantine-color-white);
   /* background-color: var(--mantine-color-green-filled) !important; */
   background-color: #393 !important;
 }
+
+.tagDisplay {
+  width: 100%;
+  border-radius: 4px;
+  background-color:#999;
+}
