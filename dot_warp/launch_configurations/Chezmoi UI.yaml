@@ -22,18 +22,18 @@
 #            - exec: code .
 
 ---
-name: Launch Configuration
+name: Chezmoi ui
 windows:
   - tabs:
-      - title: Home
+      - title: Chezmoi UI
         layout:
-          cwd: /Users/johanweitner
-        color: green
-      - title: Code
-        layout:
-          cwd: /Users/johanweitner/Code
-        color: blue
-      - title: Jobb
-        layout:
-          cwd: /Users/johanweitner/Jobb
+          cwd: /Users/johanweitner/.local/share/chezmoi
         color: red
+      - title: Chezmoi Server
+        layout:
+          cwd: /Users/johanweitner/.local/share/chezmoi/ui/server
+        color: yellow
+      - title: Chezmoi Client
+        layout:
+          cwd: /Users/johanweitner/.local/share/chezmoi/ui/client
+        color: blue
