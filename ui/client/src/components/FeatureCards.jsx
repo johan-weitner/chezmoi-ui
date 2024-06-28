@@ -6,6 +6,8 @@ import {
   useMantineTheme,
 } from '@mantine/core';
 import { useHotkeys } from 'react-hotkeys-hook';
+import SelectSearch from 'react-select-search';
+import 'react-select-search/style.css';
 import classes from './FeatureCards.module.css';
 import { SUBCAT } from '../constants/strings';
 import { ICON } from '../constants/icons';
@@ -83,6 +85,9 @@ const FeaturesCards = (props) => {
     <>
       <Container size="lg" py="xl" style={{ backgroundColor: "#333", paddingTop:"1px" }}>
         <FeatureHeader os={ os } changeKey={ changeKey } save={ save } startOver={ startOver } style={{ borderRadius:"10px" }} />
+        <div className="test">
+          <h1>Product List</h1>
+        </div>
         <SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" mt={50} className={classes.grid}>
           {/* { subCategory && <SubcategoryView subCategory={subCategory} theme={ theme } /> }
           { allApps && <AllAppsView allApps={ allApps } theme={ theme } /> }
@@ -91,15 +96,15 @@ const FeaturesCards = (props) => {
           { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteItem } editItem={ editItem } /> }
         </SimpleGrid>
         {/* { merged && <OutputView mergedArray={ merged } /> } */}
+        <AppForm
+          ref={ modalRef }
+          isPopoverOpen={ isPopoverOpen }
+          setIsPopoverOpen={ setIsPopoverOpen }
+          save={ updateApp }
+          selectedApp={ openItem }
+        />
+        <div className={ overlayClass }></div>
       </Container>
-      <AppForm
-        ref={ modalRef }
-        isPopoverOpen={ isPopoverOpen }
-        setIsPopoverOpen={ setIsPopoverOpen }
-        save={ updateApp }
-        selectedApp={ openItem }
-      />
-      <div className={ overlayClass }></div>
     </>
   );
 }

@@ -119,6 +119,7 @@ background-color: var(--darkreader-bg--mantine-color-white);
   z-index:2000 !important;
   backdrop-filter:none;
   border-radius:20px;
+  padding:30px;
 }
 
 .popupClosed {
@@ -147,6 +148,11 @@ background-color: var(--darkreader-bg--mantine-color-white);
 }
 .fieldcontainerHalf {
   /* width:49%; */
+}
+.fieldcontainer input,
+.fieldcontainerHalf input,
+.fieldcontainer textarea {
+  font-family:monospace;
 }
 
 .green {

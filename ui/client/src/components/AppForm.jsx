@@ -65,7 +65,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
         {
           formPartOne.map(item => {
             return (
-              <Group display="block" className={ classes.fieldcontainer }>
+              <Group display="block" className={ classes.fieldcontainer } key={nanoid()}>
                 <Text component="label" htmlFor={ item.name } size="sm" fw={500}>{ item.label }</Text>
                 { getField(item) }
               </Group>
