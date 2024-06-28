@@ -9,11 +9,11 @@ const FeatureHeader = props => {
 
   return (
     <>
-      <Group justify="center">
+      {/* <Group justify="center">
         <Badge variant="filled" size="xl">
           <span style={{ textTransform: "capitalize" }}>{os}</span>
         </Badge>
-      </Group>
+      </Group> */}
       <SubHeader keys={[]} changeKey={changeKey} save={ save } startOver={ startOver } />
     </>
   );

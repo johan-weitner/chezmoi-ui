@@ -33,20 +33,13 @@ const SubHeader = (props) => {
   console.log('mainItems: ', mainItems);
 
   return (
-    <header className={classes.header} style={{  }}>
+    <header className={classes.header}>
       <Container className={classes.inner} style={{  }}>
         <Box className={classes.links} visibleFrom="sm">
           <Group gap={15} justify="flex-end" className={classes.mainLinks}>
             {mainItems}
           </Group>
         </Box>
-        {/* <Burger
-          opened={opened}
-          onClick={toggle}
-          className={classes.burger}
-          size="sm"
-          hiddenFrom="sm"
-        /> */}
       </Container>
     </header>
   );
