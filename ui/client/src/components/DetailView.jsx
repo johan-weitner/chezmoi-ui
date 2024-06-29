@@ -17,7 +17,6 @@ const markUnPopulated = <span className={classes.red}>✗</span>;
 const DetailView = (props) => {
 	const { selectedApp, deleteItem, editItem, theme } = props;
 
-	// Detail view
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
 			<ICON.detail

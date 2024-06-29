@@ -5,11 +5,11 @@ import { useState } from "react";
 import { ICON } from "../constants/icons";
 import classes from "./FeatureCards.module.css";
 
-const MergedView = (props) => {
-	const { merged, theme, selectApp, deleteItem } = props;
+const ListView = (props) => {
+	const { software, theme, selectApp, deleteItem } = props;
 
 	const [filter, setFilter] = useState("");
-	// Strip metadata nodes from Install.Doctor array
+	// Strip metadata nodes from Install.Doctor list
 	const unwanted = [
 		"_envchain:deps",
 		"_kde",
@@ -17,25 +17,23 @@ const MergedView = (props) => {
 		"_nautilus-extensions",
 	];
 
-	const purgedMerged = Object.keys(merged).filter(
+	const purgedList = Object.keys(software).filter(
 		(item) => !unwanted.includes(item),
 	);
-	// console.log('purged: ', purgedMerged);
-	const mergedKeys = [];
-	purgedMerged.map((item) => {
-		mergedKeys.push(merged[item].key);
+
+	const listItemKeys = [];
+	purgedList.map((item) => {
+		listItemKeys.push(item);
 	});
-	const mergedNames = [];
-	purgedMerged.map((item) => {
-		mergedNames.push(merged[item]._name);
+	const listItemNames = [];
+	purgedList.map((item) => {
+		listItemNames.push(software[item]._name);
 	});
 
-	const filteredApps = mergedKeys.filter((key) =>
-		merged[key]?._name?.toLowerCase().includes(filter?.toLowerCase()),
+	const filteredApps = listItemKeys.filter((key) =>
+		software[key]?._name?.toLowerCase().includes(filter?.toLowerCase()),
 	);
-	// console.log('filteredApps: ', filteredApps);
 
-	// Merged list
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
 			<ICON.allApps
@@ -109,7 +107,7 @@ const MergedView = (props) => {
 									style={{ width: "100%" }}
 									type="button"
 								>
-									{merged[item]._name}
+									{software[item]._name}
 								</button>
 								<ICON.edit
 									style={{
@@ -144,4 +142,4 @@ const MergedView = (props) => {
 	);
 };
 
-export default MergedView;
+export default ListView;

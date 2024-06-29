@@ -5,10 +5,10 @@ import AppForm from "./AppForm.jsx";
 import DetailView from "./DetailView";
 import classes from "./FeatureCards.module.css";
 import FeatureHeader from "./FeatureHeader";
-import MergedView from "./MergedView";
+import ListView from "./ListView";
 
 const FeaturesCards = (props) => {
-	const { merged, deleteApp, save, startOver, updateItem } = props;
+	const { software, deleteApp, save, startOver, updateItem } = props;
 	const theme = useMantineTheme();
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -16,14 +16,16 @@ const FeaturesCards = (props) => {
 	useHotkeys("esc", () => setIsPopoverOpen(false));
 	const modalRef = useRef();
 
+	console.log("Software: ", software);
+
 	const selectApp = (e, item) => {
 		e.preventDefault();
-		setSelectedApp(merged[item]);
+		setSelectedApp(software[item]);
 	};
 
 	const deleteItem = (key) => {
 		setSelectedApp(null);
-		deleteApp(selectedApp.key);
+		deleteApp(selectedApp[key]);
 	};
 
 	const editItem = () => {
@@ -56,9 +58,9 @@ const FeaturesCards = (props) => {
 					className={classes.grid}
 					style={{ backgroundColor: "#333" }}
 				>
-					{merged && (
-						<MergedView
-							merged={merged}
+					{software && (
+						<ListView
+							software={software}
 							theme={theme}
 							selectApp={selectApp}
 							deleteItem={deleteApp}

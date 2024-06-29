@@ -18,30 +18,21 @@ import {
 } from "@mantine/core";
 import { APP_FORM } from "../constants/appForm";
 import { ICON } from "../constants/icons";
+import { TAGS_WHITE_LIST } from "../constants/tagsWhiteList";
 import classes from "./FeatureCards.module.css";
 
 const AppForm = forwardRef(function AppForm(props, ref) {
 	const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp } = props;
-	const { register, handleSubmit, formState } = useForm({
+	const { register, handleSubmit } = useForm({
 		defaultValues: selectedApp,
 	});
 
-	const TAG_WHITE_LIST = [
-		"mac",
-		"win",
-		"linux",
-		"work",
-		"home",
-		"cli",
-		"desktop",
-		"dev",
-	];
 	window.TAGIFY_DEBUG = false;
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	useEffect(() => {
 		const input = document.querySelector("input[name=tags]");
-		new Tagify(input, { whitelist: TAG_WHITE_LIST, enforceWhitelist: true });
+		new Tagify(input, { whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
 	}, []);
 
 	useHotkeys("esc", () => setIsPopoverOpen(false));

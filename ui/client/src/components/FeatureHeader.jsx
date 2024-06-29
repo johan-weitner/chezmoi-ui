@@ -10,7 +10,7 @@ const FeatureHeader = (props) => {
 		{ icon: <ICON.startOver />, label: "Start over", action: startOver },
 	];
 
-	const mainItems = links.map((item, index) => (
+	const mainItems = links.map((item) => (
 		<Button
 			href={item.link}
 			key={item.label}
