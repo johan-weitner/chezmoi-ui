@@ -17,7 +17,8 @@ import {
   IconEdit,
   IconTrash,
   IconReload,
-  IconDeviceFloppy
+  IconDeviceFloppy,
+  IconX
 
 } from '@tabler/icons-react';
 
@@ -41,5 +42,6 @@ export const ICON = {
   edit: IconEdit,
   remove: IconTrash,
   startOver: IconReload,
-  save: IconDeviceFloppy
+  save: IconDeviceFloppy,
+  close: IconX
 };

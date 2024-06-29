@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, forwardRef } from 'react';
 import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
 import Tagify from '@yaireo/tagify';
+import { useHotkeys } from 'react-hotkeys-hook';
 import "@yaireo/tagify/dist/tagify.css";
 import {
   Group,
@@ -10,28 +11,29 @@ import {
   Card,
   Input,
   Button,
-  SimpleGrid
+  SimpleGrid,
+  ActionIcon,
+  rem,
+  Flex
 } from '@mantine/core';
 import classes from './FeatureCards.module.css';
 import { ICON } from '../constants/icons';
-import useDebounce from '../utils/useDebounce.js';
 
 const AppForm = forwardRef(function AppForm(props, ref) {
   const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp } = props;
   const { register, handleSubmit, formState: { errors } } = useForm({
     defaultValues: selectedApp,
   });
-  // const { isPopoverOpen, setIsPopoverOpen, save, selectedApp, handleInputChange } = props;
-  const [formState, setFormState] = useState({...selectedApp});
-  console.log('selectedApp: ', selectedApp);
+
   const TAG_WHITE_LIST = ['mac', 'win', 'linux', 'work', 'home', 'cli', 'desktop', 'dev'];
   window.TAGIFY_DEBUG = false;
 
   useEffect(() => {
     var input = document.querySelector('input[name=tags]');
     new Tagify(input, { whitelist: TAG_WHITE_LIST, enforceWhitelist: true });
-    console.log('FormState: ', formState);
   }, []);
+
+  useHotkeys('esc', () => setIsPopoverOpen(false));
 
   const formPartOne = [
     { name: '_name', label: 'Name', value: selectedApp?._name },
@@ -39,8 +41,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
     { name: '_short', label: 'Short desc', value: selectedApp?._short },
     { name: '_home', label: 'Homepage', value: selectedApp?._home },
     { name: '_docs', label: 'Documentation', value: selectedApp?._docs },
-    { name: '_github', label: 'Github', value: selectedApp?._github },
-    // { name: '_desc', label: 'Description', value: selectedApp?._desc, textarea: true },
+    { name: '_github', label: 'Github', value: selectedApp?._github }
   ];
 
   const formPartTwo = [
@@ -64,31 +65,18 @@ const AppForm = forwardRef(function AppForm(props, ref) {
     { name: 'appstore', label: 'AppStore' },
   ];
 
-
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   console.log('save');
-  // };
   const onSubmit = (data) => {
-    // Handle form submission
-    console.log('Saving data:', data);
     updateApp(data);
   };
 
-  // const handleChange = (e) => {
-  //   console.log(e.target);
-  //   const {name: id, value} = e.target;
-  //   setFormState((prevFormData) => ({
-  //     ...prevFormData,
-  //     [id]: value,
-  //   }));
-  //   console.log(`Changed: ${id} = ${value}`);
-  //   console.log('After change: ', formState);
-  // };
-
   return selectedApp && (
     <Card ref={ ref } className={ isPopoverOpen ? classes.popup : classes.popupClosed} style={{ zIndex:"20000"}}>
+      <Flex justify="flex-end">
+        <ActionIcon size={32} radius="xl" color="#933" variant="filled" onClick={ () => setIsPopoverOpen(false) }>
+          <ICON.close style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+        </ActionIcon>
+      </Flex>
+
       <form onSubmit={handleSubmit(onSubmit)}>
       <h2 className={classes.editDetailHeader}>{ selectedApp && selectedApp._name }</h2>
       <h3 style={{ textAlign:"left", fontSize:"1.8em", fontWeight:"normal", marginTop:"0" }}>Info</h3>

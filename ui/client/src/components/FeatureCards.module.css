@@ -109,8 +109,8 @@ background-color: var(--darkreader-bg--mantine-color-white);
 .popupClosed {
   position:absolute !important;
   top:50px;
-  left:300px;
-  right:300px;
+  left:200px;
+  right:200px;
   border:1px solid #999;
   background-color:#222;
   min-height:400px;
@@ -124,6 +124,8 @@ background-color: var(--darkreader-bg--mantine-color-white);
 
 .popupClosed {
   display:none !important;
+  /* linear gradient from #933 to #C33 */
+  /* background: linear-gradient(to bottom, #933, #C33); */
 }
 
 .popup input,
@@ -133,6 +135,12 @@ background-color: var(--darkreader-bg--mantine-color-white);
 
 .popup div {
   text-align:left;
+}
+
+.popupCloseBtn {
+  position:absolute;
+  top:10px;
+  right:10px;
 }
 
 .editDetailHeader {
