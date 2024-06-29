@@ -12,7 +12,7 @@ const markPopulated = <span className={classes.green}>✓</span>;
 const markUnPopulated = <span className={classes.red}>✗</span>;
 
 const DetailView = props => {
-  const { openItem, deleteItem, editItem, theme } = props;
+  const { selectedApp, deleteItem, editItem, theme } = props;
 
   // Detail view
   return (
@@ -26,20 +26,20 @@ const DetailView = props => {
       Detail view
       </Text>
       <Card shadow="md" fz="sm" c="dimmed" mt="sm" style={{ textAlign:"left" }}>
-       { openItem &&
+       { selectedApp &&
           <div className={classes.itemBox}>
             <h2 style={{ textAlign:"left", fontWeight:"normal", fontSize:"2em", margin:"0 0 10px 0" }}>
-            <a href={ openItem._home || openItem._github || '#' } target="_blank" style={{ fontWeight: "normal", textDecoration:"none" }}>
-              { openItem._name || openItem._bin }
+            <a href={ selectedApp._home || selectedApp._github || '#' } target="_blank" style={{ fontWeight: "normal", textDecoration:"none" }}>
+              { selectedApp._name || selectedApp._bin }
             </a>
             </h2>
-            { openItem._short && <Text className={classes.short}>{  openItem._short}</Text> }
-            { openItem._desc && <Text className={classes.desc}>{  openItem._desc}</Text> }
+            { selectedApp._short && <Text className={classes.short}>{  selectedApp._short}</Text> }
+            { selectedApp._desc && <Text className={classes.desc}>{  selectedApp._desc}</Text> }
 
             <div className={ classes.indicatorGroup }>
-              <Text size='sm'>Homepage { openItem._home ? markPopulated : markUnPopulated }</Text>
-              <Text size='sm'>Documentation { openItem._docs ? markPopulated : markUnPopulated }</Text>
-              <Text size='sm'>Github { openItem._github ? markPopulated : markUnPopulated }</Text>
+              <Text size='sm'>Homepage { selectedApp._home ? markPopulated : markUnPopulated }</Text>
+              <Text size='sm'>Documentation { selectedApp._docs ? markPopulated : markUnPopulated }</Text>
+              <Text size='sm'>Github { selectedApp._github ? markPopulated : markUnPopulated }</Text>
             </div>
 
             <Group justify="center" p="md">
@@ -48,7 +48,7 @@ const DetailView = props => {
                 stroke={2}
                 color="#FFF"
               />}>Edit</Button>
-              <Button onClick={ () => deleteItem(openItem.key) } className={ classes.deleteBtn } leftSection={<ICON.remove
+              <Button onClick={ () => deleteItem(selectedApp.key) } className={ classes.deleteBtn } leftSection={<ICON.remove
                 style={{ width: rem(20), height: rem(20), margin:"0 10px 0 0px" }}
                 stroke={2}
                 color="#FFF"

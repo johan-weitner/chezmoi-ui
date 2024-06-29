@@ -11,7 +11,7 @@ import classes from './FeatureCards.module.css';
 import { ICON } from '../constants/icons';
 
 const MergedView = props => {
-  const { merged, theme, open, deleteItem, editItem } = props;
+  const { merged, theme, selectApp, deleteItem } = props;
 
   const [filter, setFilter] = useState('');
   // Strip metadata nodes from Install.Doctor array
@@ -33,7 +33,7 @@ const MergedView = props => {
     mergedNames.push(merged[item]._name);
   });
 
-  const filteredApps = mergedKeys.filter(key => merged[key]._name?.toLowerCase().includes(filter?.toLowerCase()));
+  const filteredApps = mergedKeys.filter(key => merged[key]?._name?.toLowerCase().includes(filter?.toLowerCase()));
   // console.log('filteredApps: ', filteredApps);
 
   // Merged list
@@ -63,19 +63,20 @@ const MergedView = props => {
         }
         {...props}
       />
+      <Text size="xs" style={{ textAlign:"left", margin:"10px 0 0 20px" }}>{ filteredApps.length } apps in total.</Text>
       <Card shadow="md" fz="sm" c="dimmed" mt="sm" className={classes.scrollContainer} style={{ textAlign:"left", overflow:"scroll", height:"calc(100vh - 150px)" }}>
       { filteredApps?.length > 0 && filteredApps.map(item => {
           return (
             <div style={{ position:"relative", width:"100%" }} key={ nanoid() }>
-              <button className={classes.itemBox} onClick={e => open(e, item)} style={{ width: "100%" }}>
+              <button className={classes.itemBox} onClick={e => selectApp(e, item)} style={{ width: "100%" }}>
                 { merged[item]._name }
               </button>
-              {/* <ICON.edit
-                style={{ width: rem(20), height: rem(20), position:"absolute", right: "70px", top:"14px" }}
+              <ICON.edit
+                style={{ width: rem(20), height: rem(20), position:"absolute", right: "50px", top:"14px" }}
                 stroke={2}
                 color="white"
                 onClick={ () => editItem(item) }
-              /> */}
+              />
               <ICON.remove
                 style={{ width: rem(20), height: rem(20), position:"absolute", right: "20px", top:"14px", cursor:"pointer" }}
                 stroke={2}

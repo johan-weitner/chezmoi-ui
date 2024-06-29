@@ -144,4 +144,5 @@ app.post('/save', (req, res) => {
 //
 app.listen(port, () => {
     console.log(`Point your web browser at http://localhost:${port}`);
+    console.log('...or whichever port the consuming client is served from');
 });

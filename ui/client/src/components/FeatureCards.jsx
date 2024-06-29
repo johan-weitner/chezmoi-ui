@@ -18,7 +18,7 @@ const FeaturesCards = (props) => {
   const { data, os, allApps, software, merged, deleteApp, save, startOver, updateItem } = props;
   const theme = useMantineTheme();
   const [ key, setKey ] = useState('brews');
-  const [ openItem, setOpenItem ] = useState(null);
+  const [ selectedApp, setSelectedApp ] = useState(null);
   const [ isPopoverOpen, setIsPopoverOpen ] = useState(false);
   const [ delayClickHandler, setDelayClickHandler ] = useState(false);
 
@@ -39,6 +39,7 @@ const FeaturesCards = (props) => {
 
   useHotkeys('esc', () => setIsPopoverOpen(false));
   const modalRef = useRef();
+
   // useClickOutside(modalRef, () => {
   //   if (!delayClickHandler && isPopoverOpen) {
   //     setIsPopoverOpen(false);
@@ -53,17 +54,17 @@ const FeaturesCards = (props) => {
     setKey(key);
   };
 
-  const open = (e, item) => {
+  const selectApp = (e, item) => {
     e.preventDefault();
-    // console.log('OpenItem: ', item);
+    console.log('Selected item: ', item);
     // setDelayClickHandler(true);
-    setOpenItem(merged[item]);
+    setSelectedApp(merged[item]);
     // setTimeout(() => setDelayClickHandler(false), 3000);
   };
 
   const deleteItem = (key) => {
-    setOpenItem(null);
-    deleteApp(openItem.key)
+    setSelectedApp(null);
+    deleteApp(selectedApp.key)
   };
 
   const editItem = () => {
@@ -71,10 +72,17 @@ const FeaturesCards = (props) => {
     setIsPopoverOpen(true);
   };
 
-  const updateApp = () => {
-    // console.log('Save: ', openItem);
-    updateItem(openItem);
+  const updateApp = (updatedApp) => {
+    updateItem(updatedApp);
     setIsPopoverOpen(false);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setSelectedApp((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
@@ -87,18 +95,24 @@ const FeaturesCards = (props) => {
           {/* { subCategory && <SubcategoryView subCategory={subCategory} theme={ theme } /> }
           { allApps && <AllAppsView allApps={ allApps } theme={ theme } /> }
           { software && <InstallDoctorListView software={software} theme={ theme } /> } */}
-          { merged && <MergedView merged={ merged } theme={ theme } open={ open } deleteItem={ deleteApp} editItem={ editItem } />}
-          { openItem && <DetailView openItem={ openItem } theme={ theme } deleteItem={ deleteItem } editItem={ editItem } /> }
+          { merged && <MergedView merged={ merged } theme={ theme } selectApp={ selectApp } deleteItem={ deleteApp} editItem={ editItem } />}
+          { selectedApp && <DetailView selectedApp={ selectedApp } theme={ theme } deleteItem={ deleteItem } editItem={ editItem } /> }
         </SimpleGrid>
         {/* { merged && <OutputView mergedArray={ merged } /> } */}
-        <AppForm
-          ref={ modalRef }
-          isPopoverOpen={ isPopoverOpen }
-          setIsPopoverOpen={ setIsPopoverOpen }
-          save={ updateApp }
-          selectedApp={ openItem }
-        />
-        <div className={ overlayClass }></div>
+        {
+          selectedApp && isPopoverOpen && (
+            <><AppForm
+              ref={ modalRef }
+              isPopoverOpen={ isPopoverOpen }
+              setIsPopoverOpen={ setIsPopoverOpen }
+              updateApp={ updateApp }
+              selectedApp={ selectedApp }
+              handleInputChange={handleInputChange}
+            />
+            <div className={ overlayClass }></div></>
+          )
+        }
+
       </Container>
     </>
   );

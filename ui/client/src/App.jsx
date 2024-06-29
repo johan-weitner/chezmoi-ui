@@ -56,9 +56,9 @@ function App() {
     } else {
       seedAppList();
     }
-
-
   }, []);
+
+
 
   const seedAppList = () => {
     axios.get('http://localhost:3000/merged')
@@ -122,8 +122,12 @@ function App() {
 
   const updateItem = item => {
     console.log('Update: ', item);
-    merged[item.key] = item;
-    saveList({...merged});
+
+    setMerged((prevState) => ({
+      ...prevState,
+      [item.key]: item,
+    }));
+
     toast.success('Item was updated');
   };
 

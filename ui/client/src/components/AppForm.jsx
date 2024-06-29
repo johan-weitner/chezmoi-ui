@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, forwardRef } from 'react';
 import { nanoid } from 'nanoid';
+import { useForm } from 'react-hook-form';
 import Tagify from '@yaireo/tagify';
 import "@yaireo/tagify/dist/tagify.css";
 import {
@@ -13,26 +14,24 @@ import {
 } from '@mantine/core';
 import classes from './FeatureCards.module.css';
 import { ICON } from '../constants/icons';
+import useDebounce from '../utils/useDebounce.js';
 
 const AppForm = forwardRef(function AppForm(props, ref) {
-  const { isPopoverOpen, setIsPopoverOpen, save, selectedApp } = props;
-
+  const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp } = props;
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: selectedApp,
+  });
+  // const { isPopoverOpen, setIsPopoverOpen, save, selectedApp, handleInputChange } = props;
+  const [formState, setFormState] = useState({...selectedApp});
+  console.log('selectedApp: ', selectedApp);
   const TAG_WHITE_LIST = ['mac', 'win', 'linux', 'work', 'home', 'cli', 'desktop', 'dev'];
   window.TAGIFY_DEBUG = false;
 
-  const getField = item => {
-    return selectedApp && item.textarea ?
-      (<Textarea
-        id={item.name}
-        defaultValue={selectedApp[item.name]}
-        styles={{ height: "200px" }}
-        rows="14"
-      />) :
-      (<Input
-        id={item.name}
-        defaultValue={selectedApp[item.name]}
-      />);
-  };
+  useEffect(() => {
+    var input = document.querySelector('input[name=tags]');
+    new Tagify(input, { whitelist: TAG_WHITE_LIST, enforceWhitelist: true });
+    console.log('FormState: ', formState);
+  }, []);
 
   const formPartOne = [
     { name: '_name', label: 'Name', value: selectedApp?._name },
@@ -61,17 +60,36 @@ const AppForm = forwardRef(function AppForm(props, ref) {
     { name: 'pkgdarwin', label: 'Pkg-Darwin' },
     { name: 'ansible', label: 'Ansible' },
     { name: 'binary', label: 'Binary' },
+    { name: 'yay', label: 'Yay' },
     { name: 'appstore', label: 'AppStore' },
   ];
 
-  var input = document.querySelector('input[name=tags]');
-  new Tagify(input, { whitelist: TAG_WHITE_LIST, enforceWhitelist: true })
-  // var tagify = new Tagify(inputElm, {
-  //   originalInputValueFormat: valuesArr => valuesArr.map(item => item.value).join(',')
-  // })
+
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log('save');
+  // };
+  const onSubmit = (data) => {
+    // Handle form submission
+    console.log('Saving data:', data);
+    updateApp(data);
+  };
+
+  // const handleChange = (e) => {
+  //   console.log(e.target);
+  //   const {name: id, value} = e.target;
+  //   setFormState((prevFormData) => ({
+  //     ...prevFormData,
+  //     [id]: value,
+  //   }));
+  //   console.log(`Changed: ${id} = ${value}`);
+  //   console.log('After change: ', formState);
+  // };
 
   return selectedApp && (
     <Card ref={ ref } className={ isPopoverOpen ? classes.popup : classes.popupClosed} style={{ zIndex:"20000"}}>
+      <form onSubmit={handleSubmit(onSubmit)}>
       <h2 className={classes.editDetailHeader}>{ selectedApp && selectedApp._name }</h2>
       <h3 style={{ textAlign:"left", fontSize:"1.8em", fontWeight:"normal", marginTop:"0" }}>Info</h3>
       <SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" mt={50} className={classes.grid} style={{marginBottom:"-20px"}}>
@@ -80,7 +98,10 @@ const AppForm = forwardRef(function AppForm(props, ref) {
             return (
               <Group display="block" className={ classes.fieldcontainer } key={nanoid()}>
                 <Text component="label" htmlFor={ item.name } size="sm" fw={500}>{ item.label }</Text>
-                { getField(item) }
+                <Input
+                  id={item.name}
+                  {...register(item.name)}
+                />
               </Group>
             );
           })
@@ -92,8 +113,8 @@ const AppForm = forwardRef(function AppForm(props, ref) {
           <Text component="label" htmlFor="_desc" size="sm" fw={500}>Description</Text>
           <Textarea
             id="_desc"
-            defaultValue={selectedApp._desc}
             rows="8"
+            {...register('_desc')}
           />
         </Group>
       </SimpleGrid>
@@ -102,8 +123,8 @@ const AppForm = forwardRef(function AppForm(props, ref) {
       <div style={{ marginBottom:"40px", width:"100%" }}>
         <input
           name='tags'
-          defaultValue=''
           autoFocus
+          {...register('tags')}
         />
       </div>
 
@@ -114,7 +135,10 @@ const AppForm = forwardRef(function AppForm(props, ref) {
             return (
               <Group display="block" className={ classes.fieldcontainer } key={ nanoid() }>
                 <Text component="label" htmlFor={ item.name } size="sm" fw={500}>{ item.label }</Text>
-                <Input defaultValue={ selectedApp[item.name] } id={ item.name } />
+                <Input
+                  id={ item.name }
+                  {...register(item.name)}
+                />
               </Group>
             );
           })
@@ -123,8 +147,9 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 
       <Group justify='center'>
         <Button onClick={() => setIsPopoverOpen(false)} className={ classes.cancelBtn }>Cancel</Button>
-        <Button onClick={ () => save() } className={ classes.saveBtn } leftSection={<ICON.save/>}>Save</Button>
+        <Button type="submit" className={ classes.saveBtn } leftSection={<ICON.save/>}>Save</Button>
       </Group>
+      </form>
     </Card>
   );
 });
