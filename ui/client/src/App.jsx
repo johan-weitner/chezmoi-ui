@@ -14,14 +14,14 @@ function App() {
 	};
 
 	useEffect(() => {
-		axios
-			.get("http://localhost:3000/software")
-			.then((response) => {
-				setSoftware(response.data.softwarePackages);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		// axios
+		// 	.get("http://localhost:3000/software")
+		// 	.then((response) => {
+		// 		setSoftware(response.data.softwarePackages);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.error(error);
+		// 	});
 
 		if (localStorage.getItem("APP_LIST")) {
 			setSoftware(JSON.parse(localStorage.getItem("APP_LIST")));
@@ -43,6 +43,7 @@ function App() {
 				});
 
 				saveList(softwarePackages);
+				console.log('Seeded software: ', softwarePackages);
 				toast.success("List was successfully seeded");
 			})
 			.catch((error) => {
@@ -52,7 +53,8 @@ function App() {
 	};
 
 	const deleteApp = (key) => {
-		const appName = software[key].name;
+		console.log('Trying to delete app with key: ' + key);
+		const appName = software[key]?._name;
 		delete software[key];
 		saveList({ ...software });
 		toast.success(`${appName} was deleted`);

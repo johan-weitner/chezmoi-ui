@@ -111,7 +111,7 @@ const DetailView = (props) => {
 								Edit
 							</Button>
 							<Button
-								onClick={() => deleteItem(selectedApp.key)}
+								onClick={() => deleteItem()}
 								className={classes.deleteBtn}
 								leftSection={
 									<ICON.remove

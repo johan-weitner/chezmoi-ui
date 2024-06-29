@@ -23,9 +23,9 @@ const FeaturesCards = (props) => {
 		setSelectedApp(software[item]);
 	};
 
-	const deleteItem = (key) => {
+	const deleteItem = () => {
 		setSelectedApp(null);
-		deleteApp(selectedApp[key]);
+		deleteApp(selectedApp.key);
 	};
 
 	const editItem = () => {
