@@ -29,15 +29,16 @@ const packages = YAML.parse(packagesYaml);
 
 const softwareYamlPath = '/Users/johanweitner/.local/share/chezmoi/software.yml';
 const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
-const software = YAML.parse(softwareYaml);
+const software = YAML.parse(softwareYaml).softwarePackages;
+const keys = Object.keys(software);
+const softwareArray = [];
+for (let i = 0; i < keys.length; i++) {
+  softwareArray.push(software[keys[i]]);
+}
 
 const mergedYamlPath = '/Users/johanweitner/.local/share/chezmoi/merged.yml';
 const mergedYaml = fs.readFileSync(softwareYamlPath, 'utf8');
 const merged = YAML.parse(softwareYaml);
-
-// console.log(packages);
-// console.log(software);
-// console.log(merged);
 
 const {
   packages: {
@@ -84,6 +85,12 @@ const allApps = [...new Set([
 // Read software.yaml, iterate software list, if item exists in allApps, add to new array.
 // If missing, add item from allApps, with same object structure - for filling out later, in UI
 
+// A method that returns a subset of an array, like a pager
+const paginate = (arr, page_size, page_number) => {
+  return arr.slice((page_number - 1) * page_size, page_number * page_size);
+};
+
+
 
 app.set('json spaces', 2);
 app.use(cors());
@@ -109,11 +116,17 @@ app.get('/all', (req, res) => {
 });
 
 app.get('/software', (req, res) => {
+  // read request paramters
+  const { paged, page_size, page_number } = req.query;
   res.header('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
   res.header('Access-Control-Allow-Methods', 'GET'); // Allow GET method
   res.header('Access-Control-Allow-Headers', 'Content-Type'); // Allow Content-Type header
 
-  res.json(software);
+  if(paged === 'true') {
+    res.json(paginate(softwareArray, page_size, page_number));
+  } else {
+    res.json(software);
+  }
 });
 
 app.get('/merged', (req, res) => {

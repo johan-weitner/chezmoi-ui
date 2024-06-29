@@ -14,15 +14,6 @@ function App() {
 	};
 
 	useEffect(() => {
-		// axios
-		// 	.get("http://localhost:3000/software")
-		// 	.then((response) => {
-		// 		setSoftware(response.data.softwarePackages);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.error(error);
-		// 	});
-
 		if (localStorage.getItem("APP_LIST")) {
 			setSoftware(JSON.parse(localStorage.getItem("APP_LIST")));
 		} else {
