@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import { nanoid } from 'nanoid';
 import {
   SimpleGrid,
   Container,
@@ -7,17 +6,14 @@ import {
 } from '@mantine/core';
 import { useHotkeys } from 'react-hotkeys-hook';
 import classes from './FeatureCards.module.css';
-import { SUBCAT } from '../constants/strings';
-import { ICON } from '../constants/icons';
 import FeatureHeader from './FeatureHeader';
 import MergedView from './MergedView';
 import DetailView from './DetailView';
 import AppForm from './AppForm.jsx';
 
 const FeaturesCards = (props) => {
-  const { data, os, allApps, software, merged, deleteApp, save, startOver, updateItem } = props;
+  const { merged, deleteApp, save, startOver, updateItem } = props;
   const theme = useMantineTheme();
-  const [ key, setKey ] = useState('brews');
   const [ selectedApp, setSelectedApp ] = useState(null);
   const [ isPopoverOpen, setIsPopoverOpen ] = useState(false);
 
@@ -26,7 +22,6 @@ const FeaturesCards = (props) => {
 
   const selectApp = (e, item) => {
     e.preventDefault();
-    console.log('Selected item: ', item);
     setSelectedApp(merged[item]);
   };
 
@@ -42,14 +37,6 @@ const FeaturesCards = (props) => {
   const updateApp = (updatedApp) => {
     updateItem(updatedApp);
     setIsPopoverOpen(false);
-  };
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setSelectedApp((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
   };
 
   const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
@@ -71,7 +58,6 @@ const FeaturesCards = (props) => {
                 setIsPopoverOpen={ setIsPopoverOpen }
                 updateApp={ updateApp }
                 selectedApp={ selectedApp }
-                handleInputChange={handleInputChange}
               />
               <div className={ overlayClass }></div>
             </>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, forwardRef } from 'react';
+import { useEffect, forwardRef } from 'react';
 import { nanoid } from 'nanoid';
 import { useForm } from 'react-hook-form';
 import Tagify from '@yaireo/tagify';
@@ -18,15 +18,17 @@ import {
 } from '@mantine/core';
 import classes from './FeatureCards.module.css';
 import { ICON } from '../constants/icons';
+import { APP_FORM } from '../constants/appForm';
 
 const AppForm = forwardRef(function AppForm(props, ref) {
   const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp } = props;
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: selectedApp,
   });
 
   const TAG_WHITE_LIST = ['mac', 'win', 'linux', 'work', 'home', 'cli', 'desktop', 'dev'];
   window.TAGIFY_DEBUG = false;
+  const { formPartOne, formPartTwo } = APP_FORM;
 
   useEffect(() => {
     var input = document.querySelector('input[name=tags]');
@@ -35,35 +37,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 
   useHotkeys('esc', () => setIsPopoverOpen(false));
 
-  const formPartOne = [
-    { name: '_name', label: 'Name', value: selectedApp?._name },
-    { name: 'key', label: 'Key', value: selectedApp?.key },
-    { name: '_short', label: 'Short desc', value: selectedApp?._short },
-    { name: '_home', label: 'Homepage', value: selectedApp?._home },
-    { name: '_docs', label: 'Documentation', value: selectedApp?._docs },
-    { name: '_github', label: 'Github', value: selectedApp?._github }
-  ];
 
-  const formPartTwo = [
-    { name: 'whalebrew', label: 'Whalebrew' },
-    { name: 'apt', label: 'Apt' },
-    { name: 'homebrew', label: 'Homebrew' },
-    { name: 'cask', label: 'Homebrew cask' },
-    { name: 'cargo', label: 'Cargo' },
-    { name: 'npm', label: 'NPM' },
-    { name: 'pip', label: 'Pip' },
-    { name: 'pipx', label: 'Pipx' },
-    { name: 'gem', label: 'Gem' },
-    { name: 'script', label: 'Script' },
-    { name: 'choco', label: 'Chocolatey' },
-    { name: 'scoop', label: 'Scoop' },
-    { name: 'winget', label: 'Winget' },
-    { name: 'pkgdarwin', label: 'Pkg-Darwin' },
-    { name: 'ansible', label: 'Ansible' },
-    { name: 'binary', label: 'Binary' },
-    { name: 'yay', label: 'Yay' },
-    { name: 'appstore', label: 'AppStore' },
-  ];
 
   const onSubmit = (data) => {
     updateApp(data);

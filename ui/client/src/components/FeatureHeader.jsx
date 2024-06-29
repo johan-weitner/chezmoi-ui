@@ -1,5 +1,5 @@
 import { Container, Group, Button, Box } from '@mantine/core';
-import classes from './SubHeader.module.css';
+import classes from './FeatureHeader.module.css';
 import { ICON } from '../constants/icons.js'
 
 const FeatureHeader = props => {
