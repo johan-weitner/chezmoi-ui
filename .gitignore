@@ -8,3 +8,4 @@ apple.txt
 .chezmoidata/merged.yaml
 .chezmoidata/merged2.json
 .chezmoidata/software.yml
+**/backup*
