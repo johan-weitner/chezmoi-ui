@@ -23,7 +23,6 @@ const Header = (props) => {
 				>
 					Chezmoi UI
 				</h1>
-				<Burger opened={opened} onClick={toggle} hiddenFrom="xs" size="sm" />
 			</Container>
 		</header>
 	);

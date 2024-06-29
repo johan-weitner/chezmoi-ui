@@ -6,7 +6,7 @@ import { ICON } from "../constants/icons";
 import classes from "./FeatureCards.module.css";
 
 const ListView = (props) => {
-	const { software, theme, selectApp, deleteItem } = props;
+	const { software, theme, selectApp, editItem, deleteItem } = props;
 
 	const [filter, setFilter] = useState("");
 	// Strip metadata nodes from Install.Doctor list
@@ -116,10 +116,11 @@ const ListView = (props) => {
 										position: "absolute",
 										right: "50px",
 										top: "14px",
+										cursor: "pointer"
 									}}
 									stroke={2}
 									color="white"
-									onClick={() => editItem(item)}
+									onClick={() => editItem(item, true)}
 								/>
 								<ICON.remove
 									style={{
@@ -128,7 +129,7 @@ const ListView = (props) => {
 										position: "absolute",
 										right: "20px",
 										top: "14px",
-										cursor: "pointer",
+										cursor: "pointer"
 									}}
 									stroke={2}
 									color="white"

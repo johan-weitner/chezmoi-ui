@@ -9,3 +9,6 @@ apple.txt
 .chezmoidata/merged2.json
 .chezmoidata/software.yml
 **/backup*
+.aider*
+ui/server/.env
+software-custom.json

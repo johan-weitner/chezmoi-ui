@@ -45,6 +45,20 @@ background-color: var(--darkreader-bg--mantine-color-white);
   }
 }
 
+@keyframes glow {
+  from {
+    box-shadow:none;
+    border-color:#999;
+    color:#FFF;
+  }
+
+  to {
+    box-shadow: 0 0 20px #3391ff;
+    border-color:#3391ff;
+    color:#3391ff;
+  }
+}
+
 .itemBox {
   text-align: left;;
   border-radius:8px;
@@ -54,6 +68,12 @@ background-color: var(--darkreader-bg--mantine-color-white);
   margin-bottom:5px;
   font-size:1.2em;
   cursor: pointer !important;
+}
+.itemBox:hover {
+  animation-duration: .5s;
+  animation-name: glow;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .short {
@@ -77,15 +97,7 @@ background-color: var(--darkreader-bg--mantine-color-white);
   color:#FFF !important;
   font-size:1em !important;
 }
-/* .mainLink {
-  color:#FFF !important;
-  font-size:2em !important;
-  border:1px solid #FFF;
-  background-color:#999;
-  height:20px;
-  line-height:100%;
-  display:inline-block;
-} */
+
 .menuIcon {
   position: relative;
   top:113px;
@@ -98,8 +110,8 @@ background-color: var(--darkreader-bg--mantine-color-white);
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(10px); /* Apply blur to the background */
-  background-color: rgba(255, 255, 255, 0.5); /* Optional: Add semi-transparent color */
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.5);
   z-index: 1000;
   display: flex;
   align-items: center;

@@ -28,7 +28,8 @@ const FeaturesCards = (props) => {
 		deleteApp(selectedApp.key);
 	};
 
-	const editItem = () => {
+	const editItem = (key, makeSelection = false) => {
+		makeSelection && setSelectedApp(software[key]);
 		setIsPopoverOpen(true);
 	};
 

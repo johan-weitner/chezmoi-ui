@@ -6,7 +6,7 @@ const FeatureHeader = (props) => {
 	const { save, startOver } = props;
 
 	const links = [
-		{ icon: <ICON.save />, label: "Save backup", action: save },
+		{ icon: <ICON.save />, label: "Save", action: save },
 		{ icon: <ICON.startOver />, label: "Start over", action: startOver },
 	];
 

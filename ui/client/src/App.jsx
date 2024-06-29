@@ -8,33 +8,37 @@ import Header from "./components/Header";
 function App() {
 	const [software, setSoftware] = useState(null);
 
+	useEffect(() => {
+		// if (localStorage.getItem("APP_LIST")) {
+		// 	setSoftware(JSON.parse(localStorage.getItem("APP_LIST")));
+		// } else {
+		// 	seedAppList();
+		// }
+		seedAppList();
+	}, []);
+
 	const saveList = (list) => {
 		localStorage.setItem("APP_LIST", JSON.stringify(list));
 		setSoftware(list);
 	};
 
-	useEffect(() => {
-		if (localStorage.getItem("APP_LIST")) {
-			setSoftware(JSON.parse(localStorage.getItem("APP_LIST")));
-		} else {
-			seedAppList();
-		}
-	}, []);
-
 	const seedAppList = () => {
 		axios
 			.get("http://localhost:3000/software")
 			.then((response) => {
+				// const {
+				// 	data: { softwarePackages },
+				// } = response;
 				const {
-					data: { softwarePackages },
+					data
 				} = response;
-				const keys = Object.keys(softwarePackages);
+				const keys = Object.keys(data);
 				keys.map((key) => {
-					softwarePackages[key].key = key;
+					data[key].key = key;
 				});
 
-				saveList(softwarePackages);
-				console.log('Seeded software: ', softwarePackages);
+				saveList(data);
+				console.log('Seeded software: ', data);
 				toast.success("List was successfully seeded");
 			})
 			.catch((error) => {
