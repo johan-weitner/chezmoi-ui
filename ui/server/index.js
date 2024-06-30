@@ -11,13 +11,26 @@ const targetFilePath = process.env.TARGET_FILE;
 let softwareArray = [];
 let software;
 
+if(!softwareYamlPath ||!targetFilePath) {
+  console.log('Missing environment variables');
+  console.log('Please set SOURCE_FILE and TARGET_FILE');
+  process.exit(1);
+}
+
+if(!fs.existsSync(softwareYamlPath) && !fs.existsSync(targetFilePath)) {
+  console.log('Neither source file nor work file exists ');
+  console.log('Please point SOURCE_FILE and TARGET_FILE to existing files');
+  process.exit(1);
+}
 
 if(fs.existsSync(targetFilePath)) {
-  console.log('Work in progress exists - opening WiP...');
+  console.log('Work in progress exists - opening WiP:');
+  console.log(targetFilePath);
   softwareArray = fs.readFileSync(targetFilePath, 'utf8');
   software = JSON.parse(softwareArray);
 } else {
-  console.log('Work in progress does not exist - opening source file...');
+  console.log('Work in progress does not exist - opening source file:');
+  console.log(softwareYamlPath);
   const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
   software = YAML.parse(softwareYaml).softwarePackages;
   const keys = Object.keys(software);
@@ -80,6 +93,7 @@ app.post('/save', (req, res) => {
 // Start the web server.
 //
 app.listen(port, () => {
+  console.log(`\nServer is listening at port ${port}`);
   console.log(`Point your web browser at http://localhost:${port}`);
   console.log('...or whichever port the consuming client is served from');
 });
