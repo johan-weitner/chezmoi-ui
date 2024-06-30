@@ -6,7 +6,7 @@ import { ICON } from "../constants/icons";
 import classes from "./FeatureCards.module.css";
 
 const ListView = (props) => {
-	const { software, theme, selectApp, editItem, deleteItem } = props;
+	const { software, theme, selectApp, editItem, deleteItem, gotoNext } = props;
 
 	const [filter, setFilter] = useState("");
 	// Strip metadata nodes from Install.Doctor list

@@ -5,9 +5,9 @@ import {
 	Flex,
 	Group,
 	Text,
-	rem,
+	rem
 } from "@mantine/core";
-import { IconArrowRight } from "@tabler/icons-react";
+import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { ICON } from "../constants/icons";
 import classes from "./FeatureCards.module.css";
 
@@ -15,7 +15,7 @@ const markPopulated = <span className={classes.green}>✓</span>;
 const markUnPopulated = <span className={classes.red}>✗</span>;
 
 const DetailView = (props) => {
-	const { selectedApp, deleteItem, editItem, theme } = props;
+	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } = props;
 
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
@@ -33,6 +33,36 @@ const DetailView = (props) => {
 			>
 				Detail view
 			</Text>
+			<ActionIcon
+				size={32}
+				radius="xl"
+				color={theme.primaryColor}
+				variant="filled"
+				title="Go to previous app"
+				onClick={() => gotoPrev()}
+				style={{ position: "absolute", right: "90px", top: "130px", zIndex:"10" }}
+			>
+				<IconPlayerTrackPrev
+					style={{ width: rem(18), height: rem(18) }}
+					stroke={1.5}
+					color="white"
+				/>
+			</ActionIcon>
+			<ActionIcon
+				size={32}
+				radius="xl"
+				color={theme.primaryColor}
+				variant="filled"
+				title="Go to next app"
+				onClick={() => gotoNext()}
+				style={{ position: "absolute", right: "50px", top: "130px", zIndex:"10" }}
+			>
+				<IconPlayerTrackNext
+					style={{ width: rem(18), height: rem(18) }}
+					stroke={1.5}
+					color="white"
+				/>
+			</ActionIcon>
 			<Card
 				shadow="md"
 				fz="sm"
@@ -51,27 +81,28 @@ const DetailView = (props) => {
 							}}
 						>
 							<a
-								href={selectedApp._home || selectedApp._github || "#"}
+								href={selectedApp._home || selectedApp._github || null }
 								target="_blank"
 								style={{ fontWeight: "normal", textDecoration: "none" }}
 								title="Open homepage in new window"
 								rel="noreferrer"
 							>
 								{selectedApp._name || selectedApp._bin}
-								<ActionIcon
+								{/* <ActionIcon
 									size={32}
 									radius="xl"
 									color="transparent"
 									style={{ position: "relative", top: "3px", left: "10px" }}
 								>
-									<IconArrowRight
+									<IconFolderOpen
 										style={{ width: rem(30), height: rem(30) }}
 										stroke={2.5}
 										color="blue"
 									/>
-								</ActionIcon>
+								</ActionIcon> */}
 							</a>
 						</h2>
+
 						{selectedApp._short && (
 							<Text className={classes.short}>{selectedApp._short}</Text>
 						)}

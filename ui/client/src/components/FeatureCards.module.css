@@ -60,6 +60,7 @@ background-color: var(--darkreader-bg--mantine-color-white);
 }
 
 .itemBox {
+  position:relatve;
   text-align: left;;
   border-radius:8px;
   border:1px solid #999;

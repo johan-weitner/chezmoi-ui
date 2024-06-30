@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import { forwardRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useHotkeys } from "react-hotkeys-hook";
+import { IconPlayerTrackPrev, IconPlayerTrackNext } from "@tabler/icons-react";
 import "@yaireo/tagify/dist/tagify.css";
 import {
 	ActionIcon,
@@ -22,7 +23,7 @@ import { TAGS_WHITE_LIST } from "../constants/tagsWhiteList";
 import classes from "./FeatureCards.module.css";
 
 const AppForm = forwardRef(function AppForm(props, ref) {
-	const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp } = props;
+	const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp, gotoPrev, gotoNext, theme } = props;
 	const { register, handleSubmit } = useForm({
 		defaultValues: selectedApp,
 	});
@@ -48,12 +49,41 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 				className={isPopoverOpen ? classes.popup : classes.popupClosed}
 				style={{ zIndex: "20000" }}
 			>
-				<Flex justify="flex-end">
+				<Flex justify="flex-end" gap={"sm"}>
+				<ActionIcon
+						size={32}
+						radius="xl"
+						color={theme.primaryColor}
+						variant="filled"
+						title="Go to previous app"
+						onClick={() => gotoPrev()}
+					>
+						<IconPlayerTrackPrev
+							style={{ width: rem(18), height: rem(18) }}
+							stroke={1.5}
+							color="white"
+						/>
+					</ActionIcon>
+					<ActionIcon
+						size={32}
+						radius="xl"
+						color={theme.primaryColor}
+						variant="filled"
+						title="Go to next app"
+						onClick={() => gotoNext()}
+					>
+						<IconPlayerTrackNext
+							style={{ width: rem(18), height: rem(18) }}
+							stroke={1.5}
+							color="white"
+						/>
+					</ActionIcon>
 					<ActionIcon
 						size={32}
 						radius="xl"
 						color="#933"
 						variant="filled"
+						title="Close edit popover"
 						onClick={() => setIsPopoverOpen(false)}
 					>
 						<ICON.close

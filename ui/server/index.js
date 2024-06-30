@@ -45,14 +45,6 @@ const paginate = (list, page_size, page_number) => {
   return list.slice((page_number - 1) * page_size, page_number * page_size);
 };
 
-// const getStringArray = arr => {
-//   return arr.reduce((acc, current) => [...acc, current.name], []);
-// };
-
-// const nullCheck = arr => {
-//   return arr ? arr : [];
-// };
-
 app.set('json spaces', 2);
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
@@ -83,8 +75,6 @@ app.post('/save', (req, res) => {
   res.header('Access-Control-Allow-Methods', 'POST');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   const jsonStr = JSON.stringify(req.body);
-  // const filePath = `/Users/johanweitner/.local/share/chezmoi/backup_${new Date().getTime()}.yml`;
-  // fs.writeFileSync(filePath, yamlStr, 'utf8');
   fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
   res.sendStatus(200);
 });

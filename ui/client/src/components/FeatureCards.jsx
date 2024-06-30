@@ -6,6 +6,7 @@ import DetailView from "./DetailView";
 import classes from "./FeatureCards.module.css";
 import FeatureHeader from "./FeatureHeader";
 import ListView from "./ListView";
+import { toast } from "sonner";
 
 const FeaturesCards = (props) => {
 	const { software, deleteApp, save, startOver, updateItem } = props;
@@ -19,7 +20,7 @@ const FeaturesCards = (props) => {
 	console.log("Software: ", software);
 
 	const selectApp = (e, item) => {
-		e.preventDefault();
+		e?.preventDefault();
 		setSelectedApp(software[item]);
 	};
 
@@ -36,6 +37,33 @@ const FeaturesCards = (props) => {
 	const updateApp = (updatedApp) => {
 		updateItem(updatedApp);
 		setIsPopoverOpen(false);
+	};
+
+	const gotoPrev = () => {
+		if (selectedApp) {
+			const keys = Object.keys(software);
+			const newKey = keys[keys.indexOf(selectedApp.key) - 1];
+			console.log(keys.indexOf(newKey), (newKey > -1));
+			if(keys.indexOf(newKey) > -1) {
+				selectApp(null, newKey);
+			} else {
+				toast.warning("Already at the start of list");
+			}
+
+		}
+	};
+
+	const gotoNext = () => {
+		if (selectedApp) {
+			const keys = Object.keys(software);
+			const newKey = keys[keys.indexOf(selectedApp.key) + 1];
+			console.log(keys.indexOf(newKey), keys.length, (newKey < keys.length));
+			if(keys.indexOf(newKey) < keys.length) {
+				selectApp(null, newKey);
+			} else {
+				toast.warning("Already at the end of list");
+			}
+		}
 	};
 
 	const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
@@ -74,6 +102,8 @@ const FeaturesCards = (props) => {
 							theme={theme}
 							deleteItem={deleteItem}
 							editItem={editItem}
+							gotoPrev={ gotoPrev }
+							gotoNext={ gotoNext }
 						/>
 					)}
 				</SimpleGrid>
@@ -85,6 +115,9 @@ const FeaturesCards = (props) => {
 							setIsPopoverOpen={setIsPopoverOpen}
 							updateApp={updateApp}
 							selectedApp={selectedApp}
+							gotoPrev={ gotoPrev }
+							gotoNext={ gotoNext }
+							theme={theme}
 						/>
 						<div className={overlayClass} />
 					</>
