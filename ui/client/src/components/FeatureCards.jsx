@@ -65,7 +65,7 @@ const FeaturesCards = (props) => {
 
 	const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
 
-	initHotKeys(gotoPrev, gotoNext);
+	initHotKeys(setIsPopoverOpen, gotoPrev, gotoNext, updateApp);
 
 	return (
 		<>

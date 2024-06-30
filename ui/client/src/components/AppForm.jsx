@@ -36,8 +36,6 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		new Tagify(input, { whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
 	}, []);
 
-	initHotKeys();
-
 	const onSubmit = (data) => {
 		updateApp(data);
 	};
