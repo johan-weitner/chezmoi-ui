@@ -1,8 +1,8 @@
+import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import Tagify from "@yaireo/tagify";
 import { nanoid } from "nanoid";
 import { forwardRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { IconPlayerTrackPrev, IconPlayerTrackNext } from "@tabler/icons-react";
 import "@yaireo/tagify/dist/tagify.css";
 import {
 	ActionIcon,
@@ -23,7 +23,15 @@ import { initHotKeys } from "utils/hotkeys";
 import classes from "./FeatureCards.module.css";
 
 const AppForm = forwardRef(function AppForm(props, ref) {
-	const { isPopoverOpen, setIsPopoverOpen, updateApp, selectedApp, gotoPrev, gotoNext, theme } = props;
+	const {
+		isPopoverOpen,
+		setIsPopoverOpen,
+		updateApp,
+		selectedApp,
+		gotoPrev,
+		gotoNext,
+		theme,
+	} = props;
 	const { register, handleSubmit } = useForm({
 		defaultValues: selectedApp,
 	});
@@ -48,7 +56,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 				style={{ zIndex: "20000" }}
 			>
 				<Flex justify="flex-end" gap={"sm"}>
-				<ActionIcon
+					<ActionIcon
 						size={32}
 						radius="xl"
 						color={theme.primaryColor}

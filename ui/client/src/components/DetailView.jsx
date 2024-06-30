@@ -5,7 +5,7 @@ import {
 	Flex,
 	Group,
 	Text,
-	rem
+	rem,
 } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { ICON } from "../constants/icons";
@@ -15,7 +15,8 @@ const markPopulated = <span className={classes.green}>✓</span>;
 const markUnPopulated = <span className={classes.red}>✗</span>;
 
 const DetailView = (props) => {
-	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } = props;
+	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } =
+		props;
 
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
@@ -40,7 +41,12 @@ const DetailView = (props) => {
 				variant="filled"
 				title="Go to previous app"
 				onClick={() => gotoPrev()}
-				style={{ position: "absolute", right: "90px", top: "130px", zIndex:"10" }}
+				style={{
+					position: "absolute",
+					right: "90px",
+					top: "130px",
+					zIndex: "10",
+				}}
 			>
 				<IconPlayerTrackPrev
 					style={{ width: rem(18), height: rem(18) }}
@@ -55,7 +61,12 @@ const DetailView = (props) => {
 				variant="filled"
 				title="Go to next app"
 				onClick={() => gotoNext()}
-				style={{ position: "absolute", right: "50px", top: "130px", zIndex:"10" }}
+				style={{
+					position: "absolute",
+					right: "50px",
+					top: "130px",
+					zIndex: "10",
+				}}
 			>
 				<IconPlayerTrackNext
 					style={{ width: rem(18), height: rem(18) }}
@@ -81,7 +92,7 @@ const DetailView = (props) => {
 							}}
 						>
 							<a
-								href={selectedApp._home || selectedApp._github || null }
+								href={selectedApp._home || selectedApp._github || null}
 								target="_blank"
 								style={{ fontWeight: "normal", textDecoration: "none" }}
 								title="Open homepage in new window"

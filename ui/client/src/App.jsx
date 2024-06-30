@@ -29,16 +29,14 @@ function App() {
 				// const {
 				// 	data: { softwarePackages },
 				// } = response;
-				const {
-					data
-				} = response;
+				const { data } = response;
 				const keys = Object.keys(data);
 				keys.map((key) => {
 					data[key].key = key;
 				});
 
 				saveList(data);
-				console.log('Seeded software: ', data);
+				console.log("Seeded software: ", data);
 				toast.success("List was successfully seeded");
 			})
 			.catch((error) => {
@@ -48,7 +46,6 @@ function App() {
 	};
 
 	const deleteApp = (key) => {
-		console.log('Trying to delete app with key: ' + key);
 		const appName = software[key]?._name;
 		delete software[key];
 		saveList({ ...software });

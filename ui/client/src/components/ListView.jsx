@@ -116,7 +116,7 @@ const ListView = (props) => {
 										position: "absolute",
 										right: "50px",
 										top: "14px",
-										cursor: "pointer"
+										cursor: "pointer",
 									}}
 									stroke={2}
 									color="white"
@@ -129,7 +129,7 @@ const ListView = (props) => {
 										position: "absolute",
 										right: "20px",
 										top: "14px",
-										cursor: "pointer"
+										cursor: "pointer",
 									}}
 									stroke={2}
 									color="white"
