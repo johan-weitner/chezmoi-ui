@@ -26,9 +26,6 @@ function App() {
 		axios
 			.get("http://localhost:3000/software")
 			.then((response) => {
-				// const {
-				// 	data: { softwarePackages },
-				// } = response;
 				const { data } = response;
 				const keys = Object.keys(data);
 				keys.map((key) => {
