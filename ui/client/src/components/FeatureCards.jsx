@@ -1,24 +1,20 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
 import { useRef, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import AppForm from "./AppForm.jsx";
 import DetailView from "./DetailView";
 import classes from "./FeatureCards.module.css";
 import FeatureHeader from "./FeatureHeader";
 import ListView from "./ListView";
 import { toast } from "sonner";
-import { initHotKeys } from "../utils/hotkeys";
+import { initHotKeys } from "utils/hotkeys";
 
 const FeaturesCards = (props) => {
 	const { software, deleteApp, save, startOver, updateItem } = props;
 	const theme = useMantineTheme();
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-	initHotKeys();
 	const modalRef = useRef();
-
-	console.log("Software: ", software);
+	const LIST_INDEX_OFFSET = 4;
 
 	const selectApp = (e, item) => {
 		e?.preventDefault();
@@ -45,7 +41,7 @@ const FeaturesCards = (props) => {
 			const keys = Object.keys(software);
 			const newKey = keys[keys.indexOf(selectedApp.key) - 1];
 			console.log(keys.indexOf(newKey), (newKey > -1));
-			if(keys.indexOf(newKey) > -1) {
+			if((keys.indexOf(newKey) - LIST_INDEX_OFFSET) > -1) {
 				selectApp(null, newKey);
 			} else {
 				toast.warning("Already at the start of list");
@@ -68,6 +64,8 @@ const FeaturesCards = (props) => {
 	};
 
 	const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
+
+	initHotKeys(gotoPrev, gotoNext);
 
 	return (
 		<>
