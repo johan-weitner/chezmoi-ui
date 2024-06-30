@@ -7,6 +7,7 @@ import classes from "./FeatureCards.module.css";
 import FeatureHeader from "./FeatureHeader";
 import ListView from "./ListView";
 import { toast } from "sonner";
+import { initHotKeys } from "../utils/hotkeys";
 
 const FeaturesCards = (props) => {
 	const { software, deleteApp, save, startOver, updateItem } = props;
@@ -14,7 +15,7 @@ const FeaturesCards = (props) => {
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-	useHotkeys("esc", () => setIsPopoverOpen(false));
+	initHotKeys();
 	const modalRef = useRef();
 
 	console.log("Software: ", software);

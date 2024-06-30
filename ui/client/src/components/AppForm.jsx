@@ -20,6 +20,7 @@ import {
 import { APP_FORM } from "../constants/appForm";
 import { ICON } from "../constants/icons";
 import { TAGS_WHITE_LIST } from "../constants/tagsWhiteList";
+import { initHotKeys } from "../utils/hotkeys";
 import classes from "./FeatureCards.module.css";
 
 const AppForm = forwardRef(function AppForm(props, ref) {
@@ -36,7 +37,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		new Tagify(input, { whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
 	}, []);
 
-	useHotkeys("esc", () => setIsPopoverOpen(false));
+	initHotKeys();
 
 	const onSubmit = (data) => {
 		updateApp(data);
