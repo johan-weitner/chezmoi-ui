@@ -10,7 +10,7 @@ So this is a UI for Chezmoi users who'd like to base an application list on the 
 
 ## Get started
 
-Clone this repo and make sure you have [Node](https://nodejs.org/) installed. Then run `start.sh`, (or `start.bat` if you're on Windows). Then open `http://localhost:5173`in a browser. That's it. Don't forget to stop the servers with `stop.sh`, (and `stop.bat`respectively).
+Clone this repo and make sure you have [Node](https://nodejs.org/) installed. Rename `.env.example` `.env` and edit the file locations. Then run `start.sh`, (or `start.bat` if you're on Windows). The UI is now available at `http://localhost:5173`. That's it. Don't forget to stop the servers with `stop.sh`, (and `stop.bat`respectively) when you're done, or you might end up with a lot of invisible Node processes. (If you prefer you can of course navigate to `/client`and `server`respectively and run the `npm` commands to start the respective server).
 
 ## Keyboard shortcuts
 
