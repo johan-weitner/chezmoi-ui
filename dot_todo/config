@@ -1,6 +1,0 @@
-export TODO_DIR="$HOME/Documents/todo"
-export TODO_FILE="$TODO_DIR/todo.txt"
-export DONE_FILE="$TODO_DIR/done.txt"
-export REPORT_FILE="$TODO_DIR/report.txt"
-export TMP_FILE="/tmp/todo.tmp"
-export TODOTXT_DEFAULT_ACTION=ls
