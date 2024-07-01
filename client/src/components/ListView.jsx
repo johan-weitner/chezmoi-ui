@@ -48,7 +48,7 @@ const ListView = (props) => {
 				mt="md"
 				style={{ textAlign: "left", marginBottom: "30px" }}
 			>
-				Merged list
+				Applications
 			</Text>
 			<TextInput
 				radius="xl"
