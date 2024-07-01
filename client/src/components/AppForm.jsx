@@ -20,7 +20,7 @@ import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
 import { initHotKeys } from "utils/hotkeys";
-import classes from "./FeatureCards.module.css";
+import classes from "./MainView.module.css";
 
 const AppForm = forwardRef(function AppForm(props, ref) {
 	const {

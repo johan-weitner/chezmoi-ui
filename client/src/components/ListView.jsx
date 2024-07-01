@@ -3,7 +3,7 @@ import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import { ICON } from "../constants/icons";
-import classes from "./FeatureCards.module.css";
+import classes from "./MainView.module.css";
 
 const ListView = (props) => {
 	const { software, theme, selectApp, editItem, deleteItem, gotoNext } = props;
@@ -48,7 +48,7 @@ const ListView = (props) => {
 				mt="md"
 				style={{ textAlign: "left", marginBottom: "30px" }}
 			>
-				Merged list
+				Applications
 			</Text>
 			<TextInput
 				radius="xl"

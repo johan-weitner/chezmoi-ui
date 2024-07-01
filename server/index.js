@@ -11,35 +11,60 @@ const targetFilePath = process.env.TARGET_FILE;
 let softwareArray = [];
 let software;
 
-console.log(`softwareYamlPath: ${softwareYamlPath}`);
-console.log(`targetFilePath: ${targetFilePath}`);
+console.log('\n\n-= STARTING BACKEND SERVER... =-\n');
+console.log(`Path to source file: ${softwareYamlPath}`);
+fs.existsSync(softwareYamlPath) ?
+  console.log('\x1b[32m%s\x1b[0m', 'Found ✔\n') :
+  console.log('\x1b[31m%s\x1b[0m', 'Not found ✘\n');
+console.log(`Path to work file: ${targetFilePath}`);
+fs.existsSync(targetFilePath) ?
+  console.log('\x1b[32m%s\x1b[0m', 'Found ✔\n') :
+  console.log('\x1b[31m%s\x1b[0m', 'Not found ✘\n');
+
+const isEmpty = (data) => {
+  return Object.keys(data).length === 0;
+};
+
+const readSourceFile = () => {
+  const arr = fs.readFileSync(softwareYamlPath, 'utf8');
+  const data = YAML.parse(arr);
+  if (isEmpty()) {
+    console.error('Something went wrong - work file is empty');
+    return;
+  }
+  return data;
+}
 
 const readWorkFile = () => {
   const arr = fs.readFileSync(targetFilePath, 'utf8');
-  console.log('Array: ', arr);
-  return JSON.parse(arr);
+  const data = JSON.parse(arr);
+  if (isEmpty()) {
+    console.error('Something went wrong - work file is empty');
+    return;
+  }
+  return data;
 }
 
-if(!softwareYamlPath ||!targetFilePath) {
-  console.log('Missing environment variables');
-  console.log('Please set SOURCE_FILE and TARGET_FILE');
+if (!softwareYamlPath || !targetFilePath) {
+  console.error('\x1b[31m%s\x1b[0m', 'Missing environment variables');
+  console.error('\x1b[31m%s\x1b[0m', 'Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment');
   process.exit(1);
 }
 
-if(!fs.existsSync(softwareYamlPath) && !fs.existsSync(targetFilePath)) {
-  console.log('Neither source file nor work file exists ');
-  console.log('Please point SOURCE_FILE and TARGET_FILE to existing files');
+if (!fs.existsSync(softwareYamlPath) && !fs.existsSync(targetFilePath)) {
+  console.error('\x1b[31m%s\x1b[0m', 'Neither source file nor work file exists ');
+  console.error('\x1b[31m%s\x1b[0m', 'Please point SOURCE_FILE and TARGET_FILE to existing files');
   process.exit(1);
 }
 
-if(fs.existsSync(targetFilePath)) {
+if (fs.existsSync(targetFilePath)) {
   console.log('Work in progress exists - opening WiP:');
   console.log(targetFilePath);
 
   softwareArray = fs.readFileSync(targetFilePath, 'utf8');
   software = JSON.parse(softwareArray);
 } else {
-  console.log('Work in progress does not exist - opening source file:');
+  console.log('Work in progress does not exist - opening source file to seed a starting point:');
   console.log(softwareYamlPath);
   const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
   software = YAML.parse(softwareYaml).softwarePackages;
@@ -72,7 +97,7 @@ app.get('/software', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
-  if(paged === 'true') {
+  if (paged === 'true') {
     res.json(paginate(arr, page_size, page_number));
   } else {
     res.json(software);
@@ -97,11 +122,11 @@ app.post('/save', (req, res) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   const jsonStr = JSON.stringify(req.body);
   fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
-  res.sendStatus(200);
+  res.status(200).json(jsonStr);
 });
 
 app.listen(port, () => {
-  console.log(`\nServer is listening at port ${port}`);
+  console.log('\x1b[32m%s\x1b[0m', `\nServer is listening at port ${port}`);
   console.log(`Point your web browser at http://localhost:${port}`);
   console.log('...or whichever port the consuming client is served from');
 });

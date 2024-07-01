@@ -1,7 +1,7 @@
 #!/bin/bash
 
 cd server
-pnpm start &
+node index.js &
 pid=$!
 echo $pid > /tmp/srvprocess.pid
 

@@ -1,20 +1,27 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
-import { initHotKeys } from "utils/hotkeys";
+import { useHotkeys } from "react-hotkeys-hook";
 import AppForm from "./AppForm.jsx";
-import DetailView from "./DetailView";
-import classes from "./FeatureCards.module.css";
-import FeatureHeader from "./FeatureHeader";
-import ListView from "./ListView";
+import DetailView from "./DetailView.jsx";
+import classes from "./MainView.module.css";
+import MainHeader from "./MainHeader.jsx";
+import ListView from "./ListView.jsx";
 
-const FeaturesCards = (props) => {
+const MainView = (props) => {
 	const { software, deleteApp, save, startOver, updateItem } = props;
 	const theme = useMantineTheme();
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const modalRef = useRef();
 	const LIST_INDEX_OFFSET = 4;
+
+	useHotkeys("esc", () => setIsPopoverOpen(false));
+	useHotkeys("alt + b", () => gotoPrev());
+	useHotkeys("alt + n", () => gotoNext());
+	useHotkeys("ctrl + s", () => {
+		isPopoverOpen ? updateApp(selectedApp) : save();
+	});
 
 	const selectApp = (e, item) => {
 		e?.preventDefault();
@@ -64,8 +71,6 @@ const FeaturesCards = (props) => {
 
 	const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
 
-	initHotKeys(setIsPopoverOpen, gotoPrev, gotoNext, updateApp);
-
 	return (
 		<>
 			<Container
@@ -73,7 +78,7 @@ const FeaturesCards = (props) => {
 				py="xl"
 				style={{ backgroundColor: "#333", paddingTop: "0px" }}
 			>
-				<FeatureHeader
+				<MainHeader
 					save={save}
 					startOver={startOver}
 					style={{ borderRadius: "10px" }}
@@ -125,4 +130,4 @@ const FeaturesCards = (props) => {
 	);
 };
 
-export default FeaturesCards;
+export default MainView;
