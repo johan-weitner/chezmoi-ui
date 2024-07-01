@@ -1,8 +1,8 @@
 .grid {
-background-color:#333;
-margin:10px 0 20px 0 !important;
-padding-top:0;
-background-color: var(--darkreader-bg--mantine-color-white);
+  background-color: #333;
+  margin: 10px 0 20px 0 !important;
+  padding-top: 0;
+  background-color: var(--darkreader-bg--mantine-color-white);
 }
 
 .title {
@@ -47,29 +47,31 @@ background-color: var(--darkreader-bg--mantine-color-white);
 
 @keyframes glow {
   from {
-    box-shadow:none;
-    border-color:#999;
-    color:#FFF;
+    box-shadow: none;
+    border-color: #999;
+    color: #FFF;
   }
 
   to {
     box-shadow: 0 0 20px #3391ff;
-    border-color:#3391ff;
-    color:#3391ff;
+    border-color: #3391ff;
+    color: #3391ff;
   }
 }
 
 .itemBox {
-  position:relatve;
-  text-align: left;;
-  border-radius:8px;
-  border:1px solid #999;
-  background-color:#292929;
-  padding:10px 25px;
-  margin-bottom:5px;
-  font-size:1.2em;
+  position: relatve;
+  text-align: left;
+  ;
+  border-radius: 8px;
+  border: 1px solid #999;
+  background-color: #292929;
+  padding: 10px 25px;
+  margin-bottom: 5px;
+  font-size: 1.2em;
   cursor: pointer !important;
 }
+
 .itemBox:hover {
   animation-duration: .5s;
   animation-name: glow;
@@ -79,30 +81,32 @@ background-color: var(--darkreader-bg--mantine-color-white);
 
 .short {
   font-size: 1.2em !important;
-  margin-bottom:20px !important;
+  margin-bottom: 20px !important;
 }
 
 .desc {
   font-size: 1.0em !important;
-  margin-bottom:20px !important;
+  margin-bottom: 20px !important;
 }
 
 .header {
   margin: 0;
 }
+
 .links {
   margin: 0;
 }
+
 .mainLinks {
   margin: 0;
-  color:#FFF !important;
-  font-size:1em !important;
+  color: #FFF !important;
+  font-size: 1em !important;
 }
 
 .menuIcon {
   position: relative;
-  top:113px;
-  display:none;
+  top: 113px;
+  display: none;
 }
 
 .overlay {
@@ -118,93 +122,95 @@ background-color: var(--darkreader-bg--mantine-color-white);
   align-items: center;
   justify-content: center;
 }
+
 .popup,
 .popupClosed {
-  position:absolute !important;
-  top:50px;
-  left:200px;
-  right:200px;
-  border:1px solid #999;
-  background-color:#222;
-  min-height:400px;
-  box-shadow: 0px 10px 50px rgba(0,0,0,.4)  !important;
-  display:block;
-  z-index:2000 !important;
-  backdrop-filter:none;
-  border-radius:20px;
-  padding:30px;
+  position: absolute !important;
+  top: 50px;
+  left: 200px;
+  right: 200px;
+  border: 1px solid #999;
+  background-color: #222;
+  min-height: 400px;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, .4) !important;
+  display: block;
+  z-index: 2000 !important;
+  backdrop-filter: none;
+  border-radius: 20px;
+  padding: 30px;
 }
 
 .popupClosed {
-  display:none !important;
-  /* linear gradient from #933 to #C33 */
-  /* background: linear-gradient(to bottom, #933, #C33); */
+  display: none !important;
 }
 
 .popup input,
 .popup textarea {
-  background-color:#333;
+  background-color: #333;
 }
 
 .popup div {
-  text-align:left;
+  text-align: left;
 }
 
 .popupCloseBtn {
-  position:absolute;
-  top:10px;
-  right:10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .editDetailHeader {
-  margin:0 0 30px 0;
-  font-size:2.5em;
-  font-weight:normal;
-  text-align:left;
-  border-bottom:2px solid #FFF;
+  margin: 0 0 30px 0;
+  font-size: 2.5em;
+  font-weight: normal;
+  text-align: left;
+  border-bottom: 2px solid #FFF;
 }
 
 .fieldcontainer {
-  margin:0 0 40px 0;
+  margin: 0 0 40px 0;
 }
+
 .fieldcontainerHalf {
   /* width:49%; */
 }
+
 .fieldcontainer input,
 .fieldcontainerHalf input,
 .fieldcontainer textarea {
-  font-family:monospace;
+  font-family: monospace;
 }
 
 .green {
-  color:#393;
+  color: #393;
 }
 
 .red {
-  color:#933;
+  color: #933;
 }
 
 .indicatorGroup {
-  margin-bottom:20px;
+  margin-bottom: 20px;
 }
 
 .cancelBtn {
   background-color: #555 !important;
 }
+
 .editBtn {
   background-color: var(--mantine-color-blue-filled) !important;
 }
+
 .deleteBtn {
-  /* background-color: var(--mantine-color-red-filled) !important; */
   background-color: #933 !important;
 }
+
 .saveBtn {
-  /* background-color: var(--mantine-color-green-filled) !important; */
   background-color: #393 !important;
 }
 
 .tagDisplay {
   width: 100%;
   border-radius: 4px;
-  background-color:#999;
+  background-color: #999;
 }

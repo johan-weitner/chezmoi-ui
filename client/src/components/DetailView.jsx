@@ -9,7 +9,7 @@ import {
 } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { ICON } from "../constants/icons";
-import classes from "./FeatureCards.module.css";
+import classes from "./MainView.module.css";
 
 const markPopulated = <span className={classes.green}>✓</span>;
 const markUnPopulated = <span className={classes.red}>✗</span>;

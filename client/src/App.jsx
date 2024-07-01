@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
+import { AppShell, Burger } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import { Toaster, toast } from "sonner";
-import FeatureCards from "./components/FeatureCards";
+import MainView from "./components/MainView";
 import Header from "./components/Header";
 
 function App() {
 	const [software, setSoftware] = useState(null);
+	const [opened, { toggle }] = useDisclosure();
 
 	useEffect(() => {
 		seedAppList();
@@ -14,7 +17,7 @@ function App() {
 
 	const saveList = (list) => {
 		setSoftware(list);
-		saveDocument();
+		// saveDocument();
 	};
 
 	const seedAppList = () => {
@@ -45,11 +48,19 @@ function App() {
 	};
 
 	const saveDocument = () => {
+		if (software === null || Object.keys(software).length === 0) {
+			toast.error("Critical error - no software list to save");
+			return;
+		}
 		axios
 			.post("http://localhost:3000/save", {
 				...software,
 			})
-			.then(() => {
+			.then((response) => {
+				const { data } = response;
+				setSoftware((prevState) => ({
+					...JSON.parse(data),
+				}));
 				toast.success("Saved current state to disk");
 			})
 			.catch((error) => {
@@ -73,19 +84,27 @@ function App() {
 	};
 
 	return (
-		<>
-			<Header />
-			{software && (
-				<FeatureCards
-					software={software}
-					deleteApp={deleteApp}
-					save={saveDocument}
-					startOver={startOver}
-					updateItem={updateItem}
-				/>
-			)}
+		<AppShell
+			header={{ height: 40 }}
+			padding="md"
+		>
+			<AppShell.Header withBorder={false}>
+				<Header />
+			</AppShell.Header>
+
+			<AppShell.Main>
+				{software && (
+					<MainView
+						software={software}
+						deleteApp={deleteApp}
+						save={saveDocument}
+						startOver={startOver}
+						updateItem={updateItem}
+					/>
+				)}
+			</AppShell.Main>
 			<Toaster theme="dark" richColors closeButton pauseWhenPageIsHidden />
-		</>
+		</AppShell>
 	);
 }
 

@@ -1,8 +1,8 @@
 import { Box, Button, Container, Group } from "@mantine/core";
 import { ICON } from "../constants/icons.js";
-import classes from "./FeatureHeader.module.css";
+import classes from "./MainHeader.module.css";
 
-const FeatureHeader = (props) => {
+const MainHeader = (props) => {
 	const { save, startOver } = props;
 
 	const links = [
@@ -40,4 +40,4 @@ const FeatureHeader = (props) => {
 	);
 };
 
-export default FeatureHeader;
+export default MainHeader;

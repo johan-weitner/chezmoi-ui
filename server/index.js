@@ -14,6 +14,8 @@ let software;
 console.log(`softwareYamlPath: ${softwareYamlPath}`);
 console.log(`targetFilePath: ${targetFilePath}`);
 
+// Put file reads in functions and call them on boot and whenever a request is made for realted data
+
 const readWorkFile = () => {
   const arr = fs.readFileSync(targetFilePath, 'utf8');
   console.log('Array: ', arr);
@@ -97,7 +99,7 @@ app.post('/save', (req, res) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   const jsonStr = JSON.stringify(req.body);
   fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
-  res.sendStatus(200);
+  res.status(200).json(jsonStr);
 });
 
 app.listen(port, () => {
