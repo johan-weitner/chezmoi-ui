@@ -12,3 +12,6 @@ apple.txt
 .aider*
 ui/server/.env
 software-custom.json
+client/node_modules
+server/node_modules
+server/.env
