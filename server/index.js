@@ -8,14 +8,17 @@ const fs = require('fs');
 
 const softwareYamlPath = process.env.SOURCE_FILE;
 const targetFilePath = process.env.TARGET_FILE;
-let arr = [];
+let softwareArray = [];
 let software;
 
-// const readWorkFile = () => {
-//   const arr = fs.readFileSync(targetFilePath, 'utf8');
-//   console.log('Array: ', arr);
-//   return JSON.parse(arr);
-// }
+console.log(`softwareYamlPath: ${softwareYamlPath}`);
+console.log(`targetFilePath: ${targetFilePath}`);
+
+const readWorkFile = () => {
+  const arr = fs.readFileSync(targetFilePath, 'utf8');
+  console.log('Array: ', arr);
+  return JSON.parse(arr);
+}
 
 if(!softwareYamlPath ||!targetFilePath) {
   console.log('Missing environment variables');
@@ -32,8 +35,8 @@ if(!fs.existsSync(softwareYamlPath) && !fs.existsSync(targetFilePath)) {
 if(fs.existsSync(targetFilePath)) {
   console.log('Work in progress exists - opening WiP:');
   console.log(targetFilePath);
+
   softwareArray = fs.readFileSync(targetFilePath, 'utf8');
-  console.log('softwareArray: ', softwareArray);
   software = JSON.parse(softwareArray);
 } else {
   console.log('Work in progress does not exist - opening source file:');
@@ -43,8 +46,6 @@ if(fs.existsSync(targetFilePath)) {
   const keys = Object.keys(software);
 
   for (let i = 0; i < keys.length; i++) {
-    // arr.push(software[keys[i]]);
-    // arr[i].key = keys[i];
     softwareArray.push(software[keys[i]]);
     softwareArray[i].key = keys[i];
   }
@@ -71,7 +72,6 @@ app.get('/software', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'GET');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
-
   if(paged === 'true') {
     res.json(paginate(arr, page_size, page_number));
   } else {
@@ -86,11 +86,7 @@ app.get('/rawlist', (req, res) => {
   res.set('Content-Type', 'text/plain');
 
   softwareArray = fs.readFileSync(targetFilePath, 'utf8');
-  console.log('softwareArray: ', softwareArray);
   const yamlData = YAML.stringify(softwareArray);
-
-  console.log('JSON: ', JSON.stringify(jsonData).substring(0, 1000));
-  console.log('YAML: ', yamlData.substring(0, 1000));
 
   res.send(yamlData);
 });
