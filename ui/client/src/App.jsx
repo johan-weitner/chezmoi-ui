@@ -9,17 +9,12 @@ function App() {
 	const [software, setSoftware] = useState(null);
 
 	useEffect(() => {
-		// if (localStorage.getItem("APP_LIST")) {
-		// 	setSoftware(JSON.parse(localStorage.getItem("APP_LIST")));
-		// } else {
-		// 	seedAppList();
-		// }
 		seedAppList();
 	}, []);
 
 	const saveList = (list) => {
-		localStorage.setItem("APP_LIST", JSON.stringify(list));
 		setSoftware(list);
+		saveDocument();
 	};
 
 	const seedAppList = () => {
@@ -49,7 +44,7 @@ function App() {
 		toast.success(`${appName} was deleted`);
 	};
 
-	const saveNewDocument = () => {
+	const saveDocument = () => {
 		axios
 			.post("http://localhost:3000/save", {
 				...software,
@@ -84,7 +79,7 @@ function App() {
 				<FeatureCards
 					software={software}
 					deleteApp={deleteApp}
-					save={saveNewDocument}
+					save={saveDocument}
 					startOver={startOver}
 					updateItem={updateItem}
 				/>
