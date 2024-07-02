@@ -20,8 +20,6 @@ Clone this repo and make sure you have [Node](https://nodejs.org/) installed. Re
 
 | Shortcut                  | Action                                                       |
 | ------------------------- | ------------------------------------------------------------ |
-| `[OPT/ALT + B]`           | Go to previous application in the list                       |
-| `[OPT/ALT + N]`           | Go to next application in the last                           |
 | `[OPT/ALT + Left arrow]`  | Go to previous application in the list                       |
 | `[OPT/ALT + Right arrow]` | Go to next application in the last                           |
 | `[CTRL + S]`              | In edit view: Save edited list item. In list view: Save whole list |

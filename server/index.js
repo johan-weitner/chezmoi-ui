@@ -1,34 +1,79 @@
-require('dotenv').config();
-const express = require('express')
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import { Chalk } from 'chalk';
+import cors from 'cors';
+import YAML from 'yaml';
+import fs from 'fs';
+
 const app = express();
-const cors = require('cors');
 const port = 3000;
-const YAML = require('yaml');
-const fs = require('fs');
 
 const softwareYamlPath = process.env.SOURCE_FILE;
 const targetFilePath = process.env.TARGET_FILE;
+const backup = [];
 let softwareArray = [];
 let software;
 
-console.log('\n\n-= STARTING BACKEND SERVER... =-\n');
-console.log(`Path to source file: ${softwareYamlPath}`);
+const customChalk = new Chalk({ level: 2 });
+const success = customChalk.green;
+const warn = customChalk.hex('#F59E0B');
+const error = customChalk.red;
+const bold = customChalk.bold;
+const italic = customChalk.italic;
+const check = success('✔');
+const cross = error('✘');
+const wsign = '⚠️';
+
+const log = {
+  success: (msg) => console.log(success(msg)),
+  warn: (msg) => console.log(warn(msg)),
+  error: (msg) => console.log(error(msg))
+}
+
+const row1 = `  ____ _                              _   _   _ ___`;
+const row2 = ` / ___| |__   ___ _____ __ ___   ___ (_) | | | |_ _|`;
+const row3 = `| |   | '_ \\ / _ \\_  / '_ \\ _ \\ / _ \\| | | | | || | `;
+const row4 = `| |___| | | |  __// /| | | | | | (_) | | | |_| || |`;
+const row5 = ` \\____|_| |_|\\___/___|_| |_| |_|\\___/|_|  \\___/|___|`;
+
+console.log(row1);
+console.log(row2);
+console.log(row3);
+console.log(row4);
+console.log(row5);
+console.log('  © 2024 Johan Weitner')
+
+console.log(bold('\n\n-= STARTING BACKEND SERVER... =-\n'));
+console.log(bold('Path to source file: ') + softwareYamlPath);
 fs.existsSync(softwareYamlPath) ?
-  console.log('\x1b[32m%s\x1b[0m', 'Found ✔\n') :
-  console.log('\x1b[31m%s\x1b[0m', 'Not found ✘\n');
-console.log(`Path to work file: ${targetFilePath}`);
+  log.success(`Found ${check} \n`) :
+  log.error(`Not found ${cross} \n`);
+console.log(bold('Path to work file: ') + targetFilePath);
 fs.existsSync(targetFilePath) ?
-  console.log('\x1b[32m%s\x1b[0m', 'Found ✔\n') :
-  console.log('\x1b[31m%s\x1b[0m', 'Not found ✘\n');
+  log.success(`Found ${check} \n`) :
+  log.error(`Not found ${cross} \n`);
+(process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERVAL > 0) ?
+  log.success(`Backup interval set to ${process.env.BACKUP_INTERVAL} min ${check} \n`) :
+  log.warn(`${wsign}   Backup interval not set\n`);
 
 const isEmpty = (data) => {
   return Object.keys(data).length === 0;
 };
 
+// FIFO container for storing the 5 most recent changes
+const addToBackup = (data) => {
+  backup.unshift(data);
+  if (backup.length > 5) {
+    backup.pop();
+  }
+  console.log('\nBacked up to FIFO array');
+};
+
 const readSourceFile = () => {
   const arr = fs.readFileSync(softwareYamlPath, 'utf8');
   const data = YAML.parse(arr);
-  if (isEmpty()) {
+  if (isEmpty(data)) {
     console.error('Something went wrong - work file is empty');
     return;
   }
@@ -38,12 +83,17 @@ const readSourceFile = () => {
 const readWorkFile = () => {
   const arr = fs.readFileSync(targetFilePath, 'utf8');
   const data = JSON.parse(arr);
-  if (isEmpty()) {
+  if (isEmpty(data)) {
     console.error('Something went wrong - work file is empty');
     return;
   }
   return data;
 }
+
+const backupInterval = (process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERVAL > 0) && setInterval(() => {
+  const data = readWorkFile();
+  addToBackup(data); console.log('Backing up to work file');
+}, process.env.BACKUP_INTERVAL * 60 * 1000);
 
 if (!softwareYamlPath || !targetFilePath) {
   console.error('\x1b[31m%s\x1b[0m', 'Missing environment variables');
@@ -120,13 +170,26 @@ app.post('/save', (req, res) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Methods', 'POST');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
-  const jsonStr = JSON.stringify(req.body);
-  fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
-  res.status(200).json(jsonStr);
+  if (isEmpty(req.body)) {
+    res.status(500).json({
+      error: 'No data provided'
+    });
+    return;
+  }
+  try {
+    const jsonStr = JSON.stringify(req.body);
+    fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
+    res.status(200).json(jsonStr);
+  } catch (err) {
+    res.status(500).json({
+      error: err
+    });
+    return;
+  }
 });
 
 app.listen(port, () => {
-  console.log('\x1b[32m%s\x1b[0m', `\nServer is listening at port ${port}`);
+  console.log('\x1b[32m%s\x1b[0m', `\nServer is listening at port ${port} `);
   console.log(`Point your web browser at http://localhost:${port}`);
   console.log('...or whichever port the consuming client is served from');
 });

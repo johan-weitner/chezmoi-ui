@@ -21,8 +21,6 @@ const MainView = (props) => {
 		enableOnFormTags: ['INPUT', 'TEXTAREA']
 	}
 	useHotkeys("esc", () => setIsPopoverOpen(false)), hotkeyOptions;
-	useHotkeys("alt + b", () => gotoPrev(), hotkeyOptions);
-	useHotkeys("alt + n", () => gotoNext(), hotkeyOptions);
 	useHotkeys("alt + left", () => gotoPrev(), hotkeyOptions);
 	useHotkeys("alt + right", () => gotoNext(), hotkeyOptions);
 	useHotkeys("ctrl + s", () => {

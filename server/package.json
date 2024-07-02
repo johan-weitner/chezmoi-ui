@@ -2,10 +2,12 @@
   "name": "chezmoi-ui-server",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
+    "chalk": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
