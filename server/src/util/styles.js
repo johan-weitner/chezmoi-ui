@@ -7,7 +7,7 @@ export const styles = {
   error: customChalk.red,
   bold: customChalk.bold,
   italic: customChalk.italic,
-  check: success('✔'),
-  cross: error('✘'),
+  check: customChalk.green('✔'),
+  cross: customChalk.red('✘'),
   wsign: '⚠️',
 }

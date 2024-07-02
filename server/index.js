@@ -5,8 +5,8 @@ import { Chalk } from 'chalk';
 import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
-import { printAppLogo } from './src/logo';
-import { styles } from './src/util/styles';
+import { printAppLogo } from './src/logo.js';
+import { styles } from './src/util/styles.js';
 
 const app = express();
 const port = 3000;
@@ -23,6 +23,8 @@ const log = {
   warn: (msg) => console.log(warn(msg)),
   error: (msg) => console.log(error(msg))
 }
+
+
 
 printAppLogo();
 console.log('  © 2024 Johan Weitner')
