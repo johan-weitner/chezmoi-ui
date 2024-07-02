@@ -83,6 +83,10 @@ function App() {
 		toast.success("Item was updated");
 	};
 
+	const addNewApp = () => {
+		console.log('Add new app');
+	};
+
 	return (
 		<AppShell
 			header={{ height: 40 }}
@@ -100,6 +104,7 @@ function App() {
 						save={saveDocument}
 						startOver={startOver}
 						updateItem={updateItem}
+						addNewApp={addNewApp}
 					/>
 				)}
 			</AppShell.Main>

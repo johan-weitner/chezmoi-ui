@@ -19,7 +19,8 @@ import {
 	IconTrash,
 	IconWorldCode,
 	IconX,
-	IconDownload
+	IconDownload,
+	IconCirclePlus
 } from "@tabler/icons-react";
 
 export const ICON = {
@@ -44,5 +45,6 @@ export const ICON = {
 	startOver: IconReload,
 	save: IconDeviceFloppy,
 	close: IconX,
-	download: IconDownload
+	download: IconDownload,
+	add: IconCirclePlus
 };

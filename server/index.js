@@ -7,34 +7,31 @@ import YAML from 'yaml';
 import fs from 'fs';
 import { printAppLogo } from './src/logo.js';
 import { styles } from './src/util/styles.js';
+import { log } from './src/util/log.js';
 
 const app = express();
 const port = 3000;
 
 const softwareYamlPath = process.env.SOURCE_FILE;
 const targetFilePath = process.env.TARGET_FILE;
+const BACKUP_DEPTH = process.env.BACKUP_DEPTH || 5;
+const BACKUP_INTERVAL = process.env.BACKUP_INTERVAL || 10;
 const backupPaths = [];
 let softwareArray = [];
 let software;
 
 const { success, warn, error, bold, italic, check, cross, wsign } = styles;
-const log = {
-  success: (msg) => console.log(success(msg)),
-  warn: (msg) => console.log(warn(msg)),
-  error: (msg) => console.log(error(msg))
-}
 
-
-
+console.clear();
 printAppLogo();
-console.log('  © 2024 Johan Weitner')
+log.info('  © 2024 Johan Weitner')
 
-console.log(bold('\n\n-= STARTING BACKEND SERVER... =-\n'));
-console.log(bold('Path to source file: ') + softwareYamlPath);
+log.info(bold('\n\n-= STARTING BACKEND SERVER... =-\n'));
+log.info(bold('Path to source file: ') + softwareYamlPath);
 fs.existsSync(softwareYamlPath) ?
   log.success(`Found ${check} \n`) :
   log.error(`Not found ${cross} \n`);
-console.log(bold('Path to work file: ') + targetFilePath);
+log.info(bold('Path to work file: ') + targetFilePath);
 fs.existsSync(targetFilePath) ?
   log.success(`Found ${check} \n`) :
   log.error(`Not found ${cross} \n`);
@@ -53,14 +50,13 @@ const addToBackup = (data) => {
   try {
     fs.writeFileSync(backupPath, JSON.stringify(data), 'utf8');
     backupPaths.unshift(backupPath);
-    if (backupPaths.length > 5) {
-      backupPaths.pop();
+    if (backupPaths.length > BACKUP_DEPTH) {
+      fs.unlinkSync(backupPaths.pop());
     }
   } catch (err) {
     console.error(err);
     return;
   }
-  console.log('\nBacked up to FIFO array');
 };
 
 const readSourceFile = () => {
@@ -85,30 +81,30 @@ const readWorkFile = () => {
 
 const backupInterval = (process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERVAL > 0) && setInterval(() => {
   const data = readWorkFile();
-  addToBackup(data); console.log('Backing up to work file');
-}, process.env.BACKUP_INTERVAL * 60 * 1000);
+  addToBackup(data);
+}, BACKUP_INTERVAL * 60 * 1000);
 
 if (!softwareYamlPath || !targetFilePath) {
-  console.error(error('Missing environment variables'));
-  console.error(error('Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment'));
+  log.error(error('Missing environment variables'));
+  log.error(error('Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment'));
   process.exit(1);
 }
 
 if (!fs.existsSync(softwareYamlPath) && !fs.existsSync(targetFilePath)) {
-  console.error(error('Neither source file nor work file exists '));
-  console.error(error('\x1b[31m%s\x1b[0m', 'Please point SOURCE_FILE and TARGET_FILE to existing files'));
+  log.error(error('Neither source file nor work file exists '));
+  log.error(error('\x1b[31m%s\x1b[0m', 'Please point SOURCE_FILE and TARGET_FILE to existing files'));
   process.exit(1);
 }
 
 if (fs.existsSync(targetFilePath)) {
-  console.log('Work in progress exists - opening WiP:');
-  console.log(targetFilePath);
+  log.info('Work in progress exists - opening WiP:');
+  log.info(targetFilePath);
 
   softwareArray = fs.readFileSync(targetFilePath, 'utf8');
   software = JSON.parse(softwareArray);
 } else {
-  console.log('Work in progress does not exist - opening source file to seed a starting point:');
-  console.log(softwareYamlPath);
+  log.info('Work in progress does not exist - opening source file to seed a starting point:');
+  log.info(softwareYamlPath);
   const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
   software = YAML.parse(softwareYaml).softwarePackages;
   const keys = Object.keys(software);
@@ -182,7 +178,7 @@ app.post('/save', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(success(`\nServer is listening at port ${port} `));
-  console.log(`Point your web browser at http://localhost:${port}`);
-  console.log('...or whichever port the consuming client is served from');
+  log.success(`\nServer is listening at port ${port} `);
+  log.info(`Point your web browser at http://localhost:${port}`);
+  log.info('...or whichever port the consuming client is served from');
 });

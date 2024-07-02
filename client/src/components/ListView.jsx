@@ -7,7 +7,7 @@ import classes from "./MainView.module.css";
 import { ListItem } from "./ListItem";
 
 const ListView = (props) => {
-	const { software, theme, selectApp, editItem, deleteItem, gotoNext } = props;
+	const { software, theme, selectApp, editItem, deleteItem, gotoNext, createNewRecord } = props;
 
 	const [filter, setFilter] = useState("");
 	// Strip metadata nodes from Install.Doctor list
@@ -51,6 +51,26 @@ const ListView = (props) => {
 			>
 				Applications
 			</Text>
+			<ActionIcon
+				title="Add application"
+				onClick={e => createNewRecord(e)}
+				style={{
+					width: rem(50),
+					height: rem(50),
+					position: "absolute",
+					top: "33px",
+					right: "24px",
+					backgroundColor: "transparent"
+				}}>
+				<ICON.add
+					style={{
+						width: rem(50),
+						height: rem(50)
+					}}
+					stroke={2}
+					color={theme.colors.blue[6]}
+				/>
+			</ActionIcon>
 			<TextInput
 				radius="xl"
 				size="lg"
@@ -109,7 +129,7 @@ const ListView = (props) => {
 						);
 					})}
 			</Card>
-		</Card>
+		</Card >
 	);
 };
 

@@ -1,5 +1,5 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "sonner";
 import { useHotkeys } from "react-hotkeys-hook";
 import AppForm from "./AppForm.jsx";
@@ -7,14 +7,23 @@ import DetailView from "./DetailView.jsx";
 import classes from "./MainView.module.css";
 import MainHeader from "./MainHeader.jsx";
 import ListView from "./ListView.jsx";
+import { listenForOutsideClicks } from "../utils/outsideClickListener.js";
 
 const MainView = (props) => {
-	const { software, deleteApp, save, startOver, updateItem } = props;
+	const { software, deleteApp, save, startOver, updateItem, addNewApp } = props;
 	const theme = useMantineTheme();
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const [listening, setListening] = useState(false);
 	const modalRef = useRef();
 	const LIST_INDEX_OFFSET = 4;
+
+	useEffect(() => listenForOutsideClicks(
+		listening,
+		setListening,
+		modalRef,
+		setIsPopoverOpen,
+	), [listening, isPopoverOpen]);
 
 	const hotkeyOptions = {
 		preventDefault: true,
@@ -26,6 +35,11 @@ const MainView = (props) => {
 	useHotkeys("ctrl + s", () => {
 		isPopoverOpen ? updateApp(selectedApp) : save();
 	}, hotkeyOptions);
+	useHotkeys("e", () => {
+		if (!isPopoverOpen && selectedApp) {
+			editItem(selectedApp.key, false);
+		};
+	}, { preventDefault: true, enableOnFormTags: [] });
 
 	const selectApp = (e, item) => {
 		e?.preventDefault();
@@ -45,6 +59,13 @@ const MainView = (props) => {
 	const updateApp = (updatedApp) => {
 		updateItem(updatedApp);
 		setIsPopoverOpen(false);
+	};
+
+	const createNewRecord = (e) => {
+		e.preventDefault();
+		addNewApp();
+		setSelectedApp(null);
+		setIsPopoverOpen(true);
 	};
 
 	const gotoPrev = () => {
@@ -101,6 +122,7 @@ const MainView = (props) => {
 							selectApp={selectApp}
 							deleteItem={deleteApp}
 							editItem={editItem}
+							createNewRecord={createNewRecord}
 						/>
 					)}
 					{selectedApp && (
@@ -114,7 +136,7 @@ const MainView = (props) => {
 						/>
 					)}
 				</SimpleGrid>
-				{selectedApp && isPopoverOpen && (
+				{isPopoverOpen && (
 					<>
 						<AppForm
 							ref={modalRef}
