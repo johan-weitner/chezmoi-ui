@@ -16,3 +16,4 @@ client/node_modules
 server/node_modules
 server/.env
 node_modules
+.turbo

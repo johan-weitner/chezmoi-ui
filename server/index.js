@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
-import { Chalk } from 'chalk';
 import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';

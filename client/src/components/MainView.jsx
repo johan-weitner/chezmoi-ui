@@ -40,6 +40,7 @@ const MainView = (props) => {
 			editItem(selectedApp.key, false);
 		};
 	}, { preventDefault: true, enableOnFormTags: [] });
+	useHotkeys("alt + n", (e) => createNewRecord(e), hotkeyOptions);
 
 	const selectApp = (e, item) => {
 		e?.preventDefault();
@@ -63,9 +64,9 @@ const MainView = (props) => {
 
 	const createNewRecord = (e) => {
 		e.preventDefault();
-		addNewApp();
 		setSelectedApp(null);
 		setIsPopoverOpen(true);
+		// addNewApp();
 	};
 
 	const gotoPrev = () => {
