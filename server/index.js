@@ -5,43 +5,26 @@ import { Chalk } from 'chalk';
 import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
+import { printAppLogo } from './src/logo';
+import { styles } from './src/util/styles';
 
 const app = express();
 const port = 3000;
 
 const softwareYamlPath = process.env.SOURCE_FILE;
 const targetFilePath = process.env.TARGET_FILE;
-const backup = [];
+const backupPaths = [];
 let softwareArray = [];
 let software;
 
-const customChalk = new Chalk({ level: 2 });
-const success = customChalk.green;
-const warn = customChalk.hex('#F59E0B');
-const error = customChalk.red;
-const bold = customChalk.bold;
-const italic = customChalk.italic;
-const check = success('✔');
-const cross = error('✘');
-const wsign = '⚠️';
-
+const { success, warn, error, bold, italic, check, cross, wsign } = styles;
 const log = {
   success: (msg) => console.log(success(msg)),
   warn: (msg) => console.log(warn(msg)),
   error: (msg) => console.log(error(msg))
 }
 
-const row1 = `  ____ _                              _   _   _ ___`;
-const row2 = ` / ___| |__   ___ _____ __ ___   ___ (_) | | | |_ _|`;
-const row3 = `| |   | '_ \\ / _ \\_  / '_ \\ _ \\ / _ \\| | | | | || | `;
-const row4 = `| |___| | | |  __// /| | | | | | (_) | | | |_| || |`;
-const row5 = ` \\____|_| |_|\\___/___|_| |_| |_|\\___/|_|  \\___/|___|`;
-
-console.log(row1);
-console.log(row2);
-console.log(row3);
-console.log(row4);
-console.log(row5);
+printAppLogo();
 console.log('  © 2024 Johan Weitner')
 
 console.log(bold('\n\n-= STARTING BACKEND SERVER... =-\n'));
@@ -63,9 +46,17 @@ const isEmpty = (data) => {
 
 // FIFO container for storing the 5 most recent changes
 const addToBackup = (data) => {
-  backup.unshift(data);
-  if (backup.length > 5) {
-    backup.pop();
+  const basePath = targetFilePath.split('.')[0];
+  const backupPath = `${basePath}-${new Date().getTime()}.json`;
+  try {
+    fs.writeFileSync(backupPath, JSON.stringify(data), 'utf8');
+    backupPaths.unshift(backupPath);
+    if (backupPaths.length > 5) {
+      backupPaths.pop();
+    }
+  } catch (err) {
+    console.error(err);
+    return;
   }
   console.log('\nBacked up to FIFO array');
 };
@@ -96,14 +87,14 @@ const backupInterval = (process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERV
 }, process.env.BACKUP_INTERVAL * 60 * 1000);
 
 if (!softwareYamlPath || !targetFilePath) {
-  console.error('\x1b[31m%s\x1b[0m', 'Missing environment variables');
-  console.error('\x1b[31m%s\x1b[0m', 'Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment');
+  console.error(error('Missing environment variables'));
+  console.error(error('Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment'));
   process.exit(1);
 }
 
 if (!fs.existsSync(softwareYamlPath) && !fs.existsSync(targetFilePath)) {
-  console.error('\x1b[31m%s\x1b[0m', 'Neither source file nor work file exists ');
-  console.error('\x1b[31m%s\x1b[0m', 'Please point SOURCE_FILE and TARGET_FILE to existing files');
+  console.error(error('Neither source file nor work file exists '));
+  console.error(error('\x1b[31m%s\x1b[0m', 'Please point SOURCE_FILE and TARGET_FILE to existing files'));
   process.exit(1);
 }
 
@@ -189,7 +180,7 @@ app.post('/save', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log('\x1b[32m%s\x1b[0m', `\nServer is listening at port ${port} `);
+  console.log(success(`\nServer is listening at port ${port} `));
   console.log(`Point your web browser at http://localhost:${port}`);
   console.log('...or whichever port the consuming client is served from');
 });
