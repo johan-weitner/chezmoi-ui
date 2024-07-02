@@ -4,6 +4,7 @@ import { nanoid } from "nanoid";
 import { useState } from "react";
 import { ICON } from "../constants/icons";
 import classes from "./MainView.module.css";
+import { ListItem } from "./ListItem";
 
 const ListView = (props) => {
 	const { software, theme, selectApp, editItem, deleteItem, gotoNext } = props;
@@ -97,45 +98,14 @@ const ListView = (props) => {
 				{filteredApps?.length > 0 &&
 					filteredApps.map((item) => {
 						return (
-							<div
-								style={{ position: "relative", width: "100%" }}
+							<ListItem
+								software={software}
+								item={item}
+								selectApp={selectApp}
+								editItem={editItem}
+								deleteItem={deleteItem}
 								key={nanoid()}
-							>
-								<button
-									className={classes.itemBox}
-									onClick={(e) => selectApp(e, item)}
-									style={{ width: "100%" }}
-									type="button"
-								>
-									{software[item]._name}
-								</button>
-								<ICON.edit
-									style={{
-										width: rem(20),
-										height: rem(20),
-										position: "absolute",
-										right: "50px",
-										top: "14px",
-										cursor: "pointer",
-									}}
-									stroke={2}
-									color="white"
-									onClick={() => editItem(item, true)}
-								/>
-								<ICON.remove
-									style={{
-										width: rem(20),
-										height: rem(20),
-										position: "absolute",
-										right: "20px",
-										top: "14px",
-										cursor: "pointer",
-									}}
-									stroke={2}
-									color="white"
-									onClick={() => deleteItem(item)}
-								/>
-							</div>
+							/>
 						);
 					})}
 			</Card>
