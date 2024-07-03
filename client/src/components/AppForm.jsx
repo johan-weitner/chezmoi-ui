@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import Tagify from "@yaireo/tagify";
 import { nanoid } from "nanoid";
@@ -23,6 +24,23 @@ import { ICON } from "constants/icons";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
 import classes from "./MainView.module.css";
 
+/**
+ * The `AppForm` component is a React functional component that renders a modal form for creating or editing an application.
+ *
+ * The component receives several props:
+ * - `isPopoverOpen`: a boolean indicating whether the modal should be open or closed
+ * - `closePopover`: a function to close the modal
+ * - `updateApp`: a function to update the application data
+ * - `selectedApp`: the currently selected application object
+ * - `gotoPrev`: a function to navigate to the previous application
+ * - `gotoNext`: a function to navigate to the next application
+ * - `theme`: the current theme object
+ * - `isNewApp`: a boolean indicating whether the form is for a new application or an existing one
+ *
+ * The component uses the `useForm` hook from `react-hook-form` to manage the form state and validation. It also uses the `Tagify` library to handle the tags input field.
+ *
+ * The component renders a modal with a form that allows the user to edit the application's name, description, and tags. It also includes buttons to navigate between applications and save the changes.
+ */
 const AppForm = forwardRef(function AppForm(props, ref) {
 	const {
 		isPopoverOpen,
@@ -39,18 +57,31 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	});
 
 	const [opened, { open, close }] = useDisclosure(true);
+	let tagifyInstance;
 
 	useEffect(() => {
 		reset(selectedApp);
 	}, [selectedApp, isPopoverOpen, isNewApp, reset]);
 
-	window.TAGIFY_DEBUG = false;
+	window.TAGIFY_DEBUG = true;
 	const { formPartOne, formPartTwo } = APP_FORM;
 
-	useEffect(() => {
-		const input = document.querySelector("input[name=tags]");
-		new Tagify(input, { whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
-	}, [selectedApp]);
+	// useEffect(() => {
+	// 	const input = document.querySelector("input[name=tags]");
+	// 	tagifyInstance = new Tagify(input, { whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
+	// }, []);
+	tagifyInstance = new Tagify(
+		document.querySelector("input[name=tags]"),
+		{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true }
+	);
+
+	const verifyTagify = () => {
+		if (!tagifyInstance) {
+			tagifyInstance = new Tagify(
+				document.querySelector("input[name=tags]"),
+				{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
+		}
+	};
 
 	const onSubmit = (data) => {
 		updateApp(data);
@@ -59,10 +90,11 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	return (
 		<Modal
 			opened={isPopoverOpen}
+			keepMounted
 			onClose={closePopover}
 			overlayProps={{
 				backgroundOpacity: 0.55,
-				blur: 3,
+				blur: 7,
 			}}
 			radius="10"
 			size="xl"
@@ -197,7 +229,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 						Installers
 					</h3>
 					<SimpleGrid
-						cols={{ base: 1, md: 3 }}
+						cols={{ base: 1, md: 4 }}
 						spacing="sm"
 						mt={50}
 						className={classes.grid}

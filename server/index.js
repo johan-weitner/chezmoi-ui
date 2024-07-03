@@ -21,7 +21,6 @@ let software;
 
 const { success, warn, error, bold, italic, check, cross, wsign } = styles;
 
-console.clear();
 printAppLogo();
 log.info('  © 2024 Johan Weitner')
 
@@ -44,8 +43,15 @@ const isEmpty = (data) => {
 
 // FIFO container for storing the 5 most recent changes
 const addToBackup = (data) => {
-  const basePath = targetFilePath.split('.')[0];
-  const backupPath = `${basePath}-${new Date().getTime()}.json`;
+  const segments = targetFilePath.split('/');
+  segments.pop();
+  segments.push('_backups');
+  const basePath = segments.join('/');
+  if (!fs.existsSync(basePath)) {
+    fs.mkdirSync(basePath);
+  }
+
+  const backupPath = `${basePath}/backup-${new Date().getTime()}.json`;
   try {
     fs.writeFileSync(backupPath, JSON.stringify(data), 'utf8');
     backupPaths.unshift(backupPath);

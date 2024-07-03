@@ -2,6 +2,17 @@ import { rem } from "@mantine/core";
 import { ICON } from "../constants/icons";
 import classes from "./MainView.module.css";
 
+/**
+ * Renders a list item component that displays software information and provides actions to select, edit, and delete the item.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.software - An object containing software information.
+ * @param {Function} props.selectApp - A function to handle selecting the app.
+ * @param {Function} props.editItem - A function to handle editing the item.
+ * @param {Function} props.deleteItem - A function to handle deleting the item.
+ * @param {string} props.item - The identifier of the item.
+ * @returns {JSX.Element} The rendered list item component.
+ */
 export const ListItem = props => {
   const { software, selectApp, editItem, deleteItem, item } = props;
 

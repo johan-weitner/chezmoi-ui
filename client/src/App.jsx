@@ -7,6 +7,14 @@ import { Toaster, toast } from "sonner";
 import MainView from "./components/MainView";
 import Header from "./components/Header";
 
+/**
+ * The main React component for the application. It handles the state management, API calls, and rendering of the main view.
+ *
+ * - Fetches the software list from the backend and stores it in the component state.
+ * - Provides functions to save the software list, delete an app, save the current state to disk, and start over.
+ * - Renders the main view component and passes down the necessary props.
+ * - Displays a Toaster component for showing success and error messages.
+ */
 function App() {
 	const [software, setSoftware] = useState(null);
 	const [opened, { toggle }] = useDisclosure();
@@ -52,6 +60,7 @@ function App() {
 			toast.error("Critical error - no software list to save");
 			return;
 		}
+
 		axios
 			.post("http://localhost:3000/save", {
 				...software,
@@ -80,6 +89,7 @@ function App() {
 			...prevState,
 			[item.key]: item,
 		}));
+
 		toast.success("Item was updated");
 	};
 

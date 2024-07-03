@@ -8,6 +8,19 @@ import classes from "./MainView.module.css";
 import MainHeader from "./MainHeader.jsx";
 import ListView from "./ListView.jsx";
 
+/**
+ * The `MainView` component is the main view of the application, responsible for rendering the main header, list view, and detail view.
+ * It handles the state and logic for managing the selected app, opening and closing the app form popover, and handling various keyboard shortcuts.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.software - The software data to be displayed.
+ * @param {function} props.deleteApp - A function to delete an app.
+ * @param {function} props.save - A function to save the current state.
+ * @param {function} props.startOver - A function to start over.
+ * @param {function} props.updateItem - A function to update an app.
+ * @param {function} props.addNewApp - A function to add a new app.
+ * @returns {JSX.Element} - The rendered `MainView` component.
+ */
 const MainView = (props) => {
 	const { software, deleteApp, save, startOver, updateItem, addNewApp } = props;
 	const theme = useMantineTheme();
@@ -40,6 +53,8 @@ const MainView = (props) => {
 		};
 	}, { preventDefault: true, enableOnFormTags: [] });
 	useHotkeys("alt + n", (e) => createNewRecord(e), hotkeyOptions);
+
+
 
 	const selectApp = (e, item) => {
 		e?.preventDefault();

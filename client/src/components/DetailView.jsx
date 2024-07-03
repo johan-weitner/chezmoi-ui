@@ -14,6 +14,18 @@ import classes from "./MainView.module.css";
 const markPopulated = <span className={classes.green}>✓</span>;
 const markUnPopulated = <span className={classes.red}>✗</span>;
 
+/**
+ * Renders a detailed view of a selected application, including its name, short description, full description, and links to its homepage, documentation, and GitHub repository. The view also includes buttons to edit or delete the selected application.
+ *
+ * @param {Object} props - The component props.
+ * @param {Object} props.selectedApp - The selected application object.
+ * @param {Function} props.deleteItem - A function to delete the selected application.
+ * @param {Function} props.editItem - A function to edit the selected application.
+ * @param {Object} props.theme - The current theme object.
+ * @param {Function} props.gotoPrev - A function to navigate to the previous application.
+ * @param {Function} props.gotoNext - A function to navigate to the next application.
+ * @returns {JSX.Element} - The DetailView component.
+ */
 const DetailView = (props) => {
 	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } =
 		props;

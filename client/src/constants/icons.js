@@ -23,6 +23,10 @@ import {
 	IconCirclePlus
 } from "@tabler/icons-react";
 
+/**
+ * An object containing references to various Tabler icons used throughout the application.
+ * These icons are used to represent different types of packages, commands, and other application-specific elements.
+ */
 export const ICON = {
 	cargo: IconBrandRust,
 	taps: IconBarrel,

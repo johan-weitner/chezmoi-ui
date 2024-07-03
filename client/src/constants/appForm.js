@@ -9,6 +9,20 @@
  *
  * This is consumed in the `ui/client/src/components/AppForm.jsx` component.
  */
+/**
+ * Defines the form configuration for the application form, which is used to
+ * edit or add applications to the application list. The form is divided into
+ * two parts:
+ *
+ * 1. `formPartOne`: Contains the mandatory metadata fields for the application,
+ *    such as name, key, short description, homepage, documentation, and GitHub.
+ *
+ * 2. `formPartTwo`: Contains the different installation sources for the
+ *    application, such as Whalebrew, Apt, Homebrew, Cargo, NPM, Pip, Gem, and
+ *    various Windows-specific package managers.
+ *
+ * This configuration is consumed by the `AppForm` component in the UI.
+ */
 export const APP_FORM = {
 	formPartOne: [
 		{ name: "_name", label: "Name" },

@@ -1,12 +1,14 @@
 # Chezmoi UI
 
-A quick stab at a UI for managing a list of applications to use with Chezmoi.
+A quick stab at a UI for managing a list of applications to feed a Chezmoi setup9.
 
 ## Background
 
 Trying out a bunch of dot file management tooling it seemed to me most of them are either too sparse, (read: a CLI for creating soft links to a Git repo), or way too complicated and time-consuming, (read: Install.Doctor). I even learnt Ansible in the process. But Chezmoi hits a sweet spot for me. Manually maintaining long lists on the other hand, not so much...
 
-I did kind of like the way [Install.Doctor](https://github.com/megabyte-labs/install.doctor) approached the issue of maintaining a universal list of applications though, offering wide OS support from a unified source. On any given day I'm faced with MacOS, Windows/WSL or Linux, and regardless of which I want to be able to run a script and immediately feel at home. And, I don't want the maintenance of it to be a full-time job...
+I did kind of like the way [Install.Doctor](https://github.com/megabyte-labs/install.doctor) approached the issue of maintaining a universal list of applications though, offering wide OS support from a unified source. On any given day I'm faced with MacOS, Windows/WSL or Linux, and regardless of which I want to be able to run a script and immediately feel at home. And - crucially - I don't want the maintenance of it to be a full-time job...
+
+## What it is
 
 So this is a UI for Chezmoi users who'd like to base an application list on the impressive curation of Install.Doctor. But I guess Install.Doctor users could find it useful too. It's a very simple SPA with a Node backend, for local file management, meant to run locally on your machine. So you need current Node LTS - (version 20.x and above should suffice. It's all very simple, but I do use modern syntax, like optional chaining for example).
 
