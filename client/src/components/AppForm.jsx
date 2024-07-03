@@ -32,16 +32,17 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		gotoPrev,
 		gotoNext,
 		theme,
+		isNewApp
 	} = props;
 	const { register, handleSubmit, reset } = useForm({
-		defaultValues: selectedApp,
+		defaultValues: isNewApp ? null : selectedApp,
 	});
 
 	const [opened, { open, close }] = useDisclosure(true);
 
 	useEffect(() => {
 		reset(selectedApp);
-	}, [selectedApp, isPopoverOpen, reset]);
+	}, [selectedApp, isPopoverOpen, isNewApp, reset]);
 
 	window.TAGIFY_DEBUG = false;
 	const { formPartOne, formPartTwo } = APP_FORM;

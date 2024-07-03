@@ -4,17 +4,14 @@
   "description": "A local web UI for managing the software list in a Chezmoi installation",
   "main": "start.sh",
   "scripts": {
-    "test": "N/A"
+    "start": "./start.sh",
+    "stop": "stop.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
   },
-  "keywords": [
-    "chezmoi",
-    "ui",
-    "dotfiles"
-  ],
+  "keywords": ["chezmoi", "ui", "dotfiles"],
   "author": "Johan Weitner",
   "license": "MIT",
   "bugs": {
@@ -23,5 +20,6 @@
   "homepage": "https://github.com/johan-weitner/chezmoi-ui#readme",
   "dependencies": {
     "@changesets/cli": "^2.27.7"
-  }
+  },
+  "type": "module"
 }

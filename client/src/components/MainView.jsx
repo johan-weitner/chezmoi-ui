@@ -136,16 +136,19 @@ const MainView = (props) => {
 						/>
 					)}
 				</SimpleGrid>
-				<AppForm
-					ref={modalRef}
-					isPopoverOpen={isPopoverOpen}
-					closePopover={closePopover}
-					updateApp={updateApp}
-					selectedApp={selectedApp}
-					gotoPrev={gotoPrev}
-					gotoNext={gotoNext}
-					theme={theme}
-				/>
+				{isPopoverOpen && (
+					<AppForm
+						ref={modalRef}
+						isPopoverOpen={isPopoverOpen}
+						closePopover={closePopover}
+						updateApp={updateApp}
+						selectedApp={selectedApp}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
+						theme={theme}
+						isNewApp={!selectedApp}
+					/>
+				)}
 			</Container>
 		</>
 	);
