@@ -5,13 +5,17 @@
   "main": "start.sh",
   "scripts": {
     "start": "./start.sh",
-    "stop": "stop.sh"
+    "stop": "./stop.sh"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
   },
-  "keywords": ["chezmoi", "ui", "dotfiles"],
+  "keywords": [
+    "chezmoi",
+    "ui",
+    "dotfiles"
+  ],
   "author": "Johan Weitner",
   "license": "MIT",
   "bugs": {

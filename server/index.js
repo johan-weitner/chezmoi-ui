@@ -179,5 +179,5 @@ app.post('/save', (req, res) => {
 app.listen(port, () => {
   log.success(`\nServer is listening at port ${port} `);
   log.info(`Point your web browser at http://localhost:${port}`);
-  log.info('...or whichever port the consuming client is served from');
+  log.info('...or whichever port the consuming client is served from\n\n');
 });
