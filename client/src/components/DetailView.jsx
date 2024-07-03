@@ -2,17 +2,20 @@ import {
 	ActionIcon,
 	Button,
 	Card,
-	Flex,
+	Badge,
 	Group,
 	Text,
 	rem,
+
 } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { ICON } from "../constants/icons";
 import classes from "./MainView.module.css";
+import { APP_FORM } from 'constants/appForm.js'
 
 const markPopulated = <span className={classes.green}>✓</span>;
 const markUnPopulated = <span className={classes.red}>✗</span>;
+const warningSign = <span className={classes.red}>⚠</span>;
 
 /**
  * Renders a detailed view of a selected application, including its name, short description, full description, and links to its homepage, documentation, and GitHub repository. The view also includes buttons to edit or delete the selected application.
@@ -29,6 +32,17 @@ const markUnPopulated = <span className={classes.red}>✗</span>;
 const DetailView = (props) => {
 	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } =
 		props;
+	const tags = [];  // selectedApp?.tags && JSON.parse(selectedApp.tags);
+	let hasInstaller = false;
+	APP_FORM.formPartTwo.map((item) => {
+		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
+			hasInstaller = true;
+			return;
+		}
+	});
+
+	console.log("Tags: ", tags);
+	console.log("Typeof Tags: ", typeof tags);
 
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
@@ -144,7 +158,30 @@ const DetailView = (props) => {
 							<Text size="sm">
 								{selectedApp._github ? markPopulated : markUnPopulated} Github
 							</Text>
+							{!hasInstaller && (
+								<Text size="sm" style={{ marginTop: "6px" }}>
+									{warningSign} <span className={classes.red} >No installer specified</span>
+								</Text>
+							)}
 						</div>
+						{tags && (
+							<div>
+								{tags?.map(tag => {
+									return (
+										<Badge
+											key={tag?.value}
+											variant="filled"
+											color="blue"
+											style={{ marginRight: "5px" }}
+											size="sm"
+										>
+											{tag?.value}
+										</Badge>
+									)
+								})}
+							</div>
+						)}
+
 
 						<Group justify="center" p="md">
 							<Button

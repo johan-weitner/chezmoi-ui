@@ -5,7 +5,8 @@
   "main": "start.sh",
   "scripts": {
     "start": "./start.sh",
-    "stop": "./stop.sh"
+    "stop": "./stop.sh",
+    "clean": "rm -rf ./_backups/"
   },
   "repository": {
     "type": "git",

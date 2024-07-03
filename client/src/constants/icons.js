@@ -20,7 +20,8 @@ import {
 	IconWorldCode,
 	IconX,
 	IconDownload,
-	IconCirclePlus
+	IconCirclePlus,
+	IconAlertCircle
 } from "@tabler/icons-react";
 
 /**
@@ -50,5 +51,6 @@ export const ICON = {
 	save: IconDeviceFloppy,
 	close: IconX,
 	download: IconDownload,
-	add: IconCirclePlus
+	add: IconCirclePlus,
+	warn: IconAlertCircle
 };
