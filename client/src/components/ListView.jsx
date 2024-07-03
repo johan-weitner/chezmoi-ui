@@ -7,7 +7,7 @@ import classes from "./MainView.module.css";
 import { ListItem } from "./ListItem";
 
 const ListView = (props) => {
-	const { software, theme, selectApp, editItem, deleteItem, gotoNext, createNewRecord } = props;
+	const { software, theme, selectApp, editItem, deleteItem, gotoNext } = props;
 
 	const [filter, setFilter] = useState("");
 	// Strip metadata nodes from Install.Doctor list
@@ -53,7 +53,7 @@ const ListView = (props) => {
 			</Text>
 			<ActionIcon
 				title="Add application"
-				onClick={e => createNewRecord(e)}
+				onClick={e => editItem(null, false, true)}
 				style={{
 					width: rem(50),
 					height: rem(50),

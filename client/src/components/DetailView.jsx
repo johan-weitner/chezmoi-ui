@@ -136,7 +136,7 @@ const DetailView = (props) => {
 
 						<Group justify="center" p="md">
 							<Button
-								onClick={() => editItem()}
+								onClick={() => editItem(selectedApp.key)}
 								className={classes.editBtn}
 								leftSection={
 									<ICON.edit

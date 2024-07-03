@@ -7,29 +7,28 @@ import DetailView from "./DetailView.jsx";
 import classes from "./MainView.module.css";
 import MainHeader from "./MainHeader.jsx";
 import ListView from "./ListView.jsx";
-import { listenForOutsideClicks } from "../utils/outsideClickListener.js";
 
 const MainView = (props) => {
 	const { software, deleteApp, save, startOver, updateItem, addNewApp } = props;
 	const theme = useMantineTheme();
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-	const [listening, setListening] = useState(false);
 	const modalRef = useRef();
 	const LIST_INDEX_OFFSET = 4;
 
-	useEffect(() => listenForOutsideClicks(
-		listening,
-		setListening,
-		modalRef,
-		setIsPopoverOpen,
-	), [listening, isPopoverOpen]);
+	const closePopover = () => {
+		setIsPopoverOpen(false);
+	};
+
+	const openPopover = () => {
+		setIsPopoverOpen(true);
+	};
 
 	const hotkeyOptions = {
 		preventDefault: true,
 		enableOnFormTags: ['INPUT', 'TEXTAREA']
 	}
-	useHotkeys("esc", () => setIsPopoverOpen(false)), hotkeyOptions;
+	useHotkeys("esc", () => closePopover()), hotkeyOptions;
 	useHotkeys("alt + left", () => gotoPrev(), hotkeyOptions);
 	useHotkeys("alt + right", () => gotoNext(), hotkeyOptions);
 	useHotkeys("ctrl + s", () => {
@@ -37,7 +36,7 @@ const MainView = (props) => {
 	}, hotkeyOptions);
 	useHotkeys("e", () => {
 		if (!isPopoverOpen && selectedApp) {
-			editItem(selectedApp.key, false);
+			editItem(selectedApp.key);
 		};
 	}, { preventDefault: true, enableOnFormTags: [] });
 	useHotkeys("alt + n", (e) => createNewRecord(e), hotkeyOptions);
@@ -52,21 +51,22 @@ const MainView = (props) => {
 		deleteApp(selectedApp.key);
 	};
 
-	const editItem = (key, makeSelection = false) => {
-		makeSelection && setSelectedApp(software[key]);
-		setIsPopoverOpen(true);
+	const editItem = (key, makeSelection = false, isNewApp = false) => {
+		console.log(`editItem: ${key}, MakeSelection: ${makeSelection}, New app: ${isNewApp}`);
+		makeSelection && key && setSelectedApp(software[key]);
+		isNewApp && setSelectedApp(null);
+		openPopover();
 	};
 
 	const updateApp = (updatedApp) => {
 		updateItem(updatedApp);
-		setIsPopoverOpen(false);
+		closePopover();
 	};
 
 	const createNewRecord = (e) => {
 		e.preventDefault();
 		setSelectedApp(null);
-		setIsPopoverOpen(true);
-		// addNewApp();
+		openPopover();
 	};
 
 	const gotoPrev = () => {
@@ -123,7 +123,6 @@ const MainView = (props) => {
 							selectApp={selectApp}
 							deleteItem={deleteApp}
 							editItem={editItem}
-							createNewRecord={createNewRecord}
 						/>
 					)}
 					{selectedApp && (
@@ -137,21 +136,16 @@ const MainView = (props) => {
 						/>
 					)}
 				</SimpleGrid>
-				{isPopoverOpen && (
-					<>
-						<AppForm
-							ref={modalRef}
-							isPopoverOpen={isPopoverOpen}
-							setIsPopoverOpen={setIsPopoverOpen}
-							updateApp={updateApp}
-							selectedApp={selectedApp}
-							gotoPrev={gotoPrev}
-							gotoNext={gotoNext}
-							theme={theme}
-						/>
-						<div className={overlayClass} />
-					</>
-				)}
+				<AppForm
+					ref={modalRef}
+					isPopoverOpen={isPopoverOpen}
+					closePopover={closePopover}
+					updateApp={updateApp}
+					selectedApp={selectedApp}
+					gotoPrev={gotoPrev}
+					gotoNext={gotoNext}
+					theme={theme}
+				/>
 			</Container>
 		</>
 	);
