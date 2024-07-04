@@ -1,0 +1,34 @@
+[View code on GitHub](https://github.com/johan-weitner/chezmoi-ui.git/client/vite.config.js)
+
+This code is a Vite configuration file for the chezmoi-ui project. It sets up the project's build configuration, including plugins, aliases for paths, and server settings.
+
+The `dotenv` package is used to load environment variables from a `.env` file. This allows for configuration options to be set outside of the codebase.
+
+The `defineConfig` function from Vite is used to define the project's configuration. The `plugins` array includes the `react` plugin, which enables Vite to handle React components.
+
+The `resolve` object sets up aliases for different directories within the project. This makes it easier to import modules using shorter paths, improving code readability and maintainability.
+
+The `server` object configures the development server. It specifies the port to run the server on, with a fallback to port 8080 if no `SERVER_PORT` environment variable is set. It also sets up a proxy for requests to `/api`, redirecting them to the `BACKEND_URL` environment variable or `http://localhost:3000` by default.
+
+Overall, this configuration file ensures that the chezmoi-ui project is set up correctly for development and production builds. It simplifies the development process by handling environment variables, path aliases, and server settings automatically. Developers can easily customize the project's configuration by modifying this file. 
+
+Example usage:
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
+```
+## Questions: 
+ 1. What is the purpose of importing and using the `dotenv` package in this code?
+   
+   - The `dotenv` package is being used to load environment variables from a `.env` file into `process.env`.
+   
+2. Why is the `vitejs/plugin-react` plugin being used in this configuration?
+   
+   - The `vitejs/plugin-react` plugin is being used to enable React support in the Vite build tool for the project.
+   
+3. How are the aliases defined in the `resolve` section being used in this configuration?
+   
+   - The aliases defined in the `resolve` section are being used to create shortcuts for importing specific directories in the project, such as components, assets, utils, and constants.
