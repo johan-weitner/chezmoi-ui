@@ -22,6 +22,7 @@
     "@tabler/icons-react": "^3.6.0",
     "@yaireo/tagify": "^4.27.0",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
     "nanoid": "^5.0.7",
     "postcss-preset-mantine": "^1.15.0",
     "react": "^18.3.1",

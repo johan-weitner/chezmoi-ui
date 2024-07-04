@@ -18,6 +18,7 @@ import Header from "./components/Header";
 function App() {
 	const [software, setSoftware] = useState(null);
 	const [opened, { toggle }] = useDisclosure();
+	const baseUrl = '/api';
 
 	useEffect(() => {
 		seedAppList();
@@ -30,7 +31,7 @@ function App() {
 
 	const seedAppList = () => {
 		axios
-			.get("http://localhost:3000/software")
+			.get(`${baseUrl}/software`)
 			.then((response) => {
 				const { data } = response;
 				const keys = Object.keys(data);
@@ -62,7 +63,7 @@ function App() {
 		}
 
 		axios
-			.post("http://localhost:3000/save", {
+			.post(`${baseUrl}/save`, {
 				...software,
 			})
 			.then((response) => {

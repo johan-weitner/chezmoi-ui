@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from "path";
@@ -11,6 +13,17 @@ export default defineConfig({
       assets: path.resolve(__dirname, "./src/assets"),
       utils: path.resolve(__dirname, "./src/utils"),
       constants: path.resolve(__dirname, "./src/constants")
+    }
+  },
+  server: {
+    port: process.env.SERVER_PORT || 8080,
+    strictPort: true,
+    proxy: {
+      '/api': {
+        target: process.env.BACKEND_URL || 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
+      }
     }
   }
 })
