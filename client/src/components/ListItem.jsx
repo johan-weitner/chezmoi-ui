@@ -14,10 +14,22 @@ import classes from "./MainView.module.css";
  * @returns {JSX.Element} The rendered list item component.
  */
 export const ListItem = props => {
-  const { software, selectApp, editItem, deleteItem, item } = props;
+  const { software, selectApp, selectedApp, editItem, deleteItem, item, edited } = props;
+  const className = selectedApp?.key === item ? classes.selected : null;
+  const indicateEdit = edited ? (<ICON.check
+    style={{
+      width: rem(14),
+      height: rem(14),
+      position: "absolute",
+      right: "75px",
+      top: "18px",
+    }}
+    stroke={2}
+    color="green"
+  />) : null;
 
   return (
-    <div style={{ position: "relative", width: "100%" }}>
+    <div style={{ position: "relative", width: "100%" }} className={className}>
       <button
         className={classes.itemBox}
         onClick={(e) => selectApp(e, item)}
@@ -31,7 +43,7 @@ export const ListItem = props => {
           width: rem(20),
           height: rem(20),
           position: "absolute",
-          right: "50px",
+          right: "45px",
           top: "14px",
           cursor: "pointer",
         }}
@@ -44,7 +56,7 @@ export const ListItem = props => {
           width: rem(20),
           height: rem(20),
           position: "absolute",
-          right: "20px",
+          right: "15px",
           top: "14px",
           cursor: "pointer",
         }}
@@ -52,6 +64,7 @@ export const ListItem = props => {
         color="white"
         onClick={() => deleteItem(item)}
       />
+      {indicateEdit}
     </div>
   );
 };

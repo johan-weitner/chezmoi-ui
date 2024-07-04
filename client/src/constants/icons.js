@@ -21,7 +21,8 @@ import {
 	IconX,
 	IconDownload,
 	IconCirclePlus,
-	IconAlertCircle
+	IconAlertCircle,
+	IconCheck
 } from "@tabler/icons-react";
 
 /**
@@ -52,5 +53,6 @@ export const ICON = {
 	close: IconX,
 	download: IconDownload,
 	add: IconCirclePlus,
-	warn: IconAlertCircle
+	warn: IconAlertCircle,
+	check: IconCheck
 };

@@ -32,7 +32,7 @@ const warningSign = <span className={classes.red}>⚠</span>;
 const DetailView = (props) => {
 	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } =
 		props;
-	const tags = [];  // selectedApp?.tags && JSON.parse(selectedApp.tags);
+	const tags = selectedApp?.tags && JSON.parse(selectedApp.tags);
 	let hasInstaller = false;
 	APP_FORM.formPartTwo.map((item) => {
 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
@@ -40,9 +40,6 @@ const DetailView = (props) => {
 			return;
 		}
 	});
-
-	console.log("Tags: ", tags);
-	console.log("Typeof Tags: ", typeof tags);
 
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">

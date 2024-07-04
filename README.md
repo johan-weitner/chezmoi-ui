@@ -21,6 +21,8 @@ Clone this repo and make sure you have [Node](https://nodejs.org/) installed. Re
 ## Proposed workflow
 In my experience, working through very large lists like this one, it helps to do it in two or more passes, with increasing scrutiny, (and decreasing speed): First weed out the obvious lemons, with relatively high speed, preferrably directly from the list view. And so on, however many passes seem adequate, until it's time for a more precise review of the remaining applications. Once you're somewhat happy with the list you can start adding your own favourites. And once you have a list that is wholly your own, it should hopefully be a lot more trivial to maintain it. Again, the challenge here is to process a very large list that hides a surprising amount of gems, without losing one's mind, and actually finish. Hopefully this UI makes it a little easier than reading through the YAML file...
 
+Finally, I'd recommend forking this repository and pushing `software-custom.json`regularly. Either that, or find some other way of safe-keeping the work you do on your list. But forking seems like the quick and easy way. In fact, I might add syncing with a Git repo in the UI, but for now it's just a local file.
+
 ## Keyboard shortcuts
 
 | Shortcut                  | Action                                                       |

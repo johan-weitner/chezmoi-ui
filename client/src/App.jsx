@@ -17,7 +17,7 @@ import Header from "./components/Header";
  */
 function App() {
 	const [software, setSoftware] = useState(null);
-	const [opened, { toggle }] = useDisclosure();
+	const [edited, setEdited] = useState([]);
 	const baseUrl = '/api';
 
 	useEffect(() => {
@@ -90,7 +90,8 @@ function App() {
 			...prevState,
 			[item.key]: item,
 		}));
-
+		setEdited((prevState) => [...prevState, item.key]);
+		console.log('Edited: ', edited)
 		toast.success("Item was updated");
 	};
 
@@ -116,10 +117,11 @@ function App() {
 						startOver={startOver}
 						updateItem={updateItem}
 						addNewApp={addNewApp}
+						edited={edited}
 					/>
 				)}
 			</AppShell.Main>
-			<Toaster theme="dark" richColors closeButton pauseWhenPageIsHidden />
+			<Toaster position="top-right" theme="dark" richColors closeButton pauseWhenPageIsHidden />
 		</AppShell>
 	);
 }

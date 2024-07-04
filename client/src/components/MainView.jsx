@@ -22,7 +22,7 @@ import ListView from "./ListView.jsx";
  * @returns {JSX.Element} - The rendered `MainView` component.
  */
 const MainView = (props) => {
-	const { software, deleteApp, save, startOver, updateItem, addNewApp } = props;
+	const { software, deleteApp, save, startOver, updateItem, edited } = props;
 	const theme = useMantineTheme();
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -110,8 +110,6 @@ const MainView = (props) => {
 		}
 	};
 
-	const overlayClass = isPopoverOpen ? classes.overlay : classes.hidden;
-
 	return (
 		<>
 			<Container
@@ -136,11 +134,13 @@ const MainView = (props) => {
 							software={software}
 							theme={theme}
 							selectApp={selectApp}
+							selectedApp={selectedApp}
 							deleteItem={deleteApp}
 							editItem={editItem}
+							edited={edited}
 						/>
 					)}
-					{selectedApp && (
+					{selectedApp && !isPopoverOpen && (
 						<DetailView
 							selectedApp={selectedApp}
 							theme={theme}

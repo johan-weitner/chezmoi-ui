@@ -59,10 +59,11 @@
   }
 }
 
+
+
 .itemBox {
   position: relatve;
   text-align: left;
-  ;
   border-radius: 8px;
   border: 1px solid #999;
   background-color: #292929;
@@ -179,6 +180,18 @@
 .fieldcontainerHalf input,
 .fieldcontainer textarea {
   font-family: monospace;
+}
+
+.selected {
+  padding-left: 10px;
+  padding-bottom: 0;
+  background-color: #3391ff;
+  border-radius: 8px;
+  margin-bottom: 5px;
+
+  button {
+    margin: 0;
+  }
 }
 
 .green {

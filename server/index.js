@@ -5,14 +5,14 @@ import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
 import { log } from './src/util/log.js';
-import { targetFilePath } from './src/config.js';
-import { boot } from './src/boot.js';
-import { isEmpty } from './src/api.js';
+import { targetFilePath } from './src/core/config.js';
+import { boot } from './src/core/boot.js';
+import { isEmpty } from './src/core/api.js';
+
+
 
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
-
-// boot();
 let { softwareArray, software } = boot();
 
 app.set('json spaces', 2);

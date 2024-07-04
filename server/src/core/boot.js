@@ -3,9 +3,9 @@ import {
   softwareYamlPath,
   targetFilePath
 } from './config.js';
-import { styles } from "./util/styles.js";
+import { styles } from "../util/styles.js";
 import { printAppLogo } from "./logo.js";
-import { log } from './util/log.js';
+import { log } from '../util/log.js';
 
 /**
  * Exports a set of styles used for logging and formatting output in the application.

@@ -20,7 +20,7 @@ import { filterUnwantedNodes } from "utils/installDoctorFilter";
  * @returns {JSX.Element} The list view component.
  */
 const ListView = (props) => {
-	const { software, theme, selectApp, editItem, deleteItem, gotoNext } = props;
+	const { software, theme, selectApp, selectedApp, editItem, deleteItem, edited } = props;
 
 	const [filter, setFilter] = useState("");
 	const purgedList = filterUnwantedNodes(software);;
@@ -67,9 +67,11 @@ const ListView = (props) => {
 								software={software}
 								item={item}
 								selectApp={selectApp}
+								selectedApp={selectedApp}
 								editItem={editItem}
 								deleteItem={deleteItem}
 								key={nanoid()}
+								edited={edited.includes(item)}
 							/>
 						);
 					})}
