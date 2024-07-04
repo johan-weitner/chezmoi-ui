@@ -4,8 +4,11 @@ import {
   targetFilePath,
   BACKUP_DEPTH,
   BACKUP_INTERVAL,
-  backupPaths
+  backupBasePath
 } from './config.js';
+import { backupPaths } from './boot.js';
+
+
 
 export const isEmpty = (data) => {
   return Object.keys(data).length === 0;
@@ -13,18 +16,14 @@ export const isEmpty = (data) => {
 
 // FIFO container for storing the 5 most recent changes
 export const addToBackup = (data) => {
-  const segments = targetFilePath.split('/');
-  segments.pop();
-  segments.push('_backups');
-  const basePath = segments.join('/');
-  if (!fs.existsSync(basePath)) {
-    fs.mkdirSync(basePath);
+  if (!fs.existsSync(backupBasePath)) {
+    fs.mkdirSync(backupBasePath);
   }
 
-  const backupPath = `${basePath}/backup-${new Date().getTime()}.json`;
+  const thisBackupPath = `${backupBasePath}/backup-${new Date().getTime()}.json`;
   try {
-    fs.writeFileSync(backupPath, JSON.stringify(data), 'utf8');
-    backupPaths.unshift(backupPath);
+    fs.writeFileSync(thisBackupPath, JSON.stringify(data), 'utf8');
+    backupPaths.unshift(thisBackupPath);
     if (backupPaths.length > BACKUP_DEPTH) {
       fs.unlinkSync(backupPaths.pop());
     }
@@ -62,3 +61,4 @@ export const backupInterval = (process.env.BACKUP_INTERVAL && process.env.BACKUP
 export const paginate = (list, page_size, page_number) => {
   return list.slice((page_number - 1) * page_size, page_number * page_size);
 };
+

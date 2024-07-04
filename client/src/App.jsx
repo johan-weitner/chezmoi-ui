@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import axios from "axios";
 import { AppShell, Burger } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { Toaster, toast } from "sonner";
 import MainView from "./components/MainView";
 import Header from "./components/Header";
+import { getMarkedAsEdited, saveMarkedAsEdited } from 'utils/fileHandler.js';
 
 /**
  * The main React component for the application. It handles the state management, API calls, and rendering of the main view.
@@ -17,7 +17,7 @@ import Header from "./components/Header";
  */
 function App() {
 	const [software, setSoftware] = useState(null);
-	const [edited, setEdited] = useState([]);
+	const [edited, setEdited] = useState(getMarkedAsEdited());
 	const baseUrl = '/api';
 
 	useEffect(() => {
@@ -28,6 +28,8 @@ function App() {
 		setSoftware(list);
 		// saveDocument();
 	};
+
+
 
 	const seedAppList = () => {
 		axios
@@ -79,19 +81,14 @@ function App() {
 			});
 	};
 
-	const startOver = () => {
-		localStorage.removeItem("APP_LIST");
-		seedAppList();
-		toast.success("Started over and seeded list from source file");
-	};
-
 	const updateItem = (item) => {
+		item.edited = true;
 		setSoftware((prevState) => ({
 			...prevState,
-			[item.key]: item,
+			[item.key]: item
 		}));
-		setEdited((prevState) => [...prevState, item.key]);
-		console.log('Edited: ', edited)
+		// saveDocument();
+		// setTimeout(saveDocument, 3000);
 		toast.success("Item was updated");
 	};
 
@@ -114,14 +111,13 @@ function App() {
 						software={software}
 						deleteApp={deleteApp}
 						save={saveDocument}
-						startOver={startOver}
 						updateItem={updateItem}
 						addNewApp={addNewApp}
 						edited={edited}
 					/>
 				)}
 			</AppShell.Main>
-			<Toaster position="top-right" theme="dark" richColors closeButton pauseWhenPageIsHidden />
+			<Toaster position="top-right" theme="dark" expand richColors closeButton pauseWhenPageIsHidden />
 		</AppShell>
 	);
 }

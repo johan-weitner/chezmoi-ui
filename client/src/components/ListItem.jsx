@@ -16,7 +16,7 @@ import classes from "./MainView.module.css";
 export const ListItem = props => {
   const { software, selectApp, selectedApp, editItem, deleteItem, item, edited } = props;
   const className = selectedApp?.key === item ? classes.selected : null;
-  const indicateEdit = edited ? (<ICON.check
+  const indicateEdit = software[item].edited ? (<ICON.check
     style={{
       width: rem(14),
       height: rem(14),
@@ -26,6 +26,7 @@ export const ListItem = props => {
     }}
     stroke={2}
     color="green"
+    title="Has been edited"
   />) : null;
 
   return (

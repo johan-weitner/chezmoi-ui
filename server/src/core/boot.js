@@ -1,7 +1,8 @@
 import fs from 'fs';
 import {
   softwareYamlPath,
-  targetFilePath
+  targetFilePath,
+  backupBasePath
 } from './config.js';
 import { styles } from "../util/styles.js";
 import { printAppLogo } from "./logo.js";
@@ -21,6 +22,18 @@ import { log } from '../util/log.js';
  */
 export const { success, warn, error, bold, italic, check, cross, wsign } = styles;
 
+// Redundant?
+export let backupPaths = [];
+
+// Redundant?
+if (fs.existsSync(backupBasePath)) {
+  const backupFiles = fs.readdirSync(backupBasePath);
+  backupPaths = backupFiles.map(file => {
+    return `${backupBasePath}/${file}`;
+  });
+}
+
+
 /**
  * Initializes the backend server by performing the following steps:
  * - Prints the application logo.
@@ -32,9 +45,12 @@ export const { success, warn, error, bold, italic, check, cross, wsign } = style
  * @returns {Object} An object containing the software array and the software object.
  */
 export const boot = () => {
+  console.clear();
   printAppLogo();
   log.info('  © 2024 Johan Weitner')
   log.info(bold('\n\n-= STARTING BACKEND SERVER... =-\n'));
+
+  console.log('BACKUP-PATH: ', backupPaths);
 
   _checkEnvVars();
   const { sourceExists, workExists } = _checkFileExistence();
@@ -97,6 +113,19 @@ const _setupFileData = () => {
       softwareArray[i].key = keys[i];
     }
     console.log(italic('List size: ' + keys.length));
-    return { softwareArray, software };
+    const backupPaths = _readBackups();
+    return { softwareArray, software, backupPaths };
+  }
+};
+
+const _readBackups = () => {
+  if (fs.existsSync(backupBasePath)) {
+    const backupFiles = fs.readdirSync(backupBasePath);
+    const backupPaths = backupFiles.map(file => {
+      return `${backupBasePath}/${file}`;
+    });
+    return backupPaths;
+  } else {
+    return [];
   }
 };

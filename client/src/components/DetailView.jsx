@@ -30,16 +30,31 @@ const warningSign = <span className={classes.red}>⚠</span>;
  * @returns {JSX.Element} - The DetailView component.
  */
 const DetailView = (props) => {
-	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext } =
+	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext, edited } =
 		props;
 	const tags = selectedApp?.tags && JSON.parse(selectedApp.tags);
 	let hasInstaller = false;
+
 	APP_FORM.formPartTwo.map((item) => {
 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
 			hasInstaller = true;
 			return;
 		}
 	});
+
+	const indicateEdit = selectedApp.edited ? (<ICON.check
+		style={{
+			width: rem(20),
+			height: rem(20),
+			position: "absolute",
+			right: "50px",
+			top: "45px",
+			zIndex: "999999"
+		}}
+		stroke={2}
+		color="green"
+		title="Has been edited"
+	/>) : null;
 
 	return (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
@@ -135,6 +150,7 @@ const DetailView = (props) => {
 									/>
 								</ActionIcon> */}
 							</a>
+							{indicateEdit}
 						</h2>
 
 						{selectedApp._short && (

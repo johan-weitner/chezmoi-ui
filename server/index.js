@@ -13,7 +13,7 @@ import { isEmpty } from './src/core/api.js';
 
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
-let { softwareArray, software } = boot();
+let { softwareArray, software, backupPaths } = boot();
 
 app.set('json spaces', 2);
 app.use(cors());
@@ -34,12 +34,12 @@ app.get('/', (req, res) => {
 app.get('/software', (req, res) => {
   // const { paged, page_size, page_number } = req.query;
   res = attachHeaders(res);
-  // if (paged === 'true') {
-  //   res.json(paginate(arr, page_size, page_number));
-  // } else {
-  //   res.json(software);
-  // }
   res.json(software);
+});
+
+app.get('/backups', (req, res) => {
+  res = attachHeaders(res);
+  res.json(backupPaths);
 });
 
 app.get('/rawlist', (req, res) => {
@@ -74,6 +74,4 @@ app.post('/save', (req, res) => {
 
 app.listen(port, () => {
   log.success(`\nServer is listening at port ${port} `);
-  log.info(`Point your web browser at http://localhost:${port}`);
-  log.info('...or whichever port the consuming client is served from\n\n');
 });

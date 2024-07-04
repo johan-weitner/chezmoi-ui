@@ -71,7 +71,7 @@ const ListView = (props) => {
 								editItem={editItem}
 								deleteItem={deleteItem}
 								key={nanoid()}
-								edited={edited.includes(item)}
+								edited={edited}
 							/>
 						);
 					})}

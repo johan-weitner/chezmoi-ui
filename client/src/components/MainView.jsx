@@ -137,7 +137,7 @@ const MainView = (props) => {
 							selectedApp={selectedApp}
 							deleteItem={deleteApp}
 							editItem={editItem}
-							edited={edited}
+							edited={selectedApp && selectedApp.key in edited}
 						/>
 					)}
 					{selectedApp && !isPopoverOpen && (
@@ -148,6 +148,7 @@ const MainView = (props) => {
 							editItem={editItem}
 							gotoPrev={gotoPrev}
 							gotoNext={gotoNext}
+							edited={selectedApp && selectedApp.key in edited}
 						/>
 					)}
 				</SimpleGrid>
