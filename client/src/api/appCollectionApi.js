@@ -98,34 +98,55 @@ export const getApp = async key => {
   return data;
 };
 
+// updateNode
+// addNode
 
-
-const postApp = async (item) => {
-  console.log('Saving app: ', item);
+const postAppUpdate = async (item) => {
+  console.log('Updating app: ', item);
   if (!item) return;
+  let result;
   item.edited = true;
-  const apps = useAppCollection();
-  const update = {
-    ...apps,
-    [item.key]: item
-  };
-  // await axios
-  //   .post(`${baseUrl}/save`, {
-  //     ...update,
-  //   })
-  //   .then((response) => {
-  //     const { data } = response;
-  //     // toast.success("Saved current state to disk");
-  //   })
-  //   .catch((error) => {
-  //     console.error(error);
-  //     // toast.error(error);
-  //   });
+
+  await axios
+    .post(`${baseUrl}/updateNode`, {
+      ...item,
+    })
+    .then((response) => {
+      result = response;
+      // toast.success("Saved current state to disk");
+    })
+    .catch((error) => {
+      console.error(error);
+      // toast.error(error);
+    });
   // toast.success("Item was updated");
-  return update;
+  return result;
+}
+
+const postNewApp = async (item) => {
+  console.log('Adding app: ', item);
+  if (!item) return;
+  let result;
+  item.edited = true;
+
+  await axios
+    .post(`${baseUrl}/addNode`, {
+      ...item,
+    })
+    .then((response) => {
+      result = response;
+      // toast.success("Saved current state to disk");
+    })
+    .catch((error) => {
+      console.error(error);
+      // toast.error(error);
+    });
+  // toast.success("Item was updated");
+  return result;
 }
 
 const postAppCollection = async (item) => {
+  console.log('Save app collection');
   const apps = useAppCollection();
   const update = {
     ...apps,
@@ -156,7 +177,7 @@ export const postAppKeys = async (keys) => {
 export const useAppMutation = () => {
 
   return useMutation({
-    mutationFn: async () => postApp(),
+    mutationFn: async () => postAppUpdate(),
     // onSuccess: () => {
     //   queryClient.invalidateQueries({ queryKey: ['appCollection'] });
     // },
@@ -200,3 +221,37 @@ export const useAppKeysMutation = () => {
   });
 };
 
+function useEditNode() {
+  const queryClient = useQueryClient();
+
+  return useMutation(
+    async ({ key, newValue }) => {
+      const response = await fetch(`/api/endpoint/${key}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newValue),
+      });
+      return response.json();
+    },
+    {
+      onMutate: async ({ key, newValue }) => {
+        await queryClient.cancelQueries('data');
+        const previousData = queryClient.getQueryData('data');
+
+        queryClient.setQueryData('data', oldData =>
+          oldData.map(item => (item.key === key ? { ...item, ...newValue } : item))
+        );
+
+        return { previousData };
+      },
+      onError: (err, variables, context) => {
+        queryClient.setQueryData('data', context.previousData);
+      },
+      onSettled: () => {
+        queryClient.invalidateQueries('data');
+      },
+    }
+  );
+}

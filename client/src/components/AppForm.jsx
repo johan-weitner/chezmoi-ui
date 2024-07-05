@@ -56,7 +56,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		defaultValues: isNewApp ? null : selectedApp,
 	});
 
-	const updateApp = useAppMutation() //.mutate(text)
+	const updateApp = useAppMutation();
 
 	const [opened, { open, close }] = useDisclosure(true);
 	let tagifyInstance;
@@ -68,14 +68,13 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	window.TAGIFY_DEBUG = true;
 	const { formPartOne, formPartTwo } = APP_FORM;
 
-	// useEffect(() => {
-	// 	const input = document.querySelector("input[name=tags]");
-	// 	tagifyInstance = new Tagify(input, { whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
-	// }, []);
-	tagifyInstance = new Tagify(
-		document.querySelector("input[name=tags]"),
-		{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true }
-	);
+	if (!tagifyInstance) {
+		tagifyInstance = new Tagify(
+			document.querySelector("input[name=tags]"),
+			{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true, TAGIFY_DEBUG: false }
+		);
+	}
+
 
 	const onSubmit = (data) => {
 		updateApp.mutate(data);

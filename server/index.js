@@ -57,6 +57,55 @@ app.get('/rawlist', (req, res) => {
   res.send(yamlData);
 });
 
+app.put('/updateNode', (req, res) => {
+  res = attachHeaders(res);
+  const { body } = req;
+  if (isEmpty(body)) {
+    res.status(500).json({
+      error: 'No data provided'
+    });
+    return;
+  }
+  try {
+    software[body.key] = { ...body };
+    const jsonStr = JSON.stringify(software, null, 2);
+    fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
+    res.status(200).json(jsonStr);
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      error: err
+    });
+    return;
+  }
+});
+
+app.post('/addNode', (req, res) => {
+  res = attachHeaders(res);
+  const { body } = req;
+  if (isEmpty(body)) {
+    res.status(500).json({
+      error: 'No data provided'
+    });
+    return;
+  }
+  try {
+    software = {
+      ...software,
+      body
+    };
+    const jsonStr = JSON.stringify(software, null, 2);
+    fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
+    res.status(200).json(jsonStr);
+  } catch (err) {
+    res.status(500).json({
+      status: 500,
+      error: err
+    });
+    return;
+  }
+});
+
 app.post('/save', (req, res) => {
   res = attachHeaders(res);
   if (isEmpty(req.body)) {
@@ -66,7 +115,7 @@ app.post('/save', (req, res) => {
     return;
   }
   try {
-    const jsonStr = JSON.stringify(req.body);
+    const jsonStr = JSON.stringify(req.body, null, 2);
     fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
     res.status(200).json(jsonStr);
   } catch (err) {
