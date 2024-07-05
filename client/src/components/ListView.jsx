@@ -1,10 +1,14 @@
 import { Card } from "@mantine/core";
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import {
+	useQuery,
+	useMutation,
+	useQueryClient
+} from '@tanstack/react-query'
 import classes from "./MainView.module.css";
 import { ListViewHeader } from "./ListViewHeader";
 import { ListItem } from "./ListItem";
-import { filterUnwantedNodes } from "utils/installDoctorFilter";
 
 
 /**
@@ -22,24 +26,33 @@ import { filterUnwantedNodes } from "utils/installDoctorFilter";
 const ListView = (props) => {
 	const { software, theme, selectApp, selectedApp, editItem, deleteItem, edited } = props;
 
+	const getAppCollection = (arg) => {
+		console.log('getAppCollection');
+	};
+
+	const getAppKeys = () => {
+		return Object.keys(software);
+	};
+
+	const appCollectionQuery = useQuery({ queryKey: ['appCollection'], queryFn: getAppCollection });
+	const appKeysQuery = useQuery({ queryKey: ['appKeys'], queryFn: getAppKeys });
+	const appCollection = appCollectionQuery.data;
+	const appKeys = appKeysQuery.data;
+	console.log('appCollection', appCollection);
+	console.log('appKeys', appKeys);
+
 	const [filter, setFilter] = useState("");
-	const purgedList = filterUnwantedNodes(software);;
 
-	const listItemKeys = [];
-	purgedList.map((item) => {
-		listItemKeys.push(item);
+	const appNames = [];
+	Object.keys(software).map((item) => {
+		appNames.push(software[item]?._name);
 	});
 
-	const listItemNames = [];
-	purgedList.map((item) => {
-		listItemNames.push(software[item]._name);
-	});
-
-	const filteredApps = listItemKeys.filter((key) =>
+	const filteredApps = appKeys?.filter((key) =>
 		software[key]?._name?.toLowerCase().includes(filter?.toLowerCase()),
 	);
 
-	return (
+	return appCollection && (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
 			<ListViewHeader
 				filter={filter}

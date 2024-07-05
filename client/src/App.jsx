@@ -6,6 +6,12 @@ import { Toaster, toast } from "sonner";
 import MainView from "./components/MainView";
 import Header from "./components/Header";
 import { getMarkedAsEdited, saveMarkedAsEdited } from 'utils/fileHandler.js';
+import {
+	useQuery,
+	useMutation,
+	useQueryClient
+} from '@tanstack/react-query'
+import { filterUnwantedNodes } from "utils/installDoctorFilter";
 
 /**
  * The main React component for the application. It handles the state management, API calls, and rendering of the main view.
@@ -24,12 +30,64 @@ function App() {
 		seedAppList();
 	}, []);
 
-	const saveList = (list) => {
-		setSoftware(list);
-		// saveDocument();
+	const queryClient = useQueryClient();
+
+	const getApp = key => {
+		return software[key];
 	};
 
+	const postApp = (item) => {
+		updateItem(item);
+	}
 
+	const getAppCollection = () => {
+		return software;
+	};
+
+	const postAppCollection = (item) => {
+		// updateItem(item);
+	}
+
+	const getAppKeys = () => {
+		return Object.keys(software);
+	};
+
+	const postAppKeys = (keys) => {
+		// console.log(keys);
+	}
+
+	// Queries
+	const appQuery = useQuery({ queryKey: ['appCollection'], queryFn: getApp });
+	const appCollectionQuery = useQuery({ queryKey: ['appCollection'], queryFn: getAppCollection });
+	const appKeysQuery = useQuery({ queryKey: ['appKeys'], queryFn: getAppKeys });
+
+	// Mutations
+	const appMutation = useMutation({
+		mutationFn: postApp,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['appCollection'] });
+		},
+	});
+
+	const appCollectionMutation = useMutation({
+		mutationFn: postAppCollection,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['appCollection'] });
+		},
+	});
+
+	const appKeysMutation = useMutation({
+		mutationFn: postAppKeys,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['appKeys'] });
+		},
+	});
+
+	const saveList = (list) => {
+		setSoftware(list);
+		appCollectionMutation.mutate(list);
+		appKeysMutation.mutate(Object.keys(list));
+	};
 
 	const seedAppList = () => {
 		axios
@@ -40,9 +98,9 @@ function App() {
 				keys.map((key) => {
 					data[key].key = key;
 				});
-
-				saveList(data);
-				console.log("Seeded software: ", data);
+				const purgedList = filterUnwantedNodes(data);
+				saveList(purgedList);
+				console.log("Seeded software: ", purgedList);
 				toast.success("List was successfully seeded");
 			})
 			.catch((error) => {

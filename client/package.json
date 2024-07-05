@@ -20,6 +20,8 @@
     "@mantine/nprogress": "^7.10.2",
     "@mantine/spotlight": "^7.10.2",
     "@tabler/icons-react": "^3.6.0",
+    "@tanstack/react-query": "^5.50.1",
+    "@tanstack/react-query-devtools": "^5.50.1",
     "@yaireo/tagify": "^4.27.0",
     "axios": "^1.7.2",
     "nanoid": "^5.0.7",

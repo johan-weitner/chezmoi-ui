@@ -14,8 +14,8 @@ import classes from "./MainView.module.css";
  * @param {function} props.setFilter - A function to update the filter value.
  * @returns {JSX.Element} - The rendered list view header component.
  */
-export const ListViewHeader = props => {
-  const { filter, filteredApps, theme, editItem, setFilter } = props;
+export const ListViewHeader = ({ filteredApps, editItem, setFilter, ...props }) => {
+  const { filter, theme } = props;
   return (
     <>
       <ICON.allApps
