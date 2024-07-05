@@ -1,3 +1,4 @@
+import classes from "components/MainHeader.module.css";
 import {
 	IconBarrel,
 	IconBeer,
@@ -55,4 +56,10 @@ export const ICON = {
 	add: IconCirclePlus,
 	warn: IconAlertCircle,
 	check: IconCheck
+};
+
+export const INDICATOR = {
+	populated: { css: classes.green, icon: '✓' },
+	unpopulated: { css: classes.red, icon: '✗' },
+	warning: { css: classes.red, icon: '⚠' }
 };

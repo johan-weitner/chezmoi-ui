@@ -1,14 +1,10 @@
 import { Card } from "@mantine/core";
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import {
-	useQuery,
-	useMutation,
-	useQueryClient
-} from '@tanstack/react-query'
 import classes from "./MainView.module.css";
 import { ListViewHeader } from "./ListViewHeader";
 import { ListItem } from "./ListItem";
+import { useAppCollection, useAppKeys, getApp } from "api/appCollectionApi";
 
 
 /**
@@ -24,27 +20,14 @@ import { ListItem } from "./ListItem";
  * @returns {JSX.Element} The list view component.
  */
 const ListView = (props) => {
-	const { software, theme, selectApp, selectedApp, editItem, deleteItem, edited } = props;
-
-	const getAppCollection = (arg) => {
-		console.log('getAppCollection');
-	};
-
-	const getAppKeys = () => {
-		return Object.keys(software);
-	};
-
-	const appCollectionQuery = useQuery({ queryKey: ['appCollection'], queryFn: getAppCollection });
-	const appKeysQuery = useQuery({ queryKey: ['appKeys'], queryFn: getAppKeys });
-	const appCollection = appCollectionQuery.data;
-	const appKeys = appKeysQuery.data;
-	console.log('appCollection', appCollection);
-	console.log('appKeys', appKeys);
-
+	const { theme, selectApp } = props;
+	const { data: software } = useAppCollection();
+	const { data: appKeys } = useAppKeys();
 	const [filter, setFilter] = useState("");
+	const [selectedApp, setSelectedApp] = useState(null);
 
 	const appNames = [];
-	Object.keys(software).map((item) => {
+	software && Object.keys(software).map((item) => {
 		appNames.push(software[item]?._name);
 	});
 
@@ -52,7 +35,10 @@ const ListView = (props) => {
 		software[key]?._name?.toLowerCase().includes(filter?.toLowerCase()),
 	);
 
-	return appCollection && (
+	const editItem = () => { };
+	const deleteItem = () => { };
+
+	return software && (
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
 			<ListViewHeader
 				filter={filter}
@@ -84,7 +70,6 @@ const ListView = (props) => {
 								editItem={editItem}
 								deleteItem={deleteItem}
 								key={nanoid()}
-								edited={edited}
 							/>
 						);
 					})}

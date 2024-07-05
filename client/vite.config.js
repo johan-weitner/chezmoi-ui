@@ -9,10 +9,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
+      api: `${path.resolve(__dirname, "./src/api/")}`,
+      // assets: path.resolve(__dirname, "./src/assets"),
       components: `${path.resolve(__dirname, "./src/components/")}`,
-      assets: path.resolve(__dirname, "./src/assets"),
+      constants: path.resolve(__dirname, "./src/constants"),
+      query: path.resolve(__dirname, "./src/query"),
       utils: path.resolve(__dirname, "./src/utils"),
-      constants: path.resolve(__dirname, "./src/constants")
     }
   },
   server: {

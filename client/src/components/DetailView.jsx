@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import {
 	ActionIcon,
 	Button,
@@ -12,10 +13,9 @@ import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { ICON } from "../constants/icons";
 import classes from "./MainView.module.css";
 import { APP_FORM } from 'constants/appForm.js'
+import { MarkPopulated, MarkUnPopulated, WarningSign } from "./Indicator";
+import AppForm from './AppForm'
 
-const markPopulated = <span className={classes.green}>✓</span>;
-const markUnPopulated = <span className={classes.red}>✗</span>;
-const warningSign = <span className={classes.red}>⚠</span>;
 
 /**
  * Renders a detailed view of a selected application, including its name, short description, full description, and links to its homepage, documentation, and GitHub repository. The view also includes buttons to edit or delete the selected application.
@@ -30,10 +30,19 @@ const warningSign = <span className={classes.red}>⚠</span>;
  * @returns {JSX.Element} - The DetailView component.
  */
 const DetailView = (props) => {
-	const { selectedApp, deleteItem, editItem, theme, gotoPrev, gotoNext, edited } =
-		props;
+	const { selectedApp, theme } = props;
+	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const modalRef = useRef();
 	const tags = selectedApp?.tags && JSON.parse(selectedApp.tags);
 	let hasInstaller = false;
+
+	const edit = () => {
+		setIsPopoverOpen(true);
+	};
+
+	const closePopover = () => {
+		setIsPopoverOpen(false);
+	};
 
 	APP_FORM.formPartTwo.map((item) => {
 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
@@ -56,7 +65,7 @@ const DetailView = (props) => {
 		title="Has been edited"
 	/>) : null;
 
-	return (
+	return selectedApp && (<>
 		<Card shadow="md" radius="md" className={classes.card} padding="xl">
 			<ICON.detail
 				style={{ width: rem(50), height: rem(50) }}
@@ -162,18 +171,18 @@ const DetailView = (props) => {
 
 						<div className={classes.indicatorGroup}>
 							<Text size="sm">
-								{selectedApp._home ? markPopulated : markUnPopulated} Homepage
+								{selectedApp._home ? <MarkPopulated /> : <MarkUnPopulated />} Homepage
 							</Text>
 							<Text size="sm">
-								{selectedApp._docs ? markPopulated : markUnPopulated}{" "}
+								{selectedApp._docs ? <MarkPopulated /> : <MarkUnPopulated />}{" "}
 								Documentation
 							</Text>
 							<Text size="sm">
-								{selectedApp._github ? markPopulated : markUnPopulated} Github
+								{selectedApp._github ? <MarkPopulated /> : <MarkUnPopulated />} Github
 							</Text>
 							{!hasInstaller && (
 								<Text size="sm" style={{ marginTop: "6px" }}>
-									{warningSign} <span className={classes.red} >No installer specified</span>
+									<WarningSign />
 								</Text>
 							)}
 						</div>
@@ -198,7 +207,7 @@ const DetailView = (props) => {
 
 						<Group justify="center" p="md">
 							<Button
-								onClick={() => editItem(selectedApp.key)}
+								onClick={() => edit(selectedApp.key)}
 								className={classes.editBtn}
 								leftSection={
 									<ICON.edit
@@ -215,7 +224,7 @@ const DetailView = (props) => {
 								Edit
 							</Button>
 							<Button
-								onClick={() => deleteItem()}
+								onClick={() => delete (selectedApp.key)}
 								className={classes.deleteBtn}
 								leftSection={
 									<ICON.remove
@@ -236,7 +245,16 @@ const DetailView = (props) => {
 				)}
 			</Card>
 		</Card>
-	);
+		{isPopoverOpen && (
+			<AppForm
+				ref={modalRef}
+				isPopoverOpen={isPopoverOpen}
+				closePopover={closePopover}
+				selectedApp={selectedApp}
+				theme={theme}
+			/>
+		)}
+	</>);
 };
 
 export default DetailView;

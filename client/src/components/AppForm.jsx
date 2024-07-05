@@ -23,6 +23,7 @@ import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
 import classes from "./MainView.module.css";
+import { useAppMutation } from "../api/appCollectionApi";
 
 /**
  * The `AppForm` component is a React functional component that renders a modal form for creating or editing an application.
@@ -45,7 +46,6 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	const {
 		isPopoverOpen,
 		closePopover,
-		updateApp,
 		selectedApp,
 		gotoPrev,
 		gotoNext,
@@ -55,6 +55,8 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: isNewApp ? null : selectedApp,
 	});
+
+	const updateApp = useAppMutation() //.mutate(text)
 
 	const [opened, { open, close }] = useDisclosure(true);
 	let tagifyInstance;
@@ -75,16 +77,8 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true }
 	);
 
-	const verifyTagify = () => {
-		if (!tagifyInstance) {
-			tagifyInstance = new Tagify(
-				document.querySelector("input[name=tags]"),
-				{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true });
-		}
-	};
-
 	const onSubmit = (data) => {
-		updateApp(data);
+		updateApp.mutate(data);
 	};
 
 	return (

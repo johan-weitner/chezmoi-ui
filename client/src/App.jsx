@@ -11,7 +11,13 @@ import {
 	useMutation,
 	useQueryClient
 } from '@tanstack/react-query'
-import { fetchAppCollection, fetchAppKeys } from './api/appCollectionApi'
+import {
+	fetchAppCollection,
+	fetchAppKeys,
+	useAppCollection,
+	useAppKeys,
+	useApp
+} from './api/appCollectionApi'
 
 /**
  * The main React component for the application. It handles the state management, API calls, and rendering of the main view.
@@ -22,125 +28,92 @@ import { fetchAppCollection, fetchAppKeys } from './api/appCollectionApi'
  * - Displays a Toaster component for showing success and error messages.
  */
 function App() {
-	const [software, setSoftware] = useState(null);
-	const [edited, setEdited] = useState(getMarkedAsEdited());
-	const baseUrl = '/api';
+	// const [software, setSoftware] = useState(null);
+	// const baseUrl = '/api';
 
 	useEffect(() => {
 		// seedAppList();
 	}, []);
 
-	const queryClient = useQueryClient();
 
-	const getApp = key => {
-		return appCollectionQuery.data[key];
-	};
-
-	const postApp = (item) => {
-		updateItem(item);
-	}
-
-
-	const postAppCollection = (item) => {
-		// updateItem(item);
-	}
-
-	const postAppKeys = (keys) => {
-		// console.log(keys);
-	}
 
 	// Queries
-	const appQuery = useQuery({ queryKey: ['appCollection'], queryFn: getApp });
-	const appCollectionQuery = useQuery({
-		queryKey: ['appCollection'],
-		queryFn: async () => fetchAppCollection()
-	});
-	const appKeysQuery = useQuery({ queryKey: ['appKeys'], queryFn: async () => fetchAppKeys() });
+	// const appQuery = useApp(key);
 
-	// Mutations
-	const appMutation = useMutation({
-		mutationFn: postApp,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['appCollection'] });
-		},
-	});
-
-	const appCollectionMutation = useMutation({
-		mutationFn: postAppCollection,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['appCollection'] });
-		},
-	});
-
-	const appKeysMutation = useMutation({
-		mutationFn: postAppKeys,
-		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['appKeys'] });
-		},
-	});
-
-	const saveList = (list) => {
-		if (list) {
-			setSoftware(list);
-			appCollectionMutation.mutate(list);
-			appKeysMutation.mutate(Object.keys(list));
-		} else {
-			console.error("List is empty - cancelling");
-		}
-
-	};
-
-	const seedAppList = async () => {
-		const seed = await fetchAppCollection();
-		saveList(seed);
-		console.log("Seeded software: ", seed);
-		toast.success("List was successfully seeded");
-	};
+	// const {
+	// 	data: appCollection,
+	// 	status: appCollectionStatus,
+	// 	fetchStatus: appCollectionFetchStatus,
+	// 	error: appCollectionError
+	// } = useAppCollection();
+	// const {
+	// 	data: appKeys,
+	// 	status: appKeysStatus,
+	// 	fetchStatus: appKeysFetchStatus,
+	// 	error: appKeysError
+	// } = useAppKeys();
 
 
 
-	const deleteApp = (key) => {
-		const appName = software[key]?._name;
-		delete software[key];
-		saveList({ ...software });
-		toast.success(`${appName} was deleted`);
-	};
+	// const saveList = (list) => {
+	// 	if (list) {
+	// 		setSoftware(list);
+	// 		appCollectionMutation.mutate(list);
+	// 		appKeysMutation.mutate(Object.keys(list));
+	// 	} else {
+	// 		console.error("List is empty - cancelling");
+	// 	}
+	// };
 
-	const saveDocument = () => {
-		if (software === null || Object.keys(software).length === 0) {
-			toast.error("Critical error - no software list to save");
-			return;
-		}
+	// const seedAppList = async () => {
+	// 	const { data: seed } = await useAppCollection();
+	// 	saveList(seed);
+	// 	console.log("Seeded software: ", seed);
+	// 	toast.success("List was successfully seeded");
+	// };
 
-		axios
-			.post(`${baseUrl}/save`, {
-				...software,
-			})
-			.then((response) => {
-				const { data } = response;
-				setSoftware((prevState) => ({
-					...JSON.parse(data),
-				}));
-				toast.success("Saved current state to disk");
-			})
-			.catch((error) => {
-				console.error(error);
-				toast.error(error);
-			});
-	};
+	// const deleteApp = (key) => {
+	// 	const appName = software[key]?._name;
+	// 	delete software[key];
+	// 	saveList({ ...software });
+	// 	toast.success(`${appName} was deleted`);
+	// };
 
-	const updateItem = (item) => {
-		item.edited = true;
-		setSoftware((prevState) => ({
-			...prevState,
-			[item.key]: item
-		}));
-		toast.success("Item was updated");
-	};
+	// const saveDocument = () => {
+	// 	if (software === null || Object.keys(software).length === 0) {
+	// 		toast.error("Critical error - no software list to save");
+	// 		return;
+	// 	}
 
-	const addNewApp = () => {
-		console.log('Add new app');
-	};
+	// 	axios
+	// 		.post(`${baseUrl}/save`, {
+	// 			...software,
+	// 		})
+	// 		.then((response) => {
+	// 			const { data } = response;
+	// 			setSoftware((prevState) => ({
+	// 				...JSON.parse(data),
+	// 			}));
+	// 			toast.success("Saved current state to disk");
+	// 		})
+	// 		.catch((error) => {
+	// 			console.error(error);
+	// 			toast.error(error);
+	// 		});
+	// };
+
+	// const updateItem = (item) => {
+	// 	item.edited = true;
+	// 	setSoftware((prevState) => ({
+	// 		...prevState,
+	// 		[item.key]: item
+	// 	}));
+	// 	toast.success("Item was updated");
+	// };
+
+	// const addNewApp = () => {
+	// 	console.log('Add new app');
+	// };
 
 	return (
 		<AppShell
@@ -150,18 +123,8 @@ function App() {
 			<AppShell.Header withBorder={false}>
 				<Header />
 			</AppShell.Header>
-
 			<AppShell.Main>
-				{software && (
-					<MainView
-						software={software}
-						deleteApp={deleteApp}
-						save={saveDocument}
-						updateItem={updateItem}
-						addNewApp={addNewApp}
-						edited={edited}
-					/>
-				)}
+				<MainView />
 			</AppShell.Main>
 			<Toaster position="top-right" theme="dark" expand richColors closeButton pauseWhenPageIsHidden />
 		</AppShell>
