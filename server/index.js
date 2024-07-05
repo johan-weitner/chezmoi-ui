@@ -13,7 +13,7 @@ import { isEmpty } from './src/core/api.js';
 
 const app = express();
 const port = process.env.SERVER_PORT || 3000;
-let { softwareArray, software, backupPaths } = boot();
+let { softwareArray, software, backupPaths, keys } = boot();
 
 app.set('json spaces', 2);
 app.use(cors());
@@ -35,6 +35,11 @@ app.get('/software', (req, res) => {
   // const { paged, page_size, page_number } = req.query;
   res = attachHeaders(res);
   res.json(software);
+});
+
+app.get('/softwareKeys', (req, res) => {
+  res = attachHeaders(res);
+  res.json(keys);
 });
 
 app.get('/backups', (req, res) => {

@@ -7,8 +7,6 @@ if (!localStorage.getItem(LOCAL_STORE_EDITED_APPS)) {
 
 export const getMarkedAsEdited = () => {
   const data = localStorage.getItem(LOCAL_STORE_EDITED_APPS);
-  console.log("JSON: ", typeof data)
-  // return json ? JSON.parse(json) : [];
   if (data !== 'undefined') {
     return JSON.parse(data);
   } else {

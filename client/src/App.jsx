@@ -11,7 +11,7 @@ import {
 	useMutation,
 	useQueryClient
 } from '@tanstack/react-query'
-import { filterUnwantedNodes } from "utils/installDoctorFilter";
+import { fetchAppCollection, fetchAppKeys } from './api/appCollectionApi'
 
 /**
  * The main React component for the application. It handles the state management, API calls, and rendering of the main view.
@@ -27,30 +27,23 @@ function App() {
 	const baseUrl = '/api';
 
 	useEffect(() => {
-		seedAppList();
+		// seedAppList();
 	}, []);
 
 	const queryClient = useQueryClient();
 
 	const getApp = key => {
-		return software[key];
+		return appCollectionQuery.data[key];
 	};
 
 	const postApp = (item) => {
 		updateItem(item);
 	}
 
-	const getAppCollection = () => {
-		return software;
-	};
 
 	const postAppCollection = (item) => {
 		// updateItem(item);
 	}
-
-	const getAppKeys = () => {
-		return Object.keys(software);
-	};
 
 	const postAppKeys = (keys) => {
 		// console.log(keys);
@@ -58,8 +51,11 @@ function App() {
 
 	// Queries
 	const appQuery = useQuery({ queryKey: ['appCollection'], queryFn: getApp });
-	const appCollectionQuery = useQuery({ queryKey: ['appCollection'], queryFn: getAppCollection });
-	const appKeysQuery = useQuery({ queryKey: ['appKeys'], queryFn: getAppKeys });
+	const appCollectionQuery = useQuery({
+		queryKey: ['appCollection'],
+		queryFn: async () => fetchAppCollection()
+	});
+	const appKeysQuery = useQuery({ queryKey: ['appKeys'], queryFn: async () => fetchAppKeys() });
 
 	// Mutations
 	const appMutation = useMutation({
@@ -84,30 +80,24 @@ function App() {
 	});
 
 	const saveList = (list) => {
-		setSoftware(list);
-		appCollectionMutation.mutate(list);
-		appKeysMutation.mutate(Object.keys(list));
+		if (list) {
+			setSoftware(list);
+			appCollectionMutation.mutate(list);
+			appKeysMutation.mutate(Object.keys(list));
+		} else {
+			console.error("List is empty - cancelling");
+		}
+
 	};
 
-	const seedAppList = () => {
-		axios
-			.get(`${baseUrl}/software`)
-			.then((response) => {
-				const { data } = response;
-				const keys = Object.keys(data);
-				keys.map((key) => {
-					data[key].key = key;
-				});
-				const purgedList = filterUnwantedNodes(data);
-				saveList(purgedList);
-				console.log("Seeded software: ", purgedList);
-				toast.success("List was successfully seeded");
-			})
-			.catch((error) => {
-				console.error(error);
-				toast.error(error);
-			});
+	const seedAppList = async () => {
+		const seed = await fetchAppCollection();
+		saveList(seed);
+		console.log("Seeded software: ", seed);
+		toast.success("List was successfully seeded");
 	};
+
+
 
 	const deleteApp = (key) => {
 		const appName = software[key]?._name;
@@ -145,8 +135,6 @@ function App() {
 			...prevState,
 			[item.key]: item
 		}));
-		// saveDocument();
-		// setTimeout(saveDocument, 3000);
 		toast.success("Item was updated");
 	};
 
