@@ -57,6 +57,12 @@ app.get('/rawlist', (req, res) => {
   res.send(yamlData);
 });
 
+app.get('/getApp', (req, res) => {
+  const { key } = req.query;
+  res = attachHeaders(res);
+  res.json(software[key]);
+});
+
 app.put('/updateNode', (req, res) => {
   res = attachHeaders(res);
   const { body } = req;

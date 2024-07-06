@@ -31,22 +31,15 @@ import AppForm from "./components/AppForm";
 function App() {
 	const BASE_URL = "/api";
 	const { formPartOne, formPartTwo } = APP_FORM;
-
+	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [selectedApp, setSelectedApp] = useState(null);
-
-	const useApp = (key) => {
-		return useQuery({
-			queryKey: ["app"],
-			queryFn: async () => fetchApp(key),
-		});
-	};
 
 	const useAppCollection = () => {
 		return useQuery({
 			queryKey: ["appCollection"],
 			queryFn: async () => {
 				const response = await axios.get(`${BASE_URL}/software`);
-				return response.data; // Return the actual data from the response
+				return response.data;
 			},
 		});
 	};
@@ -56,9 +49,25 @@ function App() {
 			queryKey: ["appKeys"],
 			queryFn: async () => {
 				const response = await axios.get(`${BASE_URL}/softwareKeys`);
-				return response.data; // Return the actual data from the response
+				return response.data;
 			},
 		});
+	};
+
+	const useApp = (key) => {
+		return useQuery({
+			queryKey: ["app"],
+			queryFn: async () => {
+				const response = await axios.get(`${BASE_URL}/getApp?key=${key}`);
+				return response.data;
+			},
+		});
+	};
+
+	const openApp = key => {
+		const app = useApp(key);
+		console.log("Open app:", app);
+		setSelectedApp(app)
 	};
 
 	const { data, error, isLoading } = useAppCollection();
@@ -105,20 +114,24 @@ function App() {
 							{data &&
 								keys?.length > 0 &&
 								keys.map(
-									(key, i) => (i > 4 && i < 25) && <Button key={key}>{data[key]._name}</Button>,
+									(key, i) => (i > 4 && i < 25) &&
+										<Button onClick={() => openApp(key)} key={key}>{data[key]._name}</Button>,
 								)}
 						</Flex>
 					</Grid.Col>
 					<Grid.Col span="1">
-						{selectedApp && <AppForm app={
-							selectedApp = { selectedApp }
-							isPopoverOpen={isPopoverOpen}
-							closePopover={closePopover}
-							selectedApp={selectedApp}
-							gotoPrev={gotoPrev}
-							gotoNext={gotoNext}
-							theme={theme}
-							isNewApp={isNewApp} } />}
+						{selectedApp && (
+							<AppForm
+								isPopoverOpen={isPopoverOpen}
+								closePopover={() => { }}
+								selectedApp={selectedApp}
+								gotoPrev={() => { }}
+								gotoNext={() => { }}
+								theme={theme}
+								isNewApp={false}
+							/>
+						)
+						}
 					</Grid.Col>
 				</Grid>
 
