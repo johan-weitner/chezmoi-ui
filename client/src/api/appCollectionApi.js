@@ -248,7 +248,7 @@ export const useAppMutation_OLD = () => {
 		},
 		onSettled: () => {
 			queryClient.invalidateQueries({
-				queryKey: ['app', 'appCollection'],
+				queryKey: ['appCollection'],
 				exact: true,
 				refetchType: 'active',
 			});
@@ -308,7 +308,7 @@ export const useAppMutation = async () => {
 			return { status: 'error', error: err.message };
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries(['appCollection', 'app', 'appKeys']);
+			queryClient.invalidateQueries(['appCollection']);
 			return { status: 'success' };
 		},
 	});

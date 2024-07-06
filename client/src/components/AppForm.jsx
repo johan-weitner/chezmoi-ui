@@ -62,7 +62,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	const onSubmit = async (data) => {
 		const response = await updateNodeOnServer(data);
 		console.log('response', response);
-		await updateApp.mutate(data);
+		await updateApp?.mutate(data);
 		closePopover();
 	};
 
