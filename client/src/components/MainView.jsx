@@ -1,13 +1,13 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
-import { useRef, useState, useEffect } from "react";
-import { toast } from "sonner";
+import { useEffect, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
+import { toast } from "sonner";
+import { getApp } from "../api/appCollectionApi.js";
 import AppForm from "./AppForm.jsx";
 import DetailView from "./DetailView.jsx";
-import classes from "./MainView.module.css";
-import MainHeader from "./MainHeader.jsx";
 import ListView from "./ListView.jsx";
-import { getApp } from "../api/appCollectionApi.js";
+import MainHeader from "./MainHeader.jsx";
+import classes from "./MainView.module.css";
 
 /**
  * The `MainView` component is the main view of the application, responsible for rendering the main header, list view, and detail view.
@@ -54,8 +54,6 @@ const MainView = (props) => {
 	// 	};
 	// }, { preventDefault: true, enableOnFormTags: [] });
 	// useHotkeys("alt + n", (e) => createNewRecord(e), hotkeyOptions);
-
-
 
 	const selectApp = async (e, item) => {
 		e?.preventDefault();
@@ -119,9 +117,7 @@ const MainView = (props) => {
 				py="xl"
 				style={{ backgroundColor: "#333", paddingTop: "0px" }}
 			>
-				<MainHeader
-					style={{ borderRadius: "10px" }}
-				/>
+				<MainHeader style={{ borderRadius: "10px" }} />
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"
@@ -129,17 +125,10 @@ const MainView = (props) => {
 					className={classes.grid}
 					style={{ backgroundColor: "#333" }}
 				>
-					<ListView
-						theme={theme}
-						selectApp={selectApp}
-					/>
+					<ListView theme={theme} selectApp={selectApp} />
 					{selectedApp && (
-						<DetailView
-							selectedApp={selectedApp}
-							theme={theme}
-						/>
+						<DetailView selectedApp={selectedApp} theme={theme} />
 					)}
-
 				</SimpleGrid>
 				{/* {isPopoverOpen && (
 					<AppForm

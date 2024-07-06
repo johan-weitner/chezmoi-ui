@@ -17,7 +17,13 @@ const MainHeader = (props) => {
 
 	const links = [
 		{ icon: <ICON.save />, label: "Save", action: save },
-		{ icon: <ICON.download />, label: "Download YAML", action: () => { window.open('http://localhost:3000/rawlist', '_blank') } },
+		{
+			icon: <ICON.download />,
+			label: "Download YAML",
+			action: () => {
+				window.open("http://localhost:3000/rawlist", "_blank");
+			},
+		},
 	];
 
 	const mainItems = links.map((item) => (

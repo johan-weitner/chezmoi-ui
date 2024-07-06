@@ -1,23 +1,19 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import { AppShell, Burger } from "@mantine/core";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { AppShell, Burger } from '@mantine/core';
 import { Toaster, toast } from "sonner";
-import MainView from "./components/MainView";
-import Header from "./components/Header";
-import { getMarkedAsEdited, saveMarkedAsEdited } from 'utils/fileHandler.js';
-import {
-	useQuery,
-	useMutation,
-	useQueryClient
-} from '@tanstack/react-query'
+import { getMarkedAsEdited, saveMarkedAsEdited } from "utils/fileHandler.js";
 import {
 	fetchAppCollection,
 	fetchAppKeys,
+	useApp,
 	useAppCollection,
 	useAppKeys,
-	useApp
-} from './api/appCollectionApi'
+} from "./api/appCollectionApi";
+import Header from "./components/Header";
+import MainView from "./components/MainView";
 
 /**
  * The main React component for the application. It handles the state management, API calls, and rendering of the main view.
@@ -35,8 +31,6 @@ function App() {
 		// seedAppList();
 	}, []);
 
-
-
 	// Queries
 	// const appQuery = useApp(key);
 
@@ -52,8 +46,6 @@ function App() {
 	// 	fetchStatus: appKeysFetchStatus,
 	// 	error: appKeysError
 	// } = useAppKeys();
-
-
 
 	// const saveList = (list) => {
 	// 	if (list) {
@@ -116,17 +108,21 @@ function App() {
 	// };
 
 	return (
-		<AppShell
-			header={{ height: 40 }}
-			padding="md"
-		>
+		<AppShell header={{ height: 40 }} padding="md">
 			<AppShell.Header withBorder={false}>
 				<Header />
 			</AppShell.Header>
 			<AppShell.Main>
 				<MainView />
 			</AppShell.Main>
-			<Toaster position="top-right" theme="dark" expand richColors closeButton pauseWhenPageIsHidden />
+			<Toaster
+				position="top-right"
+				theme="dark"
+				expand
+				richColors
+				closeButton
+				pauseWhenPageIsHidden
+			/>
 		</AppShell>
 	);
 }

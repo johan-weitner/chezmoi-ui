@@ -1,10 +1,10 @@
-import { useRef } from "react";
+import { useDisclosure } from "@mantine/hooks";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import Tagify from "@yaireo/tagify";
 import { nanoid } from "nanoid";
+import { useRef } from "react";
 import { forwardRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useDisclosure } from '@mantine/hooks';
 import "@yaireo/tagify/dist/tagify.css";
 import {
 	ActionIcon,
@@ -13,17 +13,17 @@ import {
 	Flex,
 	Group,
 	Input,
+	Modal,
 	SimpleGrid,
 	Text,
 	Textarea,
 	rem,
-	Modal
 } from "@mantine/core";
 import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
-import classes from "./MainView.module.css";
 import { useAppMutation } from "../api/appCollectionApi";
+import classes from "./MainView.module.css";
 
 /**
  * The `AppForm` component is a React functional component that renders a modal form for creating or editing an application.
@@ -50,7 +50,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		gotoPrev,
 		gotoNext,
 		theme,
-		isNewApp
+		isNewApp,
 	} = props;
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: isNewApp ? null : selectedApp,
@@ -69,12 +69,12 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	if (!tagifyInstance) {
-		tagifyInstance = new Tagify(
-			document.querySelector("input[name=tags]"),
-			{ whitelist: TAGS_WHITE_LIST, enforceWhitelist: true, TAGIFY_DEBUG: false }
-		);
+		tagifyInstance = new Tagify(document.querySelector("input[name=tags]"), {
+			whitelist: TAGS_WHITE_LIST,
+			enforceWhitelist: true,
+			TAGIFY_DEBUG: false,
+		});
 	}
-
 
 	const onSubmit = (data) => {
 		updateApp.mutate(data);
@@ -143,7 +143,9 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 				</Flex>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<h2 className={classes.editDetailHeader}>{selectedApp?._name || 'New application'}</h2>
+					<h2 className={classes.editDetailHeader}>
+						{selectedApp?._name || "New application"}
+					</h2>
 					<h3
 						style={{
 							textAlign: "left",

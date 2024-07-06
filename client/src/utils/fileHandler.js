@@ -1,19 +1,18 @@
-
-const LOCAL_STORE_EDITED_APPS = 'LOCAL_STORE_EDITED_APPS';
+const LOCAL_STORE_EDITED_APPS = "LOCAL_STORE_EDITED_APPS";
 
 if (!localStorage.getItem(LOCAL_STORE_EDITED_APPS)) {
-  localStorage.setItem(LOCAL_STORE_EDITED_APPS, JSON.stringify([]));
+	localStorage.setItem(LOCAL_STORE_EDITED_APPS, JSON.stringify([]));
 }
 
 export const getMarkedAsEdited = () => {
-  const data = localStorage.getItem(LOCAL_STORE_EDITED_APPS);
-  if (data !== 'undefined') {
-    return JSON.parse(data);
-  } else {
-    return [];
-  }
+	const data = localStorage.getItem(LOCAL_STORE_EDITED_APPS);
+	if (data !== "undefined") {
+		return JSON.parse(data);
+	} else {
+		return [];
+	}
 };
 
 export const saveMarkedAsEdited = (edited) => {
-  localStorage.setItem(LOCAL_STORE_EDITED_APPS, JSON.stringify(edited));
+	localStorage.setItem(LOCAL_STORE_EDITED_APPS, JSON.stringify(edited));
 };
