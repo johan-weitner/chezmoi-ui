@@ -5,6 +5,7 @@
   "main": "start.sh",
   "scripts": {
     "start": "./start.sh",
+    "start:force": "./start.sh -f",
     "stop": "./stop.sh",
     "clean": "rm -rf ./_backups/"
   },

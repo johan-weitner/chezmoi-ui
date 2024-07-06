@@ -12,7 +12,7 @@ import { isEmpty } from './src/core/api.js';
 
 
 const app = express();
-const port = process.env.SERVER_PORT || 3000;
+const port = process.env.BACKEND_SRV_PORT || 3000;
 let { softwareArray, software, backupPaths, keys } = boot();
 
 app.set('json spaces', 2);

@@ -18,7 +18,7 @@ export default defineConfig({
     }
   },
   server: {
-    port: process.env.SERVER_PORT || 8080,
+    port: process.env.FRONTEND_SRV_PORT || 8080,
     strictPort: true,
     proxy: {
       '/api': {
