@@ -11,7 +11,7 @@ import { toast } from "sonner";
 import { CACHE_TTL } from "constants/settings";
 import { filterUnwantedNodes } from "../utils/installDoctorFilter";
 
-const BASE_URL = "/api";
+const BASE_URL = "http://localhost:3000";
 const queryClient = new QueryClient();
 
 export const fetchApp = async (key) => {
@@ -136,7 +136,7 @@ const postAppUpdate = async (item) => {
 	item.edited = true;
 
 	await axios
-		.post(`${baseUrl}/updateNode`, {
+		.post(`${BASE_URL}/updateNode`, {
 			...item,
 		})
 		.then((response) => {
@@ -158,7 +158,7 @@ const postNewApp = async (item) => {
 	item.edited = true;
 
 	await axios
-		.post(`${baseUrl}/addNode`, {
+		.post(`${BASE_URL}/addNode`, {
 			...item,
 		})
 		.then((response) => {
@@ -181,7 +181,7 @@ const postAppCollection = async (item) => {
 		[item.key]: item,
 	};
 	await axios
-		.post(`${baseUrl}/save`, {
+		.post(`${BASE_URL}/save`, {
 			...update,
 		})
 		.then((response) => {
@@ -215,7 +215,7 @@ export const useAppMutation_OLD = () => {
 			item.edited = true;
 
 			const result = await axios
-				.post(`${baseUrl}/updateNode`, {
+				.post(`${BASE_URL}/updateNode`, {
 					...item,
 				})
 				.then((response) => {
@@ -258,41 +258,49 @@ export const useAppMutation_OLD = () => {
 	});
 };
 
-export const useAppMutation = () => {
+export const updateNodeOnServer = async (updatedNode) => {
+
+	updatedNode.edited = true;
+
+	console.log('...updatedNode: ', { ...updatedNode });
+
+	const result = await axios
+		.post(`${BASE_URL}/updateNode`, {
+			...updatedNode,
+		})
+		.then((response) => {
+			console.log('Inside mutation');
+			console.log('Response: ', response);
+			return response.data;
+		})
+		.catch((error) => {
+			console.error(error.message);
+			toast(error.message);
+		});
+	return result.data;
+};
+
+export const useAppMutation = async () => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: (updatedNode) => async () => {
-			console.log("Updating app: ", updatedNode);
-			if (!item) return;
-			item.edited = true;
-
-			const result = await axios
-				.post(`${baseUrl}/updateNode`, {
-					...updatedNode,
-				})
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error.message);
-					toast(error.message);
-				});
-			return result;
-		},
+		mutationFn: async () => (updatedNode) => updateNodeOnServer(updatedNode),
 		onMutate: async (updatedNode) => {
 			await queryClient.cancelQueries(['appCollection']);
 			const previousData = queryClient.getQueryData(['appCollection']);
 			const keys = Object.keys(previousData);
-			console.log(updatedNode);
+			console.log('onMutated - update: ', updatedNode);
 
 			queryClient.setQueryData(['appCollection'], (old) => {
-				return keys.map((key) => {
-					key === updatedNode.key ? { ...updatedNode } : previousData[key]
-				}
-				);
+				console.log('Old: ', old);
+				const newList = keys.map((key) => {
+					console.log('Iterating key: ', key);
+					return key === updatedNode.key ? { ...old[key], ...updatedNode } : old[key]
+				});
+				console.log(newList);
+				return newList;
 			});
-			console.log(previousData);
+			// console.log(previousData);
 			return { previousData };
 		},
 		onError: (err, updatedNode, context) => {

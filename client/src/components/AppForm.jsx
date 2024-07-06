@@ -22,26 +22,9 @@ import {
 import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
-import { useAppMutation } from "../api/appCollectionApi";
+import { useAppMutation, updateNodeOnServer } from "../api/appCollectionApi";
 import classes from "./MainView.module.css";
 
-/**
- * The `AppForm` component is a React functional component that renders a modal form for creating or editing an application.
- *
- * The component receives several props:
- * - `isPopoverOpen`: a boolean indicating whether the modal should be open or closed
- * - `closePopover`: a function to close the modal
- * - `updateApp`: a function to update the application data
- * - `selectedApp`: the currently selected application object
- * - `gotoPrev`: a function to navigate to the previous application
- * - `gotoNext`: a function to navigate to the next application
- * - `theme`: the current theme object
- * - `isNewApp`: a boolean indicating whether the form is for a new application or an existing one
- *
- * The component uses the `useForm` hook from `react-hook-form` to manage the form state and validation. It also uses the `Tagify` library to handle the tags input field.
- *
- * The component renders a modal with a form that allows the user to edit the application's name, description, and tags. It also includes buttons to navigate between applications and save the changes.
- */
 const AppForm = forwardRef(function AppForm(props, ref) {
 	const {
 		isPopoverOpen,
@@ -56,7 +39,7 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		defaultValues: isNewApp ? null : selectedApp,
 	});
 
-	const updateApp = useAppMutation();
+	// const { data, isLoading } = useDataQuery();
 
 	const [opened, { open, close }] = useDisclosure(true);
 	let tagifyInstance;
@@ -75,18 +58,12 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 			TAGIFY_DEBUG: false,
 		});
 	}
-
+	const updateApp = useAppMutation();
 	const onSubmit = async (data) => {
-		const response = await updateApp.mutate(data);
-		console.log(response);
+		const response = await updateNodeOnServer(data);
+		console.log('response', response);
+		await updateApp.mutate(data);
 		closePopover();
-		// if (status === "success") {
-		// 	toast.success("App updated successfully");
-		// 	closePopover();
-		// } else if (status === "error") {
-		// 	toast.error(error?.message || 'Failed to save changes');
-		// 	closePopover();
-		// }
 	};
 
 	return (
