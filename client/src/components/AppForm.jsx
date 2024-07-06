@@ -94,38 +94,38 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		>
 			<Card>
 				<Flex justify="flex-end" gap={"sm"}>
-					{selectedApp && (
-						<>
-							<ActionIcon
-								size={32}
-								radius="xl"
-								color={theme.primaryColor}
-								variant="filled"
-								title="Go to previous app"
-								onClick={() => gotoPrev()}
-							>
-								<IconPlayerTrackPrev
-									style={{ width: rem(18), height: rem(18) }}
-									stroke={1.5}
-									color="white"
-								/>
-							</ActionIcon>
-							<ActionIcon
-								size={32}
-								radius="xl"
-								color={theme.primaryColor}
-								variant="filled"
-								title="Go to next app"
-								onClick={() => gotoNext()}
-							>
-								<IconPlayerTrackNext
-									style={{ width: rem(18), height: rem(18) }}
-									stroke={1.5}
-									color="white"
-								/>
-							</ActionIcon>
-						</>
-					)}
+
+					<>
+						<ActionIcon
+							size={32}
+							radius="xl"
+							color={theme.primaryColor}
+							variant="filled"
+							title="Go to previous app"
+							onClick={() => gotoPrev()}
+						>
+							<IconPlayerTrackPrev
+								style={{ width: rem(18), height: rem(18) }}
+								stroke={1.5}
+								color="white"
+							/>
+						</ActionIcon>
+						<ActionIcon
+							size={32}
+							radius="xl"
+							color={theme.primaryColor}
+							variant="filled"
+							title="Go to next app"
+							onClick={() => gotoNext()}
+						>
+							<IconPlayerTrackNext
+								style={{ width: rem(18), height: rem(18) }}
+								stroke={1.5}
+								color="white"
+							/>
+						</ActionIcon>
+					</>
+
 
 					{/*<ActionIcon
 						size={32}

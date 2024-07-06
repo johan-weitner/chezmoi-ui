@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import {
 	AppShell,
@@ -13,8 +13,9 @@ import {
 	Text,
 	Textarea,
 	rem,
+	useMantineTheme
 } from "@mantine/core";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import BarSpinner from "components/BarSpinner.jsx";
 import { Toaster, toast } from "sonner";
@@ -30,9 +31,11 @@ import AppForm from "./components/AppForm";
 
 function App() {
 	const BASE_URL = "/api";
+	const theme = useMantineTheme();
 	const { formPartOne, formPartTwo } = APP_FORM;
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [selectedApp, setSelectedApp] = useState(null);
+	const modalRef = useRef();
 
 	const useAppCollection = () => {
 		return useQuery({
@@ -64,10 +67,31 @@ function App() {
 		});
 	};
 
-	const openApp = key => {
-		const app = useApp(key);
+	const queryClient = new QueryClient();
+	const getApp = async (key) => {
+		const data = await queryClient.fetchQuery({
+			queryKey: ["app"],
+			queryFn: async () => {
+				const response = await axios.get(`${BASE_URL}/getApp?key=${key}`)
+					.then(response => {
+						console.log('Success');;
+						return response;
+					})
+					.catch(error => {
+						console.lerror(error.message);
+						toast.lerror(error.message);
+					});
+				return response?.data;
+			},
+		});
+		return data;
+	};
+
+	const openApp = async key => {
+		const app = await getApp(key);
 		console.log("Open app:", app);
-		setSelectedApp(app)
+		setSelectedApp(app);
+		setIsPopoverOpen(true);
 	};
 
 	const { data, error, isLoading } = useAppCollection();
@@ -123,12 +147,13 @@ function App() {
 						{selectedApp && (
 							<AppForm
 								isPopoverOpen={isPopoverOpen}
-								closePopover={() => { }}
+								closePopover={() => setIsPopoverOpen(false)}
 								selectedApp={selectedApp}
 								gotoPrev={() => { }}
 								gotoNext={() => { }}
 								theme={theme}
 								isNewApp={false}
+								ref={modalRef}
 							/>
 						)
 						}
