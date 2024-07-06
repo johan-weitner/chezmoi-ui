@@ -6,8 +6,6 @@ import axios from "axios";
 import { Toaster, toast } from "sonner";
 import { getMarkedAsEdited, saveMarkedAsEdited } from "utils/fileHandler.js";
 import {
-	fetchAppCollection,
-	fetchAppKeys,
 	useApp,
 	useAppCollection,
 	useAppKeys,

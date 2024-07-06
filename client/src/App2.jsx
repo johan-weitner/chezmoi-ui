@@ -28,6 +28,7 @@ import classes from "components/MainView.module.css";
 import { APP_FORM } from "constants/appForm";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
 import AppForm from "./components/AppForm";
+import { getApp } from "api/appCollectionApi";
 
 function App() {
 	const BASE_URL = "/api";
@@ -67,25 +68,25 @@ function App() {
 		});
 	};
 
-	const queryClient = new QueryClient();
-	const getApp = async (key) => {
-		const data = await queryClient.fetchQuery({
-			queryKey: ["app"],
-			queryFn: async () => {
-				const response = await axios.get(`${BASE_URL}/getApp?key=${key}`)
-					.then(response => {
-						console.log('Success');;
-						return response;
-					})
-					.catch(error => {
-						console.lerror(error.message);
-						toast.lerror(error.message);
-					});
-				return response?.data;
-			},
-		});
-		return data;
-	};
+	// const queryClient = new QueryClient();
+	// const getApp = async (key) => {
+	// 	const data = await queryClient.fetchQuery({
+	// 		queryKey: ["app"],
+	// 		queryFn: async () => {
+	// 			const response = await axios.get(`${BASE_URL}/getApp?key=${key}`)
+	// 				.then(response => {
+	// 					console.log('Success');;
+	// 					return response;
+	// 				})
+	// 				.catch(error => {
+	// 					console.lerror(error.message);
+	// 					toast.lerror(error.message);
+	// 				});
+	// 			return response?.data;
+	// 		},
+	// 	});
+	// 	return data;
+	// };
 
 	const openApp = async key => {
 		const app = await getApp(key);
@@ -139,7 +140,7 @@ function App() {
 								keys?.length > 0 &&
 								keys.map(
 									(key, i) => (i > 4 && i < 25) &&
-										<Button onClick={() => openApp(key)} key={key}>{data[key]._name}</Button>,
+										<Button onClick={() => openApp(key)} key={key}>{data[key]?._name}</Button>,
 								)}
 						</Flex>
 					</Grid.Col>

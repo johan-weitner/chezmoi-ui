@@ -76,8 +76,17 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 		});
 	}
 
-	const onSubmit = (data) => {
-		updateApp.mutate(data);
+	const onSubmit = async (data) => {
+		const response = await updateApp.mutate(data);
+		console.log(response);
+		closePopover();
+		// if (status === "success") {
+		// 	toast.success("App updated successfully");
+		// 	closePopover();
+		// } else if (status === "error") {
+		// 	toast.error(error?.message || 'Failed to save changes');
+		// 	closePopover();
+		// }
 	};
 
 	return (
