@@ -1,23 +1,16 @@
+import { useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
-import { nanoid } from "nanoid";
-import { useRef } from "react";
-import { forwardRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 import {
   Button,
-  Group,
-  Input,
-  SimpleGrid,
-  Text,
-  Textarea
+  Group
 } from "@mantine/core";
 import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 
 import { useAppMutation } from "../../api/appCollectionApi";
-import classes from "../MainView.module.css";
+import classes from "../MainView/MainView.module.css";
 import InfoSection from "./InfoSection";
 import TagSection from "./TagSection";
 import InstallerSection from "./InstallerSection";
@@ -37,7 +30,7 @@ const EditViewForm = (props, ref) => {
 
   useEffect(() => {
     reset(selectedApp);
-  }, [selectedApp, isNewApp, reset]);
+  }, [selectedApp, reset]);
 
   const { formPartOne, formPartTwo } = APP_FORM;
 

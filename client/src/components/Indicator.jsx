@@ -1,6 +1,6 @@
 import { Loader, rem } from "@mantine/core";
 import { ICON } from "../constants/icons";
-import classes from "./MainView.module.css";
+import classes from "./MainView/MainView.module.css";
 
 export const FetchIndicator = ({ isFetching, cssClass }) => {
 	return (

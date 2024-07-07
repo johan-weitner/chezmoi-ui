@@ -1,28 +1,16 @@
-import { useDisclosure } from "@mantine/hooks";
-import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
-import Tagify from "@yaireo/tagify";
 import { nanoid } from "nanoid";
-import { useRef } from "react";
-import { forwardRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import "@yaireo/tagify/dist/tagify.css";
 import {
-  Button,
   Group,
   Input,
   SimpleGrid,
   Text,
   Textarea
 } from "@mantine/core";
-import { APP_FORM } from "constants/appForm";
-import { ICON } from "constants/icons";
-import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
-import { useAppMutation } from "../../api/appCollectionApi";
-import classes from "../MainView.module.css";
+import classes from "../MainView/MainView.module.css";
 
 const InfoSection = props => {
   const { formPartOne, register } = props;
-
 
   return (
     <>

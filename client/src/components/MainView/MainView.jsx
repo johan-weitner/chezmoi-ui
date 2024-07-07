@@ -2,10 +2,10 @@ import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
 import { useState, useEffect, useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { toast } from "sonner";
-import { getApp } from "../api/appCollectionApi.js";
-import EditView from "./EditView/EditView.jsx";
-import DetailView from "./DetailView.jsx";
-import ListView from "./ListView.jsx";
+import { getApp } from "../../api/appCollectionApi.js";
+import EditView from "../EditView/EditView.jsx";
+import DetailView from "../DetailView/DetailView.jsx";
+import ListView from "../ListView/ListView.jsx";
 import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
 
@@ -20,19 +20,6 @@ import axios from "axios";
 import BarSpinner from "components/BarSpinner.jsx";
 import "@yaireo/tagify/dist/tagify.css";
 
-/**
- * The `MainView` component is the main view of the application, responsible for rendering the main header, list view, and detail view.
- * It handles the state and logic for managing the selected app, opening and closing the app form popover, and handling various keyboard shortcuts.
- *
- * @param {Object} props - The component props.
- * @param {Object} props.software - The software data to be displayed.
- * @param {function} props.deleteApp - A function to delete an app.
- * @param {function} props.save - A function to save the current state.
- * @param {function} props.startOver - A function to start over.
- * @param {function} props.updateItem - A function to update an app.
- * @param {function} props.addNewApp - A function to add a new app.
- * @returns {JSX.Element} - The rendered `MainView` component.
- */
 const MainView = (props) => {
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
@@ -41,6 +28,7 @@ const MainView = (props) => {
 	const modalRef = useRef();
 
 	const selectApp = key => {
+		console.log('App selection reached MainView');
 		setSelectedAppKey(key);
 	};
 
@@ -95,7 +83,7 @@ const MainView = (props) => {
 					className={classes.grid}
 					style={{ backgroundColor: "#333" }}
 				>
-					<ListView theme={theme} selectApp={selectApp} />
+					<ListView theme={theme} selectApp={selectApp} selectedAppKey={selectedAppKey} />
 					{selectedAppKey && (
 						<DetailView appKey={selectedAppKey} theme={theme} />
 					)}

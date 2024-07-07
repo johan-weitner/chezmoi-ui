@@ -10,36 +10,51 @@ import {
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { APP_FORM } from "constants/appForm.js";
 import { useRef, useState } from "react";
-import { ICON } from "../constants/icons";
-import EditView from "./EditView/EditView";
-import { MarkPopulated, MarkUnPopulated, WarningSign } from "./Indicator";
-import classes from "./MainView.module.css";
-import { getApp } from "../api/appCollectionApi";
+import { ICON } from "../../constants/icons";
+import EditView from "../EditView/EditView";
+import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
+import classes from "../MainView/MainView.module.css";
+import { getApp } from "../../api/appCollectionApi";
+import BarSpinner from "../BarSpinner";
 
-/**
- * Renders a detailed view of a selected application, including its name, short description, full description, and links to its homepage, documentation, and GitHub repository. The view also includes buttons to edit or delete the selected application.
- *
- * @param {Object} props - The component props.
- * @param {Object} props.selectedApp - The selected application object.
- * @param {Function} props.deleteItem - A function to delete the selected application.
- * @param {Function} props.editItem - A function to edit the selected application.
- * @param {Object} props.theme - The current theme object.
- * @param {Function} props.gotoPrev - A function to navigate to the previous application.
- * @param {Function} props.gotoNext - A function to navigate to the next application.
- * @returns {JSX.Element} - The DetailView component.
- */
+// FIXME: Refactor into smaller sub-components
 const DetailView = (props) => {
 	const { appKey, theme } = props;
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const [selectedApp, setSelectedApp] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const modalRef = useRef();
 	const tags = appKey?.tags && JSON.parse(appKey.tags);
 	let hasInstaller = false;
+	let indicateEdit = false;
 
-	const openApp = async key => {
-		const app = await getApp(key);
-		// setSelectedApp(app);
-		setIsPopoverOpen(true);
-	};
+	getApp(appKey).then((app) => {
+		setIsLoading(false);
+		setSelectedApp(app);
+
+		APP_FORM.formPartTwo.map((item) => {
+			if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
+				hasInstaller = true;
+				return;
+			}
+		});
+
+		indicateEdit = appKey.edited ? (
+			<ICON.check
+				style={{
+					width: rem(20),
+					height: rem(20),
+					position: "absolute",
+					right: "50px",
+					top: "45px",
+					zIndex: "999999",
+				}}
+				stroke={2}
+				color="green"
+				title="Has been edited"
+			/>
+		) : null;
+	});
 
 	const edit = () => {
 		setIsPopoverOpen(true);
@@ -49,31 +64,8 @@ const DetailView = (props) => {
 		setIsPopoverOpen(false);
 	};
 
-	APP_FORM.formPartTwo.map((item) => {
-		if (appKey[item.name] && appKey[item.name].length > 0) {
-			hasInstaller = true;
-			return;
-		}
-	});
-
-	const indicateEdit = appKey.edited ? (
-		<ICON.check
-			style={{
-				width: rem(20),
-				height: rem(20),
-				position: "absolute",
-				right: "50px",
-				top: "45px",
-				zIndex: "999999",
-			}}
-			stroke={2}
-			color="green"
-			title="Has been edited"
-		/>
-	) : null;
-
 	return (
-		appKey && (
+		isLoading || !selectedApp ? <BarSpinner /> : (
 			<>
 				<Card shadow="md" radius="md" className={classes.card} padding="xl">
 					<ICON.detail
@@ -137,7 +129,7 @@ const DetailView = (props) => {
 						mt="sm"
 						style={{ textAlign: "left" }}
 					>
-						{appKey && (
+						{selectedApp && (
 							<div className={classes.itemBox}>
 								<h2
 									style={{
@@ -148,13 +140,13 @@ const DetailView = (props) => {
 									}}
 								>
 									<a
-										href={appKey._home || appKey._github || null}
+										href={selectedApp._home || selectedApp._github || null}
 										target="_blank"
 										style={{ fontWeight: "normal", textDecoration: "none" }}
 										title="Open homepage in new window"
 										rel="noreferrer"
 									>
-										{appKey._name || appKey._bin}
+										{selectedApp._name || selectedApp._bin}
 										{/* <ActionIcon
 									size={32}
 									radius="xl"
@@ -171,16 +163,16 @@ const DetailView = (props) => {
 									{indicateEdit}
 								</h2>
 
-								{appKey._short && (
-									<Text className={classes.short}>{appKey._short}</Text>
+								{selectedApp._short && (
+									<Text className={classes.short}>{selectedApp._short}</Text>
 								)}
-								{appKey._desc && (
-									<Text className={classes.desc}>{appKey._desc}</Text>
+								{selectedApp._desc && (
+									<Text className={classes.desc}>{selectedApp._desc}</Text>
 								)}
 
 								<div className={classes.indicatorGroup}>
 									<Text size="sm">
-										{appKey._home ? (
+										{selectedApp._home ? (
 											<MarkPopulated />
 										) : (
 											<MarkUnPopulated />
@@ -188,7 +180,7 @@ const DetailView = (props) => {
 										Homepage
 									</Text>
 									<Text size="sm">
-										{appKey._docs ? (
+										{selectedApp._docs ? (
 											<MarkPopulated />
 										) : (
 											<MarkUnPopulated />
@@ -196,7 +188,7 @@ const DetailView = (props) => {
 										Documentation
 									</Text>
 									<Text size="sm">
-										{appKey._github ? (
+										{selectedApp._github ? (
 											<MarkPopulated />
 										) : (
 											<MarkUnPopulated />
@@ -229,7 +221,7 @@ const DetailView = (props) => {
 
 								<Group justify="center" p="md">
 									<Button
-										onClick={() => edit(appKey.key)}
+										onClick={() => edit(selectedApp.key)}
 										className={classes.editBtn}
 										leftSection={
 											<ICON.edit
@@ -246,7 +238,7 @@ const DetailView = (props) => {
 										Edit
 									</Button>
 									<Button
-										onClick={() => delete appKey.key}
+										onClick={() => delete selectedApp.key}
 										className={classes.deleteBtn}
 										leftSection={
 											<ICON.remove
@@ -272,7 +264,7 @@ const DetailView = (props) => {
 						ref={modalRef}
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
-						selectedApp={appKey}
+						selectedApp={selectedApp}
 						theme={theme}
 					/>
 				)}

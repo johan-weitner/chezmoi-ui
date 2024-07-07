@@ -1,29 +1,13 @@
-import { useDisclosure } from "@mantine/hooks";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
-import Tagify from "@yaireo/tagify";
-import { nanoid } from "nanoid";
-import { useRef } from "react";
 import { forwardRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
 import "@yaireo/tagify/dist/tagify.css";
 import {
 	ActionIcon,
-	Button,
 	Card,
 	Flex,
-	Group,
-	Input,
 	Modal,
-	SimpleGrid,
-	Text,
-	Textarea,
 	rem,
 } from "@mantine/core";
-import { APP_FORM } from "constants/appForm";
-import { ICON } from "constants/icons";
-import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
-import { useAppMutation } from "../../api/appCollectionApi";
-import classes from "../MainView.module.css";
 import EditViewForm from "./EditViewForm";
 
 const EditView = forwardRef(function EditView(props, ref) {
@@ -36,8 +20,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 		theme,
 		isNewApp,
 	} = props;
-
-
 
 	return (
 		<Modal
@@ -84,21 +66,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 							/>
 						</ActionIcon>
 					</>
-
-
-					{/*<ActionIcon
-						size={32}
-						radius="xl"
-						color="#933"
-						variant="filled"
-						title="Close edit popover"
-						onClick={() => closePopover()}
-					>
-						<ICON.close
-							style={{ width: rem(18), height: rem(18) }}
-							stroke={1.5}
-						/>
-					</ActionIcon>*/}
 				</Flex>
 				<EditViewForm
 					isPopoverOpen={isPopoverOpen}
@@ -109,7 +76,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 					theme={theme}
 					isNewApp={false}
 				/>
-
 			</Card>
 		</Modal>
 	);

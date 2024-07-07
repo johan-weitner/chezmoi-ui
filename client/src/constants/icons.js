@@ -24,7 +24,7 @@ import {
 	IconWorldCode,
 	IconX,
 } from "@tabler/icons-react";
-import classes from "components/MainHeader.module.css";
+import classes from "components/MainView/MainHeader.module.css";
 
 /**
  * An object containing references to various Tabler icons used throughout the application.
