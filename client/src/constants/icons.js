@@ -1,4 +1,5 @@
 import {
+	IconAlertCircle,
 	IconBarrel,
 	IconBeer,
 	IconBinary,
@@ -10,7 +11,10 @@ import {
 	IconBrandNodejs,
 	IconBrandPython,
 	IconBrandRust,
+	IconCheck,
+	IconCirclePlus,
 	IconDeviceFloppy,
+	IconDownload,
 	IconEdit,
 	IconPackages,
 	IconReload,
@@ -19,11 +23,8 @@ import {
 	IconTrash,
 	IconWorldCode,
 	IconX,
-	IconDownload,
-	IconCirclePlus,
-	IconAlertCircle,
-	IconCheck
 } from "@tabler/icons-react";
+import classes from "components/MainHeader.module.css";
 
 /**
  * An object containing references to various Tabler icons used throughout the application.
@@ -54,5 +55,11 @@ export const ICON = {
 	download: IconDownload,
 	add: IconCirclePlus,
 	warn: IconAlertCircle,
-	check: IconCheck
+	check: IconCheck,
+};
+
+export const INDICATOR = {
+	populated: { css: classes.green, icon: "✓" },
+	unpopulated: { css: classes.red, icon: "✗" },
+	warning: { css: classes.red, icon: "⚠" },
 };

@@ -92,30 +92,32 @@ const _checkFileExistence = () => {
 };
 
 const _setupFileData = () => {
-  let software, softwareArray;
+  let software, softwareArray, backupPaths, keys;
   if (fs.existsSync(targetFilePath)) {
     log.info('Work in progress exists - opening WiP:');
     log.info(targetFilePath);
 
+    backupPaths = [];
     softwareArray = fs.readFileSync(targetFilePath, 'utf8');
     software = JSON.parse(softwareArray);
+    keys = Object.keys(software);
     console.log(italic('List size: ' + Object.keys(software).length));
-    return { softwareArray, software };
   } else {
     log.info('Work in progress does not exist - opening source file to seed a starting point:');
     log.info(softwareYamlPath);
+
     const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
     software = YAML.parse(softwareYaml).softwarePackages;
-    const keys = Object.keys(software);
+    keys = Object.keys(software);
 
     for (let i = 0; i < keys.length; i++) {
       softwareArray.push(software[keys[i]]);
       softwareArray[i].key = keys[i];
     }
     console.log(italic('List size: ' + keys.length));
-    const backupPaths = _readBackups();
-    return { softwareArray, software, backupPaths };
+    backupPaths = _readBackups();
   }
+  return { softwareArray, software, backupPaths, keys };
 };
 
 const _readBackups = () => {

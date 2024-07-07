@@ -1,4 +1,4 @@
-import { Title, Container } from "@mantine/core";
+import { Container, Title } from "@mantine/core";
 import classes from "./Header.module.css";
 import logo from "./logo.svg";
 
@@ -11,7 +11,6 @@ import logo from "./logo.svg";
  * @returns {JSX.Element} The rendered header component.
  */
 const Header = (props) => {
-
 	return (
 		<Container size="md" className={classes.header}>
 			<img src={logo} alt="Logo" />

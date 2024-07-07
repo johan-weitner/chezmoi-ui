@@ -1,32 +1,8 @@
-/**
- * The form for editing/adding applications to the application list,
- * parted in two, the first represents the mandatory metadata fields,
- * whereas the second represents the different installation sources.
- * It's safe to add fields, the data model self-updates as you continue
- * editing the list. I guess removing works too, though that will leave
- * ghost data hanging in the resulting list. Renaming is probably not
- * a good idea though...
- *
- * This is consumed in the `ui/client/src/components/AppForm.jsx` component.
- */
-/**
- * Defines the form configuration for the application form, which is used to
- * edit or add applications to the application list. The form is divided into
- * two parts:
- *
- * 1. `formPartOne`: Contains the mandatory metadata fields for the application,
- *    such as name, key, short description, homepage, documentation, and GitHub.
- *
- * 2. `formPartTwo`: Contains the different installation sources for the
- *    application, such as Whalebrew, Apt, Homebrew, Cargo, NPM, Pip, Gem, and
- *    various Windows-specific package managers.
- *
- * This configuration is consumed by the `AppForm` component in the UI.
- */
 export const APP_FORM = {
 	formPartOne: [
 		{ name: "_name", label: "Name" },
 		{ name: "key", label: "Key" },
+		{ name: "_bin", label: "Executable" },
 		{ name: "_short", label: "Short desc" },
 		{ name: "_home", label: "Homepage" },
 		{ name: "_docs", label: "Documentation" },
@@ -35,7 +11,7 @@ export const APP_FORM = {
 	formPartTwo: [
 		{ name: "whalebrew", label: "Whalebrew" },
 		{ name: "apt", label: "Apt" },
-		{ name: "homebrew", label: "Homebrew" },
+		{ name: "brew", label: "Homebrew" },
 		{ name: "cask", label: "Homebrew cask" },
 		{ name: "cargo", label: "Cargo" },
 		{ name: "npm", label: "NPM" },
@@ -51,5 +27,7 @@ export const APP_FORM = {
 		{ name: "binary", label: "Binary" },
 		{ name: "yay", label: "Yay" },
 		{ name: "appstore", label: "AppStore" },
+		{ name: "pacman", label: "Pacman" },
+		{ name: "port", label: "MacPort" }
 	],
 };

@@ -1,12 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+import App2 from "./App2.jsx";
 import "@mantine/core/styles.css";
 import { MantineProvider, createTheme } from "@mantine/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const theme = createTheme({
 	/** Put your mantine theme override here */
 });
+
+const queryClient = new QueryClient();
 
 /**
  * Renders the main React application with the Mantine theme provider.
@@ -14,8 +19,11 @@ const theme = createTheme({
  */
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<MantineProvider theme={theme}>
-			<App />
-		</MantineProvider>
+		<QueryClientProvider client={queryClient}>
+			<MantineProvider theme={theme}>
+				<App2 />
+			</MantineProvider>
+			<ReactQueryDevtools initialIsOpen={false} />
+		</QueryClientProvider>
 	</React.StrictMode>,
 );
