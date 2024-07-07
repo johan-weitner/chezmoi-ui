@@ -27,7 +27,7 @@ import { ICON } from "constants/icons";
 import classes from "components/MainView.module.css";
 import { APP_FORM } from "constants/appForm";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
-import AppForm from "./components/AppForm";
+import EditView from "./components/EditView/EditView";
 import { getApp } from "api/appCollectionApi";
 
 function App() {
@@ -90,7 +90,7 @@ function App() {
 
 	const openApp = async key => {
 		const app = await getApp(key);
-		console.log("Open app:", app);
+		// console.log("Open app:", app);
 		setSelectedApp(app);
 		setIsPopoverOpen(true);
 	};
@@ -145,9 +145,9 @@ function App() {
 						</Flex>
 					</Grid.Col>
 					<Grid.Col span="1">
-						{selectedApp && (
-							<AppForm
-								isPopoverOpen={isPopoverOpen}
+						{selectedApp && isPopoverOpen && (
+							<EditView
+								isPopoverOpen={isPopoverOpen || false}
 								closePopover={() => setIsPopoverOpen(false)}
 								selectedApp={selectedApp}
 								gotoPrev={() => { }}

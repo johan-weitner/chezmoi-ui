@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { toast } from "sonner";
 import { getApp } from "../api/appCollectionApi.js";
-import AppForm from "./AppForm.jsx";
+import EditView from "./EditView/EditView.jsx";
 import DetailView from "./DetailView.jsx";
 import ListView from "./ListView.jsx";
 import MainHeader from "./MainHeader.jsx";
@@ -131,7 +131,7 @@ const MainView = (props) => {
 					)}
 				</SimpleGrid>
 				{/* {isPopoverOpen && (
-					<AppForm
+					<EditView
 						ref={modalRef}
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}

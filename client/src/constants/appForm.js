@@ -1,28 +1,3 @@
-/**
- * The form for editing/adding applications to the application list,
- * parted in two, the first represents the mandatory metadata fields,
- * whereas the second represents the different installation sources.
- * It's safe to add fields, the data model self-updates as you continue
- * editing the list. I guess removing works too, though that will leave
- * ghost data hanging in the resulting list. Renaming is probably not
- * a good idea though...
- *
- * This is consumed in the `ui/client/src/components/AppForm.jsx` component.
- */
-/**
- * Defines the form configuration for the application form, which is used to
- * edit or add applications to the application list. The form is divided into
- * two parts:
- *
- * 1. `formPartOne`: Contains the mandatory metadata fields for the application,
- *    such as name, key, short description, homepage, documentation, and GitHub.
- *
- * 2. `formPartTwo`: Contains the different installation sources for the
- *    application, such as Whalebrew, Apt, Homebrew, Cargo, NPM, Pip, Gem, and
- *    various Windows-specific package managers.
- *
- * This configuration is consumed by the `AppForm` component in the UI.
- */
 export const APP_FORM = {
 	formPartOne: [
 		{ name: "_name", label: "Name" },
@@ -56,38 +31,3 @@ export const APP_FORM = {
 		{ name: "port", label: "MacPort" }
 	],
 };
-/*
-"_bin": "ack",
-		"_name"
-		"key"
-		"_short"
-		"_home"
-		"_docs"
-		"_github"
-
-		"_desc"
-		"tags"
-
-		"whalebrew"
-		"apt"
-		"brew"
-		"cask"
-		"cargo"
-		"npm"
-		"pip"
-		"pipx"
-		"gem"
-		"script"
-		"choco"
-		"scoop"
-		"winget"
-		"pkgdarwin"
-		"ansible"
-		"binary"
-		"yay": ""
-		"appstore"
-
-		"dnf"
-		"pacman"
-		"port"
-*/

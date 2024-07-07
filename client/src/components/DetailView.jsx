@@ -11,7 +11,7 @@ import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { APP_FORM } from "constants/appForm.js";
 import { useRef, useState } from "react";
 import { ICON } from "../constants/icons";
-import AppForm from "./AppForm";
+import EditView from "./EditView/EditView";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "./Indicator";
 import classes from "./MainView.module.css";
 
@@ -261,7 +261,7 @@ const DetailView = (props) => {
 					</Card>
 				</Card>
 				{isPopoverOpen && (
-					<AppForm
+					<EditView
 						ref={modalRef}
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
