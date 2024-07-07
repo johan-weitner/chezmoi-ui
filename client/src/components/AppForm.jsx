@@ -60,8 +60,8 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	}
 	const updateApp = useAppMutation();
 	const onSubmit = async (data) => {
-		const response = await updateNodeOnServer(data);
-		console.log('response', response);
+		// const response = await updateNodeOnServer(data);
+		console.log('updateApp', updateApp);
 		await updateApp?.mutate(data);
 		closePopover();
 	};

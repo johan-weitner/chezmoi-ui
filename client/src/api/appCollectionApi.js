@@ -259,18 +259,12 @@ export const useAppMutation_OLD = () => {
 };
 
 export const updateNodeOnServer = async (updatedNode) => {
-
 	updatedNode.edited = true;
-
-	console.log('...updatedNode: ', { ...updatedNode });
-
 	const result = await axios
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedNode,
 		})
 		.then((response) => {
-			console.log('Inside mutation');
-			console.log('Response: ', response);
 			return response.data;
 		})
 		.catch((error) => {
@@ -280,27 +274,21 @@ export const updateNodeOnServer = async (updatedNode) => {
 	return result.data;
 };
 
-export const useAppMutation = async () => {
+export const useAppMutation = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: async () => (updatedNode) => updateNodeOnServer(updatedNode),
+		mutationFn: (updatedNode) => updateNodeOnServer(updatedNode),
 		onMutate: async (updatedNode) => {
 			await queryClient.cancelQueries(['appCollection']);
 			const previousData = queryClient.getQueryData(['appCollection']);
 			const keys = Object.keys(previousData);
-			console.log('onMutated - update: ', updatedNode);
 
 			queryClient.setQueryData(['appCollection'], (old) => {
-				console.log('Old: ', old);
-				const newList = keys.map((key) => {
-					console.log('Iterating key: ', key);
+				return keys.map((key) => {
 					return key === updatedNode.key ? { ...old[key], ...updatedNode } : old[key]
 				});
-				console.log(newList);
-				return newList;
 			});
-			// console.log(previousData);
 			return { previousData };
 		},
 		onError: (err, updatedNode, context) => {
