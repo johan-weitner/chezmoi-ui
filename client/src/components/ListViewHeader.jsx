@@ -87,9 +87,9 @@ export const ListViewHeader = ({
 				}
 				{...props}
 			/>
-			<Text size="xs" style={{ textAlign: "left", margin: "10px 0 0 20px" }}>
-				{filteredApps.length} apps in total.
-			</Text>
+			{filteredApps && <Text size="xs" style={{ textAlign: "left", margin: "10px 0 0 20px" }}>
+				{filteredApps?.length} apps in total.
+			</Text>}
 		</>
 	);
 };

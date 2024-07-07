@@ -16,20 +16,20 @@ import classes from "./MainView.module.css";
  * @returns {JSX.Element} The rendered list item component.
  */
 export const ListItem = (props) => {
-	const { selectApp, selectedApp, editItem, deleteItem, item } = props;
+	const { selectApp, appKey, editItem, deleteItem, app } = props;
 	const { data: software } = useAppCollection();
-	const className = selectedApp?.key === item ? classes.selected : null;
-	const indicateEdit = software[item]?.edited ? <EditedIndicator /> : null;
+	const className = appKey?.key === app ? classes.selected : null;
+	const indicateEdit = software[app]?.edited ? <EditedIndicator /> : null;
 
 	return (
 		<div style={{ position: "relative", width: "100%" }} className={className}>
 			<button
 				className={classes.itemBox}
-				onClick={(e) => selectApp(e, item)}
+				onClick={() => selectApp(appKey)}
 				style={{ width: "100%" }}
 				type="button"
 			>
-				{software[item]?._name}
+				{software[app]?._name}
 			</button>
 			<ICON.edit
 				style={{
@@ -42,7 +42,7 @@ export const ListItem = (props) => {
 				}}
 				stroke={2}
 				color="white"
-				onClick={() => editItem(item, true)}
+				onClick={() => editItem(app.key, true)}
 			/>
 			<ICON.remove
 				style={{
@@ -55,7 +55,7 @@ export const ListItem = (props) => {
 				}}
 				stroke={2}
 				color="white"
-				onClick={() => deleteItem(item)}
+				onClick={() => deleteItem(app.key)}
 			/>
 			{indicateEdit}
 		</div>

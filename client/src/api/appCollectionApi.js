@@ -30,63 +30,12 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
-export const useAppCollection_OLD = () => {
+export const useAppCollection = () => {
 	return useQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
-			const data = await axios
-				.get(`${BASE_URL}/software`)
-				.then((response) => {
-					const { data } = response;
-					const keys = Object.keys(data);
-					keys.map((key) => {
-						data[key].key = key;
-					});
-					return filterUnwantedNodes(data);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return data;
-		},
-	});
-};
-
-export const useAppCollection = () => {
-	return useQuery({
-		queryKey: ['appCollection'],
-		queryFn: () => async () => {
-			const data = await axios
-				.get(`${BASE_URL}/software`)
-				.then((response) => {
-					const { data } = response;
-					const keys = Object.keys(data);
-					keys.map((key) => {
-						data[key].key = key;
-					});
-					return filterUnwantedNodes(data);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return data;
-		}
-	});
-};
-
-export const useAppKeys = () => {
-	return useQuery({
-		queryKey: ["appKeys"],
-		queryFn: async () => {
-			const keys = await axios
-				.get(`${BASE_URL}/softwareKeys`)
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return keys;
+			const response = await axios.get(`${BASE_URL}/software`);
+			return response.data;
 		},
 	});
 };
@@ -197,10 +146,6 @@ const postAppCollection = async (item) => {
 	return update;
 };
 
-export const postAppKeys = async (keys) => {
-	console.log(keys);
-};
-
 /**
  * MUTATE APP
  *
@@ -274,16 +219,6 @@ export const useAppCollectionMutation = () => {
 		// },
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: ["appCollection"] }),
-	});
-};
-
-export const useAppKeysMutation = () => {
-	return useMutation({
-		mutationFn: async () => postAppKeys(),
-		// onSuccess: () => {
-		//   queryClient.invalidateQueries({ queryKey: ['appKeys'] });
-		// },
-		onSettled: () => queryClient.invalidateQueries({ queryKey: ["appKeys"] }),
 	});
 };
 

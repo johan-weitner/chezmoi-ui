@@ -1,5 +1,5 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { toast } from "sonner";
 import { getApp } from "../api/appCollectionApi.js";
@@ -8,6 +8,17 @@ import DetailView from "./DetailView.jsx";
 import ListView from "./ListView.jsx";
 import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
+
+import {
+	AppShell,
+	Button,
+	Flex,
+	Grid
+} from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import BarSpinner from "components/BarSpinner.jsx";
+import "@yaireo/tagify/dist/tagify.css";
 
 /**
  * The `MainView` component is the main view of the application, responsible for rendering the main header, list view, and detail view.
@@ -23,92 +34,51 @@ import classes from "./MainView.module.css";
  * @returns {JSX.Element} - The rendered `MainView` component.
  */
 const MainView = (props) => {
-	// const { software, deleteApp, save, startOver, updateItem } = props;
 	const theme = useMantineTheme();
-	const [selectedApp, setSelectedApp] = useState(null);
+	const BASE_URL = "/api";
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const [selectedAppKey, setSelectedAppKey] = useState(null);
 	const modalRef = useRef();
-	const LIST_INDEX_OFFSET = 4;
 
-	const closePopover = () => {
-		setIsPopoverOpen(false);
+	const selectApp = key => {
+		setSelectedAppKey(key);
 	};
 
-	const openPopover = () => {
+	const useAppCollection = () => {
+		return useQuery({
+			queryKey: ["appCollection"],
+			queryFn: async () => {
+				const response = await axios.get(`${BASE_URL}/software`);
+				return response.data;
+			},
+		});
+	};
+
+	const useApp = (key) => {
+		return useQuery({
+			queryKey: ["app"],
+			queryFn: async () => {
+				const response = await axios.get(`${BASE_URL}/getApp?key=${key}`);
+				return response.data;
+			},
+		});
+	};
+
+	const openApp = async key => {
+		const app = await getApp(key);
+		setSelectedAppKey(app);
 		setIsPopoverOpen(true);
 	};
 
-	// const hotkeyOptions = {
-	// 	preventDefault: true,
-	// 	enableOnFormTags: ['INPUT', 'TEXTAREA']
-	// }
-	// useHotkeys("esc", () => closePopover()), hotkeyOptions;
-	// useHotkeys("alt + left", () => gotoPrev(), hotkeyOptions);
-	// useHotkeys("alt + right", () => gotoNext(), hotkeyOptions);
-	// useHotkeys("ctrl + s", () => {
-	// 	isPopoverOpen ? updateApp(selectedApp) : save();
-	// }, hotkeyOptions);
-	// useHotkeys("e", () => {
-	// 	if (!isPopoverOpen && selectedApp) {
-	// 		editItem(selectedApp.key);
-	// 	};
-	// }, { preventDefault: true, enableOnFormTags: [] });
-	// useHotkeys("alt + n", (e) => createNewRecord(e), hotkeyOptions);
+	const { data, error, isLoading } = useAppCollection();
 
-	const selectApp = async (e, item) => {
-		e?.preventDefault();
-		const data = await getApp(item);
-		setSelectedApp(data);
-	};
-
-	// const deleteItem = () => {
-	// 	setSelectedApp(null);
-	// 	deleteApp(selectedApp.key);
-	// };
-
-	// const editItem = (key, makeSelection = false, isNewApp = false) => {
-	// 	console.log(`editItem: ${key}, MakeSelection: ${makeSelection}, New app: ${isNewApp}`);
-	// 	makeSelection && key && setSelectedApp(software[key]);
-	// 	isNewApp && setSelectedApp(null);
-	// 	openPopover();
-	// };
-
-	// const updateApp = (updatedApp) => {
-	// 	updateItem(updatedApp);
-	// 	closePopover();
-	// };
-
-	// const createNewRecord = (e) => {
-	// 	e.preventDefault();
-	// 	setSelectedApp(null);
-	// 	openPopover();
-	// };
-
-	// const gotoPrev = () => {
-	// 	if (selectedApp) {
-	// 		const keys = Object.keys(software);
-	// 		const newKey = keys[keys.indexOf(selectedApp.key) - 1];
-	// 		console.log(keys.indexOf(newKey), newKey > -1);
-	// 		if (keys.indexOf(newKey) - LIST_INDEX_OFFSET > -1) {
-	// 			selectApp(null, newKey);
-	// 		} else {
-	// 			toast.warning("Already at the start of list");
-	// 		}
-	// 	}
-	// };
-
-	// const gotoNext = () => {
-	// 	if (selectedApp) {
-	// 		const keys = Object.keys(software);
-	// 		const newKey = keys[keys.indexOf(selectedApp.key) + 1];
-	// 		console.log(keys.indexOf(newKey), keys.length, newKey < keys.length);
-	// 		if (keys.indexOf(newKey) < keys.length) {
-	// 			selectApp(null, newKey);
-	// 		} else {
-	// 			toast.warning("Already at the end of list");
-	// 		}
-	// 	}
-	// };
+	if (isLoading) return <div>Loading...</div>;
+	if (error) {
+		if (error) {
+			toast.error("Error: ", error.message);
+			// return <div>Error: {error.message}</div>;
+		}
+	}
 
 	return (
 		<>
@@ -126,8 +96,8 @@ const MainView = (props) => {
 					style={{ backgroundColor: "#333" }}
 				>
 					<ListView theme={theme} selectApp={selectApp} />
-					{selectedApp && (
-						<DetailView selectedApp={selectedApp} theme={theme} />
+					{selectedAppKey && (
+						<DetailView appKey={selectedAppKey} theme={theme} />
 					)}
 				</SimpleGrid>
 				{/* {isPopoverOpen && (

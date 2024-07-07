@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<MantineProvider theme={theme}>
-				<App2 />
+				<App />
 			</MantineProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>

@@ -1,5 +1,5 @@
 import { Card } from "@mantine/core";
-import { getApp, useAppCollection, useAppKeys } from "api/appCollectionApi";
+import { getApp, useAppCollection } from "api/appCollectionApi";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import BarLoader from "react-spinners/BarLoader";
@@ -23,10 +23,10 @@ import classes from "./MainView.module.css";
 const ListView = (props) => {
 	const { theme, selectApp } = props;
 	const { data: software, error, isLoading } = useAppCollection();
-	const { data: appKeys } = useAppKeys();
 	const [filter, setFilter] = useState("");
 	const [selectedApp, setSelectedApp] = useState(null);
 
+	const appKeys = Object.keys(software);
 	const appNames = [];
 	software &&
 		Object.keys(software).map((item) => {
@@ -37,14 +37,8 @@ const ListView = (props) => {
 		software[key]?._name?.toLowerCase().includes(filter?.toLowerCase()),
 	);
 
-	const editItem = () => {};
-	const deleteItem = () => {};
-
-	// if (isLoading) {
-	// 	return <div>Loading...</div>;
-	// } else if (error) {
-	// 	return <div>ERROR: {error.message || error}</div>;
-	// }
+	const editItem = () => { };
+	const deleteItem = () => { };
 
 	const loading = isLoading ? (
 		<BarLoader
@@ -96,10 +90,8 @@ const ListView = (props) => {
 							filteredApps.map((item) => {
 								return (
 									<ListItem
-										software={software}
-										item={item}
 										selectApp={selectApp}
-										selectedApp={selectedApp}
+										app={item}
 										editItem={editItem}
 										deleteItem={deleteItem}
 										key={nanoid()}

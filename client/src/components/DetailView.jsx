@@ -14,6 +14,7 @@ import { ICON } from "../constants/icons";
 import EditView from "./EditView/EditView";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "./Indicator";
 import classes from "./MainView.module.css";
+import { getApp } from "../api/appCollectionApi";
 
 /**
  * Renders a detailed view of a selected application, including its name, short description, full description, and links to its homepage, documentation, and GitHub repository. The view also includes buttons to edit or delete the selected application.
@@ -28,11 +29,17 @@ import classes from "./MainView.module.css";
  * @returns {JSX.Element} - The DetailView component.
  */
 const DetailView = (props) => {
-	const { selectedApp, theme } = props;
+	const { appKey, theme } = props;
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const modalRef = useRef();
-	const tags = selectedApp?.tags && JSON.parse(selectedApp.tags);
+	const tags = appKey?.tags && JSON.parse(appKey.tags);
 	let hasInstaller = false;
+
+	const openApp = async key => {
+		const app = await getApp(key);
+		// setSelectedApp(app);
+		setIsPopoverOpen(true);
+	};
 
 	const edit = () => {
 		setIsPopoverOpen(true);
@@ -43,13 +50,13 @@ const DetailView = (props) => {
 	};
 
 	APP_FORM.formPartTwo.map((item) => {
-		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
+		if (appKey[item.name] && appKey[item.name].length > 0) {
 			hasInstaller = true;
 			return;
 		}
 	});
 
-	const indicateEdit = selectedApp.edited ? (
+	const indicateEdit = appKey.edited ? (
 		<ICON.check
 			style={{
 				width: rem(20),
@@ -66,7 +73,7 @@ const DetailView = (props) => {
 	) : null;
 
 	return (
-		selectedApp && (
+		appKey && (
 			<>
 				<Card shadow="md" radius="md" className={classes.card} padding="xl">
 					<ICON.detail
@@ -130,7 +137,7 @@ const DetailView = (props) => {
 						mt="sm"
 						style={{ textAlign: "left" }}
 					>
-						{selectedApp && (
+						{appKey && (
 							<div className={classes.itemBox}>
 								<h2
 									style={{
@@ -141,13 +148,13 @@ const DetailView = (props) => {
 									}}
 								>
 									<a
-										href={selectedApp._home || selectedApp._github || null}
+										href={appKey._home || appKey._github || null}
 										target="_blank"
 										style={{ fontWeight: "normal", textDecoration: "none" }}
 										title="Open homepage in new window"
 										rel="noreferrer"
 									>
-										{selectedApp._name || selectedApp._bin}
+										{appKey._name || appKey._bin}
 										{/* <ActionIcon
 									size={32}
 									radius="xl"
@@ -164,16 +171,16 @@ const DetailView = (props) => {
 									{indicateEdit}
 								</h2>
 
-								{selectedApp._short && (
-									<Text className={classes.short}>{selectedApp._short}</Text>
+								{appKey._short && (
+									<Text className={classes.short}>{appKey._short}</Text>
 								)}
-								{selectedApp._desc && (
-									<Text className={classes.desc}>{selectedApp._desc}</Text>
+								{appKey._desc && (
+									<Text className={classes.desc}>{appKey._desc}</Text>
 								)}
 
 								<div className={classes.indicatorGroup}>
 									<Text size="sm">
-										{selectedApp._home ? (
+										{appKey._home ? (
 											<MarkPopulated />
 										) : (
 											<MarkUnPopulated />
@@ -181,7 +188,7 @@ const DetailView = (props) => {
 										Homepage
 									</Text>
 									<Text size="sm">
-										{selectedApp._docs ? (
+										{appKey._docs ? (
 											<MarkPopulated />
 										) : (
 											<MarkUnPopulated />
@@ -189,7 +196,7 @@ const DetailView = (props) => {
 										Documentation
 									</Text>
 									<Text size="sm">
-										{selectedApp._github ? (
+										{appKey._github ? (
 											<MarkPopulated />
 										) : (
 											<MarkUnPopulated />
@@ -222,7 +229,7 @@ const DetailView = (props) => {
 
 								<Group justify="center" p="md">
 									<Button
-										onClick={() => edit(selectedApp.key)}
+										onClick={() => edit(appKey.key)}
 										className={classes.editBtn}
 										leftSection={
 											<ICON.edit
@@ -239,7 +246,7 @@ const DetailView = (props) => {
 										Edit
 									</Button>
 									<Button
-										onClick={() => delete selectedApp.key}
+										onClick={() => delete appKey.key}
 										className={classes.deleteBtn}
 										leftSection={
 											<ICON.remove
@@ -265,7 +272,7 @@ const DetailView = (props) => {
 						ref={modalRef}
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
-						selectedApp={selectedApp}
+						selectedApp={appKey}
 						theme={theme}
 					/>
 				)}
