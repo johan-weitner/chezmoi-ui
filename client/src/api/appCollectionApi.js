@@ -203,20 +203,33 @@ export const postAppKeys = async (keys) => {
 
 /**
  * MUTATE APP
- * @returns
+ *
  */
-export const useAppMutation_OLD = () => {
+// export const updateNodeOnServer = async (updatedNode) => {
+// 	updatedNode.edited = true;
+// 	const result = await axios
+// 		.post(`${BASE_URL}/updateNode`, {
+// 			...updatedNode,
+// 		})
+// 		.then((response) => {
+// 			return response.data;
+// 		})
+// 		.catch((error) => {
+// 			console.error(error.message);
+// 			toast(error.message);
+// 		});
+// 	return result.data;
+// };
+
+export const useAppMutation = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
-		mutationFn: async () => {
-			console.log("Updating app: ", item);
-			if (!item) return;
-			item.edited = true;
-
-			const result = await axios
+		mutationFn: (updatedNode) => {
+			updatedNode.edited = true;
+			const result = axios
 				.post(`${BASE_URL}/updateNode`, {
-					...item,
+					...updatedNode,
 				})
 				.then((response) => {
 					return response.data;
@@ -225,60 +238,8 @@ export const useAppMutation_OLD = () => {
 					console.error(error.message);
 					toast(error.message);
 				});
-			return result;
+			return result.data;
 		},
-		onMutate: async ({ key, newValue }) => {
-			await queryClient.cancelQueries({ queryKey: ['appCollection'], exact: true });
-			const previousData = queryClient.getQueryData("appCollection");
-			console.log('PreviousData before manipulation: ', previousData);
-
-			queryClient.setQueryData("appCollection", (oldData) => {
-				console.log('OldData: ', oldData);
-				oldData?.map((item) =>
-					item.key === key ? { ...item, ...newValue } : item,
-				)
-			});
-			console.log('PreviousData AFTER manipulation: ', previousData);
-			return { previousData };
-		},
-		onError: (err, variables, context) => {
-			queryClient.setQueryData("appCollection", context.previousData);
-			console.error(err.message);
-			toast(err.message);
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries({
-				queryKey: ['appCollection'],
-				exact: true,
-				refetchType: 'active',
-			});
-			console.log('Successfully updated app and appCollection');
-			toast.info('Successfully updated app and appCollection');
-		}
-	});
-};
-
-export const updateNodeOnServer = async (updatedNode) => {
-	updatedNode.edited = true;
-	const result = await axios
-		.post(`${BASE_URL}/updateNode`, {
-			...updatedNode,
-		})
-		.then((response) => {
-			return response.data;
-		})
-		.catch((error) => {
-			console.error(error.message);
-			toast(error.message);
-		});
-	return result.data;
-};
-
-export const useAppMutation = () => {
-	const queryClient = useQueryClient();
-
-	return useMutation({
-		mutationFn: (updatedNode) => updateNodeOnServer(updatedNode),
 		onMutate: async (updatedNode) => {
 			await queryClient.cancelQueries(['appCollection']);
 			const previousData = queryClient.getQueryData(['appCollection']);

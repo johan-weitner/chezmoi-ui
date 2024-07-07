@@ -22,7 +22,7 @@ import {
 import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
-import { useAppMutation, updateNodeOnServer } from "../api/appCollectionApi";
+import { useAppMutation } from "../api/appCollectionApi";
 import classes from "./MainView.module.css";
 
 const AppForm = forwardRef(function AppForm(props, ref) {
@@ -60,9 +60,8 @@ const AppForm = forwardRef(function AppForm(props, ref) {
 	}
 	const updateApp = useAppMutation();
 	const onSubmit = async (data) => {
-		// const response = await updateNodeOnServer(data);
 		console.log('updateApp', updateApp);
-		await updateApp?.mutate(data);
+		await updateApp.mutate(data);
 		closePopover();
 	};
 
