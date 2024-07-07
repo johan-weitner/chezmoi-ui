@@ -4,10 +4,11 @@
   "description": "A local web UI for managing the software list in a Chezmoi installation",
   "main": "start.sh",
   "scripts": {
-    "start": "./start.sh",
-    "start:force": "./start.sh -f",
-    "stop": "./stop.sh",
-    "clean": "rm -rf ./_backups/"
+    "start": "./scripts/start.sh",
+    "start:force": "./scripts/start.sh -f",
+    "stop": "./scripts/stop.sh",
+    "clean": "rm -rf ./_backups/",
+    "checkports": "./scripts/check-port-usage.sh"
   },
   "repository": {
     "type": "git",

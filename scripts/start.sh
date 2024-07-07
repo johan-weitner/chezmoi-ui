@@ -4,10 +4,8 @@
 # If force start, kill processes hogging our ports
 if [ "$1" = "-f" ]; then
 
-  export $(grep BACKEND_SRV_PORT "./server/.env")
-  export $(grep FRONTEND_SRV_PORT "./client/.env")
-  # export $(grep BACKEND_SRV_PORT "./server/.env")
-  # export $(grep FRONTEND_SRV_PORT "./client/.env")
+  export "$(grep BACKEND_SRV_PORT "./server/.env")"
+  export "$(grep FRONTEND_SRV_PORT "./client/.env")"
 
   pid=$(lsof -t -i :$BACKEND_SRV_PORT)
   if [ -n "$pid" ]; then
