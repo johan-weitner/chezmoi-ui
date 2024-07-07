@@ -1,6 +1,7 @@
 import { Box, Button, Container, Group } from "@mantine/core";
 import { ICON } from "constants/icons.js";
 import classes from "./MainHeader.module.css";
+import Toolbar from "../Toolbar";
 
 const MainHeader = (props) => {
 	const { save } = props;
@@ -34,10 +35,11 @@ const MainHeader = (props) => {
 
 	return (
 		<header className={classes.header}>
-			<Container className={classes.inner} style={{ margin: "0" }}>
+			<Container className={classes.inner} style={{ margin: "0", height: "50px" }}>
 				<Box className={classes.links} visibleFrom="sm">
 					<Group gap={0} justify="flex-end" className={classes.mainLinks}>
-						{mainItems}
+						{/* {mainItems} */}
+						<Toolbar />
 					</Group>
 				</Box>
 			</Container>

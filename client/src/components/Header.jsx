@@ -1,21 +1,32 @@
-import { Container, Title } from "@mantine/core";
+import { useEffect } from "react";
+import { Container, Title, Group } from "@mantine/core";
 import classes from "./Header.module.css";
 import logo from "./logo.svg";
+import BarSpinner from "./BarSpinner";
+import { useLoading } from "../api/appCollectionApi";
+import React from 'react';
+import { useIsFetching, useIsMutating } from '@tanstack/react-query';
+import Toolbar from './Toolbar'
 
-/**
- * Renders the header component for the application.
- *
- * The header includes the application logo and title, and is contained within a centered container.
- *
- * @param {object} props - The props passed to the header component.
- * @returns {JSX.Element} The rendered header component.
- */
 const Header = (props) => {
+	const isFetching = useIsFetching();
+	const isMutating = useIsMutating();
+	const isLoading = isFetching > 0 || isMutating > 0;
+
 	return (
-		<Container size="md" className={classes.header}>
-			<img src={logo} alt="Logo" />
-			<Title>Chezmoi UI</Title>
-		</Container>
+		<>
+			<Container size="lg" className={classes.header}>
+				{/* <Toolbar /> */}
+				<nav className={classes.navbar}>
+					<Group justify="flex-start" className={classes.navbarLogo}>
+						<img src={logo} alt="Logo" />
+						<Title>Chezmoi UI</Title>
+					</Group>
+				</nav>
+				{isLoading && <BarSpinner />}
+			</Container>
+
+		</>
 	);
 };
 

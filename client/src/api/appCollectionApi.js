@@ -42,7 +42,7 @@ export const useAppCollection = () => {
 
 export const useApp = (key) => {
 	return useQuery({
-		queryKey: ["app"],
+		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const app = await axios
 				.get(`${BASE_URL}/getApp?key=${key}`)
@@ -59,7 +59,7 @@ export const useApp = (key) => {
 
 export const getApp = async (key) => {
 	const app = await queryClient.fetchQuery({
-		queryKey: ["app"],
+		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const app = await axios
 				.get(`${BASE_URL}/getApp?key=${key}`)
@@ -75,8 +75,29 @@ export const getApp = async (key) => {
 	return app;
 };
 
-// updateNode
-// addNode
+// React Query hook to fetch the loading flag. This flag is only stored in the React Query store and not in the server.
+export const useLoading = () => {
+	return useQuery({
+		queryKey: ["loading"],
+		queryFn: async () => {
+			// Simulate fetching data from the React Query store
+			return queryClient.getQueryData(["loading"]);
+		},
+	});
+};
+
+// React Query hook to mutate the loading flag
+export const useLoadingMutation = () => {
+	return useMutation({
+		mutationFn: (flag) => {
+			return { data: { ...flag } };
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(["loading"]);
+		},
+	});
+};
+
 
 const postAppUpdate = async (item) => {
 	console.log("Updating app: ", item);
@@ -145,26 +166,6 @@ const postAppCollection = async (item) => {
 	// toast.success("Item was updated");
 	return update;
 };
-
-/**
- * MUTATE APP
- *
- */
-// export const updateNodeOnServer = async (updatedNode) => {
-// 	updatedNode.edited = true;
-// 	const result = await axios
-// 		.post(`${BASE_URL}/updateNode`, {
-// 			...updatedNode,
-// 		})
-// 		.then((response) => {
-// 			return response.data;
-// 		})
-// 		.catch((error) => {
-// 			console.error(error.message);
-// 			toast(error.message);
-// 		});
-// 	return result.data;
-// };
 
 export const useAppMutation = () => {
 	const queryClient = useQueryClient();

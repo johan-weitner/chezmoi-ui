@@ -28,7 +28,6 @@ const MainView = (props) => {
 	const modalRef = useRef();
 
 	const selectApp = key => {
-		console.log('App selection reached MainView');
 		setSelectedAppKey(key);
 	};
 

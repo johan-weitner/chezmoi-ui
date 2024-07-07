@@ -7,9 +7,10 @@
   /* position: fixed;
   z-index: 100;
   width: 1107px; */
+  height: 150px;
 
   img {
-    margin: 0 20px 0 -105px;
+    /* margin: 0 20px 0 -105px; */
   }
 
   h1 {

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import {
-  Flex, rem, UnstyledButton, Tooltip
+  Flex, rem, UnstyledButton, Tooltip, Title, Group
 } from "@mantine/core";
 import {
   IconHome2,
@@ -11,26 +11,50 @@ import {
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import "@yaireo/tagify/dist/tagify.css";
-import classes from "components/Header.module.css";
+import classes from "components/Toolbar.module.css";
+import logo from "./logo.svg";
 
 const Toolbar = (props) => {
   const [active, setActive] = useState(2);
   // const { menuData } = props;
 
+  const btnStyle = { width: rem(20), height: rem(20) };
+  const stroke = 1.5;
+
   const menuData = [
-    { icon: ICON.save, label: 'Save work to disk' },
-    { icon: ICON.newFile, label: 'Add new app' },
-    { icon: IconPlayerTrackPrev, label: 'Go to previous' },
-    { icon: IconPlayerTrackNext, label: 'Go to next' },
+    {
+      Icon: <ICON.save style={btnStyle} stroke={stroke} />,
+      label: 'Save work to disk',
+      action: () => { console.log('Save work to disk') }
+    },
+    {
+      Icon: <ICON.add style={btnStyle} stroke={stroke} />,
+      label: 'Add new app',
+      action: () => { console.log('Create new app record') }
+    },
+    {
+      Icon: <IconPlayerTrackPrev style={btnStyle} stroke={stroke} />,
+      label: 'Go to previous',
+      action: () => { console.log('Go to previous app') }
+    },
+    {
+      Icon: <IconPlayerTrackNext style={btnStyle} stroke={stroke} />,
+      label: 'Go to next',
+      action: () => { console.log('Go to next app') }
+    },
   ];
 
-  function NavbarLink({ icon: Icon, label, active, onClick }) {
+  const onClick = (action) => {
+    typeof action === 'function' && action();
+  };
+
+  function NavbarLink({ Icon, label, active, action }) {
     return (
-      <Tooltip label={label} position="top" transitionProps={{ duration: 0 }}>
-        <UnstyledButton onClick={onClick} data-active={active || undefined} className={resolveClassNames.toolbarIcon}>
-          <Icon style={{ width: rem(24), height: rem(24) }} stroke={1.5} />
+      <Tooltip label={label} position="bottom" transitionProps={{ duration: 0 }}>
+        <UnstyledButton onClick={() => onClick(action)} className={classes.link} data-active={active || null}>
+          {Icon}
         </UnstyledButton>
-      </Tooltip >
+      </Tooltip>
     );
   }
 
@@ -44,11 +68,19 @@ const Toolbar = (props) => {
   ));
 
   return (
-    <div>
+    <nav className={classes.navbar}>
+
+      <Group justify="flex-start" className={classes.navbarMain}>
+        <Flex justify="flex-start" gap={10}>
+          {links}
+        </Flex>
+      </Group>
+
       <Flex justify="flex-start" gap={20}>
-        {links}
+        <NavbarLink icon={IconHome2} label="Change account" />
+        <NavbarLink icon={IconSettings} label="Logout" />
       </Flex>
-    </div>
+    </nav>
   );
 
 };
