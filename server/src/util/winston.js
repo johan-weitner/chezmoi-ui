@@ -1,8 +1,12 @@
+import dayjs from "dayjs";
 import winston from "winston";
 
 export const log = winston.createLogger({
 	level: "info",
-	format: winston.format.json(),
+	format: winston.format.combine(
+		winston.format.timestamp(),
+		winston.format.json(),
+	),
 	defaultMeta: { service: "user-service" },
 	transports: [
 		new winston.transports.File({ filename: "error.log", level: "error" }),
@@ -12,7 +16,10 @@ export const log = winston.createLogger({
 
 export const dbLog = winston.createLogger({
 	level: "info",
-	format: winston.format.json(),
+	format: winston.format.combine(
+		winston.format.timestamp(),
+		winston.format.json(),
+	),
 	defaultMeta: { service: "db-service" },
 	transports: [
 		new winston.transports.File({ filename: "db-error.log", level: "error" }),

@@ -4,41 +4,31 @@ import express from 'express';
 import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
-import winston from 'winston';
 import { targetFilePath } from './src/core/config.js';
 import { boot } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
-import { log } from 'winston';
-import { openDb, seedDb, checkTableExists, insertRow, getAllRows } from './src/db/index.js';
-
-// const log = winston.createLogger({
-//   level: 'info',
-//   format: winston.format.json(),
-//   defaultMeta: { service: 'user-service' },
-//   transports: [
-//     new winston.transports.File({ filename: 'error.log', level: 'error' }),
-//     new winston.transports.File({ filename: 'combined.log' }),
-//   ],
-// });
-
-// //
-// // If we're not in production then log to the `console` with the format:
-// // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-// //
-// if (process.env.NODE_ENV !== 'production') {
-//   log.add(new winston.transports.Console({
-//     format: winston.format.simple(),
-//   }));
-// }
+import { log } from './src/util/winston.js';
+import { seedDb, addApp, getAllApps, getAppByKey, updateApp, deleteApp, getCount, isEmptyDb } from "./src/db/prisma.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
-let { softwareArray, software, backupPaths, keys } = boot();
 
 log.info('Set up db connection...');
-const db = await openDb();
-const tableExists = await checkTableExists();
-log.info('Table exists: ', tableExists);
+const emptyDb = await isEmptyDb();
+
+if (emptyDb) {
+  log.info('Empty db - seeding...');
+  let { software } = boot();
+  const data = [];
+  keys.forEach((key) => {
+    data.push({ key: key, JSON: JSON.stringify(software[key]) });
+  });
+  await seedDb(data);
+  await getCount()
+    .then((count) => {
+      log.info(`Done seeding db with ${count} apps`);
+    })
+}
 
 app.set('json spaces', 2);
 app.use(cors());
@@ -57,20 +47,22 @@ app.get('/', (req, res) => {
 });
 
 app.get('/software', (req, res) => {
-  // const { paged, page_size, page_number } = req.query;
-  res = attachHeaders(res);
-  res.json(software);
+  getAllApps()
+    .then((apps) => {
+      res = attachHeaders(res);
+      res.json(apps);
+    });
 });
 
-app.get('/softwareKeys', (req, res) => {
-  res = attachHeaders(res);
-  res.json(keys);
-});
+// app.get('/softwareKeys', (req, res) => {
+//   res = attachHeaders(res);
+//   res.json(keys);
+// });
 
-app.get('/backups', (req, res) => {
-  res = attachHeaders(res);
-  res.json(backupPaths);
-});
+// app.get('/backups', (req, res) => {
+//   res = attachHeaders(res);
+//   res.json(backupPaths);
+// });
 
 app.get('/rawlist', (req, res) => {
   res = attachHeaders(res);
@@ -84,59 +76,47 @@ app.get('/rawlist', (req, res) => {
 
 app.get('/getApp', (req, res) => {
   const { key } = req.query;
-  res = attachHeaders(res);
-  res.json(software[key]);
+  getAppByKey(key)
+    .then((app) => {
+      res = attachHeaders(res);
+      res.json(app);
+    });
 });
 
 app.post('/updateNode', (req, res) => {
-  log.info('Called /updateNode');
-  res = attachHeaders(res);
   const { body } = req;
-  log.info('Incoming payload: ', JSON.stringify(body, null, 2));
+  const { key } = body;
   if (isEmpty(body)) {
     res.status(500).json({
       error: 'No data provided'
     });
     return;
   }
-  try {
-    software[body.key] = { ...body };
-    const jsonStr = JSON.stringify(software, null, 2);
-    fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
-    res.status(200).json(jsonStr);
-  } catch (err) {
-    res.status(500).json({
-      status: 500,
-      error: err
+  updateApp(key, JSON.stringify(body))
+    .then((app) => {
+      res = attachHeaders(res);
+      res.status(200).json(jsonStr);
+    })
+    .catch((e) => {
+      res.status(500).json({
+        error: e.message
+      });
     });
-    return;
-  }
 });
 
 app.post('/addNode', (req, res) => {
-  res = attachHeaders(res);
   const { body } = req;
-  if (isEmpty(body)) {
-    res.status(500).json({
-      error: 'No data provided'
-    });
-    return;
-  }
-  try {
-    software = {
-      ...software,
-      body
-    };
-    const jsonStr = JSON.stringify(software, null, 2);
-    fs.writeFileSync(targetFilePath, jsonStr, 'utf8');
-    res.status(200).json(jsonStr);
-  } catch (err) {
-    res.status(500).json({
-      status: 500,
-      error: err
-    });
-    return;
-  }
+  const { key } = body;
+  addApp(key, JSON.stringify(body))
+    .then((app) => {
+      res = attachHeaders(res);
+      res.status(200).json(app);
+    })
+    .catch((e) => {
+      res.status(500).json({
+        error: e.message
+      });
+    })
 });
 
 app.post('/save', (req, res) => {

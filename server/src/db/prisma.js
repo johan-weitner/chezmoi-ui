@@ -1,17 +1,10 @@
 import { PrismaClient } from "@prisma/client";
+import { dbLog as log } from "../util/winston.js";
 
 const prisma = new PrismaClient();
 
 async function main() {
-	const app = await prisma.app.create({
-		data: {
-			JSON: '"act": {    "_bin": "act",    "_desc": "Run GitHub actions locally. More text. ",    "_docs": "https://github.com/nektos/act#example-commands",    "_github": "https://github.com/nektos/act",    "_home": "https://github.com/nektos/act",    "_name": "Act",    "_short": "Act is a tool that allows you to run GitHub Actions locally.",    "brew": "act",    "choco": "act-cli",    "go": "github.com/nektos/act@",    "nix": "nixpkgs.act",    "port": "act",    "scoop": "act",    "yay": "act",    "key": "act",    "tags": "[{"value":"dev"},{"value":"cli"}]",    "whalebrew": "",    "apt": "",    "homebrew": "",    "cask": "",    "cargo": "",    "npm": "",    "pip": "",    "pipx": "",    "gem": "",    "script": "",    "winget": "",    "pkgdarwin": "",    "ansible": "",    "binary": "",    "appstore": "",    "edited": true,    "pacman": ""  }',
-		},
-	});
-	console.log(app);
-
-	const apps = await prisma.app.findMany();
-	console.log(apps);
+	log.info("Set up db connection...");
 }
 
 main()
@@ -23,3 +16,81 @@ main()
 		await prisma.$disconnect();
 		process.exit(1);
 	});
+
+export const seedDb = async (data) => {
+	await prisma
+		.$transaction([prisma.app.createMany({ data })])
+		.then(() => {
+			log.info("Seeded db with resources");
+		})
+		.catch((e) => {
+			log.error(e.message);
+		});
+};
+
+export const addApp = async (data) => {
+	const { key, json } = data;
+	if (!key || !json) {
+		log.error("Invalid app data: ", data);
+		return null;
+	}
+
+	try {
+		const app = await prisma.app.create({
+			data: {
+				key,
+				JSON: json,
+			},
+		});
+		log.info("Adding app: ", key, JSON);
+		return app;
+	} catch (e) {
+		log.error(e.message);
+	}
+};
+
+export const getAllApps = async () => {
+	const apps = await prisma.app.findMany();
+	return apps;
+};
+
+export const getAppByKey = async (key) => {
+	const app = await prisma.app.findFirst({
+		where: {
+			key: key,
+		},
+	});
+	return app;
+};
+
+export const updateApp = async (key, json) => {
+	const app = await prisma.app.update({
+		where: {
+			key: key,
+		},
+		data: {
+			JSON: json,
+		},
+	});
+	return app;
+};
+
+export const deleteApp = async (key) => {
+	const app = await prisma.app.delete({
+		where: {
+			key: key,
+		},
+	});
+	return app;
+};
+
+export const getCount = async () => {
+	const count = await prisma.app.count();
+	return count;
+};
+
+export const isEmptyDb = async () => {
+	const count = await getCount();
+	count === 0 && log.info("Database is empty - seeding...");
+	return count === 0;
+};

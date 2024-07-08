@@ -12,5 +12,6 @@ datasource db {
 
 model App {
   id    Int     @id @default(autoincrement())
+  key   String
   JSON  String
 }

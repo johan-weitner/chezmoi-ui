@@ -31,6 +31,7 @@ const MainView = (props) => {
 			queryKey: ["appCollection"],
 			queryFn: async () => {
 				const response = await axios.get(`${BASE_URL}/software`);
+				console.log(response);
 				return response.data;
 			},
 		});

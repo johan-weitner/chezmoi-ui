@@ -35,6 +35,7 @@ export const useAppCollection = () => {
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/software`);
+			console.log(reponse);
 			return response.data;
 		},
 	});

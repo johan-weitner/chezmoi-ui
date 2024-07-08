@@ -46,8 +46,6 @@ export const boot = () => {
 	log.info("  © 2024 Johan Weitner");
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
 
-	console.log("BACKUP-PATH: ", backupPaths);
-
 	_checkEnvVars();
 	const { sourceExists, workExists } = _checkFileExistence();
 

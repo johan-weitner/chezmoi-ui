@@ -23,3 +23,5 @@ server/error.log
 server/error.log
 blueprint.md
 software.yml.backup
+server/db-error.log
+server/db.log
