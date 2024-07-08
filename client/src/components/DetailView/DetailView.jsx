@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
 	ActionIcon,
 	Badge,
@@ -11,6 +10,7 @@ import {
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
+import { useEffect } from "react";
 import { useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { getApp } from "../../api/appCollectionApi";
@@ -58,13 +58,13 @@ const DetailView = (props) => {
 				/>
 			) : null;
 		});
-	}, [appKey]);
+	}, [appKey, hasInstaller, selectedApp, indicateEdit]);
 
 	const edit = () => {
 		setIsPopoverOpen(true);
 	};
 
-	const deleteApp = () => { };
+	const deleteApp = () => {};
 
 	const closePopover = () => {
 		setIsPopoverOpen(false);

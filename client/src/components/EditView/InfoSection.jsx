@@ -1,5 +1,5 @@
-import { forwardRef } from "react";
 import { nanoid } from "nanoid";
+import { forwardRef } from "react";
 import "@yaireo/tagify/dist/tagify.css";
 import { Group, Input, SimpleGrid, Text, Textarea } from "@mantine/core";
 import classes from "../MainView/MainView.module.css";

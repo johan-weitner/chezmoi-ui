@@ -11,10 +11,10 @@ import logo from "./logo.svg";
 const Header = (props) => {
 	const isFetching = useIsFetching();
 	const isMutating = useIsMutating();
-	console.log('isFetching: ', isFetching);
-	console.log('isMutating: ', isMutating);
+	console.log("isFetching: ", isFetching);
+	console.log("isMutating: ", isMutating);
 	const isLoading = isFetching > 0 || isMutating > 0;
-	console.log('isLoading: ', isLoading);
+	console.log("isLoading: ", isLoading);
 
 	return (
 		<>
@@ -26,10 +26,7 @@ const Header = (props) => {
 						<Title>Chezmoi UI</Title>
 					</Group>
 				</nav>
-				<div style={{ marginTop: "-10px" }}>
-					{isLoading && <BarSpinner />}
-				</div>
-
+				<div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div>
 			</Container>
 		</>
 	);
