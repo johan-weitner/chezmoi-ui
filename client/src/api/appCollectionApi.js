@@ -3,12 +3,12 @@ import {
 	QueryClient,
 	useMutation,
 	useQuery,
-	useQueryClient
+	useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
 
-import { toast } from "sonner";
 import { CACHE_TTL } from "constants/settings";
+import { toast } from "sonner";
 import { filterUnwantedNodes } from "../utils/installDoctorFilter";
 
 const BASE_URL = "http://localhost:3000";
@@ -30,70 +30,19 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
-export const useAppCollection_OLD = () => {
+export const useAppCollection = () => {
 	return useQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
-			const data = await axios
-				.get(`${BASE_URL}/software`)
-				.then((response) => {
-					const { data } = response;
-					const keys = Object.keys(data);
-					keys.map((key) => {
-						data[key].key = key;
-					});
-					return filterUnwantedNodes(data);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return data;
-		},
-	});
-};
-
-export const useAppCollection = () => {
-	return useQuery({
-		queryKey: ['appCollection'],
-		queryFn: () => async () => {
-			const data = await axios
-				.get(`${BASE_URL}/software`)
-				.then((response) => {
-					const { data } = response;
-					const keys = Object.keys(data);
-					keys.map((key) => {
-						data[key].key = key;
-					});
-					return filterUnwantedNodes(data);
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return data;
-		}
-	});
-};
-
-export const useAppKeys = () => {
-	return useQuery({
-		queryKey: ["appKeys"],
-		queryFn: async () => {
-			const keys = await axios
-				.get(`${BASE_URL}/softwareKeys`)
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return keys;
+			const response = await axios.get(`${BASE_URL}/software`);
+			return response.data;
 		},
 	});
 };
 
 export const useApp = (key) => {
 	return useQuery({
-		queryKey: ["app"],
+		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const app = await axios
 				.get(`${BASE_URL}/getApp?key=${key}`)
@@ -110,7 +59,7 @@ export const useApp = (key) => {
 
 export const getApp = async (key) => {
 	const app = await queryClient.fetchQuery({
-		queryKey: ["app"],
+		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const app = await axios
 				.get(`${BASE_URL}/getApp?key=${key}`)
@@ -126,8 +75,28 @@ export const getApp = async (key) => {
 	return app;
 };
 
-// updateNode
-// addNode
+// React Query hook to fetch the loading flag. This flag is only stored in the React Query store and not in the server.
+export const useLoading = () => {
+	return useQuery({
+		queryKey: ["loading"],
+		queryFn: async () => {
+			// Simulate fetching data from the React Query store
+			return queryClient.getQueryData(["loading"]);
+		},
+	});
+};
+
+// React Query hook to mutate the loading flag
+export const useLoadingMutation = () => {
+	return useMutation({
+		mutationFn: (flag) => {
+			return { data: { ...flag } };
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(["loading"]);
+		},
+	});
+};
 
 const postAppUpdate = async (item) => {
 	console.log("Updating app: ", item);
@@ -197,30 +166,6 @@ const postAppCollection = async (item) => {
 	return update;
 };
 
-export const postAppKeys = async (keys) => {
-	console.log(keys);
-};
-
-/**
- * MUTATE APP
- *
- */
-// export const updateNodeOnServer = async (updatedNode) => {
-// 	updatedNode.edited = true;
-// 	const result = await axios
-// 		.post(`${BASE_URL}/updateNode`, {
-// 			...updatedNode,
-// 		})
-// 		.then((response) => {
-// 			return response.data;
-// 		})
-// 		.catch((error) => {
-// 			console.error(error.message);
-// 			toast(error.message);
-// 		});
-// 	return result.data;
-// };
-
 export const useAppMutation = () => {
 	const queryClient = useQueryClient();
 
@@ -241,30 +186,29 @@ export const useAppMutation = () => {
 			return result.data;
 		},
 		onMutate: async (updatedNode) => {
-			await queryClient.cancelQueries(['appCollection']);
-			const previousData = queryClient.getQueryData(['appCollection']);
+			await queryClient.cancelQueries(["appCollection"]);
+			const previousData = queryClient.getQueryData(["appCollection"]);
 			const keys = Object.keys(previousData);
 
-			queryClient.setQueryData(['appCollection'], (old) => {
+			queryClient.setQueryData(["appCollection"], (old) => {
 				return keys.map((key) => {
-					return key === updatedNode.key ? { ...old[key], ...updatedNode } : old[key]
+					return key === updatedNode.key
+						? { ...old[key], ...updatedNode }
+						: old[key];
 				});
 			});
 			return { previousData };
 		},
 		onError: (err, updatedNode, context) => {
-			queryClient.setQueryData(['appCollection'], context.previousData);
-			return { status: 'error', error: err.message };
+			queryClient.setQueryData(["appCollection"], context.previousData);
+			return { status: "error", error: err.message };
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries(['appCollection']);
-			return { status: 'success' };
+			queryClient.invalidateQueries(["appCollection"]);
+			return { status: "success" };
 		},
 	});
 };
-
-
-
 
 export const useAppCollectionMutation = () => {
 	return useMutation({
@@ -274,16 +218,6 @@ export const useAppCollectionMutation = () => {
 		// },
 		onSettled: () =>
 			queryClient.invalidateQueries({ queryKey: ["appCollection"] }),
-	});
-};
-
-export const useAppKeysMutation = () => {
-	return useMutation({
-		mutationFn: async () => postAppKeys(),
-		// onSuccess: () => {
-		//   queryClient.invalidateQueries({ queryKey: ['appKeys'] });
-		// },
-		onSettled: () => queryClient.invalidateQueries({ queryKey: ["appKeys"] }),
 	});
 };
 

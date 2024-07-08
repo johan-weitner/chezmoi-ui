@@ -21,3 +21,5 @@ node_modules
 server/combined.log
 server/error.log
 server/error.log
+blueprint.md
+software.yml.backup

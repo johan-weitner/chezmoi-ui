@@ -28,6 +28,6 @@ export const APP_FORM = {
 		{ name: "yay", label: "Yay" },
 		{ name: "appstore", label: "AppStore" },
 		{ name: "pacman", label: "Pacman" },
-		{ name: "port", label: "MacPort" }
+		{ name: "port", label: "MacPort" },
 	],
 };

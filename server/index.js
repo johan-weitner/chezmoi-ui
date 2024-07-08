@@ -5,7 +5,6 @@ import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
 import winston from 'winston';
-// import { log } from './src/util/log.js';
 import { targetFilePath } from './src/core/config.js';
 import { boot } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
@@ -15,10 +14,6 @@ const log = winston.createLogger({
   format: winston.format.json(),
   defaultMeta: { service: 'user-service' },
   transports: [
-    //
-    // - Write all logs with importance level of `error` or higher to `error.log`
-    // - Write all logs with importance level of `info` or less to `combined.log`
-    //
     new winston.transports.File({ filename: 'error.log', level: 'error' }),
     new winston.transports.File({ filename: 'combined.log' }),
   ],

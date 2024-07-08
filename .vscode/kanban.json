@@ -1,0 +1,53 @@
+{
+    "title": "Kanban",
+    "cols": [
+        {
+            "title": "Bugs",
+            "tasks": [],
+            "id": "hzj1iq8kv16tn6wgte41bfwn",
+            "color": "#eb144c"
+        },
+        {
+            "title": "To-Do",
+            "tasks": [
+                {
+                    "text": "SQLite in backend?",
+                    "id": "h9fuyo8idmjmcwnzar8r1em2"
+                },
+                {
+                    "text": "Optimize performance",
+                    "id": "rbdvylhyd0oxnk7pp3cu01ck"
+                },
+                {
+                    "text": "Implement paging",
+                    "id": "vfob2x075xuhnprulwda6ka1"
+                },
+                {
+                    "text": "Consolidate refactor branch with main",
+                    "id": "g7fx5i7j0qns10sg1w4soatn"
+                },
+                {
+                    "text": "Fix buttons and keyboard shortcuts",
+                    "id": "gv4ieem70rxhapad965n8k18"
+                }
+            ],
+            "id": "s4x8tk72jz2q1vxp1bjscz4o",
+            "color": "#ff6900"
+        },
+        {
+            "title": "Doing",
+            "tasks": [],
+            "id": "a4rk3cab77bidnwm67489nqu",
+            "color": "#0693e3"
+        },
+        {
+            "title": "Done",
+            "tasks": [],
+            "id": "jn3gjwyx5358rtr80ke72qpb",
+            "color": "#00d084"
+        }
+    ],
+    "autosave": true,
+    "saveToFile": true,
+    "timestamp": 1720444621880
+}

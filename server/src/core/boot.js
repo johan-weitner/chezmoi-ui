@@ -1,12 +1,8 @@
-import fs from 'fs';
-import {
-  softwareYamlPath,
-  targetFilePath,
-  backupBasePath
-} from './config.js';
+import fs from "node:fs";
+import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
+import { backupBasePath, softwareYamlPath, targetFilePath } from "./config.js";
 import { printAppLogo } from "./logo.js";
-import { log } from '../util/log.js';
 
 /**
  * Exports a set of styles used for logging and formatting output in the application.
@@ -20,19 +16,19 @@ import { log } from '../util/log.js';
  * - `cross`: An X symbol
  * - `wsign`: A warning symbol
  */
-export const { success, warn, error, bold, italic, check, cross, wsign } = styles;
+export const { success, warn, error, bold, italic, check, cross, wsign } =
+	styles;
 
 // Redundant?
 export let backupPaths = [];
 
 // Redundant?
 if (fs.existsSync(backupBasePath)) {
-  const backupFiles = fs.readdirSync(backupBasePath);
-  backupPaths = backupFiles.map(file => {
-    return `${backupBasePath}/${file}`;
-  });
+	const backupFiles = fs.readdirSync(backupBasePath);
+	backupPaths = backupFiles.map((file) => {
+		return `${backupBasePath}/${file}`;
+	});
 }
-
 
 /**
  * Initializes the backend server by performing the following steps:
@@ -45,89 +41,104 @@ if (fs.existsSync(backupBasePath)) {
  * @returns {Object} An object containing the software array and the software object.
  */
 export const boot = () => {
-  console.clear();
-  printAppLogo();
-  log.info('  © 2024 Johan Weitner')
-  log.info(bold('\n\n-= STARTING BACKEND SERVER... =-\n'));
+	console.clear();
+	printAppLogo();
+	log.info("  © 2024 Johan Weitner");
+	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
 
-  console.log('BACKUP-PATH: ', backupPaths);
+	console.log("BACKUP-PATH: ", backupPaths);
 
-  _checkEnvVars();
-  const { sourceExists, workExists } = _checkFileExistence();
+	_checkEnvVars();
+	const { sourceExists, workExists } = _checkFileExistence();
 
-  log.info(bold('Path to source file: ') + softwareYamlPath);
-  sourceExists ?
-    log.success(`Found ${check} \n`) :
-    log.error(`Not found ${cross} \n`);
-  log.info(bold('Path to work file: ') + targetFilePath);
-  workExists ?
-    log.success(`Found ${check} \n`) :
-    log.error(`Not found ${cross} \n`);
-  (process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERVAL > 0) ?
-    log.success(`Backup interval set to ${process.env.BACKUP_INTERVAL} min ${check} \n`) :
-    log.warn(`${wsign}   Backup interval not set\n`);
+	log.info(bold("Path to source file: ") + softwareYamlPath);
+	sourceExists
+		? log.success(`Found ${check} \n`)
+		: log.error(`Not found ${cross} \n`);
+	log.info(bold("Path to work file: ") + targetFilePath);
+	workExists
+		? log.success(`Found ${check} \n`)
+		: log.error(`Not found ${cross} \n`);
+	process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERVAL > 0
+		? log.success(
+				`Backup interval set to ${process.env.BACKUP_INTERVAL} min ${check} \n`,
+			)
+		: log.warn(`${wsign}   Backup interval not set\n`);
 
-  return _setupFileData();
+	return _setupFileData();
 };
 
 const _checkEnvVars = () => {
-  if (!softwareYamlPath || !targetFilePath) {
-    log.error(error('Missing environment variables'));
-    log.error(error('Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment'));
-    process.exit(1);
-  }
+	if (!softwareYamlPath || !targetFilePath) {
+		log.error(error("Missing environment variables"));
+		log.error(
+			error(
+				"Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment",
+			),
+		);
+		process.exit(1);
+	}
 };
 
 const _checkFileExistence = () => {
-  const sourceExists = fs.existsSync(softwareYamlPath);
-  const workExists = fs.existsSync(targetFilePath);
+	const sourceExists = fs.existsSync(softwareYamlPath);
+	const workExists = fs.existsSync(targetFilePath);
 
-  if (!sourceExists && !workExists) {
-    log.error(error('Neither source file nor work file exists '));
-    log.error(error('\x1b[31m%s\x1b[0m', 'Please point SOURCE_FILE and TARGET_FILE to existing files'));
-    process.exit(1);
-  }
+	if (!sourceExists && !workExists) {
+		log.error(error("Neither source file nor work file exists "));
+		log.error(
+			error(
+				"\x1b[31m%s\x1b[0m",
+				"Please point SOURCE_FILE and TARGET_FILE to existing files",
+			),
+		);
+		process.exit(1);
+	}
 
-  return { sourceExists, workExists };
+	return { sourceExists, workExists };
 };
 
 const _setupFileData = () => {
-  let software, softwareArray, backupPaths, keys;
-  if (fs.existsSync(targetFilePath)) {
-    log.info('Work in progress exists - opening WiP:');
-    log.info(targetFilePath);
+	let software;
+	let softwareArray;
+	let backupPaths;
+	let keys;
+	if (fs.existsSync(targetFilePath)) {
+		log.info("Work in progress exists - opening WiP:");
+		log.info(targetFilePath);
 
-    backupPaths = [];
-    softwareArray = fs.readFileSync(targetFilePath, 'utf8');
-    software = JSON.parse(softwareArray);
-    keys = Object.keys(software);
-    console.log(italic('List size: ' + Object.keys(software).length));
-  } else {
-    log.info('Work in progress does not exist - opening source file to seed a starting point:');
-    log.info(softwareYamlPath);
+		backupPaths = [];
+		softwareArray = fs.readFileSync(targetFilePath, "utf8");
+		software = JSON.parse(softwareArray);
+		keys = Object.keys(software);
+		console.log(italic(`List size: ${Object.keys(software).length}`));
+	} else {
+		log.info(
+			"Work in progress does not exist - opening source file to seed a starting point:",
+		);
+		log.info(softwareYamlPath);
 
-    const softwareYaml = fs.readFileSync(softwareYamlPath, 'utf8');
-    software = YAML.parse(softwareYaml).softwarePackages;
-    keys = Object.keys(software);
+		const softwareYaml = fs.readFileSync(softwareYamlPath, "utf8");
+		software = YAML.parse(softwareYaml).softwarePackages;
+		keys = Object.keys(software);
 
-    for (let i = 0; i < keys.length; i++) {
-      softwareArray.push(software[keys[i]]);
-      softwareArray[i].key = keys[i];
-    }
-    console.log(italic('List size: ' + keys.length));
-    backupPaths = _readBackups();
-  }
-  return { softwareArray, software, backupPaths, keys };
+		for (let i = 0; i < keys.length; i++) {
+			softwareArray.push(software[keys[i]]);
+			softwareArray[i].key = keys[i];
+		}
+		console.log(italic(`List size: ${keys.length}`));
+		backupPaths = _readBackups();
+	}
+	return { softwareArray, software, backupPaths, keys };
 };
 
 const _readBackups = () => {
-  if (fs.existsSync(backupBasePath)) {
-    const backupFiles = fs.readdirSync(backupBasePath);
-    const backupPaths = backupFiles.map(file => {
-      return `${backupBasePath}/${file}`;
-    });
-    return backupPaths;
-  } else {
-    return [];
-  }
+	if (fs.existsSync(backupBasePath)) {
+		const backupFiles = fs.readdirSync(backupBasePath);
+		const backupPaths = backupFiles.map((file) => {
+			return `${backupBasePath}/${file}`;
+		});
+		return backupPaths;
+	}
+	return [];
 };

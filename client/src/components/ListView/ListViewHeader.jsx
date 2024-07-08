@@ -1,19 +1,8 @@
 import { ActionIcon, Text, TextInput, rem } from "@mantine/core";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
-import classes from "./MainView.module.css";
+import classes from "../MainView/MainView.module.css";
 
-/**
- * Renders the header component for the list view, including the application title, a search input, and a button to add a new application.
- *
- * @param {Object} props - The component props.
- * @param {string} props.filter - The current filter value for the list.
- * @param {any[]} props.filteredApps - The list of filtered applications.
- * @param {Object} props.theme - The current theme object.
- * @param {function} props.editItem - A function to edit an existing item or create a new one.
- * @param {function} props.setFilter - A function to update the filter value.
- * @returns {JSX.Element} - The rendered list view header component.
- */
 export const ListViewHeader = ({
 	filteredApps,
 	editItem,
@@ -87,9 +76,11 @@ export const ListViewHeader = ({
 				}
 				{...props}
 			/>
-			<Text size="xs" style={{ textAlign: "left", margin: "10px 0 0 20px" }}>
-				{filteredApps.length} apps in total.
-			</Text>
+			{filteredApps && (
+				<Text size="xs" style={{ textAlign: "left", margin: "10px 0 0 20px" }}>
+					{filteredApps?.length} apps in total.
+				</Text>
+			)}
 		</>
 	);
 };
