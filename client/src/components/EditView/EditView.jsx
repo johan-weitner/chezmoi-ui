@@ -2,6 +2,8 @@ import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { forwardRef, useEffect } from "react";
 import "@yaireo/tagify/dist/tagify.css";
 import { ActionIcon, Card, Flex, Modal, rem } from "@mantine/core";
+import FallbackComponent from "components/FallbackComponent";
+import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
 
 const EditView = forwardRef(function EditView(props, ref) {
@@ -60,15 +62,21 @@ const EditView = forwardRef(function EditView(props, ref) {
 						</ActionIcon>
 					</>
 				</Flex>
-				<EditViewForm
-					isPopoverOpen={isPopoverOpen}
-					closePopover={closePopover}
-					selectedApp={selectedApp}
-					gotoPrev={() => {}}
-					gotoNext={() => {}}
-					theme={theme}
-					isNewApp={false}
-				/>
+				<ErrorBoundary
+					fallbackRender={(error) => (
+						<FallbackComponent error={error.message} />
+					)}
+				>
+					<EditViewForm
+						isPopoverOpen={isPopoverOpen}
+						closePopover={closePopover}
+						selectedApp={selectedApp}
+						gotoPrev={() => {}}
+						gotoNext={() => {}}
+						theme={theme}
+						isNewApp={false}
+					/>
+				</ErrorBoundary>
 			</Card>
 		</Modal>
 	);

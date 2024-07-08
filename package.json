@@ -11,7 +11,8 @@
     "checkports": "./scripts/check-port-usage.sh",
     "install": "pnpm i && cd server && pnpm i && cd ../client && pnpm i && cd ..",
     "lint": "cd server && pnpm run lint && cd ../client && pnpm run lint && cd ..",
-    "lint:fix": "cd server && pnpm run lint:fix && cd ../client && pnpm run lint:fix && cd .."
+    "lint:fix": "cd server && pnpm run lint:fix && cd ../client && pnpm run lint:fix && cd ..",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -37,8 +38,16 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "./server/**/*.{js,jsx}": "cd server && pnpm run lint && cd ..",
-    "./client/**/*.{js,jsx}": "cd client && pnpm run lint && cd .."
+    "./server/**/*.{js,jsx}": [
+      "cd server",
+      "pnpm run lint",
+      "cd .."
+    ],
+    "./client/**/*.{js,jsx}": [
+      "cd client",
+      "pnpm run lint",
+      "cd .."
+    ]
   },
   "type": "module"
 }

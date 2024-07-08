@@ -8,8 +8,10 @@ import {
 	rem,
 } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
+import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
 import { useRef, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
 import BarSpinner from "../BarSpinner";
@@ -69,7 +71,9 @@ const DetailView = (props) => {
 	return isLoading || !selectedApp ? (
 		<BarSpinner />
 	) : (
-		<>
+		<ErrorBoundary
+			fallbackRender={(error) => <FallbackComponent error={error.message} />}
+		>
 			<Card shadow="md" radius="md" className={classes.card} padding="xl">
 				<ICON.detail
 					style={{ width: rem(50), height: rem(50) }}
@@ -263,7 +267,7 @@ const DetailView = (props) => {
 					theme={theme}
 				/>
 			)}
-		</>
+		</ErrorBoundary>
 	);
 };
 

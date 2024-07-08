@@ -1,7 +1,9 @@
 import { Card } from "@mantine/core";
 import { useAppCollection } from "api/appCollectionApi";
+import FallbackComponent from "components/FallbackComponent";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import BarSpinner from "../BarSpinner";
 import classes from "../MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
@@ -27,7 +29,9 @@ const ListView = (props) => {
 
 	return (
 		software && (
-			<>
+			<ErrorBoundary
+				fallbackRender={(error) => <FallbackComponent error={error.message} />}
+			>
 				{loading}
 				<Card shadow="md" radius="md" className={classes.card} padding="xl">
 					<ListViewHeader
@@ -62,7 +66,7 @@ const ListView = (props) => {
 							})}
 					</Card>
 				</Card>
-			</>
+			</ErrorBoundary>
 		)
 	);
 };
