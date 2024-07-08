@@ -8,9 +8,8 @@ export const getMarkedAsEdited = () => {
 	const data = localStorage.getItem(LOCAL_STORE_EDITED_APPS);
 	if (data !== "undefined") {
 		return JSON.parse(data);
-	} else {
-		return [];
 	}
+	return [];
 };
 
 export const saveMarkedAsEdited = (edited) => {

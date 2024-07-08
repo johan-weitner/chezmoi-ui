@@ -1,11 +1,11 @@
 import { Card } from "@mantine/core";
 import { useAppCollection } from "api/appCollectionApi";
 import { nanoid } from "nanoid";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import BarSpinner from "../BarSpinner";
+import classes from "../MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListViewHeader } from "./ListViewHeader";
-import classes from "../MainView/MainView.module.css";
-import BarSpinner from "../BarSpinner";
 
 const ListView = (props) => {
 	const { theme, selectApp, selectedAppKey } = props;
@@ -14,7 +14,7 @@ const ListView = (props) => {
 
 	useEffect(() => {
 		// console.log('SelectedAppKey changed: ', selectedAppKey);
-	}, [selectedAppKey]);
+	}, []);
 
 	const appKeys = Object.keys(software);
 

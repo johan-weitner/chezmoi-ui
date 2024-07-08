@@ -1,19 +1,20 @@
 import { rem } from "@mantine/core";
 import { useAppCollection } from "api/appCollectionApi";
+import { useLoadingMutation } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
 import { EditedIndicator } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
-import { useLoadingMutation } from "../../api/appCollectionApi";
 
 export const ListItem = (props) => {
 	const { selectApp, app, selectedAppKey } = props;
 	const { data: software } = useAppCollection();
-	const className = selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
+	const className =
+		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = software[app]?.edited ? <EditedIndicator /> : null;
 
-	const editItem = () => { };
-	const deleteItem = () => { };
-	const openApp = key => {
+	const editItem = () => {};
+	const deleteItem = () => {};
+	const openApp = (key) => {
 		const flipFlag = useLoadingMutation();
 		flipFlag.mutate({ loading: true });
 		selectApp(key);

@@ -3,12 +3,12 @@ import {
 	QueryClient,
 	useMutation,
 	useQuery,
-	useQueryClient
+	useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
 
-import { toast } from "sonner";
 import { CACHE_TTL } from "constants/settings";
+import { toast } from "sonner";
 import { filterUnwantedNodes } from "../utils/installDoctorFilter";
 
 const BASE_URL = "http://localhost:3000";
@@ -98,7 +98,6 @@ export const useLoadingMutation = () => {
 	});
 };
 
-
 const postAppUpdate = async (item) => {
 	console.log("Updating app: ", item);
 	if (!item) return;
@@ -187,30 +186,29 @@ export const useAppMutation = () => {
 			return result.data;
 		},
 		onMutate: async (updatedNode) => {
-			await queryClient.cancelQueries(['appCollection']);
-			const previousData = queryClient.getQueryData(['appCollection']);
+			await queryClient.cancelQueries(["appCollection"]);
+			const previousData = queryClient.getQueryData(["appCollection"]);
 			const keys = Object.keys(previousData);
 
-			queryClient.setQueryData(['appCollection'], (old) => {
+			queryClient.setQueryData(["appCollection"], (old) => {
 				return keys.map((key) => {
-					return key === updatedNode.key ? { ...old[key], ...updatedNode } : old[key]
+					return key === updatedNode.key
+						? { ...old[key], ...updatedNode }
+						: old[key];
 				});
 			});
 			return { previousData };
 		},
 		onError: (err, updatedNode, context) => {
-			queryClient.setQueryData(['appCollection'], context.previousData);
-			return { status: 'error', error: err.message };
+			queryClient.setQueryData(["appCollection"], context.previousData);
+			return { status: "error", error: err.message };
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries(['appCollection']);
-			return { status: 'success' };
+			queryClient.invalidateQueries(["appCollection"]);
+			return { status: "success" };
 		},
 	});
 };
-
-
-
 
 export const useAppCollectionMutation = () => {
 	return useMutation({

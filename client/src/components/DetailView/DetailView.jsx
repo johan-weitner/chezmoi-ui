@@ -10,12 +10,12 @@ import {
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { APP_FORM } from "constants/appForm.js";
 import { useRef, useState } from "react";
+import { getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
+import BarSpinner from "../BarSpinner";
 import EditView from "../EditView/EditView";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
-import { getApp } from "../../api/appCollectionApi";
-import BarSpinner from "../BarSpinner";
 
 // FIXME: Refactor into smaller sub-components
 const DetailView = (props) => {
@@ -60,94 +60,97 @@ const DetailView = (props) => {
 		setIsPopoverOpen(true);
 	};
 
+	const deleteApp = () => {};
+
 	const closePopover = () => {
 		setIsPopoverOpen(false);
 	};
 
-	return (
-		isLoading || !selectedApp ? <BarSpinner /> : (
-			<>
-				<Card shadow="md" radius="md" className={classes.card} padding="xl">
-					<ICON.detail
-						style={{ width: rem(50), height: rem(50) }}
-						stroke={2}
-						color={theme.colors.blue[6]}
+	return isLoading || !selectedApp ? (
+		<BarSpinner />
+	) : (
+		<>
+			<Card shadow="md" radius="md" className={classes.card} padding="xl">
+				<ICON.detail
+					style={{ width: rem(50), height: rem(50) }}
+					stroke={2}
+					color={theme.colors.blue[6]}
+				/>
+				<Text
+					fz="lg"
+					fw={500}
+					className={classes.cardTitle}
+					mt="md"
+					style={{ textAlign: "left" }}
+				>
+					Detail view
+				</Text>
+				<ActionIcon
+					size={32}
+					radius="xl"
+					color={theme.primaryColor}
+					variant="filled"
+					title="Go to previous app"
+					onClick={() => gotoPrev()}
+					style={{
+						position: "absolute",
+						right: "90px",
+						top: "130px",
+						zIndex: "10",
+					}}
+				>
+					<IconPlayerTrackPrev
+						style={{ width: rem(18), height: rem(18) }}
+						stroke={1.5}
+						color="white"
 					/>
-					<Text
-						fz="lg"
-						fw={500}
-						className={classes.cardTitle}
-						mt="md"
-						style={{ textAlign: "left" }}
-					>
-						Detail view
-					</Text>
-					<ActionIcon
-						size={32}
-						radius="xl"
-						color={theme.primaryColor}
-						variant="filled"
-						title="Go to previous app"
-						onClick={() => gotoPrev()}
-						style={{
-							position: "absolute",
-							right: "90px",
-							top: "130px",
-							zIndex: "10",
-						}}
-					>
-						<IconPlayerTrackPrev
-							style={{ width: rem(18), height: rem(18) }}
-							stroke={1.5}
-							color="white"
-						/>
-					</ActionIcon>
-					<ActionIcon
-						size={32}
-						radius="xl"
-						color={theme.primaryColor}
-						variant="filled"
-						title="Go to next app"
-						onClick={() => gotoNext()}
-						style={{
-							position: "absolute",
-							right: "50px",
-							top: "130px",
-							zIndex: "10",
-						}}
-					>
-						<IconPlayerTrackNext
-							style={{ width: rem(18), height: rem(18) }}
-							stroke={1.5}
-							color="white"
-						/>
-					</ActionIcon>
-					<Card
-						shadow="md"
-						fz="sm"
-						c="dimmed"
-						mt="sm"
-						style={{ textAlign: "left" }}
-					>
-						{selectedApp && (
-							<div className={classes.itemBox}>
-								<h2
-									style={{
-										textAlign: "left",
-										fontWeight: "normal",
-										fontSize: "2em",
-										margin: "0 0 10px 0",
-									}}
+				</ActionIcon>
+				<ActionIcon
+					size={32}
+					radius="xl"
+					color={theme.primaryColor}
+					variant="filled"
+					title="Go to next app"
+					onClick={() => gotoNext()}
+					style={{
+						position: "absolute",
+						right: "50px",
+						top: "130px",
+						zIndex: "10",
+					}}
+				>
+					<IconPlayerTrackNext
+						style={{ width: rem(18), height: rem(18) }}
+						stroke={1.5}
+						color="white"
+					/>
+				</ActionIcon>
+				<Card
+					shadow="md"
+					fz="sm"
+					c="dimmed"
+					mt="sm"
+					style={{ textAlign: "left" }}
+				>
+					{selectedApp && (
+						<div className={classes.itemBox}>
+							<h2
+								style={{
+									textAlign: "left",
+									fontWeight: "normal",
+									fontSize: "2em",
+									margin: "0 0 10px 0",
+								}}
+							>
+								<a
+									href={selectedApp._home || selectedApp._github || null}
+									target="_blank"
+									style={{ fontWeight: "normal", textDecoration: "none" }}
+									title="Open homepage in new window"
+									rel="noreferrer"
 								>
-									<a
-										href={selectedApp._home || selectedApp._github || null}
-										target="_blank"
-										style={{ fontWeight: "normal", textDecoration: "none" }}
-										title="Open homepage in new window"
-										rel="noreferrer"
-									>
-										{selectedApp._name || selectedApp._bin}
-										{/* <ActionIcon
+									{selectedApp._name || selectedApp._bin}
+									{/* <ActionIcon
 									size={32}
 									radius="xl"
 									color="transparent"
@@ -159,117 +162,108 @@ const DetailView = (props) => {
 										color="blue"
 									/>
 								</ActionIcon> */}
-									</a>
-									{indicateEdit}
-								</h2>
+								</a>
+								{indicateEdit}
+							</h2>
 
-								{selectedApp._short && (
-									<Text className={classes.short}>{selectedApp._short}</Text>
-								)}
-								{selectedApp._desc && (
-									<Text className={classes.desc}>{selectedApp._desc}</Text>
-								)}
+							{selectedApp._short && (
+								<Text className={classes.short}>{selectedApp._short}</Text>
+							)}
+							{selectedApp._desc && (
+								<Text className={classes.desc}>{selectedApp._desc}</Text>
+							)}
 
-								<div className={classes.indicatorGroup}>
-									<Text size="sm">
-										{selectedApp._home ? (
-											<MarkPopulated />
-										) : (
-											<MarkUnPopulated />
-										)}{" "}
-										Homepage
+							<div className={classes.indicatorGroup}>
+								<Text size="sm">
+									{selectedApp._home ? <MarkPopulated /> : <MarkUnPopulated />}{" "}
+									Homepage
+								</Text>
+								<Text size="sm">
+									{selectedApp._docs ? <MarkPopulated /> : <MarkUnPopulated />}{" "}
+									Documentation
+								</Text>
+								<Text size="sm">
+									{selectedApp._github ? (
+										<MarkPopulated />
+									) : (
+										<MarkUnPopulated />
+									)}{" "}
+									Github
+								</Text>
+								{!hasInstaller && (
+									<Text size="sm" style={{ marginTop: "6px" }}>
+										<WarningSign />
 									</Text>
-									<Text size="sm">
-										{selectedApp._docs ? (
-											<MarkPopulated />
-										) : (
-											<MarkUnPopulated />
-										)}{" "}
-										Documentation
-									</Text>
-									<Text size="sm">
-										{selectedApp._github ? (
-											<MarkPopulated />
-										) : (
-											<MarkUnPopulated />
-										)}{" "}
-										Github
-									</Text>
-									{!hasInstaller && (
-										<Text size="sm" style={{ marginTop: "6px" }}>
-											<WarningSign />
-										</Text>
-									)}
-								</div>
-								{tags && (
-									<div>
-										{tags?.map((tag) => {
-											return (
-												<Badge
-													key={tag?.value}
-													variant="filled"
-													color="blue"
-													style={{ marginRight: "5px" }}
-													size="sm"
-												>
-													{tag?.value}
-												</Badge>
-											);
-										})}
-									</div>
 								)}
-
-								<Group justify="center" p="md">
-									<Button
-										onClick={() => edit(selectedApp.key)}
-										className={classes.editBtn}
-										leftSection={
-											<ICON.edit
-												style={{
-													width: rem(20),
-													height: rem(20),
-													marginRight: "10px",
-												}}
-												stroke={2}
-												color="#FFF"
-											/>
-										}
-									>
-										Edit
-									</Button>
-									<Button
-										onClick={() => delete selectedApp.key}
-										className={classes.deleteBtn}
-										leftSection={
-											<ICON.remove
-												style={{
-													width: rem(20),
-													height: rem(20),
-													margin: "0 10px 0 0px",
-												}}
-												stroke={2}
-												color="#FFF"
-											/>
-										}
-									>
-										Delete
-									</Button>
-								</Group>
 							</div>
-						)}
-					</Card>
+							{tags && (
+								<div>
+									{tags?.map((tag) => {
+										return (
+											<Badge
+												key={tag?.value}
+												variant="filled"
+												color="blue"
+												style={{ marginRight: "5px" }}
+												size="sm"
+											>
+												{tag?.value}
+											</Badge>
+										);
+									})}
+								</div>
+							)}
+
+							<Group justify="center" p="md">
+								<Button
+									onClick={() => edit(selectedApp.key)}
+									className={classes.editBtn}
+									leftSection={
+										<ICON.edit
+											style={{
+												width: rem(20),
+												height: rem(20),
+												marginRight: "10px",
+											}}
+											stroke={2}
+											color="#FFF"
+										/>
+									}
+								>
+									Edit
+								</Button>
+								<Button
+									onClick={() => deleteApp(selectedApp.key)}
+									className={classes.deleteBtn}
+									leftSection={
+										<ICON.remove
+											style={{
+												width: rem(20),
+												height: rem(20),
+												margin: "0 10px 0 0px",
+											}}
+											stroke={2}
+											color="#FFF"
+										/>
+									}
+								>
+									Delete
+								</Button>
+							</Group>
+						</div>
+					)}
 				</Card>
-				{isPopoverOpen && (
-					<EditView
-						ref={modalRef}
-						isPopoverOpen={isPopoverOpen}
-						closePopover={closePopover}
-						selectedApp={selectedApp}
-						theme={theme}
-					/>
-				)}
-			</>
-		)
+			</Card>
+			{isPopoverOpen && (
+				<EditView
+					ref={modalRef}
+					isPopoverOpen={isPopoverOpen}
+					closePopover={closePopover}
+					selectedApp={selectedApp}
+					theme={theme}
+				/>
+			)}
+		</>
 	);
 };
 

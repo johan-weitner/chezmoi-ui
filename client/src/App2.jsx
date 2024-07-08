@@ -1,19 +1,13 @@
 import { useRef, useState } from "react";
 import "./App.css";
-import {
-	AppShell,
-	Button,
-	Flex,
-	Grid,
-	useMantineTheme
-} from "@mantine/core";
+import { AppShell, Button, Flex, Grid, useMantineTheme } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import BarSpinner from "components/BarSpinner.jsx";
 import { Toaster, toast } from "sonner";
 import "@yaireo/tagify/dist/tagify.css";
-import EditView from "./components/EditView/EditView";
 import { getApp } from "api/appCollectionApi";
+import EditView from "./components/EditView/EditView";
 
 function App() {
 	const BASE_URL = "/api";
@@ -42,7 +36,7 @@ function App() {
 		});
 	};
 
-	const openApp = async key => {
+	const openApp = async (key) => {
 		const app = await getApp(key);
 		setSelectedApp(app);
 		setIsPopoverOpen(true);
@@ -81,8 +75,13 @@ function App() {
 							{data &&
 								keys?.length > 0 &&
 								keys.map(
-									(key, i) => (i > 4 && i < 25) &&
-										<Button onClick={() => openApp(key)} key={key}>{data[key]?._name}</Button>,
+									(key, i) =>
+										i > 4 &&
+										i < 25 && (
+											<Button onClick={() => openApp(key)} key={key}>
+												{data[key]?._name}
+											</Button>
+										),
 								)}
 						</Flex>
 					</Grid.Col>
@@ -92,8 +91,8 @@ function App() {
 								isPopoverOpen={isPopoverOpen || false}
 								closePopover={() => setIsPopoverOpen(false)}
 								selectedApp={selectedApp}
-								gotoPrev={() => { }}
-								gotoNext={() => { }}
+								gotoPrev={() => {}}
+								gotoNext={() => {}}
 								theme={theme}
 								isNewApp={false}
 								ref={modalRef}

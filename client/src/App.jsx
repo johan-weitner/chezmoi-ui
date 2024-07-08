@@ -1,10 +1,8 @@
 import "./App.css";
+import { AppShell } from "@mantine/core";
 import { Toaster } from "sonner";
 import Header from "./components/Header";
 import MainView from "./components/MainView/MainView";
-import {
-	AppShell
-} from "@mantine/core";
 import "@yaireo/tagify/dist/tagify.css";
 
 function App() {

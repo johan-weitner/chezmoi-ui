@@ -1,5 +1,5 @@
 export const getStringArray = (arr) => {
-	return arr.reduce((acc, current) => [...acc, current.name], []);
+	return arr.reduce((acc, current) => [acc, current.name], []);
 };
 
 export const nullCheck = (arr) => {

@@ -1,12 +1,12 @@
+import { Container, Group, Title } from "@mantine/core";
+import { useIsFetching, useIsMutating } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { Container, Title, Group } from "@mantine/core";
-import classes from "./Header.module.css";
-import logo from "./logo.svg";
-import BarSpinner from "./BarSpinner";
+import React from "react";
 import { useLoading } from "../api/appCollectionApi";
-import React from 'react';
-import { useIsFetching, useIsMutating } from '@tanstack/react-query';
-import Toolbar from './Toolbar'
+import BarSpinner from "./BarSpinner";
+import classes from "./Header.module.css";
+import Toolbar from "./Toolbar";
+import logo from "./logo.svg";
 
 const Header = (props) => {
 	const isFetching = useIsFetching();
@@ -25,7 +25,6 @@ const Header = (props) => {
 				</nav>
 				{isLoading && <BarSpinner />}
 			</Container>
-
 		</>
 	);
 };

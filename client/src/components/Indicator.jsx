@@ -6,7 +6,7 @@ export const FetchIndicator = ({ isFetching, cssClass }) => {
 	return (
 		isFetching && (
 			<div className={cssClass}>
-				<Loader color="blue" />;
+				<Loader color="blue" />s
 			</div>
 		)
 	);
@@ -16,7 +16,7 @@ export const MutateIndicator = ({ isMutating, cssClass }) => {
 	return (
 		isMutating && (
 			<div className={cssClass}>
-				<Loader color="blue" />;
+				<Loader color="blue" />
 			</div>
 		)
 	);

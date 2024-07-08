@@ -1,13 +1,7 @@
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { forwardRef, useEffect } from "react";
 import "@yaireo/tagify/dist/tagify.css";
-import {
-	ActionIcon,
-	Card,
-	Flex,
-	Modal,
-	rem,
-} from "@mantine/core";
+import { ActionIcon, Card, Flex, Modal, rem } from "@mantine/core";
 import EditViewForm from "./EditViewForm";
 
 const EditView = forwardRef(function EditView(props, ref) {
@@ -35,7 +29,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 		>
 			<Card>
 				<Flex justify="flex-end" gap={"sm"}>
-
 					<>
 						<ActionIcon
 							size={32}
@@ -71,8 +64,8 @@ const EditView = forwardRef(function EditView(props, ref) {
 					isPopoverOpen={isPopoverOpen}
 					closePopover={closePopover}
 					selectedApp={selectedApp}
-					gotoPrev={() => { }}
-					gotoNext={() => { }}
+					gotoPrev={() => {}}
+					gotoNext={() => {}}
 					theme={theme}
 					isNewApp={false}
 				/>
