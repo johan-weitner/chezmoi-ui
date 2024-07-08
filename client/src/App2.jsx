@@ -26,15 +26,15 @@ function App() {
 		});
 	};
 
-	const useApp = (key) => {
-		return useQuery({
-			queryKey: ["app"],
-			queryFn: async () => {
-				const response = await axios.get(`${BASE_URL}/getApp?key=${key}`);
-				return response.data;
-			},
-		});
-	};
+	// const useApp = (key) => {
+	// 	return useQuery({
+	// 		queryKey: ["app"],
+	// 		queryFn: async () => {
+	// 			const response = await axios.get(`${BASE_URL}/getApp?key=${key}`);
+	// 			return response.data;
+	// 		},
+	// 	});
+	// };
 
 	const openApp = async (key) => {
 		const app = await getApp(key);
@@ -91,8 +91,8 @@ function App() {
 								isPopoverOpen={isPopoverOpen || false}
 								closePopover={() => setIsPopoverOpen(false)}
 								selectedApp={selectedApp}
-								gotoPrev={() => {}}
-								gotoNext={() => {}}
+								gotoPrev={() => { }}
+								gotoNext={() => { }}
 								theme={theme}
 								isNewApp={false}
 								ref={modalRef}
