@@ -37,7 +37,8 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "**/*.{js,jsx}": "pnpm run lint"
+    "./server/**/*.{js,jsx}": "cd server && pnpm run lint && cd ..",
+    "./client/**/*.{js,jsx}": "cd client && pnpm run lint && cd .."
   },
   "type": "module"
 }
