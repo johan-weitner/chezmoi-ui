@@ -54,6 +54,14 @@ export const getAllApps = async () => {
 	return apps;
 };
 
+export const getPage = async (skip = 0, take = 20) => {
+	const apps = await prisma.app.findMany({
+		skip,
+		take,
+	});
+	return apps;
+};
+
 export const getAppByKey = async (key) => {
 	const app = await prisma.app.findFirst({
 		where: {

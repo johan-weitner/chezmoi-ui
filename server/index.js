@@ -8,7 +8,7 @@ import { targetFilePath } from './src/core/config.js';
 import { boot } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
 import { log } from './src/util/winston.js';
-import { seedDb, addApp, getAllApps, getAppByKey, updateApp, deleteApp, getCount, isEmptyDb } from "./src/db/prisma.js";
+import { seedDb, addApp, getAllApps, getPage, getAppByKey, updateApp, deleteApp, getCount, isEmptyDb } from "./src/db/prisma.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
@@ -48,6 +48,23 @@ app.get('/', (req, res) => {
 
 app.get('/software', (req, res) => {
   getAllApps()
+    .then((apps) => {
+      res = attachHeaders(res);
+      res.json(apps);
+    });
+});
+
+app.get('/getCount', (req, res) => {
+  getCount()
+    .then((count) => {
+      res = attachHeaders(res);
+      res.json({ count: count });
+    });
+});
+
+app.post('/page', (req, res) => {
+  const { body: { skip, take } } = req;
+  getPage(parseInt(skip, 10), parseInt(take, 10))
     .then((apps) => {
       res = attachHeaders(res);
       res.json(apps);

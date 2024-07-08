@@ -30,15 +30,52 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
+export const useTotalCount = async () => {
+	return useQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const response = await axios.get(`${BASE_URL}/getCount`);
+			return response.data;
+		},
+	});
+};
+
 export const useAppCollection = () => {
 	return useQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/software`);
-			console.log(reponse);
-			return response.data;
+			const data = adaptResponseData(response.data);
+			return data;
 		},
 	});
+};
+
+export const useAppPage = (page = 1, limit = 20) => {
+	const skip = (page - 1) * limit;
+	const take = limit;
+	return useQuery({
+		queryKey: ["appCollection", page],
+		queryFn: async () => {
+			const response = await axios.post(
+				`${BASE_URL}/page?skip=${skip}&take=${take}`,
+				{
+					skip,
+					take,
+				},
+			);
+			const data = adaptResponseData(response.data);
+			return data;
+		},
+	});
+};
+
+const adaptResponseData = (data) => {
+	const apps = data?.map((item) => {
+		const obj = JSON.parse(item.JSON);
+		return obj;
+	});
+	return apps;
 };
 
 export const useApp = (key) => {

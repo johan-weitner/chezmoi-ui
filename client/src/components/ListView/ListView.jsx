@@ -1,5 +1,9 @@
-import { Card } from "@mantine/core";
-import { useAppCollection } from "api/appCollectionApi";
+import { Card, Pagination, Stack, Text } from "@mantine/core";
+import {
+	useAppCollection,
+	useAppPage,
+	useTotalCount,
+} from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
@@ -11,18 +15,26 @@ import { ListViewHeader } from "./ListViewHeader";
 
 const ListView = (props) => {
 	const { theme, selectApp, selectedAppKey } = props;
-	const { data: software, error, isLoading } = useAppCollection();
 	const [filter, setFilter] = useState("");
+	const [page, setPage] = useState();
+	const [numPages, setNumPages] = useState(50);
+	const { data: software, error, isLoading } = useAppPage(page);
 
 	useEffect(() => {
 		// console.log('SelectedAppKey changed: ', selectedAppKey);
 	}, []);
 
-	const appKeys = Object.keys(software);
+	// useTotalCount().then(response => {
+	// 	const { data: { length: count } } = response;
+	// 	const pages = Math.ceil(count / 20);
+	// 	console.log('Total number of pages: ', pages);
+	// 	setNumPages(50);
+	// });
+	const pageSize = 20;
 
-	const filteredApps = appKeys?.filter((key) =>
-		software[key]?._name?.toLowerCase().includes(filter?.toLowerCase()),
-	);
+	const filteredApps = software?.filter((item) => {
+		return item?._name?.toLowerCase().includes(filter?.toLowerCase());
+	});
 
 	const loading = isLoading ? <BarSpinner /> : null;
 	const errorMsg = error ? <div>ERROR: {error.message || error}</div> : null;
@@ -40,6 +52,23 @@ const ListView = (props) => {
 						theme={theme}
 						setFilter={setFilter}
 					/>
+					<Stack justify="center" align="center" style={{ marginTop: "20px" }}>
+						<Pagination
+							total={numPages}
+							gap={20}
+							onChange={setPage}
+							value={page}
+						/>
+						{filteredApps && (
+							<Text
+								size="xs"
+								style={{ textAlign: "left", margin: "10px 0 0 20px" }}
+							>
+								{filteredApps?.length} apps in total.
+							</Text>
+						)}
+					</Stack>
+
 					<Card
 						shadow="md"
 						fz="sm"
@@ -59,7 +88,7 @@ const ListView = (props) => {
 									<ListItem
 										selectApp={selectApp}
 										selectedAppKey={selectedAppKey}
-										app={software[item]}
+										app={item}
 										key={nanoid()}
 									/>
 								);
