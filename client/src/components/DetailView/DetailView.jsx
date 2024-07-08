@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
 	ActionIcon,
 	Badge,
@@ -30,39 +31,40 @@ const DetailView = (props) => {
 	let hasInstaller = false;
 	let indicateEdit = false;
 
-	getApp(appKey).then((app) => {
-		setIsLoading(false);
-		setSelectedApp(app);
+	useEffect(() => {
+		getApp(appKey).then((app) => {
+			setIsLoading(false);
+			setSelectedApp(app);
+			APP_FORM.formPartTwo.map((item) => {
+				if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
+					hasInstaller = true;
+					return;
+				}
+			});
 
-		APP_FORM.formPartTwo.map((item) => {
-			if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
-				hasInstaller = true;
-				return;
-			}
+			indicateEdit = appKey.edited ? (
+				<ICON.check
+					style={{
+						width: rem(20),
+						height: rem(20),
+						position: "absolute",
+						right: "50px",
+						top: "45px",
+						zIndex: "999999",
+					}}
+					stroke={2}
+					color="green"
+					title="Has been edited"
+				/>
+			) : null;
 		});
-
-		indicateEdit = appKey.edited ? (
-			<ICON.check
-				style={{
-					width: rem(20),
-					height: rem(20),
-					position: "absolute",
-					right: "50px",
-					top: "45px",
-					zIndex: "999999",
-				}}
-				stroke={2}
-				color="green"
-				title="Has been edited"
-			/>
-		) : null;
-	});
+	}, [appKey]);
 
 	const edit = () => {
 		setIsPopoverOpen(true);
 	};
 
-	const deleteApp = () => {};
+	const deleteApp = () => { };
 
 	const closePopover = () => {
 		setIsPopoverOpen(false);

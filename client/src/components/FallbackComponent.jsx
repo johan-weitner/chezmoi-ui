@@ -7,9 +7,9 @@ const FallbackComponent = ({ error }) => {
 			title="Error"
 			color="red"
 			icon={<IconAlertCircle />}
-			variant="filled"
+			variant="outline"
 		>
-			{error.message}
+			{error?.message || error}
 		</Alert>
 	);
 };

@@ -1,4 +1,3 @@
-import { useDisclosure } from "@mantine/hooks";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -12,13 +11,11 @@ import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
 
-const EditViewForm = (props, ref) => {
+const EditViewForm = (props) => {
 	const { closePopover, selectedApp, theme, isNewApp } = props;
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: isNewApp ? null : selectedApp,
 	});
-
-	const [opened, { open, close }] = useDisclosure(true);
 
 	useEffect(() => {
 		reset(selectedApp);

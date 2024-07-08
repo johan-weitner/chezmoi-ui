@@ -1,5 +1,5 @@
-import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { forwardRef, useEffect } from "react";
+import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import "@yaireo/tagify/dist/tagify.css";
 import { ActionIcon, Card, Flex, Modal, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
@@ -71,8 +71,8 @@ const EditView = forwardRef(function EditView(props, ref) {
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
 						selectedApp={selectedApp}
-						gotoPrev={() => {}}
-						gotoNext={() => {}}
+						gotoPrev={() => { }}
+						gotoNext={() => { }}
 						theme={theme}
 						isNewApp={false}
 					/>
