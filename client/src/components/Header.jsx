@@ -11,15 +11,14 @@ import logo from "./logo.svg";
 const Header = (props) => {
 	const isFetching = useIsFetching();
 	const isMutating = useIsMutating();
-	console.log("isFetching: ", isFetching);
-	console.log("isMutating: ", isMutating);
+	// console.log("isFetching: ", isFetching);
+	// console.log("isMutating: ", isMutating);
 	const isLoading = isFetching > 0 || isMutating > 0;
-	console.log("isLoading: ", isLoading);
+	// console.log("isLoading: ", isLoading);
 
 	return (
 		<>
 			<Container size="lg" className={classes.header}>
-				{/* <Toolbar /> */}
 				<nav className={classes.navbar}>
 					<Group justify="flex-start" className={classes.navbarLogo}>
 						<img src={logo} alt="Logo" />

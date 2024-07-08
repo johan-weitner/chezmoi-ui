@@ -8,30 +8,37 @@ import winston from 'winston';
 import { targetFilePath } from './src/core/config.js';
 import { boot } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
+import { log } from 'winston';
+import { openDb, seedDb, checkTableExists, insertRow, getAllRows } from './src/db/index.js';
 
-const log = winston.createLogger({
-  level: 'info',
-  format: winston.format.json(),
-  defaultMeta: { service: 'user-service' },
-  transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
-  ],
-});
+// const log = winston.createLogger({
+//   level: 'info',
+//   format: winston.format.json(),
+//   defaultMeta: { service: 'user-service' },
+//   transports: [
+//     new winston.transports.File({ filename: 'error.log', level: 'error' }),
+//     new winston.transports.File({ filename: 'combined.log' }),
+//   ],
+// });
 
-//
-// If we're not in production then log to the `console` with the format:
-// `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
-//
-if (process.env.NODE_ENV !== 'production') {
-  log.add(new winston.transports.Console({
-    format: winston.format.simple(),
-  }));
-}
+// //
+// // If we're not in production then log to the `console` with the format:
+// // `${info.level}: ${info.message} JSON.stringify({ ...rest }) `
+// //
+// if (process.env.NODE_ENV !== 'production') {
+//   log.add(new winston.transports.Console({
+//     format: winston.format.simple(),
+//   }));
+// }
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
 let { softwareArray, software, backupPaths, keys } = boot();
+
+log.info('Set up db connection...');
+const db = await openDb();
+const tableExists = await checkTableExists();
+log.info('Table exists: ', tableExists);
 
 app.set('json spaces', 2);
 app.use(cors());

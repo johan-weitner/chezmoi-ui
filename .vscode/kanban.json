@@ -3,13 +3,22 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "React Hook Form is broken in EditView",
+                    "id": "jhr24fy80f1lzdjlu6lj1gdb"
+                }
+            ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
         {
             "title": "To-Do",
             "tasks": [
+                {
+                    "text": "Consolidate CSS modules - single component consumes single module",
+                    "id": "qs6mprszo0yyvuop4k6h3yxv"
+                },
                 {
                     "text": "SQLite in backend?",
                     "id": "h9fuyo8idmjmcwnzar8r1em2"
@@ -49,5 +58,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720444621880
+    "timestamp": 1720445849142
 }
