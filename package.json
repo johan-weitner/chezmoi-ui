@@ -9,7 +9,7 @@
     "stop": "./scripts/stop.sh",
     "clean": "rm -rf ./_backups/",
     "checkports": "./scripts/check-port-usage.sh",
-    "install": "cd server && pnpm i && cd ../client && pnpm i && cd ..",
+    "install": "pnpm i && cd server && pnpm i && cd ../client && pnpm i && cd ..",
     "lint": "cd server && pnpm run lint && cd ../client && pnpm run lint && cd ..",
     "lint:fix": "cd server && pnpm run lint:fix && cd ../client && pnpm run lint:fix && cd .."
   },
@@ -29,7 +29,15 @@
   },
   "homepage": "https://github.com/johan-weitner/chezmoi-ui#readme",
   "dependencies": {
-    "@changesets/cli": "^2.27.7"
+    "@changesets/cli": "^2.27.7",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7"
+  },
+  "husky": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx}": "pnpm run lint"
   },
   "type": "module"
 }
