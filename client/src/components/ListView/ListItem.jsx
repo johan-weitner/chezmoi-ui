@@ -17,8 +17,6 @@ export const ListItem = (props) => {
 	const editItem = () => {};
 	const deleteItem = () => {};
 	const openApp = (key) => {
-		const flipFlag = useLoadingMutation();
-		flipFlag.mutate({ loading: true });
 		selectApp(key);
 	};
 

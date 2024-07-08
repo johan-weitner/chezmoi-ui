@@ -5,20 +5,21 @@ import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
 import { targetFilePath } from './src/core/config.js';
-import { boot } from './src/core/boot.js';
+import { boot, setupFileData } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
 import { log } from './src/util/winston.js';
 import { seedDb, addApp, getAllApps, getPage, getAppByKey, updateApp, deleteApp, getCount, isEmptyDb } from "./src/db/prisma.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
+boot();
 
 log.info('Set up db connection...');
 const emptyDb = await isEmptyDb();
 
 if (emptyDb) {
   log.info('Empty db - seeding...');
-  let { software } = boot();
+  let { software } = setupFileData();
   const data = [];
   keys.forEach((key) => {
     data.push({ key: key, JSON: JSON.stringify(software[key]) });

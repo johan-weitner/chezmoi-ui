@@ -62,8 +62,6 @@ export const boot = () => {
 				`Backup interval set to ${process.env.BACKUP_INTERVAL} min ${check} \n`,
 			)
 		: log.warn(`${wsign}   Backup interval not set\n`);
-
-	return _setupFileData();
 };
 
 const _checkEnvVars = () => {
@@ -96,7 +94,7 @@ const _checkFileExistence = () => {
 	return { sourceExists, workExists };
 };
 
-const _setupFileData = () => {
+export const setupFileData = () => {
 	let software;
 	let softwareArray;
 	let backupPaths;

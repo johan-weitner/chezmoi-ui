@@ -3,12 +3,7 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [
-                {
-                    "text": "React Hook Form is broken in EditView",
-                    "id": "jhr24fy80f1lzdjlu6lj1gdb"
-                }
-            ],
+            "tasks": [],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
@@ -16,24 +11,20 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Break up DetailView into smaller pieces",
+                    "id": "pzzee34vjd4qh7mcdrkooasa"
+                },
+                {
+                    "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant)",
+                    "id": "ue9lt3h5rwgnzx6dsu1lunru"
+                },
+                {
                     "text": "Consolidate CSS modules - single component consumes single module",
                     "id": "qs6mprszo0yyvuop4k6h3yxv"
                 },
                 {
-                    "text": "SQLite in backend?",
-                    "id": "h9fuyo8idmjmcwnzar8r1em2"
-                },
-                {
                     "text": "Optimize performance",
                     "id": "rbdvylhyd0oxnk7pp3cu01ck"
-                },
-                {
-                    "text": "Implement paging",
-                    "id": "vfob2x075xuhnprulwda6ka1"
-                },
-                {
-                    "text": "Consolidate refactor branch with main",
-                    "id": "g7fx5i7j0qns10sg1w4soatn"
                 },
                 {
                     "text": "Fix buttons and keyboard shortcuts",
@@ -45,18 +36,40 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "SQLite in backend",
+                    "id": "h9fuyo8idmjmcwnzar8r1em2"
+                },
+                {
+                    "text": "Implement data layer using Prisma",
+                    "id": "gc5umy54lzcqxmuvlhsrurwq"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "React Hook Form is broken in EditView",
+                    "id": "jhr24fy80f1lzdjlu6lj1gdb"
+                },
+                {
+                    "text": "Implement paging",
+                    "id": "vfob2x075xuhnprulwda6ka1"
+                },
+                {
+                    "text": "Consolidate refactor branch with main",
+                    "id": "g7fx5i7j0qns10sg1w4soatn"
+                }
+            ],
             "id": "jn3gjwyx5358rtr80ke72qpb",
             "color": "#00d084"
         }
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720445849142
+    "timestamp": 1720482186361
 }

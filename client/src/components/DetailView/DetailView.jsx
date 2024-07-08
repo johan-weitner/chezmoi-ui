@@ -26,23 +26,28 @@ const DetailView = (props) => {
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [tags, setTags] = useState(null);
+	const [hasInstaller, setHasInstaller] = useState(false);
 	const modalRef = useRef();
-	const tags = appKey?.tags && JSON.parse(appKey.tags);
-	let hasInstaller = false;
-	let indicateEdit = false;
+	let indicateEdit;
 
 	useEffect(() => {
-		getApp(appKey).then((app) => {
+		getApp(appKey).then((result) => {
 			setIsLoading(false);
+			const app = JSON.parse(result.JSON);
 			setSelectedApp(app);
+			console.log("Got app: ", app);
 			APP_FORM.formPartTwo.map((item) => {
-				if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
-					hasInstaller = true;
+				if (app[item.name] && app[item.name].length > 0) {
+					setHasInstaller(true);
 					return;
 				}
 			});
 
-			indicateEdit = appKey.edited ? (
+			const appTags = app?.tags && JSON.parse(app.tags);
+			appTags && setTags(appTags);
+
+			indicateEdit = app.edited ? (
 				<ICON.check
 					style={{
 						width: rem(20),
@@ -58,7 +63,7 @@ const DetailView = (props) => {
 				/>
 			) : null;
 		});
-	}, [appKey, hasInstaller, selectedApp, indicateEdit]);
+	}, [appKey]);
 
 	const edit = () => {
 		setIsPopoverOpen(true);

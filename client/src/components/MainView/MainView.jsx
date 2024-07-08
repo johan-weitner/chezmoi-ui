@@ -1,18 +1,13 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
+import { useQuery } from "@tanstack/react-query";
+import { getApp } from "api/appCollectionApi.js";
+import axios from "axios";
+import DetailView from "components/DetailView/DetailView.jsx";
+import ListView from "components/ListView/ListView.jsx";
 import { useEffect, useRef, useState } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import { toast } from "sonner";
-import { getApp } from "../../api/appCollectionApi.js";
-import DetailView from "../DetailView/DetailView.jsx";
-import EditView from "../EditView/EditView.jsx";
-import ListView from "../ListView/ListView.jsx";
 import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
-
-import { AppShell, Button, Flex, Grid } from "@mantine/core";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import BarSpinner from "components/BarSpinner.jsx";
 import "@yaireo/tagify/dist/tagify.css";
 
 const MainView = (props) => {
@@ -23,6 +18,7 @@ const MainView = (props) => {
 	const modalRef = useRef();
 
 	const selectApp = (key) => {
+		console.log("Selected app: ", key);
 		setSelectedAppKey(key);
 	};
 
