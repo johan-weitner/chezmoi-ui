@@ -91,8 +91,8 @@ function App() {
 								isPopoverOpen={isPopoverOpen || false}
 								closePopover={() => setIsPopoverOpen(false)}
 								selectedApp={selectedApp}
-								gotoPrev={() => { }}
-								gotoNext={() => { }}
+								gotoPrev={() => {}}
+								gotoNext={() => {}}
 								theme={theme}
 								isNewApp={false}
 								ref={modalRef}
