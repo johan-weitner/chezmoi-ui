@@ -43,34 +43,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 							{isPopoverOpen ? "true" : "false"} | isNewApp:{" "}
 							{isNewApp ? "true" : "false"}
 						</Text>
-						<ActionIcon
-							size={32}
-							radius="xl"
-							color={theme.primaryColor}
-							variant="filled"
-							title="Go to previous app"
-							onClick={() => gotoPrev()}
-						>
-							<IconPlayerTrackPrev
-								style={{ width: rem(18), height: rem(18) }}
-								stroke={1.5}
-								color="white"
-							/>
-						</ActionIcon>
-						<ActionIcon
-							size={32}
-							radius="xl"
-							color={theme.primaryColor}
-							variant="filled"
-							title="Go to next app"
-							onClick={() => gotoNext()}
-						>
-							<IconPlayerTrackNext
-								style={{ width: rem(18), height: rem(18) }}
-								stroke={1.5}
-								color="white"
-							/>
-						</ActionIcon>
 					</>
 				</Flex>
 				<ErrorBoundary
@@ -82,8 +54,8 @@ const EditView = forwardRef(function EditView(props, ref) {
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
 						selectedApp={selectedApp}
-						gotoPrev={() => {}}
-						gotoNext={() => {}}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
 						theme={theme}
 						isNewApp={isNewApp}
 					/>

@@ -10,22 +10,22 @@ import "@yaireo/tagify/dist/tagify.css";
 import { IconZip } from "@tabler/icons-react";
 
 const MainView = (props) => {
+	const {
+		currentListKeys,
+		updateCurrentListKeys,
+		selectedAppKey,
+		setSelectedAppKey,
+		selectApp,
+		gotoPrev,
+		gotoNext,
+		addItem,
+		isPopoverOpen,
+		setIsPopoverOpen,
+	} = props;
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
-	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-	const [selectedAppKey, setSelectedAppKey] = useState(null);
+	// const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const modalRef = useRef();
-
-	const selectApp = (key) => {
-		console.log("Selected app: ", key);
-		setSelectedAppKey(key);
-	};
-
-	const addItem = () => {
-		setSelectedAppKey(null);
-		// setTimeout(() => setIsPopoverOpen(true), 3000);
-		setIsPopoverOpen(true);
-	};
 
 	const deleteItem = (key) => {
 		console.log("Deleting app with key: ", key);
@@ -57,6 +57,7 @@ const MainView = (props) => {
 						deleteItem={deleteItem}
 						setIsPopoverOpen={setIsPopoverOpen}
 						addItem={addItem}
+						updateCurrentListKeys={updateCurrentListKeys}
 					/>
 					{/* {selectedAppKey && ( */}
 					<DetailView
@@ -64,6 +65,8 @@ const MainView = (props) => {
 						theme={theme}
 						isPopoverOpen={isPopoverOpen}
 						setIsPopoverOpen={setIsPopoverOpen}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
 					/>
 					{/* )} */}
 				</SimpleGrid>

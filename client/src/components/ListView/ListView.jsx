@@ -16,6 +16,7 @@ const ListView = (props) => {
 		setIsPopoverOpen,
 		deleteItem,
 		addItem,
+		updateCurrentListKeys,
 	} = props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
@@ -28,16 +29,7 @@ const ListView = (props) => {
 
 	const [numPages, setNumPages] = useState(1);
 	const [totalCount, setTotalCount] = useState(1);
-
 	const { data: software, error, isLoading } = useAppPage(page);
-	// pageError && setError(pageError);
-	// pageIsLoading && setIsLoading(pageIsLoading);
-
-	// const addItem = () => {
-	// 	console.log("Add");
-	// 	selectApp(null);
-	// 	setIsPopoverOpen(true);
-	// };
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -53,6 +45,7 @@ const ListView = (props) => {
 			return item?._name?.toLowerCase().includes(filter?.toLowerCase());
 		});
 		setFilteredApps(apps);
+		updateCurrentListKeys(apps);
 		queryClient.cancelQueries(["appCollection"]);
 		queryClient.invalidateQueries(["appCollection"]);
 	}, [page, lastChange, filter, software]);

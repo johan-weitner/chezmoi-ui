@@ -24,7 +24,8 @@ import classes from "../MainView/MainView.module.css";
 
 // FIXME: Refactor into smaller sub-components
 const DetailView = (props) => {
-	const { appKey, theme, isPopoverOpen, setIsPopoverOpen } = props;
+	const { appKey, theme, isPopoverOpen, setIsPopoverOpen, gotoPrev, gotoNext } =
+		props;
 	const [selectedApp, setSelectedApp] = useState(null);
 	// const [isLoading, setIsLoading] = useState(true);
 	const [tags, setTags] = useState(null);
