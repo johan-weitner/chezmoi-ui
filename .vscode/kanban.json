@@ -11,6 +11,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Keyboard shortcut for flipping pages: opt + shift + arrows",
+                    "id": "we3ssenvm81xunhswgbr8f1f"
+                },
+                {
                     "text": "Fix bg-color in modal",
                     "id": "n9h2qgqm0p3qvp0nl3qnxpyr"
                 },
@@ -33,10 +37,6 @@
                 {
                     "text": "Optimize performance",
                     "id": "rbdvylhyd0oxnk7pp3cu01ck"
-                },
-                {
-                    "text": "Fix buttons and keyboard shortcuts",
-                    "id": "gv4ieem70rxhapad965n8k18"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -70,6 +70,10 @@
                 {
                     "text": "Consolidate refactor branch with main",
                     "id": "g7fx5i7j0qns10sg1w4soatn"
+                },
+                {
+                    "text": "Fix buttons and keyboard shortcuts",
+                    "id": "gv4ieem70rxhapad965n8k18"
                 }
             ],
             "id": "jn3gjwyx5358rtr80ke72qpb",
@@ -78,5 +82,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720552919650
+    "timestamp": 1720564429625
 }
