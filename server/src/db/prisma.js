@@ -84,6 +84,11 @@ export const updateApp = async (key, json) => {
 };
 
 export const deleteApp = async (key) => {
+	log.info("Key: ", key);
+	if (!key) {
+		log.error("Invalid key: ", key);
+		return null;
+	}
 	const app = await prisma.app.delete({
 		where: {
 			key: key,

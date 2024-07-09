@@ -8,12 +8,14 @@ import {
 	rem,
 } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
+import { QueryClient } from "@tanstack/react-query";
+import axios from "axios";
 import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
 import { useEffect } from "react";
 import { useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { getApp } from "../../api/appCollectionApi";
+import { deleteApp, getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
 import BarSpinner from "../BarSpinner";
 import EditView from "../EditView/EditView";
@@ -36,7 +38,6 @@ const DetailView = (props) => {
 			setIsLoading(false);
 			const app = JSON.parse(result.JSON);
 			setSelectedApp(app);
-			console.log("Got app: ", app);
 			APP_FORM.formPartTwo.map((item) => {
 				if (app[item.name] && app[item.name].length > 0) {
 					setHasInstaller(true);
@@ -69,7 +70,31 @@ const DetailView = (props) => {
 		setIsPopoverOpen(true);
 	};
 
-	const deleteApp = () => {};
+	const removeApp = (key) => {
+		deleteApp(key)
+			.then((result) => {
+				console.log(result);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+
+		// console.log('Deleting app with key: ', key);
+		// const queryClient = new QueryClient();
+		// axios.delete(`/api/deleteNode?key=${key}`, {
+		// 	key: key
+		// }).then(result => {
+		// 	console.log(result)
+		// 	queryClient.cancelQueries(["appCollection"]);
+		// 	const previousData = queryClient.getQueryData(["appCollection"]);
+
+		// 	queryClient.setQueryData(["appCollection"], (old) => {
+		// 		return old?.filter((item) => item.key !== key);
+		// 	});
+		// 	return { previousData };
+		// })
+		// 	.catch(error => console.error(error));
+	};
 
 	const closePopover = () => {
 		setIsPopoverOpen(false);
@@ -244,7 +269,7 @@ const DetailView = (props) => {
 									Edit
 								</Button>
 								<Button
-									onClick={() => deleteApp(selectedApp.key)}
+									onClick={() => removeApp(selectedApp.key)}
 									className={classes.deleteBtn}
 									leftSection={
 										<ICON.remove

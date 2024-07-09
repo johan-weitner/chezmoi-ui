@@ -249,6 +249,46 @@ export const useAppMutation = () => {
 	});
 };
 
+export const deleteApp = async (key) => {
+	const result = await queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const result = await axios
+				.delete(`${BASE_URL}/deleteNode`, {
+					params: {
+						key: key,
+					},
+				})
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error.message);
+					toast(error.message);
+				});
+			return result;
+		},
+		onMutate: async () => {
+			await queryClient.cancelQueries(["appCollection"]);
+			const previousData = queryClient.getQueryData(["appCollection"]);
+
+			queryClient.setQueryData(["appCollection"], (old) => {
+				return old.filter((item) => item.key !== key);
+			});
+			return { previousData };
+		},
+		onError: (err, updatedNode, context) => {
+			queryClient.setQueryData(["appCollection"], context.previousData);
+			return { status: "error", error: err.message };
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(["appCollection"]);
+			return { status: "success" };
+		},
+	});
+	return result;
+};
+
 export const useAppCollectionMutation = () => {
 	return useMutation({
 		mutationFn: async () => postAppCollection(),

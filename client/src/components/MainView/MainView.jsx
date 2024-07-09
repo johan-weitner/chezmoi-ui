@@ -1,6 +1,6 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
-import { getApp } from "api/appCollectionApi.js";
+import { deleteApp, getApp } from "api/appCollectionApi.js";
 import axios from "axios";
 import DetailView from "components/DetailView/DetailView.jsx";
 import ListView from "components/ListView/ListView.jsx";
@@ -9,12 +9,14 @@ import { toast } from "sonner";
 import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
 import "@yaireo/tagify/dist/tagify.css";
+import { nanoid } from "nanoid";
 
 const MainView = (props) => {
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [selectedAppKey, setSelectedAppKey] = useState(null);
+	const [guid, setGuid] = useState(nanoid());
 	const modalRef = useRef();
 
 	const selectApp = (key) => {
@@ -49,6 +51,21 @@ const MainView = (props) => {
 		setIsPopoverOpen(true);
 	};
 
+	const deleteItem = (key) => {
+		console.log("Deleting app with key: ", key);
+		if (key === selectedAppKey) setSelectedAppKey(null);
+		deleteApp(key)
+			.then((res) => {
+				setGuid(nanoid());
+				// setApps(filteredApps.filter(item => item.key !== key));
+				// console.log('Deleted app: ', res);
+				// console.log(apps);
+			})
+			.catch((err) => {
+				console.log("Error deleting app: ", err);
+			});
+	};
+
 	const { data, error, isLoading } = useAppCollection();
 
 	if (isLoading) return <div>Loading...</div>;
@@ -78,6 +95,8 @@ const MainView = (props) => {
 						theme={theme}
 						selectApp={selectApp}
 						selectedAppKey={selectedAppKey}
+						deleteItem={deleteItem}
+						guid={guid}
 					/>
 					{selectedAppKey && (
 						<DetailView appKey={selectedAppKey} theme={theme} />

@@ -1,4 +1,5 @@
 import { Card, Pagination, Stack, Text } from "@mantine/core";
+import { QueryClient } from "@tanstack/react-query";
 import { getTotalCount, useAppPage } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useState } from "react";
@@ -8,32 +9,51 @@ import List from "./List";
 import { ListViewHeader } from "./ListViewHeader";
 
 const ListView = (props) => {
-	const { theme, selectApp, selectedAppKey } = props;
+	const { theme, selectApp, selectedAppKey, deleteItem } = props;
 	const [filter, setFilter] = useState("");
+	const [filteredApps, setFilteredApps] = useState(null);
 	const [page, setPage] = useState();
+	const queryClient = new QueryClient();
+
+	// const [error, setError] = useState();
+	// const [isLoading, setIsLoading] = useState();
+
 	const [numPages, setNumPages] = useState(1);
 	const [totalCount, setTotalCount] = useState(1);
+
 	const { data: software, error, isLoading } = useAppPage(page);
+	// pageError && setError(pageError);
+	// pageIsLoading && setIsLoading(pageIsLoading);
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
 			const { count } = response;
 			const pages = Math.ceil(count / 20);
-			console.log("Total number of pages: ", pages);
 			setNumPages(pages);
 			setTotalCount(count);
 		});
 	}, []);
 
-	const filteredApps = software?.filter((item) => {
-		return item?._name?.toLowerCase().includes(filter?.toLowerCase());
-	});
+	useEffect(() => {
+		const apps = software?.filter((item) => {
+			return item?._name?.toLowerCase().includes(filter?.toLowerCase());
+		});
+		setFilteredApps(apps);
+		queryClient.cancelQueries(["appCollection"]);
+		queryClient.invalidateQueries(["appCollection"]);
+	}, [page]);
+
+	const deleteApp = (key) => {
+		deleteItem(key);
+		setFilteredApps(filteredApps.filter((item) => item.key !== key));
+	};
 
 	return (
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Card shadow="md" radius="md" className={classes.card} padding="xl">
+				<p>Page {page}</p>
 				<ListViewHeader
 					filter={filter}
 					filteredApps={filteredApps}
@@ -62,6 +82,7 @@ const ListView = (props) => {
 					selectedAppKey={selectedAppKey}
 					error={error}
 					loading={isLoading}
+					deleteItem={deleteItem}
 				/>
 			</Card>
 		</ErrorBoundary>

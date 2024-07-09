@@ -1,16 +1,36 @@
 import { Card, Skeleton } from "@mantine/core";
+import { deleteApp } from "api/appCollectionApi";
 import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
 import classes from "../MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
 
 const List = (props) => {
-	const { filteredApps, selectApp, selectedAppKey, error, loading } = props;
+	const {
+		filteredApps,
+		selectApp,
+		selectedAppKey,
+		error,
+		loading,
+		deleteItem,
+	} = props;
+	const [apps, setApps] = useState(filteredApps);
 	const errorMsg = error ? <div>ERROR: {error.message || error}</div> : null;
 	const skeleton = [];
 	for (let i = 0; i < 20; i++) {
 		skeleton.push(<ListSkeleton />);
 	}
+
+	useEffect(() => {
+		setApps(filteredApps);
+	}, [filteredApps]);
+
+	const deleteApp = (key) => {
+		console.log("Deleting app with key: ", key);
+		deleteItem(key);
+		setApps(filteredApps.filter((item) => item.key !== key));
+	};
 
 	return (
 		<Card
@@ -27,14 +47,15 @@ const List = (props) => {
 		>
 			{errorMsg}
 			<Skeleton visible={loading}>
-				{filteredApps?.length > 0 &&
-					filteredApps.map((item) => {
+				{apps?.length > 0 &&
+					apps.map((item) => {
 						return (
 							<ListItem
 								selectApp={selectApp}
 								selectedAppKey={selectedAppKey}
 								app={item}
 								key={nanoid()}
+								deleteItem={deleteApp}
 							/>
 						);
 					})}

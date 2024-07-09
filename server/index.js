@@ -123,12 +123,26 @@ app.post('/updateNode', (req, res) => {
 });
 
 app.post('/addNode', (req, res) => {
-  const { body } = req;
-  const { key } = body;
+  const { body: { key } } = req;
+  console.log('Body: ', body);
   addApp(key, JSON.stringify(body))
     .then((app) => {
       res = attachHeaders(res);
       res.status(200).json(app);
+    })
+    .catch((e) => {
+      res.status(500).json({
+        error: e.message
+      });
+    })
+});
+
+app.delete('/deleteNode', (req, res) => {
+  // const { key } = req.query;
+  deleteApp(req.query.key)
+    .then((result) => {
+      res = attachHeaders(res);
+      res.status(200).json(result);
     })
     .catch((e) => {
       res.status(500).json({
