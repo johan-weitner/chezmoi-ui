@@ -1,7 +1,7 @@
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
-import { forwardRef, useEffect } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
-import { ActionIcon, Card, Flex, Modal, rem } from "@mantine/core";
+import { ActionIcon, Card, Flex, Modal, Text, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
@@ -16,13 +16,16 @@ const EditView = forwardRef(function EditView(props, ref) {
 		theme,
 	} = props;
 
-	console.log(selectedApp);
-	const isNewApp = !selectedApp;
+	const [isNewApp, setIsNewApp] = useState(!selectedApp);
+
+	useEffect(() => {
+		setIsNewApp(!selectedApp);
+	}, [selectedApp]);
 
 	return (
 		<Modal
 			opened={isPopoverOpen}
-			keepMounted
+			keepMounted={false}
 			onClose={closePopover}
 			overlayProps={{
 				backgroundOpacity: 0.55,
@@ -30,10 +33,16 @@ const EditView = forwardRef(function EditView(props, ref) {
 			}}
 			radius="10"
 			size="xl"
+			transitionProps={{ duration: 2500, transition: "pop" }}
 		>
-			<Card>
+			<Card style={{ backgroundColor: "#222" }}>
 				<Flex justify="flex-end" gap={"sm"}>
 					<>
+						<Text size="sm">
+							selectedApp: {selectedApp ? "true" : "false"} | isPopoverOpen:{" "}
+							{isPopoverOpen ? "true" : "false"} | isNewApp:{" "}
+							{isNewApp ? "true" : "false"}
+						</Text>
 						<ActionIcon
 							size={32}
 							radius="xl"

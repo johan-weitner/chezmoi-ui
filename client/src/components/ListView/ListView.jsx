@@ -9,8 +9,14 @@ import List from "./List";
 import { ListViewHeader } from "./ListViewHeader";
 
 const ListView = (props) => {
-	const { theme, selectApp, selectedAppKey, setIsPopoverOpen, deleteItem } =
-		props;
+	const {
+		theme,
+		selectApp,
+		selectedAppKey,
+		setIsPopoverOpen,
+		deleteItem,
+		addItem,
+	} = props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
 	const [page, setPage] = useState();
@@ -27,11 +33,11 @@ const ListView = (props) => {
 	// pageError && setError(pageError);
 	// pageIsLoading && setIsLoading(pageIsLoading);
 
-	const addItem = () => {
-		console.log("Add");
-		// selectApp(null);
-		setIsPopoverOpen(true);
-	};
+	// const addItem = () => {
+	// 	console.log("Add");
+	// 	selectApp(null);
+	// 	setIsPopoverOpen(true);
+	// };
 
 	useEffect(() => {
 		getTotalCount().then((response) => {

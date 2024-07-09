@@ -8,7 +8,7 @@ const InfoSection = (props) => {
 	const { formPartOne, register, isNewApp } = props;
 
 	return (
-		<>
+		<div>
 			<h3
 				style={{
 					textAlign: "left",
@@ -24,7 +24,7 @@ const InfoSection = (props) => {
 				spacing="sm"
 				mt={50}
 				className={classes.grid}
-				style={{ marginBottom: "-20px" }}
+				style={{ marginBottom: "-20px", backgroundColor: "#222 !important" }}
 			>
 				{formPartOne.map((item) => {
 					return (
@@ -32,6 +32,7 @@ const InfoSection = (props) => {
 							display="block"
 							className={classes.fieldcontainer}
 							key={nanoid()}
+							style={{ backgroundColor: "#222 !important" }}
 						>
 							<Text component="label" htmlFor={item.name} size="sm" fw={500}>
 								{item.label}
@@ -55,7 +56,7 @@ const InfoSection = (props) => {
 					<Textarea id="_desc" rows="8" {...register("_desc")} />
 				</Group>
 			</SimpleGrid>
-		</>
+		</div>
 	);
 };
 

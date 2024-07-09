@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { Button, Group } from "@mantine/core";
-import { APP_FORM } from "constants/appForm";
+import { Button, Group, Text } from "@mantine/core";
+import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
 
 import { addApp, useAppMutation } from "api/appCollectionApi";
@@ -13,12 +13,19 @@ import TagSection from "./TagSection";
 
 const EditViewForm = (props) => {
 	const { closePopover, selectedApp, theme, isNewApp } = props;
+	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
-		defaultValues: isNewApp ? null : selectedApp,
+		defaultValues: defaultValues,
 	});
 
 	useEffect(() => {
-		reset(selectedApp);
+		reset({
+			values: {},
+			keepDirty: false,
+			keepDirtyFields: false,
+			keepValues: false,
+			keepDefaultValues: false,
+		});
 	}, [selectedApp, isNewApp, reset]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
@@ -31,8 +38,20 @@ const EditViewForm = (props) => {
 		} else {
 			await updateApp.mutate(data);
 		}
-
+		setSelectedApp(null);
 		closePopover();
+	};
+
+	const resetForm = () => {
+		console.log("Resetting form...");
+		const res = reset({
+			defaultValues: EMPTY_APP,
+			keepDirty: false,
+			keepDirtyFields: false,
+			keepValues: false,
+			keepDefaultValues: false,
+		});
+		console.log(res);
 	};
 
 	return (
@@ -40,11 +59,24 @@ const EditViewForm = (props) => {
 			<h2 className={classes.editDetailHeader}>
 				{selectedApp?._name || "New application"}
 			</h2>
+			<Text size="sm">
+				selectedApp: {selectedApp ? "true" : "false"} | isNewApp:{" "}
+				{isNewApp ? "true" : "false"}
+			</Text>
+			<button
+				type="button"
+				onClick={() => {
+					resetForm();
+				}}
+			>
+				Reset
+			</button>
 
 			<InfoSection
 				formPartOne={formPartOne}
 				register={register}
 				isNewApp={isNewApp}
+				style={{ backgroundColor: "#222 !important" }}
 			/>
 			<TagSection
 				register={register}

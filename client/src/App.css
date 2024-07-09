@@ -82,3 +82,9 @@
   border: 1px solid #FFF;
   border-radius: 3px;
 }
+
+.mantine-Modal-content,
+.mantine-Modal-body {
+  background-color: #222 !important;
+  color: #FFF;
+}

@@ -33,37 +33,40 @@ const DetailView = (props) => {
 	let indicateEdit;
 
 	useEffect(() => {
-		appKey &&
-			getApp(appKey).then((result) => {
-				// setIsLoading(false);
-				const app = result?.JSON && JSON.parse(result.JSON);
-				setSelectedApp(app);
-				APP_FORM.formPartTwo.map((item) => {
-					if (app[item.name] && app[item.name].length > 0) {
-						setHasInstaller(true);
-						return;
-					}
-				});
-
-				const appTags = app?.tags && JSON.parse(app.tags);
-				appTags && setTags(appTags);
-
-				indicateEdit = app.edited ? (
-					<ICON.check
-						style={{
-							width: rem(20),
-							height: rem(20),
-							position: "absolute",
-							right: "50px",
-							top: "45px",
-							zIndex: "999999",
-						}}
-						stroke={2}
-						color="green"
-						title="Has been edited"
-					/>
-				) : null;
+		if (!appKey) {
+			setSelectedApp(null);
+			return;
+		}
+		getApp(appKey).then((result) => {
+			// setIsLoading(false);
+			const app = result?.JSON && JSON.parse(result.JSON);
+			setSelectedApp(app);
+			APP_FORM.formPartTwo.map((item) => {
+				if (app[item.name] && app[item.name].length > 0) {
+					setHasInstaller(true);
+					return;
+				}
 			});
+
+			const appTags = app?.tags && JSON.parse(app.tags);
+			appTags && setTags(appTags);
+
+			indicateEdit = app.edited ? (
+				<ICON.check
+					style={{
+						width: rem(20),
+						height: rem(20),
+						position: "absolute",
+						right: "50px",
+						top: "45px",
+						zIndex: "999999",
+					}}
+					stroke={2}
+					color="green"
+					title="Has been edited"
+				/>
+			) : null;
+		});
 	}, [appKey]);
 
 	const edit = () => {
@@ -97,6 +100,7 @@ const DetailView = (props) => {
 	};
 
 	const closePopover = () => {
+		setSelectedApp(null);
 		setIsPopoverOpen(false);
 	};
 

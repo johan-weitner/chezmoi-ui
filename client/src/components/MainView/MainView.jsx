@@ -21,6 +21,12 @@ const MainView = (props) => {
 		setSelectedAppKey(key);
 	};
 
+	const addItem = () => {
+		setSelectedAppKey(null);
+		// setTimeout(() => setIsPopoverOpen(true), 3000);
+		setIsPopoverOpen(true);
+	};
+
 	const deleteItem = (key) => {
 		console.log("Deleting app with key: ", key);
 		if (key === selectedAppKey) setSelectedAppKey(null);
@@ -37,7 +43,7 @@ const MainView = (props) => {
 
 	return (
 		<>
-			<Container size="xl" clssName={classes.mainContainer}>
+			<Container size="xl" className={classes.mainContainer}>
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"
@@ -50,6 +56,7 @@ const MainView = (props) => {
 						selectedAppKey={selectedAppKey}
 						deleteItem={deleteItem}
 						setIsPopoverOpen={setIsPopoverOpen}
+						addItem={addItem}
 					/>
 					{/* {selectedAppKey && ( */}
 					<DetailView

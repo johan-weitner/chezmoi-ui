@@ -11,6 +11,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Fix bg-color in modal",
+                    "id": "n9h2qgqm0p3qvp0nl3qnxpyr"
+                },
+                {
                     "text": "FIxed position for everything but app list",
                     "id": "bzxb2r8jx8gk9hunv36882l6"
                 },
@@ -40,16 +44,7 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "SQLite in backend",
-                    "id": "h9fuyo8idmjmcwnzar8r1em2"
-                },
-                {
-                    "text": "Implement data layer using Prisma",
-                    "id": "gc5umy54lzcqxmuvlhsrurwq"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -57,8 +52,16 @@
             "title": "Done",
             "tasks": [
                 {
+                    "text": "SQLite in backend",
+                    "id": "h9fuyo8idmjmcwnzar8r1em2"
+                },
+                {
                     "text": "React Hook Form is broken in EditView",
                     "id": "jhr24fy80f1lzdjlu6lj1gdb"
+                },
+                {
+                    "text": "Implement data layer using Prisma",
+                    "id": "gc5umy54lzcqxmuvlhsrurwq"
                 },
                 {
                     "text": "Implement paging",
@@ -75,5 +78,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720539323384
+    "timestamp": 1720552919650
 }
