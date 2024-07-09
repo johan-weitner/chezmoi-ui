@@ -7,11 +7,11 @@ import "@yaireo/tagify/dist/tagify.css";
 
 function App() {
 	return (
-		<AppShell header={{ height: 40 }} padding="md">
-			<AppShell.Header withBorder={false}>
+		<AppShell header={{ height: 60 }} padding="md">
+			<AppShell.Header withBorder={false} style={{ position: "relative" }}>
 				<Header />
 			</AppShell.Header>
-			<AppShell.Main>
+			<AppShell.Main style={{ paddingTop: "0" }}>
 				<MainView />
 			</AppShell.Main>
 			<Toaster

@@ -1,10 +1,13 @@
 .navbar {
+  position: absolute;
+  top: -15px;
+  left: 0;
   width: 100%;
   height: auto;
   /* rem(750px) */
   padding: var(--mantine-spacing-md);
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   /* border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); */
 
 }
@@ -12,7 +15,7 @@
 
 
 .navbarMain {
-  flex: 1;
+  /* flex: 1; */
   /* margin-top: rem(50px); */
   background-color: #FFF;
   /* position: relative;

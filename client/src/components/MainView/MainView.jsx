@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
 import "@yaireo/tagify/dist/tagify.css";
+import { IconZip } from "@tabler/icons-react";
 
 const MainView = (props) => {
 	const theme = useMantineTheme();
@@ -41,7 +42,7 @@ const MainView = (props) => {
 				py="xl"
 				style={{ backgroundColor: "#333", paddingTop: "0px" }}
 			>
-				<MainHeader style={{ borderRadius: "10px" }} />
+				{/* <MainHeader style={{ borderRadius: "10px", position: "fixed", backgroundColor: "#181a1b !important" }} /> */}
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"

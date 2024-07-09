@@ -21,9 +21,10 @@ const Header = (props) => {
 			<Container size="lg" className={classes.header}>
 				<nav className={classes.navbar}>
 					<Group justify="flex-start" className={classes.navbarLogo}>
-						<img src={logo} alt="Logo" />
-						<Title>Chezmoi UI</Title>
+						<img src={logo} alt="Logo" className={classes.logo} />
+						<Title className={classes.logoTitle}>Chezmoi UI</Title>
 					</Group>
+					<Toolbar />
 				</nav>
 				<div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div>
 			</Container>
