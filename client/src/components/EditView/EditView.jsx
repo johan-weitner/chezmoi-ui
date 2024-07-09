@@ -14,8 +14,10 @@ const EditView = forwardRef(function EditView(props, ref) {
 		gotoPrev,
 		gotoNext,
 		theme,
-		isNewApp,
 	} = props;
+
+	console.log(selectedApp);
+	const isNewApp = !selectedApp;
 
 	return (
 		<Modal
@@ -74,7 +76,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 						gotoPrev={() => {}}
 						gotoNext={() => {}}
 						theme={theme}
-						isNewApp={false}
+						isNewApp={isNewApp}
 					/>
 				</ErrorBoundary>
 			</Card>

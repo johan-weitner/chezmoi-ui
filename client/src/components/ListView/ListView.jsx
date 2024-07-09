@@ -9,10 +9,12 @@ import List from "./List";
 import { ListViewHeader } from "./ListViewHeader";
 
 const ListView = (props) => {
-	const { theme, selectApp, selectedAppKey, deleteItem } = props;
+	const { theme, selectApp, selectedAppKey, setIsPopoverOpen, deleteItem } =
+		props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
 	const [page, setPage] = useState();
+	const [lastChange, setLastChange] = useState(new Date().getTime());
 	const queryClient = new QueryClient();
 
 	// const [error, setError] = useState();
@@ -24,6 +26,12 @@ const ListView = (props) => {
 	const { data: software, error, isLoading } = useAppPage(page);
 	// pageError && setError(pageError);
 	// pageIsLoading && setIsLoading(pageIsLoading);
+
+	const addItem = () => {
+		console.log("Add");
+		// selectApp(null);
+		setIsPopoverOpen(true);
+	};
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -41,10 +49,11 @@ const ListView = (props) => {
 		setFilteredApps(apps);
 		queryClient.cancelQueries(["appCollection"]);
 		queryClient.invalidateQueries(["appCollection"]);
-	}, [page]);
+	}, [page, lastChange, filter, software]);
 
 	const deleteApp = (key) => {
 		deleteItem(key);
+		setLastChange(new Date().getTime());
 		setFilteredApps(filteredApps.filter((item) => item.key !== key));
 	};
 
@@ -59,6 +68,7 @@ const ListView = (props) => {
 					filteredApps={filteredApps}
 					theme={theme}
 					setFilter={setFilter}
+					addItem={addItem}
 				/>
 				<Stack justify="center" align="center" style={{ marginTop: "20px" }}>
 					<Pagination
@@ -82,7 +92,7 @@ const ListView = (props) => {
 					selectedAppKey={selectedAppKey}
 					error={error}
 					loading={isLoading}
-					deleteItem={deleteItem}
+					deleteItem={deleteApp}
 				/>
 			</Card>
 		</ErrorBoundary>

@@ -5,7 +5,7 @@ import { Group, Input, SimpleGrid, Text, Textarea } from "@mantine/core";
 import classes from "../MainView/MainView.module.css";
 
 const InfoSection = (props) => {
-	const { formPartOne, register } = props;
+	const { formPartOne, register, isNewApp } = props;
 
 	return (
 		<>

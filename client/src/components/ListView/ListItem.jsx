@@ -12,7 +12,7 @@ export const ListItem = (props) => {
 	const { data: software } = useAppCollection();
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
-	const indicateEdit = software[app]?.edited ? <EditedIndicator /> : null;
+	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
 
 	const editItem = () => {};
 

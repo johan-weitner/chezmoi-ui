@@ -24,46 +24,46 @@ import classes from "../MainView/MainView.module.css";
 
 // FIXME: Refactor into smaller sub-components
 const DetailView = (props) => {
-	const { appKey, theme } = props;
-	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const { appKey, theme, isPopoverOpen, setIsPopoverOpen } = props;
 	const [selectedApp, setSelectedApp] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
+	// const [isLoading, setIsLoading] = useState(true);
 	const [tags, setTags] = useState(null);
 	const [hasInstaller, setHasInstaller] = useState(false);
 	const modalRef = useRef();
 	let indicateEdit;
 
 	useEffect(() => {
-		getApp(appKey).then((result) => {
-			setIsLoading(false);
-			const app = JSON.parse(result.JSON);
-			setSelectedApp(app);
-			APP_FORM.formPartTwo.map((item) => {
-				if (app[item.name] && app[item.name].length > 0) {
-					setHasInstaller(true);
-					return;
-				}
+		appKey &&
+			getApp(appKey).then((result) => {
+				// setIsLoading(false);
+				const app = result?.JSON && JSON.parse(result.JSON);
+				setSelectedApp(app);
+				APP_FORM.formPartTwo.map((item) => {
+					if (app[item.name] && app[item.name].length > 0) {
+						setHasInstaller(true);
+						return;
+					}
+				});
+
+				const appTags = app?.tags && JSON.parse(app.tags);
+				appTags && setTags(appTags);
+
+				indicateEdit = app.edited ? (
+					<ICON.check
+						style={{
+							width: rem(20),
+							height: rem(20),
+							position: "absolute",
+							right: "50px",
+							top: "45px",
+							zIndex: "999999",
+						}}
+						stroke={2}
+						color="green"
+						title="Has been edited"
+					/>
+				) : null;
 			});
-
-			const appTags = app?.tags && JSON.parse(app.tags);
-			appTags && setTags(appTags);
-
-			indicateEdit = app.edited ? (
-				<ICON.check
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "50px",
-						top: "45px",
-						zIndex: "999999",
-					}}
-					stroke={2}
-					color="green"
-					title="Has been edited"
-				/>
-			) : null;
-		});
 	}, [appKey]);
 
 	const edit = () => {
@@ -100,9 +100,7 @@ const DetailView = (props) => {
 		setIsPopoverOpen(false);
 	};
 
-	return isLoading || !selectedApp ? (
-		<BarSpinner />
-	) : (
+	return (
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
@@ -119,7 +117,7 @@ const DetailView = (props) => {
 					mt="md"
 					style={{ textAlign: "left" }}
 				>
-					Detail view
+					Detail view - popOverOpen: {isPopoverOpen.toString()}
 				</Text>
 				<ActionIcon
 					size={32}

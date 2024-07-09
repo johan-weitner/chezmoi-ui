@@ -5,7 +5,7 @@ import classes from "../MainView/MainView.module.css";
 
 export const ListViewHeader = ({
 	filteredApps,
-	editItem,
+	addItem,
 	setFilter,
 	...props
 }) => {
@@ -28,7 +28,7 @@ export const ListViewHeader = ({
 			</Text>
 			<ActionIcon
 				title="Add application"
-				onClick={(e) => editItem(null, false, true)}
+				onClick={(e) => addItem()}
 				style={{
 					width: rem(50),
 					height: rem(50),

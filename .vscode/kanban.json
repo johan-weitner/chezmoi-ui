@@ -11,6 +11,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "FIxed position for everything but app list",
+                    "id": "bzxb2r8jx8gk9hunv36882l6"
+                },
+                {
                     "text": "Break up DetailView into smaller pieces",
                     "id": "pzzee34vjd4qh7mcdrkooasa"
                 },
@@ -71,5 +75,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720482186361
+    "timestamp": 1720539323384
 }

@@ -5,7 +5,7 @@ import { Button, Group } from "@mantine/core";
 import { APP_FORM } from "constants/appForm";
 import { ICON } from "constants/icons";
 
-import { useAppMutation } from "../../api/appCollectionApi";
+import { addApp, useAppMutation } from "api/appCollectionApi";
 import classes from "../MainView/MainView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
@@ -19,14 +19,19 @@ const EditViewForm = (props) => {
 
 	useEffect(() => {
 		reset(selectedApp);
-	}, [selectedApp, reset]);
+	}, [selectedApp, isNewApp, reset]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const updateApp = useAppMutation();
 	const onSubmit = async (data) => {
 		console.log("updateApp", updateApp);
-		await updateApp.mutate(data);
+		if (isNewApp) {
+			addApp(data);
+		} else {
+			await updateApp.mutate(data);
+		}
+
 		closePopover();
 	};
 
@@ -36,9 +41,21 @@ const EditViewForm = (props) => {
 				{selectedApp?._name || "New application"}
 			</h2>
 
-			<InfoSection formPartOne={formPartOne} register={register} />
-			<TagSection register={register} appKey={selectedApp.key} />
-			<InstallerSection formPartTwo={formPartTwo} register={register} />
+			<InfoSection
+				formPartOne={formPartOne}
+				register={register}
+				isNewApp={isNewApp}
+			/>
+			<TagSection
+				register={register}
+				appKey={selectedApp?.key}
+				isNewApp={isNewApp}
+			/>
+			<InstallerSection
+				formPartTwo={formPartTwo}
+				register={register}
+				isNewApp={isNewApp}
+			/>
 
 			<Group justify="center">
 				<Button onClick={() => closePopover()} className={classes.cancelBtn}>
