@@ -1,7 +1,13 @@
+.mainContainer {
+  padding: 0;
+  backgroundColor: #333;
+  paddingTop: 0px;
+}
+
 .grid {
-  background-color: #333;
-  margin: 10px 0 20px 0 !important;
-  padding-top: 0;
+  background-color: #333 !important;
+  /* margin: 10px 0 20px 0 !important; */
+  padding: 12px;
   background-color: var(--darkreader-bg--mantine-color-white);
 }
 

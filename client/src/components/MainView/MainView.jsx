@@ -37,18 +37,12 @@ const MainView = (props) => {
 
 	return (
 		<>
-			<Container
-				size="lg"
-				py="xl"
-				style={{ backgroundColor: "#333", paddingTop: "0px" }}
-			>
-				{/* <MainHeader style={{ borderRadius: "10px", position: "fixed", backgroundColor: "#181a1b !important" }} /> */}
+			<Container size="xl" clssName={classes.mainContainer}>
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"
-					mt={50}
+					py={12}
 					className={classes.grid}
-					style={{ backgroundColor: "#333" }}
 				>
 					<ListView
 						theme={theme}

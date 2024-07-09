@@ -5,15 +5,27 @@
   text-align: center;
 }
 
+.appShellHeader {
+  position: relative !important;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.appShellMain {
+  margin-top: -10px;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +34,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -48,22 +61,24 @@
   background-color:#999;
   font-family: monospace;
 } */
- .tagify {
-  width:100%;
+.tagify {
+  width: 100%;
   background-color: #262a2b;
-  border-radius:4px;
-  border-color:#FFF;
- }
- .tagify__input {
-  width:100%;
+  border-radius: 4px;
+  border-color: #FFF;
+}
+
+.tagify__input {
+  width: 100%;
   background-color: #262a2b;
- }
- /* .tagify__tag,
+}
+
+/* .tagify__tag,
  .tagify__tag > div,
  .tagify__tag > x  {
   background-color:#ccc !important;
  } */
-  .tagify__tag {
-    border:1px solid #FFF;
-    border-radius:3px;
-  }
+.tagify__tag {
+  border: 1px solid #FFF;
+  border-radius: 3px;
+}
