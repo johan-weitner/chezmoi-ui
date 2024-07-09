@@ -19,7 +19,7 @@ const emptyDb = await isEmptyDb();
 
 if (emptyDb) {
   log.info('Empty db - seeding...');
-  let { software } = setupFileData();
+  let { software, keys } = setupFileData();
   const data = [];
   keys.forEach((key) => {
     data.push({ key: key, JSON: JSON.stringify(software[key]) });
