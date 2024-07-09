@@ -30,14 +30,15 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
-export const useTotalCount = async () => {
-	return useQuery({
+export const getTotalCount = async () => {
+	const count = await queryClient.fetchQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/getCount`);
 			return response.data;
 		},
 	});
+	return count;
 };
 
 export const useAppCollection = () => {
