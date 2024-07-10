@@ -28,6 +28,31 @@ export const seedDb = async (data) => {
 		});
 };
 
+export const seedDb2 = async (data) => {
+	log.info("Seeding Application table with initial data...	");
+	await prisma
+		.$transaction([prisma.application.createMany({ data })])
+		.then(() => {
+			log.info("Seeded Application table with resources");
+		})
+		.catch((e) => {
+			log.error(e.message);
+		});
+};
+
+export const seedTags = async (data) => {
+	log.info(JSON.stringify(data, null, 2));
+	await prisma
+		.$transaction([prisma.tag.createMany({ data })])
+		.then(() => {
+			log.info("Seeded db with tags");
+			log.info(JSON.stringify(data, null, 2));
+		})
+		.catch((e) => {
+			log.error(e.message);
+		});
+};
+
 export const addApp = async (data) => {
 	const { key, json } = data;
 	if (!key || !json) {
@@ -99,6 +124,16 @@ export const deleteApp = async (key) => {
 
 export const getCount = async () => {
 	const count = await prisma.app.count();
+	return count;
+};
+
+export const getCount2 = async () => {
+	const count = await prisma.application.count();
+	return count;
+};
+
+export const getTagCount = async () => {
+	const count = await prisma.tag.count();
 	return count;
 };
 

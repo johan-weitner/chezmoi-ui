@@ -5,7 +5,8 @@ export const log = winston.createLogger({
 	level: "info",
 	format: winston.format.combine(
 		winston.format.timestamp(),
-		winston.format.json(),
+		winston.format.simple(),
+		winston.format.prettyPrint(),
 	),
 	defaultMeta: { service: "user-service" },
 	transports: [
@@ -18,7 +19,8 @@ export const dbLog = winston.createLogger({
 	level: "info",
 	format: winston.format.combine(
 		winston.format.timestamp(),
-		winston.format.json(),
+		winston.format.simple(),
+		winston.format.prettyPrint(),
 	),
 	defaultMeta: { service: "db-service" },
 	transports: [

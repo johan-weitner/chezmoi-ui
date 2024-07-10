@@ -1,5 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// Prisma schema for the database
+// Documentation: https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -47,7 +47,6 @@ model Application {
   appstore       String
   pacman         String
   port           String
-  tags           String
   ApplicationTag ApplicationTag[]
 }
 

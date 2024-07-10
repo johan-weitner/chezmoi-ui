@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./App.css";
-import { useHotkeys } from "react-hotkeys-hook";
 import { AppShell, Center, Container } from "@mantine/core";
+import { useHotkeys } from "react-hotkeys-hook";
 import { Toaster } from "sonner";
 import Header from "./components/Header";
 import MainView from "./components/MainView/MainView";

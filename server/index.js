@@ -8,27 +8,76 @@ import { targetFilePath } from './src/core/config.js';
 import { boot, setupFileData } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
 import { log } from './src/util/winston.js';
-import { seedDb, addApp, getAllApps, getPage, getAppByKey, updateApp, deleteApp, getCount, isEmptyDb } from "./src/db/prisma.js";
+import { seedDb, seedDb2, seedTags, getCount2, getTagCount, addApp, getAllApps, getPage, getAppByKey, updateApp, deleteApp, getCount, isEmptyDb } from "./src/db/prisma.js";
+import { tags } from './src/db/fixtures/tags.js';
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
 boot();
 
 log.info('Set up db connection...');
-const emptyDb = await isEmptyDb();
+const emptyDb = true;  //await isEmptyDb();
+
+const stripWhitespace = (str) => {
+  if (!str || typeof str !== 'string') return "";
+  return str.replace(/\s/g, '');
+};
 
 if (emptyDb) {
-  log.info('Empty db - seeding...');
+  log.info('Empty db - seeding tables...');
   let { software, keys } = setupFileData();
   const data = [];
-  keys.forEach((key) => {
-    data.push({ key: key, JSON: JSON.stringify(software[key]) });
-  });
-  await seedDb(data);
-  await getCount()
+  const data2 = []
+  // keys.forEach((key, index) => {
+  //   data.push({ key: key, JSON: JSON.stringify(software[key]) });
+  //   data2.push({
+  //     key: stripWhitespace(software[key].key),
+  //     name: stripWhitespace(software[key]._name),
+  //     edited: stripWhitespace(software[key].edited),
+  //     desc: stripWhitespace(software[key]._desc),
+  //     bin: stripWhitespace(software[key].bin),
+  //     short: stripWhitespace(software[key]._short),
+  //     home: stripWhitespace(software[key].home),
+  //     docs: stripWhitespace(software[key].docs),
+  //     github: stripWhitespace(software[key].github),
+  //     whalebrew: stripWhitespace(software[key].whalebrew),
+  //     apt: stripWhitespace(software[key].apt),
+  //     brew: stripWhitespace(software[key].brew),
+  //     cask: stripWhitespace(software[key].cask),
+  //     cargo: stripWhitespace(software[key].cargo),
+  //     npm: stripWhitespace(software[key].npm),
+  //     pip: stripWhitespace(software[key].pip),
+  //     pipx: stripWhitespace(software[key].pipx),
+  //     gem: stripWhitespace(software[key].gem),
+  //     script: stripWhitespace(software[key].script),
+  //     choco: stripWhitespace(software[key].choco),
+  //     scoop: stripWhitespace(software[key].scoop),
+  //     winget: stripWhitespace(software[key].winget),
+  //     pkgdarwin: stripWhitespace(software[key].pkgdarwin),
+  //     ansible: stripWhitespace(software[key].ansible),
+  //     binary: stripWhitespace(software[key].binary),
+  //     yay: stripWhitespace(software[key].yay),
+  //     appstore: stripWhitespace(software[key].appstore),
+  //     pacman: stripWhitespace(software[key].pacman),
+  //     port: stripWhitespace(software[key].port),
+  //   });
+  // });
+  // log.info(Object.keys(data2[0]));
+  // await seedDb(data);
+  // await seedDb2(data2);
+  // await getCount()
+  //   .then((count) => {
+  //     log.info(`Done seeding App table with ${count} apps`);
+  //   });
+  // await getCount2()
+  //   .then((count) => {
+  //     log.info(`Done seeding Application table with ${count} apps`);
+  //   });
+  await seedTags(tags);
+  await getTagCount()
     .then((count) => {
-      log.info(`Done seeding db with ${count} apps`);
-    })
+      log.info(`Done seeding Tag table with ${count} tags`);
+    });
 }
 
 app.set('json spaces', 2);
@@ -72,7 +121,7 @@ app.post('/page', (req, res) => {
     });
 });
 
-// app.get('/softwareKeys', (req, res) => {
+// app.get('/softwares', (req, res) => {
 //   res = attachHeaders(res);
 //   res.json(keys);
 // });
