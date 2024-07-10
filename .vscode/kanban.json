@@ -11,6 +11,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Refine modal layout. Use fieldsets instead of headers",
+                    "id": "i774yj0cqxyy8cunhjatye3c"
+                },
+                {
                     "text": "Implement useThrottledCallback et al",
                     "id": "weut1k30or61ek8t6nfp3o2m"
                 },
@@ -19,24 +23,12 @@
                     "id": "yqh4c3iyxh1ld294jwhzmrot"
                 },
                 {
-                    "text": "Fix bg-color in header",
-                    "id": "nph1wuni8y7gohfvi5lu2efy"
-                },
-                {
                     "text": "Stale data lingering when creating new record",
                     "id": "zau3e18gscyonn2yx18d9qai"
                 },
                 {
                     "text": "Stale data lingering after deletion",
                     "id": "v3os63b3tgnj5ws4mf59sz00"
-                },
-                {
-                    "text": "Fix bg-color in modal",
-                    "id": "n9h2qgqm0p3qvp0nl3qnxpyr"
-                },
-                {
-                    "text": "FIxed position for everything but app list",
-                    "id": "bzxb2r8jx8gk9hunv36882l6"
                 },
                 {
                     "text": "Break up DetailView into smaller pieces",
@@ -64,6 +56,10 @@
             "title": "Done",
             "tasks": [
                 {
+                    "text": "Keyboard shortcut legend in right hand column",
+                    "id": "h4uwkohnh1vmqibp61a2j4ml"
+                },
+                {
                     "text": "SQLite in backend",
                     "id": "h9fuyo8idmjmcwnzar8r1em2"
                 },
@@ -78,6 +74,18 @@
                 {
                     "text": "Implement paging",
                     "id": "vfob2x075xuhnprulwda6ka1"
+                },
+                {
+                    "text": "Fix bg-color in header",
+                    "id": "nph1wuni8y7gohfvi5lu2efy"
+                },
+                {
+                    "text": "FIxed position for everything but app list",
+                    "id": "bzxb2r8jx8gk9hunv36882l6"
+                },
+                {
+                    "text": "Fix bg-color in modal",
+                    "id": "n9h2qgqm0p3qvp0nl3qnxpyr"
                 },
                 {
                     "text": "Consolidate refactor branch with main",
@@ -98,5 +106,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720597784508
+    "timestamp": 1720641143152
 }

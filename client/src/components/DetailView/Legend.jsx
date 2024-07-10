@@ -1,5 +1,7 @@
 import { Kbd, Text } from "@mantine/core";
 import classes from "components/MainView/MainView.module.css";
+import { keyboardShortcuts } from "constants/keyboardShortcuts";
+import { nanoid } from "nanoid";
 import s from "./DetailView.module.css";
 
 const Legend = (props) => {
@@ -18,7 +20,7 @@ const Legend = (props) => {
 			<table className={s.legendTable}>
 				<thead>
 					<tr>
-						<th width="50%">
+						<th width="40%">
 							<Text size="sm">Keyboard shortcut</Text>
 						</th>
 						<th>
@@ -27,30 +29,23 @@ const Legend = (props) => {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							<Kbd>OPT</Kbd> + <Kbd>N</Kbd>
-						</td>
-						<td>Add a new application</td>
-					</tr>
-					<tr>
-						<td>
-							<Kbd>OPT</Kbd> + <Kbd>N</Kbd>
-						</td>
-						<td>Add a new application</td>
-					</tr>
-					<tr>
-						<td>
-							<Kbd>OPT</Kbd> + <Kbd>N</Kbd>
-						</td>
-						<td>Add a new application</td>
-					</tr>
-					<tr>
-						<td>
-							<Kbd>OPT</Kbd> + <Kbd>N</Kbd>
-						</td>
-						<td>Add a new application</td>
-					</tr>
+					{keyboardShortcuts.map((item) => {
+						return (
+							<tr key={nanoid()}>
+								<td>
+									{item.keys.map((char, index) => {
+										return (
+											<>
+												<Kbd key={nanoid()}>{char}</Kbd>
+												{index < item.keys.length - 1 && " + "}
+											</>
+										);
+									})}
+								</td>
+								<td>{item.action}</td>
+							</tr>
+						);
+					})}
 				</tbody>
 			</table>
 		</div>
