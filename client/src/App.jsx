@@ -12,6 +12,7 @@ function App() {
 	const [currentListKeys, setCurrentListKeys] = useState([]);
 	const [selectedAppKey, setSelectedAppKey] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
 	useHotkeys("alt + left", () => gotoPrev());
@@ -81,6 +82,8 @@ function App() {
 				addItem={addItem}
 				isPopoverOpen={isPopoverOpen}
 				setIsPopoverOpen={setIsPopoverOpen}
+				currentPage={currentPage}
+				setCurrentPage={setCurrentPage}
 			/>
 			{/* </AppShell.Main> */}
 			<Toaster

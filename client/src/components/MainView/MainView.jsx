@@ -22,6 +22,8 @@ const MainView = (props) => {
 		addItem,
 		isPopoverOpen,
 		setIsPopoverOpen,
+		currentPage,
+		setCurrentPage,
 	} = props;
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
@@ -65,6 +67,8 @@ const MainView = (props) => {
 						setIsPopoverOpen={setIsPopoverOpen}
 						addItem={addItem}
 						updateCurrentListKeys={updateCurrentListKeys}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
 					/>
 					{/* {selectedAppKey && ( */}
 					<DetailView

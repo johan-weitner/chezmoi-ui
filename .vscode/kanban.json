@@ -11,16 +11,16 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Refine column header layouts",
+                    "id": "ugdhhg65cmvqkis53ccstyhm"
+                },
+                {
                     "text": "Refine modal layout. Use fieldsets instead of headers",
                     "id": "i774yj0cqxyy8cunhjatye3c"
                 },
                 {
                     "text": "Implement useThrottledCallback et al",
                     "id": "weut1k30or61ek8t6nfp3o2m"
-                },
-                {
-                    "text": "Keyboard shortcut for flipping pages: OPT + SHIFT + ARROW",
-                    "id": "yqh4c3iyxh1ld294jwhzmrot"
                 },
                 {
                     "text": "Stale data lingering when creating new record",
@@ -62,6 +62,10 @@
                 {
                     "text": "SQLite in backend",
                     "id": "h9fuyo8idmjmcwnzar8r1em2"
+                },
+                {
+                    "text": "Keyboard shortcut for flipping pages: OPT + SHIFT + ARROW",
+                    "id": "yqh4c3iyxh1ld294jwhzmrot"
                 },
                 {
                     "text": "React Hook Form is broken in EditView",
@@ -106,5 +110,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720641143152
+    "timestamp": 1720642551733
 }

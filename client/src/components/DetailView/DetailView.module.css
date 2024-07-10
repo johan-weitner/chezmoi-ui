@@ -8,6 +8,7 @@
   margin-bottom: 20px;
   border: 1px solid #CCC;
   box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+  color: #FFF;
 
   th {
     padding: 5px 10px;
@@ -26,6 +27,5 @@
     &:nth-child(odd) {
       background-color: #333;
     }
-
   }
 }

@@ -4,6 +4,7 @@ import { getTotalCount, useAppPage } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useHotkeys } from "react-hotkeys-hook";
 import classes from "../MainView/MainView.module.css";
 import List from "./List";
 import { ListViewHeader } from "./ListViewHeader";
@@ -17,6 +18,8 @@ const ListView = (props) => {
 		deleteItem,
 		addItem,
 		updateCurrentListKeys,
+		currentPage,
+		setCurrentPage,
 	} = props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
@@ -29,7 +32,7 @@ const ListView = (props) => {
 
 	const [numPages, setNumPages] = useState(1);
 	const [totalCount, setTotalCount] = useState(1);
-	const { data: software, error, isLoading } = useAppPage(page);
+	const { data: software, error, isLoading } = useAppPage(currentPage);
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -50,11 +53,30 @@ const ListView = (props) => {
 		queryClient.invalidateQueries(["appCollection"]);
 	}, [page, lastChange, filter, software]);
 
+	const touchLastChange = () => {
+		setLastChange(new Date().getTime());
+	};
+
 	const deleteApp = (key) => {
 		deleteItem(key);
-		setLastChange(new Date().getTime());
+		touchLastChange();
 		setFilteredApps(filteredApps.filter((item) => item.key !== key));
 	};
+
+	const nextPage = () => {
+		if (currentPage < numPages) {
+			setCurrentPage(currentPage + 1);
+		}
+	};
+
+	const prevPage = () => {
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		}
+	};
+
+	useHotkeys("shift + alt + left", () => prevPage());
+	useHotkeys("shift + alt + right", () => nextPage());
 
 	return (
 		<ErrorBoundary
@@ -73,8 +95,8 @@ const ListView = (props) => {
 					<Pagination
 						total={numPages}
 						gap={20}
-						onChange={setPage}
-						value={page}
+						onChange={setCurrentPage}
+						value={currentPage}
 					/>
 					{filteredApps && (
 						<Text
