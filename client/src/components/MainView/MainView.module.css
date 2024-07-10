@@ -7,9 +7,10 @@
 
 .grid {
   position: static;
-  background-color: #333 !important;
+  /* background-color: #333 !important; */
   padding: 12px;
-  background-color: var(--darkreader-bg--mantine-color-white);
+  /* background-color: var(--darkreader-bg--mantine-color-white); */
+  border-radius: 10px;
 }
 
 .title {
@@ -80,6 +81,7 @@
 
 .itemDetailBox,
 .itemDetailBoxFixed {
+
   /* position: -webkit-sticky;
   position: sticky;
   top: 300px;
@@ -194,7 +196,7 @@ max-height: calc(100vh - 300px);
   font-size: 2.5em;
   font-weight: normal;
   text-align: left;
-  border-bottom: 2px solid #FFF;
+  border-bottom: 2px solid #333;
 }
 
 .fieldcontainer {

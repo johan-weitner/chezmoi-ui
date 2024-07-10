@@ -32,14 +32,12 @@
   left: 0;
   right: 0;
   background-color: #121516 !important;
-  background-image: linear-gradient(180deg, #181a1b 0%, 181a1b 35%, #353738 100%);
   z-index: 999;
 
   /* height: 120px; */
 
   div {
     /* background-color: #121516 !important; */
-    background: linear-gradient(to bottom, #FFFFFF, #181a1b) !important;
   }
 }
 
@@ -49,7 +47,6 @@
 }
 
 .headerLogo {
-  background-image: linear-gradient(to bottom, #FFFFFF, #121516);
   width: 1184px;
   margin: 0 auto;
   /* background-image: linear-gradient(to bottom, #000000, #181a1b); */

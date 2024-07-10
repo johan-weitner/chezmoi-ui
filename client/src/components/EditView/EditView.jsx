@@ -39,15 +39,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 			transitionProps={{ duration: 2500, transition: "pop" }}
 		>
 			<Card style={{ backgroundColor: "#222" }}>
-				<Flex justify="flex-end" gap={"sm"}>
-					<>
-						<Text size="sm">
-							selectedApp: {selectedApp ? "true" : "false"} | isPopoverOpen:{" "}
-							{isPopoverOpen ? "true" : "false"} | isNewApp:{" "}
-							{isNewApp ? "true" : "false"}
-						</Text>
-					</>
-				</Flex>
 				<ErrorBoundary
 					fallbackRender={(error) => (
 						<FallbackComponent error={error.message} />

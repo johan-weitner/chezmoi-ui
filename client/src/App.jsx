@@ -70,7 +70,18 @@ function App() {
 					</Center>
 				</AppShell.Header> */}
 			{/* <AppShell.Main className="appShellMain"> */}
-			<MainView />
+			<MainView
+				currentListKeys={currentListKeys}
+				updateCurrentListKeys={updateCurrentListKeys}
+				selectedAppKey={selectedAppKey}
+				setSelectedAppKey={setSelectedAppKey}
+				selectApp={selectApp}
+				gotoPrev={gotoPrev}
+				gotoNext={gotoNext}
+				addItem={addItem}
+				isPopoverOpen={isPopoverOpen}
+				setIsPopoverOpen={setIsPopoverOpen}
+			/>
 			{/* </AppShell.Main> */}
 			<Toaster
 				position="top-right"

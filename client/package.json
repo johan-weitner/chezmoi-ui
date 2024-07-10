@@ -31,6 +31,7 @@
     "react-hook-form": "^7.52.1",
     "react-hotkeys-hook": "^4.5.0",
     "react-spinners": "^0.14.1",
+    "react-sticky-el": "^2.1.0",
     "sonner": "^1.5.0",
     "yaml": "^2.4.5"
   },

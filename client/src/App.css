@@ -1,8 +1,13 @@
+body {
+  background-color: #121516 !important;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #121516;
 }
 
 .appShellHeader {
@@ -90,8 +95,23 @@
   border-radius: 3px;
 }
 
+.mantine-Modal-content {
+  border: 5px solid #333;
+}
+
 .mantine-Modal-content,
 .mantine-Modal-body {
   background-color: #222 !important;
   color: #FFF;
+  /* margin-top: 50px; */
+  position: absolute;
+  top: 120px;
+  width: 1000px;
+  height: 800px !important;
+  ;
+}
+
+.mantine-Modal-body {
+  margin-top: -80px !important;
+  padding-top: 0 !important;
 }
