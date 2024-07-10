@@ -41,7 +41,7 @@ if (fs.existsSync(backupBasePath)) {
  * @returns {Object} An object containing the software array and the software object.
  */
 export const boot = () => {
-	console.clear();
+	// console.clear();
 	printAppLogo();
 	log.info("  © 2024 Johan Weitner");
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
