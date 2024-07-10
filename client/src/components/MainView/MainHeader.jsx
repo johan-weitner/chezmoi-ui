@@ -45,7 +45,6 @@ const MainHeader = (props) => {
 					</Group>
 				</Box>
 			</Container> */}
-			{/* <Toolbar /> */}
 		</header>
 	);
 };

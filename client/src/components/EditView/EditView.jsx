@@ -2,6 +2,7 @@ import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { forwardRef, useEffect, useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
 import { ActionIcon, Card, Flex, Modal, Text, rem } from "@mantine/core";
+import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
@@ -17,9 +18,11 @@ const EditView = forwardRef(function EditView(props, ref) {
 	} = props;
 
 	const [isNewApp, setIsNewApp] = useState(!selectedApp);
+	const forceUpdate = useForceUpdate();
 
 	useEffect(() => {
 		setIsNewApp(!selectedApp);
+		forceUpdate();
 	}, [selectedApp]);
 
 	return (
@@ -58,6 +61,8 @@ const EditView = forwardRef(function EditView(props, ref) {
 						gotoNext={gotoNext}
 						theme={theme}
 						isNewApp={isNewApp}
+						forceUpdate={forceUpdate}
+						randomId={randomId}
 					/>
 				</ErrorBoundary>
 			</Card>

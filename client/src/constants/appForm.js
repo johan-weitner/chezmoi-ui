@@ -35,7 +35,8 @@ export const APP_FORM = {
 export const EMPTY_APP2 = {
 	_name: null,
 	key: null,
-	_desc: "",
+	_desc: null,
+	desc: null,
 	_bin: null,
 	_short: null,
 	_home: null,
@@ -67,7 +68,8 @@ export const EMPTY_APP2 = {
 export const EMPTY_APP = {
 	_name: null,
 	key: null,
-	_desc: "",
+	_desc: null,
+	desc: null,
 	_bin: null,
 	_short: null,
 	_home: null,

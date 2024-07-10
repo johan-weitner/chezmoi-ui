@@ -7,13 +7,13 @@ import {
 	Text,
 	rem,
 } from "@mantine/core";
+import { useWindowScroll } from "@mantine/hooks";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
-import { useEffect } from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { deleteApp, getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
@@ -30,8 +30,23 @@ const DetailView = (props) => {
 	// const [isLoading, setIsLoading] = useState(true);
 	const [tags, setTags] = useState(null);
 	const [hasInstaller, setHasInstaller] = useState(false);
+	const [scroll, scrollTo] = useWindowScroll();
 	const modalRef = useRef();
+	const itemBox = useRef();
 	let indicateEdit;
+
+	document.addEventListener("scroll", () => {
+		const itemDetailBox = document.querySelector("#itemDetailBox");
+		const scrollPosition = window.scrollY;
+		// var fixedYPosition = 180;
+		const fixedYPosition = 80;
+
+		if (scrollPosition >= fixedYPosition) {
+			itemDetailBox.classList.add("itemDetailBoxFixed");
+		} else {
+			itemDetailBox.classList.remove("itemDetailBoxFixed");
+		}
+	});
 
 	useEffect(() => {
 		if (!appKey) {
@@ -172,7 +187,7 @@ const DetailView = (props) => {
 					style={{ textAlign: "left" }}
 				>
 					{selectedApp && (
-						<div className={classes.itemBox}>
+						<div id="itemDetailBox" className={classes.itemDetailBox}>
 							<h2
 								style={{
 									textAlign: "left",
@@ -291,6 +306,9 @@ const DetailView = (props) => {
 							</Group>
 						</div>
 					)}
+					<Text size="sm">
+						Scroll: {scroll.x}, {scroll.y}
+					</Text>
 				</Card>
 			</Card>
 			{isPopoverOpen && (

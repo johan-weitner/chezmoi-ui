@@ -1,11 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import { AppShell } from "@mantine/core";
 import { useHotkeys } from "react-hotkeys-hook";
+import { AppShell, Center, Container } from "@mantine/core";
 import { Toaster } from "sonner";
 import Header from "./components/Header";
 import MainView from "./components/MainView/MainView";
 import "@yaireo/tagify/dist/tagify.css";
+import classes from "./components/Header.module.css";
 
 function App() {
 	const [currentListKeys, setCurrentListKeys] = useState([]);
@@ -61,30 +62,16 @@ function App() {
 	};
 
 	return (
-		<AppShell header={{ height: 60 }}>
-			<AppShell.Header withBorder={false} className="appShellHeader" style={{}}>
-				<Header
-					gotoPrev={gotoPrev}
-					gotoNext={gotoNext}
-					addItem={addItem}
-					isPopoverOpen={isPopoverOpen}
-					setIsPopoverOpen={setIsPopoverOpen}
-				/>
-			</AppShell.Header>
-			<AppShell.Main className="appShellMain">
-				<MainView
-					currentListKeys={currentListKeys}
-					updateCurrentListKeys={updateCurrentListKeys}
-					selectedAppKey={selectedAppKey}
-					setSelectedAppKey={setSelectedAppKey}
-					selectApp={selectApp}
-					gotoPrev={gotoPrev}
-					gotoNext={gotoNext}
-					addItem={addItem}
-					isPopoverOpen={isPopoverOpen}
-					setIsPopoverOpen={setIsPopoverOpen}
-				/>
-			</AppShell.Main>
+		<>
+			{/* <AppShell header={{ height: 0 }}> */}
+			{/* <AppShell.Header withBorder={false}>
+					<Center size="xl" px={0} py={0} m={0} style={{ border: "1px solid #393" }}>
+						<Header />
+					</Center>
+				</AppShell.Header> */}
+			{/* <AppShell.Main className="appShellMain"> */}
+			<MainView />
+			{/* </AppShell.Main> */}
 			<Toaster
 				position="top-right"
 				theme="dark"
@@ -93,7 +80,8 @@ function App() {
 				closeButton
 				pauseWhenPageIsHidden
 			/>
-		</AppShell>
+			{/* </AppShell> */}
+		</>
 	);
 }
 

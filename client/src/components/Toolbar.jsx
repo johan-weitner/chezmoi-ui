@@ -88,11 +88,6 @@ const Toolbar = (props) => {
 					{links}
 				</Flex>
 			</Group>
-
-			<Flex justify="flex-start" gap={20}>
-				<NavbarLink icon={IconHome2} label="Change account" />
-				<NavbarLink icon={IconSettings} label="Logout" />
-			</Flex>
 		</nav>
 	);
 };

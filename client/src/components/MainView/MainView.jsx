@@ -4,6 +4,7 @@ import DetailView from "components/DetailView/DetailView.jsx";
 import ListView from "components/ListView/ListView.jsx";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
+import Header from "../Header.jsx";
 import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
 import "@yaireo/tagify/dist/tagify.css";
@@ -44,6 +45,7 @@ const MainView = (props) => {
 	return (
 		<>
 			<Container size="xl" className={classes.mainContainer}>
+				<Header />
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"

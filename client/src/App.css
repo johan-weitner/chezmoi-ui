@@ -11,6 +11,13 @@
   margin: 0;
 }
 
+.mainHeader {
+  width: 100%;
+  background-color: #933 !important;
+  padding: 20px !important;
+
+}
+
 .appShellMain {
   margin-top: -10px;
 }

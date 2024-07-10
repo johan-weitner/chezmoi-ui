@@ -12,7 +12,8 @@ import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
 
 const EditViewForm = (props) => {
-	const { closePopover, selectedApp, theme, isNewApp } = props;
+	const { closePopover, selectedApp, theme, isNewApp, forceUpdate, randomId } =
+		props;
 	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: defaultValues,
@@ -26,6 +27,7 @@ const EditViewForm = (props) => {
 			keepValues: false,
 			keepDefaultValues: false,
 		});
+		forceUpdate();
 	}, [selectedApp, isNewApp, reset]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
@@ -51,7 +53,7 @@ const EditViewForm = (props) => {
 			keepValues: false,
 			keepDefaultValues: false,
 		});
-		console.log(res);
+		forceUpdate();
 	};
 
 	return (
@@ -61,7 +63,7 @@ const EditViewForm = (props) => {
 			</h2>
 			<Text size="sm">
 				selectedApp: {selectedApp ? "true" : "false"} | isNewApp:{" "}
-				{isNewApp ? "true" : "false"}
+				{isNewApp ? "true" : "false"} | RandomId: {randomId()}
 			</Text>
 			<button
 				type="button"
@@ -76,7 +78,6 @@ const EditViewForm = (props) => {
 				formPartOne={formPartOne}
 				register={register}
 				isNewApp={isNewApp}
-				style={{ backgroundColor: "#222 !important" }}
 			/>
 			<TagSection
 				register={register}

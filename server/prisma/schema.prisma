@@ -11,7 +11,56 @@ datasource db {
 }
 
 model App {
-  id    Int     @id @default(autoincrement())
-  key   String  @unique
-  JSON  String
+  id   Int    @id @default(autoincrement())
+  key  String @unique
+  JSON String
+}
+
+model Application {
+  id             Int              @id @default(autoincrement())
+  key            String           @unique
+  name           String
+  edited         String
+  desc           String
+  bin            String
+  short          String
+  home           String
+  docs           String
+  github         String
+  whalebrew      String
+  apt            String
+  brew           String
+  cask           String
+  cargo          String
+  npm            String
+  pip            String
+  pipx           String
+  gem            String
+  script         String
+  choco          String
+  scoop          String
+  winget         String
+  pkgdarwin      String
+  ansible        String
+  binary         String
+  yay            String
+  appstore       String
+  pacman         String
+  port           String
+  tags           String
+  ApplicationTag ApplicationTag[]
+}
+
+model Tag {
+  id             Int              @id @default(autoincrement())
+  name           String           @unique
+  ApplicationTag ApplicationTag[]
+}
+
+model ApplicationTag {
+  id            Int         @id @default(autoincrement())
+  applicationId Int
+  tagId         Int
+  Application   Application @relation(fields: [applicationId], references: [id])
+  Tag           Tag         @relation(fields: [tagId], references: [id])
 }

@@ -1,4 +1,4 @@
-import { Container, Group, Title } from "@mantine/core";
+import { Center, Container, Group, Title } from "@mantine/core";
 import { useIsFetching, useIsMutating } from "@tanstack/react-query";
 import { useEffect } from "react";
 import React from "react";
@@ -18,18 +18,29 @@ const Header = (props) => {
 	// console.log("isLoading: ", isLoading);
 
 	return (
-		<>
-			<Container size="lg" className={classes.header} px={0} py={0} m={0}>
-				{/* <nav className={classes.navbar}> */}
-				<Group justify="flex-start" className={classes.navbarLogo}>
-					<img src={logo} alt="Logo" className={classes.logo} />
-					<Title className={classes.logoTitle}>Chezmoi UI</Title>
-				</Group>
-				<Toolbar gotoPrev={gotoPrev} gotoNext={gotoNext} addItem={addItem} />
-				{/* </nav> */}
-				{/* <div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div> */}
-			</Container>
-		</>
+		<Group
+			justify="flex-start"
+			align="center"
+			className={classes.innerContainer}
+			px={0}
+			py={0}
+			m={0}
+			style={{ height: "100px" }}
+		>
+			{/* <div className={classes.navbar}> */}
+			<Group
+				justify="flex-start"
+				className={classes.headerLogo}
+				style={{ backgroundColor: "#121516 !important" }}
+			>
+				<img src={logo} alt="Logo" className={classes.logo} />
+				<Title className={classes.logoTitle}>Chezmoi UI</Title>
+			</Group>
+			<Toolbar />
+
+			{/* </div> */}
+			{/* <div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div> */}
+		</Group>
 	);
 };
 
