@@ -18,9 +18,9 @@ boot();
 log.info('Set up db connection...');
 const emptyDb = true;  //await isEmptyDb();
 
-const stripWhitespace = (str) => {
+const stripTrailingWhitespace = (str) => {
   if (!str || typeof str !== 'string') return "";
-  return str.replace(/\s/g, '');
+  return str.replace(/\s+$/, '');
 };
 
 if (emptyDb) {
@@ -28,51 +28,51 @@ if (emptyDb) {
   let { software, keys } = setupFileData();
   const data = [];
   const data2 = []
-  // keys.forEach((key, index) => {
-  //   data.push({ key: key, JSON: JSON.stringify(software[key]) });
-  //   data2.push({
-  //     key: stripWhitespace(software[key].key),
-  //     name: stripWhitespace(software[key]._name),
-  //     edited: stripWhitespace(software[key].edited),
-  //     desc: stripWhitespace(software[key]._desc),
-  //     bin: stripWhitespace(software[key].bin),
-  //     short: stripWhitespace(software[key]._short),
-  //     home: stripWhitespace(software[key].home),
-  //     docs: stripWhitespace(software[key].docs),
-  //     github: stripWhitespace(software[key].github),
-  //     whalebrew: stripWhitespace(software[key].whalebrew),
-  //     apt: stripWhitespace(software[key].apt),
-  //     brew: stripWhitespace(software[key].brew),
-  //     cask: stripWhitespace(software[key].cask),
-  //     cargo: stripWhitespace(software[key].cargo),
-  //     npm: stripWhitespace(software[key].npm),
-  //     pip: stripWhitespace(software[key].pip),
-  //     pipx: stripWhitespace(software[key].pipx),
-  //     gem: stripWhitespace(software[key].gem),
-  //     script: stripWhitespace(software[key].script),
-  //     choco: stripWhitespace(software[key].choco),
-  //     scoop: stripWhitespace(software[key].scoop),
-  //     winget: stripWhitespace(software[key].winget),
-  //     pkgdarwin: stripWhitespace(software[key].pkgdarwin),
-  //     ansible: stripWhitespace(software[key].ansible),
-  //     binary: stripWhitespace(software[key].binary),
-  //     yay: stripWhitespace(software[key].yay),
-  //     appstore: stripWhitespace(software[key].appstore),
-  //     pacman: stripWhitespace(software[key].pacman),
-  //     port: stripWhitespace(software[key].port),
-  //   });
-  // });
-  // log.info(Object.keys(data2[0]));
-  // await seedDb(data);
-  // await seedDb2(data2);
-  // await getCount()
-  //   .then((count) => {
-  //     log.info(`Done seeding App table with ${count} apps`);
-  //   });
-  // await getCount2()
-  //   .then((count) => {
-  //     log.info(`Done seeding Application table with ${count} apps`);
-  //   });
+  keys.forEach((key, index) => {
+    data.push({ key: key, JSON: JSON.stringify(software[key]) });
+    data2.push({
+      key: stripTrailingWhitespace(software[key].key),
+      name: stripTrailingWhitespace(software[key]._name),
+      edited: stripTrailingWhitespace(software[key].edited),
+      desc: stripTrailingWhitespace(software[key]._desc),
+      bin: stripTrailingWhitespace(software[key].bin),
+      short: stripTrailingWhitespace(software[key]._short),
+      home: stripTrailingWhitespace(software[key].home),
+      docs: stripTrailingWhitespace(software[key].docs),
+      github: stripTrailingWhitespace(software[key].github),
+      whalebrew: stripTrailingWhitespace(software[key].whalebrew),
+      apt: stripTrailingWhitespace(software[key].apt),
+      brew: stripTrailingWhitespace(software[key].brew),
+      cask: stripTrailingWhitespace(software[key].cask),
+      cargo: stripTrailingWhitespace(software[key].cargo),
+      npm: stripTrailingWhitespace(software[key].npm),
+      pip: stripTrailingWhitespace(software[key].pip),
+      pipx: stripTrailingWhitespace(software[key].pipx),
+      gem: stripTrailingWhitespace(software[key].gem),
+      script: stripTrailingWhitespace(software[key].script),
+      choco: stripTrailingWhitespace(software[key].choco),
+      scoop: stripTrailingWhitespace(software[key].scoop),
+      winget: stripTrailingWhitespace(software[key].winget),
+      pkgdarwin: stripTrailingWhitespace(software[key].pkgdarwin),
+      ansible: stripTrailingWhitespace(software[key].ansible),
+      binary: stripTrailingWhitespace(software[key].binary),
+      yay: stripTrailingWhitespace(software[key].yay),
+      appstore: stripTrailingWhitespace(software[key].appstore),
+      pacman: stripTrailingWhitespace(software[key].pacman),
+      port: stripTrailingWhitespace(software[key].port),
+    });
+  });
+  log.info(Object.keys(data2[0]));
+  await seedDb(data);
+  await seedDb2(data2);
+  await getCount()
+    .then((count) => {
+      log.info(`Done seeding App table with ${count} apps`);
+    });
+  await getCount2()
+    .then((count) => {
+      log.info(`Done seeding Application table with ${count} apps`);
+    });
   await seedTags(tags);
   await getTagCount()
     .then((count) => {
