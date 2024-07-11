@@ -48,9 +48,5 @@
     "postcss-simple-vars": "^7.0.1",
     "turbo": "^2.0.6",
     "vite": "^5.3.3"
-  },
-  "engines": {
-    "node": "^20.15.0",
-    "pnpm": "^9.4.0"
   }
 }

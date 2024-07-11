@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy server files
 COPY server/ .
+COPY server/.env.docker .env
 
 # Install dependencies
 RUN npm install -g pnpm && pnpm install

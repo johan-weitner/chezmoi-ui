@@ -1,0 +1,6 @@
+prisma/dev.db
+.env
+.gitignore
+biome.json
+*.log
+turbo.json
