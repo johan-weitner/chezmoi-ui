@@ -1,5 +1,5 @@
 {
-    "title": "Kanban",
+    "title": "Chezmoi UI",
     "cols": [
         {
             "title": "Bugs",
@@ -10,6 +10,14 @@
         {
             "title": "To-Do",
             "tasks": [
+                {
+                    "text": "Dockerize the project",
+                    "id": "n5t17sefuis35v5siz049qlc"
+                },
+                {
+                    "text": "Refactor backend API to use multi-column table",
+                    "id": "puu1i1d7nfzxh06nj7uloy6b"
+                },
                 {
                     "text": "Refine column header layouts",
                     "id": "ugdhhg65cmvqkis53ccstyhm"
@@ -110,5 +118,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720642551733
+    "timestamp": 1720684396497
 }
