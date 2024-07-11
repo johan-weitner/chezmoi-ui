@@ -11,6 +11,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Abstract npm scripts to shell scripts",
+                    "id": "mw1v72jp0igbwczicgrej0r3"
+                },
+                {
                     "text": "Remove code related to file-based backend, including backup impl",
                     "id": "l2tus5amqbuhv73q9ass12ls"
                 },
@@ -130,5 +134,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720708642029
+    "timestamp": 1720711807463
 }
