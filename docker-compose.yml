@@ -8,6 +8,8 @@ services:
       - "3000:3000"
     environment:
       - NODE_ENV=development
+    volumes:
+      - db_data:/var/db-data
 
   client:
     build:
@@ -17,3 +19,5 @@ services:
       - "8000:8000"
     environment:
       - NODE_ENV=development
+volumes:
+  db_data:
