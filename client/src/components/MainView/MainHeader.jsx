@@ -35,17 +35,16 @@ const MainHeader = (props) => {
 
 	return (
 		<header className={classes.header}>
-			<Container
+			{/* <Container
 				className={classes.inner}
 				style={{ margin: "0", height: "50px" }}
 			>
 				<Box className={classes.links} visibleFrom="sm">
 					<Group gap={0} justify="flex-end" className={classes.mainLinks}>
-						{/* {mainItems} */}
-						<Toolbar />
+						{mainItems}
 					</Group>
 				</Box>
-			</Container>
+			</Container> */}
 		</header>
 	);
 };

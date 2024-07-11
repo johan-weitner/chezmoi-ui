@@ -1,23 +1,19 @@
 .navbar {
-  width: 100%;
-  height: auto;
-  /* rem(750px) */
-  padding: var(--mantine-spacing-md);
-  display: flex;
-  flex-direction: column;
-  /* border-bottom: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4)); */
+  /* position: absolute;
+  top: 44px;
+  left: 0; */
+  width: 1184px;
+  height: 50px;
+  background-color: #121516 !important;
+  padding: 0;
+  margin: -15px auto 0 auto;
 
 }
 
 
 
 .navbarMain {
-  flex: 1;
-  /* margin-top: rem(50px); */
-  background-color: #FFF;
-  /* position: relative;
-  top: 23px; */
-  margin-top: 50px;
+  margin-top: 0;
   z-index: 999;
 }
 

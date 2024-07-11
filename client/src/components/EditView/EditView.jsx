@@ -1,7 +1,8 @@
-import { forwardRef, useEffect } from "react";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
+import { forwardRef, useEffect, useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
-import { ActionIcon, Card, Flex, Modal, rem } from "@mantine/core";
+import { ActionIcon, Card, Flex, Modal, Text, rem } from "@mantine/core";
+import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
@@ -14,13 +15,20 @@ const EditView = forwardRef(function EditView(props, ref) {
 		gotoPrev,
 		gotoNext,
 		theme,
-		isNewApp,
 	} = props;
+
+	const [isNewApp, setIsNewApp] = useState(!selectedApp);
+	const forceUpdate = useForceUpdate();
+
+	useEffect(() => {
+		setIsNewApp(!selectedApp);
+		forceUpdate();
+	}, [selectedApp]);
 
 	return (
 		<Modal
 			opened={isPopoverOpen}
-			keepMounted
+			keepMounted={false}
 			onClose={closePopover}
 			overlayProps={{
 				backgroundOpacity: 0.55,
@@ -28,40 +36,9 @@ const EditView = forwardRef(function EditView(props, ref) {
 			}}
 			radius="10"
 			size="xl"
+			transitionProps={{ duration: 2500, transition: "pop" }}
 		>
-			<Card>
-				<Flex justify="flex-end" gap={"sm"}>
-					<>
-						<ActionIcon
-							size={32}
-							radius="xl"
-							color={theme.primaryColor}
-							variant="filled"
-							title="Go to previous app"
-							onClick={() => gotoPrev()}
-						>
-							<IconPlayerTrackPrev
-								style={{ width: rem(18), height: rem(18) }}
-								stroke={1.5}
-								color="white"
-							/>
-						</ActionIcon>
-						<ActionIcon
-							size={32}
-							radius="xl"
-							color={theme.primaryColor}
-							variant="filled"
-							title="Go to next app"
-							onClick={() => gotoNext()}
-						>
-							<IconPlayerTrackNext
-								style={{ width: rem(18), height: rem(18) }}
-								stroke={1.5}
-								color="white"
-							/>
-						</ActionIcon>
-					</>
-				</Flex>
+			<Card style={{ backgroundColor: "#222" }}>
 				<ErrorBoundary
 					fallbackRender={(error) => (
 						<FallbackComponent error={error.message} />
@@ -71,10 +48,12 @@ const EditView = forwardRef(function EditView(props, ref) {
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
 						selectedApp={selectedApp}
-						gotoPrev={() => { }}
-						gotoNext={() => { }}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
 						theme={theme}
-						isNewApp={false}
+						isNewApp={isNewApp}
+						forceUpdate={forceUpdate}
+						randomId={randomId}
 					/>
 				</ErrorBoundary>
 			</Card>

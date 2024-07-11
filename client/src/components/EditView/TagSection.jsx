@@ -4,7 +4,7 @@ import "@yaireo/tagify/dist/tagify.css";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
 
 const TagSection = (props) => {
-	const { register, appKey } = props;
+	const { register, appKey, isNewApp } = props;
 	window.TAGIFY_DEBUG = true;
 	let tagifyInstance;
 
@@ -14,7 +14,7 @@ const TagSection = (props) => {
 			enforceWhitelist: true,
 			TAGIFY_DEBUG: false,
 		});
-	}, [tagifyInstance]);
+	}, [tagifyInstance, appKey, isNewApp]);
 
 	return (
 		<>

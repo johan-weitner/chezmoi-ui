@@ -9,7 +9,7 @@
     "stop": "./scripts/stop.sh",
     "clean": "rm -rf ./_backups/",
     "checkports": "./scripts/check-port-usage.sh",
-    "install": "pnpm i && cd server && pnpm i && cd ../client && pnpm i && cd ..",
+    "installDeps": "pnpm i && cd server && pnpm i && cd ../client && pnpm i && cd ..",
     "lint": "cd server && pnpm run lint && cd ../client && pnpm run lint && cd ..",
     "lint:fix": "cd server && pnpm run lint:fix && cd ../client && pnpm run lint:fix && cd ..",
     "prepare": "husky"

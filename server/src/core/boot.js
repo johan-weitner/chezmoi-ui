@@ -41,12 +41,10 @@ if (fs.existsSync(backupBasePath)) {
  * @returns {Object} An object containing the software array and the software object.
  */
 export const boot = () => {
-	console.clear();
+	// console.clear();
 	printAppLogo();
 	log.info("  © 2024 Johan Weitner");
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
-
-	console.log("BACKUP-PATH: ", backupPaths);
 
 	_checkEnvVars();
 	const { sourceExists, workExists } = _checkFileExistence();
@@ -64,8 +62,6 @@ export const boot = () => {
 				`Backup interval set to ${process.env.BACKUP_INTERVAL} min ${check} \n`,
 			)
 		: log.warn(`${wsign}   Backup interval not set\n`);
-
-	return _setupFileData();
 };
 
 const _checkEnvVars = () => {
@@ -98,7 +94,7 @@ const _checkFileExistence = () => {
 	return { sourceExists, workExists };
 };
 
-const _setupFileData = () => {
+export const setupFileData = () => {
 	let software;
 	let softwareArray;
 	let backupPaths;

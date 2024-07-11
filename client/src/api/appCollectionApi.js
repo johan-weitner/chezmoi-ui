@@ -30,14 +30,53 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
+export const getTotalCount = async () => {
+	const count = await queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const response = await axios.get(`${BASE_URL}/getCount`);
+			return response.data;
+		},
+	});
+	return count;
+};
+
 export const useAppCollection = () => {
 	return useQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/software`);
-			return response.data;
+			const data = adaptResponseData(response.data);
+			return data;
 		},
 	});
+};
+
+export const useAppPage = (page = 1, limit = 20) => {
+	const skip = (page - 1) * limit;
+	const take = limit;
+	return useQuery({
+		queryKey: ["appCollection", page],
+		queryFn: async () => {
+			const response = await axios.post(
+				`${BASE_URL}/page?skip=${skip}&take=${take}`,
+				{
+					skip,
+					take,
+				},
+			);
+			const data = adaptResponseData(response.data);
+			return data;
+		},
+	});
+};
+
+const adaptResponseData = (data) => {
+	const apps = data?.map((item) => {
+		const obj = JSON.parse(item.JSON);
+		return obj;
+	});
+	return apps;
 };
 
 export const useApp = (key) => {
@@ -208,6 +247,86 @@ export const useAppMutation = () => {
 			return { status: "success" };
 		},
 	});
+};
+
+export const addApp = async (data) => {
+	const result = await queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const result = await axios
+				.post(`${BASE_URL}/addNode`, {
+					params: {
+						...data,
+					},
+				})
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error.message);
+					toast(error.message);
+				});
+			return result;
+		},
+		onMutate: async () => {
+			await queryClient.cancelQueries(["appCollection"]);
+			const previousData = queryClient.getQueryData(["appCollection"]);
+
+			queryClient.setQueryData(["appCollection"], (old) => {
+				return old.push(data);
+			});
+			return { previousData };
+		},
+		onError: (err, updatedNode, context) => {
+			queryClient.setQueryData(["appCollection"], context.previousData);
+			return { status: "error", error: err.message };
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(["appCollection"]);
+			return { status: "success" };
+		},
+	});
+	return result;
+};
+
+export const deleteApp = async (key) => {
+	const result = await queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const result = await axios
+				.delete(`${BASE_URL}/deleteNode`, {
+					params: {
+						key: key,
+					},
+				})
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error.message);
+					toast(error.message);
+				});
+			return result;
+		},
+		onMutate: async () => {
+			await queryClient.cancelQueries(["appCollection"]);
+			const previousData = queryClient.getQueryData(["appCollection"]);
+
+			queryClient.setQueryData(["appCollection"], (old) => {
+				return old.filter((item) => item.key !== key);
+			});
+			return { previousData };
+		},
+		onError: (err, updatedNode, context) => {
+			queryClient.setQueryData(["appCollection"], context.previousData);
+			return { status: "error", error: err.message };
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(["appCollection"]);
+			return { status: "success" };
+		},
+	});
+	return result;
 };
 
 export const useAppCollectionMutation = () => {

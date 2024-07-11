@@ -1,0 +1,122 @@
+{
+    "title": "Chezmoi UI",
+    "cols": [
+        {
+            "title": "Bugs",
+            "tasks": [],
+            "id": "hzj1iq8kv16tn6wgte41bfwn",
+            "color": "#eb144c"
+        },
+        {
+            "title": "To-Do",
+            "tasks": [
+                {
+                    "text": "Dockerize the project",
+                    "id": "n5t17sefuis35v5siz049qlc"
+                },
+                {
+                    "text": "Refactor backend API to use multi-column table",
+                    "id": "puu1i1d7nfzxh06nj7uloy6b"
+                },
+                {
+                    "text": "Refine column header layouts",
+                    "id": "ugdhhg65cmvqkis53ccstyhm"
+                },
+                {
+                    "text": "Refine modal layout. Use fieldsets instead of headers",
+                    "id": "i774yj0cqxyy8cunhjatye3c"
+                },
+                {
+                    "text": "Implement useThrottledCallback et al",
+                    "id": "weut1k30or61ek8t6nfp3o2m"
+                },
+                {
+                    "text": "Stale data lingering when creating new record",
+                    "id": "zau3e18gscyonn2yx18d9qai"
+                },
+                {
+                    "text": "Stale data lingering after deletion",
+                    "id": "v3os63b3tgnj5ws4mf59sz00"
+                },
+                {
+                    "text": "Break up DetailView into smaller pieces",
+                    "id": "pzzee34vjd4qh7mcdrkooasa"
+                },
+                {
+                    "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
+                    "id": "ue9lt3h5rwgnzx6dsu1lunru"
+                },
+                {
+                    "text": "Consolidate CSS modules - single component consumes single module",
+                    "id": "qs6mprszo0yyvuop4k6h3yxv"
+                }
+            ],
+            "id": "s4x8tk72jz2q1vxp1bjscz4o",
+            "color": "#ff6900"
+        },
+        {
+            "title": "Doing",
+            "tasks": [],
+            "id": "a4rk3cab77bidnwm67489nqu",
+            "color": "#0693e3"
+        },
+        {
+            "title": "Done",
+            "tasks": [
+                {
+                    "text": "Keyboard shortcut legend in right hand column",
+                    "id": "h4uwkohnh1vmqibp61a2j4ml"
+                },
+                {
+                    "text": "SQLite in backend",
+                    "id": "h9fuyo8idmjmcwnzar8r1em2"
+                },
+                {
+                    "text": "Keyboard shortcut for flipping pages: OPT + SHIFT + ARROW",
+                    "id": "yqh4c3iyxh1ld294jwhzmrot"
+                },
+                {
+                    "text": "React Hook Form is broken in EditView",
+                    "id": "jhr24fy80f1lzdjlu6lj1gdb"
+                },
+                {
+                    "text": "Implement data layer using Prisma",
+                    "id": "gc5umy54lzcqxmuvlhsrurwq"
+                },
+                {
+                    "text": "Implement paging",
+                    "id": "vfob2x075xuhnprulwda6ka1"
+                },
+                {
+                    "text": "Fix bg-color in header",
+                    "id": "nph1wuni8y7gohfvi5lu2efy"
+                },
+                {
+                    "text": "FIxed position for everything but app list",
+                    "id": "bzxb2r8jx8gk9hunv36882l6"
+                },
+                {
+                    "text": "Fix bg-color in modal",
+                    "id": "n9h2qgqm0p3qvp0nl3qnxpyr"
+                },
+                {
+                    "text": "Consolidate refactor branch with main",
+                    "id": "g7fx5i7j0qns10sg1w4soatn"
+                },
+                {
+                    "text": "Optimize performance",
+                    "id": "rbdvylhyd0oxnk7pp3cu01ck"
+                },
+                {
+                    "text": "Fix buttons and keyboard shortcuts",
+                    "id": "gv4ieem70rxhapad965n8k18"
+                }
+            ],
+            "id": "jn3gjwyx5358rtr80ke72qpb",
+            "color": "#00d084"
+        }
+    ],
+    "autosave": true,
+    "saveToFile": true,
+    "timestamp": 1720684396497
+}

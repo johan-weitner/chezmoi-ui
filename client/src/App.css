@@ -1,8 +1,30 @@
+body {
+  background-color: #121516 !important;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #121516;
+}
+
+.appShellHeader {
+  position: relative !important;
+  padding: 0 20px;
+  margin: 0;
+}
+
+.mainHeader {
+  width: 100%;
+  background-color: #933 !important;
+  padding: 20px !important;
+
+}
+
+.appShellMain {
+  margin-top: -10px;
 }
 
 .logo {
@@ -11,9 +33,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +46,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -48,22 +73,45 @@
   background-color:#999;
   font-family: monospace;
 } */
- .tagify {
-  width:100%;
+.tagify {
+  width: 100%;
   background-color: #262a2b;
-  border-radius:4px;
-  border-color:#FFF;
- }
- .tagify__input {
-  width:100%;
+  border-radius: 4px;
+  border-color: #FFF;
+}
+
+.tagify__input {
+  width: 100%;
   background-color: #262a2b;
- }
- /* .tagify__tag,
+}
+
+/* .tagify__tag,
  .tagify__tag > div,
  .tagify__tag > x  {
   background-color:#ccc !important;
  } */
-  .tagify__tag {
-    border:1px solid #FFF;
-    border-radius:3px;
-  }
+.tagify__tag {
+  border: 1px solid #FFF;
+  border-radius: 3px;
+}
+
+.mantine-Modal-content {
+  border: 5px solid #333;
+}
+
+.mantine-Modal-content,
+.mantine-Modal-body {
+  background-color: #222 !important;
+  color: #FFF;
+  /* margin-top: 50px; */
+  position: absolute;
+  top: 120px;
+  width: 1000px;
+  height: 800px !important;
+  ;
+}
+
+.mantine-Modal-body {
+  margin-top: -80px !important;
+  padding-top: 0 !important;
+}
