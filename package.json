@@ -3,32 +3,32 @@
   "version": "1.0.0",
   "description": "A local web UI for managing the software list in a Chezmoi installation",
   "main": "start.sh",
-  "scripts": {
-    "start": "./scripts/start.sh",
-    "start:force": "./scripts/start.sh -f",
-    "stop": "./scripts/stop.sh",
-    "clean": "rm -rf ./_backups/",
-    "checkports": "./scripts/check-port-usage.sh",
-    "installDeps": "pnpm i && cd server && pnpm i && cd ../client && pnpm i && cd ..",
-    "lint": "cd server && pnpm run lint && cd ../client && pnpm run lint && cd ..",
-    "lint:fix": "cd server && pnpm run lint:fix && cd ../client && pnpm run lint:fix && cd ..",
-    "prepare": "husky"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
-  },
-  "keywords": [
-    "chezmoi",
-    "ui",
-    "dotfiles"
-  ],
   "author": "Johan Weitner",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/johan-weitner/chezmoi-ui/issues"
   },
   "homepage": "https://github.com/johan-weitner/chezmoi-ui#readme",
+  "keywords": [
+    "chezmoi",
+    "ui",
+    "dotfiles"
+  ],
+  "scripts": {
+    "start": "./scripts/start.sh",
+    "start:force": "./scripts/start.sh -f",
+    "stop": "./scripts/stop.sh",
+    "checkports": "./scripts/check-port-usage.sh",
+    "installDeps": "./scripts/install-deps.sh",
+    "lint": "./scripts/lint.sh",
+    "lint:fix": "./scripts/lint.sh -f",
+    "prepare": "husky",
+    "lint-staged": "lint-staged"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
+  },
   "dependencies": {
     "@changesets/cli": "^2.27.7",
     "husky": "^9.0.11",

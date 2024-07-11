@@ -11,16 +11,8 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Abstract npm scripts to shell scripts",
-                    "id": "mw1v72jp0igbwczicgrej0r3"
-                },
-                {
                     "text": "Auto-load next page when navigating past last item",
                     "id": "mjr1u2yt48eci0c6iadmd2ev"
-                },
-                {
-                    "text": "On page load: Select first item",
-                    "id": "bwdmn65cbn6vrfl4zyl3v0oh"
                 },
                 {
                     "text": "Refactor backend API to use multi-column table",
@@ -66,8 +58,8 @@
             "title": "Doing",
             "tasks": [
                 {
-                    "text": "Remove code related to file-based backend, including backup impl",
-                    "id": "l2tus5amqbuhv73q9ass12ls"
+                    "text": "On page load: Select first item",
+                    "id": "bwdmn65cbn6vrfl4zyl3v0oh"
                 }
             ],
             "id": "a4rk3cab77bidnwm67489nqu",
@@ -76,6 +68,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Abstract npm scripts to shell scripts",
+                    "id": "mw1v72jp0igbwczicgrej0r3"
+                },
                 {
                     "text": "Dockerize the project",
                     "id": "n5t17sefuis35v5siz049qlc"
@@ -127,6 +123,10 @@
                 {
                     "text": "Fix buttons and keyboard shortcuts",
                     "id": "gv4ieem70rxhapad965n8k18"
+                },
+                {
+                    "text": "Remove code related to file-based backend, including backup impl",
+                    "id": "l2tus5amqbuhv73q9ass12ls"
                 }
             ],
             "id": "jn3gjwyx5358rtr80ke72qpb",
@@ -135,5 +135,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720714093701
+    "timestamp": 1720728858870
 }

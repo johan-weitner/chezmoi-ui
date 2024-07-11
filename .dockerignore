@@ -1,0 +1,12 @@
+.env
+.gitignore
+biome.json
+*.log
+turbo.json
+node_modules
+**/node_modules
+pnpm-lock.yaml
+**/pnpm-lock.yaml
+.git
+Dockerfile
+docker-compose.yml
