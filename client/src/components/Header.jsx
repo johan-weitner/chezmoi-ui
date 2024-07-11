@@ -2,7 +2,6 @@ import { Center, Container, Group, Title } from "@mantine/core";
 import { useIsFetching, useIsMutating } from "@tanstack/react-query";
 import { useEffect } from "react";
 import React from "react";
-import { useLoading } from "../api/appCollectionApi";
 import BarSpinner from "./BarSpinner";
 import classes from "./Header.module.css";
 import Toolbar from "./Toolbar";

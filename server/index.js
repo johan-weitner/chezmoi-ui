@@ -4,7 +4,6 @@ import express from 'express';
 import cors from 'cors';
 import YAML from 'yaml';
 import fs from 'fs';
-import { targetFilePath } from './src/core/config.js';
 import { boot, setupFileData } from './src/core/boot.js';
 import { isEmpty } from './src/core/api.js';
 import { log } from './src/util/winston.js';
@@ -120,16 +119,6 @@ app.post('/page', (req, res) => {
       res.json(apps);
     });
 });
-
-// app.get('/softwares', (req, res) => {
-//   res = attachHeaders(res);
-//   res.json(keys);
-// });
-
-// app.get('/backups', (req, res) => {
-//   res = attachHeaders(res);
-//   res.json(backupPaths);
-// });
 
 app.get('/rawlist', (req, res) => {
   res = attachHeaders(res);
