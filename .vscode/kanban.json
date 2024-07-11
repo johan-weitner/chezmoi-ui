@@ -11,6 +11,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Remove code related to file-based backend, including backup impl",
+                    "id": "l2tus5amqbuhv73q9ass12ls"
+                },
+                {
                     "text": "Auto-load next page when navigating past last item",
                     "id": "mjr1u2yt48eci0c6iadmd2ev"
                 },
@@ -126,5 +130,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720704059337
+    "timestamp": 1720708642029
 }
