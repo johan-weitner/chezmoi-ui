@@ -23,15 +23,10 @@ In my experience, working through very large lists like this one, it helps to do
 
 Finally, I'd recommend forking this repository and pushing `software-custom.json`regularly. Either that, or find some other way of safe-keeping the work you do on your list. But forking seems like the quick and easy way. In fact, I might add syncing with a Git repo in the UI, but for now it's just a local file.
 
-## Building the Docker Image
-Navigate to the Project Directory: Ensure you're in the root directory of your project where the Dockerfile is located.
+## Run in Docker Container
+Alternatively, if you don't want to install Node, you can run it in a Docker container:
 
-Build the Docker Image: 
-
-`docker build -t chezmoi-ui`
-
-## Running the Docker Container
-```docker run -d -p 3000:3000 -p 8080:8080 chezmoi-ui```
+```docker-compose up --build```
 
 ## Keyboard shortcuts
 
