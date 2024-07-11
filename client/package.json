@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "host": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "pnpm biome check ./src",
@@ -48,8 +49,5 @@
     "postcss-simple-vars": "^7.0.1",
     "turbo": "^2.0.6",
     "vite": "^5.3.3"
-  },
-  "volta": {
-    "node": "20.15.0"
   }
 }

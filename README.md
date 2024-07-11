@@ -23,6 +23,11 @@ In my experience, working through very large lists like this one, it helps to do
 
 Finally, I'd recommend forking this repository and pushing `software-custom.json`regularly. Either that, or find some other way of safe-keeping the work you do on your list. But forking seems like the quick and easy way. In fact, I might add syncing with a Git repo in the UI, but for now it's just a local file.
 
+## Run in Docker Container
+Alternatively, if you don't want to install Node, you can run it in a Docker container:
+
+```docker-compose up --build```
+
 ## Keyboard shortcuts
 
 | Shortcut                  | Action                                                       |

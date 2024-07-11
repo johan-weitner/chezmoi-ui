@@ -1,21 +1,10 @@
 import fs from "node:fs";
+import YAML from "yaml";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
 import { backupBasePath, softwareYamlPath, targetFilePath } from "./config.js";
 import { printAppLogo } from "./logo.js";
 
-/**
- * Exports a set of styles used for logging and formatting output in the application.
- * The exported styles include:
- * - `success`: A style for successful messages
- * - `warn`: A style for warning messages
- * - `error`: A style for error messages
- * - `bold`: A style for bold text
- * - `italic`: A style for italic text
- * - `check`: A checkmark symbol
- * - `cross`: An X symbol
- * - `wsign`: A warning symbol
- */
 export const { success, warn, error, bold, italic, check, cross, wsign } =
 	styles;
 
@@ -30,18 +19,7 @@ if (fs.existsSync(backupBasePath)) {
 	});
 }
 
-/**
- * Initializes the backend server by performing the following steps:
- * - Prints the application logo.
- * - Checks if the required environment variables (SOURCE_FILE and TARGET_FILE) are set.
- * - Checks if the source and work files exist.
- * - Prints setup info
- * - Sets up the file data by either opening an existing work-in-progress file or reading the source file to seed a starting point.
- *
- * @returns {Object} An object containing the software array and the software object.
- */
 export const boot = () => {
-	// console.clear();
 	printAppLogo();
 	log.info("  © 2024 Johan Weitner");
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
@@ -95,10 +73,10 @@ const _checkFileExistence = () => {
 };
 
 export const setupFileData = () => {
-	let software;
-	let softwareArray;
-	let backupPaths;
-	let keys;
+	let software = [];
+	let softwareArray = [];
+	let backupPaths = [];
+	let keys = [];
 	if (fs.existsSync(targetFilePath)) {
 		log.info("Work in progress exists - opening WiP:");
 		log.info(targetFilePath);
