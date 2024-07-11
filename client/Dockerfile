@@ -14,4 +14,4 @@ RUN npm install -g pnpm && pnpm install
 EXPOSE 8000
 
 # Start client
-CMD ["pnpm", "start"]
+CMD ["pnpm", "host"]
