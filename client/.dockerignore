@@ -1,0 +1,7 @@
+.env
+.gitignore
+biome.json
+*.log
+turbo.json
+node_modules
+pnpm-lock.yaml

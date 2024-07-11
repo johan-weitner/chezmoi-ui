@@ -11,8 +11,12 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Dockerize the project",
-                    "id": "n5t17sefuis35v5siz049qlc"
+                    "text": "Auto-load next page when navigating past last item",
+                    "id": "mjr1u2yt48eci0c6iadmd2ev"
+                },
+                {
+                    "text": "On page load: Select first item",
+                    "id": "bwdmn65cbn6vrfl4zyl3v0oh"
                 },
                 {
                     "text": "Refactor backend API to use multi-column table",
@@ -63,6 +67,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Dockerize the project",
+                    "id": "n5t17sefuis35v5siz049qlc"
+                },
                 {
                     "text": "Keyboard shortcut legend in right hand column",
                     "id": "h4uwkohnh1vmqibp61a2j4ml"
@@ -118,5 +126,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720684396497
+    "timestamp": 1720704059337
 }

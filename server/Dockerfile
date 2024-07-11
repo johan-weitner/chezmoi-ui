@@ -11,6 +11,12 @@ COPY server/.env.docker .env
 # Install dependencies
 RUN npm install -g pnpm && pnpm install
 
+# Generate Prisma client
+RUN pnpx prisma generate
+
+# Create db
+RUN pnpx prisma migrate dev
+
 # Expose server port
 EXPOSE 3000
 

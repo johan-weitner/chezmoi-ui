@@ -28,6 +28,8 @@ Alternatively, if you don't want to install Node, you can run it in a Docker con
 
 ```docker-compose up --build```
 
+On subsequent use, skip the `--build` flag. (Re-build is of course needed if you update the repo).
+
 ## Keyboard shortcuts
 
 | Shortcut                  | Action                                                       |
