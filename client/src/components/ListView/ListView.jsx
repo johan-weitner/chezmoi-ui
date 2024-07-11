@@ -20,6 +20,12 @@ const ListView = (props) => {
 		updateCurrentListKeys,
 		currentPage,
 		setCurrentPage,
+		numPages,
+		setNumPages,
+		totalCount,
+		setTotalCount,
+		gotoPrev,
+		gotoNext,
 	} = props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
@@ -30,8 +36,8 @@ const ListView = (props) => {
 	// const [error, setError] = useState();
 	// const [isLoading, setIsLoading] = useState();
 
-	const [numPages, setNumPages] = useState(1);
-	const [totalCount, setTotalCount] = useState(1);
+	// const [numPages, setNumPages] = useState(1);
+	// const [totalCount, setTotalCount] = useState(1);
 	const { data: software, error, isLoading } = useAppPage(currentPage);
 
 	useEffect(() => {
@@ -66,17 +72,24 @@ const ListView = (props) => {
 	const nextPage = () => {
 		if (currentPage < numPages) {
 			setCurrentPage(currentPage + 1);
+		} else if (page < numPages) {
+			console.log("Reached end of page, flipping to next page...");
+			setPage(page + 1);
+		} else {
+			console.log("Fell through...");
 		}
 	};
 
 	const prevPage = () => {
 		if (currentPage > 1) {
 			setCurrentPage(currentPage - 1);
+		} else if (page > 1) {
+			console.log("Reached beginning of page, flipping to previous page...");
+			setPage(page - 1);
+		} else {
+			console.log("Fell through...");
 		}
 	};
-
-	useHotkeys("shift + alt + left", () => prevPage());
-	useHotkeys("shift + alt + right", () => nextPage());
 
 	return (
 		<ErrorBoundary

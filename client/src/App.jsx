@@ -10,6 +10,8 @@ function App() {
 	const [selectedAppKey, setSelectedAppKey] = useState(null);
 	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [numPages, setNumPages] = useState(1);
+	const [totalCount, setTotalCount] = useState(1);
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
 	useHotkeys("alt + left", () => gotoPrev());
@@ -31,7 +33,6 @@ function App() {
 	};
 
 	const selectApp = (key) => {
-		console.log("Selected app: ", key);
 		setSelectedAppKey(key);
 	};
 
@@ -45,6 +46,10 @@ function App() {
 			if (index > 0) {
 				const prevKey = currentListKeys[index - 1].key;
 				selectApp(prevKey);
+			} else if (currentPage > 1) {
+				console.log("Reached beginning of page, flipping to previous page...");
+				setCurrentPage(currentPage - 1);
+				// setSelectedAppKey(currentListKeys[currentListKeys.length - 1].key);
 			}
 		}
 	};
@@ -55,6 +60,10 @@ function App() {
 			if (index < currentListKeys.length - 1) {
 				const nextKey = currentListKeys[index + 1].key;
 				selectApp(nextKey);
+			} else if (currentPage < numPages) {
+				console.log("Reached end of page, flipping to next page...");
+				setCurrentPage(currentPage + 1);
+				// setSelectedAppKey(currentListKeys[0].key);
 			}
 		}
 	};
@@ -81,6 +90,10 @@ function App() {
 				setIsPopoverOpen={setIsPopoverOpen}
 				currentPage={currentPage}
 				setCurrentPage={setCurrentPage}
+				numPages={numPages}
+				setNumPages={setNumPages}
+				totalCount={totalCount}
+				setTotalCount={setTotalCount}
 			/>
 			{/* </AppShell.Main> */}
 			<Toaster

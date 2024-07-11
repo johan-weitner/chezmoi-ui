@@ -24,6 +24,10 @@ const MainView = (props) => {
 		setIsPopoverOpen,
 		currentPage,
 		setCurrentPage,
+		numPages,
+		setNumPages,
+		totalCount,
+		setTotalCount,
 	} = props;
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
@@ -69,6 +73,12 @@ const MainView = (props) => {
 						updateCurrentListKeys={updateCurrentListKeys}
 						currentPage={currentPage}
 						setCurrentPage={setCurrentPage}
+						numPages={numPages}
+						setNumPages={setNumPages}
+						totalCount={totalCount}
+						setTotalCount={setTotalCount}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
 					/>
 					{/* {selectedAppKey && ( */}
 					<DetailView

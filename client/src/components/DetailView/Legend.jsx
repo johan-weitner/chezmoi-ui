@@ -20,7 +20,7 @@ const Legend = (props) => {
 			<table className={s.legendTable}>
 				<thead>
 					<tr>
-						<th width="40%">
+						<th width="45%">
 							<Text size="sm">Keyboard shortcut</Text>
 						</th>
 						<th>

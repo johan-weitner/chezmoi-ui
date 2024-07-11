@@ -196,9 +196,6 @@ const DetailView = (props) => {
 						) : (
 							<Legend />
 						)}
-						<Text size="sm">
-							Scroll: {scroll.x}, {scroll.y}
-						</Text>
 					</Card>
 				</Card>
 			</Sticky>
