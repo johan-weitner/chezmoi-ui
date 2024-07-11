@@ -1,12 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-import { AppShell, Center, Container } from "@mantine/core";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Toaster } from "sonner";
-import Header from "./components/Header";
 import MainView from "./components/MainView/MainView";
 import "@yaireo/tagify/dist/tagify.css";
-import classes from "./components/Header.module.css";
 
 function App() {
 	const [currentListKeys, setCurrentListKeys] = useState([]);

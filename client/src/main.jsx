@@ -12,10 +12,6 @@ const theme = createTheme({
 
 const queryClient = new QueryClient();
 
-/**
- * Renders the main React application with the Mantine theme provider.
- * This is the entry point for the application, and it sets up the initial rendering of the App component.
- */
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>

@@ -2,22 +2,11 @@ import fs from "node:fs";
 import YAML from "yaml";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
-import { backupBasePath, softwareYamlPath, targetFilePath } from "./config.js";
+import { softwareYamlPath } from "./config.js";
 import { printAppLogo } from "./logo.js";
 
 export const { success, warn, error, bold, italic, check, cross, wsign } =
 	styles;
-
-// Redundant?
-export let backupPaths = [];
-
-// Redundant?
-if (fs.existsSync(backupBasePath)) {
-	const backupFiles = fs.readdirSync(backupBasePath);
-	backupPaths = backupFiles.map((file) => {
-		return `${backupBasePath}/${file}`;
-	});
-}
 
 export const boot = () => {
 	printAppLogo();
@@ -25,29 +14,20 @@ export const boot = () => {
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
 
 	_checkEnvVars();
-	const { sourceExists, workExists } = _checkFileExistence();
+	const { sourceExists } = _checkFileExistence();
 
 	log.info(bold("Path to source file: ") + softwareYamlPath);
 	sourceExists
 		? log.success(`Found ${check} \n`)
 		: log.error(`Not found ${cross} \n`);
-	log.info(bold("Path to work file: ") + targetFilePath);
-	workExists
-		? log.success(`Found ${check} \n`)
-		: log.error(`Not found ${cross} \n`);
-	process.env.BACKUP_INTERVAL && process.env.BACKUP_INTERVAL > 0
-		? log.success(
-				`Backup interval set to ${process.env.BACKUP_INTERVAL} min ${check} \n`,
-			)
-		: log.warn(`${wsign}   Backup interval not set\n`);
 };
 
 const _checkEnvVars = () => {
-	if (!softwareYamlPath || !targetFilePath) {
-		log.error(error("Missing environment variables"));
+	if (!softwareYamlPath) {
+		log.error(error("Missing environment variable"));
 		log.error(
 			error(
-				"Please set SOURCE_FILE and TARGET_FILE, in either a .env file or in your environment",
+				"Please set SOURCE_FILE in either a .env file or in your environment",
 			),
 		);
 		process.exit(1);
@@ -56,63 +36,36 @@ const _checkEnvVars = () => {
 
 const _checkFileExistence = () => {
 	const sourceExists = fs.existsSync(softwareYamlPath);
-	const workExists = fs.existsSync(targetFilePath);
 
-	if (!sourceExists && !workExists) {
-		log.error(error("Neither source file nor work file exists "));
+	if (!sourceExists) {
+		log.error(error("Source file is missing"));
 		log.error(
 			error(
 				"\x1b[31m%s\x1b[0m",
-				"Please point SOURCE_FILE and TARGET_FILE to existing files",
+				"Please point SOURCE_FILE to an existing file",
 			),
 		);
 		process.exit(1);
 	}
 
-	return { sourceExists, workExists };
+	return { sourceExists };
 };
 
 export const setupFileData = () => {
 	let software = [];
-	let softwareArray = [];
-	let backupPaths = [];
+	const softwareArray = [];
 	let keys = [];
-	if (fs.existsSync(targetFilePath)) {
-		log.info("Work in progress exists - opening WiP:");
-		log.info(targetFilePath);
 
-		backupPaths = [];
-		softwareArray = fs.readFileSync(targetFilePath, "utf8");
-		software = JSON.parse(softwareArray);
-		keys = Object.keys(software);
-		console.log(italic(`List size: ${Object.keys(software).length}`));
-	} else {
-		log.info(
-			"Work in progress does not exist - opening source file to seed a starting point:",
-		);
-		log.info(softwareYamlPath);
+	log.info(softwareYamlPath);
+	const softwareYaml = fs.readFileSync(softwareYamlPath, "utf8");
+	software = YAML.parse(softwareYaml).softwarePackages;
+	keys = Object.keys(software);
 
-		const softwareYaml = fs.readFileSync(softwareYamlPath, "utf8");
-		software = YAML.parse(softwareYaml).softwarePackages;
-		keys = Object.keys(software);
-
-		for (let i = 0; i < keys.length; i++) {
-			softwareArray.push(software[keys[i]]);
-			softwareArray[i].key = keys[i];
-		}
-		console.log(italic(`List size: ${keys.length}`));
-		backupPaths = _readBackups();
+	for (let i = 0; i < keys.length; i++) {
+		softwareArray.push(software[keys[i]]);
+		softwareArray[i].key = keys[i];
 	}
-	return { softwareArray, software, backupPaths, keys };
-};
+	console.log(italic(`List size: ${keys.length}`));
 
-const _readBackups = () => {
-	if (fs.existsSync(backupBasePath)) {
-		const backupFiles = fs.readdirSync(backupBasePath);
-		const backupPaths = backupFiles.map((file) => {
-			return `${backupBasePath}/${file}`;
-		});
-		return backupPaths;
-	}
-	return [];
+	return { softwareArray, software, keys };
 };

@@ -15,10 +15,6 @@
                     "id": "mw1v72jp0igbwczicgrej0r3"
                 },
                 {
-                    "text": "Remove code related to file-based backend, including backup impl",
-                    "id": "l2tus5amqbuhv73q9ass12ls"
-                },
-                {
                     "text": "Auto-load next page when navigating past last item",
                     "id": "mjr1u2yt48eci0c6iadmd2ev"
                 },
@@ -68,7 +64,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Remove code related to file-based backend, including backup impl",
+                    "id": "l2tus5amqbuhv73q9ass12ls"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -134,5 +135,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720711807463
+    "timestamp": 1720714093701
 }
