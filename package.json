@@ -38,15 +38,13 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "./server/**/*.{js,jsx}": [
-      "cd server",
-      "pnpm run lint",
-      "cd .."
-    ],
-    "./client/**/*.{js,jsx}": [
-      "cd client",
-      "pnpm run lint",
-      "cd .."
+    "*.{js,cjs,mjs,jsx}": [
+      "biome check --files-ignore-unknown=true",
+      "biome check --write --no-errors-on-unmatched",
+      "biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
+      "biome check --write --unsafe --no-errors-on-unmatched",
+      "biome format --write --no-errors-on-unmatched",
+      "biome lint --write --no-errors-on-unmatched"
     ]
   },
   "type": "module"

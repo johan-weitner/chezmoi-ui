@@ -1,0 +1,16 @@
+
+.cancelBtn {
+  background-color: #555 !important;
+}
+
+.editBtn {
+  background-color: var(--mantine-color-blue-filled) !important;
+}
+
+.deleteBtn {
+  background-color: #933 !important;
+}
+
+.saveBtn {
+  background-color: #393 !important;
+}

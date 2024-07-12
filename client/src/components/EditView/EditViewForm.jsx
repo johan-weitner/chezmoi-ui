@@ -1,12 +1,14 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { Button, Group, Text } from "@mantine/core";
+import { Button, Group } from "@mantine/core";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
 
 import { addApp, useAppMutation } from "api/appCollectionApi";
-import classes from "../MainView/MainView.module.css";
+import btn from "components/Buttons.module.css";
+import Debugger from "./Debugger";
+import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
@@ -64,23 +66,18 @@ const EditViewForm = (props) => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
-			<h2 className={classes.editDetailHeader}>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			style={{ padding: "0 !important", margin: "0 !important" }}
+		>
+			<h2 className={css.editDetailHeader}>
 				{selectedApp?._name || "New application"}
 			</h2>
-			<Text size="sm">
-				selectedApp: {selectedApp ? "true" : "false"} | isNewApp:{" "}
-				{isNewApp ? "true" : "false"} | RandomId: {randomId()}
-			</Text>
-			<button
-				type="button"
-				onClick={() => {
-					resetForm();
-				}}
-			>
-				Reset
-			</button>
-
+			<Debugger
+				selectedApp={selectedApp}
+				isNewApp={isNewApp}
+				resetForm={resetForm}
+			/>
 			<InfoSection
 				formPartOne={formPartOne}
 				register={register}
@@ -98,12 +95,12 @@ const EditViewForm = (props) => {
 			/>
 
 			<Group justify="center">
-				<Button onClick={() => closePopover()} className={classes.cancelBtn}>
+				<Button onClick={() => closePopover()} className={btn.cancelBtn}>
 					Cancel
 				</Button>
 				<Button
 					type="submit"
-					className={classes.saveBtn}
+					className={btn.saveBtn}
 					leftSection={<ICON.save />}
 				>
 					Save

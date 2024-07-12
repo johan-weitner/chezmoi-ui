@@ -20,6 +20,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
+                    "id": "sfkt8exlnp0dxds69zu0iei9"
+                },
+                {
                     "text": "After switching tables: Search presets, for querying records with missing data",
                     "id": "al7skfjf6v60tg7o76fywi8t"
                 },
@@ -160,5 +164,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720813620387
+    "timestamp": 1720816365023
 }

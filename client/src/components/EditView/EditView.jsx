@@ -38,8 +38,25 @@ const EditView = forwardRef(function EditView(props, ref) {
 			radius="10"
 			size="xl"
 			transitionProps={{ duration: 2500, transition: "pop" }}
+			style={
+				{
+					// height: "100vh !important",
+					// maxHeight: "2000px !important",
+					// bottom: "120px",
+					// padding: "0 !important",
+				}
+			}
 		>
-			<Card style={{ backgroundColor: "#222" }}>
+			<Card
+				style={{
+					backgroundColor: "#222",
+					// position: "fixed",
+					// bottom: "50px",
+					// top: "50px",
+					// height: "90vh",
+					// padding: "0 !important",
+				}}
+			>
 				<ErrorBoundary
 					fallbackRender={(error) => (
 						<FallbackComponent error={error.message} />
@@ -56,6 +73,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 						isNewApp={isNewApp}
 						forceUpdate={forceUpdate}
 						randomId={randomId}
+						// style={{ height: "90vh", padding: "0 !important" }}
 					/>
 				</ErrorBoundary>
 			</Card>

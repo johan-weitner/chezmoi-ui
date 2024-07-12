@@ -243,13 +243,7 @@ max-height: calc(100vh - 300px);
   right: 10px;
 }
 
-.editDetailHeader {
-  margin: 0 0 30px 0;
-  font-size: 2.5em;
-  font-weight: normal;
-  text-align: left;
-  border-bottom: 2px solid #333;
-}
+
 
 .fieldcontainer {
   margin: 0 0 40px 0;
@@ -289,9 +283,7 @@ max-height: calc(100vh - 300px);
   margin-bottom: 20px;
 }
 
-.cancelBtn {
-  background-color: #555 !important;
-}
+
 
 .editBtn {
   background-color: var(--mantine-color-blue-filled) !important;
