@@ -28,17 +28,19 @@ Alternatively, if you don't want to install Node, you can run it in a Docker con
 
 ```docker-compose up --build```
 
-On subsequent use, skip the `--build` flag. (Re-build is of course needed if you update the repo).
+On subsequent use, skip the `--build` flag. (A re-build is of course needed if you update the repo and want to use the update).
 
 ## Keyboard shortcuts
 
-| Shortcut                  | Action                                                       |
-| ------------------------- | ------------------------------------------------------------ |
-| `[OPT/ALT + Left arrow]`  | Go to previous application in the list                       |
-| `[OPT/ALT + Right arrow]` | Go to next application in the last                           |
-| `[CTRL + S]`              | In edit view: Save edited list item. In list view: Save whole list |
-| `[ESCAPE]`                | Close the edit view                                          |
-| `[e]`                     | Open the edit view                                           |
+| Shortcut                          | Action                                                       |
+| --------------------------------- | ------------------------------------------------------------ |
+| `[OPT/ALT + Left arrow]`          | Go to previous application in the list                       |
+| `[OPT/ALT + Right arrow]`         | Go to next application in the last                           |
+| `[CTRL + S]`                      | In edit view: Save edited list item. In list view: Save whole list |
+| `[ESCAPE]`                        | Close the edit view                                          |
+| `[OPT/ALT + E]`                   | Open the edit view                                           |
+| `[SHIFT + OPT/ALT + Left arrow]`  | Go to previous page in paged resultset                       |
+| `[SHIFT + OPT/ALT + Right arrow]` | Go to next page in paged resultset                           |
 
 
 ## Known issues
@@ -47,13 +49,11 @@ On subsequent use, skip the `--build` flag. (Re-build is of course needed if you
 
 ## The stack
 - React
+- Prisma
+- React Query
 - Mantine UI
 - Vite
 - TurboRepo
-- react-hook-form
-- react-hotkeys-hook
-- Sonner
-- YAML (a parser)
 - Node 20+
 
 
@@ -62,3 +62,6 @@ On subsequent use, skip the `--build` flag. (Re-build is of course needed if you
 [MIT](https://opensource.org/license/MIT)
 
 (c) 2024 Johan Weitner
+
+
+[![Made with Prisma](http://made-with.prisma.io/dark.svg)](https://prisma.io)
