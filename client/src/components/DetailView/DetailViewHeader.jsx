@@ -1,26 +1,31 @@
-import { ActionIcon, Text, rem } from "@mantine/core";
+import { ActionIcon, Group, Text, rem } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
+import commonCss from "components/MainView//MainView.module.css";
 import { ICON } from "../../constants/icons";
+import css from "./DetailView.module.css";
 
 const DetailViewHeader = (props) => {
-	const { theme, isPopoverOpen, gotoPrev, gotoNext } = props;
+	const { theme, isPopoverOpen, gotoPrev, gotoNext, hasSelection } = props;
 
 	return (
 		<>
-			<ICON.detail
-				style={{ width: rem(50), height: rem(50) }}
-				stroke={2}
-				color={theme.colors.blue[6]}
-			/>
-			{/* <Text
-				fz="lg"
-				fw={500}
-				className={classes.cardTitle}
-				mt="md"
-				style={{ textAlign: "left" }}
-			>
-				Detail view - popOverOpen: {isPopoverOpen.toString()}
-			</Text> */}
+			<Group className={commonCss.cardTitleContainer}>
+				<ICON.detail
+					style={{ width: rem(50), height: rem(50) }}
+					stroke={2}
+					color={theme.colors.blue[6]}
+					className={commonCss.cardTitleIcon}
+				/>
+				<Text
+					fz="lg"
+					fw={500}
+					className={commonCss.cardTitle}
+					mt="md"
+					style={{ textAlign: "left" }}
+				>
+					{hasSelection ? "Detail view" : "Legend"}
+				</Text>
+			</Group>
 			<ActionIcon
 				size={32}
 				radius="xl"

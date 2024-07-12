@@ -7,13 +7,11 @@ import { EditedIndicator } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
 
 export const ListItem = (props) => {
-	const { selectApp, app, selectedAppKey, deleteItem } = props;
+	const { selectApp, app, selectedAppKey, deleteItem, editItem } = props;
 	const { data: software } = useAppCollection();
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
-
-	const editItem = () => {};
 
 	return (
 		<ErrorBoundary

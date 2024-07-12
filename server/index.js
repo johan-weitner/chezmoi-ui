@@ -91,8 +91,8 @@ const attachHeaders = (res) => {
 };
 
 app.get('/', (req, res) => {
-  res = attachHeaders(res);
-  res.redirect('/software');
+  // res = attachHeaders(res);
+  attachHeaders(res).redirect('/software');
 });
 
 app.get('/software', (req, res) => {
@@ -161,9 +161,14 @@ app.post('/updateNode', (req, res) => {
 });
 
 app.post('/addNode', (req, res) => {
-  const { body: { key } } = req;
-  console.log('Body: ', body);
-  addApp(key, JSON.stringify(body))
+  console.log('Req.body: ', req.body);
+  const { params } = req.body;
+  const { key } = params;
+  // delete params.values
+  const { values, keepDirty, keepDirtyFields, keepValues, keepDefaultValues, ...newParams } = params;
+  // params = newParams;
+  console.log('Req params: ', newParams);
+  addApp(key, JSON.stringify(params))
     .then((app) => {
       res = attachHeaders(res);
       res.status(200).json(app);

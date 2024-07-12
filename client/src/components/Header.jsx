@@ -8,7 +8,7 @@ import Toolbar from "./Toolbar";
 import logo from "./logo.svg";
 
 const Header = (props) => {
-	const { gotoPrev, gotoNext, addItem } = props;
+	const { gotoPrev, gotoNext, addItem, deleteItem } = props;
 	const isFetching = useIsFetching();
 	const isMutating = useIsMutating();
 	// console.log("isFetching: ", isFetching);
@@ -35,8 +35,7 @@ const Header = (props) => {
 				<img src={logo} alt="Logo" className={classes.logo} />
 				<Title className={classes.logoTitle}>Chezmoi UI</Title>
 			</Group>
-			<Toolbar />
-
+			<Toolbar addItem={addItem} deleteItem={deleteItem} />
 			{/* </div> */}
 			{/* <div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div> */}
 		</Group>

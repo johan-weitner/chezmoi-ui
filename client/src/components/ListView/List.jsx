@@ -11,6 +11,7 @@ const List = (props) => {
 		error,
 		loading,
 		deleteItem,
+		editItem,
 	} = props;
 	const errorMsg = error ? <div>ERROR: {error.message || error}</div> : null;
 	// const skeleton = [];
@@ -49,6 +50,7 @@ const List = (props) => {
 						app={item}
 						key={item}
 						deleteItem={deleteApp}
+						editItem={editItem}
 					/>
 				);
 			})}

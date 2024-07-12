@@ -20,6 +20,8 @@ const MainView = (props) => {
 		gotoPrev,
 		gotoNext,
 		addItem,
+		editItem,
+		deleteApp,
 		isPopoverOpen,
 		setIsPopoverOpen,
 		currentPage,
@@ -37,15 +39,7 @@ const MainView = (props) => {
 	const deleteItem = (key) => {
 		console.log("Deleting app with key: ", key);
 		if (key === selectedAppKey) setSelectedAppKey(null);
-		deleteApp(key)
-			.then((res) => {
-				// setApps(filteredApps.filter(item => item.key !== key));
-				// console.log('Deleted app: ', res);
-				// console.log(apps);
-			})
-			.catch((err) => {
-				console.log("Error deleting app: ", err);
-			});
+		deleteApp(key);
 	};
 
 	return (
@@ -55,7 +49,7 @@ const MainView = (props) => {
 				className={classes.mainContainer}
 				style={{ minHeight: "100% !important" }}
 			>
-				<Header />
+				<Header addItem={addItem} deleteItem={deleteItem} />
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"
@@ -67,9 +61,10 @@ const MainView = (props) => {
 						theme={theme}
 						selectApp={selectApp}
 						selectedAppKey={selectedAppKey}
-						deleteItem={deleteItem}
 						setIsPopoverOpen={setIsPopoverOpen}
 						addItem={addItem}
+						editItem={editItem}
+						deleteItem={deleteItem}
 						updateCurrentListKeys={updateCurrentListKeys}
 						currentPage={currentPage}
 						setCurrentPage={setCurrentPage}
@@ -83,9 +78,12 @@ const MainView = (props) => {
 					{/* {selectedAppKey && ( */}
 					<DetailView
 						appKey={selectedAppKey}
+						setSelectedAppKey={setSelectedAppKey}
 						theme={theme}
 						isPopoverOpen={isPopoverOpen}
 						setIsPopoverOpen={setIsPopoverOpen}
+						editItem={editItem}
+						deleteItem={deleteItem}
 						gotoPrev={gotoPrev}
 						gotoNext={gotoNext}
 					/>

@@ -37,17 +37,43 @@
 
 .card {
   border: rem(1px) solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+  padding-top:20px !important;
 }
+.cardTitleContainer {
+  position:relative;
+  border-bottom: 1px solid var(--mantine-color-blue-filled);
+  width:100% !important;
+  margin-bottom:20px;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, .2);
 
-.cardTitle {
-  &::after {
-    content: '';
-    display: block;
-    background-color: var(--mantine-color-blue-filled);
-    width: rem(45px);
-    height: rem(2px);
-    margin-top: var(--mantine-spacing-sm);
+  nav {
+    position:absolute;
+    bottom:0;
+    right:0;
+    width:auto;
+    background-color:#232627 !important;
+
+    div {
+      background-color:#232627 !important;
+
+      div {background-color:#232627 !important;}
+    }
+
+    button {background-color:#232627 !important;}
   }
+}
+.cardTitleIcon {
+  position:relative;
+  top:12px;
+}
+.cardTitle {
+  text-align: left;
+  font-size: rem(30px) !important;
+  padding:0 !important;
+  width:80%;
+  position:relative;
+  top:11px;
+  color: var(--mantine-color-dimmed) !important;
 }
 
 @keyframes glow {
@@ -64,7 +90,33 @@
   }
 }
 
+.link {
+  width: rem(50px);
+  height: rem(50px);
+  border-radius: var(--mantine-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  background-color: #232627 !important;
+  border: 1px solid #933;
 
+  &:hover {
+    background-color: var(--mantine-color-blue-light);
+    color: var(--mantine-color-blue-light-color);
+  }
+}
+
+.linkButtonIcon {
+  background-color: #232627 !important;
+}
+
+.colButtons {
+  position:absolute;
+  right:0;
+  bottom:0;
+  background-color:#232627 !important;
+}
 
 .itemBox,
 .itemDetailBox,

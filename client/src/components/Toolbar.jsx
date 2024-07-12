@@ -1,6 +1,7 @@
 import {
 	Flex,
 	Group,
+	Text,
 	Title,
 	Tooltip,
 	UnstyledButton,
@@ -21,7 +22,13 @@ import logo from "./logo.svg";
 
 const Toolbar = (props) => {
 	const [active, setActive] = useState();
-	const { gotoPrev, gotoNext, addItem } = props;
+	const {
+		gotoPrev,
+		gotoNext = null,
+		addItem = null,
+		deleteItem = null,
+		position = "top",
+	} = props;
 
 	const btnStyle = { width: rem(20), height: rem(20) };
 	const stroke = 1.5;
@@ -33,6 +40,15 @@ const Toolbar = (props) => {
 			action: () => {
 				addItem();
 			},
+			position: ["top", "leftcol"],
+		},
+		{
+			Icon: <ICON.remove style={btnStyle} stroke={stroke} />,
+			label: "Delete app",
+			action: () => {
+				deleteItem();
+			},
+			position: ["top", "leftcol"],
 		},
 		{
 			Icon: <IconPlayerTrackPrev style={btnStyle} stroke={stroke} />,
@@ -40,6 +56,7 @@ const Toolbar = (props) => {
 			action: () => {
 				gotoPrev();
 			},
+			position: ["top"],
 		},
 		{
 			Icon: <IconPlayerTrackNext style={btnStyle} stroke={stroke} />,
@@ -47,6 +64,7 @@ const Toolbar = (props) => {
 			action: () => {
 				gotoNext();
 			},
+			position: ["top"],
 		},
 	];
 
@@ -72,14 +90,18 @@ const Toolbar = (props) => {
 		);
 	}
 
-	const links = menuData.map((link, index) => (
-		<NavbarLink
-			{...link}
-			key={nanoid()}
-			active={index === active}
-			onClick={() => setActive(index)}
-		/>
-	));
+	const links = menuData.map((menuItem, index) => {
+		if (menuItem.position.includes(position)) {
+			return (
+				<NavbarLink
+					{...menuItem}
+					key={nanoid()}
+					active={index === active}
+					onClick={() => setActive(index)}
+				/>
+			);
+		}
+	});
 
 	return (
 		<nav className={classes.navbar}>

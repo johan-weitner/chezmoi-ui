@@ -3,7 +3,24 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Top nav buttons not working",
+                    "id": "whgf1m1yo4eecrxqa9b8ibx0"
+                },
+                {
+                    "text": "App navigation across pages is janky",
+                    "id": "ldm2nl7fhehwgx0yukwhcqo3"
+                },
+                {
+                    "text": "EditView not populated correctly",
+                    "id": "ddneh2dlbtr1ux9yqoq9h3yv"
+                },
+                {
+                    "text": "Db is re-created on every boot",
+                    "id": "sl826rii3b612j83goxnaep3"
+                }
+            ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
@@ -134,5 +151,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720743567593
+    "timestamp": 1720779835525
 }

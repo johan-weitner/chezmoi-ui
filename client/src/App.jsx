@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import { deleteApp } from "api/appCollectionApi.js";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Toaster } from "sonner";
 import MainView from "./components/MainView/MainView";
@@ -26,8 +27,17 @@ function App() {
 		setIsPopoverOpen(true);
 	};
 
-	const editItem = () => {
+	const editItem = (key = selectedAppKey) => {
+		if (key !== selectedAppKey) {
+			setSelectedAppKey(key);
+		}
 		selectedAppKey && setIsPopoverOpen(true);
+	};
+
+	const deleteItem = (key = selectedAppKey) => {
+		deleteApp(key).then((res) => {
+			console.log("Deleted app: ", res);
+		});
 	};
 
 	const updateCurrentListKeys = (keys) => {
@@ -100,6 +110,8 @@ function App() {
 				gotoPrev={gotoPrev}
 				gotoNext={gotoNext}
 				addItem={addItem}
+				editItem={editItem}
+				deleteApp={deleteItem}
 				isPopoverOpen={isPopoverOpen}
 				setIsPopoverOpen={setIsPopoverOpen}
 				currentPage={currentPage}

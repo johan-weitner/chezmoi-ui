@@ -48,12 +48,15 @@
 
 .headerLogo {
   width: 1184px;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
   /* background-image: linear-gradient(to bottom, #000000, #181a1b); */
 }
 
 .logoTitle {
   background-color: #121516 !important;
+  font-family: Segoe UI, Roboto, Helvetica, Arial,
+    sans-serif !important;
+    font-weight:normal !important;
 }
 
 

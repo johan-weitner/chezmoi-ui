@@ -24,16 +24,22 @@ import { deleteApp, getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
 import BarSpinner from "../BarSpinner";
 import EditView from "../EditView/EditView";
-import classes from "../MainView/MainView.module.css";
+import commonCss from "../MainView/MainView.module.css";
 import s from "./DetailView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
 
-// FIXME: Refactor into smaller sub - components
 const DetailView = (props) => {
-	const { appKey, theme, isPopoverOpen, setIsPopoverOpen, gotoPrev, gotoNext } =
-		props;
+	const {
+		appKey,
+		setSelectedAppKey,
+		theme,
+		isPopoverOpen,
+		setIsPopoverOpen,
+		gotoPrev,
+		gotoNext,
+	} = props;
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [tags, setTags] = useState(null);
@@ -121,12 +127,13 @@ const DetailView = (props) => {
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Sticky stickyClassName={s.sticky}>
-				<Card shadow="md" radius="md" className={classes.card} padding="xl">
+				<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 					<DetailViewHeader
 						theme={theme}
 						isPopoverOpen={isPopoverOpen}
 						gotoPrev={gotoPrev}
 						gotoNext={gotoNext}
+						hasSelection={selectedApp ?? false}
 					/>
 					<Card
 						shadow="md"
@@ -160,6 +167,7 @@ const DetailView = (props) => {
 					isPopoverOpen={isPopoverOpen}
 					closePopover={closePopover}
 					selectedApp={selectedApp}
+					setSelectedAppKey={setSelectedAppKey}
 					theme={theme}
 				/>
 			)}

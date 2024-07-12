@@ -12,6 +12,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 		isPopoverOpen,
 		closePopover,
 		selectedApp,
+		setSelectedAppKey,
 		gotoPrev,
 		gotoNext,
 		theme,
@@ -48,6 +49,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 						isPopoverOpen={isPopoverOpen}
 						closePopover={closePopover}
 						selectedApp={selectedApp}
+						setSelectedAppKey={setSelectedAppKey}
 						gotoPrev={gotoPrev}
 						gotoNext={gotoNext}
 						theme={theme}

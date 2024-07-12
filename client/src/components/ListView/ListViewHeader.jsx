@@ -1,42 +1,83 @@
-import { ActionIcon, Text, TextInput, rem } from "@mantine/core";
+import {
+	ActionIcon,
+	Group,
+	Text,
+	TextInput,
+	Tooltip,
+	UnstyledButton,
+	rem,
+} from "@mantine/core";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
-import classes from "../MainView/MainView.module.css";
+import commonCss from "../MainView/MainView.module.css";
+import Toolbar from "../Toolbar";
+import css from "./ListView.module.css";
 
 export const ListViewHeader = ({
 	filteredApps,
 	addItem,
+	editItem,
+	deleteItem,
 	setFilter,
 	...props
 }) => {
 	const { filter, theme } = props;
 	return (
 		<>
-			<ICON.allApps
-				style={{ width: rem(50), height: rem(50) }}
-				stroke={2}
-				color={theme.colors.blue[6]}
-			/>
-			<Text
-				fz="lg"
-				fw={500}
-				className={classes.cardTitle}
-				mt="md"
-				style={{ textAlign: "left", marginBottom: "30px" }}
-			>
-				Applications
-			</Text>
-			<ActionIcon
+			<Group className={commonCss.cardTitleContainer}>
+				<ICON.allApps
+					style={{ width: rem(50), height: rem(50) }}
+					stroke={2}
+					color={theme.colors.blue[6]}
+					className={commonCss.cardTitleIcon}
+				/>
+				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
+					Applications
+				</Text>
+				{/* <nav className={commonCss.colButtons}>
+					<Tooltip
+						label="Add application"
+						position="bottom"
+						transitionProps={{ duration: 0 }}
+					>
+						<UnstyledButton
+							onClick={() => onClick(() => addItem())}
+							className={commonCss.link}
+						>
+							<ICON.add
+								style={{ width: rem(20), height: rem(20) }}
+								stroke={1.5}
+								className={commonCss.linkButtonIcon}
+							/>
+						</UnstyledButton>
+					</Tooltip>
+					<Tooltip
+						label="Delete application"
+						position="bottom"
+						transitionProps={{ duration: 0 }}
+					>
+						<UnstyledButton
+							onClick={() => onClick(() => addItem())}
+							className={commonCss.link}
+						>
+							<ICON.remove
+								style={{ width: rem(20), height: rem(20) }}
+								stroke={1.5}
+								className={commonCss.linkButtonIcon}
+							/>
+						</UnstyledButton>
+					</Tooltip>
+				</nav> */}
+			</Group>
+
+			{/* <ActionIcon
 				title="Add application"
 				onClick={(e) => addItem()}
 				style={{
 					width: rem(50),
 					height: rem(50),
-					position: "absolute",
-					top: "33px",
-					right: "24px",
-					backgroundColor: "transparent",
 				}}
+				className={css.cardTitleAddIcon}
 			>
 				<ICON.add
 					style={{
@@ -46,8 +87,9 @@ export const ListViewHeader = ({
 					stroke={2}
 					color={theme.colors.blue[6]}
 				/>
-			</ActionIcon>
-			<TextInput
+			</ActionIcon> */}
+
+			{/* <TextInput
 				radius="xl"
 				size="lg"
 				placeholder="Filter by name"
@@ -75,7 +117,7 @@ export const ListViewHeader = ({
 					</ActionIcon>
 				}
 				{...props}
-			/>
+			/> */}
 		</>
 	);
 };

@@ -12,8 +12,15 @@ import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
 
 const EditViewForm = (props) => {
-	const { closePopover, selectedApp, theme, isNewApp, forceUpdate, randomId } =
-		props;
+	const {
+		closePopover,
+		selectedApp,
+		setSelectedAppKey,
+		theme,
+		isNewApp,
+		forceUpdate,
+		randomId,
+	} = props;
 	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: defaultValues,
@@ -40,7 +47,7 @@ const EditViewForm = (props) => {
 		} else {
 			await updateApp.mutate(data);
 		}
-		setSelectedApp(null);
+		setSelectedAppKey(null);
 		closePopover();
 	};
 

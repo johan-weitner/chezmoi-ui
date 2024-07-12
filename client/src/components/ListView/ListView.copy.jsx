@@ -7,7 +7,6 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useHotkeys } from "react-hotkeys-hook";
 import commonCss from "../MainView/MainView.module.css";
 import List from "./List";
-import css from "./ListView.module.css";
 import { ListViewHeader } from "./ListViewHeader";
 
 const ListView = (props) => {
@@ -18,26 +17,29 @@ const ListView = (props) => {
 		setIsPopoverOpen,
 		deleteItem,
 		addItem,
-		editItem,
 		updateCurrentListKeys,
 		currentPage,
 		setCurrentPage,
-		numPages,
-		setNumPages,
-		totalCount,
-		setTotalCount,
-		gotoPrev,
-		gotoNext,
 	} = props;
+
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
 	const [page, setPage] = useState();
-	const [lastChange, setLastChange] = useState(new Date().getTime());
-	const queryClient = new QueryClient();
-
 	const [software, setSoftware] = useState();
 	const [error, setError] = useState();
 	const [isLoading, setIsLoading] = useState();
+	const [lastChange, setLastChange] = useState(new Date().getTime());
+	const queryClient = new QueryClient();
+	const [numPages, setNumPages] = useState(1);
+	const [totalCount, setTotalCount] = useState(1);
+
+	useAppPage(currentPage).then((data) => {
+		const { data: apps, error, isLoading } = data;
+		setSoftware(apps);
+		setError(error);
+		setIsLoading(isLoading);
+		apps && selectApp(apps[0]?.key);
+	});
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -56,14 +58,7 @@ const ListView = (props) => {
 		updateCurrentListKeys(apps);
 		queryClient.cancelQueries(["appCollection"]);
 		queryClient.invalidateQueries(["appCollection"]);
-	}, [currentPage, filter, software]);
-
-	useEffect(() => {
-		useAppPage(currentPage).then((apps) => {
-			setSoftware(apps);
-			apps && selectApp(apps[0]?.key);
-		});
-	}, [currentPage, lastChange]);
+	}, [page, lastChange, filter, software]);
 
 	const touchLastChange = () => {
 		setLastChange(new Date().getTime());
@@ -75,37 +70,49 @@ const ListView = (props) => {
 		setFilteredApps(filteredApps.filter((item) => item.key !== key));
 	};
 
+	const nextPage = () => {
+		if (currentPage < numPages) {
+			setCurrentPage(currentPage + 1);
+		} else if (page < numPages) {
+			setPage(page + 1);
+		}
+	};
+
+	const prevPage = () => {
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		} else if (page > 1) {
+			setPage(page - 1);
+		}
+	};
+
+	useHotkeys("shift + alt + left", () => prevPage());
+	useHotkeys("shift + alt + right", () => nextPage());
+
 	return (
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
+				<p>Page {page}</p>
 				<ListViewHeader
 					filter={filter}
 					filteredApps={filteredApps}
 					theme={theme}
 					setFilter={setFilter}
 					addItem={addItem}
-					editItem={editItem}
-					deleteItem={deleteItem}
 				/>
-				<Stack
-					className={css.paginationContainer}
-					justify="center"
-					align="center"
-				>
+				<Stack justify="center" align="center" style={{ marginTop: "20px" }}>
 					<Pagination
 						total={numPages}
 						gap={20}
 						onChange={setCurrentPage}
 						value={currentPage}
-						className={css.pagination}
 					/>
 					{filteredApps && (
 						<Text
 							size="xs"
 							style={{ textAlign: "left", margin: "10px 0 0 20px" }}
-							className={css.paginationInfo}
 						>
 							{totalCount} apps in total.
 						</Text>
@@ -117,7 +124,6 @@ const ListView = (props) => {
 					selectedAppKey={selectedAppKey}
 					error={error}
 					loading={isLoading}
-					editItem={editItem}
 					deleteItem={deleteApp}
 				/>
 			</Card>
