@@ -28,12 +28,12 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Refactor backend API to use multi-column table",
-                    "id": "puu1i1d7nfzxh06nj7uloy6b"
+                    "text": "After switching tables: Search presets, for querying records with missing data",
+                    "id": "al7skfjf6v60tg7o76fywi8t"
                 },
                 {
-                    "text": "Refine column header layouts",
-                    "id": "ugdhhg65cmvqkis53ccstyhm"
+                    "text": "Refactor backend API to use multi-column table",
+                    "id": "puu1i1d7nfzxh06nj7uloy6b"
                 },
                 {
                     "text": "Refine modal layout. Use fieldsets instead of headers",
@@ -65,7 +65,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Refine column header layouts",
+                    "id": "ugdhhg65cmvqkis53ccstyhm"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -151,5 +156,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720779835525
+    "timestamp": 1720792207142
 }
