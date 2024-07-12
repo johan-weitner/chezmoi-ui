@@ -1,11 +1,12 @@
 import { Card, Skeleton, Text } from "@mantine/core";
+import { useEffect } from "react";
 import classes from "../MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
 
 const List = (props) => {
 	const {
-		filteredApps,
+		software,
 		selectApp,
 		selectedAppKey,
 		error,
@@ -21,10 +22,15 @@ const List = (props) => {
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
+	useEffect(() => {
+		console.log("Mounting List...");
+		console.log(software);
+	}, [software]);
+
 	const deleteApp = (key) => {
 		console.log("Deleting app with key: ", key);
 		deleteItem(key);
-		setApps(filteredApps.filter((item) => item.key !== key));
+		setApps(software.filter((item) => item.key !== key));
 	};
 
 	return (
@@ -42,7 +48,7 @@ const List = (props) => {
 		>
 			{errorMsg}
 			{/* <Skeleton visible={loading}> */}
-			{filteredApps?.map((item) => {
+			{software?.map((item) => {
 				return (
 					<ListItem
 						selectApp={selectApp}

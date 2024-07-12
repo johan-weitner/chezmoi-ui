@@ -1,12 +1,12 @@
 export const APP_FORM = {
 	formPartOne: [
-		{ name: "_name", label: "Name" },
+		{ name: "name", label: "Name" },
 		{ name: "key", label: "Key" },
-		{ name: "_bin", label: "Executable" },
-		{ name: "_short", label: "Short desc" },
-		{ name: "_home", label: "Homepage" },
-		{ name: "_docs", label: "Documentation" },
-		{ name: "_github", label: "Github" },
+		{ name: "bin", label: "Executable" },
+		{ name: "short", label: "Short desc" },
+		{ name: "home", label: "Homepage" },
+		{ name: "docs", label: "Documentation" },
+		{ name: "github", label: "Github" },
 	],
 	formPartTwo: [
 		{ name: "whalebrew", label: "Whalebrew" },
@@ -33,15 +33,14 @@ export const APP_FORM = {
 };
 
 export const EMPTY_APP2 = {
-	_name: null,
+	name: null,
 	key: null,
-	_desc: null,
 	desc: null,
-	_bin: null,
-	_short: null,
-	_home: null,
-	_docs: null,
-	_github: null,
+	bin: null,
+	short: null,
+	home: null,
+	docs: null,
+	github: null,
 	whalebrew: null,
 	apt: null,
 	brew: null,
@@ -66,15 +65,14 @@ export const EMPTY_APP2 = {
 };
 
 export const EMPTY_APP = {
-	_name: null,
+	name: null,
 	key: null,
-	_desc: null,
 	desc: null,
-	_bin: null,
-	_short: null,
-	_home: null,
-	_docs: null,
-	_github: null,
+	bin: null,
+	short: null,
+	home: null,
+	docs: null,
+	github: null,
 	whalebrew: null,
 	apt: null,
 	brew: null,

@@ -1,6 +1,13 @@
 import fs from "node:fs";
 import YAML from "yaml";
-import { isEmptyDb } from "../db/prisma.js";
+import {
+	getCount,
+	getCount2,
+	getTagCount,
+	isEmptyDb,
+	seedDb,
+	seedDb2,
+} from "../db/prisma.js";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath } from "./config.js";
@@ -94,11 +101,11 @@ const _seedDbIfEmpty = async () => {
 				name: stripTrailingWhitespace(software[key]._name),
 				edited: stripTrailingWhitespace(software[key].edited),
 				desc: stripTrailingWhitespace(software[key]._desc),
-				bin: stripTrailingWhitespace(software[key].bin),
+				bin: stripTrailingWhitespace(software[key]._bin),
 				short: stripTrailingWhitespace(software[key]._short),
-				home: stripTrailingWhitespace(software[key].home),
-				docs: stripTrailingWhitespace(software[key].docs),
-				github: stripTrailingWhitespace(software[key].github),
+				home: stripTrailingWhitespace(software[key]._home),
+				docs: stripTrailingWhitespace(software[key]._docs),
+				github: stripTrailingWhitespace(software[key]._github),
 				whalebrew: stripTrailingWhitespace(software[key].whalebrew),
 				apt: stripTrailingWhitespace(software[key].apt),
 				brew: stripTrailingWhitespace(software[key].brew),

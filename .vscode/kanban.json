@@ -28,10 +28,6 @@
                     "id": "al7skfjf6v60tg7o76fywi8t"
                 },
                 {
-                    "text": "Refactor backend API to use multi-column table",
-                    "id": "puu1i1d7nfzxh06nj7uloy6b"
-                },
-                {
                     "text": "Implement useThrottledCallback et al",
                     "id": "weut1k30or61ek8t6nfp3o2m"
                 },
@@ -57,7 +53,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Refactor backend API to use multi-column table",
+                    "id": "puu1i1d7nfzxh06nj7uloy6b"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -163,5 +164,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720820560861
+    "timestamp": 1720821140729
 }

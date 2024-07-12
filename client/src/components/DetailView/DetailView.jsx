@@ -53,9 +53,7 @@ const DetailView = (props) => {
 			setSelectedApp(null);
 			return;
 		}
-		getApp(appKey).then((result) => {
-			setIsLoading(false);
-			const app = result?.JSON && JSON.parse(result.JSON);
+		getApp(appKey).then((app) => {
 			setSelectedApp(app);
 			APP_FORM.formPartTwo.map((item) => {
 				if (app[item.name] && app[item.name].length > 0) {

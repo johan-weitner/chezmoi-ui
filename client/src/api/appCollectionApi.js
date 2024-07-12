@@ -31,6 +31,7 @@ export const getTotalCount = async () => {
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/getCount`);
+			console.log("Total count: ", response.data);
 			return response.data;
 		},
 	});
@@ -42,7 +43,6 @@ export const useAppCollection = () => {
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/software`);
-			const data = adaptResponseData(response.data);
 			return data;
 		},
 	});
@@ -58,17 +58,17 @@ export const useAppPage = async (page = 1, limit = 20) => {
 			take,
 		},
 	);
-	const data = adaptResponseData(response.data);
-	return data;
+	console.log(response.data);
+	return response.data;
 };
 
-const adaptResponseData = (data) => {
-	const apps = data?.map((item) => {
-		const obj = JSON.parse(item.JSON);
-		return obj;
-	});
-	return apps;
-};
+// const adaptResponseData = (data) => {
+// 	const apps = data?.map((item) => {
+// 		const obj = JSON.parse(item.JSON);
+// 		return obj;
+// 	});
+// 	return apps;
+// };
 
 export const getApp = async (key) => {
 	const app = await queryClient.fetchQuery({

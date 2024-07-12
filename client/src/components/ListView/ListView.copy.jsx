@@ -33,6 +33,17 @@ const ListView = (props) => {
 	const [numPages, setNumPages] = useState(1);
 	const [totalCount, setTotalCount] = useState(1);
 
+	const populateList = () => {
+		console.log("Populating ListView...");
+		const apps = software?.filter((item) => {
+			return item?._name?.toLowerCase().includes(filter?.toLowerCase());
+		});
+		setFilteredApps(apps);
+		updateCurrentListKeys(apps);
+		queryClient.cancelQueries(["appCollection"]);
+		queryClient.invalidateQueries(["appCollection"]);
+	};
+
 	useAppPage(currentPage).then((data) => {
 		const { data: apps, error, isLoading } = data;
 		setSoftware(apps);
@@ -42,22 +53,18 @@ const ListView = (props) => {
 	});
 
 	useEffect(() => {
+		console.log("Mounting ListView...");
 		getTotalCount().then((response) => {
 			const { count } = response;
 			const pages = Math.ceil(count / 20);
 			setNumPages(pages);
 			setTotalCount(count);
 		});
+		populateList();
 	}, []);
 
 	useEffect(() => {
-		const apps = software?.filter((item) => {
-			return item?._name?.toLowerCase().includes(filter?.toLowerCase());
-		});
-		setFilteredApps(apps);
-		updateCurrentListKeys(apps);
-		queryClient.cancelQueries(["appCollection"]);
-		queryClient.invalidateQueries(["appCollection"]);
+		populateList();
 	}, [page, lastChange, filter, software]);
 
 	const touchLastChange = () => {

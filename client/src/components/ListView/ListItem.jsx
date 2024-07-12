@@ -27,7 +27,7 @@ export const ListItem = (props) => {
 					style={{ width: "100%" }}
 					type="button"
 				>
-					{app?._name}
+					{app?.name}
 				</button>
 				<ICON.edit
 					style={{
