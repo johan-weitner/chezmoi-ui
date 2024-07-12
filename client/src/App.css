@@ -115,3 +115,22 @@ body {
   margin-top: -80px !important;
   padding-top: 0 !important;
 }
+
+fieldset {
+  background-color:#272728 !important;
+  margin:0 0 20px 0;
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.3);
+
+  legend {
+    font-size:2rem !important;
+    text-shadow: 5px 5px 25px rgba(0,0,0,1.0);
+  }
+
+  button {
+    box-shadow: 10px 10px 20px rgba(0,0,0,1.0);
+  }
+}
+
+kbd {
+  box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}

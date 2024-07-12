@@ -1,8 +1,7 @@
 import { Text } from "@mantine/core";
-import { nanoid } from "nanoid";
 
 const Debugger = (props) => {
-	const { selectedApp, isNewApp, resetForm } = props;
+	const { selectedApp, isNewApp, resetForm, randomId } = props;
 
 	return (
 		<>
@@ -16,7 +15,7 @@ const Debugger = (props) => {
 				}}
 			>
 				selectedApp: {selectedApp ? "true" : "false"} | isNewApp:{" "}
-				{isNewApp ? "true" : "false"} | RandomId: {nanoid()}
+				{isNewApp ? "true" : "false"} | RandomId: {randomId}
 			</Text>
 			<button
 				type="button"

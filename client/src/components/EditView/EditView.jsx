@@ -38,6 +38,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 			radius="10"
 			size="xl"
 			transitionProps={{ duration: 2500, transition: "pop" }}
+			shadow="xl"
 			style={
 				{
 					// height: "100vh !important",

@@ -1,23 +1,13 @@
 import { nanoid } from "nanoid";
 
-import { Group, Input, SimpleGrid, Text } from "@mantine/core";
+import { Fieldset, Group, Input, SimpleGrid, Text } from "@mantine/core";
 import classes from "../MainView/MainView.module.css";
 
 const InstallerSection = (props) => {
 	const { formPartTwo, register } = props;
 
 	return (
-		<>
-			<h3
-				style={{
-					textAlign: "left",
-					fontSize: "1.8em",
-					fontWeight: "normal",
-					marginTop: "0",
-				}}
-			>
-				Installers
-			</h3>
+		<Fieldset legend="Installers">
 			<SimpleGrid
 				cols={{ base: 1, md: 4 }}
 				spacing="sm"
@@ -39,7 +29,7 @@ const InstallerSection = (props) => {
 					);
 				})}
 			</SimpleGrid>
-		</>
+		</Fieldset>
 	);
 };
 

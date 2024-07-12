@@ -57,18 +57,17 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Refine modal layout. Use fieldsets instead of headers",
-                    "id": "i774yj0cqxyy8cunhjatye3c"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Refine modal layout. Use fieldsets instead of headers",
+                    "id": "i774yj0cqxyy8cunhjatye3c"
+                },
                 {
                     "text": "Db is re-created on every boot",
                     "id": "sl826rii3b612j83goxnaep3"
@@ -164,5 +163,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720816365023
+    "timestamp": 1720820560861
 }

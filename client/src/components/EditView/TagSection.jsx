@@ -1,6 +1,7 @@
 import Tagify from "@yaireo/tagify";
 import { useEffect } from "react";
 import "@yaireo/tagify/dist/tagify.css";
+import { Fieldset } from "@mantine/core";
 import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
 
 const TagSection = (props) => {
@@ -17,21 +18,11 @@ const TagSection = (props) => {
 	}, [tagifyInstance, appKey, isNewApp]);
 
 	return (
-		<>
-			<h3
-				style={{
-					textAlign: "left",
-					fontSize: "1.8em",
-					fontWeight: "normal",
-					marginTop: "0",
-				}}
-			>
-				Tags
-			</h3>
+		<Fieldset legend="Tags">
 			<div style={{ marginBottom: "40px", width: "100%" }}>
 				<input name="tags" {...register("tags")} />
 			</div>
-		</>
+		</Fieldset>
 	);
 };
 

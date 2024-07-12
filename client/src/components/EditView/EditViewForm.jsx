@@ -77,6 +77,7 @@ const EditViewForm = (props) => {
 				selectedApp={selectedApp}
 				isNewApp={isNewApp}
 				resetForm={resetForm}
+				randomId={randomId}
 			/>
 			<InfoSection
 				formPartOne={formPartOne}

@@ -285,17 +285,7 @@ max-height: calc(100vh - 300px);
 
 
 
-.editBtn {
-  background-color: var(--mantine-color-blue-filled) !important;
-}
 
-.deleteBtn {
-  background-color: #933 !important;
-}
-
-.saveBtn {
-  background-color: #393 !important;
-}
 
 .tagDisplay {
   width: 100%;
