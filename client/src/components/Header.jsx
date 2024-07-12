@@ -35,7 +35,12 @@ const Header = (props) => {
 				<img src={logo} alt="Logo" className={classes.logo} />
 				<Title className={classes.logoTitle}>Chezmoi UI</Title>
 			</Group>
-			<Toolbar addItem={addItem} deleteItem={deleteItem} />
+			<Toolbar
+				addItem={addItem}
+				deleteItem={deleteItem}
+				gotoNext={gotoNext}
+				gotoPrev={gotoPrev}
+			/>
 			{/* </div> */}
 			{/* <div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div> */}
 		</Group>

@@ -96,10 +96,12 @@ const ListView = (props) => {
 				>
 					<Pagination
 						total={numPages}
-						gap={20}
+						gap={15}
 						onChange={setCurrentPage}
 						value={currentPage}
 						className={css.pagination}
+						size={"sm"}
+						withEdges={true}
 					/>
 					{filteredApps && (
 						<Text
@@ -107,7 +109,7 @@ const ListView = (props) => {
 							style={{ textAlign: "left", margin: "10px 0 0 20px" }}
 							className={css.paginationInfo}
 						>
-							{totalCount} apps in total.
+							Page {currentPage} of {numPages} ⋅ {totalCount} apps in total.
 						</Text>
 					)}
 				</Stack>

@@ -49,7 +49,12 @@ const MainView = (props) => {
 				className={classes.mainContainer}
 				style={{ minHeight: "100% !important" }}
 			>
-				<Header addItem={addItem} deleteItem={deleteItem} />
+				<Header
+					addItem={addItem}
+					deleteItem={deleteItem}
+					gotoPrev={gotoPrev}
+					gotoNext={gotoNext}
+				/>
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"

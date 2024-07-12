@@ -5,20 +5,12 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Top nav buttons not working",
-                    "id": "whgf1m1yo4eecrxqa9b8ibx0"
-                },
-                {
                     "text": "App navigation across pages is janky",
                     "id": "ldm2nl7fhehwgx0yukwhcqo3"
                 },
                 {
                     "text": "EditView not populated correctly",
                     "id": "ddneh2dlbtr1ux9yqoq9h3yv"
-                },
-                {
-                    "text": "Db is re-created on every boot",
-                    "id": "sl826rii3b612j83goxnaep3"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -34,10 +26,6 @@
                 {
                     "text": "Refactor backend API to use multi-column table",
                     "id": "puu1i1d7nfzxh06nj7uloy6b"
-                },
-                {
-                    "text": "Refine modal layout. Use fieldsets instead of headers",
-                    "id": "i774yj0cqxyy8cunhjatye3c"
                 },
                 {
                     "text": "Implement useThrottledCallback et al",
@@ -67,8 +55,8 @@
             "title": "Doing",
             "tasks": [
                 {
-                    "text": "Refine column header layouts",
-                    "id": "ugdhhg65cmvqkis53ccstyhm"
+                    "text": "Refine modal layout. Use fieldsets instead of headers",
+                    "id": "i774yj0cqxyy8cunhjatye3c"
                 }
             ],
             "id": "a4rk3cab77bidnwm67489nqu",
@@ -77,6 +65,22 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Db is re-created on every boot",
+                    "id": "sl826rii3b612j83goxnaep3"
+                },
+                {
+                    "text": "Top nav buttons not working",
+                    "id": "whgf1m1yo4eecrxqa9b8ibx0"
+                },
+                {
+                    "text": "Deletion endpoint broken",
+                    "id": "qd5300pzh80y3r9z16umxijd"
+                },
+                {
+                    "text": "Refine column header layouts",
+                    "id": "ugdhhg65cmvqkis53ccstyhm"
+                },
                 {
                     "text": "Auto-load next page when navigating past last item",
                     "id": "mjr1u2yt48eci0c6iadmd2ev"
@@ -156,5 +160,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720792207142
+    "timestamp": 1720813620387
 }
