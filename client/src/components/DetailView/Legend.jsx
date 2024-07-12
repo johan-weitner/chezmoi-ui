@@ -35,10 +35,10 @@ const Legend = (props) => {
 								<td>
 									{item.keys.map((char, index) => {
 										return (
-											<>
-												<Kbd key={nanoid()}>{char}</Kbd>
+											<span key={nanoid()}>
+												<Kbd>{char}</Kbd>
 												{index < item.keys.length - 1 && " + "}
-											</>
+											</span>
 										);
 									})}
 								</td>

@@ -11,10 +11,6 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Auto-load next page when navigating past last item",
-                    "id": "mjr1u2yt48eci0c6iadmd2ev"
-                },
-                {
                     "text": "Refactor backend API to use multi-column table",
                     "id": "puu1i1d7nfzxh06nj7uloy6b"
                 },
@@ -39,10 +35,6 @@
                     "id": "v3os63b3tgnj5ws4mf59sz00"
                 },
                 {
-                    "text": "Break up DetailView into smaller pieces",
-                    "id": "pzzee34vjd4qh7mcdrkooasa"
-                },
-                {
                     "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
                     "id": "ue9lt3h5rwgnzx6dsu1lunru"
                 },
@@ -56,18 +48,21 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "On page load: Select first item",
-                    "id": "bwdmn65cbn6vrfl4zyl3v0oh"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Auto-load next page when navigating past last item",
+                    "id": "mjr1u2yt48eci0c6iadmd2ev"
+                },
+                {
+                    "text": "On page load: Select first item",
+                    "id": "bwdmn65cbn6vrfl4zyl3v0oh"
+                },
                 {
                     "text": "Abstract npm scripts to shell scripts",
                     "id": "mw1v72jp0igbwczicgrej0r3"
@@ -95,6 +90,10 @@
                 {
                     "text": "Implement data layer using Prisma",
                     "id": "gc5umy54lzcqxmuvlhsrurwq"
+                },
+                {
+                    "text": "Break up DetailView into smaller pieces",
+                    "id": "pzzee34vjd4qh7mcdrkooasa"
                 },
                 {
                     "text": "Implement paging",
@@ -135,5 +134,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720728858870
+    "timestamp": 1720743567593
 }

@@ -48,23 +48,18 @@ export const useAppCollection = () => {
 	});
 };
 
-export const useAppPage = (page = 1, limit = 20) => {
+export const useAppPage = async (page = 1, limit = 20) => {
 	const skip = (page - 1) * limit;
 	const take = limit;
-	return useQuery({
-		queryKey: ["appCollection", page],
-		queryFn: async () => {
-			const response = await axios.post(
-				`${BASE_URL}/page?skip=${skip}&take=${take}`,
-				{
-					skip,
-					take,
-				},
-			);
-			const data = adaptResponseData(response.data);
-			return data;
+	const response = await axios.post(
+		`${BASE_URL}/page?skip=${skip}&take=${take}`,
+		{
+			skip,
+			take,
 		},
-	});
+	);
+	const data = adaptResponseData(response.data);
+	return data;
 };
 
 const adaptResponseData = (data) => {

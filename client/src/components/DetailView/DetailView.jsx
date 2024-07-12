@@ -1,14 +1,18 @@
-import {
-	ActionIcon,
-	Badge,
-	Button,
-	Card,
-	Group,
-	Text,
-	rem,
-} from "@mantine/core";
+/**
+ * DetailView component displays the details of an app.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.appKey - The key of the app.
+ * @param {Object} props.theme - The theme object.
+ * @param {boolean} props.isPopoverOpen - Indicates whether the popover is open or not.
+ * @param {function} props.setIsPopoverOpen - Function to set the state of the popover.
+ * @param {function} props.gotoPrev - Function to navigate to the previous app.
+ * @param {function} props.gotoNext - Function to navigate to the next app.
+ * @returns {JSX.Element} The rendered DetailView component.
+ */
+import { Card, rem } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
-import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import FallbackComponent from "components/FallbackComponent";
@@ -20,9 +24,9 @@ import { deleteApp, getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
 import BarSpinner from "../BarSpinner";
 import EditView from "../EditView/EditView";
-import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
 import s from "./DetailView.module.css";
+import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
 
@@ -36,7 +40,6 @@ const DetailView = (props) => {
 	const [hasInstaller, setHasInstaller] = useState(false);
 	const [scroll, scrollTo] = useWindowScroll();
 	const modalRef = useRef();
-	const itemBox = useRef();
 	let indicateEdit;
 
 	useEffect(() => {
@@ -119,60 +122,12 @@ const DetailView = (props) => {
 		>
 			<Sticky stickyClassName={s.sticky}>
 				<Card shadow="md" radius="md" className={classes.card} padding="xl">
-					<ICON.detail
-						style={{ width: rem(50), height: rem(50) }}
-						stroke={2}
-						color={theme.colors.blue[6]}
+					<DetailViewHeader
+						theme={theme}
+						isPopoverOpen={isPopoverOpen}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
 					/>
-					<Text
-						fz="lg"
-						fw={500}
-						className={classes.cardTitle}
-						mt="md"
-						style={{ textAlign: "left" }}
-					>
-						Detail view - popOverOpen: {isPopoverOpen.toString()}
-					</Text>
-					<ActionIcon
-						size={32}
-						radius="xl"
-						color={theme.primaryColor}
-						variant="filled"
-						title="Go to previous app"
-						onClick={() => gotoPrev()}
-						style={{
-							position: "absolute",
-							right: "90px",
-							top: "130px",
-							zIndex: "10",
-						}}
-					>
-						<IconPlayerTrackPrev
-							style={{ width: rem(18), height: rem(18) }}
-							stroke={1.5}
-							color="white"
-						/>
-					</ActionIcon>
-					<ActionIcon
-						size={32}
-						radius="xl"
-						color={theme.primaryColor}
-						variant="filled"
-						title="Go to next app"
-						onClick={() => gotoNext()}
-						style={{
-							position: "absolute",
-							right: "50px",
-							top: "130px",
-							zIndex: "10",
-						}}
-					>
-						<IconPlayerTrackNext
-							style={{ width: rem(18), height: rem(18) }}
-							stroke={1.5}
-							color="white"
-						/>
-					</ActionIcon>
 					<Card
 						shadow="md"
 						fz="sm"

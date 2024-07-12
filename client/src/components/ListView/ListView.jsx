@@ -33,12 +33,9 @@ const ListView = (props) => {
 	const [lastChange, setLastChange] = useState(new Date().getTime());
 	const queryClient = new QueryClient();
 
-	// const [error, setError] = useState();
-	// const [isLoading, setIsLoading] = useState();
-
-	// const [numPages, setNumPages] = useState(1);
-	// const [totalCount, setTotalCount] = useState(1);
-	const { data: software, error, isLoading } = useAppPage(currentPage);
+	const [software, setSoftware] = useState();
+	const [error, setError] = useState();
+	const [isLoading, setIsLoading] = useState();
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -57,7 +54,15 @@ const ListView = (props) => {
 		updateCurrentListKeys(apps);
 		queryClient.cancelQueries(["appCollection"]);
 		queryClient.invalidateQueries(["appCollection"]);
-	}, [page, lastChange, filter, software]);
+	}, [currentPage, filter, software]);
+
+	useEffect(() => {
+		useAppPage(currentPage).then((apps) => {
+			console.log("Result: ", apps);
+			setSoftware(apps);
+			apps && selectApp(apps[0]?.key);
+		});
+	}, [currentPage, lastChange]);
 
 	const touchLastChange = () => {
 		setLastChange(new Date().getTime());
@@ -67,28 +72,6 @@ const ListView = (props) => {
 		deleteItem(key);
 		touchLastChange();
 		setFilteredApps(filteredApps.filter((item) => item.key !== key));
-	};
-
-	const nextPage = () => {
-		if (currentPage < numPages) {
-			setCurrentPage(currentPage + 1);
-		} else if (page < numPages) {
-			console.log("Reached end of page, flipping to next page...");
-			setPage(page + 1);
-		} else {
-			console.log("Fell through...");
-		}
-	};
-
-	const prevPage = () => {
-		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
-		} else if (page > 1) {
-			console.log("Reached beginning of page, flipping to previous page...");
-			setPage(page - 1);
-		} else {
-			console.log("Fell through...");
-		}
 	};
 
 	return (

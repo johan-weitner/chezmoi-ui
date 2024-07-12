@@ -18,6 +18,8 @@ function App() {
 	useHotkeys("alt + right", () => gotoNext());
 	useHotkeys("alt + n", () => addItem());
 	useHotkeys("alt + e", () => editItem());
+	useHotkeys("shift + alt + left", () => gotoPrevPage());
+	useHotkeys("shift + alt + right", () => gotoNextPage());
 
 	const addItem = () => {
 		setSelectedAppKey(null);
@@ -65,6 +67,18 @@ function App() {
 				setCurrentPage(currentPage + 1);
 				// setSelectedAppKey(currentListKeys[0].key);
 			}
+		}
+	};
+
+	const gotoPrevPage = () => {
+		if (currentPage > 1) {
+			setCurrentPage(currentPage - 1);
+		}
+	};
+
+	const gotoNextPage = () => {
+		if (currentPage < numPages) {
+			setCurrentPage(currentPage + 1);
 		}
 	};
 
