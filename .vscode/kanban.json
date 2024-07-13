@@ -5,10 +5,6 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "App navigation across pages is janky",
-                    "id": "ldm2nl7fhehwgx0yukwhcqo3"
-                },
-                {
                     "text": "EditView not populated correctly",
                     "id": "ddneh2dlbtr1ux9yqoq9h3yv"
                 }
@@ -64,6 +60,14 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Implement inReverse flag when browsing apps backwards, for better cross-page navigation",
+                    "id": "rbzguvms3q9rnqna1a99es2v"
+                },
+                {
+                    "text": "App navigation across pages is janky",
+                    "id": "ldm2nl7fhehwgx0yukwhcqo3"
+                },
                 {
                     "text": "Refine modal layout. Use fieldsets instead of headers",
                     "id": "i774yj0cqxyy8cunhjatye3c"
@@ -163,5 +167,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720820560861
+    "timestamp": 1720852547792
 }
