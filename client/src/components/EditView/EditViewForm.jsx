@@ -1,12 +1,10 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-
 import { Button, Group } from "@mantine/core";
-import { APP_FORM, EMPTY_APP } from "constants/appForm";
-import { ICON } from "constants/icons";
-
 import { addApp, useAppMutation } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
+import { APP_FORM, EMPTY_APP } from "constants/appForm";
+import { ICON } from "constants/icons";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Debugger from "./Debugger";
 import css from "./EditView.module.css";
@@ -19,7 +17,6 @@ const EditViewForm = (props) => {
 		closePopover,
 		selectedApp,
 		setSelectedAppKey,
-		theme,
 		isNewApp,
 		forceUpdate,
 		randomId,
@@ -43,38 +40,17 @@ const EditViewForm = (props) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const updateApp = useAppMutation();
-	// const onSubmit = async (data) => {
-	// 	console.log("updateApp", updateApp);
-	// 	console.log("with: ", data);
-	// 	if (isNewApp) {
-	// 		console.log("Is new app");
-	// 		await addApp(data);
-	// 		console.log("Done");
-	// 	} else {
-	// 		console.log("Updating app with");
-	// 		await updateApp.mutate(data);
-	// 		console.log("Done");
-	// 	}
-	// 	setSelectedAppKey(null);
-	// 	closePopover();
-	// };
-	const onSubmit = async (data) => {
-		console.log("updateApp", updateApp);
-		console.log("with: ", data);
+	const onSubmit = (data) => {
 		try {
 			if (isNewApp) {
 				console.log("Is new app");
 				addApp(data).then((app) => {
 					console.log("Done");
-					console.log(app);
 				}); // Ensure addApp is properly handling async operations.
 			} else {
-				console.log("Updating app with");
 				updateApp.mutateAsync(data).then((app) => {
 					console.log("Done");
-					console.log(app);
-				}); // Use mutateAsync to wait for completion.
-				nsole.log("Done");
+				});
 			}
 			setSelectedAppKey(null);
 			closePopover();
@@ -87,12 +63,8 @@ const EditViewForm = (props) => {
 
 	const resetForm = () => {
 		console.log("Resetting form...");
-		const res = reset({
+		reset({
 			defaultValues: EMPTY_APP,
-			keepDirty: false,
-			keepDirtyFields: false,
-			keepValues: false,
-			keepDefaultValues: false,
 		});
 		forceUpdate();
 	};

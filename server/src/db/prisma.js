@@ -46,11 +46,6 @@ export const seedTags = async (data) => {
 };
 
 export const addApp = async (data) => {
-	// const { key, json } = data;
-	// if (!key || !json) {
-	// 	log.error("Invalid app data: ", data);
-	// 	return null;
-	// }
 	console.log("PRISMA: Adding app: ", data);
 	try {
 		const app = await prisma[APPLICATION].create({
@@ -58,8 +53,8 @@ export const addApp = async (data) => {
 				...data,
 			},
 		});
-		log.info("PRISMA: Adding app: ", data);
-		console.log("PRISMA: Returned: ", app);
+		// log.info("PRISMA: Adding app: ", data);
+		log.info("PRISMA: Returned: ", app);
 		return app;
 	} catch (e) {
 		log.error(e.message);

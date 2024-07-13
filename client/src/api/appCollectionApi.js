@@ -29,14 +29,14 @@ export const fetchApp = async (key) => {
 
 const mapAppData = (app) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
-	const fields = [...formPartOne, ...formPartTwo];
+	const validKeys = [...formPartOne, ...formPartTwo].map((item) => item.name);
 	const entity = {};
-	app.map((item) => {
-		if (fields.includes(item.key)) {
-			entity[item.key] = item.value;
+	const keys = Object.keys(app);
+	keys.map((key) => {
+		if (validKeys.includes(key)) {
+			entity[key] = app[key];
 		}
 	});
-
 	return entity;
 };
 
@@ -102,26 +102,9 @@ export const getApp = (key) => {
 };
 
 export const useAppMutation = () => {
-	// const queryClient = useQueryClient();
-
 	return useMutation({
-		// mutationFn: (updatedNode) => {
-		// 	updatedNode.edited = true;
-		// 	const result = axios
-		// 		.post(`${BASE_URL}/updateNode`, {
-		// 			...updatedNode,
-		// 		})
-		// 		.then((response) => {
-		// 			return response.data;
-		// 		})
-		// 		.catch((error) => {
-		// 			console.error(error.message);
-		// 			toast(error.message);
-		// 		});
-		// 	return result.data;
-		// },
 		mutationFn: (updatedData) => {
-			updatedData.edited = true;
+			updatedData.edited = "true";
 			updatedNode = mapAppData(updatedData);
 			return axios
 				.post(`${BASE_URL}/updateNode`, {
@@ -133,7 +116,7 @@ export const useAppMutation = () => {
 				.catch((error) => {
 					console.error(error.message);
 					toast(error.message);
-					throw error; // Ensure errors are propagated up.
+					throw error;
 				});
 		},
 		onMutate: async (updatedNode) => {
@@ -163,11 +146,16 @@ export const useAppMutation = () => {
 
 export const addApp = (data) => {
 	const app = mapAppData(data);
+	app.edited = "true";
+	if (!app.desc) {
+		app.desc = "No description provided.";
+	}
+	// console.log('API: Re-mapped data: ', app);
 	return queryClient
 		.fetchQuery({
 			queryKey: ["appCollection"],
 			queryFn: async () => {
-				const result = await axios
+				axios
 					.post(`${BASE_URL}/addNode`, {
 						data: { ...app },
 					})
@@ -177,8 +165,8 @@ export const addApp = (data) => {
 					.catch((error) => {
 						console.error(error.message);
 						toast(error.message);
+						throw error;
 					});
-				return result;
 			},
 			onMutate: async () => {
 				await queryClient.cancelQueries(["appCollection"]);
