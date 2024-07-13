@@ -30,6 +30,7 @@ const MainView = (props) => {
 		setNumPages,
 		totalCount,
 		setTotalCount,
+		inReverse,
 	} = props;
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
@@ -79,6 +80,7 @@ const MainView = (props) => {
 						setTotalCount={setTotalCount}
 						gotoPrev={gotoPrev}
 						gotoNext={gotoNext}
+						inReverse={inReverse}
 					/>
 					{/* {selectedAppKey && ( */}
 					<DetailView

@@ -13,6 +13,7 @@ function App() {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [numPages, setNumPages] = useState(1);
 	const [totalCount, setTotalCount] = useState(1);
+	const [inReverse, setInReverse] = useState(false);
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
 	useHotkeys("alt + left", () => gotoPrev());
@@ -46,6 +47,7 @@ function App() {
 
 	const selectApp = (key) => {
 		setSelectedAppKey(key);
+		setInReverse(false);
 	};
 
 	const findIndex = (key) => {
@@ -63,6 +65,7 @@ function App() {
 				selectApp(prevKey);
 			} else if (currentPage > 1) {
 				console.log("Reached beginning of page, flipping to previous page...");
+				setInReverse(true);
 				setCurrentPage(currentPage - 1);
 				// setSelectedAppKey(currentListKeys[currentListKeys.length - 1].key);
 			}
@@ -124,6 +127,7 @@ function App() {
 				setNumPages={setNumPages}
 				totalCount={totalCount}
 				setTotalCount={setTotalCount}
+				inReverse={inReverse}
 			/>
 			{/* </AppShell.Main> */}
 			<Toaster

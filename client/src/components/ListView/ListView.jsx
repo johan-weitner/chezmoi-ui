@@ -27,6 +27,7 @@ const ListView = (props) => {
 		setTotalCount,
 		gotoPrev,
 		gotoNext,
+		inReverse,
 	} = props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
@@ -62,7 +63,11 @@ const ListView = (props) => {
 			console.log("Apps: ", apps);
 			console.log("apps[0]?.key: ", apps[0]?.key);
 			setSoftware(apps);
-			apps && selectApp(apps[0]?.key);
+			if (apps && inReverse) {
+				selectApp(apps[apps.length - 1]?.key);
+			} else if (apps) {
+				selectApp(apps[0]?.key);
+			}
 		});
 	}, [currentPage, lastChange]);
 
