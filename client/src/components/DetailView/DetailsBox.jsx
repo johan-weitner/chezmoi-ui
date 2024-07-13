@@ -7,8 +7,6 @@ const DetailsBox = (props) => {
 	const { selectedApp, tags, hasInstaller, indicateEdit, edit, removeApp } =
 		props;
 
-	console.log("selectedApp", selectedApp);
-
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>
 			<h2

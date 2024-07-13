@@ -7,6 +7,7 @@ import { ICON } from "constants/icons";
 
 import { addApp, useAppMutation } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
+import { toast } from "sonner";
 import Debugger from "./Debugger";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
@@ -42,15 +43,41 @@ const EditViewForm = (props) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const updateApp = useAppMutation();
+	// const onSubmit = async (data) => {
+	// 	console.log("updateApp", updateApp);
+	// 	console.log("with: ", data);
+	// 	if (isNewApp) {
+	// 		console.log("Is new app");
+	// 		await addApp(data);
+	// 		console.log("Done");
+	// 	} else {
+	// 		console.log("Updating app with");
+	// 		await updateApp.mutate(data);
+	// 		console.log("Done");
+	// 	}
+	// 	setSelectedAppKey(null);
+	// 	closePopover();
+	// };
 	const onSubmit = async (data) => {
 		console.log("updateApp", updateApp);
-		if (isNewApp) {
-			addApp(data);
-		} else {
-			await updateApp.mutate(data);
+		console.log("with: ", data);
+		try {
+			if (isNewApp) {
+				console.log("Is new app");
+				addApp(data); // Ensure addApp is properly handling async operations.
+				console.log("Done");
+			} else {
+				console.log("Updating app with");
+				updateApp.mutateAsync(data); // Use mutateAsync to wait for completion.
+				console.log("Done");
+			}
+			setSelectedAppKey(null);
+			closePopover();
+		} catch (error) {
+			console.error("Failed to update app:", error);
+			const str = isNewApp ? "add" : "update";
+			toast.error(`Failed to ${str} app: ${error.message}`);
 		}
-		setSelectedAppKey(null);
-		closePopover();
 	};
 
 	const resetForm = () => {

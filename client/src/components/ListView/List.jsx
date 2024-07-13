@@ -1,5 +1,6 @@
 import { Card, Skeleton, Text } from "@mantine/core";
 import { useEffect } from "react";
+import { toast } from "sonner";
 import classes from "../MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
@@ -22,15 +23,13 @@ const List = (props) => {
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
-	useEffect(() => {
-		console.log("Mounting List...");
-		console.log(software);
-	}, [software]);
+	useEffect(() => {}, [software]);
 
 	const deleteApp = (key) => {
 		console.log("Deleting app with key: ", key);
 		deleteItem(key);
 		setApps(software.filter((item) => item.key !== key));
+		toast.success(`Successfully deleted app with key ${key}`);
 	};
 
 	return (
@@ -54,7 +53,7 @@ const List = (props) => {
 						selectApp={selectApp}
 						selectedAppKey={selectedAppKey}
 						app={item}
-						key={item}
+						key={item.key}
 						deleteItem={deleteApp}
 						editItem={editItem}
 					/>

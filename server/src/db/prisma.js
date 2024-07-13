@@ -21,17 +21,6 @@ main()
 	});
 
 export const seedDb = async (data) => {
-	await prisma
-		.$transaction([prisma[APP].createMany({ data })])
-		.then(() => {
-			log.info("Seeded App table with initial data");
-		})
-		.catch((e) => {
-			log.error(e.message);
-		});
-};
-
-export const seedDb2 = async (data) => {
 	log.info("Seeding Application table with initial data...	");
 	await prisma
 		.$transaction([prisma[APPLICATION].createMany({ data })])
@@ -57,23 +46,24 @@ export const seedTags = async (data) => {
 };
 
 export const addApp = async (data) => {
-	const { key, json } = data;
-	if (!key || !json) {
-		log.error("Invalid app data: ", data);
-		return null;
-	}
-
+	// const { key, json } = data;
+	// if (!key || !json) {
+	// 	log.error("Invalid app data: ", data);
+	// 	return null;
+	// }
+	console.log("PRISMA: Adding app: ", data);
 	try {
 		const app = await prisma[APPLICATION].create({
 			data: {
-				key,
-				JSON: json,
+				...data,
 			},
 		});
-		log.info("Adding app: ", key, JSON);
+		log.info("PRISMA: Adding app: ", data);
+		console.log("PRISMA: Returned: ", app);
 		return app;
 	} catch (e) {
 		log.error(e.message);
+		throw e;
 	}
 };
 
@@ -126,11 +116,6 @@ export const deleteApp = async (key) => {
 };
 
 export const getCount = async () => {
-	const count = await prisma[APPLICATION].count();
-	return count;
-};
-
-export const getCount2 = async () => {
 	const count = await prisma[APPLICATION].count();
 	return count;
 };

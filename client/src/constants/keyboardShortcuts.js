@@ -34,4 +34,9 @@ export const keyboardShortcuts = [
 		hookString: "shift + opt + right",
 		action: "Go to next page",
 	},
+	{
+		keys: ["OPT", "W"],
+		hookString: "opt + w",
+		action: "Unselect app",
+	},
 ];

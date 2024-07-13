@@ -43,23 +43,22 @@ export const useAppCollection = () => {
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/software`);
-			return data;
+			return response.data;
 		},
 	});
 };
 
-export const useAppPage = async (page = 1, limit = 20) => {
+export const useAppPage = (page = 1, limit = 20) => {
 	const skip = (page - 1) * limit;
 	const take = limit;
-	const response = await axios.post(
-		`${BASE_URL}/page?skip=${skip}&take=${take}`,
-		{
+	const response = axios
+		.post(`${BASE_URL}/page?skip=${skip}&take=${take}`, {
 			skip,
 			take,
-		},
-	);
-	console.log(response.data);
-	return response.data;
+		})
+		.then((response) => {
+			return response.data;
+		});
 };
 
 // const adaptResponseData = (data) => {
@@ -70,8 +69,8 @@ export const useAppPage = async (page = 1, limit = 20) => {
 // 	return apps;
 // };
 
-export const getApp = async (key) => {
-	const app = await queryClient.fetchQuery({
+export const getApp = (key) => {
+	const app = queryClient.fetchQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const app = await axios
@@ -92,9 +91,24 @@ export const useAppMutation = () => {
 	const queryClient = useQueryClient();
 
 	return useMutation({
+		// mutationFn: (updatedNode) => {
+		// 	updatedNode.edited = true;
+		// 	const result = axios
+		// 		.post(`${BASE_URL}/updateNode`, {
+		// 			...updatedNode,
+		// 		})
+		// 		.then((response) => {
+		// 			return response.data;
+		// 		})
+		// 		.catch((error) => {
+		// 			console.error(error.message);
+		// 			toast(error.message);
+		// 		});
+		// 	return result.data;
+		// },
 		mutationFn: (updatedNode) => {
 			updatedNode.edited = true;
-			const result = axios
+			return axios
 				.post(`${BASE_URL}/updateNode`, {
 					...updatedNode,
 				})
@@ -104,8 +118,8 @@ export const useAppMutation = () => {
 				.catch((error) => {
 					console.error(error.message);
 					toast(error.message);
+					throw error; // Ensure errors are propagated up.
 				});
-			return result.data;
 		},
 		onMutate: async (updatedNode) => {
 			await queryClient.cancelQueries(["appCollection"]);
@@ -133,43 +147,50 @@ export const useAppMutation = () => {
 };
 
 export const addApp = async (data) => {
-	const result = await queryClient.fetchQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			const result = await axios
-				.post(`${BASE_URL}/addNode`, {
-					params: {
-						...data,
-					},
-				})
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error.message);
-					toast(error.message);
-				});
-			return result;
-		},
-		onMutate: async () => {
-			await queryClient.cancelQueries(["appCollection"]);
-			const previousData = queryClient.getQueryData(["appCollection"]);
+	// const queryClient = useQueryClient();
+	return await queryClient
+		.fetchQuery({
+			queryKey: ["appCollection"],
+			queryFn: async () => {
+				const result = await axios
+					.post(`${BASE_URL}/addNode`, {
+						data: { ...data },
+					})
+					.then((response) => {
+						return response.data;
+					})
+					.catch((error) => {
+						console.error(error.message);
+						toast(error.message);
+					});
+				return result;
+			},
+			onMutate: async () => {
+				await queryClient.cancelQueries(["appCollection"]);
+				const previousData = queryClient.getQueryData(["appCollection"]);
 
-			queryClient.setQueryData(["appCollection"], (old) => {
-				return old.push(data);
-			});
-			return { previousData };
-		},
-		onError: (err, updatedNode, context) => {
-			queryClient.setQueryData(["appCollection"], context.previousData);
-			return { status: "error", error: err.message };
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries(["appCollection"]);
-			return { status: "success" };
-		},
-	});
-	return result;
+				queryClient.setQueryData(["appCollection"], (old) => {
+					return [...old, data];
+				});
+				return { previousData };
+			},
+			onError: (err, updatedNode, context) => {
+				queryClient.setQueryData(["appCollection"], context.previousData);
+				return {
+					data: { ...updatedNode },
+					status: "error",
+					error: err.message,
+				};
+			},
+			onSettled: () => {
+				queryClient.invalidateQueries(["appCollection"]);
+				return { data: { ...updatedNode }, status: "success" };
+			},
+		})
+		.then((result) => {
+			console.log("API: Got result: ", result);
+			return result;
+		});
 };
 
 export const deleteApp = async (key) => {

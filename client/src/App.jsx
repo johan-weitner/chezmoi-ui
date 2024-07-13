@@ -22,6 +22,12 @@ function App() {
 	useHotkeys("alt + e", () => editItem());
 	useHotkeys("shift + alt + left", () => gotoPrevPage());
 	useHotkeys("shift + alt + right", () => gotoNextPage());
+	useHotkeys("alt + w", () => unselectAppΩ());
+
+	const unselectApp = () => {
+		setSelectedAppKey(null);
+		setIsPopoverOpen(false);
+	};
 
 	const addItem = () => {
 		setSelectedAppKey(null);

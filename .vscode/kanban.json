@@ -16,6 +16,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Fix modal height so it flows with window height",
+                    "id": "smr1ij98maxxarwesbuefuna"
+                },
+                {
                     "text": "Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
                 },
@@ -168,5 +172,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720852547792
+    "timestamp": 1720852983451
 }

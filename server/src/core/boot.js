@@ -1,13 +1,6 @@
 import fs from "node:fs";
 import YAML from "yaml";
-import {
-	getCount,
-	getCount2,
-	getTagCount,
-	isEmptyDb,
-	seedDb,
-	seedDb2,
-} from "../db/prisma.js";
+import { getCount, getTagCount, isEmptyDb, seedDb } from "../db/prisma.js";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath } from "./config.js";
@@ -93,10 +86,8 @@ const _seedDbIfEmpty = async () => {
 		log.info("Empty db - seeding tables...");
 		const { software, keys } = _setupFileData();
 		const data = [];
-		const data2 = [];
 		keys.forEach((key, index) => {
-			data.push({ key: key, JSON: JSON.stringify(software[key]) });
-			data2.push({
+			data.push({
 				key: stripTrailingWhitespace(software[key].key),
 				name: stripTrailingWhitespace(software[key]._name),
 				edited: stripTrailingWhitespace(software[key].edited),
@@ -128,13 +119,9 @@ const _seedDbIfEmpty = async () => {
 				port: stripTrailingWhitespace(software[key].port),
 			});
 		});
-		log.info(Object.keys(data2[0]));
+		log.info(Object.keys(data[0]));
 		await seedDb(data);
-		await seedDb2(data2);
 		await getCount().then((count) => {
-			log.info(`Done seeding App table with ${count} apps`);
-		});
-		await getCount2().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
 		await seedTags(tags);
