@@ -22,7 +22,7 @@ function App() {
 	useHotkeys("alt + e", () => editItem());
 	useHotkeys("shift + alt + left", () => gotoPrevPage());
 	useHotkeys("shift + alt + right", () => gotoNextPage());
-	useHotkeys("alt + w", () => unselectAppΩ());
+	useHotkeys("alt + w", () => unselectApp());
 
 	const unselectApp = () => {
 		setSelectedAppKey(null);

@@ -24,7 +24,9 @@ const DetailsBox = (props) => {
 					title="Open homepage in new window"
 					rel="noreferrer"
 				>
-					{selectedApp.name || selectedApp.bin}
+					{selectedApp.name || (
+						<Text size="lg">[ Missing Name ] - ({selectedApp.key})</Text>
+					)}
 					{/* <ActionIcon
 									size={32}
 									radius="xl"

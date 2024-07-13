@@ -74,13 +74,84 @@ export const useAppPage = (page = 1, limit = 20) => {
 		});
 };
 
-// const adaptResponseData = (data) => {
-// 	const apps = data?.map((item) => {
-// 		const obj = JSON.parse(item.JSON);
-// 		return obj;
-// 	});
-// 	return apps;
-// };
+/*
+app.get("/getAppsWithoutInstaller", (req, res) => {
+
+app.get("/getAppsWithoutUrls", (req, res) => {
+
+app.get("/getAppsWithoutDesc", (req, res) => {
+*/
+export const getNoInstallerApps = async () => {
+	const apps = queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const apps = await axios
+				.get(`${BASE_URL}/getAppsWithoutInstaller`)
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			return apps;
+		},
+	});
+	return apps;
+};
+
+export const getNoUrlsApps = async () => {
+	const apps = queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const apps = await axios
+				.get(`${BASE_URL}/getAppsWithoutUrls`)
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			return apps;
+		},
+	});
+	return apps;
+};
+
+export const getNoDescApps = async () => {
+	const apps = queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const apps = await axios
+				.get(`${BASE_URL}/getAppsWithoutDesc`)
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			return apps;
+		},
+	});
+	return apps;
+};
+
+export const getNoNameApps = async () => {
+	const apps = queryClient.fetchQuery({
+		queryKey: ["appCollection"],
+		queryFn: async () => {
+			const apps = await axios
+				.get(`${BASE_URL}/getAppsWithoutName`)
+				.then((response) => {
+					return response.data;
+				})
+				.catch((error) => {
+					console.error(error);
+				});
+			return apps;
+		},
+	});
+	return apps;
+};
 
 export const getApp = (key) => {
 	const app = queryClient.fetchQuery({

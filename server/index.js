@@ -15,6 +15,10 @@ import {
 	getCount,
 	getPage,
 	updateApp,
+	getAppsWithoutInstaller,
+	getAppsWithoutUrls,
+	getAppsWithoutDesc,
+	getAppsWithoutName
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
 
@@ -119,6 +123,30 @@ app.delete("/deleteNode", (req, res) => {
 				error: e.message,
 			});
 		});
+});
+
+app.get("/getAppsWithoutInstaller", (req, res) => {
+	getAppsWithoutInstaller().then((apps) => {
+		attachHeaders(res).json(apps);
+	});
+});
+
+app.get("/getAppsWithoutUrls", (req, res) => {
+	getAppsWithoutUrls().then((apps) => {
+		attachHeaders(res).json(apps);
+	});
+});
+
+app.get("/getAppsWithoutDesc", (req, res) => {
+	getAppsWithoutDesc().then((apps) => {
+		attachHeaders(res).json(apps);
+	});
+});
+
+app.get("/getAppsWithoutName", (req, res) => {
+	getAppsWithoutName().then((apps) => {
+		attachHeaders(res).json(apps);
+	});
 });
 
 // app.post("/save", (req, res) => {

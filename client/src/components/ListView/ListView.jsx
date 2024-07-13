@@ -1,6 +1,13 @@
-import { Card, Pagination, Stack, Text } from "@mantine/core";
+import { Card, Pagination, Stack, Text, Group } from "@mantine/core";
 import { QueryClient } from "@tanstack/react-query";
-import { getTotalCount, useAppPage } from "api/appCollectionApi";
+import {
+	getTotalCount,
+	useAppPage,
+	getNoInstallerApps,
+	getNoUrlsApps,
+	getNoDescApps,
+	getNoNameApps,
+} from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
@@ -76,6 +83,38 @@ const ListView = (props) => {
 		setFilteredApps(filteredApps.filter((item) => item.key !== key));
 	};
 
+	const fetchNoInstallerApps = () => {
+		getNoInstallerApps().then((apps) => {
+			setSoftware(apps);
+			setTotalCount(apps.length);
+			updateCurrentListKeys(Object.keys(apps));
+		});
+	};
+
+	const fetchNoUrlsApps = () => {
+		getNoUrlsApps().then((apps) => {
+			setSoftware(apps);
+			setTotalCount(apps.length);
+			updateCurrentListKeys(Object.keys(apps));
+		});
+	};
+
+	const fetchNoDescApps = () => {
+		getNoDescApps().then((apps) => {
+			setSoftware(apps);
+			setTotalCount(apps.length);
+			updateCurrentListKeys(Object.keys(apps));
+		});
+	};
+
+	const fetchNoNameApps = () => {
+		getNoNameApps().then((apps) => {
+			setSoftware(apps);
+			setTotalCount(apps?.length);
+			updateCurrentListKeys(Object.keys(apps));
+		});
+	};
+
 	return (
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
@@ -90,6 +129,21 @@ const ListView = (props) => {
 					editItem={editItem}
 					deleteItem={deleteItem}
 				/>
+				<Group>
+					<button type="button" onClick={() => fetchNoInstallerApps()}>
+						No installers
+					</button>
+					<button type="button" onClick={() => fetchNoUrlsApps()}>
+						No URLs
+					</button>
+					<button type="button" onClick={() => fetchNoDescApps()}>
+						No description
+					</button>
+					<button type="button" onClick={() => fetchNoNameApps()}>
+						No name
+					</button>
+				</Group>
+
 				<Stack
 					className={css.paginationContainer}
 					justify="center"

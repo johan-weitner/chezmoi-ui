@@ -1,4 +1,4 @@
-import { rem } from "@mantine/core";
+import { rem, Text } from "@mantine/core";
 import { useAppCollection } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
@@ -27,7 +27,11 @@ export const ListItem = (props) => {
 					style={{ width: "100%" }}
 					type="button"
 				>
-					{app?.name}
+					{app?.name || (
+						<Text size="sm" style={{ color: "#333 !important" }}>
+							<i>[ Missing Name ]</i> - ({app?.key})
+						</Text>
+					)}
 				</button>
 				<ICON.edit
 					style={{
