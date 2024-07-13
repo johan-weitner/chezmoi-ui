@@ -8,6 +8,7 @@ import axios from "axios";
 
 import { CACHE_TTL } from "constants/settings";
 import { toast } from "sonner";
+import { APP_FORM } from "../constants/appForm";
 
 const BASE_URL = "http://localhost:3000";
 const queryClient = new QueryClient();
@@ -26,12 +27,25 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
+const mapAppData = (app) => {
+	const { formPartOne, formPartTwo } = APP_FORM;
+	const fields = [...formPartOne, ...formPartTwo];
+	const entity = {};
+	app.map((item) => {
+		if (fields.includes(item.key)) {
+			entity[item.key] = item.value;
+		}
+	});
+
+	return entity;
+};
+
 export const getTotalCount = async () => {
 	const count = await queryClient.fetchQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/getCount`);
-			console.log("Total count: ", response.data);
+			console.log("Total count: ", response.data.count);
 			return response.data;
 		},
 	});
@@ -51,7 +65,7 @@ export const useAppCollection = () => {
 export const useAppPage = (page = 1, limit = 20) => {
 	const skip = (page - 1) * limit;
 	const take = limit;
-	const response = axios
+	return axios
 		.post(`${BASE_URL}/page?skip=${skip}&take=${take}`, {
 			skip,
 			take,
@@ -88,7 +102,7 @@ export const getApp = (key) => {
 };
 
 export const useAppMutation = () => {
-	const queryClient = useQueryClient();
+	// const queryClient = useQueryClient();
 
 	return useMutation({
 		// mutationFn: (updatedNode) => {
@@ -106,8 +120,9 @@ export const useAppMutation = () => {
 		// 		});
 		// 	return result.data;
 		// },
-		mutationFn: (updatedNode) => {
-			updatedNode.edited = true;
+		mutationFn: (updatedData) => {
+			updatedData.edited = true;
+			updatedNode = mapAppData(updatedData);
 			return axios
 				.post(`${BASE_URL}/updateNode`, {
 					...updatedNode,
@@ -146,15 +161,15 @@ export const useAppMutation = () => {
 	});
 };
 
-export const addApp = async (data) => {
-	// const queryClient = useQueryClient();
-	return await queryClient
+export const addApp = (data) => {
+	const app = mapAppData(data);
+	return queryClient
 		.fetchQuery({
 			queryKey: ["appCollection"],
 			queryFn: async () => {
 				const result = await axios
 					.post(`${BASE_URL}/addNode`, {
-						data: { ...data },
+						data: { ...app },
 					})
 					.then((response) => {
 						return response.data;
@@ -170,7 +185,7 @@ export const addApp = async (data) => {
 				const previousData = queryClient.getQueryData(["appCollection"]);
 
 				queryClient.setQueryData(["appCollection"], (old) => {
-					return [...old, data];
+					return [...old, app];
 				});
 				return { previousData };
 			},

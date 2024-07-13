@@ -5,6 +5,10 @@
             "title": "Bugs",
             "tasks": [
                 {
+                    "text": "Docker image for server not working",
+                    "id": "vbl6zbnaz6t0v16k06gzsfwa"
+                },
+                {
                     "text": "EditView not populated correctly",
                     "id": "ddneh2dlbtr1ux9yqoq9h3yv"
                 }
@@ -172,5 +176,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720852983451
+    "timestamp": 1720882696055
 }

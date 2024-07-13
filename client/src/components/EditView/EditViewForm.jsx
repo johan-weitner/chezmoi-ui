@@ -64,19 +64,24 @@ const EditViewForm = (props) => {
 		try {
 			if (isNewApp) {
 				console.log("Is new app");
-				addApp(data); // Ensure addApp is properly handling async operations.
-				console.log("Done");
+				addApp(data).then((app) => {
+					console.log("Done");
+					console.log(app);
+				}); // Ensure addApp is properly handling async operations.
 			} else {
 				console.log("Updating app with");
-				updateApp.mutateAsync(data); // Use mutateAsync to wait for completion.
-				console.log("Done");
+				updateApp.mutateAsync(data).then((app) => {
+					console.log("Done");
+					console.log(app);
+				}); // Use mutateAsync to wait for completion.
+				nsole.log("Done");
 			}
 			setSelectedAppKey(null);
 			closePopover();
 		} catch (error) {
-			console.error("Failed to update app:", error);
 			const str = isNewApp ? "add" : "update";
-			toast.error(`Failed to ${str} app: ${error.message}`);
+			console.error(`Failed to ${str} app`, error);
+			toast.error(`Failed to ${str} app`);
 		}
 	};
 

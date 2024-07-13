@@ -1,6 +1,13 @@
 import fs from "node:fs";
 import YAML from "yaml";
-import { getCount, getTagCount, isEmptyDb, seedDb } from "../db/prisma.js";
+import { tags } from "../db/fixtures/tags.js";
+import {
+	getCount,
+	getTagCount,
+	isEmptyDb,
+	seedDb,
+	seedTags,
+} from "../db/prisma.js";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath } from "./config.js";

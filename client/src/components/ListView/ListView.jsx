@@ -56,14 +56,15 @@ const ListView = (props) => {
 	}, [currentPage, filter, software]);
 
 	useEffect(() => {
-		const apps = useAppPage(currentPage); //.then((apps) => {
-		setSoftware(apps);
-		if (apps && inReverse) {
-			selectApp(apps[apps.length - 1]?.key);
-		} else if (apps) {
-			selectApp(apps[0]?.key);
-		}
-		// });
+		const apps = useAppPage(currentPage).then((apps) => {
+			console.log('"LISTVIEW: apps: ', apps);
+			setSoftware(apps);
+			if (apps && inReverse) {
+				selectApp(apps[apps.length - 1]?.key);
+			} else if (apps) {
+				selectApp(apps[0]?.key);
+			}
+		});
 	}, [currentPage, lastChange]);
 
 	const touchLastChange = () => {

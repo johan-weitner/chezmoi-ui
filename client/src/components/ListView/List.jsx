@@ -23,6 +23,8 @@ const List = (props) => {
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
+	console.log("LIST: software: ", software);
+
 	useEffect(() => {}, [software]);
 
 	const deleteApp = (key) => {
