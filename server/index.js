@@ -76,16 +76,17 @@ app.get("/getApp", (req, res) => {
 
 app.post("/updateNode", (req, res) => {
 	const { body } = req;
-	const { key } = body;
+	log.info("SERVER: Req: ", body);
+
 	if (isEmpty(body)) {
 		res.status(500).json({
 			error: "No data provided",
 		});
 		return;
 	}
-	updateApp(key, JSON.stringify(body))
+	updateApp(body)
 		.then((app) => {
-			attachHeaders(res).status(200).json(jsonStr);
+			attachHeaders(res).status(200).json(app);
 		})
 		.catch((e) => {
 			res.status(500).json({
@@ -129,24 +130,24 @@ app.delete("/deleteNode", (req, res) => {
 		});
 });
 
-app.post("/save", (req, res) => {
-	if (isEmpty(req.body)) {
-		attachHeaders(res).status(500).json({
-			error: "No data provided",
-		});
-		return;
-	}
-	try {
-		const jsonStr = JSON.stringify(req.body, null, 2);
-		fs.writeFileSync(targetFilePath, jsonStr, "utf8");
-		attachHeaders(res).status(200).json(jsonStr);
-	} catch (err) {
-		attachHeaders(res).status(500).json({
-			error: err,
-		});
-		return;
-	}
-});
+// app.post("/save", (req, res) => {
+// 	if (isEmpty(req.body)) {
+// 		attachHeaders(res).status(500).json({
+// 			error: "No data provided",
+// 		});
+// 		return;
+// 	}
+// 	try {
+// 		const jsonStr = JSON.stringify(req.body, null, 2);
+// 		// fs.writeFileSync(targetFilePath, jsonStr, "utf8");
+// 		// attachHeaders(res).status(200).json(jsonStr);
+// 	} catch (err) {
+// 		attachHeaders(res).status(500).json({
+// 			error: err,
+// 		});
+// 		return;
+// 	}
+// });
 
 app.listen(port, () => {
 	log.info(`\nServer is listening at port ${port} `);

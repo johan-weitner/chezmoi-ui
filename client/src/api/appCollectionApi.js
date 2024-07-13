@@ -104,8 +104,9 @@ export const getApp = (key) => {
 export const useAppMutation = () => {
 	return useMutation({
 		mutationFn: (updatedData) => {
+			console.log("API: Got data: ", updatedData);
 			updatedData.edited = "true";
-			updatedNode = mapAppData(updatedData);
+			const updatedNode = mapAppData(updatedData);
 			return axios
 				.post(`${BASE_URL}/updateNode`, {
 					...updatedNode,
@@ -120,6 +121,7 @@ export const useAppMutation = () => {
 				});
 		},
 		onMutate: async (updatedNode) => {
+			console.log("API: Mutating with data: ", updatedNode);
 			await queryClient.cancelQueries(["appCollection"]);
 			const previousData = queryClient.getQueryData(["appCollection"]);
 			const keys = Object.keys(previousData);

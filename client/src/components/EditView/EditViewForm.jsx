@@ -26,16 +26,12 @@ const EditViewForm = (props) => {
 		defaultValues: defaultValues,
 	});
 
-	useEffect(() => {
-		reset({
-			values: {},
-			keepDirty: false,
-			keepDirtyFields: false,
-			keepValues: false,
-			keepDefaultValues: false,
-		});
-		forceUpdate();
-	}, [selectedApp, isNewApp, reset]);
+	// useEffect(() => {
+	// 	reset({
+	// 		values: {}
+	// 	});
+	// 	forceUpdate();
+	// }, [selectedApp, isNewApp, reset]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
@@ -46,11 +42,12 @@ const EditViewForm = (props) => {
 				console.log("Is new app");
 				addApp(data).then((app) => {
 					console.log("Done");
-				}); // Ensure addApp is properly handling async operations.
-			} else {
-				updateApp.mutateAsync(data).then((app) => {
-					console.log("Done");
 				});
+			} else {
+				console.log("Updating with data: ", data);
+				// updateApp.mutateAsync(data).then((app) => {
+				const res = updateApp.mutate(data);
+				console.log("Res: ");
 			}
 			setSelectedAppKey(null);
 			closePopover();

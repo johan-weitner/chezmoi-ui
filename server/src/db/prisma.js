@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { dbLog as log } from "../util/winston.js";
+import { log } from "../util/winston.js";
 
 const prisma = new PrismaClient();
 const APPLICATION = "application";
@@ -84,15 +84,17 @@ export const getAppByKey = async (key) => {
 	return app;
 };
 
-export const updateApp = async (key, json) => {
+export const updateApp = async (data) => {
+	log.info("PRISMA: Updating app with data: ", data);
 	const app = await prisma[APPLICATION].update({
 		where: {
-			key: key,
+			key: data.key,
 		},
 		data: {
-			JSON: json,
+			...data,
 		},
 	});
+	log.info("PRISMA: Updated app: ", app);
 	return app;
 };
 
