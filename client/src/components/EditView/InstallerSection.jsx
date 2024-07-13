@@ -10,8 +10,8 @@ const InstallerSection = (props) => {
 		<Fieldset legend="Installers">
 			<SimpleGrid
 				cols={{ base: 1, md: 4 }}
-				spacing="sm"
-				mt={50}
+				spacing="xs"
+				mt={0}
 				className={classes.grid}
 			>
 				{formPartTwo.map((item) => {

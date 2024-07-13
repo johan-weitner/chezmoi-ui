@@ -12,15 +12,15 @@ import {
 import classes from "../MainView/MainView.module.css";
 
 const InfoSection = (props) => {
-	const { formPartOne, register, isNewApp } = props;
+	const { formPartOne, register } = props;
 
 	return (
 		<div>
-			<Fieldset legend="Info">
+			<Fieldset legend="Info" style={{ paddingTop: "0 !important" }}>
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
-					spacing="sm"
-					mt={50}
+					spacing="xs"
+					mt={0}
 					className={classes.grid}
 					style={{ marginBottom: "-20px", backgroundColor: "#222 !important" }}
 				>
@@ -30,6 +30,7 @@ const InfoSection = (props) => {
 								display="block"
 								className={classes.fieldcontainer}
 								key={nanoid()}
+								gap="xs"
 								style={{ backgroundColor: "#222 !important" }}
 							>
 								<Text component="label" htmlFor={item.name} size="sm" fw={500}>
@@ -43,12 +44,12 @@ const InfoSection = (props) => {
 				<SimpleGrid
 					cols={{ base: 1, md: 1 }}
 					spacing="sm"
-					mt={50}
+					mt={30}
 					className={classes.grid}
 					style={{ marginBottom: "0", marginTop: "-20px", paddingTop: "0" }}
 				>
-					<Group display="block" className={classes.fieldcontainer}>
-						<Text component="label" htmlFor="_desc" size="sm" fw={500}>
+					<Group display="block" className={classes.fieldcontainer} gap="xs">
+						<Text component="label" htmlFor="desc" size="sm" fw={500}>
 							Description
 						</Text>
 						<Textarea id="desc" rows="8" {...register("desc")} />

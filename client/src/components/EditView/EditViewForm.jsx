@@ -1,4 +1,5 @@
 import { Button, Group } from "@mantine/core";
+import { randomId, useForceUpdate } from "@mantine/hooks";
 import { addApp, useAppMutation } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
@@ -18,7 +19,7 @@ const EditViewForm = (props) => {
 		selectedApp,
 		setSelectedAppKey,
 		isNewApp,
-		forceUpdate,
+		// forceUpdate,
 		randomId,
 	} = props;
 	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
@@ -26,12 +27,11 @@ const EditViewForm = (props) => {
 		defaultValues: defaultValues,
 	});
 
+	const forceUpdate = useForceUpdate();
+
 	// useEffect(() => {
-	// 	reset({
-	// 		values: {}
-	// 	});
-	// 	forceUpdate();
-	// }, [selectedApp, isNewApp, reset]);
+	// 	isNewApp && forceUpdate();
+	// }, []);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
@@ -68,12 +68,12 @@ const EditViewForm = (props) => {
 			<h2 className={css.editDetailHeader}>
 				{selectedApp?._name || "New application"}
 			</h2>
-			<Debugger
+			{/* <Debugger
 				selectedApp={selectedApp}
 				isNewApp={isNewApp}
 				resetForm={resetForm}
 				randomId={randomId}
-			/>
+			/> */}
 			<InfoSection
 				formPartOne={formPartOne}
 				register={register}

@@ -36,17 +36,17 @@ const EditView = forwardRef(function EditView(props, ref) {
 				blur: 7,
 			}}
 			radius="10"
-			size="xl"
+			size="auto"
 			transitionProps={{ duration: 2500, transition: "pop" }}
 			shadow="xl"
-			style={
-				{
-					// height: "100vh !important",
-					// maxHeight: "2000px !important",
-					// bottom: "120px",
-					// padding: "0 !important",
-				}
-			}
+			style={{
+				height: "100vh !important",
+				bottom: "0 !important",
+				flexGrow: "1 !important",
+				maxHeight: "fit-content !important",
+				flexBasis: "fit-content !important",
+				minHeight: "fit-content !important",
+			}}
 		>
 			<Card
 				style={{
@@ -63,19 +63,21 @@ const EditView = forwardRef(function EditView(props, ref) {
 						<FallbackComponent error={error.message} />
 					)}
 				>
-					<EditViewForm
-						isPopoverOpen={isPopoverOpen}
-						closePopover={closePopover}
-						selectedApp={selectedApp}
-						setSelectedAppKey={setSelectedAppKey}
-						gotoPrev={gotoPrev}
-						gotoNext={gotoNext}
-						theme={theme}
-						isNewApp={isNewApp}
-						forceUpdate={forceUpdate}
-						randomId={randomId}
-						// style={{ height: "90vh", padding: "0 !important" }}
-					/>
+					{selectedApp || isNewApp ? (
+						<EditViewForm
+							isPopoverOpen={isPopoverOpen}
+							closePopover={closePopover}
+							selectedApp={selectedApp}
+							setSelectedAppKey={setSelectedAppKey}
+							gotoPrev={gotoPrev}
+							gotoNext={gotoNext}
+							theme={theme}
+							isNewApp={isNewApp}
+							forceUpdate={forceUpdate}
+							randomId={randomId}
+							// style={{ height: "90vh", padding: "0 !important" }}
+						/>
+					) : null}
 				</ErrorBoundary>
 			</Card>
 		</Modal>

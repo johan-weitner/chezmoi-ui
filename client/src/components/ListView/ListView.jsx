@@ -57,7 +57,6 @@ const ListView = (props) => {
 
 	useEffect(() => {
 		const apps = useAppPage(currentPage).then((apps) => {
-			console.log('"LISTVIEW: apps: ', apps);
 			setSoftware(apps);
 			if (apps && inReverse) {
 				selectApp(apps[apps.length - 1]?.key);

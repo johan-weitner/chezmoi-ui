@@ -5,6 +5,10 @@
             "title": "Bugs",
             "tasks": [
                 {
+                    "text": "Description field not persisted",
+                    "id": "dkidht2td1wi5rm31x00aoba"
+                },
+                {
                     "text": "Docker image for server not working",
                     "id": "vbl6zbnaz6t0v16k06gzsfwa"
                 }
@@ -28,15 +32,7 @@
                     "id": "al7skfjf6v60tg7o76fywi8t"
                 },
                 {
-                    "text": "Implement useThrottledCallback et al",
-                    "id": "weut1k30or61ek8t6nfp3o2m"
-                },
-                {
-                    "text": "Stale data lingering when creating new record",
-                    "id": "zau3e18gscyonn2yx18d9qai"
-                },
-                {
-                    "text": "Stale data lingering after deletion",
+                    "text": "Stale data lingering after deletion and update",
                     "id": "v3os63b3tgnj5ws4mf59sz00"
                 },
                 {
@@ -67,6 +63,10 @@
                 {
                     "text": "EditView not populated correctly",
                     "id": "ddneh2dlbtr1ux9yqoq9h3yv"
+                },
+                {
+                    "text": "Stale data lingering when creating new record",
+                    "id": "zau3e18gscyonn2yx18d9qai"
                 },
                 {
                     "text": "Implement inReverse flag when browsing apps backwards, for better cross-page navigation",
@@ -167,6 +167,10 @@
                 {
                     "text": "Remove code related to file-based backend, including backup impl",
                     "id": "l2tus5amqbuhv73q9ass12ls"
+                },
+                {
+                    "text": "WONTFIX: Implement useThrottledCallback et al",
+                    "id": "weut1k30or61ek8t6nfp3o2m"
                 }
             ],
             "id": "jn3gjwyx5358rtr80ke72qpb",
@@ -175,5 +179,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720893319457
+    "timestamp": 1720897048402
 }
