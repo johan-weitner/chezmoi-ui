@@ -39,15 +39,9 @@ const EditViewForm = (props) => {
 	const onSubmit = (data) => {
 		try {
 			if (isNewApp) {
-				console.log("Is new app");
-				addApp(data).then((app) => {
-					console.log("Done");
-				});
+				addApp(data).then((app) => {});
 			} else {
-				console.log("Updating with data: ", data);
-				// updateApp.mutateAsync(data).then((app) => {
 				const res = updateApp.mutate(data);
-				console.log("Res: ");
 			}
 			setSelectedAppKey(null);
 			closePopover();

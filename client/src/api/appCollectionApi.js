@@ -45,7 +45,6 @@ export const getTotalCount = async () => {
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/getCount`);
-			console.log("Total count: ", response.data.count);
 			return response.data;
 		},
 	});
@@ -104,7 +103,6 @@ export const getApp = (key) => {
 export const useAppMutation = () => {
 	return useMutation({
 		mutationFn: (updatedData) => {
-			console.log("API: Got data: ", updatedData);
 			updatedData.edited = "true";
 			const updatedNode = mapAppData(updatedData);
 			return axios
@@ -121,7 +119,6 @@ export const useAppMutation = () => {
 				});
 		},
 		onMutate: async (updatedNode) => {
-			console.log("API: Mutating with data: ", updatedNode);
 			await queryClient.cancelQueries(["appCollection"]);
 			const previousData = queryClient.getQueryData(["appCollection"]);
 			const keys = Object.keys(previousData);
@@ -152,7 +149,6 @@ export const addApp = (data) => {
 	if (!app.desc) {
 		app.desc = "No description provided.";
 	}
-	// console.log('API: Re-mapped data: ', app);
 	return queryClient
 		.fetchQuery({
 			queryKey: ["appCollection"],
@@ -193,7 +189,6 @@ export const addApp = (data) => {
 			},
 		})
 		.then((result) => {
-			console.log("API: Got result: ", result);
 			return result;
 		});
 };

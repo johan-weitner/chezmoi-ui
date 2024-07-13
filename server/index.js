@@ -76,7 +76,6 @@ app.get("/getApp", (req, res) => {
 
 app.post("/updateNode", (req, res) => {
 	const { body } = req;
-	log.info("SERVER: Req: ", body);
 
 	if (isEmpty(body)) {
 		res.status(500).json({
@@ -98,14 +97,6 @@ app.post("/updateNode", (req, res) => {
 app.post("/addNode", (req, res) => {
 	console.log("Req.body: ", req.body);
 	const { data } = req.body;
-	// const {
-	// 	values,
-	// 	keepDirty,
-	// 	keepDirtyFields,
-	// 	keepValues,
-	// 	keepDefaultValues,
-	// 	...newParams
-	// } = data;
 	console.log("Req params: ", data);
 	addApp(data)
 		.then((app) => {
