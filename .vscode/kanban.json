@@ -7,10 +7,6 @@
                 {
                     "text": "Docker image for server not working",
                     "id": "vbl6zbnaz6t0v16k06gzsfwa"
-                },
-                {
-                    "text": "EditView not populated correctly",
-                    "id": "ddneh2dlbtr1ux9yqoq9h3yv"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -57,18 +53,21 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Refactor backend API to use multi-column table",
-                    "id": "puu1i1d7nfzxh06nj7uloy6b"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Refactor backend API to use multi-column table",
+                    "id": "puu1i1d7nfzxh06nj7uloy6b"
+                },
+                {
+                    "text": "EditView not populated correctly",
+                    "id": "ddneh2dlbtr1ux9yqoq9h3yv"
+                },
                 {
                     "text": "Implement inReverse flag when browsing apps backwards, for better cross-page navigation",
                     "id": "rbzguvms3q9rnqna1a99es2v"
@@ -176,5 +175,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720882696055
+    "timestamp": 1720893319457
 }
