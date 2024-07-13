@@ -50,12 +50,12 @@ const DetailView = (props) => {
 
 	useEffect(() => {
 		if (!appKey) {
+			console.log("No selected app - showing legend");
 			setSelectedApp(null);
 			return;
 		}
-		getApp(appKey).then((result) => {
-			setIsLoading(false);
-			const app = result?.JSON && JSON.parse(result.JSON);
+		console.log("Selected app - fetching app with key: ", appKey);
+		getApp(appKey).then((app) => {
 			setSelectedApp(app);
 			APP_FORM.formPartTwo.map((item) => {
 				if (app[item.name] && app[item.name].length > 0) {
@@ -66,6 +66,7 @@ const DetailView = (props) => {
 
 			const appTags = app?.tags && JSON.parse(app.tags);
 			appTags && setTags(appTags);
+			console.log("Got app tags: ", appTags);
 
 			indicateEdit = app.edited ? (
 				<ICON.check

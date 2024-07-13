@@ -5,8 +5,8 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "EditView not populated correctly",
-                    "id": "ddneh2dlbtr1ux9yqoq9h3yv"
+                    "text": "Docker image for server not working",
+                    "id": "vbl6zbnaz6t0v16k06gzsfwa"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -16,16 +16,16 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Fix modal height so it flows with window height",
+                    "id": "smr1ij98maxxarwesbuefuna"
+                },
+                {
                     "text": "Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
                 },
                 {
                     "text": "After switching tables: Search presets, for querying records with missing data",
                     "id": "al7skfjf6v60tg7o76fywi8t"
-                },
-                {
-                    "text": "Refactor backend API to use multi-column table",
-                    "id": "puu1i1d7nfzxh06nj7uloy6b"
                 },
                 {
                     "text": "Implement useThrottledCallback et al",
@@ -60,6 +60,14 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Refactor backend API to use multi-column table",
+                    "id": "puu1i1d7nfzxh06nj7uloy6b"
+                },
+                {
+                    "text": "EditView not populated correctly",
+                    "id": "ddneh2dlbtr1ux9yqoq9h3yv"
+                },
                 {
                     "text": "Implement inReverse flag when browsing apps backwards, for better cross-page navigation",
                     "id": "rbzguvms3q9rnqna1a99es2v"
@@ -167,5 +175,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720852547792
+    "timestamp": 1720893319457
 }

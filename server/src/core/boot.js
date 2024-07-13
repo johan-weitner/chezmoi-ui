@@ -1,6 +1,13 @@
 import fs from "node:fs";
 import YAML from "yaml";
-import { isEmptyDb } from "../db/prisma.js";
+import { tags } from "../db/fixtures/tags.js";
+import {
+	getCount,
+	getTagCount,
+	isEmptyDb,
+	seedDb,
+	seedTags,
+} from "../db/prisma.js";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath } from "./config.js";
@@ -86,19 +93,17 @@ const _seedDbIfEmpty = async () => {
 		log.info("Empty db - seeding tables...");
 		const { software, keys } = _setupFileData();
 		const data = [];
-		const data2 = [];
 		keys.forEach((key, index) => {
-			data.push({ key: key, JSON: JSON.stringify(software[key]) });
-			data2.push({
+			data.push({
 				key: stripTrailingWhitespace(software[key].key),
 				name: stripTrailingWhitespace(software[key]._name),
 				edited: stripTrailingWhitespace(software[key].edited),
 				desc: stripTrailingWhitespace(software[key]._desc),
-				bin: stripTrailingWhitespace(software[key].bin),
+				bin: stripTrailingWhitespace(software[key]._bin),
 				short: stripTrailingWhitespace(software[key]._short),
-				home: stripTrailingWhitespace(software[key].home),
-				docs: stripTrailingWhitespace(software[key].docs),
-				github: stripTrailingWhitespace(software[key].github),
+				home: stripTrailingWhitespace(software[key]._home),
+				docs: stripTrailingWhitespace(software[key]._docs),
+				github: stripTrailingWhitespace(software[key]._github),
 				whalebrew: stripTrailingWhitespace(software[key].whalebrew),
 				apt: stripTrailingWhitespace(software[key].apt),
 				brew: stripTrailingWhitespace(software[key].brew),
@@ -121,13 +126,9 @@ const _seedDbIfEmpty = async () => {
 				port: stripTrailingWhitespace(software[key].port),
 			});
 		});
-		log.info(Object.keys(data2[0]));
+		log.info(Object.keys(data[0]));
 		await seedDb(data);
-		await seedDb2(data2);
 		await getCount().then((count) => {
-			log.info(`Done seeding App table with ${count} apps`);
-		});
-		await getCount2().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
 		await seedTags(tags);

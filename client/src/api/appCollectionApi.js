@@ -8,6 +8,7 @@ import axios from "axios";
 
 import { CACHE_TTL } from "constants/settings";
 import { toast } from "sonner";
+import { APP_FORM } from "../constants/appForm";
 
 const BASE_URL = "http://localhost:3000";
 const queryClient = new QueryClient();
@@ -26,6 +27,19 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
+const mapAppData = (app) => {
+	const { formPartOne, formPartTwo } = APP_FORM;
+	const validKeys = [...formPartOne, ...formPartTwo].map((item) => item.name);
+	const entity = {};
+	const keys = Object.keys(app);
+	keys.map((key) => {
+		if (validKeys.includes(key)) {
+			entity[key] = app[key];
+		}
+	});
+	return entity;
+};
+
 export const getTotalCount = async () => {
 	const count = await queryClient.fetchQuery({
 		queryKey: ["appCollection"],
@@ -42,36 +56,34 @@ export const useAppCollection = () => {
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const response = await axios.get(`${BASE_URL}/software`);
-			const data = adaptResponseData(response.data);
-			return data;
+			return response.data;
 		},
 	});
 };
 
-export const useAppPage = async (page = 1, limit = 20) => {
+export const useAppPage = (page = 1, limit = 20) => {
 	const skip = (page - 1) * limit;
 	const take = limit;
-	const response = await axios.post(
-		`${BASE_URL}/page?skip=${skip}&take=${take}`,
-		{
+	return axios
+		.post(`${BASE_URL}/page?skip=${skip}&take=${take}`, {
 			skip,
 			take,
-		},
-	);
-	const data = adaptResponseData(response.data);
-	return data;
+		})
+		.then((response) => {
+			return response.data;
+		});
 };
 
-const adaptResponseData = (data) => {
-	const apps = data?.map((item) => {
-		const obj = JSON.parse(item.JSON);
-		return obj;
-	});
-	return apps;
-};
+// const adaptResponseData = (data) => {
+// 	const apps = data?.map((item) => {
+// 		const obj = JSON.parse(item.JSON);
+// 		return obj;
+// 	});
+// 	return apps;
+// };
 
-export const getApp = async (key) => {
-	const app = await queryClient.fetchQuery({
+export const getApp = (key) => {
+	const app = queryClient.fetchQuery({
 		queryKey: ["appCollection"],
 		queryFn: async () => {
 			const app = await axios
@@ -89,12 +101,11 @@ export const getApp = async (key) => {
 };
 
 export const useAppMutation = () => {
-	const queryClient = useQueryClient();
-
 	return useMutation({
-		mutationFn: (updatedNode) => {
-			updatedNode.edited = true;
-			const result = axios
+		mutationFn: (updatedData) => {
+			updatedData.edited = "true";
+			const updatedNode = mapAppData(updatedData);
+			return axios
 				.post(`${BASE_URL}/updateNode`, {
 					...updatedNode,
 				})
@@ -104,8 +115,8 @@ export const useAppMutation = () => {
 				.catch((error) => {
 					console.error(error.message);
 					toast(error.message);
+					throw error;
 				});
-			return result.data;
 		},
 		onMutate: async (updatedNode) => {
 			await queryClient.cancelQueries(["appCollection"]);
@@ -132,44 +143,54 @@ export const useAppMutation = () => {
 	});
 };
 
-export const addApp = async (data) => {
-	const result = await queryClient.fetchQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			const result = await axios
-				.post(`${BASE_URL}/addNode`, {
-					params: {
-						...data,
-					},
-				})
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error.message);
-					toast(error.message);
-				});
-			return result;
-		},
-		onMutate: async () => {
-			await queryClient.cancelQueries(["appCollection"]);
-			const previousData = queryClient.getQueryData(["appCollection"]);
+export const addApp = (data) => {
+	const app = mapAppData(data);
+	app.edited = "true";
+	if (!app.desc) {
+		app.desc = "No description provided.";
+	}
+	return queryClient
+		.fetchQuery({
+			queryKey: ["appCollection"],
+			queryFn: async () => {
+				axios
+					.post(`${BASE_URL}/addNode`, {
+						data: { ...app },
+					})
+					.then((response) => {
+						return response.data;
+					})
+					.catch((error) => {
+						console.error(error.message);
+						toast(error.message);
+						throw error;
+					});
+			},
+			onMutate: async () => {
+				await queryClient.cancelQueries(["appCollection"]);
+				const previousData = queryClient.getQueryData(["appCollection"]);
 
-			queryClient.setQueryData(["appCollection"], (old) => {
-				return old.push(data);
-			});
-			return { previousData };
-		},
-		onError: (err, updatedNode, context) => {
-			queryClient.setQueryData(["appCollection"], context.previousData);
-			return { status: "error", error: err.message };
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries(["appCollection"]);
-			return { status: "success" };
-		},
-	});
-	return result;
+				queryClient.setQueryData(["appCollection"], (old) => {
+					return [...old, app];
+				});
+				return { previousData };
+			},
+			onError: (err, updatedNode, context) => {
+				queryClient.setQueryData(["appCollection"], context.previousData);
+				return {
+					data: { ...updatedNode },
+					status: "error",
+					error: err.message,
+				};
+			},
+			onSettled: () => {
+				queryClient.invalidateQueries(["appCollection"]);
+				return { data: { ...updatedNode }, status: "success" };
+			},
+		})
+		.then((result) => {
+			return result;
+		});
 };
 
 export const deleteApp = async (key) => {

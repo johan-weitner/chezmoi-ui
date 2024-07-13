@@ -4,7 +4,6 @@ import { getTotalCount, useAppPage } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useHotkeys } from "react-hotkeys-hook";
 import commonCss from "../MainView/MainView.module.css";
 import List from "./List";
 import css from "./ListView.module.css";
@@ -50,17 +49,15 @@ const ListView = (props) => {
 	}, []);
 
 	useEffect(() => {
-		const apps = software?.filter((item) => {
-			return item?._name?.toLowerCase().includes(filter?.toLowerCase());
-		});
-		setFilteredApps(apps);
-		updateCurrentListKeys(apps);
+		setFilteredApps(software);
+		updateCurrentListKeys(software);
 		queryClient.cancelQueries(["appCollection"]);
 		queryClient.invalidateQueries(["appCollection"]);
 	}, [currentPage, filter, software]);
 
 	useEffect(() => {
-		useAppPage(currentPage).then((apps) => {
+		const apps = useAppPage(currentPage).then((apps) => {
+			console.log('"LISTVIEW: apps: ', apps);
 			setSoftware(apps);
 			if (apps && inReverse) {
 				selectApp(apps[apps.length - 1]?.key);
@@ -118,15 +115,17 @@ const ListView = (props) => {
 						</Text>
 					)}
 				</Stack>
-				<List
-					filteredApps={filteredApps}
-					selectApp={selectApp}
-					selectedAppKey={selectedAppKey}
-					error={error}
-					loading={isLoading}
-					editItem={editItem}
-					deleteItem={deleteApp}
-				/>
+				{software && (
+					<List
+						software={software}
+						selectApp={selectApp}
+						selectedAppKey={selectedAppKey}
+						error={error}
+						loading={isLoading}
+						editItem={editItem}
+						deleteItem={deleteApp}
+					/>
+				)}
 			</Card>
 		</ErrorBoundary>
 	);

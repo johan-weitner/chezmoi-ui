@@ -1,7 +1,10 @@
 import { PrismaClient } from "@prisma/client";
-import { dbLog as log } from "../util/winston.js";
+import { log } from "../util/winston.js";
 
 const prisma = new PrismaClient();
+const APPLICATION = "application";
+const TAG = "tag";
+const APP = "app";
 
 async function main() {
 	log.info("Set up db connection...");
@@ -18,22 +21,11 @@ main()
 	});
 
 export const seedDb = async (data) => {
-	await prisma
-		.$transaction([prisma.app.createMany({ data })])
-		.then(() => {
-			log.info("Seeded db with resources");
-		})
-		.catch((e) => {
-			log.error(e.message);
-		});
-};
-
-export const seedDb2 = async (data) => {
 	log.info("Seeding Application table with initial data...	");
 	await prisma
-		.$transaction([prisma.application.createMany({ data })])
+		.$transaction([prisma[APPLICATION].createMany({ data })])
 		.then(() => {
-			log.info("Seeded Application table with resources");
+			log.info("Seeded Application table with initial data");
 		})
 		.catch((e) => {
 			log.error(e.message);
@@ -43,7 +35,7 @@ export const seedDb2 = async (data) => {
 export const seedTags = async (data) => {
 	log.info(JSON.stringify(data, null, 2));
 	await prisma
-		.$transaction([prisma.tag.createMany({ data })])
+		.$transaction([prisma[TAG].createMany({ data })])
 		.then(() => {
 			log.info("Seeded db with tags");
 			log.info(JSON.stringify(data, null, 2));
@@ -54,33 +46,29 @@ export const seedTags = async (data) => {
 };
 
 export const addApp = async (data) => {
-	const { key, json } = data;
-	if (!key || !json) {
-		log.error("Invalid app data: ", data);
-		return null;
-	}
-
+	console.log("PRISMA: Adding app: ", data);
 	try {
-		const app = await prisma.app.create({
+		const app = await prisma[APPLICATION].create({
 			data: {
-				key,
-				JSON: json,
+				...data,
 			},
 		});
-		log.info("Adding app: ", key, JSON);
+		// log.info("PRISMA: Adding app: ", data);
+		log.info("PRISMA: Returned: ", app);
 		return app;
 	} catch (e) {
 		log.error(e.message);
+		throw e;
 	}
 };
 
 export const getAllApps = async () => {
-	const apps = await prisma.app.findMany();
+	const apps = await prisma[APPLICATION].findMany();
 	return apps;
 };
 
 export const getPage = async (skip = 0, take = 20) => {
-	const apps = await prisma.app.findMany({
+	const apps = await prisma[APPLICATION].findMany({
 		skip,
 		take,
 	});
@@ -88,7 +76,7 @@ export const getPage = async (skip = 0, take = 20) => {
 };
 
 export const getAppByKey = async (key) => {
-	const app = await prisma.app.findFirst({
+	const app = await prisma[APPLICATION].findFirst({
 		where: {
 			key: key,
 		},
@@ -96,15 +84,17 @@ export const getAppByKey = async (key) => {
 	return app;
 };
 
-export const updateApp = async (key, json) => {
-	const app = await prisma.app.update({
+export const updateApp = async (data) => {
+	log.info("PRISMA: Updating app with data: ", data);
+	const app = await prisma[APPLICATION].update({
 		where: {
-			key: key,
+			key: data.key,
 		},
 		data: {
-			JSON: json,
+			...data,
 		},
 	});
+	log.info("PRISMA: Updated app: ", app);
 	return app;
 };
 
@@ -114,7 +104,7 @@ export const deleteApp = async (key) => {
 		log.error("Invalid key: ", key);
 		return null;
 	}
-	const app = await prisma.app.delete({
+	const app = await prisma[APPLICATION].delete({
 		where: {
 			key: key,
 		},
@@ -123,17 +113,12 @@ export const deleteApp = async (key) => {
 };
 
 export const getCount = async () => {
-	const count = await prisma.app.count();
-	return count;
-};
-
-export const getCount2 = async () => {
-	const count = await prisma.application.count();
+	const count = await prisma[APPLICATION].count();
 	return count;
 };
 
 export const getTagCount = async () => {
-	const count = await prisma.tag.count();
+	const count = await prisma[TAG].count();
 	return count;
 };
 

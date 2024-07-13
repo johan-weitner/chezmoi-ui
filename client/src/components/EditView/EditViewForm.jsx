@@ -1,12 +1,11 @@
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-
 import { Button, Group } from "@mantine/core";
-import { APP_FORM, EMPTY_APP } from "constants/appForm";
-import { ICON } from "constants/icons";
-
 import { addApp, useAppMutation } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
+import { APP_FORM, EMPTY_APP } from "constants/appForm";
+import { ICON } from "constants/icons";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import Debugger from "./Debugger";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
@@ -18,7 +17,6 @@ const EditViewForm = (props) => {
 		closePopover,
 		selectedApp,
 		setSelectedAppKey,
-		theme,
 		isNewApp,
 		forceUpdate,
 		randomId,
@@ -28,39 +26,36 @@ const EditViewForm = (props) => {
 		defaultValues: defaultValues,
 	});
 
-	useEffect(() => {
-		reset({
-			values: {},
-			keepDirty: false,
-			keepDirtyFields: false,
-			keepValues: false,
-			keepDefaultValues: false,
-		});
-		forceUpdate();
-	}, [selectedApp, isNewApp, reset]);
+	// useEffect(() => {
+	// 	reset({
+	// 		values: {}
+	// 	});
+	// 	forceUpdate();
+	// }, [selectedApp, isNewApp, reset]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const updateApp = useAppMutation();
-	const onSubmit = async (data) => {
-		console.log("updateApp", updateApp);
-		if (isNewApp) {
-			addApp(data);
-		} else {
-			await updateApp.mutate(data);
+	const onSubmit = (data) => {
+		try {
+			if (isNewApp) {
+				addApp(data).then((app) => {});
+			} else {
+				const res = updateApp.mutate(data);
+			}
+			setSelectedAppKey(null);
+			closePopover();
+		} catch (error) {
+			const str = isNewApp ? "add" : "update";
+			console.error(`Failed to ${str} app`, error);
+			toast.error(`Failed to ${str} app`);
 		}
-		setSelectedAppKey(null);
-		closePopover();
 	};
 
 	const resetForm = () => {
 		console.log("Resetting form...");
-		const res = reset({
+		reset({
 			defaultValues: EMPTY_APP,
-			keepDirty: false,
-			keepDirtyFields: false,
-			keepValues: false,
-			keepDefaultValues: false,
 		});
 		forceUpdate();
 	};

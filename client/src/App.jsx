@@ -22,6 +22,12 @@ function App() {
 	useHotkeys("alt + e", () => editItem());
 	useHotkeys("shift + alt + left", () => gotoPrevPage());
 	useHotkeys("shift + alt + right", () => gotoNextPage());
+	useHotkeys("alt + w", () => unselectAppΩ());
+
+	const unselectApp = () => {
+		setSelectedAppKey(null);
+		setIsPopoverOpen(false);
+	};
 
 	const addItem = () => {
 		setSelectedAppKey(null);
@@ -55,6 +61,9 @@ function App() {
 	};
 
 	const gotoPrev = () => {
+		console.log(
+			`selectedAppKey: ${selectedAppKey}, currentListKeys: ${currentListKeys}`,
+		);
 		if (selectedAppKey) {
 			const index = findIndex(selectedAppKey);
 			if (index > 0) {
@@ -67,6 +76,7 @@ function App() {
 				// setSelectedAppKey(currentListKeys[currentListKeys.length - 1].key);
 			}
 		}
+		console.log(`selectedAppKey: ${selectedAppKey}, index: ${index}`);
 	};
 
 	const gotoNext = () => {

@@ -18,13 +18,13 @@ const DetailsBox = (props) => {
 				}}
 			>
 				<a
-					href={selectedApp._home || selectedApp._github || null}
+					href={selectedApp.home || selectedApp.github || null}
 					target="_blank"
 					style={{ fontWeight: "normal", textDecoration: "none" }}
 					title="Open homepage in new window"
 					rel="noreferrer"
 				>
-					{selectedApp._name || selectedApp._bin}
+					{selectedApp.name || selectedApp.bin}
 					{/* <ActionIcon
 									size={32}
 									radius="xl"
@@ -41,23 +41,23 @@ const DetailsBox = (props) => {
 				{indicateEdit}
 			</h2>
 
-			{selectedApp._short && (
-				<Text className={classes.short}>{selectedApp._short}</Text>
+			{selectedApp.short && (
+				<Text className={classes.short}>{selectedApp.short}</Text>
 			)}
-			{selectedApp._desc && (
-				<Text className={classes.desc}>{selectedApp._desc}</Text>
+			{selectedApp.desc && (
+				<Text className={classes.desc}>{selectedApp.desc}</Text>
 			)}
 
 			<div className={classes.indicatorGroup}>
 				<Text size="sm">
-					{selectedApp._home ? <MarkPopulated /> : <MarkUnPopulated />} Homepage
+					{selectedApp.home ? <MarkPopulated /> : <MarkUnPopulated />} Homepage
 				</Text>
 				<Text size="sm">
-					{selectedApp._docs ? <MarkPopulated /> : <MarkUnPopulated />}{" "}
+					{selectedApp.docs ? <MarkPopulated /> : <MarkUnPopulated />}{" "}
 					Documentation
 				</Text>
 				<Text size="sm">
-					{selectedApp._github ? <MarkPopulated /> : <MarkUnPopulated />} Github
+					{selectedApp.github ? <MarkPopulated /> : <MarkUnPopulated />} Github
 				</Text>
 				{!hasInstaller && (
 					<Text size="sm" style={{ marginTop: "6px" }}>
