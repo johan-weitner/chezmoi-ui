@@ -11,7 +11,7 @@ services:
     volumes:
       - db_data:/var/db-data
     command: >
-      sh -c "test -f /var/db-data/dev.db && pwd && ls -la && exec node index.js"
+      sh -c "test -f /var/db-data/dev.db && exec node index.js"
 
   client:
     build:
