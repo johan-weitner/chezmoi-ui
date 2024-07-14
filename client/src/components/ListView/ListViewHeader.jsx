@@ -23,9 +23,31 @@ export const ListViewHeader = ({
 	setFilter,
 	runFilter,
 	restoreFilters,
+	useFilter,
+	filterObj,
 	...props
 }) => {
 	const { filter, theme } = props;
+
+	const filterLinks = [
+		{
+			key: "noInstallers",
+			title: "Apps without installers",
+		},
+		{
+			key: "noUrls",
+			title: "Apps without URLs",
+		},
+		{
+			key: "noName",
+			title: "Apps without name",
+		},
+		{
+			key: "noDesc",
+			title: "Apps without description",
+		},
+	];
+
 	return (
 		<>
 			<Group className={commonCss.cardTitleContainer}>
@@ -42,35 +64,24 @@ export const ListViewHeader = ({
 					<Menu.Target>
 						<Button>Toggle menu</Button>
 					</Menu.Target>
- 					<Menu.Divider />
 					<Menu.Dropdown>
 						<Menu.Label>FILTER APPS ON:</Menu.Label>
-
-						<Menu.Item>
-							<UnstyledButton onClick={() => restoreFilters()}>
-								Restore filter
-							</UnstyledButton>
+						<Menu.Item
+							onClick={() => restoreFilters()}
+							leftSection={<ICON.startOver size={16} />}
+						>
+							Restore filter
 						</Menu.Item>
-						<Menu.Item>
-							<UnstyledButton onClick={() => runFilter("noInstallers")}>
-								Apps without installers
-							</UnstyledButton>
-						</Menu.Item>
-						<Menu.Item>
-							<UnstyledButton onClick={() => runFilter("noUrls")}>
-								Apps without URLs
-							</UnstyledButton>
-						</Menu.Item>
-						<Menu.Item>
-							<UnstyledButton onClick={() => runFilter("noName")}>
-								Apps without name
-							</UnstyledButton>
-						</Menu.Item>
-						<Menu.Item>
-							<UnstyledButton onClick={() => runFilter("noDesc")}>
-								Apps without description
-							</UnstyledButton>
-						</Menu.Item>
+						{Object.keys(filterObj).map((key) => (
+							<Menu.Item
+								key={key}
+								onClick={() => runFilter(key)}
+								className={key === useFilter ? css.active : null}
+							>
+								{filterObj[key].title}
+								{key === useFilter ? <span> ✓</span> : null}
+							</Menu.Item>
+						))}
 					</Menu.Dropdown>
 				</Menu>
 				{/* <nav className={commonCss.colButtons}>

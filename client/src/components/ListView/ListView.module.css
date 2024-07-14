@@ -19,3 +19,8 @@
   right: 24px !important;
   background-color: transparent !important;
 }
+
+.active {
+  background-color: #007bff !important;
+  color: white !important;
+}

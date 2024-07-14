@@ -56,22 +56,49 @@ const ListView = (props) => {
 
 	const FILTER = {
 		noInstallers: {
+			key: "noInstallers",
 			api: getNoInstallerApps,
 			callback: fetchNoInstallerApps,
+			title: "Apps without installers",
 		},
 		noUrls: {
+			key: "noUrls",
 			api: getNoUrlsApps,
 			callback: fetchNoUrlsApps,
+			title: "Apps without URLs",
 		},
 		noDesc: {
+			key: "noDesc",
 			api: getNoDescApps,
 			callback: fetchNoDescApps,
+			title: "Apps without name",
 		},
 		noName: {
+			key: "noName",
 			api: getNoNameApps,
 			callback: fetchNoNameApps,
+			title: "Apps without description",
 		},
 	};
+
+	const filterLinks = [
+		{
+			key: "noInstallers",
+			title: "Apps without installers",
+		},
+		{
+			key: "noUrls",
+			title: "Apps without URLs",
+		},
+		{
+			key: "noName",
+			title: "Apps without name",
+		},
+		{
+			key: "noDesc",
+			title: "Apps without description",
+		},
+	];
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -111,13 +138,10 @@ const ListView = (props) => {
 	};
 
 	const runFilter = (filterKey) => {
+		setUseFilter(filterKey);
 		const filter = FILTER[filterKey];
-		console.log("Filter: ", filterKey, filter);
-		setUseFilter(true);
-		console.log(typeof filter.api);
 		typeof filter.api === "function" &&
 			filter.api().then((apps) => {
-				console.log("Fetching filtered apps...", apps);
 				setSoftware(apps);
 				setTotalCount(apps.length);
 				setNumPages(1);
@@ -135,7 +159,7 @@ const ListView = (props) => {
 			} else if (apps) {
 				selectApp(apps[0]?.key);
 			}
-			setUseFilter(false);
+			setUseFilter(null);
 			setFilteredApps(null);
 			setSoftware(apps);
 			restoreFilters();
@@ -151,6 +175,7 @@ const ListView = (props) => {
 				<ListViewHeader
 					filter={filter}
 					filteredApps={filteredApps}
+					filterObj={FILTER}
 					theme={theme}
 					setFilter={setFilter}
 					addItem={addItem}
@@ -158,22 +183,8 @@ const ListView = (props) => {
 					deleteItem={deleteItem}
 					runFilter={runFilter}
 					restoreFilters={restoreFullList}
+					useFilter={useFilter}
 				/>
-				<Group>
-					<button type="button" onClick={() => runFilter("noInstallers")}>
-						No installers
-					</button>
-					<button type="button" onClick={() => runFilter("noUrls")}>
-						No URLs
-					</button>
-					<button type="button" onClick={() => runFilter("noDesc")}>
-						No description
-					</button>
-					<button type="button" onClick={() => runFilter("noName")}>
-						No name
-					</button>
-				</Group>
-
 				<Stack
 					className={css.paginationContainer}
 					justify="center"
@@ -188,13 +199,23 @@ const ListView = (props) => {
 						size={"sm"}
 						withEdges={true}
 					/>
-					{filteredApps && (
+					{filteredApps && (!useFilter || useFilter === "") && (
 						<Text
 							size="xs"
 							style={{ textAlign: "left", margin: "10px 0 0 20px" }}
 							className={css.paginationInfo}
 						>
 							Page {currentPage} of {numPages} ⋅ {totalCount} apps in total.
+						</Text>
+					)}
+					{useFilter && (
+						<Text
+							size="xs"
+							style={{ textAlign: "left", margin: "10px 0 0 20px" }}
+							className={css.paginationInfo}
+						>
+							Filtered by {FILTER[useFilter].title.toLowerCase()} ⋅ {totalCount}{" "}
+							apps in total.
 						</Text>
 					)}
 				</Stack>

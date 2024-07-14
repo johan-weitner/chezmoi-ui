@@ -11,6 +11,14 @@
                 {
                     "text": "Docker image for server not working",
                     "id": "vbl6zbnaz6t0v16k06gzsfwa"
+                },
+                {
+                    "text": "Fix modal height so it flows with window height",
+                    "id": "smr1ij98maxxarwesbuefuna"
+                },
+                {
+                    "text": "Stale data lingering after deletion and update",
+                    "id": "v3os63b3tgnj5ws4mf59sz00"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -20,23 +28,15 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Fix modal height so it flows with window height",
-                    "id": "smr1ij98maxxarwesbuefuna"
-                },
-                {
-                    "text": "Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
+                    "text": "LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
-                },
-                {
-                    "text": "Stale data lingering after deletion and update",
-                    "id": "v3os63b3tgnj5ws4mf59sz00"
                 },
                 {
                     "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
                     "id": "ue9lt3h5rwgnzx6dsu1lunru"
                 },
                 {
-                    "text": "Consolidate CSS modules - single component consumes single module",
+                    "text": "Consolidate CSS modules - single component consumes single module. Refactor MainView.module.css into common module, or move to App.css",
                     "id": "qs6mprszo0yyvuop4k6h3yxv"
                 }
             ],
@@ -179,5 +179,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720900862818
+    "timestamp": 1720952080375
 }
