@@ -1,6 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import { deleteApp } from "api/appCollectionApi.js";
+import {
+	deleteApp,
+	getNoInstallerApps,
+	getNoUrlsApps,
+	getNoDescApps,
+	getNoNameApps,
+} from "api/appCollectionApi.js";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Toaster } from "sonner";
 import MainView from "./components/MainView/MainView";
@@ -14,6 +20,8 @@ function App() {
 	const [numPages, setNumPages] = useState(1);
 	const [totalCount, setTotalCount] = useState(1);
 	const [inReverse, setInReverse] = useState(false);
+	const [filteredView, setFilteredView] = useState(null);
+	const [useFilter, setUseFilter] = useState(false);
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
 	useHotkeys("alt + left", () => gotoPrev());
@@ -105,6 +113,53 @@ function App() {
 		}
 	};
 
+	const fetchNoInstallerApps = () => {
+		// getNoInstallerApps().then(() => {
+		// 	initFilteredView();
+		// });
+		initFilteredView();
+	};
+
+	const fetchNoUrlsApps = () => {
+		// getNoUrlsApps().then(() => {
+		// 	initFilteredView();
+		// });
+		initFilteredView();
+	};
+
+	const fetchNoDescApps = () => {
+		// getNoDescApps().then(() => {
+		// 	initFilteredView();
+		// });
+		initFilteredView();
+	};
+
+	const fetchNoNameApps = () => {
+		// getNoNameApps().then(() => {
+		// 	initFilteredView();
+		// });
+		initFilteredView();
+	};
+
+	const initFilteredView = () => {
+		// console.log("Filtering");
+		setFilteredView(null);
+		setUseFilter(true);
+		// setTotalCount(apps?.length);
+		// setCurrentListKeys(Object.keys(apps));
+		// setNumPages(1);
+		setSelectedAppKey(null);
+	};
+
+	const restoreFilters = () => {
+		setFilteredView(null);
+		setUseFilter(false);
+		setTotalCount(1);
+		setCurrentListKeys([]);
+		setNumPages(1);
+		setSelectedAppKey(null);
+	};
+
 	return (
 		<>
 			{/* <AppShell header={{ height: 0 }}> */}
@@ -134,6 +189,12 @@ function App() {
 				totalCount={totalCount}
 				setTotalCount={setTotalCount}
 				inReverse={inReverse}
+				filteredView={filteredView}
+				fetchNoNameApps={fetchNoNameApps}
+				fetchNoDescApps={fetchNoDescApps}
+				fetchNoInstallerApps={fetchNoInstallerApps}
+				fetchNoUrlsApps={fetchNoUrlsApps}
+				restoreFilters={restoreFilters}
 			/>
 			{/* </AppShell.Main> */}
 			<Toaster

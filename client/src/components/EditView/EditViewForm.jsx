@@ -66,7 +66,7 @@ const EditViewForm = (props) => {
 			style={{ padding: "0 !important", margin: "0 !important" }}
 		>
 			<h2 className={css.editDetailHeader}>
-				{selectedApp?._name || "New application"}
+				{selectedApp?.name || "New application"}
 			</h2>
 			{/* <Debugger
 				selectedApp={selectedApp}

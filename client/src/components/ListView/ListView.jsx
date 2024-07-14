@@ -35,9 +35,16 @@ const ListView = (props) => {
 		gotoPrev,
 		gotoNext,
 		inReverse,
+		filteredView,
+		fetchNoNameApps,
+		fetchNoDescApps,
+		fetchNoInstallerApps,
+		fetchNoUrlsApps,
+		restoreFilters,
 	} = props;
 	const [filter, setFilter] = useState("");
 	const [filteredApps, setFilteredApps] = useState(null);
+	const [useFilter, setUseFilter] = useState(false);
 	const [page, setPage] = useState();
 	const [lastChange, setLastChange] = useState(new Date().getTime());
 	const queryClient = new QueryClient();
@@ -46,6 +53,25 @@ const ListView = (props) => {
 	const [error, setError] = useState();
 	const [isLoading, setIsLoading] = useState();
 
+	const FILTER = {
+		noInstallers: {
+			api: getNoInstallerApps,
+			callback: fetchNoInstallerApps,
+		},
+		noUrls: {
+			api: getNoUrlsApps,
+			callback: fetchNoUrlsApps,
+		},
+		noDesc: {
+			api: getNoDescApps,
+			callback: fetchNoDescApps,
+		},
+		noName: {
+			api: getNoNameApps,
+			callback: fetchNoNameApps,
+		},
+	};
+
 	useEffect(() => {
 		getTotalCount().then((response) => {
 			const { count } = response;
@@ -53,7 +79,7 @@ const ListView = (props) => {
 			setNumPages(pages);
 			setTotalCount(count);
 		});
-	}, []);
+	}, [useFilter]);
 
 	useEffect(() => {
 		setFilteredApps(software);
@@ -83,35 +109,34 @@ const ListView = (props) => {
 		setFilteredApps(filteredApps.filter((item) => item.key !== key));
 	};
 
-	const fetchNoInstallerApps = () => {
-		getNoInstallerApps().then((apps) => {
-			setSoftware(apps);
-			setTotalCount(apps.length);
-			updateCurrentListKeys(Object.keys(apps));
-		});
+	const runFilter = (filterKey) => {
+		const filter = FILTER[filterKey];
+		console.log("Filter: ", filterKey, filter);
+		setUseFilter(true);
+		console.log(typeof filter.api);
+		typeof filter.api === "function" &&
+			filter.api().then((apps) => {
+				console.log("Fetching filtered apps...", apps);
+				setSoftware(apps);
+				setTotalCount(apps.length);
+				setNumPages(1);
+				updateCurrentListKeys(Object.keys(apps));
+			});
+		typeof filter.callback === "function" && filter.callback();
 	};
 
-	const fetchNoUrlsApps = () => {
-		getNoUrlsApps().then((apps) => {
+	const restoreFullList = () => {
+		const apps = useAppPage(currentPage).then((apps) => {
 			setSoftware(apps);
-			setTotalCount(apps.length);
-			updateCurrentListKeys(Object.keys(apps));
-		});
-	};
-
-	const fetchNoDescApps = () => {
-		getNoDescApps().then((apps) => {
+			if (apps && inReverse) {
+				selectApp(apps[apps.length - 1]?.key);
+			} else if (apps) {
+				selectApp(apps[0]?.key);
+			}
+			setUseFilter(false);
+			setFilteredApps(null);
 			setSoftware(apps);
-			setTotalCount(apps.length);
-			updateCurrentListKeys(Object.keys(apps));
-		});
-	};
-
-	const fetchNoNameApps = () => {
-		getNoNameApps().then((apps) => {
-			setSoftware(apps);
-			setTotalCount(apps?.length);
-			updateCurrentListKeys(Object.keys(apps));
+			restoreFilters();
 		});
 	};
 
@@ -128,18 +153,20 @@ const ListView = (props) => {
 					addItem={addItem}
 					editItem={editItem}
 					deleteItem={deleteItem}
+					runFilter={runFilter}
+					restoreFilters={restoreFullList}
 				/>
 				<Group>
-					<button type="button" onClick={() => fetchNoInstallerApps()}>
+					<button type="button" onClick={() => runFilter("noInstallers")}>
 						No installers
 					</button>
-					<button type="button" onClick={() => fetchNoUrlsApps()}>
+					<button type="button" onClick={() => runFilter("noUrls")}>
 						No URLs
 					</button>
-					<button type="button" onClick={() => fetchNoDescApps()}>
+					<button type="button" onClick={() => runFilter("noDesc")}>
 						No description
 					</button>
-					<button type="button" onClick={() => fetchNoNameApps()}>
+					<button type="button" onClick={() => runFilter("noName")}>
 						No name
 					</button>
 				</Group>

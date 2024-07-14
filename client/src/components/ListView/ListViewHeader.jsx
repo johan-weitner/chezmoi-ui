@@ -6,6 +6,8 @@ import {
 	Tooltip,
 	UnstyledButton,
 	rem,
+	Menu,
+	Button,
 } from "@mantine/core";
 import { IconArrowRight, IconSearch } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
@@ -19,6 +21,8 @@ export const ListViewHeader = ({
 	editItem,
 	deleteItem,
 	setFilter,
+	runFilter,
+	restoreFilters,
 	...props
 }) => {
 	const { filter, theme } = props;
@@ -34,6 +38,40 @@ export const ListViewHeader = ({
 				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
 					Applications
 				</Text>
+				<Menu shadow="md" width={200}>
+					<Menu.Target>
+						<Button>Toggle menu</Button>
+					</Menu.Target>
+
+					<Menu.Dropdown>
+						<Menu.Label>FILTER APPS ON:</Menu.Label>
+						<Menu.Item>
+							<UnstyledButton onClick={() => restoreFilters()}>
+								Restore filter
+							</UnstyledButton>
+						</Menu.Item>
+						<Menu.Item>
+							<UnstyledButton onClick={() => runFilter("noInstallers")}>
+								Apps without installers
+							</UnstyledButton>
+						</Menu.Item>
+						<Menu.Item>
+							<UnstyledButton onClick={() => runFilter("noUrls")}>
+								Apps without URLs
+							</UnstyledButton>
+						</Menu.Item>
+						<Menu.Item>
+							<UnstyledButton onClick={() => runFilter("noName")}>
+								Apps without name
+							</UnstyledButton>
+						</Menu.Item>
+						<Menu.Item>
+							<UnstyledButton onClick={() => runFilter("noDesc")}>
+								Apps without description
+							</UnstyledButton>
+						</Menu.Item>
+					</Menu.Dropdown>
+				</Menu>
 				{/* <nav className={commonCss.colButtons}>
 					<Tooltip
 						label="Add application"

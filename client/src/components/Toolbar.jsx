@@ -1,17 +1,8 @@
-import {
-	Flex,
-	Group,
-	Text,
-	Title,
-	Tooltip,
-	UnstyledButton,
-	rem,
-} from "@mantine/core";
+import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
 import {
 	IconHome2,
 	IconPlayerTrackNext,
 	IconPlayerTrackPrev,
-	IconSettings,
 } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
@@ -96,7 +87,6 @@ const Toolbar = (props) => {
 				<NavbarLink
 					{...menuItem}
 					key={nanoid()}
-					active={index === active}
 					onClick={() => setActive(index)}
 				/>
 			);

@@ -28,10 +28,6 @@
                     "id": "sfkt8exlnp0dxds69zu0iei9"
                 },
                 {
-                    "text": "After switching tables: Search presets, for querying records with missing data",
-                    "id": "al7skfjf6v60tg7o76fywi8t"
-                },
-                {
                     "text": "Stale data lingering after deletion and update",
                     "id": "v3os63b3tgnj5ws4mf59sz00"
                 },
@@ -56,6 +52,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "After switching tables: Search presets, for querying records with missing data",
+                    "id": "al7skfjf6v60tg7o76fywi8t"
+                },
                 {
                     "text": "Refactor backend API to use multi-column table",
                     "id": "puu1i1d7nfzxh06nj7uloy6b"
@@ -179,5 +179,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720897048402
+    "timestamp": 1720900862818
 }
