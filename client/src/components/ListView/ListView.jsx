@@ -37,10 +37,7 @@ const ListView = (props) => {
 		gotoNext,
 		inReverse,
 		filteredView,
-		fetchNoNameApps,
-		fetchNoDescApps,
-		fetchNoInstallerApps,
-		fetchNoUrlsApps,
+		initFilteredView,
 		restoreFilters,
 	} = props;
 	const [filter, setFilter] = useState("");
@@ -58,47 +55,24 @@ const ListView = (props) => {
 		noInstallers: {
 			key: "noInstallers",
 			api: getNoInstallerApps,
-			callback: fetchNoInstallerApps,
 			title: "Apps without installers",
 		},
 		noUrls: {
 			key: "noUrls",
 			api: getNoUrlsApps,
-			callback: fetchNoUrlsApps,
 			title: "Apps without URLs",
 		},
 		noDesc: {
 			key: "noDesc",
 			api: getNoDescApps,
-			callback: fetchNoDescApps,
 			title: "Apps without name",
 		},
 		noName: {
 			key: "noName",
 			api: getNoNameApps,
-			callback: fetchNoNameApps,
 			title: "Apps without description",
 		},
 	};
-
-	const filterLinks = [
-		{
-			key: "noInstallers",
-			title: "Apps without installers",
-		},
-		{
-			key: "noUrls",
-			title: "Apps without URLs",
-		},
-		{
-			key: "noName",
-			title: "Apps without name",
-		},
-		{
-			key: "noDesc",
-			title: "Apps without description",
-		},
-	];
 
 	useEffect(() => {
 		getTotalCount().then((response) => {
@@ -148,7 +122,7 @@ const ListView = (props) => {
 				updateCurrentListKeys(Object.keys(apps));
 				setSelectedAppKey(apps[0].key);
 			});
-		typeof filter.callback === "function" && filter.callback();
+		initFilteredView();
 	};
 
 	const restoreFullList = () => {
@@ -184,6 +158,8 @@ const ListView = (props) => {
 					runFilter={runFilter}
 					restoreFilters={restoreFullList}
 					useFilter={useFilter}
+					selectApp={selectApp}
+					setSelectedAppKey={setSelectedAppKey}
 				/>
 				<Stack
 					className={css.paginationContainer}

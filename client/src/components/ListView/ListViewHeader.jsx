@@ -9,10 +9,11 @@ import {
 	Menu,
 	Button,
 } from "@mantine/core";
-import { IconArrowRight, IconSearch } from "@tabler/icons-react";
+import { IconArrowRight, IconSearch, IconMenu2 } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
 import commonCss from "../MainView/MainView.module.css";
 import Toolbar from "../Toolbar";
+import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 
 export const ListViewHeader = ({
@@ -25,28 +26,12 @@ export const ListViewHeader = ({
 	restoreFilters,
 	useFilter,
 	filterObj,
+	selectApp,
+	selectedAppKey,
+	setSelectedAppKey,
 	...props
 }) => {
 	const { filter, theme } = props;
-
-	const filterLinks = [
-		{
-			key: "noInstallers",
-			title: "Apps without installers",
-		},
-		{
-			key: "noUrls",
-			title: "Apps without URLs",
-		},
-		{
-			key: "noName",
-			title: "Apps without name",
-		},
-		{
-			key: "noDesc",
-			title: "Apps without description",
-		},
-	];
 
 	return (
 		<>
@@ -60,30 +45,7 @@ export const ListViewHeader = ({
 				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
 					Applications
 				</Text>
-				<Menu shadow="md" width={250}>
-					<Menu.Target>
-						<Button>Toggle menu</Button>
-					</Menu.Target>
-					<Menu.Dropdown>
-						<Menu.Label>FILTER APPS ON:</Menu.Label>
-						<Menu.Item
-							onClick={() => restoreFilters()}
-							leftSection={<ICON.startOver size={16} />}
-						>
-							Restore filter
-						</Menu.Item>
-						{Object.keys(filterObj).map((key) => (
-							<Menu.Item
-								key={key}
-								onClick={() => runFilter(key)}
-								className={key === useFilter ? css.active : null}
-							>
-								{filterObj[key].title}
-								{key === useFilter ? <span> ✓</span> : null}
-							</Menu.Item>
-						))}
-					</Menu.Dropdown>
-				</Menu>
+
 				{/* <nav className={commonCss.colButtons}>
 					<Tooltip
 						label="Add application"
@@ -168,6 +130,44 @@ export const ListViewHeader = ({
 				}
 				{...props}
 			/> */}
+			<Group>
+				<Menu shadow="md" width={250}>
+					<Menu.Target>
+						<ActionIcon
+							variant="filled"
+							aria-label="Open filter menu"
+							size="xl"
+						>
+							<Tooltip label="Open filter menu" position="top">
+								<IconMenu2 size={24} />
+							</Tooltip>
+						</ActionIcon>
+					</Menu.Target>
+					<Menu.Dropdown>
+						<Menu.Label>FILTER APPS ON:</Menu.Label>
+						<Menu.Item
+							onClick={() => restoreFilters()}
+							leftSection={<ICON.startOver size={16} />}
+						>
+							Restore filter
+						</Menu.Item>
+						{Object.keys(filterObj).map((key) => (
+							<Menu.Item
+								key={key}
+								onClick={() => runFilter(key)}
+								className={key === useFilter ? css.active : null}
+							>
+								{filterObj[key].title}
+								{key === useFilter ? <span> ✓</span> : null}
+							</Menu.Item>
+						))}
+					</Menu.Dropdown>
+				</Menu>
+				<SearchWidget
+					selectApp={selectApp}
+					setSelectedAppKey={setSelectedAppKey}
+				/>
+			</Group>
 		</>
 	);
 };

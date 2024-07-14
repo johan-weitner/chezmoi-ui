@@ -5,12 +5,12 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Description field not persisted",
-                    "id": "dkidht2td1wi5rm31x00aoba"
+                    "text": "Delete from DetailBox throws",
+                    "id": "lef0ds6hux2kxrc6zryyqqo2"
                 },
                 {
-                    "text": "Docker image for server not working",
-                    "id": "vbl6zbnaz6t0v16k06gzsfwa"
+                    "text": "Description field not persisted",
+                    "id": "dkidht2td1wi5rm31x00aoba"
                 },
                 {
                     "text": "Fix modal height so it flows with window height",
@@ -32,10 +32,6 @@
                     "id": "sfkt8exlnp0dxds69zu0iei9"
                 },
                 {
-                    "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
-                    "id": "ue9lt3h5rwgnzx6dsu1lunru"
-                },
-                {
                     "text": "Consolidate CSS modules - single component consumes single module. Refactor MainView.module.css into common module, or move to App.css",
                     "id": "qs6mprszo0yyvuop4k6h3yxv"
                 }
@@ -45,7 +41,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
+                    "id": "ue9lt3h5rwgnzx6dsu1lunru"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -55,6 +56,10 @@
                 {
                     "text": "After switching tables: Search presets, for querying records with missing data",
                     "id": "al7skfjf6v60tg7o76fywi8t"
+                },
+                {
+                    "text": "Docker image for server not working",
+                    "id": "vbl6zbnaz6t0v16k06gzsfwa"
                 },
                 {
                     "text": "Refactor backend API to use multi-column table",
@@ -179,5 +184,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720952080375
+    "timestamp": 1720982552643
 }

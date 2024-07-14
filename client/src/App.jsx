@@ -60,6 +60,7 @@ function App() {
 	};
 
 	const selectApp = (key) => {
+		console.log(`Selected app with key: ${key}`);
 		setSelectedAppKey(key);
 		setInReverse(false);
 	};
@@ -81,7 +82,6 @@ function App() {
 				console.log("Reached beginning of page, flipping to previous page...");
 				setInReverse(true);
 				setCurrentPage(currentPage - 1);
-				// setSelectedAppKey(currentListKeys[currentListKeys.length - 1].key);
 			}
 		}
 		console.log(`selectedAppKey: ${selectedAppKey}, index: ${index}`);
@@ -96,7 +96,6 @@ function App() {
 			} else if (currentPage < numPages) {
 				console.log("Reached end of page, flipping to next page...");
 				setCurrentPage(currentPage + 1);
-				// setSelectedAppKey(currentListKeys[0].key);
 			}
 		}
 	};
@@ -113,41 +112,9 @@ function App() {
 		}
 	};
 
-	const fetchNoInstallerApps = () => {
-		// getNoInstallerApps().then(() => {
-		// 	initFilteredView();
-		// });
-		initFilteredView();
-	};
-
-	const fetchNoUrlsApps = () => {
-		// getNoUrlsApps().then(() => {
-		// 	initFilteredView();
-		// });
-		initFilteredView();
-	};
-
-	const fetchNoDescApps = () => {
-		// getNoDescApps().then(() => {
-		// 	initFilteredView();
-		// });
-		initFilteredView();
-	};
-
-	const fetchNoNameApps = () => {
-		// getNoNameApps().then(() => {
-		// 	initFilteredView();
-		// });
-		initFilteredView();
-	};
-
 	const initFilteredView = () => {
-		// console.log("Filtering");
 		setFilteredView(null);
 		setUseFilter(true);
-		// setTotalCount(apps?.length);
-		// setCurrentListKeys(Object.keys(apps));
-		// setNumPages(1);
 		setSelectedAppKey(null);
 	};
 
@@ -190,10 +157,7 @@ function App() {
 				setTotalCount={setTotalCount}
 				inReverse={inReverse}
 				filteredView={filteredView}
-				fetchNoNameApps={fetchNoNameApps}
-				fetchNoDescApps={fetchNoDescApps}
-				fetchNoInstallerApps={fetchNoInstallerApps}
-				fetchNoUrlsApps={fetchNoUrlsApps}
+				initFilteredView={initFilteredView}
 				restoreFilters={restoreFilters}
 			/>
 			{/* </AppShell.Main> */}

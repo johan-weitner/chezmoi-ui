@@ -32,11 +32,8 @@ const MainView = (props) => {
 		setTotalCount,
 		inReverse,
 		filteredView,
-		fetchNoNameApps,
-		fetchNoDescApps,
-		fetchNoInstallerApps,
-		fetchNoUrlsApps,
 		restoreFilters,
+		initFilteredView,
 	} = props;
 	const theme = useMantineTheme();
 	const BASE_URL = "/api";
@@ -89,10 +86,7 @@ const MainView = (props) => {
 						gotoNext={gotoNext}
 						inReverse={inReverse}
 						filteredView={filteredView}
-						fetchNoNameApps={fetchNoNameApps}
-						fetchNoDescApps={fetchNoDescApps}
-						fetchNoInstallerApps={fetchNoInstallerApps}
-						fetchNoUrlsApps={fetchNoUrlsApps}
+						initFilteredView={initFilteredView}
 						restoreFilters={restoreFilters}
 					/>
 					{/* {selectedAppKey && ( */}

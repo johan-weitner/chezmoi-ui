@@ -23,6 +23,8 @@ import {
 	IconTrash,
 	IconWorldCode,
 	IconX,
+	IconMenu2,
+	IconSearch
 } from "@tabler/icons-react";
 import classes from "components/MainView/MainHeader.module.css";
 
@@ -56,6 +58,8 @@ export const ICON = {
 	add: IconCirclePlus,
 	warn: IconAlertCircle,
 	check: IconCheck,
+	menu: IconMenu2,
+	search: IconSearch,
 };
 
 export const INDICATOR = {
