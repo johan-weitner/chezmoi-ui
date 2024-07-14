@@ -41,18 +41,17 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
-                    "id": "ue9lt3h5rwgnzx6dsu1lunru"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
+                    "id": "ue9lt3h5rwgnzx6dsu1lunru"
+                },
                 {
                     "text": "After switching tables: Search presets, for querying records with missing data",
                     "id": "al7skfjf6v60tg7o76fywi8t"
@@ -184,5 +183,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720982552643
+    "timestamp": 1720987277064
 }
