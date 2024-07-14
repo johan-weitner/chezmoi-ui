@@ -73,6 +73,7 @@ const MainView = (props) => {
 						theme={theme}
 						selectApp={selectApp}
 						selectedAppKey={selectedAppKey}
+						setSelectedAppKey={setSelectedAppKey}
 						setIsPopoverOpen={setIsPopoverOpen}
 						addItem={addItem}
 						editItem={editItem}

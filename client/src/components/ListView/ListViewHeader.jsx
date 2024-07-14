@@ -38,13 +38,14 @@ export const ListViewHeader = ({
 				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
 					Applications
 				</Text>
-				<Menu shadow="md" width={200}>
+				<Menu shadow="md" width={250}>
 					<Menu.Target>
 						<Button>Toggle menu</Button>
 					</Menu.Target>
-
+ 					<Menu.Divider />
 					<Menu.Dropdown>
 						<Menu.Label>FILTER APPS ON:</Menu.Label>
+
 						<Menu.Item>
 							<UnstyledButton onClick={() => restoreFilters()}>
 								Restore filter

@@ -21,6 +21,7 @@ const ListView = (props) => {
 		theme,
 		selectApp,
 		selectedAppKey,
+		setSelectedAppKey,
 		setIsPopoverOpen,
 		deleteItem,
 		addItem,
@@ -121,6 +122,7 @@ const ListView = (props) => {
 				setTotalCount(apps.length);
 				setNumPages(1);
 				updateCurrentListKeys(Object.keys(apps));
+				setSelectedAppKey(apps[0].key);
 			});
 		typeof filter.callback === "function" && filter.callback();
 	};
@@ -137,6 +139,7 @@ const ListView = (props) => {
 			setFilteredApps(null);
 			setSoftware(apps);
 			restoreFilters();
+			setSelectedAppKey(apps[0].key);
 		});
 	};
 
