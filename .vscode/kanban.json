@@ -28,6 +28,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Use useContext instead of deep prop drilling",
+                    "id": "ss8bgsp8q21t17kubravtcfy"
+                },
+                {
                     "text": "LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
                 },
@@ -183,5 +187,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720987277064
+    "timestamp": 1720993708319
 }
