@@ -44,3 +44,26 @@ export const filterNoDescsApps = (apps) => {
 export const filterNoNamesApps = (apps) => {
   return apps.filter((item) => _isColumnEmpty(item.name));
 };
+
+export const filterModel = {
+  noInstallers: {
+    key: "noInstallers",
+    method: filterNoInstallerApps,
+    title: "Apps without installers",
+  },
+  noUrls: {
+    key: "noUrls",
+    method: filterNoUrlsApps,
+    title: "Apps without URLs",
+  },
+  noDesc: {
+    key: "noDesc",
+    method: filterNoDescsApps,
+    title: "Apps without name",
+  },
+  noName: {
+    key: "noName",
+    method: filterNoNamesApps,
+    title: "Apps without description",
+  },
+};

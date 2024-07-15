@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import "./App.css";
 import {
-	useDataManager,
+	useClientManager,
 	useClient,
 	useDataContext,
 } from "core/ClientProvider.jsx";
@@ -10,25 +10,28 @@ const App2 = () => {
 	const {
 		allApps,
 		totalApps,
-		fetchAllApps,
+		populateList,
+		initPagination,
 		deleteItem,
 		updateItem,
 		addItem,
 		selectApp,
 		selectedApp,
+		selectedAppKey,
 		page,
 		limit,
 		totalCount,
 		pageCount,
+		setPage,
 		setLimit,
 		gotoPrev,
 		gotoNext,
 		gotoPrevPage,
 		gotoNextPage,
-		initFilteredView,
+		applyFilter,
 		restoreFilters,
 		activeFilter,
-	} = useDataManager();
+	} = useClientManager();
 
 	return (
 		<>
@@ -51,10 +54,7 @@ const App2 = () => {
 					<tbody>
 						<tr>
 							<td>
-								<button
-									type="button"
-									onClick={() => initFilteredView("noName")}
-								>
+								<button type="button" onClick={() => applyFilter("noName")}>
 									Filter
 								</button>
 							</td>

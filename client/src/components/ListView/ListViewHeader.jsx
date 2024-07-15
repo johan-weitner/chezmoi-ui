@@ -9,8 +9,11 @@ import {
 	rem,
 	Menu,
 	Button,
+	useMantineTheme,
 } from "@mantine/core";
 import { IconArrowRight, IconSearch, IconMenu2 } from "@tabler/icons-react";
+import { useClientManager } from "core/ClientProvider";
+import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
 import commonCss from "../MainView/MainView.module.css";
 import Toolbar from "../Toolbar";
@@ -18,36 +21,11 @@ import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 import { ClientContext } from "core/ClientContext.jsx";
 
-export const ListViewHeader = ({
-	filteredApps,
-	addItem,
-	editItem,
-	deleteItem,
-	setFilter,
-	runFilter,
-	restoreFilters,
-	useFilter,
-	filterObj,
-	selectApp,
-	selectedAppKey,
-	setSelectedAppKey,
-	...props
-}) => {
-	const { filter, theme } = props;
-	// const [version, setVersion] = useState("2.0");
-	// const appContext = useContext(AppContext);
-	// const ctx = useContext(clientContext);
-	// const updatedContext = {
-	// 	appVersion: version,
-	// 	...ctx,
-	// };
+export const ListViewHeader = (props) => {
+	const { selectApp, applyFilter, restoreFilters, activeFilter } =
+		useClientManager();
 
-	// console.log(updatedContext);
-
-	// const bumpContext = () => {
-	// 	console.log("Bump context");
-	// 	setVersion("2.0");
-	// };
+	const theme = useMantineTheme();
 
 	return (
 		<>
@@ -167,22 +145,19 @@ export const ListViewHeader = ({
 						>
 							Restore filter
 						</Menu.Item>
-						{Object.keys(filterObj).map((key) => (
+						{Object.keys(filterModel).map((key) => (
 							<Menu.Item
 								key={key}
-								onClick={() => runFilter(key)}
-								className={key === useFilter ? css.active : null}
+								onClick={() => applyFilter(key)}
+								className={key === activeFilter ? css.active : null}
 							>
-								{filterObj[key].title}
-								{key === useFilter ? <span> ✓</span> : null}
+								{filterModel[key].title}
+								{key === activeFilter ? <span> ✓</span> : null}
 							</Menu.Item>
 						))}
 					</Menu.Dropdown>
 				</Menu>
-				<SearchWidget
-					selectApp={selectApp}
-					setSelectedAppKey={setSelectedAppKey}
-				/>
+				<SearchWidget selectApp={selectApp} />
 			</Group>
 		</>
 	);

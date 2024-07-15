@@ -10,9 +10,6 @@ import { ClientContext } from "core/ClientContext.jsx";
 import { useClient, ClientProvider } from "core/ClientProvider.jsx";
 import App2 from "./App2.jsx";
 
-// console.log("ClientContext", ClientContext);
-// console.log("ClientContext._ctx", ClientContext._ctx);
-
 const theme = createTheme({
 	/** Mantine theme override goes here */
 });
@@ -27,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 					<App />
 				</ClientContext.Provider> */}
 				<ClientProvider>
-					<App2 />
+					<App />
 				</ClientProvider>
 			</MantineProvider>
 			<ReactQueryDevtools initialIsOpen={false} />

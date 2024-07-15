@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { rem, Button, ActionIcon, Tooltip } from "@mantine/core";
+import { useClientManager } from "../../core/ClientProvider";
 import { Spotlight, spotlight } from "@mantine/spotlight";
 
 import {
@@ -14,19 +15,17 @@ import { useAppCollection } from "api/appCollectionApi.js";
 const actions = [];
 
 const SearchWidget = (props) => {
-	const { selectApp, setSelectedAppKey } = props;
+	const { allApps } = useClientManager();
 	const [apps, setApps] = useState([]);
-	const { data: software } = useAppCollection();
 
 	const openApp = (key) => {
-		setSelectedAppKey(key);
 		selectApp(key);
 	};
 
 	useEffect(() => {
-		if (software) {
-			setApps(software);
-			software.map((app) => {
+		if (allApps) {
+			setApps(allApps);
+			allApps.map((app) => {
 				actions.push({
 					id: app.key,
 					label: app.name,
@@ -41,7 +40,7 @@ const SearchWidget = (props) => {
 				});
 			});
 		}
-	}, [software]);
+	}, [allApps]);
 
 	return (
 		<ActionIcon.Group>

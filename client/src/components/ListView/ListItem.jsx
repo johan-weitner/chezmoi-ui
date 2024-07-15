@@ -7,8 +7,7 @@ import { EditedIndicator } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
 
 export const ListItem = (props) => {
-	const { selectApp, app, selectedAppKey, deleteItem, editItem } = props;
-	const { data: software } = useAppCollection();
+	const { selectApp, selectedAppKey, app, deleteItem, editItem } = props;
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;

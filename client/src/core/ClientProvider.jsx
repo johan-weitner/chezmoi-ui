@@ -11,18 +11,14 @@ import {
 	fetchApp,
 	getTotalCount,
 	getAllApps,
+	getAppPage,
 	useAppPage,
-	getNoInstallerApps,
-	getNoUrlsApps,
-	getNoDescApps,
-	getNoNameApps,
 	getApp,
 	updateApp,
 	addApp,
 	deleteApp,
 } from "api/appCollectionApi.js";
-import Legend from "components/DetailView/Legend";
-import { FILTER } from "api/appCollectionApi";
+import { filterModel } from "api/filters";
 
 // Create a new React context
 const ClientContext = createContext();
@@ -165,11 +161,11 @@ function useDataContext() {
 // 	};
 // };
 
-const findIndex = (key, list) => {
+const _findIndex = (key, list) => {
 	return list.findIndex((item) => item.key === key);
 };
 
-const useDataManager = () => {
+const useClientManager = () => {
 	const [allApps, setAllApps] = useState([]);
 	const [totalApps, setTotalApps] = useState(0);
 	const [selectedApp, setSelectedApp] = useState(null);
@@ -186,18 +182,28 @@ const useDataManager = () => {
 	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
 
 	const populateList = () => {
-		fetchAllApps().then((apps) => {
+		getPage(1);
+	};
+
+	const initPagination = () => {
+		setListSize(allApps.length);
+		setNumPages(allApps.length);
+		setPage(1);
+		selectApp(allApps[0]);
+	};
+
+	const getPage = (page) => {
+		const skip = (page - 1) * limit;
+		getAppPage(page).then((apps) => {
 			setAllApps(apps);
-			setListSize(apps.length);
-			setNumPages(apps.length);
-			setPage(1);
-			selectApp(apps[0]);
+			initPagination();
 		});
 	};
 
 	const selectApp = (appKey) => {
 		getApp(appKey).then((app) => {
 			setSelectedApp(app);
+			setSelectedAppKey(appKey);
 		});
 	};
 
@@ -220,7 +226,7 @@ const useDataManager = () => {
 	};
 
 	const gotoPrev = () => {
-		const index = findIndex(selectedAppKey, allApps);
+		const index = _findIndex(selectedAppKey, allApps);
 		if (index === 0) return;
 		const nextApp = allApps[index - 1];
 		setSelectedApp(nextApp);
@@ -228,7 +234,7 @@ const useDataManager = () => {
 	};
 
 	const gotoNext = () => {
-		const index = findIndex(selectedAppKey, allApps);
+		const index = _findIndex(selectedAppKey, allApps);
 		if (index === allApps?.length - 1) return;
 		const nextApp = allApps[index + 1];
 		setSelectedApp(nextApp);
@@ -243,15 +249,13 @@ const useDataManager = () => {
 		page < pageCount && setPage(page + 1);
 	};
 
-	const initFilteredView = async (filter) => {
+	const applyFilter = async (filter) => {
 		setActiveFilter(filter);
 		const filteredeApps = getAllApps().then((apps) => {
-			const filteredApps = FILTER[filter].method(apps);
+			const filteredApps = filterModel[filter].method(apps);
 			setAllApps(filteredApps);
-			setTotalCount(filteredApps.length);
-			setPageCount(Math.ceil(filteredApps.length / limit));
-			setPage(1);
-			return FILTER[filter].method(apps);
+			initPagination();
+			return filterModel[filter].method(apps);
 		});
 		queryClient.invalidateQueries(["appCollection"]);
 		queryClient.setQueryData(["appCollection"], filteredeApps);
@@ -262,9 +266,7 @@ const useDataManager = () => {
 		setActiveFilter(null);
 		const appList = getAllApps().then((apps) => {
 			setAllApps(apps);
-			setTotalCount(apps.length);
-			setPageCount(Math.ceil(apps.length / limit));
-			setPage(1);
+			initPagination();
 			return apps;
 		});
 		queryClient.invalidateQueries(["appCollection"]);
@@ -273,45 +275,35 @@ const useDataManager = () => {
 	};
 
 	useEffect(() => {
-		fetchAllApps().then((apps) => {
-			setAllApps(apps);
-			setListSize(apps.length);
-			setNumPages(apps.length);
-		});
+		populateList();
 	}, []);
 
 	useEffect(() => {
-		setListSize(allApps.length);
-		setNumPages(allApps.length);
-		setPage(1);
+		initPagination();
 	}, [allApps]);
 
 	return {
 		allApps,
 		totalApps,
-		setAllApps,
 		populateList,
-		fetchAllApps,
+		initPagination,
 		deleteItem,
 		updateItem,
 		addItem,
 		selectApp,
 		selectedApp,
 		selectedAppKey,
-		setSelectedAppKey,
 		page,
 		limit,
 		totalCount,
 		pageCount,
-		setListSize,
-		setNumPages,
 		setPage,
 		setLimit,
 		gotoPrev,
 		gotoNext,
 		gotoPrevPage,
 		gotoNextPage,
-		initFilteredView,
+		applyFilter,
 		restoreFilters,
 		activeFilter,
 	};
@@ -319,58 +311,7 @@ const useDataManager = () => {
 
 // Component to provide the ClientContext
 function ClientProvider({ children }) {
-	let { data: allApps } = getAllApps();
-	let totalCount = getTotalCount();
-	let pageCount = Math.ceil(totalCount / 20);
-	let selectedItem = null;
-	let selectedItemKey = null;
-	const detailView = {
-		isOpen: false,
-		Fallback: <Legend />,
-	};
-
-	const selectItem = (appKey) => {
-		console.log("appKey", appKey);
-		getApp(appKey).then((app) => {
-			selectedItem = app;
-			selectedItemKey = app.key;
-			detailView.isOpen = true;
-		});
-	};
-
-	const closeItem = () => {
-		selectedItem = null;
-		selectedItemKey = null;
-		detailView.isOpen = false;
-	};
-
-	// Define the context value
-	const contextValue = {
-		data: {
-			allApps,
-			refetchAllApps: getAllApps,
-			useAppMutation: updateApp,
-			addApp,
-			deleteApp,
-		},
-		// Add view management state and functions here
-		view: {
-			mode: "default",
-			selectedItem,
-			selectedItemKey,
-			detailView,
-			editView: {
-				isOpen: false, // boolean
-			},
-			// pageManager: usePageManager(1, 20, allApps?.length || 0),
-			filterManager: {},
-			selectItem,
-			closeItem: null, // Function
-			editItem: null, // Function
-			addItem: null, // Function
-		},
-	};
-
+	const contextValue = useClientManager();
 	return (
 		<ClientContext.Provider value={contextValue}>
 			{children}
@@ -378,4 +319,4 @@ function ClientProvider({ children }) {
 	);
 }
 
-export { useClient, ClientProvider, useDataManager, useDataContext };
+export { useClient, ClientProvider, useClientManager, useDataContext };
