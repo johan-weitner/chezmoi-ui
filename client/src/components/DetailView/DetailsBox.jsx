@@ -3,13 +3,11 @@ import { Badge, Button, Group, Text, rem } from "@mantine/core";
 import { ICON } from "../../constants/icons";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
-import { AppContext } from "../../main";
+import { ClientContext } from "core/ClientContext.jsx";
 
 const DetailsBox = (props) => {
 	const { selectedApp, tags, hasInstaller, indicateEdit, edit, removeApp } =
 		props;
-
-	const { appVersion } = useContext(AppContext);
 
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>
@@ -44,7 +42,7 @@ const DetailsBox = (props) => {
 									/>
 								</ActionIcon> */}
 				</a>
-				{indicateEdit} - {appVersion}
+				{indicateEdit}
 			</h2>
 
 			{selectedApp.short && (

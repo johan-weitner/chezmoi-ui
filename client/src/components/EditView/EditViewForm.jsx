@@ -1,6 +1,6 @@
 import { Button, Group } from "@mantine/core";
 import { randomId, useForceUpdate } from "@mantine/hooks";
-import { addApp, useAppMutation } from "api/appCollectionApi";
+import { addApp, updateApp } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
@@ -35,13 +35,13 @@ const EditViewForm = (props) => {
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
-	const updateApp = useAppMutation();
+	const update = updateApp();
 	const onSubmit = (data) => {
 		try {
 			if (isNewApp) {
 				addApp(data).then((app) => {});
 			} else {
-				const res = updateApp.mutate(data);
+				const res = update.mutate(data);
 			}
 			setSelectedAppKey(null);
 			closePopover();

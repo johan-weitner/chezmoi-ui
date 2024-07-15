@@ -1,4 +1,4 @@
-import { useState, createContext } from "react";
+import { useState, useContext } from "react";
 import "./App.css";
 import {
 	deleteApp,
@@ -22,6 +22,7 @@ function App() {
 	const [inReverse, setInReverse] = useState(false);
 	const [filteredView, setFilteredView] = useState(null);
 	const [useFilter, setUseFilter] = useState(false);
+
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
 	useHotkeys("alt + left", () => gotoPrev());

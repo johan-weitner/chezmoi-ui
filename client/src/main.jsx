@@ -6,12 +6,12 @@ import "@mantine/spotlight/styles.css";
 import { MantineProvider, createTheme } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import clientCtx from "core/clientContext.js";
-export const AppContext = createContext(null);
+import { ClientContext } from "core/ClientContext.jsx";
+import { useClient, ClientProvider } from "core/ClientProvider.jsx";
+import App2 from "./App2.jsx";
 
-const { actions } = clientCtx;
-console.log(clientCtx);
-actions?.test();
+// console.log("ClientContext", ClientContext);
+// console.log("ClientContext._ctx", ClientContext._ctx);
 
 const theme = createTheme({
 	/** Mantine theme override goes here */
@@ -23,9 +23,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<MantineProvider theme={theme} forceColorScheme="dark">
-				<AppContext.Provider value={{ ...clientCtx }}>
+				{/* <ClientContext.Provider>
 					<App />
-				</AppContext.Provider>
+				</ClientContext.Provider> */}
+				<ClientProvider>
+					<App2 />
+				</ClientProvider>
 			</MantineProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
 		</QueryClientProvider>

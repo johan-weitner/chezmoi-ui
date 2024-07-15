@@ -16,7 +16,7 @@ import commonCss from "../MainView/MainView.module.css";
 import Toolbar from "../Toolbar";
 import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
-import { AppContext } from "../../main.jsx";
+import { ClientContext } from "core/ClientContext.jsx";
 
 export const ListViewHeader = ({
 	filteredApps,
@@ -34,23 +34,23 @@ export const ListViewHeader = ({
 	...props
 }) => {
 	const { filter, theme } = props;
-	const [version, setVersion] = useState("2.0");
-	const appContext = useContext(AppContext);
-	const { appName, appVersion } = appContext;
-	const updatedContext = {
-		appVersion: version,
-		...appContext,
-	};
+	// const [version, setVersion] = useState("2.0");
+	// const appContext = useContext(AppContext);
+	// const ctx = useContext(clientContext);
+	// const updatedContext = {
+	// 	appVersion: version,
+	// 	...ctx,
+	// };
 
-	console.log(updatedContext);
+	// console.log(updatedContext);
 
-	const bumpContext = () => {
-		console.log("Bump context");
-		setVersion("2.0");
-	};
+	// const bumpContext = () => {
+	// 	console.log("Bump context");
+	// 	setVersion("2.0");
+	// };
 
 	return (
-		<AppContext.Provider value={updatedContext}>
+		<>
 			<Group className={commonCss.cardTitleContainer}>
 				<ICON.allApps
 					style={{ width: rem(50), height: rem(50) }}
@@ -58,14 +58,8 @@ export const ListViewHeader = ({
 					color={theme.colors.blue[6]}
 					className={commonCss.cardTitleIcon}
 				/>
-				<Text
-					fz="xl"
-					fw={500}
-					className={commonCss.cardTitle}
-					mt="md"
-					onClick={() => bumpContext()}
-				>
-					Applications ({appName} | v{appVersion})
+				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
+					Applications
 				</Text>
 
 				{/* <nav className={commonCss.colButtons}>
@@ -190,6 +184,6 @@ export const ListViewHeader = ({
 					setSelectedAppKey={setSelectedAppKey}
 				/>
 			</Group>
-		</AppContext.Provider>
+		</>
 	);
 };
