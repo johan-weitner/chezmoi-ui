@@ -3,11 +3,41 @@ import { Badge, Button, Group, Text, rem } from "@mantine/core";
 import { ICON } from "../../constants/icons";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
-import { ClientContext } from "core/ClientContext.jsx";
+import { useClient } from "core/ClientProvider";
 
 const DetailsBox = (props) => {
-	const { selectedApp, tags, hasInstaller, indicateEdit, edit, removeApp } =
-		props;
+	const {
+		allApps,
+		totalApps,
+		populateList,
+		initPagination,
+		deleteItem,
+		updateItem,
+		addItem,
+		editItem,
+		selectApp,
+		selectedApp,
+		selectedAppKey: appKey,
+		page,
+		limit,
+		totalCount,
+		pageCount,
+		setPage,
+		setLimit,
+		gotoPrev,
+		gotoNext,
+		gotoPrevPage,
+		gotoNextPage,
+		applyFilter,
+		restoreFilters,
+		activeFilter,
+	} = useClient();
+
+	const tags = [];
+	const hasInstaller = true;
+	const indicateEdit = false;
+
+	const edit = () => {};
 
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>
@@ -89,7 +119,7 @@ const DetailsBox = (props) => {
 
 			<Group justify="center" p="md">
 				<Button
-					onClick={() => edit(selectedApp.key)}
+					onClick={() => editItem()}
 					className={classes.editBtn}
 					leftSection={
 						<ICON.edit
@@ -106,7 +136,7 @@ const DetailsBox = (props) => {
 					Edit
 				</Button>
 				<Button
-					onClick={() => removeApp(selectedApp.key)}
+					onClick={() => deleteItem(selectedApp.key)}
 					className={classes.deleteBtn}
 					leftSection={
 						<ICON.remove

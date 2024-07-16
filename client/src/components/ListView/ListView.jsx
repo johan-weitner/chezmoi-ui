@@ -15,10 +15,10 @@ import {
 	getNoDescApps,
 	getNoNameApps,
 } from "api/appCollectionApi";
-import { useClientManager } from "core/ClientProvider";
+import { useClient } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import FallbackComponent from "components/FallbackComponent";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "../MainView/MainView.module.css";
 import List from "./List";
@@ -173,7 +173,7 @@ const ListView = (props) => {
 		applyFilter,
 		restoreFilters,
 		activeFilter,
-	} = useClientManager();
+	} = useClient();
 
 	const theme = useMantineTheme();
 

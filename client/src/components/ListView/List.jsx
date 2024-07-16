@@ -1,14 +1,14 @@
 import { Card, Skeleton, Text } from "@mantine/core";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import { useClientManager } from "../../core/ClientProvider";
-import classes from "../MainView/MainView.module.css";
+import { useClient } from "core/ClientProvider";
+import classes from "components/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
 
 const List = (props) => {
 	const { allApps, selectApp, deleteItem, updateItem, selectedAppKey } =
-		useClientManager();
+		useClient();
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 

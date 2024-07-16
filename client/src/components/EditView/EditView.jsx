@@ -2,21 +2,42 @@ import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { forwardRef, useEffect, useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
 import { ActionIcon, Card, Flex, Modal, Text, rem } from "@mantine/core";
+import { useClient } from "../../core/ClientProvider";
 import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
 
 const EditView = forwardRef(function EditView(props, ref) {
+	const { theme } = props;
 	const {
-		isPopoverOpen,
-		closePopover,
+		allApps,
+		totalApps,
+		populateList,
+		initPagination,
+		editItem,
+		editMode,
+		setEditMode,
+		deleteItem,
+		updateItem,
+		addItem,
+		selectApp,
 		selectedApp,
-		setSelectedAppKey,
+		selectedAppKey: appKey,
+		page,
+		limit,
+		totalCount,
+		pageCount,
+		setPage,
+		setLimit,
 		gotoPrev,
 		gotoNext,
-		theme,
-	} = props;
+		gotoPrevPage,
+		gotoNextPage,
+		applyFilter,
+		restoreFilters,
+		activeFilter,
+	} = useClient();
 
 	const [isNewApp, setIsNewApp] = useState(!selectedApp);
 	const forceUpdate = useForceUpdate();
@@ -28,9 +49,9 @@ const EditView = forwardRef(function EditView(props, ref) {
 
 	return (
 		<Modal
-			opened={isPopoverOpen}
+			opened={editMode}
 			keepMounted={false}
-			onClose={closePopover}
+			onClose={() => setEditMode(false)}
 			overlayProps={{
 				backgroundOpacity: 0.55,
 				blur: 7,
@@ -48,16 +69,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 				minHeight: "fit-content !important",
 			}}
 		>
-			<Card
-				style={{
-					backgroundColor: "#222",
-					// position: "fixed",
-					// bottom: "50px",
-					// top: "50px",
-					// height: "90vh",
-					// padding: "0 !important",
-				}}
-			>
+			<Card style={{ backgroundColor: "#222" }}>
 				<ErrorBoundary
 					fallbackRender={(error) => (
 						<FallbackComponent error={error.message} />
@@ -65,17 +77,16 @@ const EditView = forwardRef(function EditView(props, ref) {
 				>
 					{selectedApp || isNewApp ? (
 						<EditViewForm
-							isPopoverOpen={isPopoverOpen}
-							closePopover={closePopover}
+							isPopoverOpen={editMode}
+							closePopover={() => setEditMode(false)}
 							selectedApp={selectedApp}
-							setSelectedAppKey={setSelectedAppKey}
+							setSelectedAppKey={() => {}}
 							gotoPrev={gotoPrev}
 							gotoNext={gotoNext}
 							theme={theme}
 							isNewApp={isNewApp}
 							forceUpdate={forceUpdate}
 							randomId={randomId}
-							// style={{ height: "90vh", padding: "0 !important" }}
 						/>
 					) : null}
 				</ErrorBoundary>

@@ -11,10 +11,11 @@
  * @param {function} props.gotoNext - Function to navigate to the next app.
  * @returns {JSX.Element} The rendered DetailView component.
  */
-import { Card, rem } from "@mantine/core";
+import { Card, rem, useMantineTheme } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { useClient } from "core/ClientProvider";
 import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
 import { useEffect, useRef, useState } from "react";
@@ -31,94 +32,84 @@ import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
 
 const DetailView = (props) => {
+	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const modalRef = useRef();
 	const {
-		appKey,
-		setSelectedAppKey,
-		theme,
-		isPopoverOpen,
-		setIsPopoverOpen,
+		allApps,
+		totalApps,
+		populateList,
+		initPagination,
+		editItem,
+		editMode,
+		deleteItem,
+		updateItem,
+		addItem,
+		selectApp,
+		selectedApp,
+		selectedAppKey: appKey,
+		page,
+		limit,
+		totalCount,
+		pageCount,
+		setPage,
+		setLimit,
 		gotoPrev,
 		gotoNext,
-	} = props;
-	const [selectedApp, setSelectedApp] = useState(null);
-	const [isLoading, setIsLoading] = useState(true);
-	const [tags, setTags] = useState(null);
-	const [hasInstaller, setHasInstaller] = useState(false);
-	const [scroll, scrollTo] = useWindowScroll();
-	const modalRef = useRef();
-	let indicateEdit;
+		gotoPrevPage,
+		gotoNextPage,
+		applyFilter,
+		restoreFilters,
+		activeFilter,
+	} = useClient();
 
-	useEffect(() => {
-		if (!appKey) {
-			setSelectedApp(null);
-			return;
-		}
-		getApp(appKey).then((app) => {
-			setSelectedApp(app);
-			APP_FORM.formPartTwo.map((item) => {
-				if (app[item.name] && app[item.name].length > 0) {
-					setHasInstaller(true);
-					return;
-				}
-			});
+	const theme = useMantineTheme();
+	const isLoading = false;
+	const tags = [];
+	const indicateEdit = null;
+	const hasInstaller = true;
 
-			const appTags = app?.tags && JSON.parse(app.tags);
-			appTags && setTags(appTags);
+	// useEffect(() => {
+	// 	if (!appKey) {
+	// 		selectApp(null);
+	// 		return;
+	// 	}
+	// 	// getApp(appKey).then((app) => {
+	// 	APP_FORM.formPartTwo.map((item) => {
+	// 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
+	// 			setHasInstaller(true);
+	// 			return;
+	// 		}
+	// 	});
 
-			indicateEdit = app.edited ? (
-				<ICON.check
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "50px",
-						top: "45px",
-						zIndex: "999999",
-					}}
-					stroke={2}
-					color="green"
-					title="Has been edited"
-				/>
-			) : null;
-		});
-	}, [appKey]);
+	// 	// const appTags = app?.tags && JSON.parse(app.tags);
+	// 	// appTags && setTags(appTags);
+	// 	const appTags = {};
+	// 	const indicateEdit = false;
 
-	const edit = () => {
-		setIsPopoverOpen(true);
-	};
-
-	const removeApp = (key) => {
-		deleteApp(key)
-			.then((result) => {
-				console.log(result);
-			})
-			.catch((error) => {
-				console.error(error);
-			});
-
-		console.log("Deleting app with key: ", key);
-		const queryClient = new QueryClient();
-		axios
-			.delete(`/api/deleteNode?key=${key}`, {
-				key: key,
-			})
-			.then((result) => {
-				console.log(result);
-				queryClient.cancelQueries(["appCollection"]);
-				const previousData = queryClient.getQueryData(["appCollection"]);
-
-				queryClient.setQueryData(["appCollection"], (old) => {
-					return old?.filter((item) => item.key !== key);
-				});
-				return { previousData };
-			})
-			.catch((error) => console.error(error));
-	};
+	// 	// indicateEdit = app.edited ? (
+	// 	// 	<ICON.check
+	// 	// 		style={{
+	// 	// 			width: rem(20),
+	// 	// 			height: rem(20),
+	// 	// 			position: "absolute",
+	// 	// 			right: "50px",
+	// 	// 			top: "45px",
+	// 	// 			zIndex: "999999",
+	// 	// 		}}
+	// 	// 		stroke={2}
+	// 	// 		color="green"
+	// 	// 		title="Has been edited"
+	// 	// 	/>
+	// 	// ) : null;
+	// 	// });
+	// }, [appKey]);
 
 	const closePopover = () => {
 		setSelectedApp(null);
 		setIsPopoverOpen(false);
 	};
+
+	const setSelectedAppKey = (key) => {};
 
 	return (
 		<ErrorBoundary
@@ -126,13 +117,7 @@ const DetailView = (props) => {
 		>
 			<Sticky stickyClassName={s.sticky}>
 				<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
-					<DetailViewHeader
-						theme={theme}
-						isPopoverOpen={isPopoverOpen}
-						gotoPrev={gotoPrev}
-						gotoNext={gotoNext}
-						hasSelection={selectedApp ?? false}
-					/>
+					<DetailViewHeader theme={theme} hasSelection={selectedApp ?? false} />
 					<Card
 						shadow="md"
 						fz="sm"
@@ -140,35 +125,11 @@ const DetailView = (props) => {
 						mt="sm"
 						style={{ textAlign: "left" }}
 					>
-						{selectedApp ? (
-							<DetailsBox
-								selectedApp={selectedApp}
-								isLoading={isLoading}
-								tags={tags}
-								hasInstaller={hasInstaller}
-								indicateEdit={indicateEdit}
-								edit={edit}
-								removeApp={removeApp}
-								closePopover={closePopover}
-								scroll={scroll}
-								theme={theme}
-							/>
-						) : (
-							<Legend />
-						)}
+						{selectedApp ? <DetailsBox /> : <Legend />}
 					</Card>
 				</Card>
 			</Sticky>
-			{isPopoverOpen && (
-				<EditView
-					ref={modalRef}
-					isPopoverOpen={isPopoverOpen}
-					closePopover={closePopover}
-					selectedApp={selectedApp}
-					setSelectedAppKey={setSelectedAppKey}
-					theme={theme}
-				/>
-			)}
+			{editMode && <EditView ref={modalRef} theme={theme} />}
 		</ErrorBoundary>
 	);
 };

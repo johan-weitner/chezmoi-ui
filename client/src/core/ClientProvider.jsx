@@ -28,10 +28,6 @@ const DataContext = createContext();
 // Initialize a QueryClient
 const queryClient = new QueryClient();
 
-// Custom hook to use the ClientContext
-function useClient() {
-	return useContext(ClientContext);
-}
 function usePageContext() {
 	return useContext(PageContext);
 }
@@ -175,6 +171,7 @@ const useClientManager = () => {
 	const [pageCount, setPageCount] = useState(1);
 	const [totalCount, setTotalCount] = useState(0);
 	const [activeFilter, setActiveFilter] = useState(null);
+	const [editMode, setEditMode] = useState(null);
 
 	const queryClient = useQueryClient();
 	const fetchAllApps = getAllApps;
@@ -186,10 +183,10 @@ const useClientManager = () => {
 	};
 
 	const initPagination = () => {
-		setListSize(allApps.length);
-		setNumPages(allApps.length);
+		setListSize(allApps?.length);
+		setNumPages(allApps?.length);
 		setPage(1);
-		selectApp(allApps[0]);
+		selectApp(allApps && allApps[0]);
 	};
 
 	const getPage = (page) => {
@@ -205,6 +202,21 @@ const useClientManager = () => {
 			setSelectedApp(app);
 			setSelectedAppKey(appKey);
 		});
+	};
+
+	const editItem = (appKey) => {
+		console.log("Edit");
+		if (appKey) {
+			console.log("Getting app...");
+			getApp(appKey).then((app) => {
+				setSelectedApp(app);
+				setSelectedAppKey(appKey);
+				setEditMode(true);
+			});
+		} else {
+			console.log("Set edit mode");
+			setEditMode(true);
+		}
 	};
 
 	const deleteItem = (appKey) => {
@@ -291,6 +303,9 @@ const useClientManager = () => {
 		updateItem,
 		addItem,
 		selectApp,
+		editItem,
+		editMode,
+		setEditMode,
 		selectedApp,
 		selectedAppKey,
 		page,
@@ -318,5 +333,18 @@ function ClientProvider({ children }) {
 		</ClientContext.Provider>
 	);
 }
+
+// // Custom hook to use the ClientContext
+// function useClient() {
+// 	return useContext(ClientContext);
+// }
+
+const useClient = () => {
+	const context = useContext(ClientContext);
+	if (!context) {
+		throw new Error("useClient must be used within a ClientProvider");
+	}
+	return context;
+};
 
 export { useClient, ClientProvider, useClientManager, useDataContext };

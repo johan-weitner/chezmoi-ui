@@ -12,18 +12,16 @@ import {
 	useMantineTheme,
 } from "@mantine/core";
 import { IconArrowRight, IconSearch, IconMenu2 } from "@tabler/icons-react";
-import { useClientManager } from "core/ClientProvider";
+import { useClient } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
-import commonCss from "../MainView/MainView.module.css";
+import commonCss from "components/MainView/MainView.module.css";
 import Toolbar from "../Toolbar";
 import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
-import { ClientContext } from "core/ClientContext.jsx";
 
 export const ListViewHeader = (props) => {
-	const { selectApp, applyFilter, restoreFilters, activeFilter } =
-		useClientManager();
+	const { selectApp, applyFilter, restoreFilters, activeFilter } = useClient();
 
 	const theme = useMantineTheme();
 
