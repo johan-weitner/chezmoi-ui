@@ -6,25 +6,29 @@
   "scripts": {
     "dev": "vite",
     "host": "vite --host",
+    "serve": "node ./scripts/server.js",
     "build": "vite build",
+    "deploy": "pnpm build && pnpm serve",
     "preview": "vite preview",
     "lint": "pnpm biome check ./src",
     "lint:fix": "pnpm biome check --write ./src"
   },
   "dependencies": {
-    "@mantine/core": "^7.11.1",
-    "@mantine/dates": "^7.11.1",
-    "@mantine/form": "^7.11.1",
-    "@mantine/hooks": "^7.11.1",
-    "@mantine/modals": "^7.11.1",
-    "@mantine/notifications": "^7.11.1",
-    "@mantine/nprogress": "^7.11.1",
-    "@mantine/spotlight": "^7.11.1",
+    "@mantine/core": "^7.11.2",
+    "@mantine/dates": "^7.11.2",
+    "@mantine/form": "^7.11.2",
+    "@mantine/hooks": "^7.11.2",
+    "@mantine/modals": "^7.11.2",
+    "@mantine/notifications": "^7.11.2",
+    "@mantine/nprogress": "^7.11.2",
+    "@mantine/spotlight": "^7.11.2",
     "@tabler/icons-react": "^3.10.0",
-    "@tanstack/react-query": "^5.50.1",
-    "@tanstack/react-query-devtools": "^5.50.1",
+    "@tanstack/react-query": "^5.51.1",
+    "@tanstack/react-query-devtools": "^5.51.1",
     "@yaireo/tagify": "^4.27.0",
     "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "http-proxy-middleware": "^3.0.0",
     "nanoid": "^5.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -48,6 +52,6 @@
     "postcss-preset-mantine": "^1.15.0",
     "postcss-simple-vars": "^7.0.1",
     "turbo": "^2.0.6",
-    "vite": "^5.3.3"
+    "vite": "^5.3.4"
   }
 }
