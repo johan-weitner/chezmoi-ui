@@ -26,3 +26,5 @@ software.yml.backup
 server/db-error.log
 server/db.log
 server/prisma/dev.db
+server/prisma/dev.db-journal
+client/dist

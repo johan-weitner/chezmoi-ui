@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Card, Skeleton, Text } from "@mantine/core";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -5,12 +6,29 @@ import { useClient } from "core/ClientProvider";
 import classes from "components/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
+import { set } from "react-hook-form";
 
 const List = (props) => {
-	const { allApps, selectApp, deleteItem, updateItem, selectedAppKey } =
-		useClient();
+	const [list, setList] = useState([]);
+	const {
+		page,
+		pageContent,
+		selectApp,
+		deleteItem,
+		updateItem,
+		selectedAppKey,
+	} = useClient();
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
+
+	useEffect(() => {
+		console.log("Re-rendering...");
+		setList(pageContent);
+	}, [page, pageContent]);
+
+	useEffect(() => {
+		console.log("Page content: ", pageContent);
+	}, [page, pageContent]);
 
 	return (
 		<Card
@@ -26,7 +44,7 @@ const List = (props) => {
 			}}
 		>
 			{/* <Skeleton visible={loading}> */}
-			{allApps?.map((item) => {
+			{list?.map((item) => {
 				return (
 					<ListItem
 						selectApp={selectApp}

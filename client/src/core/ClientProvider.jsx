@@ -26,21 +26,6 @@ import {
 } from "api/appModel";
 import { filterModel } from "api/filters";
 
-// Create a new React context
-const ClientContext = createContext();
-const PageContext = createContext();
-const DataContext = createContext();
-
-// Initialize a QueryClient
-const queryClient = new QueryClient();
-
-function usePageContext() {
-	return useContext(PageContext);
-}
-function useDataContext() {
-	return useContext(DataContext);
-}
-
 const _findIndex = (key, list) => {
 	return list.findIndex((item) => item.key === key);
 };
@@ -64,24 +49,6 @@ const useClientManager = () => {
 	const fetchAllApps = getAllApps;
 	const setListSize = (size) => setTotalCount(size);
 	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
-
-	// useEffect(() => {
-	// 	if (!appKey) {
-	// 		selectApp(null);
-	// 		return;
-	// 	}
-	// 	// getApp(appKey).then((app) => {
-	// 	APP_FORM.formPartTwo.map((item) => {
-	// 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
-	// 			setHasInstaller(true);
-	// 			return;
-	// 		}
-	// 	});
-
-	// 	// const appTags = app?.tags && JSON.parse(app.tags);
-	// 	// appTags && setTags(appTags);
-	// 	const appTags = {};
-	// 	const indicateEdit = false;
 
 	const isNullOrEmpty = (value) => {
 		return value === null || value === undefined || value === "";
@@ -119,8 +86,10 @@ const useClientManager = () => {
 	};
 
 	const getPage = (page) => {
+		console.log(`Getting page: ${page}`);
 		setIsLoading(true);
-		getAppPage(1).then((apps) => {
+		getAppPage(page).then((apps) => {
+			console.log(apps);
 			setPageContent(apps);
 			setIsLoading(false);
 		});
@@ -312,6 +281,22 @@ const useClient = () => {
 		);
 	}
 	return context;
+};
+
+// Create a new React context
+const ClientContext = createContext();
+const PageContext = createContext();
+const DataContext = createContext();
+
+// Initialize a QueryClient
+const queryClient = new QueryClient();
+
+const usePageContext = () => {
+	return useContext(PageContext);
+};
+
+const useDataContext = () => {
+	return useContext(DataContext);
 };
 
 export { useClient, ClientProvider, useClientManager, useDataContext };

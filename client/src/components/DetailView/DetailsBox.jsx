@@ -5,16 +5,9 @@ import classes from "../MainView/MainView.module.css";
 import { useClient } from "core/ClientProvider";
 
 const DetailsBox = (props) => {
-	const {
-		deleteItem,
-		editItem,
-		selectedApp,
-		selectedAppKey: appKey,
-	} = useClient();
+	const { deleteItem, editItem, selectedApp } = useClient();
 
 	const tags = [];
-	// const hasInstaller = true;
-	// const indicateEdit = false;
 	const { hasInstaller, edited: indicateEdit } = selectedApp;
 
 	return (
@@ -35,20 +28,12 @@ const DetailsBox = (props) => {
 					rel="noreferrer"
 				>
 					{selectedApp.name || (
-						<Text size="lg">[ Missing Name ] - ({selectedApp.key})</Text>
+						<Text size="lg">
+							<MarkUnPopulated />
+							{" Missing Name - "}
+							<i style={{ color: "#636363" }}>(Key: "{selectedApp.key}")</i>
+						</Text>
 					)}
-					{/* <ActionIcon
-									size={32}
-									radius="xl"
-									color="transparent"
-									style={{ position: "relative", top: "3px", left: "10px" }}
-								>
-									<IconFolderOpen
-										style={{ width: rem(30), height: rem(30) }}
-										stroke={2.5}
-										color="blue"
-									/>
-								</ActionIcon> */}
 				</a>
 				{indicateEdit}
 			</h2>
