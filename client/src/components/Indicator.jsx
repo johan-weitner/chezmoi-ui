@@ -27,7 +27,7 @@ export const MarkUnPopulated = () => <span className={classes.red}>✗</span>;
 export const WarningSign = () => (
 	<>
 		<span className={classes.red}>⚠</span>
-		<span className={classes.red}>No installer specified</span>
+		<span className={classes.red}> No installer specified</span>
 	</>
 );
 

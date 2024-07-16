@@ -1,50 +1,12 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
-import { deleteApp, useAppCollection } from "api/appCollectionApi.js";
 import DetailView from "components/DetailView/DetailView.jsx";
 import ListView from "components/ListView/ListView.jsx";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "sonner";
 import Header from "../Header.jsx";
-import MainHeader from "./MainHeader.jsx";
 import classes from "./MainView.module.css";
 import "@yaireo/tagify/dist/tagify.css";
-import { IconZip } from "@tabler/icons-react";
 
 const MainView = (props) => {
-	const {
-		currentListKeys,
-		updateCurrentListKeys,
-		selectedAppKey,
-		setSelectedAppKey,
-		selectApp,
-		gotoPrev,
-		gotoNext,
-		addItem,
-		editItem,
-		deleteApp,
-		isPopoverOpen,
-		setIsPopoverOpen,
-		currentPage,
-		setCurrentPage,
-		numPages,
-		setNumPages,
-		totalCount,
-		setTotalCount,
-		inReverse,
-		filteredView,
-		restoreFilters,
-		initFilteredView,
-	} = props;
 	const theme = useMantineTheme();
-	const BASE_URL = "/api";
-	// const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-	const modalRef = useRef();
-
-	const deleteItem = (key) => {
-		console.log("Deleting app with key: ", key);
-		if (key === selectedAppKey) setSelectedAppKey(null);
-		deleteApp(key);
-	};
 
 	return (
 		<>
@@ -53,12 +15,7 @@ const MainView = (props) => {
 				className={classes.mainContainer}
 				style={{ minHeight: "100% !important" }}
 			>
-				<Header
-					addItem={addItem}
-					deleteItem={deleteItem}
-					gotoPrev={gotoPrev}
-					gotoNext={gotoNext}
-				/>
+				<Header />
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="sm"
@@ -66,42 +23,8 @@ const MainView = (props) => {
 					className={classes.grid}
 					style={{ minHeight: "100% !important" }}
 				>
-					<ListView
-						theme={theme}
-						selectApp={selectApp}
-						selectedAppKey={selectedAppKey}
-						setSelectedAppKey={setSelectedAppKey}
-						setIsPopoverOpen={setIsPopoverOpen}
-						addItem={addItem}
-						editItem={editItem}
-						deleteItem={deleteItem}
-						updateCurrentListKeys={updateCurrentListKeys}
-						currentPage={currentPage}
-						setCurrentPage={setCurrentPage}
-						numPages={numPages}
-						setNumPages={setNumPages}
-						totalCount={totalCount}
-						setTotalCount={setTotalCount}
-						gotoPrev={gotoPrev}
-						gotoNext={gotoNext}
-						inReverse={inReverse}
-						filteredView={filteredView}
-						initFilteredView={initFilteredView}
-						restoreFilters={restoreFilters}
-					/>
-					{/* {selectedAppKey && ( */}
-					<DetailView
-						appKey={selectedAppKey}
-						setSelectedAppKey={setSelectedAppKey}
-						theme={theme}
-						isPopoverOpen={isPopoverOpen}
-						setIsPopoverOpen={setIsPopoverOpen}
-						editItem={editItem}
-						deleteItem={deleteItem}
-						gotoPrev={gotoPrev}
-						gotoNext={gotoNext}
-					/>
-					{/* )} */}
+					<ListView theme={theme} />
+					<DetailView theme={theme} />
 				</SimpleGrid>
 			</Container>
 		</>

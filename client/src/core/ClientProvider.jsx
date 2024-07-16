@@ -7,6 +7,7 @@ import {
 	QueryClient,
 	QueryClientProvider,
 } from "@tanstack/react-query";
+import { useHotkeys } from "react-hotkeys-hook";
 import {
 	fetchApp,
 	getTotalCount,
@@ -18,6 +19,11 @@ import {
 	addApp,
 	deleteApp,
 } from "api/appCollectionApi.js";
+import {
+	appViewModel,
+	appModelFieldTypes,
+	appModelInstallerFields,
+} from "api/appModel";
 import { filterModel } from "api/filters";
 
 // Create a new React context
@@ -35,128 +41,6 @@ function useDataContext() {
 	return useContext(DataContext);
 }
 
-/*
-	data: {
-		allApps: [], // Array<Object>
-		filteredResult: [], // Array<Object>
-		setAllApps: null, // function: @arg Array<
-		saveOrUpdateItem: null, // function: @arg app {Object}
-		deleteItem: null, // function: @arg appKey {string}
-		downloadGenericYaml: null, // function: void
-		downloadGenericJson: null, // function: void
-		downloadInstallDoctorYaml: null, // function: void
-	},
-	view: {
-		mode: "default", // string: "default" | "filteredView"
-		selectedItem: null, // Object
-		selectedItemKey: null, // string
-		detailView: {
-			isOpen: false, // boolean
-			fallback: Legend, // ReactComponent
-		},
-		editView: {
-			isOpen: false, // boolean
-		},
-		pageManager: {
-			currentPage: null, // number
-			pageCount: 0, // number
-			prevApp: null, // Function
-			nextApp: null, // Function
-			prevPage: null, // Function
-			nextPage: null, // Function
-		},
-		filterManager: {
-			filters: [], // Array<Object>
-			activeFilter: null, // string
-			applyFilter: null, // Function
-			clearFilter: null, // Function
-		},
-		selectItem: null, // Function @arg appKey {string}
-		closeItem: null, // Function
-		editItem: null, // Function
-		addItem: null, // Function
-		openSpotlightSearch: null, // Function
-	},
-*/
-
-// const usePageManager = (
-// 	initialPage = 1,
-// 	initialLimit = 20,
-// 	initialTotalCount = 0,
-// ) => {
-// 	const [page, setPage] = useState(initialPage);
-// 	const [limit, setLimit] = useState(initialLimit);
-// 	const [pageCount, setPageCount] = useState(1);
-// 	const [totalCount, setTotalCount] = useState(initialTotalCount);
-// 	const [activeFilter, setActiveFilter] = useState(null);
-
-// 	const queryClient = useQueryClient();
-
-// 	const setListSize = (size) => setTotalCount(size);
-// 	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
-
-// 	const gotoPrev = () => {
-// 		setPage((prev) => Math.max(prev - 1, 1));
-// 	};
-
-// 	const gotoNext = () => {
-// 		setPage((prev) => prev + 1);
-// 	};
-
-// 	const gotoPrevPage = () => {
-// 		setPage((prev) => Math.max(prev - 10, 1));
-// 	};
-
-// 	const gotoNextPage = () => {
-// 		setPage((prev) => prev + 10);
-// 	};
-
-// 	const initFilteredView = async (filter) => {
-// 		setActiveFilter(filter);
-// 		const filteredeApps = getAllApps().then((apps) => {
-// 			const filteredApps = FILTER[filter].method(apps);
-// 			setTotalCount(filteredApps.length);
-// 			setPageCount(Math.ceil(filteredApps.length / limit));
-// 			setPage(1);
-// 			return FILTER[filter].method(apps);
-// 		});
-// 		queryClient.invalidateQueries(["appCollection"]);
-// 		queryClient.setQueryData(["appCollection"], filteredeApps);
-// 		return filteredeApps;
-// 	};
-
-// 	const restoreFilters = async (filter) => {
-// 		setActiveFilter(null);
-// 		const appList = getAllApps().then((apps) => {
-// 			setTotalCount(apps.length);
-// 			setPageCount(Math.ceil(apps.length / limit));
-// 			setPage(1);
-// 			return apps;
-// 		});
-// 		queryClient.invalidateQueries(["appCollection"]);
-// 		queryClient.setQueryData(["appCollection"], appList);
-// 		return appList;
-// 	};
-
-// 	return {
-// 		page,
-// 		limit,
-// 		totalCount,
-// 		pageCount,
-// 		setListSize,
-// 		setNumPages,
-// 		setPage,
-// 		setLimit,
-// 		gotoPrev,
-// 		gotoNext,
-// 		gotoPrevPage,
-// 		gotoNextPage,
-// 		initFilteredView,
-// 		restoreFilters,
-// 		activeFilter,
-// 	};
-// };
-
 const _findIndex = (key, list) => {
 	return list.findIndex((item) => item.key === key);
 };
@@ -167,40 +51,88 @@ const useClientManager = () => {
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [selectedAppKey, setSelectedAppKey] = useState(null);
 	const [page, setPage] = useState(1);
+	const [pageContext, setPageContent] = useState([]);
 	const [limit, setLimit] = useState(20);
 	const [pageCount, setPageCount] = useState(1);
 	const [totalCount, setTotalCount] = useState(0);
 	const [activeFilter, setActiveFilter] = useState(null);
 	const [editMode, setEditMode] = useState(null);
+	const [isLoading, setIsLoading] = useState(null);
+	const [error, setError] = useState(null);
 
 	const queryClient = useQueryClient();
 	const fetchAllApps = getAllApps;
 	const setListSize = (size) => setTotalCount(size);
 	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
 
+	// useEffect(() => {
+	// 	if (!appKey) {
+	// 		selectApp(null);
+	// 		return;
+	// 	}
+	// 	// getApp(appKey).then((app) => {
+	// 	APP_FORM.formPartTwo.map((item) => {
+	// 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
+	// 			setHasInstaller(true);
+	// 			return;
+	// 		}
+	// 	});
+
+	// 	// const appTags = app?.tags && JSON.parse(app.tags);
+	// 	// appTags && setTags(appTags);
+	// 	const appTags = {};
+	// 	const indicateEdit = false;
+
+	const isNullOrEmpty = (value) => {
+		return value === null || value === undefined || value === "";
+	};
+
+	const appHasInstaller = (app) => {
+		for (const field of appModelInstallerFields) {
+			if (!isNullOrEmpty(app[field])) {
+				return true;
+			}
+		}
+		return false;
+	};
+
 	const populateList = () => {
-		getPage(1);
+		setIsLoading(true);
+		getAllApps()
+			.then((apps) => {
+				setAllApps(apps);
+				initPagination();
+			})
+			.then(() => {
+				getAppPage(1).then((apps) => {
+					setPageContent(apps);
+					setIsLoading(false);
+				});
+			});
 	};
 
 	const initPagination = () => {
 		setListSize(allApps?.length);
 		setNumPages(allApps?.length);
 		setPage(1);
-		selectApp(allApps && allApps[0]);
+		selectApp(allApps?.[0]);
 	};
 
 	const getPage = (page) => {
-		const skip = (page - 1) * limit;
-		getAppPage(page).then((apps) => {
-			setAllApps(apps);
-			initPagination();
+		setIsLoading(true);
+		getAppPage(1).then((apps) => {
+			setPageContent(apps);
+			setIsLoading(false);
 		});
 	};
 
 	const selectApp = (appKey) => {
+		setIsLoading(true);
 		getApp(appKey).then((app) => {
+			app.hasInstaller = appHasInstaller(app);
 			setSelectedApp(app);
 			setSelectedAppKey(appKey);
+			setIsLoading(false);
 		});
 	};
 
@@ -208,10 +140,12 @@ const useClientManager = () => {
 		console.log("Edit");
 		if (appKey) {
 			console.log("Getting app...");
+			setIsLoading(true);
 			getApp(appKey).then((app) => {
 				setSelectedApp(app);
 				setSelectedAppKey(appKey);
 				setEditMode(true);
+				setIsLoading(false);
 			});
 		} else {
 			console.log("Set edit mode");
@@ -220,20 +154,34 @@ const useClientManager = () => {
 	};
 
 	const deleteItem = (appKey) => {
+		setIsLoading(true);
 		deleteApp(appKey).then(() => {
 			setAllApps((prev) => prev.filter((app) => app.key !== appKey));
+			setIsLoading(false);
 		});
 	};
 
 	const updateItem = (app) => {
+		setIsLoading(true);
+		app.edited = true;
 		updateApp(app.appKey).then(() => {
 			setAllApps(...prev, app);
+			setIsLoading(false);
 		});
 	};
 
+	const editNewItem = () => {
+		console.log("Edit new item");
+		setSelectedApp(null);
+		setSelectedAppKey(null);
+		setEditMode(true);
+	};
+
 	const addItem = (app) => {
+		setIsLoading(true);
 		addApp(app).then(() => {
 			setAllApps(...prev, app);
+			setIsLoading(false);
 		});
 	};
 
@@ -262,11 +210,13 @@ const useClientManager = () => {
 	};
 
 	const applyFilter = async (filter) => {
+		setIsLoading(true);
 		setActiveFilter(filter);
 		const filteredeApps = getAllApps().then((apps) => {
 			const filteredApps = filterModel[filter].method(apps);
 			setAllApps(filteredApps);
 			initPagination();
+			setIsLoading(false);
 			return filterModel[filter].method(apps);
 		});
 		queryClient.invalidateQueries(["appCollection"]);
@@ -276,9 +226,11 @@ const useClientManager = () => {
 
 	const restoreFilters = async (filter) => {
 		setActiveFilter(null);
+		setIsLoading(true);
 		const appList = getAllApps().then((apps) => {
 			setAllApps(apps);
 			initPagination();
+			setIsLoading(false);
 			return apps;
 		});
 		queryClient.invalidateQueries(["appCollection"]);
@@ -286,9 +238,23 @@ const useClientManager = () => {
 		return appList;
 	};
 
+	// useHotkeys("alt + b", () => gotoPrev());
+	// useHotkeys("alt + n", () => gotoNext());
+	// useHotkeys("alt + left", () => gotoPrev());
+	// useHotkeys("alt + right", () => gotoNext());
+	// useHotkeys("alt + n", () => addItem());
+	// useHotkeys("alt + e", () => editItem());
+	// useHotkeys("shift + alt + left", () => gotoPrevPage());
+	// useHotkeys("shift + alt + right", () => gotoNextPage());
+	// useHotkeys("alt + w", () => unselectApp());
+
 	useEffect(() => {
 		populateList();
 	}, []);
+
+	useEffect(() => {
+		getPage(page);
+	}, [page]);
 
 	useEffect(() => {
 		initPagination();
@@ -304,6 +270,9 @@ const useClientManager = () => {
 		addItem,
 		selectApp,
 		editItem,
+		editNewApp: editNewItem,
+		error,
+		isLoading,
 		editMode,
 		setEditMode,
 		selectedApp,
@@ -312,7 +281,7 @@ const useClientManager = () => {
 		limit,
 		totalCount,
 		pageCount,
-		setPage,
+		getPage,
 		setLimit,
 		gotoPrev,
 		gotoNext,
@@ -334,15 +303,13 @@ function ClientProvider({ children }) {
 	);
 }
 
-// // Custom hook to use the ClientContext
-// function useClient() {
-// 	return useContext(ClientContext);
-// }
-
 const useClient = () => {
 	const context = useContext(ClientContext);
 	if (!context) {
-		throw new Error("useClient must be used within a ClientProvider");
+		throw new Error(
+			"The useClient hook must be used within a ClientProvider. \
+			Add one to the component tree, outside of every component using it.",
+		);
 	}
 	return context;
 };

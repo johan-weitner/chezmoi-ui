@@ -187,14 +187,9 @@ export const useAppPage = (page = 1, limit = 20) => {
 export const getAppPage = (page = 1, limit = 20) => {
 	const skip = page === 1 ? 0 : (page - 1) * limit;
 	const take = limit;
-
 	const apps = getAllApps()
 		.then((apps) => {
-			// console.log('All apps:', apps?.length);
-			console.log('Skip - Take:', skip, take);
-			console.log('Page - Limit:', page, limit);
 			const slice = apps?.slice(skip, skip + take);
-			// console.log('Slice:', slice);
 			return slice;
 		})
 		.catch((error) => {

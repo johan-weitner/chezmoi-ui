@@ -3,12 +3,9 @@ import {
 	ActionIcon,
 	Group,
 	Text,
-	TextInput,
 	Tooltip,
-	UnstyledButton,
 	rem,
 	Menu,
-	Button,
 	useMantineTheme,
 } from "@mantine/core";
 import { IconArrowRight, IconSearch, IconMenu2 } from "@tabler/icons-react";
@@ -16,7 +13,6 @@ import { useClient } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
 import commonCss from "components/MainView/MainView.module.css";
-import Toolbar from "../Toolbar";
 import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 
@@ -73,55 +69,6 @@ export const ListViewHeader = (props) => {
 					</Tooltip>
 				</nav> */}
 			</Group>
-
-			{/* <ActionIcon
-				title="Add application"
-				onClick={(e) => addItem()}
-				style={{
-					width: rem(50),
-					height: rem(50),
-				}}
-				className={css.cardTitleAddIcon}
-			>
-				<ICON.add
-					style={{
-						width: rem(50),
-						height: rem(50),
-					}}
-					stroke={2}
-					color={theme.colors.blue[6]}
-				/>
-			</ActionIcon> */}
-
-			{/* <TextInput
-				radius="xl"
-				size="lg"
-				placeholder="Filter by name"
-				value={filter}
-				onChange={(e) => setFilter(e.target.value)}
-				style={{ margin: "0 14px", backgroundColor: "#262a2b" }}
-				rightSectionWidth={42}
-				leftSection={
-					<IconSearch
-						style={{ width: rem(18), height: rem(18) }}
-						stroke={1.5}
-					/>
-				}
-				rightSection={
-					<ActionIcon
-						size={32}
-						radius="xl"
-						color={theme.primaryColor}
-						variant="filled"
-					>
-						<IconArrowRight
-							style={{ width: rem(18), height: rem(18) }}
-							stroke={1.5}
-						/>
-					</ActionIcon>
-				}
-				{...props}
-			/> */}
 			<Group>
 				<Menu shadow="md" width={250}>
 					<Menu.Target>

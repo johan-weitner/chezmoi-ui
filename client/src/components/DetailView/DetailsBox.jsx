@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Badge, Button, Group, Text, rem } from "@mantine/core";
 import { ICON } from "../../constants/icons";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
@@ -7,37 +6,16 @@ import { useClient } from "core/ClientProvider";
 
 const DetailsBox = (props) => {
 	const {
-		allApps,
-		totalApps,
-		populateList,
-		initPagination,
 		deleteItem,
-		updateItem,
-		addItem,
 		editItem,
-		selectApp,
 		selectedApp,
 		selectedAppKey: appKey,
-		page,
-		limit,
-		totalCount,
-		pageCount,
-		setPage,
-		setLimit,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		applyFilter,
-		restoreFilters,
-		activeFilter,
 	} = useClient();
 
 	const tags = [];
-	const hasInstaller = true;
-	const indicateEdit = false;
-
-	const edit = () => {};
+	// const hasInstaller = true;
+	// const indicateEdit = false;
+	const { hasInstaller, edited: indicateEdit } = selectedApp;
 
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>

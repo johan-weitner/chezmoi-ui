@@ -7,7 +7,10 @@ import { MantineProvider, createTheme } from "@mantine/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ClientProvider } from "core/ClientProvider.jsx";
-import App2 from "./App2.jsx";
+import { Toaster } from "sonner";
+import MainView from "./components/MainView/MainView";
+import "@yaireo/tagify/dist/tagify.css";
+import "./App.css";
 
 const theme = createTheme({
 	/** Mantine theme override goes here */
@@ -20,7 +23,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<QueryClientProvider client={queryClient}>
 			<MantineProvider theme={theme} forceColorScheme="dark">
 				<ClientProvider>
-					<App />
+					<MainView />
+					<Toaster
+						position="top-right"
+						theme="dark"
+						expand
+						richColors
+						closeButton
+						pauseWhenPageIsHidden
+					/>
 				</ClientProvider>
 			</MantineProvider>
 			<ReactQueryDevtools initialIsOpen={false} />

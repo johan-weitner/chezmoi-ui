@@ -1,3 +1,4 @@
+import { useClient } from "../core/ClientProvider";
 import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
 import {
 	IconHome2,
@@ -10,16 +11,21 @@ import { useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
 import classes from "components/Toolbar.module.css";
 import logo from "./logo.svg";
+import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {
-	const [active, setActive] = useState();
+	const [active, setActive] = useState(null);
 	const {
+		deleteItem,
+		editNewItem,
+		error,
+		isLoading,
+		editMode,
 		gotoPrev,
-		gotoNext = null,
-		addItem = null,
-		deleteItem = null,
-		position = "top",
-	} = props;
+		gotoNext,
+		gotoPrevPage,
+		gotoNextPage,
+	} = useClient();
 
 	const btnStyle = { width: rem(20), height: rem(20) };
 	const stroke = 1.5;
@@ -28,34 +34,22 @@ const Toolbar = (props) => {
 		{
 			Icon: <ICON.add style={btnStyle} stroke={stroke} />,
 			label: "Add new app",
-			action: () => {
-				addItem();
-			},
-			position: ["top", "leftcol"],
+			action: editNewItem,
 		},
 		{
 			Icon: <ICON.remove style={btnStyle} stroke={stroke} />,
 			label: "Delete app",
-			action: () => {
-				deleteItem();
-			},
-			position: ["top", "leftcol"],
+			action: deleteItem,
 		},
 		{
 			Icon: <IconPlayerTrackPrev style={btnStyle} stroke={stroke} />,
 			label: "Go to previous",
-			action: () => {
-				gotoPrev();
-			},
-			position: ["top"],
+			action: gotoPrev,
 		},
 		{
 			Icon: <IconPlayerTrackNext style={btnStyle} stroke={stroke} />,
 			label: "Go to next",
-			action: () => {
-				gotoNext();
-			},
-			position: ["top"],
+			action: gotoNext,
 		},
 	];
 
@@ -82,15 +76,13 @@ const Toolbar = (props) => {
 	}
 
 	const links = menuData.map((menuItem, index) => {
-		if (menuItem.position.includes(position)) {
-			return (
-				<NavbarLink
-					{...menuItem}
-					key={nanoid()}
-					onClick={() => setActive(index)}
-				/>
-			);
-		}
+		return (
+			<NavbarLink
+				{...menuItem}
+				key={nanoid()}
+				onClick={() => setActive(index)}
+			/>
+		);
 	});
 
 	return (
@@ -100,6 +92,7 @@ const Toolbar = (props) => {
 					{links}
 				</Flex>
 			</Group>
+			{isLoading && BarSpinner}
 		</nav>
 	);
 };
