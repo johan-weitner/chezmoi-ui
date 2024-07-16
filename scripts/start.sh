@@ -2,7 +2,7 @@
 # clear
 
 # If force start, kill processes hogging our ports
-if [ "$1" = "-f" ]; then
+if [ "$1" = "--force" ]; then
 
   export "$(grep BACKEND_SRV_PORT "./server/.env")"
   export "$(grep FRONTEND_SRV_PORT "./client/.env")"
@@ -38,10 +38,15 @@ pid=$!
 echo $pid > /tmp/srvprocess.pid
 
 cd ../client
-pnpm run dev &
-pid=$!
-echo $pid > /tmp/clientprocess.pid
-
+if [ "$1" = "--deploy" ] || [ "$2" = "--deploy" ]; then
+  pnpm run dev &
+  pid=$!
+  echo $pid > /tmp/clientprocess.pid
+else
+  pnpm run deploy &
+  pid=$!
+  echo $pid > /tmp/clientprocess.pid
+fi
 cd ..
 
 

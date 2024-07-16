@@ -16,36 +16,21 @@
   ],
   "scripts": {
     "start": "./scripts/start.sh",
-    "start:force": "./scripts/start.sh -f",
+    "start:force": "./scripts/start.sh --force",
     "stop": "./scripts/stop.sh",
+    "prod": "./scripts/start.sh --deploy",
+    "prod:force": "./scripts/start.sh --force --deploy",
     "checkports": "./scripts/check-port-usage.sh",
     "installDeps": "./scripts/install-deps.sh",
     "lint": "./scripts/lint.sh",
-    "lint:fix": "./scripts/lint.sh -f",
-    "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint:fix": "./scripts/lint.sh -f"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
   },
   "dependencies": {
-    "@changesets/cli": "^2.27.7",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7"
-  },
-  "husky": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,cjs,mjs,jsx}": [
-      "biome check --files-ignore-unknown=true",
-      "biome check --write --no-errors-on-unmatched",
-      "biome check --write --organize-imports-enabled=false --no-errors-on-unmatched",
-      "biome check --write --unsafe --no-errors-on-unmatched",
-      "biome format --write --no-errors-on-unmatched",
-      "biome lint --write --no-errors-on-unmatched"
-    ]
+    "@changesets/cli": "^2.27.7"
   },
   "type": "module"
 }
