@@ -17,18 +17,16 @@ const List = (props) => {
 		deleteItem,
 		updateItem,
 		selectedAppKey,
+		isLoading,
 	} = useClient();
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
 	useEffect(() => {
-		console.log("Re-rendering...");
+		// console.log("Re-rendering...");
 		setList(pageContent);
-	}, [page, pageContent]);
-
-	useEffect(() => {
 		console.log("Page content: ", pageContent);
-	}, [page, pageContent]);
+	}, [pageContent]);
 
 	return (
 		<Card
@@ -43,20 +41,20 @@ const List = (props) => {
 				height: "calc(100vh - 150px)",
 			}}
 		>
-			{/* <Skeleton visible={loading}> */}
-			{list?.map((item) => {
-				return (
-					<ListItem
-						selectApp={selectApp}
-						selectedAppKey={selectedAppKey}
-						app={item}
-						key={item.key}
-						deleteItem={deleteItem}
-						editItem={updateItem}
-					/>
-				);
-			})}
-			{/* </Skeleton> */}
+			<Skeleton visible={isLoading}>
+				{list?.map((item) => {
+					return (
+						<ListItem
+							selectApp={selectApp}
+							selectedAppKey={selectedAppKey}
+							app={item}
+							key={item.key}
+							deleteItem={deleteItem}
+							editItem={updateItem}
+						/>
+					);
+				})}
+			</Skeleton>
 		</Card>
 	);
 };

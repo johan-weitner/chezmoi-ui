@@ -1,17 +1,24 @@
-import { Stack, Text } from "@mantine/core";
+import { useState, useEffect } from "react";
+import { Stack, Text, Pagination } from "@mantine/core";
 import { useClient } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
 
-const Pagination = (props) => {
+const PaginationBar = (props) => {
 	const { page, totalCount, pageCount, getPage, activeFilter } = useClient();
+	const [pageNum, setPageNum] = useState(pageCount || 0);
+	useEffect(() => {
+		setPageNum(pageCount);
+	}, [pageCount]);
+
+	if (!pageCount || pageCount === 0) return;
 
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
 			<Pagination
-				total={56}
+				total={pageCount}
 				gap={15}
-				onChange={console.log}
+				onChange={getPage}
 				className={css.pagination}
 				size={"sm"}
 				withEdges={true}
@@ -34,4 +41,4 @@ const Pagination = (props) => {
 	);
 };
 
-export default Pagination;
+export default PaginationBar;

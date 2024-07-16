@@ -36,9 +36,9 @@ const useClientManager = () => {
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [selectedAppKey, setSelectedAppKey] = useState(null);
 	const [page, setPage] = useState(1);
-	const [pageContext, setPageContent] = useState([]);
+	const [pageContent, setPageContent] = useState([]);
 	const [limit, setLimit] = useState(20);
-	const [pageCount, setPageCount] = useState(1);
+	const [pageCount, setPageCount] = useState(0);
 	const [totalCount, setTotalCount] = useState(0);
 	const [activeFilter, setActiveFilter] = useState(null);
 	const [editMode, setEditMode] = useState(null);
@@ -56,11 +56,16 @@ const useClientManager = () => {
 
 	const appHasInstaller = (app) => {
 		for (const field of appModelInstallerFields) {
-			if (!isNullOrEmpty(app[field])) {
+			if (app && !isNullOrEmpty(app[field])) {
 				return true;
 			}
 		}
 		return false;
+	};
+
+	const invalidateCache = () => {
+		queryClient.invalidateQueries(["appCollection"]);
+		// queryClient.setQueryData(["appCollection"], filteredeApps);
 	};
 
 	const populateList = () => {
@@ -72,8 +77,10 @@ const useClientManager = () => {
 			})
 			.then(() => {
 				getAppPage(1).then((apps) => {
+					console.log("PopulateList: ", apps);
 					setPageContent(apps);
 					setIsLoading(false);
+					invalidateCache();
 				});
 			});
 	};
@@ -82,7 +89,14 @@ const useClientManager = () => {
 		setListSize(allApps?.length);
 		setNumPages(allApps?.length);
 		setPage(1);
-		selectApp(allApps?.[0]);
+		if (allApps.length > 0) {
+			const firstApp = allApps[0];
+			firstApp.hasInstaller = appHasInstaller(firstApp);
+			setSelectedApp(firstApp);
+			setSelectedAppKey(firstApp.key);
+		}
+
+		setIsLoading(false);
 	};
 
 	const getPage = (page) => {
@@ -92,12 +106,19 @@ const useClientManager = () => {
 			console.log(apps);
 			setPageContent(apps);
 			setIsLoading(false);
+			invalidateCache();
 		});
 	};
 
 	const selectApp = (appKey) => {
 		setIsLoading(true);
 		getApp(appKey).then((app) => {
+			if (!app) {
+				console.warn("Found no app with key: ", appKey);
+				setIsLoading(false);
+				return;
+			}
+
 			app.hasInstaller = appHasInstaller(app);
 			setSelectedApp(app);
 			setSelectedAppKey(appKey);
@@ -127,6 +148,7 @@ const useClientManager = () => {
 		deleteApp(appKey).then(() => {
 			setAllApps((prev) => prev.filter((app) => app.key !== appKey));
 			setIsLoading(false);
+			invalidateCache();
 		});
 	};
 
@@ -136,6 +158,7 @@ const useClientManager = () => {
 		updateApp(app.appKey).then(() => {
 			setAllApps(...prev, app);
 			setIsLoading(false);
+			invalidateCache();
 		});
 	};
 
@@ -151,6 +174,7 @@ const useClientManager = () => {
 		addApp(app).then(() => {
 			setAllApps(...prev, app);
 			setIsLoading(false);
+			invalidateCache();
 		});
 	};
 
@@ -188,7 +212,7 @@ const useClientManager = () => {
 			setIsLoading(false);
 			return filterModel[filter].method(apps);
 		});
-		queryClient.invalidateQueries(["appCollection"]);
+		invalidateCache();
 		queryClient.setQueryData(["appCollection"], filteredeApps);
 		return filteredeApps;
 	};
@@ -202,7 +226,7 @@ const useClientManager = () => {
 			setIsLoading(false);
 			return apps;
 		});
-		queryClient.invalidateQueries(["appCollection"]);
+		invalidateCache();
 		queryClient.setQueryData(["appCollection"], appList);
 		return appList;
 	};
@@ -227,7 +251,7 @@ const useClientManager = () => {
 
 	useEffect(() => {
 		initPagination();
-	}, [allApps]);
+	}, [allApps, pageContent]);
 
 	return {
 		allApps,
@@ -247,6 +271,7 @@ const useClientManager = () => {
 		selectedApp,
 		selectedAppKey,
 		page,
+		pageContent,
 		limit,
 		totalCount,
 		pageCount,

@@ -5,10 +5,10 @@ import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "../MainView/MainView.module.css";
 import List from "./List";
 import { ListViewHeader } from "./ListViewHeader";
-import Pagination from "./Pagination";
+import PaginationBar from "./Pagination";
 
 const ListView = (props) => {
-	const { allApps } = useClient();
+	const { allApps, pageContent } = useClient();
 
 	const theme = useMantineTheme();
 	const turnPage = (page) => {
@@ -21,8 +21,8 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				<ListViewHeader theme={theme} />
-				<Pagination />
-				{allApps && <List />}
+				<PaginationBar />
+				{pageContent && <List />}
 			</Card>
 		</ErrorBoundary>
 	);

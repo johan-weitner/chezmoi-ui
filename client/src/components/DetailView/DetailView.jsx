@@ -68,41 +68,10 @@ const DetailView = (props) => {
 	const indicateEdit = null;
 	const hasInstaller = true;
 
-	// useEffect(() => {
-	// 	if (!appKey) {
-	// 		selectApp(null);
-	// 		return;
-	// 	}
-	// 	// getApp(appKey).then((app) => {
-	// 	APP_FORM.formPartTwo.map((item) => {
-	// 		if (selectedApp[item.name] && selectedApp[item.name].length > 0) {
-	// 			setHasInstaller(true);
-	// 			return;
-	// 		}
-	// 	});
-
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);
 	// 	const appTags = {};
 	// 	const indicateEdit = false;
-
-	// 	// indicateEdit = app.edited ? (
-	// 	// 	<ICON.check
-	// 	// 		style={{
-	// 	// 			width: rem(20),
-	// 	// 			height: rem(20),
-	// 	// 			position: "absolute",
-	// 	// 			right: "50px",
-	// 	// 			top: "45px",
-	// 	// 			zIndex: "999999",
-	// 	// 		}}
-	// 	// 		stroke={2}
-	// 	// 		color="green"
-	// 	// 		title="Has been edited"
-	// 	// 	/>
-	// 	// ) : null;
-	// 	// });
-	// }, [appKey]);
 
 	const closePopover = () => {
 		setSelectedApp(null);
@@ -117,7 +86,12 @@ const DetailView = (props) => {
 		>
 			<Sticky stickyClassName={s.sticky}>
 				<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
-					<DetailViewHeader theme={theme} hasSelection={selectedApp ?? false} />
+					<DetailViewHeader
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
+						theme={theme}
+						hasSelection={selectedApp ?? false}
+					/>
 					<Card
 						shadow="md"
 						fz="sm"

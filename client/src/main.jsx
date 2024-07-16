@@ -32,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 						closeButton
 						pauseWhenPageIsHidden
 					/>
+					<p>OK</p>
 				</ClientProvider>
 			</MantineProvider>
 			<ReactQueryDevtools initialIsOpen={false} />
