@@ -2,7 +2,9 @@ import { Box, Button, Container, Group } from "@mantine/core";
 import { ICON } from "constants/icons.js";
 import Toolbar from "../Toolbar";
 import classes from "./MainHeader.module.css";
-
+/**
+ * DEPRECATED: This component is no longer in use.
+ */
 const MainHeader = (props) => {
 	const { save } = props;
 

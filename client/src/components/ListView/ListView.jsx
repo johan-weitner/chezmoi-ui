@@ -8,12 +8,9 @@ import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
 
 const ListView = (props) => {
-	const { allApps, pageContent } = useClient();
+	const { pageContent } = useClient();
 
 	const theme = useMantineTheme();
-	const turnPage = (page) => {
-		console.log(`Turning page: ${page}`);
-	};
 
 	return (
 		<ErrorBoundary

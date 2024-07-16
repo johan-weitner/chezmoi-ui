@@ -1,17 +1,14 @@
 import { useState } from "react";
-import { Card, Skeleton, Text } from "@mantine/core";
+import { Card, Skeleton } from "@mantine/core";
 import { useEffect } from "react";
-import { toast } from "sonner";
 import { useClient } from "core/ClientProvider";
 import classes from "components/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
-import { set } from "react-hook-form";
 
 const List = (props) => {
 	const [list, setList] = useState([]);
 	const {
-		page,
 		pageContent,
 		selectApp,
 		deleteItem,
@@ -23,9 +20,7 @@ const List = (props) => {
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
 	useEffect(() => {
-		// console.log("Re-rendering...");
 		setList(pageContent);
-		console.log("Page content: ", pageContent);
 	}, [pageContent]);
 
 	return (
