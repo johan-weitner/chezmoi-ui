@@ -20,6 +20,7 @@ const List = (props) => {
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
 	useEffect(() => {
+		console.log("PageContent:", pageContent);
 		setList(pageContent);
 	}, [pageContent]);
 

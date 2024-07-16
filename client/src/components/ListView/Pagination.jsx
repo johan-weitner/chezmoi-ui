@@ -15,6 +15,7 @@ const PaginationBar = (props) => {
 		<Stack className={css.paginationContainer} justify="center" align="center">
 			<Pagination
 				total={pageCount}
+				value={currentPage}
 				gap={15}
 				onChange={getPage}
 				className={css.pagination}

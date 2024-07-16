@@ -1,6 +1,5 @@
 import React, { useState, createContext } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "@mantine/core/styles.css";
 import "@mantine/spotlight/styles.css";
 import { MantineProvider, createTheme } from "@mantine/core";

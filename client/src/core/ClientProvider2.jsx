@@ -18,32 +18,94 @@ const _findIndex = (key, list) => {
 	return list.findIndex((item) => item.key === key);
 };
 
+const providerModel = {
+	data: {
+		allApps: [],
+		filteredResult: [],
+		setAllApps: null,
+		saveOrUpdateItem: null,
+		deleteItem: null,
+		downloadGenericYaml: null,
+		downloadGenericJson: null,
+		downloadInstallDoctorYaml: null,
+	},
+	view: {
+		mode: "default",
+		selectedItem: null,
+		selectedItemKey: null,
+		detailView: {
+			isOpen: false,
+			fallback: Legend,
+		},
+		editView: {
+			isOpen: false,
+		},
+		pageManager: {
+			currentPage,
+			pageCount,
+			prevApp,
+			nextApp,
+			prevPage,
+			nextPage,
+		},
+		filterManager: {
+			filterModel,
+			activeFilter,
+			applyFilter,
+			clearFilter,
+		},
+		selectItem: null,
+		closeItem: null,
+		editItem: null,
+		addItem: null,
+		openSpotlightSearch: null,
+	},
+};
+
 const useClientManager = () => {
 	const [allApps, setAllApps] = useState([]);
 	const [totalApps, setTotalApps] = useState(0);
 	const [selectedApp, setSelectedApp] = useState(null);
 	const [selectedAppKey, setSelectedAppKey] = useState(null);
-	const [page, setPage] = useState(1);
+	const [currentPage, setCurrentPage] = useState(0);
 	const [pageContent, setPageContent] = useState([]);
 	const [limit, setLimit] = useState(20);
 	const [pageCount, setPageCount] = useState(0);
 	const [totalCount, setTotalCount] = useState(0);
 	const [activeFilter, setActiveFilter] = useState(null);
 	const [editMode, setEditMode] = useState(null);
-	const [inReverse, setInReverse] = useState(false);
 	const [isLoading, setIsLoading] = useState(null);
 	const [error, setError] = useState(null);
 
 	const queryClient = useQueryClient();
 	// const queryClient = new QueryClient();
-	const setListSize = (size) => setTotalCount(size);
-	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
+	useHotkeys("alt + b", () => gotoPrev());
+	useHotkeys("alt + n", () => gotoNext());
+	useHotkeys("alt + left", () => gotoPrev());
+	useHotkeys("alt + right", () => gotoNext());
+	useHotkeys("alt + n", () => addItem());
+	useHotkeys("alt + e", () => editItem());
+	useHotkeys("shift + alt + left", () => gotoPrevPage());
+	useHotkeys("shift + alt + right", () => gotoNextPage());
+	useHotkeys("alt + w", () => unselectApp());
 
-	const isNullOrEmpty = (value) => {
+	useEffect(() => {
+		populateList();
+	}, []);
+
+	useEffect(() => {
+		initPagination();
+	}, [allApps, pageContent]);
+
+	// Internal methods
+	const _setListSize = (size) => setTotalCount(size);
+	const _setNumPages = (size) => setPageCount(Math.ceil(size / limit));
+
+	const _isNullOrEmpty = (value) => {
 		return value === null || value === undefined || value === "";
 	};
 
-	const appHasInstaller = (app) => {
+	const _appHasInstaller = (app) => {
 		for (const field of appModelInstallerFields) {
 			if (app && !isNullOrEmpty(app[field])) {
 				return true;
@@ -52,39 +114,32 @@ const useClientManager = () => {
 		return false;
 	};
 
-	const invalidateCache = () => {
+	const _invalidateCache = () => {
 		queryClient.invalidateQueries(["appCollection", "appPage"]);
 		// queryClient.setQueryData(["appCollection"], filteredeApps);
 	};
 
-	const populateList = (page = 1) => {
-		console.log(`*** Populating list - viewing page ${page} ***`);
+	const _populateList = () => {
 		setIsLoading(true);
-		getAllApps().then((apps) => {
-			setAllApps(apps);
-			setListSize(apps?.length);
-			setNumPages(apps?.length);
-			setPage(page);
-			getAppPagee(page).then((apps) => {
-				console.log("PopulateList: ", apps?.length);
-				setPageContent(apps);
-				selectApp(apps[0].key);
-				setIsLoading(false);
-				invalidateCache();
+		getAllApps()
+			.then((apps) => {
+				setAllApps(apps);
+				initPagination();
+			})
+			.then(() => {
+				getAppPagee(1).then((apps) => {
+					console.log("PopulateList: ", apps);
+					setPageContent(apps);
+					setIsLoading(false);
+					invalidateCache();
+				});
 			});
-		});
 	};
 
-	const initPagination = (page = 1) => {
+	const _initPagination = () => {
 		setListSize(allApps?.length);
-		setNumPages(Math.ceil(allApps?.length / 20));
-		setPage(page);
-		console.table({
-			page,
-			totalApps,
-			pageCount,
-			totalCount,
-		});
+		setNumPages(allApps?.length);
+		setPage(1);
 		if (allApps.length > 0) {
 			const firstApp = allApps[0];
 			firstApp.hasInstaller = appHasInstaller(firstApp);
@@ -94,21 +149,22 @@ const useClientManager = () => {
 
 		setIsLoading(false);
 	};
+	// /Internal methods
 
+	// Public methods
 	const getPage = (page) => {
 		console.log(`Getting page: ${page}`);
 		setIsLoading(true);
 		getAppPagee(page).then((apps) => {
-			console.log("Got page", apps);
+			console.log(apps);
 			setPage(page);
 			setPageContent(apps);
 			setIsLoading(false);
 			invalidateCache();
-			queryClient.setQueryData(["appPage"], apps);
 		});
 	};
 
-	const selectApp = (appKey) => {
+	const selectItem = (appKey) => {
 		setIsLoading(true);
 		getApp(appKey).then((app) => {
 			if (!app) {
@@ -123,7 +179,7 @@ const useClientManager = () => {
 		});
 	};
 
-	const unselectApp = () => {
+	const closeItem = () => {
 		setSelectedApp(null);
 		setSelectedAppKey(null);
 	};
@@ -154,7 +210,7 @@ const useClientManager = () => {
 		});
 	};
 
-	const updateItem = (app) => {
+	const saveUpdatedItem = (app) => {
 		setIsLoading(true);
 		app.edited = true;
 		updateApp(app.appKey).then(() => {
@@ -171,7 +227,7 @@ const useClientManager = () => {
 		setEditMode(true);
 	};
 
-	const addItem = (app) => {
+	const saveNewItem = (app) => {
 		setIsLoading(true);
 		addApp(app).then(() => {
 			setAllApps(...prev, app);
@@ -181,24 +237,19 @@ const useClientManager = () => {
 	};
 
 	const gotoPrev = () => {
-		if (selectedAppKey) {
-			const index = _findIndex(selectedAppKey, allApps);
-			index > 0 && selectApp(allApps[index - 1].key);
-			page > 1 && getPage(page - 1);
-		} else {
-			selectApp(pageContent[0].key);
-		}
+		const index = _findIndex(selectedAppKey, allApps);
+		if (index === 0) return;
+		const nextApp = allApps[index - 1];
+		setSelectedApp(nextApp);
+		setSelectedAppKey(nextApp.key);
 	};
 
 	const gotoNext = () => {
-		console.log(selectedAppKey);
-		if (selectedAppKey) {
-			const index = _findIndex(selectedAppKey, allApps);
-			index < allApps.length - 1 && selectApp(allApps[index + 1].key);
-			page < pageCount && getPage(page + 1);
-		} else {
-			selectApp(pageContent[0].key);
-		}
+		const index = _findIndex(selectedAppKey, allApps);
+		if (index === allApps?.length - 1) return;
+		const nextApp = allApps[index + 1];
+		setSelectedApp(nextApp);
+		setSelectedAppKey(nextApp.key);
 	};
 
 	const gotoPrevPage = () => {
@@ -206,8 +257,6 @@ const useClientManager = () => {
 	};
 
 	const gotoNextPage = () => {
-		console.log(`Turning page from ${page} to ${page + 1}`);
-		console.log(`PageCount ${pageCount}`);
 		page < pageCount && getPage(page + 1);
 	};
 
@@ -226,7 +275,7 @@ const useClientManager = () => {
 		return filteredeApps;
 	};
 
-	const restoreFilters = async (filter) => {
+	const clearFilter = async () => {
 		setActiveFilter(null);
 		setIsLoading(true);
 		const appList = getAllApps().then((apps) => {
@@ -239,67 +288,63 @@ const useClientManager = () => {
 		queryClient.setQueryData(["appPage"], appList);
 		return appList;
 	};
+	// /Public methods
 
-	useHotkeys("alt + b", () => gotoPrev());
-	useHotkeys("alt + n", () => gotoNext());
-	useHotkeys("alt + left", () => gotoPrev());
-	useHotkeys("alt + right", () => gotoNext());
-	useHotkeys("alt + n", () => addItem());
-	useHotkeys("alt + e", () => editItem());
-	useHotkeys("shift + alt + left", () => gotoPrevPage());
-	useHotkeys("shift + alt + right", () => gotoNextPage());
-	useHotkeys("alt + w", () => unselectApp());
-
-	const useInit = () => {
-		return useEffect(() => {
-			console.log("Init");
-			populateList(page);
-			initPagination(page);
-		}, []);
-	};
-
-	useEffect(() => {
-		console.log("New page content - selecting first item");
-		pageContent && setSelectedApp(pageContent[0]?.key);
-		pageContent && setSelectedAppKey(pageContent[0]?.key);
-	}, [pageContent]);
-
-	return {
-		useInit,
+	const dataManager = {
 		allApps,
-		totalApps,
-		populateList,
-		initPagination,
+		setAllApps,
+		saveNewItem,
+		saveUpdatedItem,
 		deleteItem,
-		updateItem,
-		addItem,
-		selectApp,
+		downloadGenericYaml: null,
+		downloadGenericJson: null,
+		downloadInstallDoctorYaml: null,
+	};
+	const viewManager = {
+		mode: "default",
+		selectedItem,
+		selectedItemKey,
+		detailView: {
+			isOpen: false,
+			fallback: Legend,
+		},
+		editView: {
+			isOpen: false,
+		},
+		selectItem,
+		closeItem,
 		editItem,
-		editNewItem,
-		error,
-		isLoading,
-		editMode,
-		setEditMode,
-		selectedApp,
-		selectedAppKey,
-		page,
-		pageContent,
-		limit,
-		totalCount,
+	};
+	const pageManager = {
+		currentPage,
+		totalSize,
 		pageCount,
-		getPage,
-		setLimit,
+		pageSize,
+		pageContent,
 		gotoPrev,
 		gotoNext,
 		gotoPrevPage,
 		gotoNextPage,
-		applyFilter,
-		restoreFilters,
-		activeFilter,
 	};
-};
+	const filterManager = {
+		filters: [],
+		filteredResult: [],
+		activeFilter,
+		applyFilter,
+		clearFilter,
+	};
 
-// Component to provide the ClientContext
+	return {
+		useClientManager,
+		dataManager,
+		viewManager,
+		pageManager,
+		filterManager,
+		error,
+		isLoading,
+	};
+}; // useClientManager
+
 function ClientProvider({ children }) {
 	const contextValue = useClientManager();
 	return (
