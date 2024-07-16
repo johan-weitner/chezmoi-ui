@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import { forwardRef } from "react";
+import { useFocusTrap } from "@mantine/hooks";
 import "@yaireo/tagify/dist/tagify.css";
 import {
 	Fieldset,
@@ -13,6 +14,7 @@ import classes from "../MainView/MainView.module.css";
 
 const InfoSection = (props) => {
 	const { formPartOne, register } = props;
+	const focusTrapRef = useFocusTrap();
 
 	return (
 		<div>
@@ -36,7 +38,11 @@ const InfoSection = (props) => {
 								<Text component="label" htmlFor={item.name} size="sm" fw={500}>
 									{item.label}
 								</Text>
-								<Input id={item.name} {...register(item.name)} />
+								<Input
+									id={item.name}
+									{...register(item.name)}
+									ref={item.trapFocus && focusTrapRef}
+								/>
 							</Group>
 						);
 					})}

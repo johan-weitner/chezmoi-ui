@@ -1,5 +1,5 @@
 import { Button, Group } from "@mantine/core";
-import { randomId, useForceUpdate } from "@mantine/hooks";
+import { useFocusTrap, randomId, useForceUpdate } from "@mantine/hooks";
 import { addApp, updateApp } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
@@ -28,11 +28,6 @@ const EditViewForm = (props) => {
 	});
 
 	const forceUpdate = useForceUpdate();
-
-	// useEffect(() => {
-	// 	isNewApp && forceUpdate();
-	// }, []);
-
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const update = updateApp();

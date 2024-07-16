@@ -6,9 +6,8 @@ import { useClient } from "core/ClientProvider";
 
 const DetailsBox = (props) => {
 	const { deleteItem, editItem, selectedApp } = useClient();
-
-	const tags = [];
 	const { hasInstaller, edited: indicateEdit } = selectedApp;
+	const tags = [];
 
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>

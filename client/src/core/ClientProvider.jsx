@@ -13,6 +13,7 @@ import {
 	getTotalCount,
 	getAllApps,
 	getAppPage,
+	getAppPagee,
 	useAppPage,
 	getApp,
 	updateApp,
@@ -46,7 +47,6 @@ const useClientManager = () => {
 	const [error, setError] = useState(null);
 
 	const queryClient = useQueryClient();
-	const fetchAllApps = getAllApps;
 	const setListSize = (size) => setTotalCount(size);
 	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
 
@@ -64,7 +64,7 @@ const useClientManager = () => {
 	};
 
 	const invalidateCache = () => {
-		queryClient.invalidateQueries(["appCollection"]);
+		queryClient.invalidateQueries(["appCollection", "appPage"]);
 		// queryClient.setQueryData(["appCollection"], filteredeApps);
 	};
 
@@ -76,7 +76,7 @@ const useClientManager = () => {
 				initPagination();
 			})
 			.then(() => {
-				getAppPage(1).then((apps) => {
+				getAppPagee(1).then((apps) => {
 					console.log("PopulateList: ", apps);
 					setPageContent(apps);
 					setIsLoading(false);
@@ -102,8 +102,9 @@ const useClientManager = () => {
 	const getPage = (page) => {
 		console.log(`Getting page: ${page}`);
 		setIsLoading(true);
-		getAppPage(page).then((apps) => {
+		getAppPagee(page).then((apps) => {
 			console.log(apps);
+			setPage(page);
 			setPageContent(apps);
 			setIsLoading(false);
 			invalidateCache();
@@ -118,12 +119,16 @@ const useClientManager = () => {
 				setIsLoading(false);
 				return;
 			}
-
 			app.hasInstaller = appHasInstaller(app);
 			setSelectedApp(app);
 			setSelectedAppKey(appKey);
 			setIsLoading(false);
 		});
+	};
+
+	const unselectApp = () => {
+		setSelectedApp(null);
+		setSelectedAppKey(null);
 	};
 
 	const editItem = (appKey) => {
@@ -195,11 +200,11 @@ const useClientManager = () => {
 	};
 
 	const gotoPrevPage = () => {
-		page > 1 && setPage(page - 1);
+		page > 1 && getPage(page - 1);
 	};
 
 	const gotoNextPage = () => {
-		page < pageCount && setPage(page + 1);
+		page < pageCount && getPage(page + 1);
 	};
 
 	const applyFilter = async (filter) => {
@@ -213,7 +218,7 @@ const useClientManager = () => {
 			return filterModel[filter].method(apps);
 		});
 		invalidateCache();
-		queryClient.setQueryData(["appCollection"], filteredeApps);
+		queryClient.setQueryData(["appPage"], filteredeApps);
 		return filteredeApps;
 	};
 
@@ -227,27 +232,23 @@ const useClientManager = () => {
 			return apps;
 		});
 		invalidateCache();
-		queryClient.setQueryData(["appCollection"], appList);
+		queryClient.setQueryData(["appPage"], appList);
 		return appList;
 	};
 
-	// useHotkeys("alt + b", () => gotoPrev());
-	// useHotkeys("alt + n", () => gotoNext());
-	// useHotkeys("alt + left", () => gotoPrev());
-	// useHotkeys("alt + right", () => gotoNext());
-	// useHotkeys("alt + n", () => addItem());
-	// useHotkeys("alt + e", () => editItem());
-	// useHotkeys("shift + alt + left", () => gotoPrevPage());
-	// useHotkeys("shift + alt + right", () => gotoNextPage());
-	// useHotkeys("alt + w", () => unselectApp());
+	useHotkeys("alt + b", () => gotoPrev());
+	useHotkeys("alt + n", () => gotoNext());
+	useHotkeys("alt + left", () => gotoPrev());
+	useHotkeys("alt + right", () => gotoNext());
+	useHotkeys("alt + n", () => addItem());
+	useHotkeys("alt + e", () => editItem());
+	useHotkeys("shift + alt + left", () => gotoPrevPage());
+	useHotkeys("shift + alt + right", () => gotoNextPage());
+	useHotkeys("alt + w", () => unselectApp());
 
 	useEffect(() => {
 		populateList();
 	}, []);
-
-	useEffect(() => {
-		getPage(page);
-	}, [page]);
 
 	useEffect(() => {
 		initPagination();
@@ -263,7 +264,7 @@ const useClientManager = () => {
 		addItem,
 		selectApp,
 		editItem,
-		editNewApp: editNewItem,
+		editNewItem,
 		error,
 		isLoading,
 		editMode,

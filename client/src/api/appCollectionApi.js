@@ -187,157 +187,66 @@ export const useAppPage = (page = 1, limit = 20) => {
 export const getAppPage = (page = 1, limit = 20) => {
 	const skip = page === 1 ? 0 : (page - 1) * limit;
 	const take = limit;
-	const apps = getAllApps()
-		.then((apps) => {
-			const slice = apps?.slice(skip, skip + take);
-			return slice;
-		})
-		.catch((error) => {
-			console.error(error);
-		});
-	return apps;
+	const apps = queryClient.getQueryData(['appCollection']) || [];
+	const slice = apps?.slice(skip, skip + take);
+	return slice;
+	// const apps = getAllApps()
+	// 	.then((apps) => {
+	// 		const slice = apps?.slice(skip, skip + take);
+	// 		return slice;
+	// 	})
+	// 	.catch((error) => {
+	// 		console.error(error);
+	// 	});
+	// return apps;
 };
 
-
-
+export const getAppPagee = (page = 1, limit = 20) => {
+	const skip = page === 1 ? 0 : (page - 1) * limit;
+	const take = limit;
+	const apps = queryClient.fetchQuery({
+		queryKey: ["appPage"],
+		queryFn: async () => {
+			// const apps = await axios
+			// 	.get(`${BASE_URL}/software`)
+			// 	.then((response) => {
+			// 		return response?.data?.slice(skip, skip + take);
+			// 	})
+			// 	.catch((error) => {
+			// 		console.error(error);
+			// 	});
+			// return apps;
+			const apps = queryClient.getQueryData(['appCollection']) || [];
+			const slice = apps?.slice(skip, skip + take);
+			return slice;
+		},
+	});
+	return apps;
+};
 
 export const getNoInstallerApps = async () => {
 	const apps = await useAppCollection();
 	return filterNoInstallerApps();
-	// const apps = queryClient.fetchQuery({
-	// 	queryKey: ["appCollection"],
-	// 	queryFn: async () => {
-	// 		const apps = await axios
-	// 			.get(`${BASE_URL}/getAppsWithoutInstaller`)
-	// 			.then((response) => {
-	// 				return response.data;
-	// 			})
-	// 			.catch((error) => {
-	// 				console.error(error);
-	// 			});
-	// 		return apps;
-	// 	},
-	// });
-	// return apps;
 };
 
 export const getNoUrlsApps = async () => {
 	const apps = await useAppCollection();
 	return filterNoUrlsApps();
-	// const apps = queryClient.fetchQuery({
-	// 	queryKey: ["appCollection"],
-	// 	queryFn: async () => {
-	// 		const apps = await axios
-	// 			.get(`${BASE_URL}/getAppsWithoutUrls`)
-	// 			.then((response) => {
-	// 				return response.data;
-	// 			})
-	// 			.catch((error) => {
-	// 				console.error(error);
-	// 			});
-	// 		return apps;
-	// 	},
-	// });
-	// return apps;
 };
 
 export const getNoDescApps = async () => {
 	const apps = await useAppCollection();
 	return filterNoDescsApps();
-	// const apps = queryClient.fetchQuery({
-	// 	queryKey: ["appCollection"],
-	// 	queryFn: async () => {
-	// 		const apps = await axios
-	// 			.get(`${BASE_URL}/getAppsWithoutDesc`)
-	// 			.then((response) => {
-	// 				return response.data;
-	// 			})
-	// 			.catch((error) => {
-	// 				console.error(error);
-	// 			});
-	// 		return apps;
-	// 	},
-	// });
-	// return apps;
 };
 
 export const getNoNameApps = async () => {
 	const apps = await useAppCollection();
 	return filterNoNamesApps();
-	// const apps = queryClient.fetchQuery({
-	// 	queryKey: ["appCollection"],
-	// 	queryFn: async () => {
-	// 		const apps = await axios
-	// 			.get(`${BASE_URL}/getAppsWithoutName`)
-	// 			.then((response) => {
-	// 				return response.data;
-	// 			})
-	// 			.catch((error) => {
-	// 				console.error(error);
-	// 			});
-	// 		return apps;
-	// 	},
-	// });
-	// return apps;
 };
-
-// export const filterNoInstallerApps = async () => {
-// 	const apps = await useAppCollection();
-// 	return apps.some(item => {
-// 		return _isColumnEmpty(item.whalebrew) &&
-// 			_isColumnEmpty(item.apt) &&
-// 			_isColumnEmpty(item.brew) &&
-// 			_isColumnEmpty(item.cask) &&
-// 			_isColumnEmpty(item.cargo) &&
-// 			_isColumnEmpty(item.npm) &&
-// 			_isColumnEmpty(item.pip) &&
-// 			_isColumnEmpty(item.pipx) &&
-// 			_isColumnEmpty(item.gem) &&
-// 			_isColumnEmpty(item.script) &&
-// 			_isColumnEmpty(item.choco) &&
-// 			_isColumnEmpty(item.scoop) &&
-// 			_isColumnEmpty(item.winget) &&
-// 			_isColumnEmpty(item.pkgdarwin) &&
-// 			_isColumnEmpty(item.ansible) &&
-// 			_isColumnEmpty(item.yay) &&
-// 			_isColumnEmpty(item.appstore) &&
-// 			_isColumnEmpty(item.pacman) &&
-// 			_isColumnEmpty(item.port)
-// 	});
-// };
-
-// const _isColumnEmpty = (column) => {
-// 	return column === "" || column === null;
-// };
-
-// export const filterNoUrlsApps = async () => {
-// 	useAppCollection();
-// 	return apps.some((item) => {
-// 		return (
-// 			_isColumnEmpty(item.home) &&
-// 			_isColumnEmpty(item.docs) &&
-// 			_isColumnEmpty(item.github)
-// 		);
-// 	});
-// };
-
-// export const filterNoDescsApps = async () => {
-// 	useAppCollection();
-// 	return apps.some((item) => {
-// 		return isColumnEmpty(item.desc);
-// 	});
-// };
-
-// export const filterNoNamesApps = async () => {
-// 	useAppCollection();
-// 	return apps.some((item) => {
-// 		return isColumnEmpty(item.name);
-// 	});
-// };
 
 export const getApp = (key) => {
 	const app = queryClient.fetchQuery({
-		queryKey: ["appCollection"],
+		queryKey: ["appPage"],
 		queryFn: async () => {
 			const app = await axios
 				.get(`${BASE_URL}/getApp?key=${key}`)
