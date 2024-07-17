@@ -54,6 +54,7 @@
     "postcss-preset-mantine": "^1.15.0",
     "postcss-simple-vars": "^7.0.1",
     "turbo": "^2.0.6",
-    "vite": "^5.3.4"
+    "vite": "^5.3.4",
+    "zukeeper": "^1.0.2"
   }
 }

@@ -11,11 +11,12 @@
  * @param {function} props.gotoNext - Function to navigate to the next app.
  * @returns {JSX.Element} The rendered DetailView component.
  */
-import { Card, Stack, useMantineTheme } from "@mantine/core";
+import { Card, Stack, useMantineTheme, Text } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useClient } from "core/ClientProvider";
+import { useStore } from "store/rootState";
 import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
 import { useEffect, useRef, useState } from "react";
@@ -32,19 +33,29 @@ import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
 
 const DetailView = (props) => {
-	const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+	const [currentApp, setCurrentApp] = useState(false);
 	const modalRef = useRef();
+	const {
+		populateList,
+		initPagination,
+		deleteItem,
+		updateItem,
+		selectApp,
+		gotoPrev,
+		gotoNext,
+		gotoPrevPage,
+		gotoNextPage,
+		applyFilter,
+		restoreFilters,
+	} = useClient();
+
 	const {
 		allApps,
 		totalApps,
-		populateList,
-		initPagination,
+		closeApp,
 		editItem,
 		editMode,
-		deleteItem,
-		updateItem,
 		addItem,
-		selectApp,
 		selectedApp,
 		selectedAppKey: appKey,
 		page,
@@ -53,30 +64,23 @@ const DetailView = (props) => {
 		pageCount,
 		setPage,
 		setLimit,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		applyFilter,
-		restoreFilters,
 		activeFilter,
-	} = useClient();
+	} = useStore();
 
 	const theme = useMantineTheme();
-	const isLoading = false;
 	const tags = [];
 	const indicateEdit = null;
 	const hasInstaller = true;
+
+	useEffect(() => {
+		console.log("selectedApp:", selectedApp);
+		setCurrentApp(selectedApp);
+	}, [selectedApp]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);
 	// 	const appTags = {};
 	// 	const indicateEdit = false;
-
-	const closePopover = () => {
-		setSelectedApp(null);
-		setIsPopoverOpen(false);
-	};
 
 	return (
 		<ErrorBoundary
@@ -91,6 +95,9 @@ const DetailView = (props) => {
 							theme={theme}
 							hasSelection={selectedApp ?? false}
 						/>
+						<Text size="sm">
+							{appKey}: {selectedApp?.name}
+						</Text>
 						<Card
 							shadow="md"
 							fz="sm"

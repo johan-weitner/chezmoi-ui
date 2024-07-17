@@ -199,22 +199,35 @@ export const getAppPage = (page = 1, limit = 20) => {
 	return apps;
 };
 
+// export const getApp = (key) => {
+// 	const app = queryClient.fetchQuery({
+// 		queryKey: ["appPage"],
+// 		queryFn: async () => {
+// 			const app = await axios
+// 				.get(`${BASE_URL}/getApp?key=${key}`)
+// 				.then((response) => {
+// 					return response.data;
+// 				})
+// 				.catch((error) => {
+// 					console.error(error);
+// 				});
+// 			return app;
+// 		},
+// 	});
+// 	return app;
+// };
+
 export const getApp = (key) => {
-	const app = queryClient.fetchQuery({
-		queryKey: ["appPage"],
-		queryFn: async () => {
-			const app = await axios
-				.get(`${BASE_URL}/getApp?key=${key}`)
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return app;
-		},
+	getAllApps().then((data) => {
+		const app = queryClient.fetchQuery({
+			queryKey: ["appPage"],
+			queryFn: () => {
+				return data[key];
+			},
+		});
+		return app;
 	});
-	return app;
+
 };
 
 export const updateApp = () => {

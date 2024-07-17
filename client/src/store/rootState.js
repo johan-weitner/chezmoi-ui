@@ -1,98 +1,86 @@
-import { create } from 'zustand'
+import React from "react";
+import { create } from 'zustand';
+import zukeeper from 'zukeeper';
+import { QueryClient } from "@tanstack/react-query";
+import {
+  getAllApps,
+  getAppPage,
+  getApp,
+  updateApp,
+  addApp,
+  deleteApp,
+} from "api/appCollectionApi.js";
+import { appModelInstallerFields } from "api/appModel";
+import { filterModel } from "api/filters";
+import Legend from 'components/DetailView/Legend';
 
+// Zustand store
+// export const useStore = create(zukeeper(set => ({
 export const useStore = create((set) => ({
-  data: {
-    allApps: [],
-    setAllApps: (apps) => set({ data: { allApps: apps } }),
-    saveUpdatedItem: (key) => saveUpdatedItem(key),
-    saveNewItem: (key) => saveNewItem(key),
-    deleteItem: (key) => deleteItem(key),
-    downloadGenericYaml: () => downloadGenericYaml(),
-    downloadGenericJson: () => downloadGenericJson(),
-    downloadInstallDoctorYaml: () => downloadInstallDoctorYaml(),
+  allApps: [],
+  setAllApps: (apps) => {
+    set({ allApps: apps });
+    console.log('Set allApps in global Zustand store');
   },
-  view: {
-    mode: "default",
-    setMode: (mode) => set({ view: { mode } }),
+  totalCount: 0,
+  setTotalCount: (total) => {
+    set({ totalCount: total });
+  },
+  limit: 20,
+  setLimit: (limit) => set({ limit }),
+  downloadGenericYaml: () => downloadGenericYaml(),
+  downloadGenericJson: () => downloadGenericJson(),
+  downloadInstallDoctorYaml: () => downloadInstallDoctorYaml(),
+
+  selectedApp: null,
+  setSelectedApp: (app) => {
+    set({ selectedApp: app });
+    console.log('Set selectedApp in global Zustand store');
+  },
+  selectedAppKey: null,
+  setSelectedAppKey: (key) => set({ selectedAppKey: key }),
+  closeApp: () => set({ selectedApp: null, selectedAppKey: null }),
+  editItem: (appKey) => set({
+    selectedApp: allApps[appKey],
+    selectedAppKey: appKey,
+    isEditMode: true,
+  }),
+  addItem: () => set({
     selectedItem: null,
-    setSelectedApp: (selectedItem) => set({ view: { selectedItem } }),
     selectedItemKey: null,
-    setSelectedAppKey: (selectedItemKey) => set({ view: { selectedItemKey } }),
-    detailView: {
-      isOpen: false,
-      setIsOpen: (isOpen) => set({ detailView: { isOpen } }),
-      fallback: Legend,
-    },
-    editView: {
-      isOpen: false,
-      setIsOpen: (isOpen) => set({ editView: { isOpen } }),
-      isNewApp: false,
-      setIsNewApp: (isNewApp) => set({ editView: { isNewApp } }),
-    },
+    isEditMode: true,
+    isNewApp: true,
+  }),
+  isEditMode: false,
+  setIsEditeMode: (mode) => set({ isEditMode: mode }),
 
-    selectItem: (app) => { set({ selectedItem: app, selectedItemKey: app.key }); },
-    closeItem: () => set({ selectedItem: null, selectedItemKey: null }),
-    editItem: (appKey) => set({
-      selectedItem: allApps[appKey],
-      selectedItemKey: appKey,
-      editView: { isOpen: true, isNewApp: false }
-    }),
-    addItem: () => set({
-      selectedItem: null,
-      selectedItemKey: null,
-      editView: { isOpen: true, isNewApp: true },
-    }),
-    isEditMode: false,
-    setIsEditeMode: (mode) => set({ isEditMode: mode }),
+  page: 0,
+  pageCount: 0,
+  pageContent: null,
+  setPage: (page) => set({ page: page }),
+  setPageCount: (count) => set({ pageCount: count }),
+  setPageContent: (content) => {
+    set({ pageContent: content });
+    console.log('Populated pageContent in global Zustand store: ', content);
   },
-  pageManager: {
-    currentPage: 0,
-    pageCount: 0,
-    getPage: (page) => getPage(page),
-    setPage: (page) => set({ currentPage: page }),
-    setPageCount: (count) => set({ pageCount: count }),
-    prevApp: () => prevApp(),
-    nextApp: () => nextApp(),
-    prevPage: () => prevPage(),
-    nextPage: () => nextPage(),
-  },
-  filterManager: {
-    filterModel: {
-      noInstallers: {
-        key: "noInstallers",
-        method: filterNoInstallerApps,
-        title: "Apps without installers",
-      },
-      noUrls: {
-        key: "noUrls",
-        method: filterNoUrlsApps,
-        title: "Apps without URLs",
-      },
-      noDesc: {
-        key: "noDesc",
-        method: filterNoDescsApps,
-        title: "Apps without name",
-      },
-      noName: {
-        key: "noName",
-        method: filterNoNamesApps,
-        title: "Apps without description",
-      },
-    },
-    filteredResult: [],
-    activeFilter: null,
-    applyFilter: (filter) => applyFilter(filter),
-    clearFilter: () => set({ filterManager: { activeFilter: null } }),
-  },
+
+  filterModel: filterModel,
+  filteredResult: [],
+  activeFilter: null,
+
+  isLoading: false,
+  setIsLoading: (isLoading) => set({ isLoading }),
+  error: null,
+  setError: (error) => set({ error }),
+
 }));
+// })));
+
+window.store = useStore;
 
 
-
-
-
-
-const queryClient = useQueryClient();
-// const queryClient = new QueryClient();
+// const queryClient = useQueryClient();
+const queryClient = new QueryClient();
 const _setListSize = (size) => setTotalCount(size);
 const _setNumPages = (size) => setPageCount(Math.ceil(size / limit));
 
@@ -271,7 +259,7 @@ const invalidateCache = () => {
   // queryClient.setQueryData(["appCollection"], filteredeApps);
 };
 
-const populateList = (page = 1) => {
+export const populateList = (page = 1) => {
   console.log(`*** Populating list - viewing page ${page} ***`);
   setIsLoading(true);
   getAllApps().then((apps) => {
@@ -311,6 +299,9 @@ const initPagination = (page = 1) => {
 const downloadGenericYaml = () => { console.log('Not implemented...'); };
 const downloadGenericJson = () => { console.log('Not implemented...'); };
 const downloadInstallDoctorYaml = () => { console.log('Not implemented...'); };
+
+
+
 
 /*
 const providerModel = {

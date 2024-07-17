@@ -1,4 +1,3 @@
-import { useContext, useState } from "react";
 import {
 	ActionIcon,
 	Group,
@@ -8,8 +7,8 @@ import {
 	Menu,
 	useMantineTheme,
 } from "@mantine/core";
-import { IconArrowRight, IconSearch, IconMenu2 } from "@tabler/icons-react";
-import { useClient } from "core/ClientProvider";
+import { IconMenu2 } from "@tabler/icons-react";
+import { useStore } from "store/rootState";
 import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
 import commonCss from "components/MainView/MainView.module.css";
@@ -17,8 +16,7 @@ import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 
 export const ListViewHeader = (props) => {
-	const { selectApp, applyFilter, restoreFilters, activeFilter } = useClient();
-
+	const { selectApp, applyFilter, restoreFilters, activeFilter } = useStore();
 	const theme = useMantineTheme();
 
 	return (

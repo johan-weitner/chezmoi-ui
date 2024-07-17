@@ -7,7 +7,14 @@ import { EditedIndicator } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
 
 export const ListItem = (props) => {
-	const { selectApp, selectedAppKey, app, deleteItem, editItem } = props;
+	const {
+		selectApp,
+		selectedAppKey,
+		setSelectedAppKey,
+		app,
+		deleteItem,
+		editItem,
+	} = props;
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
@@ -22,7 +29,7 @@ export const ListItem = (props) => {
 			>
 				<button
 					className={classes.itemBox}
-					onClick={() => selectApp(app.key)}
+					onClick={() => setSelectedAppKey(app.key)}
 					style={{ width: "100%" }}
 					type="button"
 				>

@@ -17,6 +17,7 @@ export default defineConfig({
       constants: path.resolve(__dirname, "./src/constants"),
       core: path.resolve(__dirname, "./src/core"),
       query: path.resolve(__dirname, "./src/query"),
+      store: path.resolve(__dirname, "./src/store"),
       utils: path.resolve(__dirname, "./src/utils"),
     }
   },

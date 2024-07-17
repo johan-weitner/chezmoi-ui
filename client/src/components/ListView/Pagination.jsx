@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { Stack, Text, Pagination } from "@mantine/core";
 import { useClient } from "core/ClientProvider";
+import { useStore } from "store/rootState";
 import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {
-	const { page, totalCount, pageCount, getPage, activeFilter } = useClient();
-	const [currentPage, setCurrentPage] = useState(page);
+	const { getPage } = useClient();
+	const { page, totalCount, pageCount, activeFilter } = useStore();
+	const [currentPage, setCurrentPage] = useState(0);
+
 	useEffect(() => {
+		console.log(`Page: ${page}, Total: ${totalCount}, Count: ${pageCount}`);
 		setCurrentPage(page);
 	}, [page]);
 

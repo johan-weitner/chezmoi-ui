@@ -1,5 +1,5 @@
 import "utils/wdyr";
-import React, { useState, createContext } from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "@mantine/core/styles.css";
 import "@mantine/spotlight/styles.css";
