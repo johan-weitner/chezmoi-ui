@@ -52,49 +52,6 @@ const useClientManager = () => {
 		return false;
 	};
 
-	const invalidateCache = () => {
-		queryClient.invalidateQueries(["appCollection", "appPage"]);
-		// queryClient.setQueryData(["appCollection"], filteredeApps);
-	};
-
-	const populateList = (page = 1) => {
-		console.log(`*** Populating list - viewing page ${page} ***`);
-		setIsLoading(true);
-		getAllApps().then((apps) => {
-			setAllApps(apps);
-			setListSize(apps?.length);
-			setNumPages(apps?.length);
-			setPage(page);
-			getAppPagee(page).then((apps) => {
-				console.log("PopulateList: ", apps?.length);
-				setPageContent(apps);
-				selectApp(apps[0].key);
-				setIsLoading(false);
-				invalidateCache();
-			});
-		});
-	};
-
-	const initPagination = (page = 1) => {
-		setListSize(allApps?.length);
-		setNumPages(Math.ceil(allApps?.length / 20));
-		setPage(page);
-		console.table({
-			page,
-			totalApps,
-			pageCount,
-			totalCount,
-		});
-		if (allApps.length > 0) {
-			const firstApp = allApps[0];
-			firstApp.hasInstaller = appHasInstaller(firstApp);
-			setSelectedApp(firstApp);
-			setSelectedAppKey(firstApp.key);
-		}
-
-		setIsLoading(false);
-	};
-
 	const getPage = (page) => {
 		console.log(`Getting page: ${page}`);
 		setIsLoading(true);
@@ -123,7 +80,7 @@ const useClientManager = () => {
 		});
 	};
 
-	const unselectApp = () => {
+	const clearAppSelection = () => {
 		setSelectedApp(null);
 		setSelectedAppKey(null);
 	};
@@ -134,8 +91,7 @@ const useClientManager = () => {
 			console.log("Getting app...");
 			setIsLoading(true);
 			getApp(appKey).then((app) => {
-				setSelectedApp(app);
-				setSelectedAppKey(appKey);
+				selectApp(appKey);
 				setEditMode(true);
 				setIsLoading(false);
 			});
@@ -166,8 +122,7 @@ const useClientManager = () => {
 
 	const editNewItem = () => {
 		console.log("Edit new item");
-		setSelectedApp(null);
-		setSelectedAppKey(null);
+		clearAppSelection();
 		setEditMode(true);
 	};
 
@@ -180,28 +135,46 @@ const useClientManager = () => {
 		});
 	};
 
-	const gotoPrev = () => {
-		if (selectedAppKey) {
-			const index = _findIndex(selectedAppKey, allApps);
-			index > 0 && selectApp(allApps[index - 1].key);
-			page > 1 && getPage(page - 1);
-		} else {
-			selectApp(pageContent[0].key);
-		}
+	const _isStartOfPage = (index) => {
+		return index === 0;
 	};
 
-	const gotoNext = () => {
-		console.log(selectedAppKey);
-		if (selectedAppKey) {
-			const index = _findIndex(selectedAppKey, allApps);
-			index < pageContent.length - 1 && selectApp(pageContent[index + 1].key);
-			// page < pageCount && getPage(page + 1);
+	const _isEndOfPage = (index) => {
+		return index === pageContent.length - 1;
+	};
+
+	const _isStartOfPageNotOfCollection = (index) => {
+		return _isStartOfPage(index) && page > 1;
+	};
+
+	const _isEndOfPageNotOfCollection = (index) => {
+		return _isEndOfPage(index) && page < pageCount;
+	};
+
+	const gotoPrev = () => {
+		if (selectedAppKey && pageContent) {
+			const index = _findIndex(selectedAppKey, pageContent);
+			_isStartOfPage(index)
+				? gotoPrevPage()
+				: selectApp(pageContent[index - 1].key);
 		} else {
 			Array.isArray(pageContent) && selectApp(pageContent[0].key);
 		}
 	};
 
+	const gotoNext = () => {
+		if (selectedAppKey && pageContent) {
+			const index = _findIndex(selectedAppKey, pageContent);
+			_isEndOfPage(index)
+				? gotoNextPage()
+				: selectApp(pageContent[index + 1].key);
+		} else {
+			Array.isArray(pageContent) && selectApp(pageContent[0]?.key);
+		}
+	};
+
 	const gotoPrevPage = () => {
+		setInReverse(true);
 		page > 1 && getPage(page - 1);
 	};
 
@@ -240,15 +213,47 @@ const useClientManager = () => {
 		return appList;
 	};
 
-	useHotkeys("alt + b", () => gotoPrev());
-	useHotkeys("alt + n", () => gotoNext());
-	useHotkeys("alt + left", () => gotoPrev());
-	useHotkeys("alt + right", () => gotoNext());
-	useHotkeys("alt + n", () => addItem());
-	useHotkeys("alt + e", () => editItem());
-	useHotkeys("shift + alt + left", () => gotoPrevPage());
-	useHotkeys("shift + alt + right", () => gotoNextPage());
-	useHotkeys("alt + w", () => unselectApp());
+	const invalidateCache = () => {
+		queryClient.invalidateQueries(["appCollection", "appPage"]);
+		// queryClient.setQueryData(["appCollection"], filteredeApps);
+	};
+
+	const populateList = (page = 1) => {
+		console.log(`*** Populating list - viewing page ${page} ***`);
+		setIsLoading(true);
+		getAllApps().then((apps) => {
+			setAllApps(apps);
+			setListSize(apps?.length);
+			setNumPages(apps?.length);
+			setPage(page);
+			getAppPagee(page).then((apps) => {
+				console.log("PopulateList: ", apps?.length);
+				setPageContent(apps);
+				selectApp(apps[0].key);
+				setIsLoading(false);
+				invalidateCache();
+			});
+		});
+	};
+
+	const initPagination = (page = 1) => {
+		setListSize(allApps?.length);
+		setNumPages(Math.ceil(allApps?.length / 20));
+		setPage(page);
+		console.table({
+			page,
+			totalApps,
+			pageCount,
+			totalCount,
+		});
+		if (allApps.length > 0) {
+			const firstApp = allApps[0];
+			firstApp.hasInstaller = appHasInstaller(firstApp);
+			selectApp(firstApp.key);
+		}
+
+		setIsLoading(false);
+	};
 
 	const useInit = () => {
 		return useEffect(() => {
@@ -260,9 +265,20 @@ const useClientManager = () => {
 
 	useEffect(() => {
 		console.log("New page content - selecting first item");
-		pageContent && setSelectedApp(pageContent[0]?.key);
-		pageContent && setSelectedAppKey(pageContent[0]?.key);
+		const index = inReverse ? pageContent.length - 1 : 0;
+		pageContent && selectApp(pageContent[index]?.key);
+		setInReverse(false);
 	}, [pageContent]);
+
+	useHotkeys("alt + b", () => gotoPrev());
+	useHotkeys("alt + n", () => gotoNext());
+	useHotkeys("alt + left", () => gotoPrev());
+	useHotkeys("alt + right", () => gotoNext());
+	useHotkeys("alt + n", () => addItem());
+	useHotkeys("alt + e", () => editItem());
+	useHotkeys("shift + alt + left", () => gotoPrevPage());
+	useHotkeys("shift + alt + right", () => gotoNextPage());
+	useHotkeys("alt + w", () => clearAppSelection());
 
 	return {
 		useInit,
