@@ -1,20 +1,20 @@
 import {
 	ActionIcon,
+	Button,
 	Group,
+	Menu,
 	Text,
 	TextInput,
 	Tooltip,
 	UnstyledButton,
 	rem,
-	Menu,
-	Button,
 } from "@mantine/core";
-import { IconArrowRight, IconSearch, IconMenu2 } from "@tabler/icons-react";
+import { IconArrowRight, IconMenu2, IconSearch } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
 import commonCss from "../MainView/MainView.module.css";
 import Toolbar from "../Toolbar";
-import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
+import SearchWidget from "./SearchWidget";
 
 export const ListViewHeader = ({
 	filteredApps,

@@ -32,21 +32,18 @@ if [ "$1" = "--force" ]; then
 
 fi
 
-cd server
-node index.js &
+turbo run start --cwd=./server &
 pid=$!
 echo $pid > /tmp/srvprocess.pid
 
-cd ../client
 if [ "$1" = "--deploy" ] || [ "$2" = "--deploy" ]; then
-  pnpm run dev &
+  turbo run deploy --cwd=./client &
   pid=$!
   echo $pid > /tmp/clientprocess.pid
 else
-  pnpm run deploy &
+  turbo run dev --cwd=./client &
   pid=$!
   echo $pid > /tmp/clientprocess.pid
 fi
-cd ..
 
 

@@ -1,12 +1,12 @@
-import { Card, Pagination, Stack, Text, Group } from "@mantine/core";
+import { Card, Group, Pagination, Stack, Text } from "@mantine/core";
 import { QueryClient } from "@tanstack/react-query";
 import {
+	getNoDescApps,
+	getNoInstallerApps,
+	getNoNameApps,
+	getNoUrlsApps,
 	getTotalCount,
 	useAppPage,
-	getNoInstallerApps,
-	getNoUrlsApps,
-	getNoDescApps,
-	getNoNameApps,
 } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useState } from "react";

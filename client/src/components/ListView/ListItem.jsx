@@ -1,4 +1,4 @@
-import { rem, Text } from "@mantine/core";
+import { Text, rem } from "@mantine/core";
 import { useAppCollection } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";

@@ -144,7 +144,7 @@ export const getAppsWithoutInstaller = async (key) => {
 			yay: "",
 			appstore: "",
 			pacman: "",
-			port: ""
+			port: "",
 		},
 	});
 	return app;
@@ -165,7 +165,7 @@ export const getAppsWithoutDesc = async (key) => {
 	const app = await prisma[APPLICATION].findMany({
 		where: {
 			short: "",
-			desc: ""
+			desc: "",
 		},
 	});
 	return app;
@@ -174,7 +174,7 @@ export const getAppsWithoutDesc = async (key) => {
 export const getAppsWithoutName = async (key) => {
 	const app = await prisma[APPLICATION].findMany({
 		where: {
-			name: ""
+			name: "",
 		},
 	});
 	return app;
