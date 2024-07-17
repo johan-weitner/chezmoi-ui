@@ -8,3 +8,5 @@ install.doctor
 blueprint.md
 software.yml.backup
 server/prisma/dev.db
+.autodoc
+autodoc.config.json

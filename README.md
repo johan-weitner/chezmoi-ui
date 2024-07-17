@@ -49,9 +49,9 @@ On subsequent use, skip the `--build` flag. (A re-build is of course needed if y
 
 ## The stack
 - React
-- Prisma
-- React Query
 - Mantine UI
+- React Query
+- Prisma
 - Vite
 - TurboRepo
 - Node 20+
