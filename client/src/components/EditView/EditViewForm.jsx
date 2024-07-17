@@ -1,10 +1,9 @@
+import { useState, useEffect } from "react";
 import { Button, Group } from "@mantine/core";
-import { useFocusTrap, randomId, useForceUpdate } from "@mantine/hooks";
 import { addApp, updateApp } from "api/appCollectionApi";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Debugger from "./Debugger";
@@ -14,20 +13,20 @@ import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
 
 const EditViewForm = (props) => {
-	const {
-		closePopover,
-		selectedApp,
-		setSelectedAppKey,
-		isNewApp,
-		// forceUpdate,
-		randomId,
-	} = props;
+	const [currentApp, setCurrentApp] = useState(null);
+	const { closePopover, selectedApp, setSelectedAppKey, isNewApp, randomId } =
+		props;
+
 	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: defaultValues,
 	});
+	const debugMode = import.meta.env.VITE_DEBUG;
 
-	const forceUpdate = useForceUpdate();
+	useEffect(() => {
+		reset(selectedApp);
+	}, [selectedApp]);
+
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const update = updateApp();
@@ -63,12 +62,14 @@ const EditViewForm = (props) => {
 			<h2 className={css.editDetailHeader}>
 				{selectedApp?.name || "New application"}
 			</h2>
-			{/* <Debugger
-				selectedApp={selectedApp}
-				isNewApp={isNewApp}
-				resetForm={resetForm}
-				randomId={randomId}
-			/> */}
+			{debugMode && (
+				<Debugger
+					selectedApp={selectedApp}
+					isNewApp={isNewApp}
+					resetForm={resetForm}
+					randomId={randomId}
+				/>
+			)}
 			<InfoSection
 				formPartOne={formPartOne}
 				register={register}
@@ -84,7 +85,6 @@ const EditViewForm = (props) => {
 				register={register}
 				isNewApp={isNewApp}
 			/>
-
 			<Group justify="center">
 				<Button onClick={() => closePopover()} className={btn.cancelBtn}>
 					Cancel

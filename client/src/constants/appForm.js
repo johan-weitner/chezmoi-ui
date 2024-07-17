@@ -1,6 +1,6 @@
 export const APP_FORM = {
 	formPartOne: [
-		{ name: "name", label: "Name", trapFocus: true },
+		{ name: "name", label: "Name" },
 		{ name: "key", label: "Key" },
 		{ name: "bin", label: "Executable" },
 		{ name: "short", label: "Short desc" },

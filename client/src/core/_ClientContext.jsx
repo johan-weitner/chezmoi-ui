@@ -1,11 +1,5 @@
 import { createContext } from "react";
-import {
-	deleteApp,
-	getNoInstallerApps,
-	getNoUrlsApps,
-	getNoDescApps,
-	getNoNameApps,
-} from "api/appCollectionApi.js";
+import { deleteApp } from "api/appCollectionApi.js";
 import Legend from "components/DetailView/Legend";
 
 /* Methods */

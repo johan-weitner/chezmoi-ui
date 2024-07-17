@@ -5,7 +5,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import {
 	getAllApps,
 	getAppPage,
-	getAppPagee,
 	getApp,
 	updateApp,
 	addApp,
@@ -127,7 +126,7 @@ const useClientManager = () => {
 				initPagination();
 			})
 			.then(() => {
-				getAppPagee(1).then((apps) => {
+				getAppPage(1).then((apps) => {
 					console.log("PopulateList: ", apps);
 					setPageContent(apps);
 					setIsLoading(false);
@@ -155,7 +154,7 @@ const useClientManager = () => {
 	const getPage = (page) => {
 		console.log(`Getting page: ${page}`);
 		setIsLoading(true);
-		getAppPagee(page).then((apps) => {
+		getAppPage(page).then((apps) => {
 			console.log(apps);
 			setPage(page);
 			setPageContent(apps);

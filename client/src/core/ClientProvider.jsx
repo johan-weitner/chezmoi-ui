@@ -5,7 +5,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import {
 	getAllApps,
 	getAppPage,
-	getAppPagee,
 	getApp,
 	updateApp,
 	addApp,
@@ -36,26 +35,34 @@ const useClientManager = () => {
 
 	const queryClient = useQueryClient();
 	// const queryClient = new QueryClient();
-	const setListSize = (size) => setTotalCount(size);
-	const setNumPages = (size) => setPageCount(Math.ceil(size / limit));
+	const _setListSize = (size) => setTotalCount(size);
+	const _setNumPages = (size) => setPageCount(Math.ceil(size / limit));
 
-	const isNullOrEmpty = (value) => {
+	const _isNullOrEmpty = (value) => {
 		return value === null || value === undefined || value === "";
 	};
 
-	const appHasInstaller = (app) => {
+	const _appHasInstaller = (app) => {
 		for (const field of appModelInstallerFields) {
-			if (app && !isNullOrEmpty(app[field])) {
+			if (app && !_isNullOrEmpty(app[field])) {
 				return true;
 			}
 		}
 		return false;
 	};
 
+	const _isStartOfPage = (index) => {
+		return index === 0;
+	};
+
+	const _isEndOfPage = (index) => {
+		return index === pageContent.length - 1;
+	};
+
 	const getPage = (page) => {
 		console.log(`Getting page: ${page}`);
 		setIsLoading(true);
-		getAppPagee(page).then((apps) => {
+		getAppPage(page).then((apps) => {
 			console.log("Got page", apps);
 			setPage(page);
 			setPageContent(apps);
@@ -73,7 +80,7 @@ const useClientManager = () => {
 				setIsLoading(false);
 				return;
 			}
-			app.hasInstaller = appHasInstaller(app);
+			app.hasInstaller = _appHasInstaller(app);
 			setSelectedApp(app);
 			setSelectedAppKey(appKey);
 			setIsLoading(false);
@@ -133,22 +140,6 @@ const useClientManager = () => {
 			setIsLoading(false);
 			invalidateCache();
 		});
-	};
-
-	const _isStartOfPage = (index) => {
-		return index === 0;
-	};
-
-	const _isEndOfPage = (index) => {
-		return index === pageContent.length - 1;
-	};
-
-	const _isStartOfPageNotOfCollection = (index) => {
-		return _isStartOfPage(index) && page > 1;
-	};
-
-	const _isEndOfPageNotOfCollection = (index) => {
-		return _isEndOfPage(index) && page < pageCount;
 	};
 
 	const gotoPrev = () => {
@@ -223,10 +214,10 @@ const useClientManager = () => {
 		setIsLoading(true);
 		getAllApps().then((apps) => {
 			setAllApps(apps);
-			setListSize(apps?.length);
-			setNumPages(apps?.length);
+			_setListSize(apps?.length);
+			_setNumPages(apps?.length);
 			setPage(page);
-			getAppPagee(page).then((apps) => {
+			getAppPage(page).then((apps) => {
 				console.log("PopulateList: ", apps?.length);
 				setPageContent(apps);
 				selectApp(apps[0].key);
@@ -237,8 +228,8 @@ const useClientManager = () => {
 	};
 
 	const initPagination = (page = 1) => {
-		setListSize(allApps?.length);
-		setNumPages(Math.ceil(allApps?.length / 20));
+		_setListSize(allApps?.length);
+		_setNumPages(Math.ceil(allApps?.length / 20));
 		setPage(page);
 		console.table({
 			page,
@@ -248,7 +239,7 @@ const useClientManager = () => {
 		});
 		if (allApps.length > 0) {
 			const firstApp = allApps[0];
-			firstApp.hasInstaller = appHasInstaller(firstApp);
+			firstApp.hasInstaller = _appHasInstaller(firstApp);
 			selectApp(firstApp.key);
 		}
 

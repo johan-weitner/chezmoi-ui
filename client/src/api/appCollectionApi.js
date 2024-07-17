@@ -167,10 +167,6 @@ export const refetchAppCollection = () => {
 	});
 };
 
-
-
-
-
 export const useAppPage = (page = 1, limit = 20) => {
 	const skip = (page - 1) * limit;
 	const take = limit;
@@ -187,61 +183,15 @@ export const useAppPage = (page = 1, limit = 20) => {
 export const getAppPage = (page = 1, limit = 20) => {
 	const skip = page === 1 ? 0 : (page - 1) * limit;
 	const take = limit;
-	const apps = queryClient.getQueryData(['appCollection']) || [];
-	const slice = apps?.slice(skip, skip + take);
-	return slice;
-	// const apps = getAllApps()
-	// 	.then((apps) => {
-	// 		const slice = apps?.slice(skip, skip + take);
-	// 		return slice;
-	// 	})
-	// 	.catch((error) => {
-	// 		console.error(error);
-	// 	});
-	// return apps;
-};
-
-export const getAppPagee = (page = 1, limit = 20) => {
-	const skip = page === 1 ? 0 : (page - 1) * limit;
-	const take = limit;
 	const apps = queryClient.fetchQuery({
 		queryKey: ["appPage"],
 		queryFn: async () => {
-			// const apps = await axios
-			// 	.get(`${BASE_URL}/software`)
-			// 	.then((response) => {
-			// 		return response?.data?.slice(skip, skip + take);
-			// 	})
-			// 	.catch((error) => {
-			// 		console.error(error);
-			// 	});
-			// return apps;
 			const apps = queryClient.getQueryData(['appCollection']) || [];
 			const slice = apps?.slice(skip, skip + take);
 			return slice;
 		},
 	});
 	return apps;
-};
-
-export const getNoInstallerApps = async () => {
-	const apps = await useAppCollection();
-	return filterNoInstallerApps();
-};
-
-export const getNoUrlsApps = async () => {
-	const apps = await useAppCollection();
-	return filterNoUrlsApps();
-};
-
-export const getNoDescApps = async () => {
-	const apps = await useAppCollection();
-	return filterNoDescsApps();
-};
-
-export const getNoNameApps = async () => {
-	const apps = await useAppCollection();
-	return filterNoNamesApps();
 };
 
 export const getApp = (key) => {
@@ -305,9 +255,25 @@ export const updateApp = () => {
 	});
 };
 
+
+
+
+
+
+
+
+
+
 export const addApp = (data) => {
 	const app = mapAppData(data);
 	app.edited = "true";
+	console.log('Mapped app data:', app);
+	for (const key of Object.keys(app)) {
+		if (!app[key]) {
+			app[key] = "";
+		}
+	}
+
 	if (!app.desc) {
 		app.desc = "No description provided.";
 	}
@@ -354,6 +320,14 @@ export const addApp = (data) => {
 			return result;
 		});
 };
+
+
+
+
+
+
+
+
 
 export const deleteApp = async (key) => {
 	const result = await queryClient.fetchQuery({

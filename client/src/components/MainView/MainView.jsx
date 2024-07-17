@@ -13,7 +13,12 @@ const MainView = (props) => {
 			<Container
 				size="xl"
 				className={classes.mainContainer}
-				style={{ minHeight: "100% !important" }}
+				style={{
+					minHeight: "100% !important",
+					display: "flex",
+					alignItems: "flex-start",
+					justifyContent: "center",
+				}}
 			>
 				<Header />
 				<SimpleGrid
@@ -21,7 +26,6 @@ const MainView = (props) => {
 					spacing="sm"
 					py={12}
 					className={classes.grid}
-					style={{ minHeight: "100% !important" }}
 				>
 					<ListView theme={theme} />
 					<DetailView theme={theme} />

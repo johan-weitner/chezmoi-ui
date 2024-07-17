@@ -11,7 +11,7 @@
  * @param {function} props.gotoNext - Function to navigate to the next app.
  * @returns {JSX.Element} The rendered DetailView component.
  */
-import { Card, rem, useMantineTheme } from "@mantine/core";
+import { Card, Stack, useMantineTheme } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
@@ -20,7 +20,7 @@ import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
 import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import Sticky from "react-sticky-el";
+import StickyBox from "react-sticky-box";
 import { deleteApp, getApp } from "../../api/appCollectionApi";
 import { ICON } from "../../constants/icons";
 import BarSpinner from "../BarSpinner";
@@ -82,25 +82,27 @@ const DetailView = (props) => {
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
-			<Sticky stickyClassName={s.sticky}>
-				<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
-					<DetailViewHeader
-						gotoPrev={gotoPrev}
-						gotoNext={gotoNext}
-						theme={theme}
-						hasSelection={selectedApp ?? false}
-					/>
-					<Card
-						shadow="md"
-						fz="sm"
-						c="dimmed"
-						mt="sm"
-						style={{ textAlign: "left" }}
-					>
-						{selectedApp ? <DetailsBox /> : <Legend />}
+			<Stack>
+				<StickyBox offsetTop={105} offsetBottom={0}>
+					<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
+						<DetailViewHeader
+							gotoPrev={gotoPrev}
+							gotoNext={gotoNext}
+							theme={theme}
+							hasSelection={selectedApp ?? false}
+						/>
+						<Card
+							shadow="md"
+							fz="sm"
+							c="dimmed"
+							mt="sm"
+							style={{ textAlign: "left" }}
+						>
+							{selectedApp ? <DetailsBox /> : <Legend />}
+						</Card>
 					</Card>
-				</Card>
-			</Sticky>
+				</StickyBox>
+			</Stack>
 			{editMode && <EditView ref={modalRef} theme={theme} />}
 		</ErrorBoundary>
 	);

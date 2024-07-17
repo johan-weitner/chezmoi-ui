@@ -2,9 +2,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from "path";
+import path from "node:path";
 
-// https://vitejs.dev/config/
+// https://vitejs.dev/config/ // add env varible specified in .env file
+
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -28,5 +30,8 @@ export default defineConfig({
         rewrite: path => path.replace(/^\/api/, '')
       }
     }
-  }
+  },
+  env: {
+    DEBUG: process.env.DEBUG || false,
+  },
 })
