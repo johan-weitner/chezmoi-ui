@@ -2,10 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import {
 	deleteApp,
-	getNoInstallerApps,
-	getNoUrlsApps,
 	getNoDescApps,
+	getNoInstallerApps,
 	getNoNameApps,
+	getNoUrlsApps,
 } from "api/appCollectionApi.js";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Toaster } from "sonner";

@@ -16,15 +16,15 @@ import {
 	IconDeviceFloppy,
 	IconDownload,
 	IconEdit,
+	IconMenu2,
 	IconPackages,
 	IconReload,
 	IconScript,
+	IconSearch,
 	IconTerminal2,
 	IconTrash,
 	IconWorldCode,
 	IconX,
-	IconMenu2,
-	IconSearch
 } from "@tabler/icons-react";
 import classes from "components/MainView/MainHeader.module.css";
 

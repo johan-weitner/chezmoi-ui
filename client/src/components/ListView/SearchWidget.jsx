@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { rem, Button, ActionIcon, Tooltip } from "@mantine/core";
+import { ActionIcon, Button, Tooltip, rem } from "@mantine/core";
 import { Spotlight, spotlight } from "@mantine/spotlight";
+import { useEffect, useState } from "react";
 
 import {
-	IconHome,
 	IconDashboard,
 	IconFileText,
+	IconHome,
 	IconSearch,
 } from "@tabler/icons-react";
 
