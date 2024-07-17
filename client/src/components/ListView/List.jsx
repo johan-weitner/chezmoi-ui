@@ -21,6 +21,10 @@ const List = (props) => {
 
 	useEffect(() => {
 		console.log("PageContent:", pageContent);
+		if (!Array.isArray(pageContent)) {
+			console.warn("PageContent is not an array");
+			return;
+		}
 		setList(pageContent);
 	}, [pageContent]);
 

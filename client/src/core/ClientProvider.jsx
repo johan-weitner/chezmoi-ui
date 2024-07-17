@@ -194,10 +194,10 @@ const useClientManager = () => {
 		console.log(selectedAppKey);
 		if (selectedAppKey) {
 			const index = _findIndex(selectedAppKey, allApps);
-			index < allApps.length - 1 && selectApp(allApps[index + 1].key);
-			page < pageCount && getPage(page + 1);
+			index < pageContent.length - 1 && selectApp(pageContent[index + 1].key);
+			// page < pageCount && getPage(page + 1);
 		} else {
-			selectApp(pageContent[0].key);
+			Array.isArray(pageContent) && selectApp(pageContent[0].key);
 		}
 	};
 

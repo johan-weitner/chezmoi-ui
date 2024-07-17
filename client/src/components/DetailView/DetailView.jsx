@@ -78,8 +78,6 @@ const DetailView = (props) => {
 		setIsPopoverOpen(false);
 	};
 
-	const setSelectedAppKey = (key) => {};
-
 	return (
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}

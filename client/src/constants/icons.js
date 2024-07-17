@@ -24,7 +24,9 @@ import {
 	IconWorldCode,
 	IconX,
 	IconMenu2,
-	IconSearch
+	IconSearch,
+	IconPlayerTrackPrev,
+	IconPlayerTrackNext
 } from "@tabler/icons-react";
 
 /**
@@ -59,6 +61,8 @@ export const ICON = {
 	check: IconCheck,
 	menu: IconMenu2,
 	search: IconSearch,
+	prev: IconPlayerTrackPrev,
+	next: IconPlayerTrackNext,
 };
 
 export const INDICATOR = {
