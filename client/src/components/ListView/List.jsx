@@ -59,4 +59,5 @@ const List = (props) => {
 	);
 };
 
+List.whyDidYouRender = true;
 export default List;

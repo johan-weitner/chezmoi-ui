@@ -25,4 +25,5 @@ const ListView = (props) => {
 	);
 };
 
+ListView.whyDidYouRender = true;
 export default ListView;

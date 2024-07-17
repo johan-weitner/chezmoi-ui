@@ -95,4 +95,5 @@ const EditView = forwardRef(function EditView(props, ref) {
 	);
 });
 
+EditView.whyDidYouRender = true;
 export default EditView;

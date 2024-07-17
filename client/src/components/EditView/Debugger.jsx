@@ -15,7 +15,7 @@ const Debugger = (props) => {
 				}}
 			>
 				selectedApp: {selectedApp ? "true" : "false"} | isNewApp:{" "}
-				{isNewApp ? "true" : "false"} | RandomId: {randomId}
+				{isNewApp ? "true" : "false"}
 			</Text>
 			<button
 				type="button"

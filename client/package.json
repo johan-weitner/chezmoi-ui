@@ -25,6 +25,7 @@
     "@tabler/icons-react": "^3.10.0",
     "@tanstack/react-query": "^5.51.1",
     "@tanstack/react-query-devtools": "^5.51.1",
+    "@welldone-software/why-did-you-render": "^8.0.3",
     "@yaireo/tagify": "^4.27.0",
     "axios": "^1.7.2",
     "express": "^4.19.2",
@@ -38,7 +39,8 @@
     "react-spinners": "^0.14.1",
     "react-sticky-box": "^2.0.5",
     "sonner": "^1.5.0",
-    "yaml": "^2.4.5"
+    "yaml": "^2.4.5",
+    "zustand": "^4.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",

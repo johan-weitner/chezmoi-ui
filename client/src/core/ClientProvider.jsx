@@ -111,7 +111,8 @@ const useClientManager = () => {
 	const deleteItem = (appKey) => {
 		setIsLoading(true);
 		deleteApp(appKey).then(() => {
-			setAllApps((prev) => prev.filter((app) => app.key !== appKey));
+			setAllApps(allApps.filter((app) => app.key !== appKey));
+			setPageContent(pageContent.filter((app) => app.key !== appKey));
 			setIsLoading(false);
 			invalidateCache();
 		});
@@ -136,7 +137,10 @@ const useClientManager = () => {
 	const addItem = (app) => {
 		setIsLoading(true);
 		addApp(app).then(() => {
-			setAllApps(...prev, app);
+			setAllApps([...prev, app]);
+			if (page === pageCount.length) {
+				setPageContent([...pageContent, app]);
+			}
 			setIsLoading(false);
 			invalidateCache();
 		});
@@ -316,6 +320,8 @@ function ClientProvider({ children }) {
 	);
 }
 
+const ClientContext = createContext();
+
 const useClient = () => {
 	const context = useContext(ClientContext);
 	if (!context) {
@@ -326,7 +332,5 @@ const useClient = () => {
 	}
 	return context;
 };
-
-const ClientContext = createContext();
 
 export { useClient, ClientProvider, useClientManager };

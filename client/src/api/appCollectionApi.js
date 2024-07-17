@@ -187,8 +187,13 @@ export const getAppPage = (page = 1, limit = 20) => {
 		queryKey: ["appPage"],
 		queryFn: async () => {
 			const apps = queryClient.getQueryData(['appCollection']) || [];
-			const slice = apps?.slice(skip, skip + take);
-			return slice;
+			if (Array.isArray(apps)) {
+				const slice = Array.isArray(apps) && apps?.slice(skip, skip + take);
+				return slice;
+			}
+			console.error('Result is not a list: ', apps);
+			throw new Error('Query returned no list');
+
 		},
 	});
 	return apps;
