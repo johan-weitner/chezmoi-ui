@@ -32,5 +32,8 @@
   "dependencies": {
     "@changesets/cli": "^2.27.7"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "turbo": "^2.0.7"
+  }
 }
