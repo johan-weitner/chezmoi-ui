@@ -387,26 +387,27 @@ const useClientManager = () => {
 };
 
 // Component to provide the ClientContext
-function ClientProvider({ children }) {
-	const contextValue = useClientManager();
-	return (
-		<ClientContext.Provider value={contextValue}>
-			{children}
-		</ClientContext.Provider>
-	);
-}
+// function ClientProvider({ children }) {
+// 	const contextValue = useClientManager();
+// 	return (
+// 		<ClientContext.Provider value={contextValue}>
+// 			{children}
+// 		</ClientContext.Provider>
+// 	);
+// }
 
-const ClientContext = createContext();
+// const ClientContext = createContext();
 
-const useClient = () => {
-	const context = useContext(ClientContext);
-	if (!context) {
-		throw new Error(
-			"The useClient hook must be used within a ClientProvider. \
-			Add one to the component tree, outside of every component using it.",
-		);
-	}
-	return context;
-};
+// const useClient = () => {
+// 	const context = useContext(ClientContext);
+// 	if (!context) {
+// 		throw new Error(
+// 			"The useClient hook must be used within a ClientProvider. \
+// 			Add one to the component tree, outside of every component using it.",
+// 		);
+// 	}
+// 	return context;
+// };
 
-export { useClient, ClientProvider, useClientManager };
+// export { useClient, ClientProvider, useClientManager };
+export { useClientManager };
