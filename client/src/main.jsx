@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { printTitleCard } from "utils/titleCard.js";
 import { Toaster } from "sonner";
-import MainView from "./components/MainView/MainView";
+import MainView from "views/MainView/MainView";
 import "@yaireo/tagify/dist/tagify.css";
 import "./App.css";
 

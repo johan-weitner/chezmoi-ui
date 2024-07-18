@@ -23,6 +23,7 @@ export default defineConfig({
       query: path.resolve(__dirname, "./src/query"),
       store: path.resolve(__dirname, "./src/store"),
       utils: path.resolve(__dirname, "./src/utils"),
+      views: path.resolve(__dirname, "./src/views"),
     }
   },
   server: {

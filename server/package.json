@@ -29,5 +29,6 @@
     "lint-staged": "^15.2.7",
     "prisma": "^5.16.1",
     "turbo": "^2.0.6"
-  }
+  },
+  "packageManager": "pnpm@9.4.0"
 }

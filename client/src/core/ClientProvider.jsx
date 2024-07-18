@@ -1,7 +1,7 @@
 import React from "react";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useQueryClient, QueryClient } from "@tanstack/react-query";
-import { useStore } from "store/rootState";
+import { useStore } from "store/store";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
 	getAllApps,

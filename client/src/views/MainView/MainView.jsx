@@ -4,7 +4,7 @@ import ListView from "views/ListView/ListView.jsx";
 import Header from "components/Header.jsx";
 import classes from "./MainView.module.css";
 import "@yaireo/tagify/dist/tagify.css";
-import { useStore } from "store/rootState";
+import { useStore } from "store/store";
 
 const MainView = (props) => {
 	const theme = useMantineTheme();
