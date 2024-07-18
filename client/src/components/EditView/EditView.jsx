@@ -14,12 +14,12 @@ const EditView = forwardRef(function EditView(props, ref) {
 		useClientManager();
 
 	const [isNewApp, setIsNewApp] = useState(!selectedApp); // FIXME
-	// const forceUpdate = useForceUpdate();
+	const forceUpdate = useForceUpdate();
 
 	// FIXME
 	useEffect(() => {
 		setIsNewApp(!selectedApp);
-		forceUpdate();
+		// forceUpdate();
 	}, [selectedApp]);
 
 	return (

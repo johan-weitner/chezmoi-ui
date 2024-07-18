@@ -16,7 +16,7 @@ const EditViewForm = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
 	const {
 		addApp,
-		updateApp,
+		updateItem: updateApp,
 		closePopover,
 		selectedApp,
 		setSelectedAppKey,
@@ -37,6 +37,7 @@ const EditViewForm = (props) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const update = updateApp();
+	console.log(update);
 	const onSubmit = (data) => {
 		try {
 			if (isNewApp) {

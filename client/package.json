@@ -58,6 +58,7 @@
     "turbo": "^2.0.6",
     "vite": "^5.3.4",
     "vitest": "^2.0.3",
-    "zukeeper": "^1.0.2"
+    "zukeeper": "^1.0.2",
+    "zustymiddleware": "^1.2.0"
   }
 }

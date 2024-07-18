@@ -138,6 +138,9 @@ importers:
       zukeeper:
         specifier: ^1.0.2
         version: 1.0.2
+      zustymiddleware:
+        specifier: ^1.2.0
+        version: 1.2.0
 
 packages:
 
@@ -2674,6 +2677,9 @@ packages:
         optional: true
       react:
         optional: true
+
+  zustymiddleware@1.2.0:
+    resolution: {integrity: sha512-N2/OrW3r5TwX5slwSwk81xynDnM24pWkcIjvoHDeGJJY/fKrfKjZ4EmvvADKANeMPkkCp4Mkf49Ok2BhDR0scg==}
 
 snapshots:
 
@@ -5377,3 +5383,5 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.3
       react: 18.3.1
+
+  zustymiddleware@1.2.0: {}

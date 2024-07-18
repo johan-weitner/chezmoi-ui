@@ -46,9 +46,8 @@ const useClientManager = () => {
 		setSelectedApp,
 		selectedAppKey,
 		setSelectedAppKey,
-		// selectApp,
 		closeApp,
-		editItem,
+		editApp,
 		addItem,
 		isEditMode: editMode,
 		setIsEditeMode: setEditMode,
@@ -130,21 +129,23 @@ const useClientManager = () => {
 		setSelectedAppKey(null);
 	};
 
-	// const editItem = (appKey) => {
-	// 	//console.log("Edit");
-	// 	if (appKey) {
-	// 		//console.log("Getting app...");
-	// 		setIsLoading(true);
-	// 		getApp(appKey).then((app) => {
-	// 			selectApp(appKey);
-	// 			setEditMode(true);
-	// 			setIsLoading(false);
-	// 		});
-	// 	} else {
-	// 		//console.log("Set edit mode");
-	// 		setEditMode(true);
-	// 	}
-	// };
+	const editItem = (appKey) => {
+		console.log("Edit: ", appKey);
+		if (appKey) {
+			//console.log("Getting app...");
+			setIsLoading(true);
+			// getApp(appKey).then((app) => {
+			// 	selectApp(appKey);
+			// 	setEditMode(true);
+			// 	setIsLoading(false);
+			// });
+			const app = allApps.find((app) => app.key === appKey);
+			selectApp(appKey);
+			setEditMode(true);
+			setIsLoading(false);
+		}
+		setEditMode(true);
+	};
 
 	const deleteItem = (appKey) => {
 		setIsLoading(true);
@@ -157,6 +158,10 @@ const useClientManager = () => {
 	};
 
 	const updateItem = (app) => {
+		if (typeof app !== "object") {
+			console.warn("Invalid app object: ", typeof app);
+			return;
+		}
 		setIsLoading(true);
 		app.edited = true;
 		updateApp(app.appKey).then(() => {

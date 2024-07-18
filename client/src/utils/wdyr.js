@@ -6,7 +6,9 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-if (process.env.NODE_ENV === 'development') {
+const { VITE_DEBUG } = import.meta.env
+
+if (process.env.NODE_ENV === 'development' && VITE_DEBUG === 'true') {
   whyDidYouRender(React, {
     trackAllPureComponents: true,
     logOnDifferentValues: true,

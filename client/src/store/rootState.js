@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from 'zustand';
-import zukeeper from 'zukeeper';
+import zustymiddleware from 'zustymiddleware';
 import { QueryClient } from "@tanstack/react-query";
 import {
   getAllApps,
@@ -14,9 +14,24 @@ import { appModelInstallerFields } from "api/appModel";
 import { filterModel } from "api/filters";
 import Legend from 'components/DetailView/Legend';
 
-// Zustand store
-// export const useStore = create(zukeeper(set => ({
+/*
+import zustymiddleware from 'zustymiddleware';
+
+const useStore = create(
+  zustymiddleware((set) => ({
+    bears: 0,
+    increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
+    removeAllBears: () => set({ bears: 0 }),
+  }))
+);
+
+window.store = useStore;
+export default useStore;
+*/
+
 export const useStore = create((set) => ({
+  // const useStore = create(
+  //   zustymiddleware((set) => ({
   allApps: [],
   setAllApps: (apps) => {
     set({ allApps: apps });
@@ -40,7 +55,7 @@ export const useStore = create((set) => ({
   selectedAppKey: null,
   setSelectedAppKey: (key) => set({ selectedAppKey: key }),
   closeApp: () => set({ selectedApp: null, selectedAppKey: null }),
-  editItem: (appKey) => set({
+  editApp: (appKey) => set({
     selectedApp: allApps[appKey],
     selectedAppKey: appKey,
     isEditMode: true,
@@ -72,11 +87,11 @@ export const useStore = create((set) => ({
   setIsLoading: (isLoading) => set({ isLoading }),
   error: null,
   setError: (error) => set({ error }),
-
+  //   }))
+  // );
 }));
-// })));
 
-window.store = useStore;
+// window.store = useStore;
 
 
 // const queryClient = useQueryClient();
@@ -138,7 +153,7 @@ const clearAppSelection = () => {
   setSelectedAppKey(null);
 };
 
-const editItem = (appKey) => {
+const editApp = (appKey) => {
   console.log("Edit");
   if (appKey) {
     console.log("Getting app...");
@@ -300,51 +315,4 @@ const downloadGenericYaml = () => { console.log('Not implemented...'); };
 const downloadGenericJson = () => { console.log('Not implemented...'); };
 const downloadInstallDoctorYaml = () => { console.log('Not implemented...'); };
 
-
-
-
-/*
-const providerModel = {
-  data: {
-    allApps: [],
-    filteredResult: [],
-    setAllApps: null,
-    saveOrUpdateItem: null,
-    deleteItem: null,
-    downloadGenericYaml: null,
-    downloadGenericJson: null,
-    downloadInstallDoctorYaml: null,
-  },
-  view: {
-    mode: "default",
-    selectedItem: null,
-    selectedItemKey: null,
-    detailView: {
-      isOpen: false,
-      fallback: Legend,
-    },
-    editView: {
-      isOpen: false,
-    },
-    pageManager: {
-      currentPage: null,
-      pageCount: 0,
-      prevApp: null,
-      nextApp: null,
-      prevPage: null,
-      nextPage: null,
-    },
-    filterManager: {
-      filters: [],
-      activeFilter: null,
-      applyFilter: null,
-      clearFilter: null,
-    },
-    selectItem: null,
-    closeItem: null,
-    editItem: null,
-    addItem: null,
-    openSpotlightSearch: null,
-  },
-};
-*/
+// export default useStore;

@@ -12,3 +12,4 @@ server/prisma/dev.db-journal
 **/dist
 .autodoc
 autodoc*
+.envrc

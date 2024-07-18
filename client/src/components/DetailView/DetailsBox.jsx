@@ -5,7 +5,8 @@ import classes from "../MainView/MainView.module.css";
 import { useClientManager } from "core/ClientProvider";
 
 const DetailsBox = (props) => {
-	const { deleteItem, editItem, selectedApp } = useClientManager();
+	const { deleteItem, editItem, selectedApp, selectedAppKey } =
+		useClientManager();
 	const { hasInstaller, edited: indicateEdit } = selectedApp;
 	const tags = [];
 
@@ -81,7 +82,7 @@ const DetailsBox = (props) => {
 
 			<Group justify="center" p="md">
 				<Button
-					onClick={() => editItem()}
+					onClick={() => editItem(selectedAppKey)}
 					className={classes.editBtn}
 					leftSection={
 						<ICON.edit
