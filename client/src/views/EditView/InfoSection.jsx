@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import { forwardRef } from "react";
 import "@yaireo/tagify/dist/tagify.css";
 import {
 	Fieldset,
@@ -9,7 +8,7 @@ import {
 	Text,
 	Textarea,
 } from "@mantine/core";
-import classes from "../MainView/MainView.module.css";
+import classes from "views/MainView/MainView.module.css";
 
 const InfoSection = (props) => {
 	const { formPartOne, register } = props;

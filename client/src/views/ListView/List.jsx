@@ -2,21 +2,28 @@ import { useState } from "react";
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect } from "react";
 import { useClientManager } from "core/ClientProvider";
-import classes from "components/MainView/MainView.module.css";
+import classes from "views/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
+import { memoizedSelectPage } from "core/Selectors";
 
 const List = (props) => {
-	const { feed } = props;
+	const { bootstrapClient } = useClientManager();
 	const [list, setList] = useState([]);
+	useEffect(() => {
+		bootstrapClient();
+	}, []);
 	const {
+		store,
 		deleteItem,
 		updateItem,
-		pageContent,
+		// pageContent,
 		setSelectedAppKey,
 		selectedAppKey,
 		isLoading,
 	} = useClientManager();
+	const pageContent = memoizedSelectPage(store);
+
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 
@@ -60,5 +67,5 @@ const List = (props) => {
 	);
 };
 
-List.whyDidYouRender = true;
+// List.whyDidYouRender = true;
 export default List;

@@ -1,4 +1,4 @@
-import classes from "../MainView/MainView.module.css";
+import classes from "views/MainView/MainView.module.css";
 
 export const ListSkeleton = (props) => {
 	return (

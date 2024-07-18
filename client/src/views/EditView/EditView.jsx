@@ -1,8 +1,7 @@
-import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { forwardRef, useEffect, useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
-import { ActionIcon, Card, Flex, Modal, Text, rem } from "@mantine/core";
-import { useClientManager } from "../../core/ClientProvider";
+import { Card, Modal } from "@mantine/core";
+import { useClientManager } from "core/ClientProvider";
 import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
@@ -70,5 +69,5 @@ const EditView = forwardRef(function EditView(props, ref) {
 	);
 });
 
-EditView.whyDidYouRender = true;
+// EditView.whyDidYouRender = true;
 export default EditView;

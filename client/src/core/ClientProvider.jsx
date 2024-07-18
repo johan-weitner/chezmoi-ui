@@ -32,6 +32,7 @@ const useClientManager = () => {
 	const [inReverse, setInReverse] = useState(false);
 	// const [isLoading, setIsLoading] = useState(null);
 	// const [error, setError] = useState(null);
+	const store = useStore();
 	const {
 		allApps,
 		setAllApps,
@@ -64,7 +65,7 @@ const useClientManager = () => {
 		setIsLoading,
 		error,
 		setError,
-	} = useStore();
+	} = store;
 
 	const queryClient = useQueryClient();
 	// const queryClient = new QueryClient();
@@ -339,6 +340,7 @@ const useClientManager = () => {
 
 	return {
 		// ClientManager methods
+		store,
 		bootstrapClient,
 		useInit,
 		populateList,

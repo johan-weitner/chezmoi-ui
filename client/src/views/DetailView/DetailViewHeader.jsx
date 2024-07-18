@@ -1,7 +1,7 @@
 import { ActionIcon, Group, Text, rem } from "@mantine/core";
 import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import commonCss from "components/MainView//MainView.module.css";
-import { ICON } from "../../constants/icons";
+import { ICON } from "constants/icons";
 import css from "./DetailView.module.css";
 
 const DetailViewHeader = (props) => {

@@ -1,20 +1,13 @@
 import { rem, Text } from "@mantine/core";
-import { useAppCollection } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
-import { ICON } from "../../constants/icons";
-import { EditedIndicator } from "../Indicator";
-import classes from "../MainView/MainView.module.css";
+import { ICON } from "constants/icons";
+import { EditedIndicator } from "components/Indicator";
+import classes from "views/MainView/MainView.module.css";
 
 export const ListItem = (props) => {
-	const {
-		selectApp,
-		selectedAppKey,
-		setSelectedAppKey,
-		app,
-		deleteItem,
-		editItem,
-	} = props;
+	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
+		props;
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;

@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid";
 
 import { Fieldset, Group, Input, SimpleGrid, Text } from "@mantine/core";
-import classes from "../MainView/MainView.module.css";
+import classes from "views/MainView/MainView.module.css";
 
 const InstallerSection = (props) => {
 	const { formPartTwo, register } = props;

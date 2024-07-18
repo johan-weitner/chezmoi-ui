@@ -1,7 +1,11 @@
 import { Badge, Button, Group, Text, rem } from "@mantine/core";
-import { ICON } from "../../constants/icons";
-import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
-import classes from "../MainView/MainView.module.css";
+import { ICON } from "constants/icons";
+import {
+	MarkPopulated,
+	MarkUnPopulated,
+	WarningSign,
+} from "components/Indicator";
+import classes from "views/MainView/MainView.module.css";
 import { useClientManager } from "core/ClientProvider";
 
 const DetailsBox = (props) => {

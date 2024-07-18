@@ -11,7 +11,7 @@ import { IconMenu2 } from "@tabler/icons-react";
 import { useClientManager } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
-import commonCss from "components/MainView/MainView.module.css";
+import commonCss from "views/MainView/MainView.module.css";
 import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 

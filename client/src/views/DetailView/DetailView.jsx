@@ -17,16 +17,18 @@ import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import StickyBox from "react-sticky-box";
-import EditView from "../EditView/EditView";
-import commonCss from "../MainView/MainView.module.css";
+import EditView from "views/EditView/EditView";
+import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
+import { memoizedSelectApp } from "core/Selectors";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
 	const modalRef = useRef();
-	const { gotoPrev, gotoNext, editMode, selectedApp } = useClientManager();
+	const { store, gotoPrev, gotoNext, editMode } = useClientManager();
+	const selectedApp = memoizedSelectApp(store);
 	const theme = useMantineTheme();
 
 	useEffect(() => {

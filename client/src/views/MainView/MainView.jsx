@@ -1,7 +1,7 @@
 import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
-import DetailView from "components/DetailView/DetailView.jsx";
-import ListView from "components/ListView/ListView.jsx";
-import Header from "../Header.jsx";
+import DetailView from "views/DetailView/DetailView.jsx";
+import ListView from "views/ListView/ListView.jsx";
+import Header from "components/Header.jsx";
 import classes from "./MainView.module.css";
 import "@yaireo/tagify/dist/tagify.css";
 import { useStore } from "store/rootState";

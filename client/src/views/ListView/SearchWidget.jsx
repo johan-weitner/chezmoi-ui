@@ -1,14 +1,9 @@
 import { useEffect, useState } from "react";
-import { rem, Button, ActionIcon, Tooltip } from "@mantine/core";
+import { rem, ActionIcon, Tooltip } from "@mantine/core";
 import { useClientManager } from "core/ClientProvider";
 import { Spotlight, spotlight } from "@mantine/spotlight";
 
-import {
-	IconHome,
-	IconDashboard,
-	IconFileText,
-	IconSearch,
-} from "@tabler/icons-react";
+import { IconFileText, IconSearch } from "@tabler/icons-react";
 
 const actions = [];
 const SearchWidget = (props) => {

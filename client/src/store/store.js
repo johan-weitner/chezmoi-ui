@@ -12,89 +12,117 @@ import {
 } from "api/appCollectionApi.js";
 import { appModelInstallerFields } from "api/appModel";
 import { filterModel } from "api/filters";
-import Legend from 'components/DetailView/Legend';
+// import Legend from 'views/DetailView/Legend';
 
-/*
-import zustymiddleware from 'zustymiddleware';
+const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 
-const useStore = create(
-  zustymiddleware((set) => ({
-    bears: 0,
-    increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-    removeAllBears: () => set({ bears: 0 }),
-  }))
-);
-
-window.store = useStore;
-export default useStore;
-*/
-
-export const useStore = create((set) => ({
-  // const useStore = create(
-  //   zustymiddleware((set) => ({
-  allApps: [],
-  setAllApps: (apps) => {
-    set({ allApps: apps });
-    console.log('Set allApps in global Zustand store');
+export const useAppCollectionStore = create((set) => ({
+  appCollection: [],
+  setAppCollection: (apps) => {
+    set({ appCollection: apps });
   },
-  totalCount: 0,
-  setTotalCount: (total) => {
-    set({ totalCount: total });
+  saveUpdatedApp: (app) => {
+    set((state) => ({
+      appCollection: state.appCollection.map((a) =>
+        a.id === app.id ? app : a,
+      ),
+    }));
+    console.log(useAppCollectionStore.getState().appCollection);
   },
-  limit: 20,
-  setLimit: (limit) => set({ limit }),
-  downloadGenericYaml: () => downloadGenericYaml(),
-  downloadGenericJson: () => downloadGenericJson(),
-  downloadInstallDoctorYaml: () => downloadInstallDoctorYaml(),
-
-  selectedApp: null,
-  setSelectedApp: (app) => {
-    set({ selectedApp: app });
-    console.log('Set selectedApp in global Zustand store');
-  },
-  selectedAppKey: null,
-  setSelectedAppKey: (key) => set({ selectedAppKey: key }),
-  closeApp: () => set({ selectedApp: null, selectedAppKey: null }),
-  editApp: (appKey) => set({
-    selectedApp: allApps[appKey],
-    selectedAppKey: appKey,
-    isEditMode: true,
-  }),
-  addItem: () => set({
-    selectedItem: null,
-    selectedItemKey: null,
-    isEditMode: true,
-    isNewApp: true,
-  }),
-  isEditMode: false,
-  setIsEditeMode: (mode) => set({ isEditMode: mode }),
-
-  page: 0,
-  pageCount: 0,
-  pageContent: null,
-  setPage: (page) => set({ page: page }),
-  setPageCount: (count) => set({ pageCount: count }),
-  setPageContent: (content) => {
-    set({ pageContent: content });
-    console.log('Populated pageContent in global Zustand store: ', content);
-  },
-
-  filterModel: filterModel,
-  filteredResult: [],
-  activeFilter: null,
-
-  isLoading: false,
-  setIsLoading: (isLoading) => set({ isLoading }),
-  error: null,
-  setError: (error) => set({ error }),
-  //   }))
-  // );
+  saveNewApp: (app) => {
+    set((state) => ({ appCollection: [...state.appCollection, app] }));
+  }
 }));
 
-// window.store = useStore;
+export const usePageStore = create((set) => ({
+  page: 0,
+  setPage: (page) => set({ page }),
+  pageCount: 0,
+  setPageCount: (count) => set({ pageCount: count }),
+  pageContent: null,
+  setPageContent: (content) => set({ pageContent: content }),
+  pageSize: PAGE_SIZE,
+  setPageSize: (pageSize) => set({ pageSize }),
+  inReverse: false,
+  setInReverse: (reverse) => set({ inReverse: reverse }),
+  filterModel: filterModel,
+  activeFilter: null,
+  setActiveFilter: (filter) => set({ activeFilter: filter }),
+  filteredList: null,
+  setFilteredList: (list) => set({ filteredList: list }),
+}));
+
+export const useSelectionStore = create((set) => ({
+  selectedApp: null,
+  setSelectedApp: (app) => set({ selectedApp: app }),
+  selectedAppKey: null,
+  setSelectedAppKey: (key) => set({ selectedAppKey: key }),
+  editMode: false,
+  setEditMode: (mode) => set({ editMode: mode }),
+}));
 
 
-// const queryClient = useQueryClient();
+
+
+// export const useStore = create((set) => ({
+//   allApps: [],
+//   setAllApps: (apps) => {
+//     set({ allApps: apps });
+//   },
+//   totalCount: 0,
+//   setTotalCount: (total) => {
+//     set({ totalCount: total });
+//   },
+//   limit: 20,
+//   setLimit: (limit) => set({ limit }),
+//   downloadGenericYaml: () => downloadGenericYaml(),
+//   downloadGenericJson: () => downloadGenericJson(),
+//   downloadInstallDoctorYaml: () => downloadInstallDoctorYaml(),
+
+//   selectedApp: null,
+//   setSelectedApp: (app) => {
+//     set({ selectedApp: app });
+//     console.log('Set selectedApp in global Zustand store');
+//   },
+//   selectedAppKey: null,
+//   setSelectedAppKey: (key) => set({ selectedAppKey: key }),
+//   closeApp: () => set({ selectedApp: null, selectedAppKey: null }),
+//   editApp: (appKey) => set({
+//     selectedApp: allApps[appKey],
+//     selectedAppKey: appKey,
+//     isEditMode: true,
+//   }),
+//   addItem: () => set({
+//     selectedItem: null,
+//     selectedItemKey: null,
+//     isEditMode: true,
+//     isNewApp: true,
+//   }),
+//   isEditMode: false,
+//   setIsEditeMode: (mode) => set({ isEditMode: mode }),
+
+//   page: 0,
+//   pageCount: 0,
+//   pageContent: null,
+//   setPage: (page) => set({ page: page }),
+//   setPageCount: (count) => set({ pageCount: count }),
+//   setPageContent: (content) => {
+//     set({ pageContent: content });
+//     console.log('Populated pageContent in global Zustand store: ', content);
+//   },
+
+//   filterModel: filterModel,
+//   filteredResult: [],
+//   activeFilter: null,
+
+//   isLoading: false,
+//   setIsLoading: (isLoading) => set({ isLoading }),
+//   error: null,
+//   setError: (error) => set({ error }),
+// }));
+
+
+
 const queryClient = new QueryClient();
 const _setListSize = (size) => setTotalCount(size);
 const _setNumPages = (size) => setPageCount(Math.ceil(size / limit));
@@ -314,5 +342,3 @@ const initPagination = (page = 1) => {
 const downloadGenericYaml = () => { console.log('Not implemented...'); };
 const downloadGenericJson = () => { console.log('Not implemented...'); };
 const downloadInstallDoctorYaml = () => { console.log('Not implemented...'); };
-
-// export default useStore;

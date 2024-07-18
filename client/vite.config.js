@@ -9,6 +9,10 @@ import path from "node:path";
 
 export default defineConfig({
   plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+  },
   resolve: {
     alias: {
       api: `${path.resolve(__dirname, "./src/api/")}`,
