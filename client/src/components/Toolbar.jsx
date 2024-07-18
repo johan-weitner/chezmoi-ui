@@ -1,4 +1,4 @@
-import { useClient } from "../core/ClientProvider";
+import { useClientManager } from "../core/ClientProvider";
 import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
 import {
 	IconHome2,
@@ -25,7 +25,7 @@ const Toolbar = (props) => {
 		gotoNext,
 		gotoPrevPage,
 		gotoNextPage,
-	} = useClient();
+	} = useClientManager();
 
 	const stroke = 1.5;
 

@@ -2,10 +2,12 @@ import { Badge, Button, Group, Text, rem } from "@mantine/core";
 import { ICON } from "../../constants/icons";
 import { MarkPopulated, MarkUnPopulated, WarningSign } from "../Indicator";
 import classes from "../MainView/MainView.module.css";
-import { useClient } from "core/ClientProvider";
+import { useClientManager } from "core/ClientProvider";
+import { useStore } from "store/rootState";
 
 const DetailsBox = (props) => {
-	const { deleteItem, editItem, selectedApp } = useClient();
+	const { deleteItem, editItem } = useClientManager();
+	const { selectedApp } = useStore();
 	const { hasInstaller, edited: indicateEdit } = selectedApp;
 	const tags = [];
 

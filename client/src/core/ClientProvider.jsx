@@ -66,44 +66,6 @@ const useClientManager = () => {
 		error,
 		setError,
 	} = useStore();
-	/*
-{
-
-  allApps: [],
-  setAllApps: (apps) => set({ allApps: apps }),
-  downloadGenericYaml: () => downloadGenericYaml(),
-  downloadGenericJson: () => downloadGenericJson(),
-  downloadInstallDoctorYaml: () => downloadInstallDoctorYaml(),
-
-  selectedApp: null,
-  setSelectedApp: (app) => set({ selectedApp: app }),
-  selectedAppKey: null,
-  setSelectedAppKey: (key) => set({ selectedAppKey: key }),
-  selectApp: (app) => { set({ selectedApp: app, selectedAppKey: app.key }); },
-  closeApp: () => set({ selectedApp: null, selectedAppKey: null }),
-  editItem,
-  addItem,
-  isEditMode: false,
-  setIsEditeMode: (mode) => set({ isEditMode: mode }),
-
-  page: 0,
-  pageCount: 0,
-  pageContent: null,
-  setPage: (page) => set({ currentPage: page }),
-  setPageCount: (count) => set({ pageCount: count }),
-  setPageContent: (content) => set({ pageContent: content }),
-
-  filterModel: filterModel,
-  filteredResult: [],
-  activeFilter: null,
-
-  isLoading: false,
-  setIsLoading: (isLoading) => set({ isLoading }),
-  error: null,
-  setError: (error) => set({ error }),
-
-}
-	*/
 
 	const queryClient = useQueryClient();
 	// const queryClient = new QueryClient();

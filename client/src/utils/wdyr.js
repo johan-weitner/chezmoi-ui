@@ -9,7 +9,7 @@ import {
 if (process.env.NODE_ENV === 'development') {
   whyDidYouRender(React, {
     trackAllPureComponents: true,
-    // logOnDifferentValues: true,
+    logOnDifferentValues: true,
     trackHooks: true,
     logOwnerReasons: true,
   });

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { rem, Button, ActionIcon, Tooltip } from "@mantine/core";
-import { useClient } from "core/ClientProvider";
+import { useClientManager } from "core/ClientProvider";
 import { Spotlight, spotlight } from "@mantine/spotlight";
 
 import {
@@ -15,7 +15,7 @@ import { useAppCollection } from "api/appCollectionApi.js";
 const actions = [];
 
 const SearchWidget = (props) => {
-	const { allApps } = useClient();
+	const { allApps } = useClientManager();
 	const [apps, setApps] = useState([]);
 
 	const openApp = (key) => {

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Card, useMantineTheme } from "@mantine/core";
-import { useClient } from "core/ClientProvider";
+import { useClientManager } from "core/ClientProvider";
 import { useStore } from "store/rootState";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
@@ -10,7 +10,7 @@ import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
 
 const ListView = (props) => {
-	const { useInit, bootstrapClient } = useClient();
+	const { useInit, bootstrapClient } = useClientManager();
 	const theme = useMantineTheme();
 	const debugMode = import.meta.env.VITE_DEBUG;
 

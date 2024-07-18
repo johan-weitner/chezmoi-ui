@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect } from "react";
-import { useClient } from "core/ClientProvider";
+import { useClientManager } from "core/ClientProvider";
 import { useStore } from "store/rootState";
 import classes from "components/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
@@ -10,7 +10,7 @@ import { ListSkeleton } from "./ListSkeleton";
 const List = (props) => {
 	const { feed } = props;
 	const [list, setList] = useState([]);
-	const { deleteItem, updateItem } = useClient();
+	const { deleteItem, updateItem } = useClientManager();
 	const { pageContent, setSelectedAppKey, selectedAppKey, isLoading } =
 		useStore();
 	const skeleton = Array(20);

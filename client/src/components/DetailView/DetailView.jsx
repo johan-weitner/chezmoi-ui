@@ -15,7 +15,7 @@ import { Card, Stack, useMantineTheme, Text } from "@mantine/core";
 import { useWindowScroll } from "@mantine/hooks";
 import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { useClient } from "core/ClientProvider";
+import { useClientManager } from "core/ClientProvider";
 import { useStore } from "store/rootState";
 import FallbackComponent from "components/FallbackComponent";
 import { APP_FORM } from "constants/appForm.js";
@@ -34,39 +34,10 @@ import Legend from "./Legend";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
-	const [currentAppKey, setCurrentAppKey] = useState(null);
 	const modalRef = useRef();
-	const {
-		populateList,
-		initPagination,
-		deleteItem,
-		updateItem,
-		selectApp,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		applyFilter,
-		restoreFilters,
-	} = useClient();
+	const { gotoPrev, gotoNext } = useClientManager();
 
-	const {
-		allApps,
-		totalApps,
-		closeApp,
-		editItem,
-		editMode,
-		addItem,
-		selectedApp,
-		selectedAppKey,
-		page,
-		limit,
-		totalCount,
-		pageCount,
-		setPage,
-		setLimit,
-		activeFilter,
-	} = useStore();
+	const { editMode, selectedApp, selectedAppKey } = useStore();
 
 	const theme = useMantineTheme();
 	const tags = [];
@@ -77,11 +48,6 @@ const DetailView = (props) => {
 		console.log("selectedApp:", selectedApp);
 		setCurrentApp(selectedApp);
 	}, [selectedApp]);
-
-	useEffect(() => {
-		console.log("selectedApp:", selectedApp);
-		setCurrentAppKey(selectedAppKey);
-	}, [selectedAppKey]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);
@@ -101,9 +67,6 @@ const DetailView = (props) => {
 							theme={theme}
 							hasSelection={selectedApp ?? false}
 						/>
-						<Text size="sm">
-							{selectedAppKey}: {selectedApp?.name}
-						</Text>
 						<Card
 							shadow="md"
 							fz="sm"
