@@ -27,7 +27,6 @@ export const useAppCollectionStore = create((set) => ({
         a.id === app.id ? app : a,
       ),
     }));
-    console.log(useAppCollectionStore.getState().appCollection);
   },
   saveNewApp: (app) => {
     set((state) => ({ appCollection: [...state.appCollection, app] }));
