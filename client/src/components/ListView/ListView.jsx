@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Card, useMantineTheme } from "@mantine/core";
 import { useClientManager } from "core/ClientProvider";
-import { useStore } from "store/rootState";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "../MainView/MainView.module.css";
@@ -10,11 +9,12 @@ import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
 
 const ListView = (props) => {
-	const { useInit, bootstrapClient } = useClientManager();
 	const theme = useMantineTheme();
 	const debugMode = import.meta.env.VITE_DEBUG;
 
 	const {
+		useInit,
+		bootstrapClient,
 		allApps,
 		page,
 		totalCount,
@@ -25,7 +25,7 @@ const ListView = (props) => {
 		restoreFilters,
 		activeFilter,
 		selectedAppKey,
-	} = useStore();
+	} = useClientManager();
 
 	useEffect(() => {
 		bootstrapClient();

@@ -10,10 +10,7 @@ import {
 	IconSearch,
 } from "@tabler/icons-react";
 
-import { useAppCollection } from "api/appCollectionApi.js";
-
 const actions = [];
-
 const SearchWidget = (props) => {
 	const { allApps } = useClientManager();
 	const [apps, setApps] = useState([]);

@@ -8,7 +8,7 @@ import {
 	useMantineTheme,
 } from "@mantine/core";
 import { IconMenu2 } from "@tabler/icons-react";
-import { useStore } from "store/rootState";
+import { useClientManager } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
 import commonCss from "components/MainView/MainView.module.css";
@@ -16,7 +16,8 @@ import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 
 export const ListViewHeader = (props) => {
-	const { selectApp, applyFilter, restoreFilters, activeFilter } = useStore();
+	const { selectApp, applyFilter, restoreFilters, activeFilter } =
+		useClientManager();
 	const theme = useMantineTheme();
 
 	return (

@@ -12,22 +12,13 @@
  * @returns {JSX.Element} The rendered DetailView component.
  */
 import { Card, Stack, useMantineTheme, Text } from "@mantine/core";
-import { useWindowScroll } from "@mantine/hooks";
-import { QueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import { useClientManager } from "core/ClientProvider";
-import { useStore } from "store/rootState";
 import FallbackComponent from "components/FallbackComponent";
-import { APP_FORM } from "constants/appForm.js";
 import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import StickyBox from "react-sticky-box";
-import { deleteApp, getApp } from "../../api/appCollectionApi";
-import { ICON } from "../../constants/icons";
-import BarSpinner from "../BarSpinner";
 import EditView from "../EditView/EditView";
 import commonCss from "../MainView/MainView.module.css";
-import s from "./DetailView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
@@ -35,14 +26,8 @@ import Legend from "./Legend";
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
 	const modalRef = useRef();
-	const { gotoPrev, gotoNext } = useClientManager();
-
-	const { editMode, selectedApp, selectedAppKey } = useStore();
-
+	const { gotoPrev, gotoNext, editMode, selectedApp } = useClientManager();
 	const theme = useMantineTheme();
-	const tags = [];
-	const indicateEdit = null;
-	const hasInstaller = true;
 
 	useEffect(() => {
 		console.log("selectedApp:", selectedApp);

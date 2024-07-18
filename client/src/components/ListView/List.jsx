@@ -10,9 +10,14 @@ import { ListSkeleton } from "./ListSkeleton";
 const List = (props) => {
 	const { feed } = props;
 	const [list, setList] = useState([]);
-	const { deleteItem, updateItem } = useClientManager();
-	const { pageContent, setSelectedAppKey, selectedAppKey, isLoading } =
-		useStore();
+	const {
+		deleteItem,
+		updateItem,
+		pageContent,
+		setSelectedAppKey,
+		selectedAppKey,
+		isLoading,
+	} = useClientManager();
 	const skeleton = Array(20);
 	skeleton.fill(<ListSkeleton />, 0, 20);
 

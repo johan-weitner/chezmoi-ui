@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Group } from "@mantine/core";
-import { addApp, updateApp } from "api/appCollectionApi";
+import { useClientManager } from "core/ClientProvider";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
@@ -14,8 +14,15 @@ import TagSection from "./TagSection";
 
 const EditViewForm = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
-	const { closePopover, selectedApp, setSelectedAppKey, isNewApp, randomId } =
-		props;
+	const {
+		addApp,
+		updateApp,
+		closePopover,
+		selectedApp,
+		setSelectedAppKey,
+		isNewApp,
+		randomId,
+	} = useClientManager();
 
 	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({

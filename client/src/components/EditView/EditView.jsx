@@ -10,38 +10,13 @@ import EditViewForm from "./EditViewForm";
 
 const EditView = forwardRef(function EditView(props, ref) {
 	const { theme } = props;
-	const {
-		allApps,
-		totalApps,
-		populateList,
-		initPagination,
-		editItem,
-		editMode,
-		setEditMode,
-		deleteItem,
-		updateItem,
-		addItem,
-		selectApp,
-		selectedApp,
-		selectedAppKey: appKey,
-		page,
-		limit,
-		totalCount,
-		pageCount,
-		setPage,
-		setLimit,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		applyFilter,
-		restoreFilters,
-		activeFilter,
-	} = useClientManager();
+	const { editMode, setEditMode, selectedApp, gotoPrev, gotoNext } =
+		useClientManager();
 
-	const [isNewApp, setIsNewApp] = useState(!selectedApp);
-	const forceUpdate = useForceUpdate();
+	const [isNewApp, setIsNewApp] = useState(!selectedApp); // FIXME
+	// const forceUpdate = useForceUpdate();
 
+	// FIXME
 	useEffect(() => {
 		setIsNewApp(!selectedApp);
 		forceUpdate();
