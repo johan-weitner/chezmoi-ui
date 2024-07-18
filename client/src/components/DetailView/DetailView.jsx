@@ -3,7 +3,7 @@
  *
  * @component
  * @param {Object} props - The component props.
- * @param {string} props.appKey - The key of the app.
+ * @param {string} props.selectedAppKey - The key of the app.
  * @param {Object} props.theme - The theme object.
  * @param {boolean} props.isPopoverOpen - Indicates whether the popover is open or not.
  * @param {function} props.setIsPopoverOpen - Function to set the state of the popover.
@@ -33,7 +33,8 @@ import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
 
 const DetailView = (props) => {
-	const [currentApp, setCurrentApp] = useState(false);
+	const [currentApp, setCurrentApp] = useState(null);
+	const [currentAppKey, setCurrentAppKey] = useState(null);
 	const modalRef = useRef();
 	const {
 		populateList,
@@ -57,7 +58,7 @@ const DetailView = (props) => {
 		editMode,
 		addItem,
 		selectedApp,
-		selectedAppKey: appKey,
+		selectedAppKey,
 		page,
 		limit,
 		totalCount,
@@ -76,6 +77,11 @@ const DetailView = (props) => {
 		console.log("selectedApp:", selectedApp);
 		setCurrentApp(selectedApp);
 	}, [selectedApp]);
+
+	useEffect(() => {
+		console.log("selectedApp:", selectedApp);
+		setCurrentAppKey(selectedAppKey);
+	}, [selectedAppKey]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);
@@ -96,7 +102,7 @@ const DetailView = (props) => {
 							hasSelection={selectedApp ?? false}
 						/>
 						<Text size="sm">
-							{appKey}: {selectedApp?.name}
+							{selectedAppKey}: {selectedApp?.name}
 						</Text>
 						<Card
 							shadow="md"

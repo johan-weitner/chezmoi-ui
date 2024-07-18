@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { rem, Text } from "@mantine/core";
 import { useAppCollection } from "api/appCollectionApi";
 import FallbackComponent from "components/FallbackComponent";
@@ -15,9 +16,14 @@ export const ListItem = (props) => {
 		deleteItem,
 		editItem,
 	} = props;
+	const [currentAppKey, setCurrentAppKey] = useState(null);
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
+
+	useEffect(() => {
+		setCurrentAppKey(selectedAppKey);
+	}, [selectedAppKey]);
 
 	return (
 		<ErrorBoundary

@@ -150,16 +150,17 @@ const useClientManager = () => {
 			return;
 		}
 		setIsLoading(true);
-		const app = getApp(appKey);
-		if (!app) {
-			console.warn("Found no app with key: ", appKey);
+		const app = getApp(appKey).then((app) => {
+			if (!app) {
+				console.warn("Found no app with key: ", appKey);
+				setIsLoading(false);
+				return;
+			}
+			app.hasInstaller = _appHasInstaller(app);
+			setSelectedApp(app);
+			setSelectedAppKey(appKey);
 			setIsLoading(false);
-			return;
-		}
-		app.hasInstaller = _appHasInstaller(app);
-		setSelectedApp(app);
-		setSelectedAppKey(appKey);
-		setIsLoading(false);
+		});
 	};
 
 	const clearAppSelection = () => {
@@ -354,6 +355,10 @@ const useClientManager = () => {
 		pageContent?.length > 0 && selectApp(pageContent[index]?.key);
 		setInReverse(false);
 	}, [pageContent]);
+
+	useEffect(() => {
+		selectApp(selectedAppKey);
+	}, [selectedAppKey]);
 
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
