@@ -1,62 +1,109 @@
 import React from "react";
-import { createContext, useContext, useState, useEffect } from "react";
-import { useQueryClient, QueryClient } from "@tanstack/react-query";
-import { useStore } from "store/store";
+import { useState, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
-  getAllApps,
-  getAppPage,
-  getApp,
-  updateApp,
-  addApp,
-  deleteApp,
-} from "api/appCollectionApi.js";
-import { appModelInstallerFields } from "api/appModel";
+  getAppCollection,
+  getPage,
+  getPageCount,
+  getPageContent,
+  getPageSize,
+  getInReverse,
+  getFilterModel,
+  getActiveFilter,
+  getFilteredList,
+  getSelectedApp,
+  getSelectedAppKey,
+  getEditMode,
+  getCurrentIndex,
+  getPreviousKey,
+  getNextKey,
+  selectPageContent
+} from "store/selectors";
 import {
   useAppCollectionStore,
   usePageStore,
   useSelectionStore
 } from "store/store";
-import {
-  findIndex,
-  isStartOfPage,
-  isEndOfPage,
-  isNullOrEmpty,
-  appHasInstaller
-} from "utils/pageUtils";
-
-const queryClient = useQueryClient();
+import { getAllApps } from "api/appCollectionApi";
 
 const appCollectionStore = useAppCollectionStore();
 const pageStore = usePageStore();
 const selectionStore = useSelectionStore();
 
-const { setAppCollection, saveUpdatedApp, saveNewApp } = appCollectionStore();
-const { setPage, setPageCount, SetPageSize, setInReverse, setActiveFilter, setFilteredList } = pageStore();
-const { setSelectedApp, setSelectedAppKey, setEditMode } = selectionStore();
-
-
-
-const useClientManager = () => {
-
-
-
-
-
-
-};
-
-export {
+const {
   setAppCollection,
   saveUpdatedApp,
-  saveNewApp,
+  saveNewApp
+} = appCollectionStore();
+
+const {
   setPage,
   setPageCount,
-  SetPageSize,
+  setPageSize,
   setInReverse,
   setActiveFilter,
-  setFilteredList,
-  setSelectedApp,
-  setSelectedAppKey,
-  setEditMode
+  setFilteredList
+} = pageStore();
+
+const { setSelectedApp, setSelectedAppKey, setEditMode } = selectionStore();
+
+export const useClientManager = () => {
+  const seedStore = () => {
+    getAllApps().then((apps) => {
+      setAppCollection(apps);
+      setPageCount(Math.ceil(apps.length / getPageSize(pageStore)));
+    });
+  };
+
+  const refreshStore = () => {
+    getAllApps().then((apps) => {
+      setAppCollection(apps);
+      setPageCount(Math.ceil(apps.length / getPageSize(pageStore)));
+    });
+  };
+
+  const getPageContent = (page) => {
+    setPage(page);
+    setPageCont;
+  };
+
+  const selectPrev = () => {
+    setSelectedAppKey(getPreviousKey(appCollectionStore));
+  };
+
+  const selectNext = () => {
+    setSelectedAppKey(getNextKey(appCollectionStore));
+  };
+
+  const gotoPrevPage = () => {
+    const currPage = getPage(pageStore);
+    if (currPage > 0) {
+      setPage(currPage - 1);
+    }
+  };
+
+  const gotoNextPage = () => {
+    const currPage = getPage(pageStore);
+    const pageCount = getPageCount(pageStore);
+    if (currPage < pageCount - 1) {
+      setPage(currPage + 1);
+    }
+  };
+
+  const setFilter = (filter) => {
+    setActiveFilter(filter);
+    setFilteredList(getFilteredList(filterModel, filter));
+  };
+
+
+  useHotkeys("alt + b", () => gotoPrev());
+  useHotkeys("alt + n", () => gotoNext());
+  useHotkeys("alt + left", () => gotoPrev());
+  useHotkeys("alt + right", () => gotoNext());
+  useHotkeys("alt + n", () => addItem());
+  useHotkeys("alt + e", () => editItem());
+  useHotkeys("shift + alt + left", () => gotoPrevPage());
+  useHotkeys("shift + alt + right", () => gotoNextPage());
+  useHotkeys("alt + w", () => clearAppSelection());
+
 };

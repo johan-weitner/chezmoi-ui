@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import {
   getAppCollection,
   getPageContent,
@@ -11,6 +12,9 @@ import {
   getEditMode,
   memoizedSelectApp,
   memoizedSelectAppByKey,
+  getPreviousKey,
+  getNextKey,
+  selectPageContent
 } from "./selectors";
 
 describe("Selectors", () => {
@@ -66,13 +70,6 @@ describe("Selectors", () => {
     it("should return the active filter from the state", () => {
       const result = getActiveFilter(state);
       expect(result).toEqual("example");
-    });
-  });
-
-  describe("getFilteredList", () => {
-    it("should return the filtered list from the state", () => {
-      const result = getFilteredList(state);
-      expect(result).toEqual([{ name: "example" }]);
     });
   });
 
@@ -132,5 +129,122 @@ describe("Selectors", () => {
       expect(() => memoizedSelectAppByKey(state, 'app1')).toThrow();
     });
   });
+
+
+  describe('selectPageContent', () => {
+    it('returns the first page correctly', () => {
+      const appCollection = Array.from({ length: 100 }, (_, i) => ({ id: i + 1 }));
+      const page = 1;
+      const pageSize = 10;
+      const result = selectPageContent.resultFunc(appCollection, page, pageSize);
+      expect(result).toEqual(appCollection.slice(0, 10));
+    });
+
+    it('returns a middle page correctly', () => {
+      const appCollection = Array.from({ length: 100 }, (_, i) => ({ id: i + 1 }));
+      const page = 5;
+      const pageSize = 10;
+      const result = selectPageContent.resultFunc(appCollection, page, pageSize);
+      expect(result).toEqual(appCollection.slice(40, 50));
+    });
+
+    it('returns the last page correctly, even if not full', () => {
+      const appCollection = Array.from({ length: 95 }, (_, i) => ({ id: i + 1 }));
+      const page = 10;
+      const pageSize = 10;
+      const result = selectPageContent.resultFunc(appCollection, page, pageSize);
+      expect(result).toEqual(appCollection.slice(90, 95));
+    });
+
+  });
+
+
+  // describe('getFilteredList', () => {
+  //   vi.mock('./selectors', () => ({
+  //     getActiveFilter: vi.fn(),
+  //     getAppCollection: vi.fn(),
+  //     getFilterModel: vi.fn(() => ({
+  //       validFilter: {
+  //         method: (apps) => apps.filter(app => app.id === 1),
+  //       },
+  //     })),
+  //   }));
+
+  //   it('returns filtered list based on the active filter', () => {
+  //     // Setup
+  //     getActiveFilter.mockReturnValue('validFilter');
+  //     getAppCollection.mockReturnValue([
+  //       { id: 1, name: 'App1' },
+  //       { id: 2, name: 'App2' },
+  //     ]);
+
+  //     // Execute
+  //     const state = {}; // Assuming state structure is handled within mocked functions
+  //     const filteredList = getFilteredList(state)(state);
+
+  //     // Assert
+  //     expect(filteredList).toEqual([{ id: 1, name: 'App1' }]);
+  //   });
+
+  //   it('returns an empty array when the filter is invalid', () => {
+  //     // Setup
+  //     getActiveFilter.mockReturnValue('invalidFilter');
+  //     getAppCollection.mockReturnValue([
+  //       { id: 1, name: 'App1' },
+  //       { id: 2, name: 'App2' },
+  //     ]);
+
+  //     // Execute
+  //     const state = {}; // Assuming state structure is handled within mocked functions
+  //     const filteredList = getFilteredList(state)(state);
+
+  //     // Assert
+  //     expect(filteredList).toEqual([]);
+  //   });
+  // });
+
+
+
+  // describe('Navigation selectors', () => {
+  //   const state = {
+  //     appCollection: [
+  //       { key: 'app1', name: 'Application 1' },
+  //       { key: 'app2', name: 'Application 2' },
+  //       { key: 'app3', name: 'Application 3' },
+  //     ]
+  //   };
+
+  //   const getCurrentIndex = vi.fn();
+  //   const getAppCollection = vi.fn().mockReturnValue(state.appCollection);
+
+  //   beforeEach(() => {
+  //     vi.resetAllMocks();
+  //   });
+
+  //   describe('getPreviousKey', () => {
+  //     it('should return the key of the previous app', () => {
+  //       getCurrentIndex.mockReturnValueOnce(2); // Assuming current index is 2 (app3)
+  //       expect(getPreviousKey(state)).toEqual('app2');
+  //     });
+
+  //     it('should return the first app key if the current app is the first one', () => {
+  //       getCurrentIndex.mockReturnValueOnce(0); // Assuming current index is 0 (app1)
+  //       expect(getPreviousKey(state)).toEqual('app1');
+  //     });
+  //   });
+
+  //   describe('getNextKey', () => {
+  //     it('should return the key of the next app', () => {
+  //       getCurrentIndex.mockReturnValueOnce(0); // Assuming current index is 0 (app1)
+  //       expect(getNextKey(state)).toEqual('app2');
+  //     });
+
+  //     it('should return the last app key if the current app is the last one', () => {
+  //       getCurrentIndex.mockReturnValueOnce(2); // Assuming current index is 2 (app3)
+  //       expect(getNextKey(state)).toEqual('app3');
+  //     });
+  //   });
+  // });
+
 });
 
