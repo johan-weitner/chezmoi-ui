@@ -1,43 +1,12 @@
 import { useState, useContext, useEffect } from "react";
 import "./App.css";
-import {
-	useClientManager,
-	useClient,
-	useDataContext,
-} from "core/ClientProvider.jsx";
 
 const App2 = () => {
-	const {
-		allApps,
-		totalApps,
-		populateList,
-		initPagination,
-		deleteItem,
-		updateItem,
-		addItem,
-		selectApp,
-		selectedApp,
-		selectedAppKey,
-		page,
-		limit,
-		totalCount,
-		pageCount,
-		setPage,
-		setLimit,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		applyFilter,
-		restoreFilters,
-		activeFilter,
-	} = useClientManager();
-
 	return (
 		<>
 			<div>
 				<h1>TESTING</h1>
-				<table className="debugTable">
+				{/* <table className="debugTable">
 					<tbody>
 						<tr>
 							<td>Selection: {selectedApp?.name}</td>
@@ -90,7 +59,7 @@ const App2 = () => {
 							);
 						})}
 					</tbody>
-				</table>
+				</table> */}
 			</div>
 		</>
 	);

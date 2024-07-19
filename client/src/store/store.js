@@ -14,6 +14,8 @@ import { appModelInstallerFields } from "api/appModel";
 import { filterModel } from "api/filters";
 // import Legend from 'views/DetailView/Legend';
 
+export const useStore = () => { };
+
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 
 export const useAppCollectionStore = create((set) => ({

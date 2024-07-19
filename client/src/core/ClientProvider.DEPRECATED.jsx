@@ -318,79 +318,79 @@ const useClientManager = () => {
 		}, []);
 	};
 
-	useEffect(() => {
-		const index = inReverse ? pageContent.length - 1 : 0;
-		pageContent?.length > 0 && selectApp(pageContent[index]?.key);
-		setInReverse(false);
-	}, [pageContent]);
+	// useEffect(() => {
+	// 	const index = inReverse ? pageContent.length - 1 : 0;
+	// 	pageContent?.length > 0 && selectApp(pageContent[index]?.key);
+	// 	setInReverse(false);
+	// }, [pageContent]);
 
-	useEffect(() => {
-		selectApp(selectedAppKey);
-	}, [selectedAppKey]);
+	// useEffect(() => {
+	// 	selectApp(selectedAppKey);
+	// }, [selectedAppKey]);
 
-	useHotkeys("alt + b", () => gotoPrev());
-	useHotkeys("alt + n", () => gotoNext());
-	useHotkeys("alt + left", () => gotoPrev());
-	useHotkeys("alt + right", () => gotoNext());
-	useHotkeys("alt + n", () => addItem());
-	useHotkeys("alt + e", () => editItem());
-	useHotkeys("shift + alt + left", () => gotoPrevPage());
-	useHotkeys("shift + alt + right", () => gotoNextPage());
-	useHotkeys("alt + w", () => clearAppSelection());
+	// useHotkeys("alt + b", () => gotoPrev());
+	// useHotkeys("alt + n", () => gotoNext());
+	// useHotkeys("alt + left", () => gotoPrev());
+	// useHotkeys("alt + right", () => gotoNext());
+	// useHotkeys("alt + n", () => addItem());
+	// useHotkeys("alt + e", () => editItem());
+	// useHotkeys("shift + alt + left", () => gotoPrevPage());
+	// useHotkeys("shift + alt + right", () => gotoNextPage());
+	// useHotkeys("alt + w", () => clearAppSelection());
 
-	return {
-		// ClientManager methods
-		store,
-		bootstrapClient,
-		useInit,
-		populateList,
-		initPagination,
-		deleteItem,
-		updateItem,
-		selectApp,
-		editNewItem,
-		editMode,
-		setEditMode,
-		getPage,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		applyFilter,
-		restoreFilters,
-		// StoreManager methods
-		allApps,
-		setAllApps,
-		totalCount,
-		setTotalCount,
-		limit,
-		setLimit,
-		downloadGenericYaml,
-		downloadGenericJson,
-		downloadInstallDoctorYaml,
-		selectedApp,
-		setSelectedApp,
-		selectedAppKey,
-		setSelectedAppKey,
-		closeApp,
-		editItem,
-		addItem,
-		isEditMode: editMode,
-		setIsEditeMode: setEditMode,
-		page,
-		pageCount,
-		pageContent,
-		setPage,
-		setPageCount,
-		setPageContent,
-		filterModel,
-		filteredResult,
-		activeFilter,
-		isLoading,
-		setIsLoading,
-		error,
-		setError,
-	};
+	// return {
+	// 	// ClientManager methods
+	// 	store,
+	// 	bootstrapClient,
+	// 	useInit,
+	// 	populateList,
+	// 	initPagination,
+	// 	deleteItem,
+	// 	updateItem,
+	// 	selectApp,
+	// 	editNewItem,
+	// 	editMode,
+	// 	setEditMode,
+	// 	getPage,
+	// 	gotoPrev,
+	// 	gotoNext,
+	// 	gotoPrevPage,
+	// 	gotoNextPage,
+	// 	applyFilter,
+	// 	restoreFilters,
+	// 	// StoreManager methods
+	// 	allApps,
+	// 	setAllApps,
+	// 	totalCount,
+	// 	setTotalCount,
+	// 	limit,
+	// 	setLimit,
+	// 	downloadGenericYaml,
+	// 	downloadGenericJson,
+	// 	downloadInstallDoctorYaml,
+	// 	selectedApp,
+	// 	setSelectedApp,
+	// 	selectedAppKey,
+	// 	setSelectedAppKey,
+	// 	closeApp,
+	// 	editItem,
+	// 	addItem,
+	// 	isEditMode: editMode,
+	// 	setIsEditeMode: setEditMode,
+	// 	page,
+	// 	pageCount,
+	// 	pageContent,
+	// 	setPage,
+	// 	setPageCount,
+	// 	setPageContent,
+	// 	filterModel,
+	// 	filteredResult,
+	// 	activeFilter,
+	// 	isLoading,
+	// 	setIsLoading,
+	// 	error,
+	// 	setError,
+	// };
 };
 
 // Component to provide the ClientContext

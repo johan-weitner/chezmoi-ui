@@ -8,64 +8,7 @@ import { useStore } from "store/store";
 
 const MainView = (props) => {
 	const theme = useMantineTheme();
-	const {
-		allApps,
-		setAllApps,
-		totalCount,
-		setTotalCount,
-		limit,
-		setLimit,
-		downloadGenericYaml,
-		downloadGenericJson,
-		downloadInstallDoctorYaml,
-		// selectedApp: { id, key, name, desc, home, edited, hasInstaller },
-		selectedApp,
-		setSelectedApp,
-		selectedAppKey,
-		setSelectedAppKey,
-		closeApp,
-		editApp,
-		addItem,
-		isEditMode: editMode,
-		setIsEditeMode: setEditMode,
-		page,
-		pageCount,
-		pageContent,
-		setPage,
-		setPageCount,
-		setPageContent,
-		filterModel,
-		filteredResult,
-		activeFilter,
-		isLoading,
-		setIsLoading,
-		error,
-		setError,
-	} = useStore();
-
-	const currentApp = selectedApp
-		? { ...selectedApp }
-		: { id: 0, key: 0, name: 0, desc: 0, home: 0, edited: 0, hasInstaller: 0 };
-	const allAppsLength = allApps ? allApps.length : 0;
-	const pageCountLength = pageCount ? pageCount.length : 0;
-
-	const debug = {
-		isLoading,
-		allAppsLength,
-		totalCount,
-		limit,
-		selectedAppKey,
-		editMode,
-		page,
-		pageCount,
-		pageCountLength,
-
-		filteredResult,
-		activeFilter,
-
-		filterModel: Object.keys(filterModel).length,
-		currentApp,
-	};
+	const debug = { content: "not impl" };
 
 	return (
 		<>
@@ -83,7 +26,7 @@ const MainView = (props) => {
 					style={{ minHeight: "100% !important" }}
 				>
 					<ListView theme={theme} />
-					<DetailView theme={theme} />
+					{/* <DetailView theme={theme} /> */}
 				</SimpleGrid>
 				<div
 					style={{

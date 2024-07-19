@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { rem, ActionIcon, Tooltip } from "@mantine/core";
-import { useClientManager } from "core/ClientProvider";
 import { Spotlight, spotlight } from "@mantine/spotlight";
 
 import { IconFileText, IconSearch } from "@tabler/icons-react";

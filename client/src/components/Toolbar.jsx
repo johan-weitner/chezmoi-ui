@@ -1,4 +1,3 @@
-import { useClientManager } from "../core/ClientProvider";
 import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
 import {
 	IconHome2,
@@ -15,17 +14,6 @@ import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {
 	const [active, setActive] = useState(null);
-	const {
-		deleteItem,
-		editNewItem,
-		error,
-		isLoading,
-		editMode,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-	} = useClientManager();
 
 	const stroke = 1.5;
 

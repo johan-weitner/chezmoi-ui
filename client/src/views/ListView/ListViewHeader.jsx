@@ -8,7 +8,6 @@ import {
 	useMantineTheme,
 } from "@mantine/core";
 import { IconMenu2 } from "@tabler/icons-react";
-import { useClientManager } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import { ICON } from "constants/icons";
 import commonCss from "views/MainView/MainView.module.css";
@@ -16,8 +15,6 @@ import SearchWidget from "./SearchWidget";
 import css from "./ListView.module.css";
 
 export const ListViewHeader = (props) => {
-	const { selectApp, applyFilter, restoreFilters, activeFilter } =
-		useClientManager();
 	const theme = useMantineTheme();
 
 	return (
@@ -69,7 +66,7 @@ export const ListViewHeader = (props) => {
 				</nav> */}
 			</Group>
 			<Group>
-				<Menu shadow="md" width={250}>
+				{/* <Menu shadow="md" width={250}>
 					<Menu.Target>
 						<ActionIcon
 							variant="filled"
@@ -101,7 +98,7 @@ export const ListViewHeader = (props) => {
 						))}
 					</Menu.Dropdown>
 				</Menu>
-				<SearchWidget selectApp={selectApp} />
+				<SearchWidget selectApp={selectApp} /> */}
 			</Group>
 		</>
 	);

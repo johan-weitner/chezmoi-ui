@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect } from "react";
-import { useClientManager } from "core/ClientProvider";
 import classes from "views/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";

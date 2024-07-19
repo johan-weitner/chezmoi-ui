@@ -12,12 +12,11 @@
  * @returns {JSX.Element} The rendered DetailView component.
  */
 import { Card, Stack, useMantineTheme, Text } from "@mantine/core";
-import { useClientManager } from "core/ClientProvider";
 import FallbackComponent from "components/FallbackComponent";
 import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import StickyBox from "react-sticky-box";
-import EditView from "views/EditView/EditView";
+// import EditView from "views/EditView/EditView";
 import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
@@ -27,7 +26,6 @@ import { memoizedSelectApp } from "core/Selectors";
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
 	const modalRef = useRef();
-	const { store, gotoPrev, gotoNext, editMode } = useClientManager();
 	const selectedApp = memoizedSelectApp(store);
 	const theme = useMantineTheme();
 
@@ -66,7 +64,7 @@ const DetailView = (props) => {
 					</Card>
 				</StickyBox>
 			</Stack>
-			{editMode && <EditView ref={modalRef} theme={theme} />}
+			{/* {editMode && <EditView ref={modalRef} theme={theme} />} */}
 		</ErrorBoundary>
 	);
 };

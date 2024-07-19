@@ -2,7 +2,7 @@ import { Group, Title } from "@mantine/core";
 import React from "react";
 import BarSpinner from "./BarSpinner";
 import classes from "./Header.module.css";
-import Toolbar from "./Toolbar";
+// import Toolbar from "./Toolbar";
 import logo from "./logo.svg";
 
 const Header = (props) => {
@@ -25,7 +25,7 @@ const Header = (props) => {
 				<img src={logo} alt="Logo" className={classes.logo} />
 				<Title className={classes.logoTitle}>Chezmoi UI</Title>
 			</Group>
-			<Toolbar />
+			{/* <Toolbar /> */}
 			{/* </div> */}
 			{/* <div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div> */}
 		</Group>

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Stack, Text, Pagination } from "@mantine/core";
-import { useClientManager } from "core/ClientProvider";
 import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
 

@@ -73,7 +73,7 @@ export const selectPageContent = createSelector(
   [getAppCollection, getPage, getPageSize],
   (appCollection, page, pageSize) => {
     const skip = page === 1 ? 0 : (page - 1) * pageSize;
-    return appCollection.slice(skip, skip + pageSize);
+    return appCollection?.slice(skip, skip + pageSize) || [];
   },
 );
 

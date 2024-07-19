@@ -6,12 +6,8 @@ import {
 	WarningSign,
 } from "components/Indicator";
 import classes from "views/MainView/MainView.module.css";
-import { useClientManager } from "core/ClientProvider";
 
 const DetailsBox = (props) => {
-	const { deleteItem, editItem, selectedApp, selectedAppKey } =
-		useClientManager();
-	const { hasInstaller, edited: indicateEdit } = selectedApp;
 	const tags = [];
 
 	return (
@@ -42,14 +38,14 @@ const DetailsBox = (props) => {
 				{indicateEdit}
 			</h2>
 
-			{selectedApp.short && (
+			{/* {selectedApp.short && (
 				<Text className={classes.short}>{selectedApp.short}</Text>
 			)}
 			{selectedApp.desc && (
 				<Text className={classes.desc}>{selectedApp.desc}</Text>
-			)}
+			)} */}
 
-			<div className={classes.indicatorGroup}>
+			{/* <div className={classes.indicatorGroup}>
 				<Text size="sm">
 					{selectedApp.home ? <MarkPopulated /> : <MarkUnPopulated />} Homepage
 				</Text>
@@ -82,9 +78,9 @@ const DetailsBox = (props) => {
 						);
 					})}
 				</div>
-			)}
+			)} */}
 
-			<Group justify="center" p="md">
+			{/* <Group justify="center" p="md">
 				<Button
 					onClick={() => editItem(selectedAppKey)}
 					className={classes.editBtn}
@@ -119,7 +115,7 @@ const DetailsBox = (props) => {
 				>
 					Delete
 				</Button>
-			</Group>
+			</Group> */}
 		</div>
 	);
 };
