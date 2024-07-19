@@ -7,20 +7,20 @@ import { ListSkeleton } from "./ListSkeleton";
 import { memoizedSelectPage } from "core/Selectors";
 
 const List = (props) => {
-	const { bootstrapClient } = useClientManager();
+	// const { bootstrapClient } = useClientManager();
 	const [list, setList] = useState([]);
-	useEffect(() => {
-		bootstrapClient();
-	}, []);
-	const {
-		store,
-		deleteItem,
-		updateItem,
-		// pageContent,
-		setSelectedAppKey,
-		selectedAppKey,
-		isLoading,
-	} = useClientManager();
+	// useEffect(() => {
+	// 	bootstrapClient();
+	// }, []);
+	// const {
+	// 	store,
+	// 	deleteItem,
+	// 	updateItem,
+	// 	// pageContent,
+	// 	setSelectedAppKey,
+	// 	selectedAppKey,
+	// 	isLoading,
+	// } = useClientManager();
 	const pageContent = memoizedSelectPage(store);
 
 	const skeleton = Array(20);

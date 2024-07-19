@@ -1,110 +1,14 @@
 import {
 	QueryClient,
 	useMutation,
-	useQuery,
-	useQueryClient,
 } from "@tanstack/react-query";
 import axios from "axios";
-
-import { CACHE_TTL } from "constants/settings";
 import { toast } from "sonner";
 import { APP_FORM } from "../constants/appForm";
-import { filterNoInstallerApps, filterNoUrlsApps, filterNoDescsApps, filterNoNamesApps } from "./filters";
 
-const BASE_URL = "http://localhost:3000";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+const CACHE_TTL = import.meta.env.VITE_CACHE_TTL;
 const queryClient = new QueryClient();
-
-export const FILTER = {
-	noInstallers: {
-		key: "noInstallers",
-		method: filterNoInstallerApps,
-		title: "Apps without installers",
-	},
-	noUrls: {
-		key: "noUrls",
-		method: filterNoUrlsApps,
-		title: "Apps without URLs",
-	},
-	noDesc: {
-		key: "noDesc",
-		method: filterNoDescsApps,
-		title: "Apps without name",
-	},
-	noName: {
-		key: "noName",
-		method: filterNoNamesApps,
-		title: "Apps without description",
-	},
-};
-
-
-// React Query hook that stores the current page number and limit, and methods for mutatning current page
-export const usePageManager = (initialPage = 1, initialLimit = 20, initialTotalCount = 0) => {
-	const [page, setPage] = useState(initialPage);
-	const [limit, setLimit] = useState(initialLimit);
-	const [pageCount, setPageCount] = useState(1);
-	const [totalCount, setTotalCount] = useState(initialTotalCount);
-	const [lastChange, setLastChange] = useState(new Date().getTime());
-	const [activeFilter, setActiveFilter] = useState(null);
-
-	const queryClient = useQueryClient();
-
-	const gotoPrev = () => {
-		setPage((prev) => Math.max(prev - 1, 1));
-	};
-
-	const gotoNext = () => {
-		setPage((prev) => prev + 1);
-	}
-
-	const gotoPrevPage = () => {
-		setPage((prev) => Math.max(prev - 10, 1));
-	}
-
-	const gotoNextPage = () => {
-		setPage((prev) => prev + 10);
-	}
-
-	const initFilteredView = (filter) => {
-		setActiveFilter(filter);
-
-		const currentData = queryClient.getQueryData(['appCollection']) || [];
-		const filteredData = currentData.filter(app => FILTER[filter].method(app));
-		queryClient.setQueryData(['appCollection'], filteredData);
-	}
-
-	const restoreFilters = () => {
-		queryClient.invalidateQueries(["appCollection"]);
-	}
-
-	return {
-		page,
-		limit,
-		setPage,
-		setLimit,
-		lastChange,
-		gotoPrev,
-		gotoNext,
-		gotoPrevPage,
-		gotoNextPage,
-		initFilteredView,
-		restoreFilters,
-	};
-};
-
-export const fetchApp = async (key) => {
-	let app = {};
-	await axios
-		.get(`${BASE_URL}/software`)
-		.then((response) => {
-			const { data } = response;
-			app = data[key];
-		})
-		.catch((error) => {
-			console.error(error);
-		});
-	return app;
-};
 
 const mapAppData = (app) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
@@ -117,27 +21,6 @@ const mapAppData = (app) => {
 		}
 	});
 	return entity;
-};
-
-export const getTotalCount = async () => {
-	const count = await queryClient.fetchQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			const response = await axios.get(`${BASE_URL}/getCount`);
-			return response.data;
-		},
-	});
-	return count;
-};
-
-export const useAppCollection = () => {
-	return useQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			const response = await axios.get(`${BASE_URL}/software`);
-			return response.data;
-		},
-	});
 };
 
 export const getAllApps = () => {
@@ -158,27 +41,27 @@ export const getAllApps = () => {
 	return apps;
 };
 
-export const refetchAppCollection = () => {
-	return useQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			return useAppCollection();
-		},
-	});
-};
+// export const refetchAppCollection = () => {
+// 	return useQuery({
+// 		queryKey: ["appCollection"],
+// 		queryFn: async () => {
+// 			return getAllApps();
+// 		},
+// 	});
+// };
 
-export const useAppPage = (page = 1, limit = 20) => {
-	const skip = (page - 1) * limit;
-	const take = limit;
-	return axios
-		.post(`${BASE_URL}/page?skip=${skip}&take=${take}`, {
-			skip,
-			take,
-		})
-		.then((response) => {
-			return response.data;
-		});
-};
+// export const useAppPage = (page = 1, limit = 20) => {
+// 	const skip = (page - 1) * limit;
+// 	const take = limit;
+// 	return axios
+// 		.post(`${BASE_URL}/page?skip=${skip}&take=${take}`, {
+// 			skip,
+// 			take,
+// 		})
+// 		.then((response) => {
+// 			return response.data;
+// 		});
+// };
 
 export const getAppPage = (page = 1, limit = 20) => {
 	const skip = page === 1 ? 0 : (page - 1) * limit;
@@ -193,7 +76,6 @@ export const getAppPage = (page = 1, limit = 20) => {
 			}
 			console.error('Result is not a list: ', apps);
 			throw new Error('Query returned no list');
-
 		},
 	});
 	return apps;
@@ -273,14 +155,6 @@ export const updateApp = () => {
 };
 
 
-
-
-
-
-
-
-
-
 export const addApp = (data) => {
 	const app = mapAppData(data);
 	app.edited = "true";
@@ -337,14 +211,6 @@ export const addApp = (data) => {
 			return result;
 		});
 };
-
-
-
-
-
-
-
-
 
 export const deleteApp = async (key) => {
 	const result = await queryClient.fetchQuery({

@@ -4,8 +4,8 @@ import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {
-	const { getPage, page, totalCount, pageCount, activeFilter } =
-		useClientManager();
+	// const { getPage, page, totalCount, pageCount, activeFilter } =
+	// 	useClientManager();
 	const [currentPage, setCurrentPage] = useState(0);
 
 	useEffect(() => {
