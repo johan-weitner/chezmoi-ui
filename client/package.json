@@ -42,7 +42,8 @@
     "reselect": "^5.1.1",
     "sonner": "^1.5.0",
     "yaml": "^2.4.5",
-    "zustand": "^4.5.4"
+    "zustand": "^4.5.4",
+    "zustand-x": "^3.0.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
@@ -59,7 +60,7 @@
     "postcss": "^8.4.39",
     "postcss-preset-mantine": "^1.16.0",
     "postcss-simple-vars": "^7.0.1",
-    "turbo": "^2.0.7",
+    "turbo": "^2.0.8",
     "vite": "^5.3.4",
     "vitest": "^2.0.3",
     "zukeeper": "^1.0.2",

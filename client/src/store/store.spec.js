@@ -1,14 +1,14 @@
 import { act } from "react";
 import { renderHook } from "@testing-library/react";
 import {
-  useAppCollectionStore,
+  appCollectionStore,
   usePageStore,
   useSelectionStore,
 } from "./store";
 
 describe("useAppCollectionStore", () => {
   test("should set app collection", () => {
-    const { result } = renderHook(() => useAppCollectionStore());
+    const { result } = renderHook(() => appCollectionStore());
     const apps = [
       { id: 1, name: "App 1" },
       { id: 2, name: "App 2" },
@@ -22,7 +22,7 @@ describe("useAppCollectionStore", () => {
   });
 
   test("should save updated app", () => {
-    const { result } = renderHook(() => useAppCollectionStore());
+    const { result } = renderHook(() => appCollectionStore());
     const app = { id: 1, name: "Updated App" };
     const initialApps = [
       { id: 1, name: "App 1" },
@@ -44,7 +44,7 @@ describe("useAppCollectionStore", () => {
   });
 
   test("should save new app", () => {
-    const { result } = renderHook(() => useAppCollectionStore());
+    const { result } = renderHook(() => appCollectionStore());
     const app = { id: 3, name: "New App" };
     const initialApps = [
       { id: 1, name: "App 1" },

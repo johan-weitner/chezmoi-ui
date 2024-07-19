@@ -1,0 +1,31 @@
+.sticky {
+  top: 105px !important;
+}
+
+.legendTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  border: 1px solid #CCC;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.3);
+  color: #FFF;
+
+  th {
+    padding: 5px 10px;
+    background-color: #222;
+  }
+
+  thead {
+    border: 1p solid #666;
+  }
+
+  td {
+    padding: 10px 10px;
+  }
+
+  tr {
+    &:nth-child(odd) {
+      background-color: #333;
+    }
+  }
+}

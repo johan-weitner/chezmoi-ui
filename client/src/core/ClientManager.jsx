@@ -2,102 +2,129 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
-  getAppCollection,
-  getPage,
-  getPageCount,
-  getPageContent,
-  getPageSize,
-  getInReverse,
-  getFilterModel,
-  getActiveFilter,
-  getFilteredList,
-  getSelectedApp,
-  getSelectedAppKey,
-  getEditMode,
-  getCurrentIndex,
-  getPreviousKey,
-  getNextKey,
-  selectPageContent
+	getAppCollection,
+	getPage,
+	getPageCount,
+	getPageContent,
+	getPageSize,
+	getInReverse,
+	getFilterModel,
+	getActiveFilter,
+	getFilteredList,
+	getSelectedApp,
+	getSelectedAppKey,
+	getEditMode,
+	getCurrentIndex,
+	getPreviousKey,
+	getNextKey,
+	selectPageContent,
+	memoizedSelectAppByKey,
 } from "store/selectors";
-import {
-  useAppCollectionStore,
-  usePageStore,
-  useSelectionStore
-} from "store/store";
+import { rootStore } from "store/store";
 import { getAllApps } from "api/appCollectionApi";
 
-// const appCollectionStore = useAppCollectionStore();
+// const appStore = appCollectionStore();
 // const pageStore = usePageStore();
 // const selectionStore = useSelectionStore();
 
-const {
-  setAppCollection,
-  saveUpdatedApp,
-  saveNewApp
-} = useAppCollectionStore();
+// const {
+//   setAppCollection,
+//   saveUpdatedApp,
+//   saveNewApp
+// } = useAppCollectionStore();
 
-const {
-  setPage,
-  setPageCount,
-  setPageSize,
-  setInReverse,
-  setActiveFilter,
-  setFilteredList
-} = pageStore();
+// const {
+// 	setPage,
+// 	setPageCount,
+// 	setPageSize,
+// 	setInReverse,
+// 	setActiveFilter,
+// 	setFilteredList,
+// } = usePageStore();
 
-
-
-const { setSelectedApp, setSelectedAppKey, setEditMode } = selectionStore();
+// const { setSelectedApp, setSelectedAppKey, setEditMode } = useSelectionStore();
 
 export const useClientManager = () => {
-  // const seedStore = () => {
-  //   getAllApps().then((apps) => {
-  //     setAppCollection(apps);
-  //     setPageCount(Math.ceil(apps.length / getPageSize(pageStore)));
-  //   });
-  // };
+	const { store } = rootStore;
+	const state = store.getState();
 
-  // const refreshStore = () => {
-  //   getAllApps().then((apps) => {
-  //     setAppCollection(apps);
-  //     setPageCount(Math.ceil(apps.length / getPageSize(pageStore)));
-  //   });
-  // };
+	const seedStore = () => {
+		getAllApps().then((apps) => {
+			rootStore.set.appCollection(apps);
+			rootStore.set.pageCount(
+				Math.ceil(apps.length / rootStore.get.pageSize()),
+			);
+			rootStore.set.page(1);
+			openFirstPage();
+		});
+	};
 
-  const getPageContent = (page) => {
-    setPage(page);
-    selectPageContent(getAppCollection, page);
-  };
+	const openFirstPage = () => {
+		const apps = selectPageContent(state);
+		rootStore.set.pageContent(apps);
+	};
 
-  // const selectPrev = () => {
-  //   setSelectedAppKey(getPreviousKey(appCollectionStore));
-  // };
+	const refreshAppCollection = () => {
+		getAllApps().then((apps) => {
+			rootStore.set.appCollection(apps);
+			rootStore.set.pageCount(
+				Math.ceil(apps.length / rootStore.get.pageSize()),
+			);
+		});
+	};
 
-  // const selectNext = () => {
-  //   setSelectedAppKey(getNextKey(appCollectionStore));
-  // };
+	const selectPrevApp = () => {
+		const prevKey = getPreviousKey(state);
+		const prevApp = memoizedSelectAppByKey(state, prevKey);
+		rootStore.set.selectedApp(prevApp);
+		rootStore.set.selectedAppKey(prevKey);
+		console.log("Prev appKey: ", prevKey);
+		console.log("Prev app: ", prevApp);
+	};
 
-  // const gotoPrevPage = () => {
-  //   const currPage = getPage(pageStore);
-  //   if (currPage > 0) {
-  //     setPage(currPage - 1);
-  //   }
-  // };
+	const selectNextApp = () => {
+		const nextKey = getNextKey(state);
+		const nextApp = memoizedSelectAppByKey(state, nextKey);
+		rootStore.set.selectedApp(nextApp);
+		rootStore.set.selectedAppKey(nextKey);
+		console.log("Next appKey: ", nextKey);
+		console.log("Next app: ", nextApp);
+	};
 
-  // const gotoNextPage = () => {
-  //   const currPage = getPage(pageStore);
-  //   const pageCount = getPageCount(pageStore);
-  //   if (currPage < pageCount - 1) {
-  //     setPage(currPage + 1);
-  //   }
-  // };
-
-  // const setFilter = (filter) => {
-  //   setActiveFilter(filter);
-  //   setFilteredList(getFilteredList(filterModel, filter));
-  // };
-
-
+	// const getPageContent = (page) => {
+	// 	setPage(page);
+	// 	selectPageContent(getAppCollection, page);
+	// };
+	// const selectPrev = () => {
+	//   setSelectedAppKey(getPreviousKey(appCollectionStore));
+	// };
+	// const selectNext = () => {
+	//   setSelectedAppKey(getNextKey(appCollectionStore));
+	// };
+	// const gotoPrevPage = () => {
+	//   const currPage = getPage(pageStore);
+	//   if (currPage > 0) {
+	//     setPage(currPage - 1);
+	//   }
+	// };
+	// const gotoNextPage = () => {
+	//   const currPage = getPage(pageStore);
+	//   const pageCount = getPageCount(pageStore);
+	//   if (currPage < pageCount - 1) {
+	//     setPage(currPage + 1);
+	//   }
+	// };
+	// const setFilter = (filter) => {
+	//   setActiveFilter(filter);
+	//   setFilteredList(getFilteredList(filterModel, filter));
+	// };
+	return {
+		seedStore,
+		openFirstPage,
+		refreshAppCollection,
+		selectPrevApp,
+		selectNextApp,
+	};
 };
 
 // useHotkeys("alt + b", () => gotoPrev());

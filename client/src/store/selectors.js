@@ -1,7 +1,11 @@
 import { createSelector } from "reselect";
+import { rootStore } from "./store";
 import { isStartOfPage, isEndOfPage, findIndex } from "utils/pageUtils";
 
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
+const state = rootStore.store.getState();
+const { store } = rootStore;
+const { getState } = store;
 
 /**
  * Raw selectors - these are the basic selectors that are used to get the data
@@ -23,8 +27,6 @@ export const getFilterModel = (state) => state.filterModel;
 
 export const getActiveFilter = (state) => state.activeFilter;
 
-
-
 export const getSelectedApp = (state) => state.selectedApp;
 
 export const getSelectedAppKey = (state) => state.selectedAppKey;
@@ -40,12 +42,31 @@ export const getPreviousKey = (state) => {
 };
 
 export const getNextKey = (state) => {
-  const index = getCurrentIndex(state.appCollection, state.selectedAppKey);
+  const index = getCurrentIndex(state);
   if (index < getAppCollection(state).length - 1) {
     return getAppCollection(state)[index + 1].key;
   }
   return getAppCollection(state)[getAppCollection(state).length - 1].key;
 };
+
+export const selectPageContent = async (state) => {
+  console.log('SELECTOR: selectPageContent');
+  const { appCollection, page, inReverse, selectedAppKey } = state;
+  const skip = page < 2 ? 0 : (page - 1) * PAGE_SIZE;
+  const cutoff = skip + Number.parseInt(PAGE_SIZE, 10);
+  console.log('Slicing: ', skip, page, cutoff);
+  const slice = appCollection?.slice(skip, cutoff) || [];
+
+  rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
+  rootStore.set.pageContent(slice);
+  return slice;
+};
+
+export const getCurrentIndex = (state) => {
+  const { appCollection, selectedAppKey } = state;
+  return findIndex(selectedAppKey, appCollection);
+};
+
 
 
 
@@ -69,18 +90,13 @@ export const memoizedSelectAppByKey = (state, key) => {
   return app;
 };
 
-export const selectPageContent = createSelector(
-  [getAppCollection, getPage, getPageSize],
-  (appCollection, page, pageSize) => {
+export const selectMemoizedPageContent = createSelector(
+  getState,
+  (state) => {
+    const { appCollection, page, pageSize } = state;
+    console.log(state);
     const skip = page === 1 ? 0 : (page - 1) * pageSize;
     return appCollection?.slice(skip, skip + pageSize) || [];
-  },
-);
-
-export const getCurrentIndex = createSelector(
-  [getAppCollection, getSelectedAppKey],
-  (appCollection, selectedAppKey) => {
-    return findIndex(appCollection, selectedAppKey);
   },
 );
 

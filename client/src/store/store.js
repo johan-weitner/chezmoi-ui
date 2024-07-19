@@ -1,6 +1,6 @@
 import React from "react";
 import { create } from 'zustand';
-import zustymiddleware from 'zustymiddleware';
+import { createStore } from 'zustand-x'
 import { QueryClient } from "@tanstack/react-query";
 import {
   getAllApps,
@@ -17,6 +17,53 @@ import { filterModel } from "api/filters";
 export const useStore = () => { };
 
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
+
+const initialAppCollectionStore = create((set) => ({
+  appCollection: [],
+  setAppCollection: (apps) => {
+    set({ appCollection: apps });
+  },
+  saveUpdatedApp: (app) => {
+    set((state) => ({
+      appCollection: state.appCollection.map((a) =>
+        a.id === app.id ? app : a,
+      ),
+    }));
+  },
+  saveNewApp: (app) => {
+    set((state) => ({ appCollection: [...state.appCollection, app] }));
+  }
+}));
+
+const initialPageStore = create((set) => ({
+  page: 0,
+  pageCount: 0,
+  pageContent: null,
+  pageSize: PAGE_SIZE,
+  inReverse: false,
+  filterModel: filterModel,
+  activeFilter: null,
+  filteredList: null,
+}));
+
+const initialSelectionStore = create((set) => ({
+  selectedApp: null,
+  selectedAppKey: null,
+  editMode: false,
+}));
+
+
+
+export const rootStore = createStore('root')({
+  ...initialSelectionStore.getState(),
+  ...initialAppCollectionStore.getState(),
+  ...initialPageStore.getState(),
+  middlewares: ['devtools']
+}, { devtools: { enabled: true } });
+
+
+
+
 
 export const useAppCollectionStore = create((set) => ({
   appCollection: [],
@@ -62,8 +109,11 @@ export const useSelectionStore = create((set) => ({
   setEditMode: (mode) => set({ editMode: mode }),
 }));
 
-
-
+// export const useRootStore = create((set) => ({
+//   ...appCollectionStore(),
+//   ...usePageStore(),
+//   ...useSelectionStore()
+// }))
 
 // export const useStore = create((set) => ({
 //   allApps: [],

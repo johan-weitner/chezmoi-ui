@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { APP_FORM } from "../constants/appForm";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 const CACHE_TTL = import.meta.env.VITE_CACHE_TTL;
 const queryClient = new QueryClient();
 
