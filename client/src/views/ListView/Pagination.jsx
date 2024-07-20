@@ -1,17 +1,28 @@
 import { useEffect, useState } from "react";
 import { Stack, Text, Pagination } from "@mantine/core";
+import { rootStore } from "store/store";
 import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
+import { useClientManager } from "core/ClientManager";
 
 const PaginationBar = (props) => {
-	// const { getPage, page, totalCount, pageCount, activeFilter } =
-	// 	useClientManager();
+	const { page, getTotalSize, pageCount, activeFilter } =
+		rootStore.store.getState();
+	const { getPageContent } = useClientManager();
 	const [currentPage, setCurrentPage] = useState(0);
 
 	useEffect(() => {
-		console.log(`Page: ${page}, Total: ${totalCount}, Count: ${pageCount}`);
+		console.log(`Page: ${page},
+			Total: ${getTotalSize(rootStore.store.getState())},
+			Count: ${pageCount}`);
 		setCurrentPage(page);
 	}, [page]);
+
+	const gotoPage = (page) => {
+		console.log(`Goto page: ${page}`);
+		setCurrentPage(page);
+		rootStore.set.page(page);
+	};
 
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
@@ -19,7 +30,7 @@ const PaginationBar = (props) => {
 				total={pageCount}
 				value={currentPage}
 				gap={15}
-				onChange={getPage}
+				onChange={gotoPage}
 				className={css.pagination}
 				size={"sm"}
 				withEdges={true}
@@ -36,7 +47,8 @@ const PaginationBar = (props) => {
 						{" ⋅ "}
 					</span>
 				)}
-				Page {page} of {pageCount} ⋅ {totalCount} apps in total.
+				Page {page} of {pageCount} ⋅ {getTotalSize(rootStore.store.getState())}{" "}
+				apps in total.
 			</Text>
 		</Stack>
 	);

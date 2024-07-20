@@ -20,6 +20,7 @@ const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 
 const initialAppCollectionStore = create((set) => ({
   appCollection: [],
+  totalCount: 0,
   setAppCollection: (apps) => {
     set({ appCollection: apps });
   },
@@ -32,6 +33,11 @@ const initialAppCollectionStore = create((set) => ({
   },
   saveNewApp: (app) => {
     set((state) => ({ appCollection: [...state.appCollection, app] }));
+  },
+  removeApp: (app) => {
+    set((state) => ({
+      appCollection: state.appCollection.filter((a) => a.id !== app.id),
+    }));
   }
 }));
 
@@ -39,6 +45,7 @@ const initialPageStore = create((set) => ({
   page: 0,
   pageCount: 0,
   pageContent: null,
+  getTotalSize: state => state.appCollection?.length,
   pageSize: PAGE_SIZE,
   inReverse: false,
   filterModel: filterModel,
@@ -52,12 +59,16 @@ const initialSelectionStore = create((set) => ({
   editMode: false,
 }));
 
-
+const initialGlobalStore = create((set) => ({
+  isloading: false,
+  error: null,
+}));
 
 export const rootStore = createStore('root')({
   ...initialSelectionStore.getState(),
   ...initialAppCollectionStore.getState(),
   ...initialPageStore.getState(),
+  ...initialGlobalStore.getState(),
   middlewares: ['devtools']
 }, { devtools: { enabled: true } });
 

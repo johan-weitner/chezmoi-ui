@@ -32,41 +32,57 @@ const ListView = (props) => {
 	const { store } = rootStore;
 
 	const state = store.getState();
-	const { page, pageContent, selectedAppKey } = state;
-	const clientManager = useClientManager();
+	// const { page, pageContent, selectedAppKey } = state;
+	// const clientManager = useClientManager();
 
-	const [currentPage, setCurrentPage] = useState(1);
-	const [currentPageContent, setCurrentPageContent] = useState(null);
-	const [date, setDate] = useState(null);
+	// const [currentPage, setCurrentPage] = useState(1);
+	// const [currentPageContent, setCurrentPageContent] = useState(null);
+	// const [currentApp, setCurrentApp] = useState(null);
+	// const [date, setDate] = useState(null);
 
-	useEffect(() => {
-		console.log("Seeding store...");
-		clientManager.seedStore();
-	}, []);
+	// useEffect(() => {
+	// 	console.log("Seeding store...");
+	// 	clientManager.seedStore();
+	// }, []);
 
-	useEffect(() => {
-		console.log("New page: ", currentPage);
-		rootStore.set.page(currentPage);
-		console.log("Set in store: ", rootStore.get.page());
-	}, [currentPage, date]);
+	// useEffect(() => {
+	// 	console.log("New page: ", currentPage);
+	// 	rootStore.set.page(currentPage);
+	// 	console.log("Set in store: ", rootStore.get.page());
+	// }, [currentPage, date]);
 
-	useEffect(() => {
-		console.log("!!! Updating content");
-		selectPageContent(state).then((content) => {
-			console.log("List size: ", content.length);
-			setCurrentPageContent(content);
-		});
-	}, [currentPage, date]);
+	// useEffect(() => {
+	// 	console.log("!!! Updating app");
+	// 	setCurrentApp(selectedAppKey);
+	// }, [currentApp, date]);
+
+	// useEffect(() => {
+	// 	console.log("!!! Updating content");
+	// 	selectPageContent(state).then((content) => {
+	// 		console.log("List size: ", content.length);
+	// 		setCurrentPageContent(content);
+	// 	});
+	// }, [currentPage, date]);
 
 	return (
 		<ErrorBoundary
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
+				{/* <button type="button" onClick={() => setDate(new Date().getTime())} /> */}
 				<ListViewHeader />
-				{/* <PaginationBar /> */}
-				{/* <List /> */}
-				<table style={{ backgroundColor: "#222", border: "1px solid #777" }}>
+				<PaginationBar />
+				<List />
+			</Card>
+		</ErrorBoundary>
+	);
+};
+
+// ListView.whyDidYouRender = true;
+export default ListView;
+
+/*
+<table style={{ backgroundColor: "#222", border: "1px solid #777" }}>
 					<caption style={{ backgroundColor: "#222", padding: "10px 0" }}>
 						<b>APP COLLECTION </b>
 						<button
@@ -84,7 +100,7 @@ const ListView = (props) => {
 							<td>inReverse: {rootStore.get.inReverse()}</td>
 							<td>pageCount: {rootStore.get.pageCount()}</td>
 							<td>currentPage: {typeof currentPage}</td>
-							<td>selectedAppKey: {selectedAppKey}</td>
+							<td>currentApp: {currentApp}</td>
 						</tr>
 						<tr>
 							<td>Prev</td>
@@ -147,7 +163,7 @@ const ListView = (props) => {
 									<li key={item.key}>
 										<input
 											type="checkbox"
-											defaultChecked={selectedAppKey === item.key}
+											defaultChecked={currentApp === item.key}
 										/>{" "}
 										{item.name} -{" "}
 										<span
@@ -164,10 +180,4 @@ const ListView = (props) => {
 							})}
 					</ul>
 				</div>
-			</Card>
-		</ErrorBoundary>
-	);
-};
-
-// ListView.whyDidYouRender = true;
-export default ListView;
+*/

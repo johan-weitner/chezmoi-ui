@@ -49,16 +49,26 @@ export const getNextKey = (state) => {
   return getAppCollection(state)[getAppCollection(state).length - 1].key;
 };
 
-export const selectPageContent = async (state) => {
+export const selectPageContent = (state) => {
   console.log('SELECTOR: selectPageContent');
-  const { appCollection, page, inReverse, selectedAppKey } = state;
+  const {
+    appCollection,
+    page,
+    inReverse,
+    selectedAppKey,
+    pageContent
+  } = state;
+  console.log('State: ', state);
   const skip = page < 2 ? 0 : (page - 1) * PAGE_SIZE;
   const cutoff = skip + Number.parseInt(PAGE_SIZE, 10);
-  console.log('Slicing: ', skip, page, cutoff);
+  console.log('Slicing: ', page, skip, cutoff);
   const slice = appCollection?.slice(skip, cutoff) || [];
 
   rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
-  rootStore.set.pageContent(slice);
+
+  pageContent && console.log(pageContent[0]?.key);
+  pageContent && console.log(slice[0]?.key);
+  console.log(pageContent);
   return slice;
 };
 
@@ -71,8 +81,7 @@ export const getCurrentIndex = (state) => {
 
 
 /**
- * Memoized selectors - these are the selectors that are memoized to prevent
- * unnecessary re-renders.
+ * Memoized selectors - to prevent unnecessary re-renders.
  */
 export const memoizedSelectApp = createSelector(
   [getAppCollection, getSelectedAppKey],
