@@ -11,7 +11,7 @@ import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
 
 const DetailsBox = (props) => {
-	const { selectedApp } = props;
+	const { selectedApp, editMode } = props;
 	const tags = [];
 	const indicateEdit = selectedApp?.edited ? <EditedIndicator /> : null;
 

@@ -19,7 +19,7 @@ import {
 	getPreviousKey,
 	getNextKey,
 	selectPageContent,
-	memoizedSelectAppByKey,
+	selectAppByKey,
 } from "store/selectors";
 import { rootStore } from "store/store";
 import {
@@ -28,7 +28,6 @@ import {
 	deleteApp,
 	updateApp,
 	addApp,
-	rawApi,
 } from "api/appCollectionApi";
 
 const queryClient = new QueryClient();
@@ -64,19 +63,9 @@ export const useClientManager = () => {
 			return;
 		}
 		rootStore.set.isLoading(true);
-		console.log("ClientManager hook: Page changed - fetching new content");
 		const newPage = getPageContent();
-		const oldPage = rootStore.get.pageContent();
-		// Array.isArray(newPage) && console.log(newPage[0]?.key);
-		// Array.isArray(oldPage) && console.log(oldPage[0]?.key);
+		rootStore.set.pageContent(newPage);
 
-		DEBUG &&
-			console.log(`ClientManager hook:
-			Page: ${page},
-			Total: ${getTotalSize(rootStore.store.getState())},
-			Count: ${pageCount}`);
-
-		rootStore.set.page(page);
 		rootStore.set.isLoading(false);
 	}, [rootStore.use.page()]);
 
@@ -134,8 +123,8 @@ export const useClientManager = () => {
 
 	const gotoPage = (page) => {
 		console.log(`ClientManager: Goto page: ${page}`);
-		const apps = selectPageContent(state);
 		rootStore.set.page(page);
+		const apps = selectPageContent(state);
 		rootStore.set.pageContent(apps);
 		return apps;
 	};
@@ -151,7 +140,7 @@ export const useClientManager = () => {
 
 	const selectPrevApp = () => {
 		const prevKey = getPreviousKey(state);
-		const prevApp = memoizedSelectAppByKey(state, prevKey);
+		const prevApp = selectAppByKey(prevKey);
 		rootStore.set.selectedApp(prevApp);
 		rootStore.set.selectedAppKey(prevKey);
 		console.log("Prev appKey: ", prevKey);
@@ -160,7 +149,10 @@ export const useClientManager = () => {
 
 	const selectNextApp = () => {
 		const nextKey = getNextKey(state);
-		const nextApp = memoizedSelectAppByKey(state, nextKey);
+		const nextApp = selectAppByKey(nextKey);
+		console.log(`ClientManager:
+			Next app key: ${nextKey}
+			Next app: ${nextApp.key}`);
 		rootStore.set.selectedApp(nextApp);
 		rootStore.set.selectedAppKey(nextKey);
 		console.log("Next appKey: ", nextKey);
@@ -252,41 +244,7 @@ export const useClientManager = () => {
 	const invalidateCache = () => {
 		queryClient.invalidateQueries(["appCollection", "apps"]);
 	};
-	/*
-export const selectPageContent = async (state) => {
-  console.log('SELECTOR: selectPageContent');
-  const { appCollection, page, inReverse, selectedAppKey } = state;
-  const skip = page < 2 ? 0 : (page - 1) * PAGE_SIZE;
-  const cutoff = skip + Number.parseInt(PAGE_SIZE, 10);
-  console.log('Slicing: ', skip, page, cutoff);
-  const slice = appCollection?.slice(skip, cutoff) || [];
 
-  rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
-  rootStore.set.pageContent(slice);
-  return slice;
-};
-
-export const getCurrentIndex = (state) => {
-  const { appCollection, selectedAppKey } = state;
-  return findIndex(selectedAppKey, appCollection);
-};
-  */
-
-	// const getPageContent = (page) => {
-	// 	setPage(page);
-	// 	selectPageContent(getAppCollection, page);
-	// };
-	// const selectPrev = () => {
-	//   setSelectedAppKey(getPreviousKey(appCollectionStore));
-	// };
-	// const selectNext = () => {
-	//   setSelectedAppKey(getNextKey(appCollectionStore));
-	// };
-
-	// const setFilter = (filter) => {
-	//   setActiveFilter(filter);
-	//   setFilteredList(getFilteredList(filterModel, filter));
-	// };
 	return {
 		seedStore,
 		openFirstPage,

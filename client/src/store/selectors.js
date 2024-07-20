@@ -33,11 +33,12 @@ export const getPreviousKey = (state) => {
 };
 
 export const getNextKey = (state) => {
-  const index = getCurrentIndex(state);
-  if (index < getAppCollection(state).length - 1) {
-    return getAppCollection(state)[index + 1].key;
+  const index = getCurrentIndex();
+  const appCollection = rootStore.get.appCollection();
+  if (index < rootStore.get.totalCount() - 1) {
+    return appCollection[index + 1].key;
   }
-  return getAppCollection(state)[getAppCollection(state).length - 1].key;
+  return appCollection[appCollection?.length - 1].key;
 };
 
 export const selectPageContent = (state) => {
@@ -61,9 +62,23 @@ export const selectPageContent = (state) => {
   return slice;
 };
 
-export const getCurrentIndex = (state) => {
-  const { appCollection, selectedAppKey } = state;
+export const getCurrentIndex = () => {
+  const appCollection = rootStore.get.appCollection();
+  const selectedAppKey = rootStore.get.selectedAppKey();
   return findIndex(selectedAppKey, appCollection);
+};
+
+export const selectApp = (appCollection, selectedAppKey) => {
+  return appCollection.find((app) => app.key === selectedAppKey);
+};
+
+export const selectAppByKey = (key) => {
+  const appCollection = rootStore.get.appCollection();
+  const app = appCollection.find((app) => app.key === key);
+  if (!app) {
+    throw new Error(`App with key ${key} not found`);
+  }
+  return app;
 };
 
 

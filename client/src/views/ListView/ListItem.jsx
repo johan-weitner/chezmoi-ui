@@ -12,6 +12,7 @@ export const ListItem = (props) => {
 		props;
 
 	const [selectedKey, setSelectedKey] = useState(null);
+	const [isEditMode, setIsEditMode] = useState(null);
 
 	const className =
 		selectedKey && selectedKey === app.key ? classes.selected : null;
@@ -19,6 +20,7 @@ export const ListItem = (props) => {
 
 	useEffect(() => {
 		setSelectedKey(rootStore.get.selectedAppKey());
+		setIsEditMode(rootStore.get.editMode());
 		console.log(`ListItem: Key: ${app.key} | selectedKey: ${selectedKey}`);
 	}, []);
 
@@ -26,6 +28,11 @@ export const ListItem = (props) => {
 		setSelectedKey(rootStore.get.selectedAppKey());
 		console.log(`Selection changed: ${selectedKey}`);
 	}, [rootStore.use.selectedAppKey()]);
+
+	useEffect(() => {
+		setIsEditMode(rootStore.get.editMode());
+		console.log(`EditMode changed: ${isEditMode}`);
+	}, [rootStore.use.editMode()]);
 
 	return (
 		<ErrorBoundary

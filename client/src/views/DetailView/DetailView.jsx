@@ -27,6 +27,7 @@ import { rootStore } from "store/store";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
+	const [editMode, setEditMode] = useState(null);
 	const modalRef = useRef();
 	const theme = useMantineTheme();
 
@@ -35,6 +36,10 @@ const DetailView = (props) => {
 	useEffect(() => {
 		setCurrentApp(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
+
+	useEffect(() => {
+		setEditMode(rootStore.get.editMode());
+	}, [rootStore.use.editMode()]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);
@@ -70,7 +75,7 @@ const DetailView = (props) => {
 					</Card>
 				</StickyBox>
 			</Stack>
-			{/* {editMode && <EditView ref={modalRef} theme={theme} />} */}
+			{editMode && <EditView ref={modalRef} theme={theme} />}
 		</ErrorBoundary>
 	);
 };

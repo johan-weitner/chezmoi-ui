@@ -20,8 +20,8 @@ const PaginationBar = (props) => {
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
 			<Pagination
-				total={pageCount}
-				value={currentPage}
+				total={rootStore.get.pageCount()}
+				value={rootStore.get.page()}
 				gap={15}
 				onChange={gotoPage}
 				className={css.pagination}
@@ -36,11 +36,14 @@ const PaginationBar = (props) => {
 				{currentFilter && (
 					<span>
 						{"Filtered by "}
-						<b>{filterModel[currentFilter].title.toLowerCase()}</b>
+						<b>
+							{filterModel[rootStore.use.activeFilter()].title.toLowerCase()}
+						</b>
 						{" ⋅ "}
 					</span>
 				)}
-				Page {currentPage} of {pageCount} ⋅ {totalCount} apps in total.
+				Page {rootStore.get.page()} of {rootStore.get.pageCount()} ⋅{" "}
+				{rootStore.get.pageCount()} apps in total.
 			</Text>
 		</Stack>
 	);

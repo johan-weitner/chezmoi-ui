@@ -50,8 +50,6 @@ const ListView = (props) => {
 					/>
 				)}
 				<List
-					pageContent={rootStore.get.pageContent()}
-					isLoading={rootStore.get.isLoading()}
 					selectedAppKey={rootStore.get.selectedAppKey()}
 					setSelectedAppKey={setSelectedAppKey}
 					deleteItem={deleteItem}
