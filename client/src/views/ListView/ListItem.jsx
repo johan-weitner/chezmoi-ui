@@ -1,16 +1,31 @@
+import { useEffect, useState } from "react";
 import { rem, Text } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import { ICON } from "constants/icons";
 import { EditedIndicator } from "components/Indicator";
 import classes from "views/MainView/MainView.module.css";
+import { rootStore } from "../../store/store";
 
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
+
+	const [selectedKey, setSelectedKey] = useState(null);
+
 	const className =
-		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
+		selectedKey && selectedKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
+
+	useEffect(() => {
+		setSelectedKey(rootStore.get.selectedAppKey());
+		console.log(`ListItem: Key: ${app.key} | selectedKey: ${selectedKey}`);
+	}, []);
+
+	useEffect(() => {
+		setSelectedKey(rootStore.get.selectedAppKey());
+		console.log(`Selection changed: ${selectedKey}`);
+	}, [rootStore.use.selectedAppKey()]);
 
 	return (
 		<ErrorBoundary

@@ -34,7 +34,7 @@ const DetailView = (props) => {
 
 	useEffect(() => {
 		setCurrentApp(rootStore.get.selectedApp());
-	}, [rootStore.use.selectedAppKey()]);
+	}, [rootStore.use.selectedApp()]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);

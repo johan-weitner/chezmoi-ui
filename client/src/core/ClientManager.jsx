@@ -168,14 +168,18 @@ export const useClientManager = () => {
 	};
 
 	const gotoPrevPage = () => {
+		const page = rootStore.get.page();
 		if (page > 0) {
 			rootStore.set.page(page - 1);
+			getPageContent();
 		}
 	};
 	const gotoNextPage = () => {
-		const pageCount = getPageCount(pageStore);
+		const page = rootStore.get.page();
+		const pageCount = rootStore.get.pageCount();
 		if (page < pageCount - 1) {
 			rootStore.set.page(page + 1);
+			getPageContent();
 		}
 	};
 
@@ -296,5 +300,7 @@ export const getCurrentIndex = (state) => {
 		addItem,
 		editItem,
 		gotoPage,
+		gotoPrevPage,
+		gotoNextPage,
 	};
 };

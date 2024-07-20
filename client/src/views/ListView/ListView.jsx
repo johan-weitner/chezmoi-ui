@@ -19,6 +19,8 @@ const ListView = (props) => {
 		selectPrevApp,
 		selectNextApp,
 		gotoPage,
+		gotoPrevPage,
+		gotoNextPage,
 	} = useClientManager();
 
 	useHotkeys("alt + b", () => selectPrevApp());
@@ -37,6 +39,7 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				<ListViewHeader />
+				<p>selectedAppKey: {rootStore.get.selectedAppKey}</p>
 				{rootStore.get.pageCount() > 1 && (
 					<PaginationBar
 						currentPage={rootStore.get.page()}
