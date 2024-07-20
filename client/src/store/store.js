@@ -16,9 +16,55 @@ import { filterModel } from "api/filters";
 
 export const useStore = () => { };
 
-const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
+const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
 
-const initialAppCollectionStore = create((set) => ({
+// const initialAppCollectionStore = createStore('apps')({
+//   appCollection: [],
+//   totalCount: 0,
+//   setAppCollection: (apps) => {
+//     set({ appCollection: apps });
+//   },
+//   saveUpdatedApp: (app) => {
+//     set((state) => ({
+//       appCollection: state.appCollection.map((a) =>
+//         a.id === app.id ? app : a,
+//       ),
+//     }));
+//   },
+//   saveNewApp: (app) => {
+//     set((state) => ({ appCollection: [...state.appCollection, app] }));
+//   },
+//   removeApp: (app) => {
+//     set((state) => ({
+//       appCollection: state.appCollection.filter((a) => a.id !== app.id),
+//     }));
+//   }
+// });
+
+// const initialPageStore = createStore('page')({
+//   page: 0,
+//   pageCount: 0,
+//   pageContent: null,
+//   getTotalSize: state => state.appCollection?.length,
+//   pageSize: PAGE_SIZE,
+//   inReverse: false,
+//   filterModel: filterModel,
+//   activeFilter: null,
+//   filteredList: null,
+// });
+
+// const initialSelectionStore = createStore('selection')({
+//   selectedApp: null,
+//   selectedAppKey: null,
+//   editMode: false,
+// });
+
+// const initialGlobalStore = createStore('global')({
+//   isloading: false,
+//   error: null,
+// });
+
+export const rootStore = createStore('root')({
   appCollection: [],
   totalCount: 0,
   setAppCollection: (apps) => {
@@ -38,10 +84,7 @@ const initialAppCollectionStore = create((set) => ({
     set((state) => ({
       appCollection: state.appCollection.filter((a) => a.id !== app.id),
     }));
-  }
-}));
-
-const initialPageStore = create((set) => ({
+  },
   page: 0,
   pageCount: 0,
   pageContent: null,
@@ -51,74 +94,61 @@ const initialPageStore = create((set) => ({
   filterModel: filterModel,
   activeFilter: null,
   filteredList: null,
-}));
-
-const initialSelectionStore = create((set) => ({
   selectedApp: null,
   selectedAppKey: null,
   editMode: false,
-}));
-
-const initialGlobalStore = create((set) => ({
-  isloading: false,
+  isLoading: false,
   error: null,
-}));
-
-export const rootStore = createStore('root')({
-  ...initialSelectionStore.getState(),
-  ...initialAppCollectionStore.getState(),
-  ...initialPageStore.getState(),
-  ...initialGlobalStore.getState(),
   middlewares: ['devtools']
-}, { devtools: { enabled: true } });
+});
 
 
 
 
 
-export const useAppCollectionStore = create((set) => ({
-  appCollection: [],
-  setAppCollection: (apps) => {
-    set({ appCollection: apps });
-  },
-  saveUpdatedApp: (app) => {
-    set((state) => ({
-      appCollection: state.appCollection.map((a) =>
-        a.id === app.id ? app : a,
-      ),
-    }));
-  },
-  saveNewApp: (app) => {
-    set((state) => ({ appCollection: [...state.appCollection, app] }));
-  }
-}));
+// export const useAppCollectionStore = create((set) => ({
+//   appCollection: [],
+//   setAppCollection: (apps) => {
+//     set({ appCollection: apps });
+//   },
+//   saveUpdatedApp: (app) => {
+//     set((state) => ({
+//       appCollection: state.appCollection.map((a) =>
+//         a.id === app.id ? app : a,
+//       ),
+//     }));
+//   },
+//   saveNewApp: (app) => {
+//     set((state) => ({ appCollection: [...state.appCollection, app] }));
+//   }
+// }));
 
-export const usePageStore = create((set) => ({
-  page: 0,
-  setPage: (page) => set({ page }),
-  pageCount: 0,
-  setPageCount: (count) => set({ pageCount: count }),
-  pageContent: null,
-  setPageContent: (content) => set({ pageContent: content }),
-  pageSize: PAGE_SIZE,
-  setPageSize: (pageSize) => set({ pageSize }),
-  inReverse: false,
-  setInReverse: (reverse) => set({ inReverse: reverse }),
-  filterModel: filterModel,
-  activeFilter: null,
-  setActiveFilter: (filter) => set({ activeFilter: filter }),
-  filteredList: null,
-  setFilteredList: (list) => set({ filteredList: list }),
-}));
+// export const usePageStore = create((set) => ({
+//   page: 0,
+//   setPage: (page) => set({ page }),
+//   pageCount: 0,
+//   setPageCount: (count) => set({ pageCount: count }),
+//   pageContent: null,
+//   setPageContent: (content) => set({ pageContent: content }),
+//   pageSize: PAGE_SIZE,
+//   setPageSize: (pageSize) => set({ pageSize }),
+//   inReverse: false,
+//   setInReverse: (reverse) => set({ inReverse: reverse }),
+//   filterModel: filterModel,
+//   activeFilter: null,
+//   setActiveFilter: (filter) => set({ activeFilter: filter }),
+//   filteredList: null,
+//   setFilteredList: (list) => set({ filteredList: list }),
+// }));
 
-export const useSelectionStore = create((set) => ({
-  selectedApp: null,
-  setSelectedApp: (app) => set({ selectedApp: app }),
-  selectedAppKey: null,
-  setSelectedAppKey: (key) => set({ selectedAppKey: key }),
-  editMode: false,
-  setEditMode: (mode) => set({ editMode: mode }),
-}));
+// export const useSelectionStore = create((set) => ({
+//   selectedApp: null,
+//   setSelectedApp: (app) => set({ selectedApp: app }),
+//   selectedAppKey: null,
+//   setSelectedAppKey: (key) => set({ selectedAppKey: key }),
+//   editMode: false,
+//   setEditMode: (mode) => set({ editMode: mode }),
+// }));
 
 // export const useRootStore = create((set) => ({
 //   ...appCollectionStore(),

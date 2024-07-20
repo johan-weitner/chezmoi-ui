@@ -3,26 +3,17 @@ import { Stack, Text, Pagination } from "@mantine/core";
 import { rootStore } from "store/store";
 import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
-import { useClientManager } from "core/ClientManager";
 
 const PaginationBar = (props) => {
-	const { page, getTotalSize, pageCount, activeFilter } =
-		rootStore.store.getState();
-	const { getPageContent } = useClientManager();
-	const [currentPage, setCurrentPage] = useState(0);
+	const { currentPage, totalCount, currentFilter, gotoPage, pageCount } = props;
 
 	useEffect(() => {
-		console.log(`Page: ${page},
-			Total: ${getTotalSize(rootStore.store.getState())},
-			Count: ${pageCount}`);
-		setCurrentPage(page);
-	}, [page]);
-
-	const gotoPage = (page) => {
-		console.log(`Goto page: ${page}`);
-		setCurrentPage(page);
-		rootStore.set.page(page);
-	};
+		console.log(`Pagination.jsx:
+			currentPage: ${currentPage},
+			Total: ${totalCount},
+			Count: ${pageCount});
+			currentFilter: ${currentFilter}`);
+	}, []);
 
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
@@ -40,15 +31,14 @@ const PaginationBar = (props) => {
 				style={{ textAlign: "left", margin: "10px 0 0 20px" }}
 				className={css.paginationInfo}
 			>
-				{activeFilter && (
+				{currentFilter && (
 					<span>
 						{"Filtered by "}
-						<b>{filterModel[activeFilter].title.toLowerCase()}</b>
+						<b>{filterModel[currentFilter].title.toLowerCase()}</b>
 						{" ⋅ "}
 					</span>
 				)}
-				Page {page} of {pageCount} ⋅ {getTotalSize(rootStore.store.getState())}{" "}
-				apps in total.
+				Page {currentPage} of {pageCount} ⋅ {totalCount} apps in total.
 			</Text>
 		</Stack>
 	);

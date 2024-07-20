@@ -22,7 +22,13 @@ import {
 	memoizedSelectAppByKey,
 } from "store/selectors";
 import { rootStore } from "store/store";
-import { getAllApps, deleteApp, updateApp, addApp } from "api/appCollectionApi";
+import {
+	getAllApps,
+	deleteApp,
+	updateApp,
+	addApp,
+	rawApi,
+} from "api/appCollectionApi";
 
 const queryClient = new QueryClient();
 
@@ -50,7 +56,22 @@ const queryClient = new QueryClient();
 export const useClientManager = () => {
 	const { store } = rootStore;
 	const state = store.getState();
-	const { page, selectedAppKey, editMode, pageCount, totalCount } = state;
+	const { page, selectedAppKey, editMode, pageCount, getTotalSize } = state;
+	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
+
+	useEffect(() => {
+		console.log("ClientManager: Seeding client...");
+		seedStore().then((apps) => {
+			console.log("ClientManager: Fetched data payload: ", apps?.length);
+			const list = getPageContent();
+			rootStore.set.pageContent(list);
+
+			console.log(`ClientManager:
+			Page: ${page},
+			Total: ${getTotalSize(rootStore.store.getState())},
+			Count: ${pageCount}`);
+		});
+	}, []);
 
 	useEffect(() => {
 		console.log("ClientManager hook: Page changed - fetching new content");
@@ -60,14 +81,28 @@ export const useClientManager = () => {
 		Array.isArray(oldPage) && console.log(oldPage[0]?.key);
 	}, [page]);
 
-	const seedStore = () => {
+	const seedStore = async () => {
 		getAllApps().then((apps) => {
-			rootStore.set.appCollection(apps);
-			rootStore.set.totalCount(apps?.length);
-			rootStore.set.pageCount(
-				Math.ceil(apps.length / rootStore.get.pageSize()),
+			console.log(
+				`ClientManager: Seeding app collection: Got ${apps.length} apps`,
 			);
+			const totalCount = apps?.length || 0;
+			const pageCount = Math.ceil(apps.length / PAGE_SIZE);
+
+			console.log(`ClientManager:
+			totalCount: ${totalCount},
+			pageCount: ${pageCount},
+			PAGE_SIZE: ${PAGE_SIZE}`);
+
+			rootStore.set.appCollection(apps);
+			rootStore.set.totalCount(totalCount);
+			rootStore.set.pageCount(pageCount);
 			rootStore.set.page(1);
+			console.log(`ClientManager: Populated global state:
+				appCollection: ${rootStore.get.appCollection()?.length}
+				totalCount: ${rootStore.get.totalCount()}
+				pageCount: ${rootStore.get.pageCount()}
+				page: ${rootStore.get.page()}`);
 			return openFirstPage();
 		});
 	};
@@ -82,8 +117,10 @@ export const useClientManager = () => {
 		return apps;
 	};
 
-	const openPage = (page) => {
+	const gotoPage = (page) => {
+		console.log(`ClientManager: Goto page: ${page}`);
 		const apps = selectPageContent(state);
+		rootStore.set.page(page);
 		rootStore.set.pageContent(apps);
 		return apps;
 	};
@@ -129,6 +166,7 @@ export const useClientManager = () => {
 
 	const getPageContent = () => {
 		const apps = selectPageContent(state);
+		rootStore.set.pageContent(apps);
 		return apps;
 	};
 
@@ -233,6 +271,7 @@ export const getCurrentIndex = (state) => {
 	return {
 		seedStore,
 		openFirstPage,
+		openPage: gotoPage,
 		refreshAppCollection,
 		selectPrevApp,
 		selectNextApp,
@@ -241,5 +280,6 @@ export const getCurrentIndex = (state) => {
 		deleteItem,
 		addItem,
 		editItem,
+		gotoPage,
 	};
 };
