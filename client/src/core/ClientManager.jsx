@@ -200,7 +200,7 @@ export const useClientManager = () => {
 	const editItem = (appKey) => {
 		console.log(`ClientManager: Editing app with key: ${appKey}`);
 		if (appKey) {
-			const app = memoizedSelectAppByKey(state, appKey);
+			const app = selectAppByKey(appKey);
 			rootStore.set.selectedApp(app);
 			rootStore.set.selectedAppKey(appKey);
 		}

@@ -5,6 +5,8 @@ import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
+import { rootStore } from "store/store";
+import { useClientManager } from "core/ClientManager";
 
 const EditView = forwardRef(function EditView(props, ref) {
 	const { theme } = props;
@@ -22,7 +24,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 
 	return (
 		<Modal
-			opened={editMode}
+			opened={rootStore.use.editMode()}
 			keepMounted={false}
 			onClose={() => setEditMode(false)}
 			overlayProps={{
@@ -48,11 +50,11 @@ const EditView = forwardRef(function EditView(props, ref) {
 						<FallbackComponent error={error.message} />
 					)}
 				>
-					{selectedApp || isNewApp ? (
+					{/* {rootStore.get.selectedApp() || isNewApp ? ( */}
 						<EditViewForm
-							isPopoverOpen={editMode}
-							closePopover={() => setEditMode(false)}
-							selectedApp={selectedApp}
+							isPopoverOpen={rootStore.use.editMode()}
+							closePopover={() => rootStore.set.editMode(false)}
+							selectedApp={rootStore.use.selectedApp()}
 							setSelectedAppKey={() => {}}
 							gotoPrev={gotoPrev}
 							gotoNext={gotoNext}
@@ -61,7 +63,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 							forceUpdate={forceUpdate}
 							randomId={randomId}
 						/>
-					) : null}
+					// ) : null}
 				</ErrorBoundary>
 			</Card>
 		</Modal>

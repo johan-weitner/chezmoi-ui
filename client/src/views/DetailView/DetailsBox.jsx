@@ -9,9 +9,12 @@ import {
 import { appModelInstallerFields } from "api/appModel";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
+import { useClientManager } from "core/ClientManager";
+import { rootStore } from "../../store/store";
 
 const DetailsBox = (props) => {
 	const { selectedApp, editMode } = props;
+	const { editItem, deleteItem } = useClientManager();
 	const tags = [];
 	const indicateEdit = selectedApp?.edited ? <EditedIndicator /> : null;
 
@@ -94,9 +97,9 @@ const DetailsBox = (props) => {
 				</div>
 			)}
 
-			{/* <Group justify="center" p="md">
+			<Group justify="center" p="md">
 				<Button
-					onClick={() => editItem(selectedAppKey)}
+					onClick={() => editItem(rootStore.get.selectedAppKey())}
 					className={classes.editBtn}
 					leftSection={
 						<ICON.edit
@@ -129,7 +132,7 @@ const DetailsBox = (props) => {
 				>
 					Delete
 				</Button>
-			</Group> */}
+			</Group>
 		</div>
 	);
 };
