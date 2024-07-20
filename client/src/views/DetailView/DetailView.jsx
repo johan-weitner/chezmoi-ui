@@ -22,17 +22,19 @@ import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
 import { memoizedSelectApp } from "core/Selectors";
+import { useClientManager } from "core/ClientManager";
+import { rootStore } from "store/store";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
 	const modalRef = useRef();
-	const selectedApp = memoizedSelectApp(store);
 	const theme = useMantineTheme();
 
+	const { gotoPrev, gotoNext } = useClientManager();
+
 	useEffect(() => {
-		console.log("selectedApp:", selectedApp);
-		setCurrentApp(selectedApp);
-	}, [selectedApp]);
+		setCurrentApp(rootStore.get.selectedApp());
+	}, [rootStore.use.selectedAppKey()]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);
@@ -50,7 +52,7 @@ const DetailView = (props) => {
 							gotoPrev={gotoPrev}
 							gotoNext={gotoNext}
 							theme={theme}
-							hasSelection={selectedApp ?? false}
+							hasSelection={currentApp ?? false}
 						/>
 						<Card
 							shadow="md"
@@ -59,7 +61,11 @@ const DetailView = (props) => {
 							mt="sm"
 							style={{ textAlign: "left" }}
 						>
-							{selectedApp ? <DetailsBox /> : <Legend />}
+							{currentApp ? (
+								<DetailsBox selectedApp={currentApp} />
+							) : (
+								<Legend />
+							)}
 						</Card>
 					</Card>
 				</StickyBox>

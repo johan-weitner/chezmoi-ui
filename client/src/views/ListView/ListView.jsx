@@ -11,11 +11,7 @@ import { useClientManager } from "core/ClientManager";
 import { useHotkeys } from "react-hotkeys-hook";
 
 const ListView = (props) => {
-	const state = rootStore.store.getState();
-	const { selectedAppKey, page, getTotalSize, pageCount } = state;
 	const {
-		seedStore,
-		getPageContent,
 		setSelectedAppKey,
 		deleteItem,
 		editItem,
@@ -24,18 +20,6 @@ const ListView = (props) => {
 		selectNextApp,
 		gotoPage,
 	} = useClientManager();
-
-	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
-
-	// useEffect(() => {
-	// 	DEBUG &&
-	// 		console.log(`ListView.jsx:
-	// 		Page: ${page},
-	// 		Total: ${getTotalSize(rootStore.store.getState())},
-	// 		Count: ${pageCount}`);
-
-	// 	setCurrentPage(page);
-	// }, [rootStore.use.page()]);
 
 	useHotkeys("alt + b", () => selectPrevApp());
 	useHotkeys("alt + n", () => selectNextApp());
@@ -53,7 +37,7 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				<ListViewHeader />
-				{pageCount > 1 && (
+				{rootStore.get.pageCount() > 1 && (
 					<PaginationBar
 						currentPage={rootStore.get.page()}
 						totalCount={rootStore.get.appCollection()?.length}

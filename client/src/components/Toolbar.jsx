@@ -1,20 +1,17 @@
 import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
-import {
-	IconHome2,
-	IconPlayerTrackNext,
-	IconPlayerTrackPrev,
-} from "@tabler/icons-react";
+import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
+import { useClientManager } from "core/ClientManager";
 import classes from "components/Toolbar.module.css";
-import logo from "./logo.svg";
 import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {
 	const [active, setActive] = useState(null);
-
+	const { isLoading, editItem, deleteItem, gotoPrev, gotoNext } =
+		useClientManager();
 	const stroke = 1.5;
 
 	const menuData = [
@@ -23,7 +20,7 @@ const Toolbar = (props) => {
 				<ICON.add style={{ width: rem(20), height: rem(20) }} stroke={stroke} />
 			),
 			label: "Add new app",
-			action: editNewItem,
+			action: editItem,
 		},
 		{
 			Icon: (

@@ -24,6 +24,7 @@ import {
 import { rootStore } from "store/store";
 import {
 	getAllApps,
+	fetchApp,
 	deleteApp,
 	updateApp,
 	addApp,
@@ -110,7 +111,19 @@ export const useClientManager = () => {
 	};
 
 	const setSelectedAppKey = (key) => {
+		console.log(`ClientManager: Set selected app key: ${key}`);
 		rootStore.set.selectedAppKey(key);
+		console.log(
+			`ClientManager: Selected app key: ${rootStore.get.selectedAppKey()}`,
+		);
+		rootStore.set.isLoading(true);
+		const app = fetchApp(key).then((app) => {
+			rootStore.set.isLoading(false);
+			rootStore.set.selectedApp(app);
+			console.log(
+				`ClientManager: Set app object in store: ${rootStore.get.selectedApp()?.key}`,
+			);
+		});
 	};
 
 	const openFirstPage = () => {

@@ -6,9 +6,11 @@ import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {
 	const { currentPage, totalCount, currentFilter, gotoPage, pageCount } = props;
+	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
 	useEffect(() => {
-		console.log(`Pagination.jsx:
+		DEBUG &&
+			console.log(`Pagination.jsx:
 			currentPage: ${currentPage},
 			Total: ${totalCount},
 			Count: ${pageCount});

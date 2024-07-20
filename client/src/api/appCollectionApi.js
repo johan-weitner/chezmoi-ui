@@ -67,6 +67,18 @@ export const fetchAppPage = async (page = 1, limit = 20) => {
 	throw new Error('Query returned no list');
 };
 
+export const fetchApp = async (key) => {
+	const app = await axios
+		.get(`${BASE_URL}/getApp?key=${key}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			console.error(error);
+		});
+	return app;
+};
+
 export const postUpdatedApp = async () => {
 	updatedData.edited = "true";
 	const updatedNode = _mapAppData(updatedData);
@@ -121,7 +133,7 @@ export const postAppDeletion = async (key) => {
 	return result;
 };
 
-export const rawApi = { fetchApps, fetchAppPage, postUpdatedApp, postNewApp, postAppDeletion };
+export const rawApi = { fetchApps, fetchAppPage, fetchApp, postUpdatedApp, postNewApp, postAppDeletion };
 
 /**
  * API functions wrapped in React Query
