@@ -1,12 +1,7 @@
-import { useState } from "react";
 import { Card, Skeleton } from "@mantine/core";
-import { useEffect } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
 import classes from "views/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
-import { rootStore } from "store/store";
-import { useClientManager } from "core/ClientManager";
 
 const List = (props) => {
 	const {

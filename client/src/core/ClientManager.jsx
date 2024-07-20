@@ -32,54 +32,52 @@ import {
 
 const queryClient = new QueryClient();
 
-// const appStore = appCollectionStore();
-// const pageStore = usePageStore();
-// const selectionStore = useSelectionStore();
-
-// const {
-//   setAppCollection,
-//   saveUpdatedApp,
-//   saveNewApp
-// } = useAppCollectionStore();
-
-// const {
-// 	setPage,
-// 	setPageCount,
-// 	setPageSize,
-// 	setInReverse,
-// 	setActiveFilter,
-// 	setFilteredList,
-// } = usePageStore();
-
-// const { setSelectedApp, setSelectedAppKey, setEditMode } = useSelectionStore();
-
 export const useClientManager = () => {
 	const { store } = rootStore;
 	const state = store.getState();
 	const { page, selectedAppKey, editMode, pageCount, getTotalSize } = state;
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
+	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
 	useEffect(() => {
-		console.log("ClientManager: Seeding client...");
+		console.log("--=== ClientManager: Seeding client... ===--");
+		rootStore.set.isLoading(true);
 		seedStore().then((apps) => {
-			console.log("ClientManager: Fetched data payload: ", apps?.length);
+			DEBUG &&
+				console.log("ClientManager: Fetched data payload: ", apps?.length);
 			const list = getPageContent();
 			rootStore.set.pageContent(list);
 
-			console.log(`ClientManager:
+			DEBUG &&
+				console.log(`ClientManager:
 			Page: ${page},
 			Total: ${getTotalSize(rootStore.store.getState())},
 			Count: ${pageCount}`);
+			rootStore.set.isLoading(false);
+			console.log("--=== ClientManager: Done seeding client! ===--");
 		});
 	}, []);
 
 	useEffect(() => {
+		if (!rootStore.get.appCollection()) {
+			return;
+		}
+		rootStore.set.isLoading(true);
 		console.log("ClientManager hook: Page changed - fetching new content");
 		const newPage = getPageContent();
 		const oldPage = rootStore.get.pageContent();
-		Array.isArray(newPage) && console.log(newPage[0]?.key);
-		Array.isArray(oldPage) && console.log(oldPage[0]?.key);
-	}, [page]);
+		// Array.isArray(newPage) && console.log(newPage[0]?.key);
+		// Array.isArray(oldPage) && console.log(oldPage[0]?.key);
+
+		DEBUG &&
+			console.log(`ClientManager hook:
+			Page: ${page},
+			Total: ${getTotalSize(rootStore.store.getState())},
+			Count: ${pageCount}`);
+
+		rootStore.set.page(page);
+		rootStore.set.isLoading(false);
+	}, [rootStore.use.page()]);
 
 	const seedStore = async () => {
 		getAllApps().then((apps) => {
@@ -89,7 +87,8 @@ export const useClientManager = () => {
 			const totalCount = apps?.length || 0;
 			const pageCount = Math.ceil(apps.length / PAGE_SIZE);
 
-			console.log(`ClientManager:
+			DEBUG &&
+				console.log(`ClientManager:
 			totalCount: ${totalCount},
 			pageCount: ${pageCount},
 			PAGE_SIZE: ${PAGE_SIZE}`);
@@ -98,11 +97,14 @@ export const useClientManager = () => {
 			rootStore.set.totalCount(totalCount);
 			rootStore.set.pageCount(pageCount);
 			rootStore.set.page(1);
-			console.log(`ClientManager: Populated global state:
+
+			DEBUG &&
+				console.log(`ClientManager: Populated global state:
 				appCollection: ${rootStore.get.appCollection()?.length}
 				totalCount: ${rootStore.get.totalCount()}
 				pageCount: ${rootStore.get.pageCount()}
 				page: ${rootStore.get.page()}`);
+
 			return openFirstPage();
 		});
 	};

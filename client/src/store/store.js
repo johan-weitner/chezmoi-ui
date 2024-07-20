@@ -65,7 +65,7 @@ const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
 // });
 
 export const rootStore = createStore('root')({
-  appCollection: [],
+  appCollection: null,
   totalCount: 0,
   setAppCollection: (apps) => {
     set({ appCollection: apps });
