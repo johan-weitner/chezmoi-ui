@@ -40,19 +40,22 @@ const EditViewForm = (props) => {
 			return;
 		}
 		console.log("Is NOT new app");
+		setIsNewApp(false);
 		reset(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
-		if (rootStore.get.getIsNewApp()) {
+		if (isNewApp) {
+			console.log("Saving NEW app");
 			saveNewItem(data);
 		} else {
+			console.log("Updating EXISTING app");
 			updateItem(data);
 		}
 		setSelectedAppKey(null);
-		closePopover();
+		rootStore.set.editMode(false);
 	};
 
 	const resetForm = () => {
@@ -60,7 +63,7 @@ const EditViewForm = (props) => {
 		reset({
 			defaultValues: EMPTY_APP,
 		});
-		forceUpdate();
+		// forceUpdate();
 	};
 
 	return (

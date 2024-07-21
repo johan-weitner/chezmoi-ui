@@ -1,8 +1,12 @@
-import { fetchApps, fetchAppPage, fetchApp, postUpdatedApp, postNewApp, postAppDeletion } from './appCollectionApi';
+import { fetchApps, getPageSlice, fetchApp, updateApp, saveNewApp, deleteApp } from './appCollectionApi';
+import { vi } from 'vitest'
 import axios from 'axios';
-import { vi } from 'vitest';
+import jest from 'jest';
 
 vi.mock('axios');
+
+
+const mockAppCollection = Array(50).fill().map((_, i) => ({ id: i + 1 }));
 
 describe('appCollectionApi', () => {
   const BASE_URL = '/api';
@@ -27,19 +31,27 @@ describe('appCollectionApi', () => {
   });
 
   describe('fetchAppPage', () => {
-    it('should fetch a page of apps successfully', async () => {
-      const apps = Array(40).fill().map((_, index) => ({ id: index + 1 }));
-      const page = 2;
-      const limit = 20;
-      const expectedApps = apps.slice(20, 40);
-      const queryClient = {
-        getQueryData: vi.fn().mockReturnValue(apps),
-      };
-      const result = await fetchAppPage(page, limit, queryClient);
-      console.log('result', result, 'expected', expectedApps);;
-      // expect(result).toEqual(expectedApps);
-      expect(1).toEqual(1);
+    // Test for successful data fetching and slicing
+    it('returns the correct slice of apps for the first page', async () => {
+      const apps = getPageSlice(1, 10, mockAppCollection);
+      expect(apps).toHaveLength(10);
+      expect(apps[0].id).toBe(1);
+    });
 
+    it('returns the correct slice of apps for a subsequent page', async () => {
+      const apps = getPageSlice(2, 10, mockAppCollection);
+      expect(apps).toHaveLength(10);
+      expect(apps[0].id).toBe(11);
+    });
+
+    // Test for empty or undefined data
+    it('handles empty array correctly', async () => {
+      const apps = getPageSlice(1, 10, []);
+      expect(apps).toEqual([]);
+    });
+
+    it('handles undefined correctly', async () => {
+      expect(() => getPageSlice(1, 10, undefined)).toThrow();
     });
   });
 
@@ -59,24 +71,23 @@ describe('appCollectionApi', () => {
     });
   });
 
-  describe('postUpdatedApp', () => {
+  describe('updateApp', () => {
     it('should post updated app data successfully', async () => {
       axios.post.mockResolvedValue(mockAppResponse);
-      const result = await postUpdatedApp(mockApp);
+      const result = await updateApp(mockApp);
       expect(result).toEqual(mockApp);
     });
 
-    // it('should handle error on updating app data', async () => {
-    //   console.error = vi.fn();
-    //   axios.post.mockResolvedValue(mockData);
-    //   await expect(postUpdatedApp(mockApp)).rejects.toEqual(error);
-    // });
+    it('should handle error on updating app data', async () => {
+      axios.post.mockResolvedValue(null);
+      await expect(() => updateApp(mockApp)).rejects.toThrow();
+    });
   });
 
-  describe('postNewApp', () => {
+  describe('saveNewApp', () => {
     it('should post new app data successfully', async () => {
       axios.post.mockResolvedValue(mockAppResponse);
-      const result = await postNewApp(mockApp);
+      const result = await saveNewApp(mockApp);
       // expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/addNode`, {
       //   data: {
       //     ...mockApp
@@ -87,15 +98,15 @@ describe('appCollectionApi', () => {
 
     it('should handle error on posting new app data', async () => {
       axios.post.mockRejectedValue(error);
-      await expect(postNewApp(mockApp)).rejects.toEqual(error);
+      await expect(saveNewApp(mockApp)).rejects.toEqual(error);
     });
   });
 
-  describe('postAppDeletion', () => {
+  describe('deleteApp', () => {
     it('should delete an app successfully', async () => {
       const key = 'testKey';
       axios.delete.mockResolvedValue({ data: 'Deleted' });
-      const result = await postAppDeletion(key);
+      const result = await deleteApp(key);
       expect(axios.delete).toHaveBeenCalledWith(`${BASE_URL}/deleteNode`, { params: { key } });
       expect(result).toEqual('Deleted');
     });
@@ -103,7 +114,7 @@ describe('appCollectionApi', () => {
     it('should handle deletion error', async () => {
       const key = 'testKey';
       axios.delete.mockRejectedValue(error);
-      await expect(postAppDeletion(key)).rejects.toEqual(error);
+      await expect(deleteApp(key)).rejects.toEqual(error);
     });
   });
 });

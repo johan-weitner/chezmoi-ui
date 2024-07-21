@@ -65,12 +65,14 @@ export const getCurrentIndex = () => {
 
 export const selectApp = (selectedAppKey) => {
   const appCollection = rootStore.get.appCollection();
-  return appCollection.find((app) => app.key === selectedAppKey);
+  console.log('SELECTORS: selectApp: ', appCollection);
+  return rootStore.get.appCollection().find((app) => app.key === selectedAppKey);
 };
 
 export const selectAppByKey = (key) => {
   const appCollection = rootStore.get.appCollection();
-  const app = appCollection.find((app) => app.key === key);
+  console.log('SELECTORS: selectAppByKey: ', appCollection);
+  const app = rootStore.get.appCollection().find((app) => app.key === key);
   if (!app) {
     throw new Error(`App with key ${key} not found`);
   }

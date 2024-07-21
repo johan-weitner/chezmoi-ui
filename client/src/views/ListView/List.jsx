@@ -4,6 +4,7 @@ import classes from "views/MainView/MainView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
 import { rootStore } from "store/store";
+import { selectAppByKey } from "store/selectors";
 
 const List = (props) => {
 	const { deleteItem, editItem } = props;
@@ -17,6 +18,7 @@ const List = (props) => {
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
 		rootStore.set.selectedAppKey(key);
+		rootStore.set.selectedApp(selectAppByKey(key));
 	};
 
 	const skeleton = Array(20);

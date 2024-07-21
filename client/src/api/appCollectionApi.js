@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { APP_FORM } from "../constants/appForm";
 
 const BASE_URL = '/api';
-const CACHE_TTL = import.meta.env.VITE_CACHE_TTL;
+// const CACHE_TTL = import.meta.env.VITE_CACHE_TTL;
 
 /**
  * Helper functions
@@ -56,11 +56,15 @@ export const fetchApps = async () => {
 };
 
 export const fetchAppPage = async (page = 1, limit = 20) => {
+	const apps = await fetchApps() || [];
+	return getPageSlice(page, limit, apps);
+};
+
+export const getPageSlice = (page, limit, appCollection) => {
 	const skip = page === 1 ? 0 : (page - 1) * limit;
 	const take = limit;
-	const apps = await queryClient.getQueryData(['appCollection']) || [];
-	if (Array.isArray(apps)) {
-		const slice = Array.isArray(apps) && apps?.slice(skip, skip + take);
+	if (Array.isArray(appCollection)) {
+		const slice = Array.isArray(appCollection) && appCollection?.slice(skip, skip + take);
 		return slice;
 	}
 	throw new Error('Query returned no listt');
@@ -79,11 +83,12 @@ export const fetchApp = async (key) => {
 };
 
 export const updateApp = async (updatedData) => {
+	console.log('API: Saving new app:', updatedData);
 	const updatedNode = _mapAppData(updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedNode,
-			edited: true
+			edited: "true"
 		})
 		.then((response) => {
 			return response.data;
@@ -97,12 +102,13 @@ export const updateApp = async (updatedData) => {
 export const saveNewApp = async (data) => {
 	const app = _mapAppData(data);
 	const fixedNullValuesApp = _transformNullValues(app);
+	console.log('API: Saving new app:', fixedNullValuesApp);
 
 	return axios
 		.post(`${BASE_URL}/addNode`, {
 			data: {
 				...fixedNullValuesApp,
-				edited: true
+				edited: "true"
 			},
 		})
 		.then((response) => {
@@ -154,11 +160,11 @@ export const rawApi = { fetchApps, fetchAppPage, fetchApp, updateApp, saveNewApp
 const queryClient = new QueryClient();
 
 // Set cache TTL for React Query, defined in local .env file as VITE_CACHE_TTL
-queryClient.setDefaultOptions({
-	queries: {
-		cacheTime: CACHE_TTL,
-	},
-});
+// queryClient.setDefaultOptions({
+// 	queries: {
+// 		cacheTime: CACHE_TTL,
+// 	},
+// });
 
 export const getAllApps = () => {
 	const apps = queryClient.fetchQuery({

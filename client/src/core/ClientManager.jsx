@@ -28,6 +28,7 @@ import {
 	deleteApp,
 	updateApp,
 	addApp,
+	saveNewApp,
 } from "api/appCollectionApi";
 
 const queryClient = new QueryClient();
@@ -229,9 +230,18 @@ export const useClientManager = () => {
 
 	const updateItem = (app) => {
 		setIsLoading(true);
-		app.edited = true;
-		updateApp(app.appKey).then(() => {
-			rootStore.set.appCollection(...prev, app);
+		const apps = rootStore.get.appCollection();
+		updateApp(app).then(() => {
+			rootStore.set.appCollection(...apps, {
+				...app,
+				edited: "true",
+			});
+
+			const index = apps.findIndex((item) => item.key === app.key);
+			apps[index] = app;
+			rootStore.set.appCollection(apps);
+			gotoPage(rootStore.get.page());
+
 			setIsLoading(false);
 			invalidateCache();
 		});
@@ -249,11 +259,13 @@ export const useClientManager = () => {
 
 	const saveNewItem = (app) => {
 		setIsLoading(true);
-		addApp(app).then(() => {
-			rootStore.set.appCollection(...prev, app);
-			// if (page === pageCount.length) {
-			// 	setPageContent([...pageContent, app]);
-			// }
+		const apps = rootStore.get.appCollection();
+		const pageContent = rootStore.get.pageContent();
+		saveNewApp(app).then(() => {
+			rootStore.set.appCollection(...apps, app);
+			if (page === pageCount.length) {
+				rootStore.set.pageContent([...pageContent, app]);
+			}
 			setIsLoading(false);
 			invalidateCache();
 		});
