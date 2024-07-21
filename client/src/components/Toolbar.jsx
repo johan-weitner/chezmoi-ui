@@ -10,7 +10,7 @@ import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {
 	const [active, setActive] = useState(null);
-	const { isLoading, editItem, deleteItem, gotoPrev, gotoNext } =
+	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext } =
 		useClientManager();
 	const stroke = 1.5;
 
@@ -20,7 +20,7 @@ const Toolbar = (props) => {
 				<ICON.add style={{ width: rem(20), height: rem(20) }} stroke={stroke} />
 			),
 			label: "Add new app",
-			action: editItem,
+			action: addItem,
 		},
 		{
 			Icon: (

@@ -14,23 +14,32 @@ import { useClientManager } from "core/ClientManager";
 import { rootStore } from "../../store/store";
 
 const EditViewForm = (props) => {
-	const [isNewApp, setIsNewApp] = useState(null);
+	const [isNewApp, setIsNewApp] = useState(true);
 	const {
 		updateItem,
 		saveNewItem,
 		closePopover,
 		selectedApp,
 		setSelectedAppKey,
-		setIsEditMode,
 	} = useClientManager();
 
-	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
+	const defaultValues =
+		isNewApp || !rootStore.get.selectedApp() ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
 		defaultValues: defaultValues,
 	});
 	const debugMode = import.meta.env.VITE_DEBUG;
 
 	useEffect(() => {
+		const app = rootStore.get.selectedAppKey();
+		console.log(app);
+		if (!app) {
+			console.log("EditViewForm: Is new app - resetting form");
+			setIsNewApp(true);
+			resetForm();
+			return;
+		}
+		console.log("Is NOT new app");
 		reset(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
 
@@ -44,9 +53,6 @@ const EditViewForm = (props) => {
 		}
 		setSelectedAppKey(null);
 		closePopover();
-		// const str = isNewApp ? "add" : "update";
-		// console.error(`Failed to ${str} app`, error);
-		// toast.error(`Failed to ${str} app`);
 	};
 
 	const resetForm = () => {

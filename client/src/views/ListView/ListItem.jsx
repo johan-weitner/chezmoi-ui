@@ -29,10 +29,10 @@ export const ListItem = (props) => {
 		console.log(`Selection changed: ${selectedKey}`);
 	}, [rootStore.use.selectedAppKey()]);
 
-	useEffect(() => {
-		setIsEditMode(rootStore.get.editMode());
-		console.log(`EditMode changed: ${isEditMode}`);
-	}, [rootStore.use.editMode()]);
+	// useEffect(() => {
+	// 	setIsEditMode(rootStore.get.editMode());
+	// 	console.log(`EditMode changed: ${isEditMode}`);
+	// }, [rootStore.use.editMode()]);
 
 	return (
 		<ErrorBoundary

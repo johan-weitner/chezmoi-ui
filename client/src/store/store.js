@@ -97,13 +97,15 @@ export const rootStore = createStore('root')({
   selectedApp: null,
   selectedAppKey: null,
   editMode: false,
-  getIsNewApp: state => state.selectedAppKey === null,
+  getIsNewApp: state => getState().selectedAppKey === null,
   isLoading: false,
   error: null,
   middlewares: ['devtools']
 });
 
-
+const getState = () => {
+  return rootStore.store.getState();
+};
 
 
 

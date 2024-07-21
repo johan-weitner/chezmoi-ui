@@ -40,6 +40,12 @@ export const useClientManager = () => {
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
 	useEffect(() => {
+		if (
+			rootStore.get.appCollection() &&
+			rootStore.get.appCollection().length > 0
+		) {
+			return;
+		}
 		console.log("--=== ClientManager: Seeding client... ===--");
 		rootStore.set.isLoading(true);
 		seedStore().then((apps) => {
@@ -205,7 +211,7 @@ export const useClientManager = () => {
 			rootStore.set.selectedAppKey(appKey);
 		}
 		rootStore.set.editMode(true);
-		console.log(`ClientManager: Edit flag set: ${editMode}`);
+		console.log(`ClientManager: Edit flag set: ${rootStore.get.editMode()}`);
 	};
 
 	const updateItem = (app) => {
@@ -222,11 +228,10 @@ export const useClientManager = () => {
 		console.log("Adding new item");
 		rootStore.set.selectedApp(null);
 		rootStore.set.selectedAppKey(null);
-		rootStore.setEditMode(true);
-		console.log(`ClientManager: Edit flag set: ${editMode}`);
-		console.log(
-			`ClientManager: Emptied app selection: ${selectedAppKey === null}`,
-		);
+		rootStore.set.editMode(true);
+		console.log(`ClientManager:
+			- Edit flag set: ${editMode}
+			- Emptied app selection: ${selectedAppKey === null}`);
 	};
 
 	const saveNewItem = (app) => {
