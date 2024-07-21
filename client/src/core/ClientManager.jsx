@@ -123,6 +123,8 @@ export const useClientManager = () => {
 
 	const openFirstPage = () => {
 		const apps = selectPageContent(state);
+		gotoPage(1);
+		rootStore.set.selectedAppKey(apps[0]?.key);
 		rootStore.set.pageContent(apps);
 		return apps;
 	};

@@ -22,7 +22,6 @@ import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import EditView from "views/EditView/EditView";
 import Legend from "./Legend";
-import { memoizedSelectApp } from "core/Selectors";
 import { useClientManager } from "core/ClientManager";
 import { rootStore } from "store/store";
 

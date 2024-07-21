@@ -5,34 +5,26 @@ import { ErrorBoundary } from "react-error-boundary";
 import { ICON } from "constants/icons";
 import { EditedIndicator } from "components/Indicator";
 import classes from "views/MainView/MainView.module.css";
-import { rootStore } from "../../store/store";
+import { rootStore } from "store/store";
 
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
-
-	const [selectedKey, setSelectedKey] = useState(null);
-	const [isEditMode, setIsEditMode] = useState(null);
+	// const selectedKey = rootStore.get.selectedAppKey();
+	// const [currentKey, setCurrentKey] = useState(selectedKey);
 
 	const className =
-		selectedKey && selectedKey === app.key ? classes.selected : null;
+		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
 
-	useEffect(() => {
-		setSelectedKey(rootStore.get.selectedAppKey());
-		setIsEditMode(rootStore.get.editMode());
-		console.log(`ListItem: Key: ${app.key} | selectedKey: ${selectedKey}`);
-	}, []);
-
-	useEffect(() => {
-		setSelectedKey(rootStore.get.selectedAppKey());
-		console.log(`Selection changed: ${selectedKey}`);
-	}, [rootStore.use.selectedAppKey()]);
-
 	// useEffect(() => {
-	// 	setIsEditMode(rootStore.get.editMode());
-	// 	console.log(`EditMode changed: ${isEditMode}`);
-	// }, [rootStore.use.editMode()]);
+	// 	setCurrentKey(rootStore.get.selectedAppKey());
+	// }, [rootStore.use.selectedAppKey()]);
+
+	// const selectNewApp = () => {
+	// 	setCurrentKey(app.key);
+	// 	rootStore.set.selectedAppKey(app.key);
+	// };
 
 	return (
 		<ErrorBoundary
@@ -44,7 +36,7 @@ export const ListItem = (props) => {
 			>
 				<button
 					className={classes.itemBox}
-					onClick={() => setSelectedAppKey(app.key)}
+					onClick={() => setSelectedAppKey(app?.key)}
 					style={{ width: "100%" }}
 					type="button"
 				>

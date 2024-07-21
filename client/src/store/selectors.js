@@ -4,14 +4,7 @@ import { isStartOfPage, isEndOfPage, findIndex } from "utils/pageUtils";
 
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
-const state = rootStore.store.getState();
-const { store } = rootStore;
-const { getState } = store;
 
-/**
- * Raw selectors - these are the basic selectors that are used to get the data
- * from the store without the protection of memoization.
- */
 export const getAppCollection = (state) => state.appCollection;
 export const getPage = (state) => state.page;
 export const getPageCount = (state) => state.pageCount;
@@ -25,14 +18,15 @@ export const getSelectedAppKey = (state) => state.selectedAppKey;
 export const getEditMode = (state) => state.editMode;
 
 export const getPreviousKey = (state) => {
+  const appCollection = rootStore.get.appCollection();
   const index = getCurrentIndex(state);
   if (index > 0) {
-    return getAppCollection(state)[index - 1].key;
+    return appCollection[index - 1].key;
   }
-  return getAppCollection(state)[0].key;
+  return appCollection[0].key;
 };
 
-export const getNextKey = (state) => {
+export const getNextKey = () => {
   const index = getCurrentIndex();
   const appCollection = rootStore.get.appCollection();
   if (index < rootStore.get.totalCount() - 1) {
@@ -41,14 +35,14 @@ export const getNextKey = (state) => {
   return appCollection[appCollection?.length - 1].key;
 };
 
-export const selectPageContent = (state) => {
+export const selectPageContent = () => {
   DEBUG && console.log('SELECTOR: selectPageContent');
   const {
     appCollection,
     page,
     inReverse,
     pageContent
-  } = state;
+  } = rootStore.store.getState();
   const skip = page < 2 ? 0 : (page - 1) * PAGE_SIZE;
   const cutoff = skip + Number.parseInt(PAGE_SIZE, 10);
   DEBUG && console.log('Slicing: ', page, skip, cutoff);
@@ -68,7 +62,8 @@ export const getCurrentIndex = () => {
   return findIndex(selectedAppKey, appCollection);
 };
 
-export const selectApp = (appCollection, selectedAppKey) => {
+export const selectApp = (selectedAppKey) => {
+  const appCollection = rootStore.get.appCollection();
   return appCollection.find((app) => app.key === selectedAppKey);
 };
 
@@ -81,39 +76,7 @@ export const selectAppByKey = (key) => {
   return app;
 };
 
-
-
-/**
- * Memoized selectors - to prevent unnecessary re-renders.
- */
-export const memoizedSelectApp = createSelector(
-  [getAppCollection, getSelectedAppKey],
-  (appCollection, selectedAppKey) => {
-    return appCollection.find((app) => app.key === selectedAppKey);
-  },
-);
-
-export const memoizedSelectAppByKey = (state, key) => {
-  const appCollection = getAppCollection(state);
-  const app = appCollection.find((app) => app.key === key);
-  if (!app) {
-    throw new Error(`App with key ${key} not found`);
-  }
-  return app;
+export const getFilteredList = (filter, appCollection) => {
+  const filters = rootStore.get.filterModel();
+  return filters[filter].method(appCollection) || [];
 };
-
-export const selectMemoizedPageContent = createSelector(
-  getState,
-  (state) => {
-    const { appCollection, page, pageSize } = state;
-    const skip = page === 1 ? 0 : (page - 1) * pageSize;
-    return appCollection?.slice(skip, skip + pageSize) || [];
-  },
-);
-
-export const getFilteredList = (state) => createSelector(
-  [getActiveFilter, getAppCollection],
-  (filter, appCollection) => {
-    return getFilterModel()[filter].method(appCollection) || [];
-  },
-);

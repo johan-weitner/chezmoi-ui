@@ -12,7 +12,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 
 const ListView = (props) => {
 	const {
-		setSelectedAppKey,
 		deleteItem,
 		editItem,
 		addItem,
@@ -49,12 +48,7 @@ const ListView = (props) => {
 						pageCount={rootStore.get.pageCount()}
 					/>
 				)}
-				<List
-					selectedAppKey={rootStore.get.selectedAppKey()}
-					setSelectedAppKey={setSelectedAppKey}
-					deleteItem={deleteItem}
-					editItem={editItem}
-				/>
+				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
 		</ErrorBoundary>
 	);

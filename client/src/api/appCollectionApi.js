@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { APP_FORM } from "../constants/appForm";
 
-const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+const BASE_URL = '/api';
 const CACHE_TTL = import.meta.env.VITE_CACHE_TTL;
 
 /**
@@ -50,7 +50,7 @@ export const fetchApps = async () => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.error(error);
+			throw error;
 		});
 	return apps;
 };
@@ -63,8 +63,7 @@ export const fetchAppPage = async (page = 1, limit = 20) => {
 		const slice = Array.isArray(apps) && apps?.slice(skip, skip + take);
 		return slice;
 	}
-	console.error('Result is not a list: ', apps);
-	throw new Error('Query returned no list');
+	throw new Error('Query returned no listt');
 };
 
 export const fetchApp = async (key) => {
@@ -74,44 +73,41 @@ export const fetchApp = async (key) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.error(error);
+			throw error;
 		});
 	return app;
 };
 
-export const postUpdatedApp = async () => {
-	updatedData.edited = "true";
+export const postUpdatedApp = async (updatedData) => {
 	const updatedNode = _mapAppData(updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedNode,
+			edited: true
 		})
 		.then((response) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.error(error.message);
-			toast(error.message);
 			throw error;
 		});
 };
 
 export const postNewApp = async (data) => {
 	const app = _mapAppData(data);
-	app.edited = "true";
-	app.desc = app.desc || "No description provided.";
 	const fixedNullValuesApp = _transformNullValues(app);
 
 	return axios
 		.post(`${BASE_URL}/addNode`, {
-			data: { ...fixedNullValuesApp },
+			data: {
+				...fixedNullValuesApp,
+				edited: true
+			},
 		})
 		.then((response) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.error(error.message);
-			toast(error.message);
 			throw error;
 		});
 };
@@ -127,8 +123,7 @@ export const postAppDeletion = async (key) => {
 			return response.data;
 		})
 		.catch((error) => {
-			console.error(error.message);
-			toast(error.message);
+			throw error;
 		});
 	return result;
 };

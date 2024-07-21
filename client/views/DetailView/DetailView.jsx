@@ -22,13 +22,13 @@ import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
-import { memoizedSelectApp } from "core/Selectors";
+import { selectApp } from "core/Selectors";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);
 	const modalRef = useRef();
 	const { store, gotoPrev, gotoNext, editMode } = useClientManager();
-	const selectedApp = memoizedSelectApp(store);
+	const selectedApp = selectApp(store);
 	const theme = useMantineTheme();
 
 	useEffect(() => {
