@@ -146,25 +146,36 @@ export const useClientManager = () => {
 		});
 	};
 
+	const _isFirstOnPage = (appKey) => {
+		const pageContent = rootStore.get.pageContent();
+		return appKey === pageContent[0]?.key;
+	};
+
+	const _isLastOnPage = (appKey) => {
+		const pageContent = rootStore.get.pageContent();
+		return appKey === pageContent[pageContent?.length - 1]?.key;
+	};
+
 	const selectPrevApp = () => {
+		const currentKey = rootStore.get.selectedAppKey();
 		const prevKey = getPreviousKey(state);
 		const prevApp = selectAppByKey(prevKey);
 		rootStore.set.selectedApp(prevApp);
 		rootStore.set.selectedAppKey(prevKey);
-		console.log("Prev appKey: ", prevKey);
-		console.log("Prev app: ", prevApp);
+		if (_isFirstOnPage(currentKey)) {
+			rootStore.set.inReverse(true);
+			gotoPrevPage();
+		}
 	};
 
 	const selectNextApp = () => {
+		const currentKey = rootStore.get.selectedAppKey();
 		const nextKey = getNextKey(state);
 		const nextApp = selectAppByKey(nextKey);
-		console.log(`ClientManager:
-			Next app key: ${nextKey}
-			Next app: ${nextApp.key}`);
 		rootStore.set.selectedApp(nextApp);
 		rootStore.set.selectedAppKey(nextKey);
-		console.log("Next appKey: ", nextKey);
-		console.log("Next app: ", nextApp);
+		rootStore.set.inReverse(false);
+		_isLastOnPage(currentKey) && gotoNextPage();
 	};
 
 	const gotoPrevPage = () => {

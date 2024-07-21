@@ -49,6 +49,7 @@ export const selectPageContent = () => {
   const slice = appCollection?.slice(skip, cutoff) || [];
 
   rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
+  // rootStore.set.inReverse(false);
 
   DEBUG && pageContent && console.log(pageContent[0]?.key);
   DEBUG && pageContent && console.log(slice[0]?.key);
