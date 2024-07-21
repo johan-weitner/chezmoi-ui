@@ -78,7 +78,7 @@ export const fetchApp = async (key) => {
 	return app;
 };
 
-export const postUpdatedApp = async (updatedData) => {
+export const updateApp = async (updatedData) => {
 	const updatedNode = _mapAppData(updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
@@ -93,7 +93,8 @@ export const postUpdatedApp = async (updatedData) => {
 		});
 };
 
-export const postNewApp = async (data) => {
+
+export const saveNewApp = async (data) => {
 	const app = _mapAppData(data);
 	const fixedNullValuesApp = _transformNullValues(app);
 
@@ -112,7 +113,7 @@ export const postNewApp = async (data) => {
 		});
 };
 
-export const postAppDeletion = async (key) => {
+export const deleteApp = async (key) => {
 	const result = await axios
 		.delete(`${BASE_URL}/deleteNode`, {
 			params: {
@@ -128,7 +129,21 @@ export const postAppDeletion = async (key) => {
 	return result;
 };
 
-export const rawApi = { fetchApps, fetchAppPage, fetchApp, postUpdatedApp, postNewApp, postAppDeletion };
+
+export const addApp = (data) => {
+	const app = _mapAppData(data);
+	app.edited = "true";
+	console.log('Mapped app data:', app);
+	for (const key of Object.keys(app)) {
+		if (!app[key]) {
+			app[key] = "";
+		}
+	}
+}
+
+
+
+export const rawApi = { fetchApps, fetchAppPage, fetchApp, updateApp, saveNewApp, deleteApp };
 
 /**
  * API functions wrapped in React Query
@@ -172,41 +187,41 @@ export const refetchAppCollection = () => {
 	});
 };
 
-export const getAppPage = (page = 1, limit = 20) => {
-	const skip = page === 1 ? 0 : (page - 1) * limit;
-	const take = limit;
-	const apps = queryClient.fetchQuery({
-		queryKey: ["appPage"],
-		queryFn: async () => {
-			const apps = queryClient.getQueryData(['appCollection']) || [];
-			if (Array.isArray(apps)) {
-				const slice = Array.isArray(apps) && apps?.slice(skip, skip + take);
-				return slice;
-			}
-			console.error('Result is not a list: ', apps);
-			throw new Error('Query returned no list');
-		},
-	});
-	return apps;
-};
+// export const getAppPage = (page = 1, limit = 20) => {
+// 	const skip = page === 1 ? 0 : (page - 1) * limit;
+// 	const take = limit;
+// 	const apps = queryClient.fetchQuery({
+// 		queryKey: ["appPage"],
+// 		queryFn: async () => {
+// 			const apps = queryClient.getQueryData(['appCollection']) || [];
+// 			if (Array.isArray(apps)) {
+// 				const slice = Array.isArray(apps) && apps?.slice(skip, skip + take);
+// 				return slice;
+// 			}
+// 			console.error('Result is not a list: ', apps);
+// 			throw new Error('Query returned no list');
+// 		},
+// 	});
+// 	return apps;
+// };
 
-export const getApp = (key) => {
-	const app = queryClient.fetchQuery({
-		queryKey: ["appPage"],
-		queryFn: async () => {
-			const app = await axios
-				.get(`${BASE_URL}/getApp?key=${key}`)
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return app;
-		},
-	});
-	return app;
-};
+// export const getApp = (key) => {
+// 	const app = queryClient.fetchQuery({
+// 		queryKey: ["appPage"],
+// 		queryFn: async () => {
+// 			const app = await axios
+// 				.get(`${BASE_URL}/getApp?key=${key}`)
+// 				.then((response) => {
+// 					return response.data;
+// 				})
+// 				.catch((error) => {
+// 					console.error(error);
+// 				});
+// 			return app;
+// 		},
+// 	});
+// 	return app;
+// };
 
 // export const getApp = (key) => {
 // 	getAllApps().then((data) => {
@@ -220,144 +235,136 @@ export const getApp = (key) => {
 // 	});
 // };
 
-export const updateApp = () => {
-	return useMutation({
-		mutationFn: (updatedData) => {
-			updatedData.edited = "true";
-			const updatedNode = _mapAppData(updatedData);
-			return axios
-				.post(`${BASE_URL}/updateNode`, {
-					...updatedNode,
-				})
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error.message);
-					toast(error.message);
-					throw error;
-				});
-		},
-		onMutate: async (updatedNode) => {
-			await queryClient.cancelQueries(["appCollection"]);
-			const previousData = queryClient.getQueryData(["appCollection"]);
-			const keys = Object.keys(previousData);
+// export const updateApp = () => {
+// 	return useMutation({
+// 		mutationFn: (updatedData) => {
+// 			updatedData.edited = "true";
+// 			const updatedNode = _mapAppData(updatedData);
+// 			return axios
+// 				.post(`${BASE_URL}/updateNode`, {
+// 					...updatedNode,
+// 				})
+// 				.then((response) => {
+// 					return response.data;
+// 				})
+// 				.catch((error) => {
+// 					console.error(error.message);
+// 					toast(error.message);
+// 					throw error;
+// 				});
+// 		},
+// 		onMutate: async (updatedNode) => {
+// 			await queryClient.cancelQueries(["appCollection"]);
+// 			const previousData = queryClient.getQueryData(["appCollection"]);
+// 			const keys = Object.keys(previousData);
 
-			queryClient.setQueryData(["appCollection"], (old) => {
-				return keys.map((key) => {
-					return key === updatedNode.key
-						? { ...old[key], ...updatedNode }
-						: old[key];
-				});
-			});
-			return { previousData };
-		},
-		onError: (err, updatedNode, context) => {
-			queryClient.setQueryData(["appCollection"], context.previousData);
-			return { status: "error", error: err.message };
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries(["appCollection"]);
-			return { status: "success" };
-		},
-	});
-};
+// 			queryClient.setQueryData(["appCollection"], (old) => {
+// 				return keys.map((key) => {
+// 					return key === updatedNode.key
+// 						? { ...old[key], ...updatedNode }
+// 						: old[key];
+// 				});
+// 			});
+// 			return { previousData };
+// 		},
+// 		onError: (err, updatedNode, context) => {
+// 			queryClient.setQueryData(["appCollection"], context.previousData);
+// 			return { status: "error", error: err.message };
+// 		},
+// 		onSettled: () => {
+// 			queryClient.invalidateQueries(["appCollection"]);
+// 			return { status: "success" };
+// 		},
+// 	});
+// };
 
-export const addApp = (data) => {
-	const app = _mapAppData(data);
-	app.edited = "true";
-	console.log('Mapped app data:', app);
-	for (const key of Object.keys(app)) {
-		if (!app[key]) {
-			app[key] = "";
-		}
-	}
 
-	if (!app.desc) {
-		app.desc = "No description provided.";
-	}
-	return queryClient
-		.fetchQuery({
-			queryKey: ["appCollection"],
-			queryFn: async () => {
-				axios
-					.post(`${BASE_URL}/addNode`, {
-						data: { ...app },
-					})
-					.then((response) => {
-						return response.data;
-					})
-					.catch((error) => {
-						console.error(error.message);
-						toast(error.message);
-						throw error;
-					});
-			},
-			onMutate: async () => {
-				await queryClient.cancelQueries(["appCollection"]);
-				const previousData = queryClient.getQueryData(["appCollection"]);
 
-				queryClient.setQueryData(["appCollection"], (old) => {
-					return [...old, app];
-				});
-				return { previousData };
-			},
-			onError: (err, updatedNode, context) => {
-				queryClient.setQueryData(["appCollection"], context.previousData);
-				return {
-					data: { ...updatedNode },
-					status: "error",
-					error: err.message,
-				};
-			},
-			onSettled: () => {
-				queryClient.invalidateQueries(["appCollection"]);
-				return { data: { ...updatedNode }, status: "success" };
-			},
-		})
-		.then((result) => {
-			return result;
-		});
-};
+// 	if (!app.desc) {
+// 		app.desc = "No description provided.";
+// 	}
+// 	return queryClient
+// 		.fetchQuery({
+// 			queryKey: ["appCollection"],
+// 			queryFn: async () => {
+// 				axios
+// 					.post(`${BASE_URL}/addNode`, {
+// 						data: { ...app },
+// 					})
+// 					.then((response) => {
+// 						return response.data;
+// 					})
+// 					.catch((error) => {
+// 						console.error(error.message);
+// 						toast(error.message);
+// 						throw error;
+// 					});
+// 			},
+// 			onMutate: async () => {
+// 				await queryClient.cancelQueries(["appCollection"]);
+// 				const previousData = queryClient.getQueryData(["appCollection"]);
 
-export const deleteApp = async (key) => {
-	const result = await queryClient.fetchQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			const result = await axios
-				.delete(`${BASE_URL}/deleteNode`, {
-					params: {
-						key: key,
-					},
-				})
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error.message);
-					toast(error.message);
-				});
-			return result;
-		},
-		onMutate: async () => {
-			await queryClient.cancelQueries(["appCollection"]);
-			const previousData = queryClient.getQueryData(["appCollection"]);
+// 				queryClient.setQueryData(["appCollection"], (old) => {
+// 					return [...old, app];
+// 				});
+// 				return { previousData };
+// 			},
+// 			onError: (err, updatedNode, context) => {
+// 				queryClient.setQueryData(["appCollection"], context.previousData);
+// 				return {
+// 					data: { ...updatedNode },
+// 					status: "error",
+// 					error: err.message,
+// 				};
+// 			},
+// 			onSettled: () => {
+// 				queryClient.invalidateQueries(["appCollection"]);
+// 				return { data: { ...updatedNode }, status: "success" };
+// 			},
+// 		})
+// 		.then((result) => {
+// 			return result;
+// 		});
+// };
 
-			queryClient.setQueryData(["appCollection"], (old) => {
-				return old.filter((item) => item.key !== key);
-			});
-			return { previousData };
-		},
-		onError: (err, updatedNode, context) => {
-			queryClient.setQueryData(["appCollection"], context.previousData);
-			return { status: "error", error: err.message };
-		},
-		onSettled: () => {
-			queryClient.invalidateQueries(["appCollection"]);
-			return { status: "success" };
-		},
-	});
-	return result;
-};
+// export const deleteApp = async (key) => {
+// 	const result = await queryClient.fetchQuery({
+// 		queryKey: ["appCollection"],
+// 		queryFn: async () => {
+// 			const result = await axios
+// 				.delete(`${BASE_URL}/deleteNode`, {
+// 					params: {
+// 						key: key,
+// 					},
+// 				})
+// 				.then((response) => {
+// 					return response.data;
+// 				})
+// 				.catch((error) => {
+// 					console.error(error.message);
+// 					toast(error.message);
+// 				});
+// 			return result;
+// 		},
+// 		onMutate: async () => {
+// 			await queryClient.cancelQueries(["appCollection"]);
+// 			const previousData = queryClient.getQueryData(["appCollection"]);
 
-export const cacheApi = { getAllApps, refetchAppCollection, getAppPage, getApp, updateApp, addApp, deleteApp };
+// 			queryClient.setQueryData(["appCollection"], (old) => {
+// 				return old.filter((item) => item.key !== key);
+// 			});
+// 			return { previousData };
+// 		},
+// 		onError: (err, updatedNode, context) => {
+// 			queryClient.setQueryData(["appCollection"], context.previousData);
+// 			return { status: "error", error: err.message };
+// 		},
+// 		onSettled: () => {
+// 			queryClient.invalidateQueries(["appCollection"]);
+// 			return { status: "success" };
+// 		},
+// 	});
+// 	return result;
+// };
+
+export const cacheApi = { getAllApps, refetchAppCollection };
