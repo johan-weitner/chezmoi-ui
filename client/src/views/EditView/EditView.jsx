@@ -10,7 +10,7 @@ import { useClientManager } from "core/ClientManager";
 
 const EditView = forwardRef(function EditView(props, ref) {
 	const { theme } = props;
-	const { editMode, setEditMode, selectedApp, gotoPrev, gotoNext } =
+	const { editMode, setIsEditMode, selectedApp, gotoPrev, gotoNext } =
 		useClientManager();
 
 	const [isNewApp, setIsNewApp] = useState(!selectedApp); // FIXME
@@ -26,7 +26,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 		<Modal
 			opened={rootStore.use.editMode()}
 			keepMounted={false}
-			onClose={() => setEditMode(false)}
+			onClose={() => setIsEditMode(false)}
 			overlayProps={{
 				backgroundOpacity: 0.55,
 				blur: 7,
@@ -51,19 +51,19 @@ const EditView = forwardRef(function EditView(props, ref) {
 					)}
 				>
 					{/* {rootStore.get.selectedApp() || isNewApp ? ( */}
-						<EditViewForm
-							isPopoverOpen={rootStore.use.editMode()}
-							closePopover={() => rootStore.set.editMode(false)}
-							selectedApp={rootStore.use.selectedApp()}
-							setSelectedAppKey={() => {}}
-							gotoPrev={gotoPrev}
-							gotoNext={gotoNext}
-							theme={theme}
-							isNewApp={isNewApp}
-							forceUpdate={forceUpdate}
-							randomId={randomId}
-						/>
-					// ) : null}
+					<EditViewForm
+						isPopoverOpen={rootStore.use.editMode()}
+						closePopover={() => rootStore.set.editMode(false)}
+						selectedApp={rootStore.use.selectedApp()}
+						setSelectedAppKey={() => {}}
+						gotoPrev={gotoPrev}
+						gotoNext={gotoNext}
+						theme={theme}
+						isNewApp={isNewApp}
+						forceUpdate={forceUpdate}
+						randomId={randomId}
+					/>
+					{/* ) : null} */}
 				</ErrorBoundary>
 			</Card>
 		</Modal>

@@ -241,6 +241,14 @@ export const useClientManager = () => {
 		});
 	};
 
+	const setIsLoading = (flag) => {
+		rootStore.set.isLoading(flag);
+	};
+
+	const setIsEditMode = (flag) => {
+		rootStore.set.editMode(flag);
+	};
+
 	const invalidateCache = () => {
 		queryClient.invalidateQueries(["appCollection", "apps"]);
 	};
@@ -255,10 +263,14 @@ export const useClientManager = () => {
 		getPageContent,
 		setSelectedAppKey,
 		deleteItem,
+		updateItem,
+		saveNewItem,
 		addItem,
 		editItem,
 		gotoPage,
 		gotoPrevPage,
 		gotoNextPage,
+		setIsLoading,
+		setIsEditMode,
 	};
 };

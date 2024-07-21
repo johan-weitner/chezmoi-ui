@@ -97,6 +97,7 @@ export const rootStore = createStore('root')({
   selectedApp: null,
   selectedAppKey: null,
   editMode: false,
+  getIsNewApp: state => state.selectedAppKey === null,
   isLoading: false,
   error: null,
   middlewares: ['devtools']

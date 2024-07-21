@@ -10,17 +10,18 @@ import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
+import { useClientManager } from "core/ClientManager";
+import { rootStore } from "../../store/store";
 
 const EditViewForm = (props) => {
-	const [currentApp, setCurrentApp] = useState(null);
+	const [isNewApp, setIsNewApp] = useState(null);
 	const {
-		addApp,
-		updateItem: updateApp,
+		updateItem,
+		saveNewItem,
 		closePopover,
 		selectedApp,
 		setSelectedAppKey,
-		isNewApp,
-		randomId,
+		setIsEditMode,
 	} = useClientManager();
 
 	const defaultValues = isNewApp || !selectedApp ? EMPTY_APP : selectedApp;
@@ -30,27 +31,22 @@ const EditViewForm = (props) => {
 	const debugMode = import.meta.env.VITE_DEBUG;
 
 	useEffect(() => {
-		reset(selectedApp);
-	}, [selectedApp]);
+		reset(rootStore.get.selectedApp());
+	}, [rootStore.use.selectedApp()]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
-	const update = updateApp();
-	console.log(update);
 	const onSubmit = (data) => {
-		try {
-			if (isNewApp) {
-				addApp(data).then((app) => {});
-			} else {
-				const res = update.mutate(data);
-			}
-			setSelectedAppKey(null);
-			closePopover();
-		} catch (error) {
-			const str = isNewApp ? "add" : "update";
-			console.error(`Failed to ${str} app`, error);
-			toast.error(`Failed to ${str} app`);
+		if (rootStore.get.getIsNewApp()) {
+			saveNewItem(data);
+		} else {
+			updateItem(data);
 		}
+		setSelectedAppKey(null);
+		closePopover();
+		// const str = isNewApp ? "add" : "update";
+		// console.error(`Failed to ${str} app`, error);
+		// toast.error(`Failed to ${str} app`);
 	};
 
 	const resetForm = () => {
@@ -67,14 +63,13 @@ const EditViewForm = (props) => {
 			style={{ padding: "0 !important", margin: "0 !important" }}
 		>
 			<h2 className={css.editDetailHeader}>
-				{selectedApp?.name || "New application"}
+				{rootStore.use.selectedApp()?.name || "New application"}
 			</h2>
 			{debugMode && (
 				<Debugger
 					selectedApp={selectedApp}
 					isNewApp={isNewApp}
 					resetForm={resetForm}
-					randomId={randomId}
 				/>
 			)}
 			<InfoSection
