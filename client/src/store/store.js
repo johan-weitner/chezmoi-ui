@@ -1,17 +1,5 @@
-// import React from "react";
 import { createStore } from 'zustand-x'
-// import { QueryClient } from "@tanstack/react-query";
-// import {
-//   getAllApps,
-//   fetchAppPage,
-//   getApp,
-//   updateApp,
-//   addApp,
-//   deleteApp,
-// } from "api/appCollectionApi.js";
-// import { appModelInstallerFields } from "api/appModel";
 import { filterModel } from "api/filters";
-// import Legend from 'views/DetailView/Legend';
 
 export const useStore = () => { };
 

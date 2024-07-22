@@ -147,6 +147,10 @@ export const addApp = (data) => {
 	}
 }
 
+export const invalidateCache = () => {
+	queryClient.invalidateQueries(["appCollection", "apps"]);
+};
+
 
 
 export const rawApi = { fetchApps, fetchAppPage, fetchApp, updateApp, saveNewApp, deleteApp };

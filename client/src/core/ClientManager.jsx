@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { QueryClient } from "@tanstack/react-query";
 import { useHotkeys } from "react-hotkeys-hook";
 import {
 	getAppCollection,
@@ -29,9 +28,8 @@ import {
 	updateApp,
 	addApp,
 	saveNewApp,
+	invalidateCache,
 } from "api/appCollectionApi";
-
-const queryClient = new QueryClient();
 
 export const useClientManager = () => {
 	const { store } = rootStore;
@@ -287,10 +285,6 @@ export const useClientManager = () => {
 
 	const setIsEditMode = (flag) => {
 		rootStore.set.editMode(flag);
-	};
-
-	const invalidateCache = () => {
-		queryClient.invalidateQueries(["appCollection", "apps"]);
 	};
 
 	return {
