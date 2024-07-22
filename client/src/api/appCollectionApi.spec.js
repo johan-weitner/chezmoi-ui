@@ -1,7 +1,6 @@
 import { fetchApps, getPageSlice, fetchApp, updateApp, saveNewApp, deleteApp } from './appCollectionApi';
 import { vi } from 'vitest'
 import axios from 'axios';
-import jest from 'jest';
 
 vi.mock('axios');
 

@@ -1,9 +1,7 @@
-import { QueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 
 const BASE_URL = '/api';
-const CACHE_TTL = import.meta.env.VITE_CACHE_TTL;
 
 export const fetchApps = async () => {
 	const apps = await axios
@@ -107,48 +105,4 @@ export const addApp = (data) => {
 	}
 }
 
-export const invalidateCache = () => {
-	queryClient.invalidateQueries(["appCollection", "apps"]);
-};
-
-export const rawApi = { fetchApps, fetchAppPage, fetchApp, updateApp, saveNewApp, deleteApp };
-
-
-
-const queryClient = new QueryClient();
-
-// Set cache TTL for React Query, defined in local .env file as VITE_CACHE_TTL
-queryClient.setDefaultOptions({
-	queries: {
-		cacheTime: CACHE_TTL,
-	},
-});
-
-export const getAllApps = () => {
-	const apps = queryClient.fetchQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			const apps = await axios
-				.get(`${BASE_URL}/software`)
-				.then((response) => {
-					return response.data;
-				})
-				.catch((error) => {
-					console.error(error);
-				});
-			return apps;
-		},
-	});
-	return apps;
-};
-
-export const refetchAppCollection = () => {
-	return useQuery({
-		queryKey: ["appCollection"],
-		queryFn: async () => {
-			return getAllApps();
-		},
-	});
-};
-
-export const cacheApi = { getAllApps, refetchAppCollection };
+export const getAllApps = fetchApps;

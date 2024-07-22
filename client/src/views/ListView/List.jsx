@@ -31,11 +31,6 @@ const List = (props) => {
 			c="dimmed"
 			mt="sm"
 			className={classes.scrollContainer}
-			style={{
-				textAlign: "left",
-				overflow: "scroll",
-				height: "calc(100vh - 150px)",
-			}}
 		>
 			<Skeleton visible={rootStore?.use?.isLoading()}>
 				{rootStore?.use?.pageContent()?.map((item) => {

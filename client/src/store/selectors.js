@@ -7,7 +7,7 @@ const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
 // FIXME: Memoize appCollection selector, then remove React Query.
 
-export const getAppCollection = (state) => state.appCollection;
+const getAppCollection = (state) => state.appCollection;
 export const getPage = (state) => state.page;
 export const getPageCount = (state) => state.pageCount;
 export const getPageContent = (state) => state.pageContent;
@@ -19,6 +19,11 @@ export const getSelectedApp = (state) => state.selectedApp;
 export const getSelectedAppKey = (state) => state.selectedAppKey;
 export const getEditMode = (state) => state.editMode;
 
+// getAppCollection: memozied selector returning appCollection
+const getMemoizedAppCollection = createSelector(
+  [getAppCollection],
+  (appCollection) => appCollection
+);
 export const getPreviousKey = (state) => {
   const appCollection = rootStore.get.appCollection();
   const index = getCurrentIndex(state);
@@ -27,6 +32,8 @@ export const getPreviousKey = (state) => {
   }
   return appCollection[0].key;
 };
+
+
 
 export const getNextKey = () => {
   const index = getCurrentIndex();
@@ -85,3 +92,5 @@ export const getFilteredList = (filter, appCollection) => {
   const filters = rootStore.get.filterModel();
   return filters[filter].method(appCollection) || [];
 };
+
+export { getMemoizedAppCollection as getAppCollection };

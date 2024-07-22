@@ -1,20 +1,5 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
+import { useEffect } from "react";
 import {
-	getAppCollection,
-	getPage,
-	getPageCount,
-	getPageContent,
-	getPageSize,
-	getInReverse,
-	getFilterModel,
-	getActiveFilter,
-	getFilteredList,
-	getSelectedApp,
-	getSelectedAppKey,
-	getEditMode,
-	getCurrentIndex,
 	getPreviousKey,
 	getNextKey,
 	selectPageContent,
@@ -26,15 +11,13 @@ import {
 	fetchApp,
 	deleteApp,
 	updateApp,
-	addApp,
 	saveNewApp,
-	invalidateCache,
 } from "api/appCollectionApi";
 
 export const useClientManager = () => {
 	const { store } = rootStore;
 	const state = store.getState();
-	const { page, selectedAppKey, editMode, pageCount, getTotalSize } = state;
+	const { page, pageCount, getTotalSize } = state;
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
@@ -212,7 +195,6 @@ export const useClientManager = () => {
 			rootStore.set.appCollection(newList);
 			rootStore.set.pageContent(newPage);
 			rootStore.set.isLoading(false);
-			invalidateCache();
 			console.log("ClientManager: App deleted");
 		});
 	};
@@ -249,7 +231,6 @@ export const useClientManager = () => {
 			gotoPage(rootStore.get.page());
 
 			setIsLoading(false);
-			invalidateCache();
 		});
 	};
 
@@ -275,7 +256,6 @@ export const useClientManager = () => {
 				rootStore.set.pageContent([...pageContent, app]);
 			}
 			setIsLoading(false);
-			invalidateCache();
 		});
 	};
 
