@@ -203,14 +203,16 @@ export const useClientManager = () => {
 
 	const deleteItem = (appKey) => {
 		console.log(`ClientManager: Delete app: ${appKey}`);
+		const apps = rootStore.get.appCollection();
+		const pageContent = rootStore.get.pageContent();
 		rootStore.set.isLoading(true);
 		deleteApp(appKey).then(() => {
-			rootStore.set.appCollection((prev) =>
-				prev.filter((app) => app.key !== appKey),
-			);
-			rootStore.set.pageContent((prev) => {
-				return prev.filter((app) => app.key !== appKey);
-			});
+			const newList = apps.filter((app) => app.key !== appKey);
+			const newPage = pageContent.filter((app) => app.key !== appKey);
+			console.log("New list: ", newList);
+			console.log("New page: ", newPage);
+			rootStore.set.appCollection(newList);
+			rootStore.set.pageContent(newPage);
 			rootStore.set.isLoading(false);
 			invalidateCache();
 			console.log("ClientManager: App deleted");
@@ -223,19 +225,25 @@ export const useClientManager = () => {
 			const app = selectAppByKey(appKey);
 			rootStore.set.selectedApp(app);
 			rootStore.set.selectedAppKey(appKey);
+			rootStore.set.isNewApp(false);
 		}
 		rootStore.set.editMode(true);
-		console.log(`ClientManager: Edit flag set: ${rootStore.get.editMode()}`);
+		console.log(`ClientManager:
+			- Edit flag set: ${rootStore.get.editMode()}
+			- isNewApp flag set: ${rootStore.get.isNewApp()}`);
 	};
 
 	const updateItem = (app) => {
 		setIsLoading(true);
 		const apps = rootStore.get.appCollection();
 		updateApp(app).then(() => {
-			rootStore.set.appCollection(...apps, {
-				...app,
-				edited: "true",
-			});
+			rootStore.set.appCollection([
+				...apps,
+				{
+					...app,
+					edited: "true",
+				},
+			]);
 
 			const index = apps.findIndex((item) => item.key === app.key);
 			apps[index] = app;
@@ -251,10 +259,12 @@ export const useClientManager = () => {
 		console.log("Adding new item");
 		rootStore.set.selectedApp(null);
 		rootStore.set.selectedAppKey(null);
+		rootStore.set.isNewApp(true);
 		rootStore.set.editMode(true);
 		console.log(`ClientManager:
-			- Edit flag set: ${editMode}
-			- Emptied app selection: ${selectedAppKey === null}`);
+			- Edit flag set: ${rootStore.get.editMode()}
+			- isNewApp flag set: ${rootStore.get.isNewApp() === null}
+			- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);
 	};
 
 	const saveNewItem = (app) => {
@@ -262,7 +272,7 @@ export const useClientManager = () => {
 		const apps = rootStore.get.appCollection();
 		const pageContent = rootStore.get.pageContent();
 		saveNewApp(app).then(() => {
-			rootStore.set.appCollection(...apps, app);
+			rootStore.set.appCollection([...apps, app]);
 			if (page === pageCount.length) {
 				rootStore.set.pageContent([...pageContent, app]);
 			}

@@ -47,7 +47,7 @@ const EditViewForm = (props) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
-		if (isNewApp) {
+		if (rootStore.get.isNewApp()) {
 			console.log("Saving NEW app");
 			saveNewItem(data);
 		} else {

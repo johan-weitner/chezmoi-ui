@@ -46,7 +46,8 @@ export const selectPageContent = () => {
   const skip = page < 2 ? 0 : (page - 1) * PAGE_SIZE;
   const cutoff = skip + Number.parseInt(PAGE_SIZE, 10);
   DEBUG && console.log('Slicing: ', page, skip, cutoff);
-  const slice = appCollection?.slice(skip, cutoff) || [];
+  const slice = (Array.isArray(appCollection) && appCollection.length > 20)
+    && appCollection.slice(skip, cutoff) || [];
 
   rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
   // rootStore.set.inReverse(false);

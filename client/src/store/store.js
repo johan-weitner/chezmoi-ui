@@ -50,7 +50,7 @@ export const rootStore = createStore('root')({
   selectedApp: null,
   selectedAppKey: null,
   editMode: false,
-  getIsNewApp: state => getState().selectedAppKey === null,
+  isNewApp: false,
   isLoading: false,
   error: null,
   middlewares: ['devtools']
