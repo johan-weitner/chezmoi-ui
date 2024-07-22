@@ -5,20 +5,12 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Delete from DetailBox throws",
-                    "id": "lef0ds6hux2kxrc6zryyqqo2"
+                    "text": "Tags are not persisted",
+                    "id": "kamzixrfbtb1n1eo96hbhc1z"
                 },
                 {
-                    "text": "Description field not persisted",
-                    "id": "dkidht2td1wi5rm31x00aoba"
-                },
-                {
-                    "text": "Fix modal height so it flows with window height",
+                    "text": "Fix modal height so it flows with window height - fullscreen?",
                     "id": "smr1ij98maxxarwesbuefuna"
-                },
-                {
-                    "text": "Stale data lingering after deletion and update",
-                    "id": "v3os63b3tgnj5ws4mf59sz00"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -28,8 +20,24 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Use useContext instead of deep prop drilling",
-                    "id": "ss8bgsp8q21t17kubravtcfy"
+                    "text": "Finalize README",
+                    "id": "qw0qi112gg72nyjn12k9p0td"
+                },
+                {
+                    "text": "Generate tests",
+                    "id": "hgq9yj2ke92gg8sk3jh42s5l"
+                },
+                {
+                    "text": "Cleanup",
+                    "id": "zr5lbe1szmgbkjmlquooxbed"
+                },
+                {
+                    "text": "YAML and JSON export",
+                    "id": "m8r2xwf6j6mail84wo9pq5p2"
+                },
+                {
+                    "text": "Re-enable filtering",
+                    "id": "o4kpvgo4e5p1kywooecf15sl"
                 },
                 {
                     "text": "LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
@@ -53,8 +61,20 @@
             "title": "Done",
             "tasks": [
                 {
+                    "text": "Remove React Query",
+                    "id": "bvlb1lvvc033rdza6j9gpjaa"
+                },
+                {
+                    "text": "Implement Zustand for global state management",
+                    "id": "e9cj4jd9gbsats86f119k027"
+                },
+                {
                     "text": "Refactor list filter, so it's a search against db instead. (With paging it's now redundant). Implement Spotlight",
                     "id": "ue9lt3h5rwgnzx6dsu1lunru"
+                },
+                {
+                    "text": "Implement Reselect for memoization",
+                    "id": "h4lswftvetvt0wfejdk778ra"
                 },
                 {
                     "text": "After switching tables: Search presets, for querying records with missing data",
@@ -65,8 +85,20 @@
                     "id": "vbl6zbnaz6t0v16k06gzsfwa"
                 },
                 {
+                    "text": "Description field not persisted",
+                    "id": "dkidht2td1wi5rm31x00aoba"
+                },
+                {
+                    "text": "Stale data lingering after deletion and update",
+                    "id": "v3os63b3tgnj5ws4mf59sz00"
+                },
+                {
                     "text": "Refactor backend API to use multi-column table",
                     "id": "puu1i1d7nfzxh06nj7uloy6b"
+                },
+                {
+                    "text": "Delete from DetailBox throws",
+                    "id": "lef0ds6hux2kxrc6zryyqqo2"
                 },
                 {
                     "text": "EditView not populated correctly",
@@ -83,6 +115,10 @@
                 {
                     "text": "App navigation across pages is janky",
                     "id": "ldm2nl7fhehwgx0yukwhcqo3"
+                },
+                {
+                    "text": "Use useContext instead of deep prop drilling",
+                    "id": "ss8bgsp8q21t17kubravtcfy"
                 },
                 {
                     "text": "Refine modal layout. Use fieldsets instead of headers",
@@ -187,5 +223,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1720993708319
+    "timestamp": 1721645174030
 }

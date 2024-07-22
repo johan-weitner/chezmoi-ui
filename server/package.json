@@ -7,17 +7,18 @@
   "src": "./src",
   "scripts": {
     "start": "node index.js",
+    "test": "vitest",
     "lint": "pnpm biome check ./src",
     "lint:fix": "pnpm biome check --write ./src"
   },
   "dependencies": {
-    "@prisma/client": "5.16.2",
+    "@prisma/client": "5.17.0",
     "chalk": "^5.3.0",
     "cors": "^2.8.5",
-    "dayjs": "^1.11.11",
+    "dayjs": "^1.11.12",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "winston": "^3.13.0",
+    "winston": "^3.13.1",
     "yaml": "^2.4.5"
   },
   "volta": {
@@ -25,10 +26,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "husky": "^9.0.11",
+    "husky": "^9.1.1",
+    "jest": "^29.7.0",
     "lint-staged": "^15.2.7",
-    "prisma": "^5.16.1",
-    "turbo": "^2.0.6"
+    "prisma": "^5.17.0",
+    "turbo": "^2.0.9",
+    "vitest": "^2.0.4"
   },
   "packageManager": "pnpm@9.4.0"
 }

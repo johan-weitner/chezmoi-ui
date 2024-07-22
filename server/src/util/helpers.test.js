@@ -1,5 +1,5 @@
 import { getStringArray, nullCheck } from "./helpers";
-
+import { describe, it, vi, expect } from "vitest";
 describe("getStringArray", () => {
   it("should return an array of strings", () => {
     const arr = [{ name: "John" }, { name: "Jane" }, { name: "Doe" }];
