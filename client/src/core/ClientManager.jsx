@@ -60,9 +60,11 @@ export const useClientManager = () => {
 
 	const seedStore = async () => {
 		getAllApps().then((apps) => {
-			console.log(
-				`ClientManager: Seeding app collection: Got ${apps.length} apps`,
-			);
+			console
+				.log(`ClientManager: Seeding app collection: Got ${apps.length} apps`)
+				.catch((err) => {
+					toast.error("Error fetching app collection: ", err);
+				});
 			const totalCount = apps?.length || 0;
 			const pageCount = Math.ceil(apps.length / PAGE_SIZE);
 
@@ -95,13 +97,17 @@ export const useClientManager = () => {
 			`ClientManager: Selected app key: ${rootStore.get.selectedAppKey()}`,
 		);
 		rootStore.set.isLoading(true);
-		const app = fetchApp(key).then((app) => {
-			rootStore.set.isLoading(false);
-			rootStore.set.selectedApp(app);
-			console.log(
-				`ClientManager: Set app object in store: ${rootStore.get.selectedApp()?.key}`,
-			);
-		});
+		const app = fetchApp(key)
+			.then((app) => {
+				rootStore.set.isLoading(false);
+				rootStore.set.selectedApp(app);
+				console.log(
+					`ClientManager: Set app object in store: ${rootStore.get.selectedApp()?.key}`,
+				);
+			})
+			.catch((err) => {
+				toast.error("Error fetching app: ", err);
+			});
 	};
 
 	const openFirstPage = () => {
