@@ -1,9 +1,11 @@
 import { createSelector } from "reselect";
 import { rootStore } from "./store";
-import { isStartOfPage, isEndOfPage, findIndex } from "utils/pageUtils";
+import { isStartOfPage, isEndOfPage, findIndex } from "api/helpers";
 
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+
+// FIXME: Memoize appCollection selector, then remove React Query.
 
 export const getAppCollection = (state) => state.appCollection;
 export const getPage = (state) => state.page;
@@ -50,7 +52,6 @@ export const selectPageContent = () => {
     && appCollection.slice(skip, cutoff) || [];
 
   rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
-  // rootStore.set.inReverse(false);
 
   DEBUG && pageContent && console.log(pageContent[0]?.key);
   DEBUG && pageContent && console.log(slice[0]?.key);

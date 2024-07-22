@@ -4,9 +4,11 @@ import {
   findIndex,
   isNullOrEmpty,
   appHasInstaller,
-} from "./pageUtils";
+  mapEntityToDb,
+  transformNullValues,
+} from "./helpers";
 
-describe("pageUtils", () => {
+describe("helpers", () => {
   describe("isStartOfPage", () => {
     it("should return true if index is 0", () => {
       expect(isStartOfPage(0)).toBe(true);
@@ -89,6 +91,53 @@ describe("pageUtils", () => {
       };
 
       expect(appHasInstaller(app)).toBe(false);
+    });
+  });
+
+  describe("mapEntityToDb", () => {
+    it("should return an object with only the valid keys from the app object", () => {
+      const appEntity = {
+        name: "App Name",
+        invalidKey: "Invalid Key Value",
+      };
+
+      const expectedEntity = {
+        name: "App Name",
+      };
+
+      expect(mapEntityToDb(appEntity)).toEqual(expectedEntity);
+    });
+  });
+
+  describe("transformNullValues", () => {
+    it("should transform null values in the app object to empty strings", () => {
+      const app = {
+        name: "App Name",
+        version: null,
+        description: "App Description",
+        invalidKey: null,
+      };
+
+      const expectedApp = {
+        name: "App Name",
+        version: "",
+        description: "App Description",
+        invalidKey: "",
+      };
+
+      expect(transformNullValues(app)).toEqual(expectedApp);
+    });
+
+    it("should not modify app object if it does not contain any null values", () => {
+      const appRecord = {
+        name: "App Name"
+      };
+
+      const appEntity = {
+        name: "App Name"
+      };
+
+      expect(transformNullValues(appRecord)).toEqual(appEntity);
     });
   });
 });
