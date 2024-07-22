@@ -20,6 +20,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Re-enable toasts, (in ClientManager)",
+                    "id": "s7e3i4g9n7448nbpru5fop8k"
+                },
+                {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
                 },
@@ -223,5 +227,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721645174030
+    "timestamp": 1721657024419
 }

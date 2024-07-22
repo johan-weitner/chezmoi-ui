@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { toast } from "sonner";
 import {
 	getPreviousKey,
 	getNextKey,
@@ -187,16 +188,22 @@ export const useClientManager = () => {
 		const apps = rootStore.get.appCollection();
 		const pageContent = rootStore.get.pageContent();
 		rootStore.set.isLoading(true);
-		deleteApp(appKey).then(() => {
-			const newList = apps.filter((app) => app.key !== appKey);
-			const newPage = pageContent.filter((app) => app.key !== appKey);
-			console.log("New list: ", newList);
-			console.log("New page: ", newPage);
-			rootStore.set.appCollection(newList);
-			rootStore.set.pageContent(newPage);
-			rootStore.set.isLoading(false);
-			console.log("ClientManager: App deleted");
-		});
+		deleteApp(appKey)
+			.then(() => {
+				const newList = apps.filter((app) => app.key !== appKey);
+				const newPage = pageContent.filter((app) => app.key !== appKey);
+				console.log("New list: ", newList);
+				console.log("New page: ", newPage);
+				rootStore.set.appCollection(newList);
+				rootStore.set.pageContent(newPage);
+				rootStore.set.isLoading(false);
+				console.log("ClientManager: App deleted");
+				toast.success("App deleted successfully");
+			})
+			.catch((err) => {
+				console.error("ClientManager: Error deleting app: ", err);
+				toast.error("Error deleting app");
+			});
 	};
 
 	const editItem = (appKey) => {
@@ -208,7 +215,8 @@ export const useClientManager = () => {
 			rootStore.set.isNewApp(false);
 		}
 		rootStore.set.editMode(true);
-		console.log(`ClientManager:
+		DEBUG &&
+			console.log(`ClientManager:
 			- Edit flag set: ${rootStore.get.editMode()}
 			- isNewApp flag set: ${rootStore.get.isNewApp()}`);
 	};
@@ -216,22 +224,27 @@ export const useClientManager = () => {
 	const updateItem = (app) => {
 		setIsLoading(true);
 		const apps = rootStore.get.appCollection();
-		updateApp(app).then(() => {
-			rootStore.set.appCollection([
-				...apps,
-				{
-					...app,
-					edited: "true",
-				},
-			]);
+		updateApp(app)
+			.then(() => {
+				rootStore.set.appCollection([
+					...apps,
+					{
+						...app,
+						edited: "true",
+					},
+				]);
 
-			const index = apps.findIndex((item) => item.key === app.key);
-			apps[index] = app;
-			rootStore.set.appCollection(apps);
-			gotoPage(rootStore.get.page());
-
-			setIsLoading(false);
-		});
+				const index = apps.findIndex((item) => item.key === app.key);
+				apps[index] = app;
+				rootStore.set.appCollection(apps);
+				gotoPage(rootStore.get.page());
+				setIsLoading(false);
+				toast.success("App updated successfully");
+			})
+			.catch((err) => {
+				console.error("ClientManager: Error updating app: ", err);
+				toast.error("Error updating app");
+			});
 	};
 
 	const addItem = () => {
@@ -240,7 +253,8 @@ export const useClientManager = () => {
 		rootStore.set.selectedAppKey(null);
 		rootStore.set.isNewApp(true);
 		rootStore.set.editMode(true);
-		console.log(`ClientManager:
+		DEBUG &&
+			console.log(`ClientManager:
 			- Edit flag set: ${rootStore.get.editMode()}
 			- isNewApp flag set: ${rootStore.get.isNewApp() === null}
 			- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);
@@ -250,13 +264,19 @@ export const useClientManager = () => {
 		setIsLoading(true);
 		const apps = rootStore.get.appCollection();
 		const pageContent = rootStore.get.pageContent();
-		saveNewApp(app).then(() => {
-			rootStore.set.appCollection([...apps, app]);
-			if (page === pageCount.length) {
-				rootStore.set.pageContent([...pageContent, app]);
-			}
-			setIsLoading(false);
-		});
+		saveNewApp(app)
+			.then(() => {
+				rootStore.set.appCollection([...apps, app]);
+				if (page === pageCount.length) {
+					rootStore.set.pageContent([...pageContent, app]);
+				}
+				setIsLoading(false);
+				toast.success("App added successfully");
+			})
+			.catch((err) => {
+				console.error("ClientManager: Error saving new app: ", err);
+				toast.error("Error saving new app");
+			});
 	};
 
 	const setIsLoading = (flag) => {
