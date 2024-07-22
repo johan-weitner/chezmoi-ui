@@ -14,6 +14,7 @@ import {
 	updateApp,
 	saveNewApp,
 } from "api/appCollectionApi";
+import { filterModel } from "api/filters";
 
 export const useClientManager = () => {
 	const { store } = rootStore;
@@ -22,48 +23,52 @@ export const useClientManager = () => {
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
-	useEffect(() => {
-		console.log("BOOTSTRAP");
-		if (
-			rootStore.get.appCollection() &&
-			rootStore.get.appCollection().length > 0
-		) {
-			return;
-		}
-		console.log("--=== ClientManager: Seeding client... ===--");
-		rootStore.set.isLoading(true);
-		seedStore().then((apps) => {
-			DEBUG &&
-				console.log("ClientManager: Fetched data payload: ", apps?.length);
-			const list = getPageContent();
-			rootStore.set.pageContent(list);
+	const useBootstrap = () => {
+		return useEffect(() => {
+			if (
+				rootStore.get.appCollection() &&
+				rootStore.get.appCollection().length > 0
+			) {
+				return;
+			}
+			console.log("--=== ClientManager: Seeding client... ===--");
+			rootStore.set.isLoading(true);
+			seedStore().then((apps) => {
+				DEBUG &&
+					console.log("ClientManager: Fetched data payload: ", apps?.length);
+				const list = getPageContent();
+				rootStore.set.pageContent(list);
 
-			DEBUG &&
-				console.log(`ClientManager:
+				DEBUG &&
+					console.log(`ClientManager:
 			Page: ${page},
 			Total: ${getTotalSize(rootStore.store.getState())},
 			Count: ${pageCount}`);
+				rootStore.set.isLoading(false);
+				console.log("--=== ClientManager: Done seeding client! ===--");
+			});
+		}, []);
+	};
+
+	const usePageSwitch = () => {
+		return useEffect(() => {
+			if (!rootStore.get.appCollection()) {
+				return;
+			}
+			rootStore.set.isLoading(true);
+			const newPage = getPageContent();
+			rootStore.set.pageContent(newPage);
+
 			rootStore.set.isLoading(false);
-			console.log("--=== ClientManager: Done seeding client! ===--");
-		});
-	}, []);
-
-	useEffect(() => {
-		if (!rootStore.get.appCollection()) {
-			return;
-		}
-		rootStore.set.isLoading(true);
-		const newPage = getPageContent();
-		rootStore.set.pageContent(newPage);
-
-		rootStore.set.isLoading(false);
-	}, [rootStore.use.page()]);
+		}, [rootStore.use.page()]);
+	};
 
 	const seedStore = async () => {
-		console.log("BOOTSTRAP");
 		getAllApps().then((apps) => {
-			console
-				.log(`ClientManager: Seeding app collection: Got ${apps.length} apps`)
+			DEBUG && console
+				.log(
+					`ClientManager: Seeding app collection: Got ${apps?.length} apps`,
+				)
 				.catch((err) => {
 					toast.error("Error fetching app collection: ", err);
 				});
@@ -230,6 +235,10 @@ export const useClientManager = () => {
 	};
 
 	const updateItem = (app) => {
+		const appKey = app.key;
+		DEBUG &&
+			console.log(`ClientManager: Updating app:
+			- Tags: ${app.tags}`);
 		setIsLoading(true);
 		const apps = rootStore.get.appCollection();
 		updateApp(app)
@@ -247,6 +256,13 @@ export const useClientManager = () => {
 				rootStore.set.appCollection(apps);
 				gotoPage(rootStore.get.page());
 				setIsLoading(false);
+
+				if (DEBUG) {
+					const updatedApp = selectAppByKey(appKey);
+					console.log(`ClientManager: Updated app in store:
+						- Tags: ${updatedApp.tags}`);
+				}
+
 				toast.success("App updated successfully");
 			})
 			.catch((err) => {
@@ -287,6 +303,18 @@ export const useClientManager = () => {
 			});
 	};
 
+	const applyFilter = (filter) => {
+		DEBUG && console.log(`ClientManager: Apply filter: ${filter}`);
+		rootStore.set.activeFilter(filter);
+		const filteredApps = filterModel[filter].method();
+		rootStore.set.filteredList(filteredApps);
+	};
+
+	const clearFilter = () => {
+		rootStore.set.activeFilter(null);
+		rootStore.set.filteredList(null);
+	};
+
 	const setIsLoading = (flag) => {
 		rootStore.set.isLoading(flag);
 	};
@@ -314,5 +342,9 @@ export const useClientManager = () => {
 		gotoNextPage,
 		setIsLoading,
 		setIsEditMode,
+		useBootstrap,
+		usePageSwitch,
+		applyFilter,
+		clearFilter
 	};
 };

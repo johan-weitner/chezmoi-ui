@@ -8,7 +8,7 @@ import {
 	Text,
 	Textarea,
 } from "@mantine/core";
-import classes from "views/MainView/MainView.module.css";
+import classes from "./EditView.module.css";
 
 const InfoSection = (props) => {
 	const { formPartOne, register } = props;

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, Skeleton } from "@mantine/core";
-import classes from "views/MainView/MainView.module.css";
+import classes from "./ListView.module.css";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
 import { rootStore } from "store/store";
@@ -10,10 +10,18 @@ const List = (props) => {
 	const { deleteItem, editItem } = props;
 	const selectedKey = rootStore.get.selectedAppKey();
 	const [currentKey, setCurrentKey] = useState(selectedKey);
+	const [activeFilter, setActiveFilter] = useState(selectedKey);
+
+	// rootStore.get.filteredList() === null &&
 
 	useEffect(() => {
 		setCurrentKey(rootStore.get.selectedAppKey());
 	}, [rootStore.use.selectedAppKey()]);
+
+	useEffect(() => {
+		console.log("FilteredList: ", rootStore.get.filteredList());
+		setActiveFilter(rootStore.get.activeFilter());
+	}, [rootStore.use.activeFilter()]);
 
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
@@ -33,18 +41,32 @@ const List = (props) => {
 			className={classes.scrollContainer}
 		>
 			<Skeleton visible={rootStore?.use?.isLoading()}>
-				{rootStore?.use?.pageContent()?.map((item) => {
-					return (
-						<ListItem
-							selectedAppKey={currentKey}
-							setSelectedAppKey={selectNewApp}
-							app={item}
-							key={item.key}
-							deleteItem={deleteItem}
-							editItem={editItem}
-						/>
-					);
-				})}
+				{!activeFilter &&
+					rootStore?.use?.pageContent()?.map((item) => {
+						return (
+							<ListItem
+								selectedAppKey={currentKey}
+								setSelectedAppKey={selectNewApp}
+								app={item}
+								key={item.key}
+								deleteItem={deleteItem}
+								editItem={editItem}
+							/>
+						);
+					})}
+				{activeFilter &&
+					rootStore?.use?.filteredList()?.map((item) => {
+						return (
+							<ListItem
+								selectedAppKey={currentKey}
+								setSelectedAppKey={selectNewApp}
+								app={item}
+								key={item.key}
+								deleteItem={deleteItem}
+								editItem={editItem}
+							/>
+						);
+					})}
 			</Skeleton>
 		</Card>
 	);

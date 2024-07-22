@@ -4,7 +4,7 @@ import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import { ICON } from "constants/icons";
 import { EditedIndicator } from "components/Indicator";
-import classes from "views/MainView/MainView.module.css";
+import classes from "./ListView.module.css";
 import { rootStore } from "store/store";
 
 export const ListItem = (props) => {

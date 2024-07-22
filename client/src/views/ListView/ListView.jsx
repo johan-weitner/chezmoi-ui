@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
-import commonCss from "views/MainView/MainView.module.css";
+import commonCss from "./ListView.module.css";
 import List from "./List";
 import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
@@ -20,8 +20,10 @@ const ListView = (props) => {
 		gotoPage,
 		gotoPrevPage,
 		gotoNextPage,
+		useBootstrap,
 	} = useClientManager();
 
+	useBootstrap();
 	useHotkeys("alt + b", () => selectPrevApp());
 	useHotkeys("alt + n", () => selectNextApp());
 	useHotkeys("alt + left", () => selectPrevApp());
@@ -38,7 +40,6 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				<ListViewHeader />
-				<p>selectedAppKey: {rootStore.get.selectedAppKey}</p>
 				{rootStore.get.pageCount() > 1 && (
 					<PaginationBar
 						currentPage={rootStore.get.page()}

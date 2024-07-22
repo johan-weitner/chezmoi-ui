@@ -5,3 +5,16 @@
   text-align: left;
 }
 
+.fieldcontainer {
+  margin: 0 0 20px 0;
+}
+
+.fieldcontainerHalf {
+  /* width:49%; */
+}
+
+.fieldcontainer input,
+.fieldcontainerHalf input,
+.fieldcontainer textarea {
+  font-family: monospace;
+}

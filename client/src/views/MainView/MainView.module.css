@@ -5,97 +5,6 @@
   /* paddingTop: 0px; */
 }
 
-.scrollContainer {
-  text-align: left;
-	overflow: scroll;
-	height: calc(100vh - 150px);
-}
-
-.grid {
-  position: static;
-  /* background-color: #333 !important; */
-  padding: 0px;
-  /* background-color: var(--darkreader-bg--mantine-color-white); */
-  border-radius: 10px;
-}
-
-.title {
-  font-size: rem(34px);
-  font-weight: 900;
-
-}
-
-.description {
-  max-width: rem(600px);
-  margin: auto;
-
-  &::after {
-    content: '';
-    display: block;
-    background-color: var(--mantine-color-blue-filled);
-    width: rem(45px);
-    height: rem(2px);
-    margin-top: var(--mantine-spacing-sm);
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-.card {
-  border: rem(1px) solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
-  padding-top:20px !important;
-}
-.cardTitleContainer {
-  position:relative;
-  border-bottom: 1px solid var(--mantine-color-blue-filled);
-  width:100% !important;
-  margin-bottom:20px;
-  box-shadow: 0 30px 30px rgba(0, 0, 0, .2);
-
-  nav {
-    position:absolute;
-    bottom:0;
-    right:0;
-    width:auto;
-    background-color:#232627 !important;
-
-    div {
-      background-color:#232627 !important;
-
-      div {background-color:#232627 !important;}
-    }
-
-    button {background-color:#232627 !important;}
-  }
-}
-.cardTitleIcon {
-  position:relative;
-  top:12px;
-}
-.cardTitle {
-  text-align: left;
-  font-size: rem(30px) !important;
-  padding:0 !important;
-  width:80%;
-  position:relative;
-  top:11px;
-  color: var(--mantine-color-dimmed) !important;
-}
-
-@keyframes glow {
-  from {
-    box-shadow: none;
-    border-color: #999;
-    color: #FFF;
-  }
-
-  to {
-    box-shadow: 0 0 20px #3391ff;
-    border-color: #3391ff;
-    color: #3391ff;
-  }
-}
-
 .link {
   width: rem(50px);
   height: rem(50px);
@@ -113,61 +22,7 @@
   }
 }
 
-.linkButtonIcon {
-  background-color: #232627 !important;
-}
 
-.colButtons {
-  position:absolute;
-  right:0;
-  bottom:0;
-  background-color:#232627 !important;
-}
-
-.itemBox,
-.itemDetailBox,
-.itemDetailBoxFixed {
-  text-align: left;
-  border-radius: 8px;
-  border: 1px solid #999;
-  background-color: #292929;
-  padding: 10px 25px;
-  margin-bottom: 5px;
-  font-size: 1.2em;
-  cursor: pointer !important;
-}
-
-.itemDetailBox,
-.itemDetailBoxFixed {
-
-  /* position: -webkit-sticky;
-  position: sticky;
-  top: 300px;
-  left: calc(50% - 250px) !important; */
-  cursor: default !important;
-  /* width: 537px;
-  margin-left: 25px;
-  z-index: 999;
-  overflow-y: auto;
-  max-height: calc(100vh - 300px); */
-}
-
-.itemDetailBoxFixed {
-  position: fixed !important;
-  top: 200px !important;
-  left: 0;
-}
-
-/*
-overflow-y: auto;
-max-height: calc(100vh - 300px);
-*/
-.itemBox:hover {
-  animation-duration: .5s;
-  animation-name: glow;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
 
 .short {
   font-size: 1.2em !important;
@@ -187,17 +42,11 @@ max-height: calc(100vh - 300px);
   margin: 0;
 }
 
-.mainLinks {
+/* .mainLinks {
   margin: 0;
   color: #FFF !important;
   font-size: 1em !important;
-}
-
-.menuIcon {
-  position: relative;
-  top: 113px;
-  display: none;
-}
+} */
 
 .overlay {
   position: fixed;
@@ -213,88 +62,22 @@ max-height: calc(100vh - 300px);
   justify-content: center;
 }
 
-.popup,
-.popupClosed {
-  position: absolute !important;
-  top: 50px;
-  left: 200px;
-  right: 200px;
-  border: 1px solid #999;
-  background-color: #222;
-  min-height: 400px;
-  box-shadow: 0px 10px 50px rgba(0, 0, 0, .4) !important;
-  display: block;
-  z-index: 2000 !important;
-  backdrop-filter: none;
-  border-radius: 20px;
-  padding: 30px;
-}
 
-.popupClosed {
-  display: none !important;
-}
-
-.popup input,
+/* .popup input,
 .popup textarea {
   background-color: #333;
 }
 
 .popup div {
   text-align: left;
-}
-
-.popupCloseBtn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-
-
-.fieldcontainer {
-  margin: 0 0 20px 0;
-}
-
-.fieldcontainerHalf {
-  /* width:49%; */
-}
-
-.fieldcontainer input,
-.fieldcontainerHalf input,
-.fieldcontainer textarea {
-  font-family: monospace;
-}
-
-.selected {
-  padding-left: 10px;
-  padding-bottom: 0;
-  background-color: #3391ff;
-  border-radius: 8px;
-  margin-bottom: 5px;
-
-  button {
-    margin: 0;
-  }
-}
-
-.green {
-  color: #393;
-}
-
-.red {
-  color: #933;
-}
-
-.indicatorGroup {
-  margin-bottom: 20px;
-}
+} */
 
 
 
 
 
-.tagDisplay {
-  width: 100%;
-  border-radius: 4px;
-  background-color: #999;
-}
+
+
+
+
+

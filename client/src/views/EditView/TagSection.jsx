@@ -19,7 +19,7 @@ const TagSection = (props) => {
 
 	return (
 		<Fieldset legend="Tags">
-			<div style={{ marginBottom: "40px", width: "100%" }}>
+			<div style={{ width: "100%" }}>
 				<input name="tags" {...register("tags")} />
 			</div>
 		</Fieldset>

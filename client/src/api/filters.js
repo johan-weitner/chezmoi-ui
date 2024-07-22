@@ -1,9 +1,11 @@
+import { rootStore } from "store/store";
 
 const _isColumnEmpty = (column) => {
   return column === "" || column === null;
 };
 
-export const filterNoInstallerApps = (apps) => {
+export const filterNoInstallerApps = () => {
+  const apps = rootStore.get.appCollection();
   return apps.filter(item => {
     return _isColumnEmpty(item.whalebrew) &&
       _isColumnEmpty(item.apt) &&
@@ -27,7 +29,8 @@ export const filterNoInstallerApps = (apps) => {
   });
 };
 
-export const filterNoUrlsApps = (apps) => {
+export const filterNoUrlsApps = () => {
+  const apps = rootStore.get.appCollection();
   return apps.filter((item) => {
     return (
       _isColumnEmpty(item.home) &&
@@ -37,11 +40,13 @@ export const filterNoUrlsApps = (apps) => {
   });
 };
 
-export const filterNoDescsApps = (apps) => {
+export const filterNoDescsApps = () => {
+  const apps = rootStore.get.appCollection();
   return apps.filter((item) => _isColumnEmpty(item.desc));
 };
 
-export const filterNoNamesApps = (apps) => {
+export const filterNoNamesApps = () => {
+  const apps = rootStore.get.appCollection();
   return apps.filter((item) => _isColumnEmpty(item.name));
 };
 
@@ -58,12 +63,12 @@ export const filterModel = {
   },
   noDesc: {
     key: "noDesc",
-    method: filterNoDescsApps,
+    method: filterNoNamesApps,
     title: "Apps without name",
   },
   noName: {
     key: "noName",
-    method: filterNoNamesApps,
+    method: filterNoDescsApps,
     title: "Apps without description",
   },
 };
