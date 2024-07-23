@@ -226,9 +226,10 @@ export const useClientManager = () => {
 		console.log(`ClientManager: Editing app with key: ${appKey}`);
 		if (appKey) {
 			const app = selectAppByKey(appKey);
-			const tags = mapTagsToComponent(app.tags);
+			// const tags = mapTagsToComponent(app.tags);
+			const tags = app.tags;
 			console.log(`ClientManager: Fixed tags: ${tags}`);
-			rootStore.set.selectedApp(transformNullValues({ ...app, tags: tags }));
+			rootStore.set.selectedApp(transformNullValues({ ...app }));
 			rootStore.set.selectedAppKey(appKey);
 			rootStore.set.isNewApp(false);
 		}
@@ -241,11 +242,7 @@ export const useClientManager = () => {
 
 	const updateItem = (app) => {
 		const appKey = app.key;
-		console.log(`ClientManager: Updated app BEFORE cleanup:, ${app.tags}`);
-		const tagStr = JSON.stringify(app.tags);
-		app.tags = tagStr.replace(/\\/g, "");
-		console.log(`ClientManager: Updated app AFTER cleanup:, ${app.tags}`);
-		true &&
+		DEBUG &&
 			console.log(`ClientManager: Updating app:
 			- Tags: ${app.tags}`);
 		setIsLoading(true);
@@ -256,7 +253,6 @@ export const useClientManager = () => {
 					...apps,
 					{
 						...app,
-						tags: app.tags.replace(/\\/g, ""),
 						edited: "true",
 					},
 				]);

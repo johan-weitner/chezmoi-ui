@@ -55,7 +55,8 @@ export const transformNullValues = (app) => {
 };
 
 export const mapTagsToComponent = (tags) => {
-  if (!tags) return [];
+  console.log('<<<<<< Mapping tags to component >>>>>>', tags);
+  if (!tags) return "";
   if (tags[0]?.label) return tags;
   let tagCollection = tags;
   console.log("Mapping tags to component: ", tagCollection);

@@ -105,6 +105,7 @@ const EditViewForm = (props) => {
 				tags={rootStore.use.selectedApp()?.tags || ""}
 				editMode={rootStore.get.editMode()}
 				hoistValues={hoistValues}
+				setValue={setValue}
 			/>
 			{/* <input type="text" name="tags" {...register("tags")} /> */}
 			<InstallerSection

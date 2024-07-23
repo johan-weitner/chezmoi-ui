@@ -12,6 +12,11 @@ export const fetchApps = async () => {
 		.catch((error) => {
 			throw error;
 		});
+	for (const app of apps) {
+		if (app.tags === null) {
+			app.tags = "";
+		}
+	}
 	return apps;
 };
 
@@ -43,13 +48,12 @@ export const fetchApp = async (key) => {
 };
 
 export const updateApp = async (updatedData) => {
-	console.log(`API: Updating app:
-		- Tags: ${updatedData.tags}`);
 	const updatedNode = mapEntityToDb(updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedNode,
-			edited: "true"
+			edited: "true",
+			tags: updatedNode.tags === null ? "" : updatedNode.tags,
 		})
 		.then((response) => {
 			console.log(`API: Updating app:

@@ -36,16 +36,8 @@
                     "id": "m8r2xwf6j6mail84wo9pq5p2"
                 },
                 {
-                    "text": "Re-enable filtering",
-                    "id": "o4kpvgo4e5p1kywooecf15sl"
-                },
-                {
                     "text": "LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
-                },
-                {
-                    "text": "Consolidate CSS modules - single component consumes single module. Refactor MainView.module.css into common module, or move to App.css",
-                    "id": "qs6mprszo0yyvuop4k6h3yxv"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -61,8 +53,20 @@
             "title": "Done",
             "tasks": [
                 {
+                    "text": "Re-enable Spotlight search",
+                    "id": "x1p0pd7uh9926lwh25hjvb0y"
+                },
+                {
                     "text": "Re-enable toasts, (in ClientManager)",
                     "id": "s7e3i4g9n7448nbpru5fop8k"
+                },
+                {
+                    "text": "Re-enable filtering",
+                    "id": "o4kpvgo4e5p1kywooecf15sl"
+                },
+                {
+                    "text": "Consolidate CSS modules - single component consumes single module. Refactor MainView.module.css into common module, or move to App.css",
+                    "id": "qs6mprszo0yyvuop4k6h3yxv"
                 },
                 {
                     "text": "Remove React Query",
@@ -227,5 +231,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721657482353
+    "timestamp": 1721684348679
 }

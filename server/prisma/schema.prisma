@@ -17,7 +17,7 @@ model Application {
   name           String
   edited         String?
   desc           String?
-  tags           String?
+  tags           String?          @default("")
   bin            String?
   short          String?
   home           String
