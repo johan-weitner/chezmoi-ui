@@ -87,11 +87,6 @@ describe('appCollectionApi', () => {
     it('should post new app data successfully', async () => {
       axios.post.mockResolvedValue(mockAppResponse);
       const result = await saveNewApp(mockApp);
-      // expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/addNode`, {
-      //   data: {
-      //     ...mockApp
-      //   },
-      // });
       expect(result).toEqual(mockApp);
     });
 

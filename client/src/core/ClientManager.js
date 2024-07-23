@@ -15,6 +15,7 @@ import {
 	saveNewApp,
 } from "api/appCollectionApi";
 import { filterModel } from "api/filters";
+import { transformNullValues, mapTagsToComponent } from "../api/helpers";
 
 export const useClientManager = () => {
 	const { store } = rootStore;
@@ -109,7 +110,9 @@ export const useClientManager = () => {
 				rootStore.set.isLoading(false);
 				rootStore.set.selectedApp(app);
 				console.log(
-					`ClientManager: Set app object in store: ${rootStore.get.selectedApp()?.key}`,
+					`ClientManager: Set app object in store:
+					- Key: ${rootStore.get.selectedApp()?.key}
+					- Tags: ${rootStore.get.selectedApp()?.tags}`,
 				);
 			})
 			.catch((err) => {
@@ -223,7 +226,9 @@ export const useClientManager = () => {
 		console.log(`ClientManager: Editing app with key: ${appKey}`);
 		if (appKey) {
 			const app = selectAppByKey(appKey);
-			rootStore.set.selectedApp(app);
+			const tags = mapTagsToComponent(app.tags);
+			console.log(`ClientManager: Fixed tags: ${tags}`);
+			rootStore.set.selectedApp(transformNullValues({ ...app, tags: tags }));
 			rootStore.set.selectedAppKey(appKey);
 			rootStore.set.isNewApp(false);
 		}
@@ -236,7 +241,11 @@ export const useClientManager = () => {
 
 	const updateItem = (app) => {
 		const appKey = app.key;
-		DEBUG &&
+		console.log(`ClientManager: Updated app BEFORE cleanup:, ${app.tags}`);
+		const tagStr = JSON.stringify(app.tags);
+		app.tags = tagStr.replace(/\\/g, "");
+		console.log(`ClientManager: Updated app AFTER cleanup:, ${app.tags}`);
+		true &&
 			console.log(`ClientManager: Updating app:
 			- Tags: ${app.tags}`);
 		setIsLoading(true);
@@ -247,6 +256,7 @@ export const useClientManager = () => {
 					...apps,
 					{
 						...app,
+						tags: app.tags.replace(/\\/g, ""),
 						edited: "true",
 					},
 				]);

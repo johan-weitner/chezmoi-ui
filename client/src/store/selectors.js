@@ -79,9 +79,10 @@ export const selectApp = (selectedAppKey) => {
 };
 
 export const selectAppByKey = (key) => {
-  const appCollection = rootStore.get.appCollection();
-  console.log('SELECTORS: selectAppByKey: ', appCollection);
   const app = rootStore.get.appCollection().find((app) => app.key === key);
+  console.log(`SELECTORS:
+    - AppKey: ${app.key}
+    - Tags: "${app.tags}"`);
   if (!app) {
     throw new Error(`App with key ${key} not found`);
   }

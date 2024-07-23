@@ -39,11 +39,12 @@ export const fetchApp = async (key) => {
 		.catch((error) => {
 			throw error;
 		});
-	return app;
+	return transformNullValues(app);
 };
 
 export const updateApp = async (updatedData) => {
-	console.log('API: Saving new app:', updatedData);
+	console.log(`API: Updating app:
+		- Tags: ${updatedData.tags}`);
 	const updatedNode = mapEntityToDb(updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
@@ -51,6 +52,8 @@ export const updateApp = async (updatedData) => {
 			edited: "true"
 		})
 		.then((response) => {
+			console.log(`API: Updating app:
+		- Tags: `, response.data);
 			return response.data;
 		})
 		.catch((error) => {

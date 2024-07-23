@@ -1,26 +1,39 @@
-import Tagify from "@yaireo/tagify";
+import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
-import "@yaireo/tagify/dist/tagify.css";
 import { Fieldset } from "@mantine/core";
-import { TAGS_WHITE_LIST } from "constants/tagsWhiteList";
+import { TAGS_WHITE_LIST, getTagsWhiteList } from "constants/tagsWhiteList";
+import { rootStore } from "store/store";
 
 const TagSection = (props) => {
-	const { register, appKey, isNewApp } = props;
-	window.TAGIFY_DEBUG = true;
-	let tagifyInstance;
+	const { hoistValues, register } = props;
+	const [tags, setTags] = useState([]);
 
-	useEffect(() => {
-		tagifyInstance = new Tagify(document.querySelector("input[name=tags]"), {
-			whitelist: TAGS_WHITE_LIST,
-			enforceWhitelist: true,
-			TAGIFY_DEBUG: false,
-		});
-	}, [tagifyInstance, appKey, isNewApp]);
+	const [suggestions, setSuggestions] = useState(getTagsWhiteList() || []);
+
+	const reactTags = useRef();
+
+	const onDelete = useCallback(
+		(tagIndex) => {
+			setTags(tags.filter((_, i) => i !== tagIndex));
+			// setTagFieldValue(JSON.stringify(stripTags(tags)));
+			// hoistValues([tags]);
+		},
+		[tags],
+	);
+
+	const onAddition = useCallback(
+		(newTag) => {
+			setTags([...tags, newTag]);
+			// setTagFieldValue(JSON.stringify(stripTags(tags)));
+			// hoistValues(tags);
+		},
+		[tags],
+	);
 
 	return (
 		<Fieldset legend="Tags">
 			<div style={{ width: "100%" }}>
-				<input name="tags" {...register("tags")} />
+				<p>Not impl</p>
 			</div>
 		</Fieldset>
 	);

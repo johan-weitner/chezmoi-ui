@@ -32,12 +32,16 @@ export const appHasInstaller = (app) => {
 export const mapEntityToDb = (app) => {
   const { formPartOne, formPartTwo } = APP_FORM;
   const validKeys = [...formPartOne, ...formPartTwo].map((item) => item.name);
-  const entity = {};
+  const entity = { tags: app.tags };
   Object.keys(app).map((key) => {
     if (validKeys.includes(key)) {
       entity[key] = app[key];
     }
-  });
+  }); if (app.tags?.length > 0) {
+    entity.tags = JSON.stringify(app.tags);
+  }
+  console.log(`Mapped app data:
+    - Entity:`, entity);
   return entity;
 };
 
@@ -48,4 +52,24 @@ export const transformNullValues = (app) => {
     }
   }
   return app;
+};
+
+export const mapTagsToComponent = (tags) => {
+  if (!tags) return [];
+  if (tags[0]?.label) return tags;
+  let tagCollection = tags;
+  console.log("Mapping tags to component: ", tagCollection);
+  if (typeof tags === "string") {
+    tagCollection = JSON.parse(tags);
+  }
+  console.log("Mapping tags to component: ", tagCollection);
+  let i = 0;
+  const reMappedTags = Array.isArray(tagCollection) && tagCollection?.map((tag) => {
+    return {
+      id: ++i,
+      label: tag.value || tag.label,
+    };
+  });
+  console.log("Re-mapped tags: ", reMappedTags);
+  return JSON.stringify(reMappedTags);
 };

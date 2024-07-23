@@ -25,9 +25,11 @@ const EditViewForm = (props) => {
 
 	const defaultValues =
 		isNewApp || !rootStore.get.selectedApp() ? EMPTY_APP : selectedApp;
-	const { register, handleSubmit, reset } = useForm({
+	const { register, handleSubmit, reset, watch, setValue } = useForm({
 		defaultValues: defaultValues,
 	});
+	const [currentApp, setCurrentApp] = useState(selectedApp);
+	const [currentTags, setCurrentTags] = useState([]);
 	const debugMode = import.meta.env.VITE_DEBUG;
 
 	useEffect(() => {
@@ -43,6 +45,10 @@ const EditViewForm = (props) => {
 		setIsNewApp(false);
 		reset(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
+
+	useEffect(() => {
+		console.log("Watch form - Tags: ", watch().tags);
+	}, [watch()]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
@@ -64,6 +70,12 @@ const EditViewForm = (props) => {
 			defaultValues: EMPTY_APP,
 		});
 		// forceUpdate();
+	};
+
+	const hoistValues = (tags) => {
+		console.log("Hoisting tags: ", tags);
+		setCurrentTags(tags);
+		setValue({ tags: tags });
 	};
 
 	return (
@@ -90,7 +102,11 @@ const EditViewForm = (props) => {
 				register={register}
 				appKey={selectedApp?.key}
 				isNewApp={isNewApp}
+				tags={rootStore.use.selectedApp()?.tags || ""}
+				editMode={rootStore.get.editMode()}
+				hoistValues={hoistValues}
 			/>
+			{/* <input type="text" name="tags" {...register("tags")} /> */}
 			<InstallerSection
 				formPartTwo={formPartTwo}
 				register={register}
