@@ -5,10 +5,6 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Tags are not persisted",
-                    "id": "kamzixrfbtb1n1eo96hbhc1z"
-                },
-                {
                     "text": "Fix modal height so it flows with window height - fullscreen?",
                     "id": "smr1ij98maxxarwesbuefuna"
                 }
@@ -52,6 +48,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Tags are not persisted",
+                    "id": "kamzixrfbtb1n1eo96hbhc1z"
+                },
                 {
                     "text": "Re-enable Spotlight search",
                     "id": "x1p0pd7uh9926lwh25hjvb0y"
@@ -231,5 +231,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721684348679
+    "timestamp": 1721779588931
 }

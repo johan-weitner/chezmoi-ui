@@ -12,50 +12,51 @@ datasource db {
 }
 
 model Application {
-  id             Int              @id @default(autoincrement())
-  key            String           @unique
-  name           String
-  edited         String?
-  desc           String?
-  tags           String?          @default("")
-  bin            String?
-  short          String?
-  home           String
-  docs           String?
-  github         String?
-  whalebrew      String?
-  apt            String?
-  brew           String?
-  cask           String?
-  cargo          String?
-  npm            String?
-  pip            String?
-  pipx           String?
-  gem            String?
-  script         String?
-  choco          String?
-  scoop          String?
-  winget         String?
-  pkgdarwin      String?
-  ansible        String?
-  binary         String?
-  yay            String?
-  appstore       String?
-  pacman         String?
-  port           String?
-  ApplicationTag ApplicationTag[]
+  id        Int              @id @default(autoincrement())
+  key       String           @unique
+  name      String
+  edited    String?
+  desc      String?
+  tags      String?          @default("")
+  bin       String?
+  short     String?
+  home      String
+  docs      String?
+  github    String?
+  whalebrew String?
+  apt       String?
+  brew      String?
+  cask      String?
+  cargo     String?
+  npm       String?
+  pip       String?
+  pipx      String?
+  gem       String?
+  script    String?
+  choco     String?
+  scoop     String?
+  winget    String?
+  pkgdarwin String?
+  ansible   String?
+  binary    String?
+  yay       String?
+  appstore  String?
+  pacman    String?
+  port      String?
+  appTags   ApplicationTag[]
 }
 
 model Tag {
-  id             Int              @id @default(autoincrement())
-  name           String           @unique
-  ApplicationTag ApplicationTag[]
+  id   Int              @id @default(autoincrement())
+  name String           @unique
+  apps ApplicationTag[]
 }
 
 model ApplicationTag {
-  id            Int         @id @default(autoincrement())
+  application   Application @relation(fields: [applicationId], references: [id])
   applicationId Int
+  tag           Tag         @relation(fields: [tagId], references: [id])
   tagId         Int
-  Application   Application @relation(fields: [applicationId], references: [id])
-  Tag           Tag         @relation(fields: [tagId], references: [id])
+
+  @@id([applicationId, tagId])
 }

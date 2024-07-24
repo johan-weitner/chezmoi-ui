@@ -40,15 +40,13 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				<ListViewHeader />
-				{rootStore.get.pageCount() > 1 && (
-					<PaginationBar
-						currentPage={rootStore.get.page()}
-						totalCount={rootStore.get.appCollection()?.length}
-						currentFilter={rootStore.get.activeFilter()}
-						gotoPage={gotoPage}
-						pageCount={rootStore.get.pageCount()}
-					/>
-				)}
+				<PaginationBar
+					currentPage={rootStore.get.page()}
+					totalCount={rootStore.get.appCollection()?.length}
+					currentFilter={rootStore.get.activeFilter()}
+					gotoPage={gotoPage}
+					pageCount={rootStore.get.pageCount()}
+				/>
 				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
 		</ErrorBoundary>

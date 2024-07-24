@@ -1,22 +1,18 @@
 import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
 import {
+	TagsInput,
 	MultiSelect,
 	Autocomplete,
 	Pill,
 	InputBase,
 	Fieldset,
 } from "@mantine/core";
-import { TAGS_WHITE_LIST, getTagsWhiteList } from "constants/tagsWhiteList";
-import { rootStore } from "store/store";
+import { mockTags } from "constants/tagsWhiteList";
 
 const TagSection = (props) => {
 	const { tags, register, setValue } = props;
-	const [currentTags, setCurrentTags] = useState(tags);
-	// const tagOptions = getTagsWhiteList();
-	// console.log("TagOptions: ", tagOptions);
-
-	const reactTags = useRef();
+	const whiteList = mockTags.map((tag) => tag.name);
 
 	const prepTags = (tags) => {
 		if (!tags) return "mac, win";
@@ -24,31 +20,49 @@ const TagSection = (props) => {
 
 	const getArray = (tags) => {
 		if (!tags) return [];
-		const arr = tags.split(",");
-		console.log("getArray: ", arr);
+		// if(Array.isArray(tags)) return tags;
+		// const arr = tags.split(",");
+	};
+
+	const getJson = (tags) => {
+		if (!tags) return [];
+		try {
+			console.log("Tags: ", tags);
+			console.log("Parsed tags: ", JSON.parse(tags));
+			return JSON.parse(tags);
+		} catch (e) {
+			console.error(e);
+			return [];
+		}
 	};
 
 	useEffect(() => {
 		getArray(tags);
 	}, []);
 
+	const getTagId = (tag) => {
+		const found = mockTags.find((item) => item.name === tag);
+		return found ? found.id : -1;
+	};
+
 	const onChange = (value) => {
-		console.log("Tags: ", value);
-		// setCurrentTags(value);
-		setValue("tags", value);
+		console.log("New tags: ", value);
+		console.log("Is array: ", Array.isArray(value));
+		const tagsIds = value.map((tag) => {
+			return getTagId(tag);
+		});
+
+		setValue("tags", tagsIds);
 	};
 
 	return (
 		<Fieldset legend="Tags">
 			<div style={{ width: "100%" }}>
-				<MultiSelect
-					label="Tags"
-					placeholder="Choose tags"
-					defaultValue={JSON.parse(tags) || tags}
-					data={TAGS_WHITE_LIST}
-					onChange={(value) => {
-						onChange(value);
-					}}
+				<TagsInput
+					label="Press Enter to submit a tag"
+					placeholder="Pick tag from list"
+					data={whiteList}
+					onChange={onChange}
 				/>
 				<input
 					type="text"

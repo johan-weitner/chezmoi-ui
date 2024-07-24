@@ -34,7 +34,7 @@ const Header = (props) => {
 				</Group>
 				<Toolbar />
 			</div>
-			<div style={{ marginTop: "-10px" }}>{isLoading && <BarSpinner />}</div>
+			<div style={{ marginTop: "80px" }}>{isLoading && <BarSpinner />}</div>
 		</Group>
 	);
 };

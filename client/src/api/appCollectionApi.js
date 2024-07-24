@@ -23,6 +23,7 @@ export const fetchApps = async () => {
 export const fetchAppPage = async (page = 1, limit = 20) => {
 	const apps = await fetchApps() || [];
 	return getPageSlice(page, limit, apps);
+
 };
 
 export const getPageSlice = (page, limit, appCollection) => {
@@ -44,7 +45,10 @@ export const fetchApp = async (key) => {
 		.catch((error) => {
 			throw error;
 		});
+
+	console.log('Throttled fetchApp');
 	return transformNullValues(app);
+
 };
 
 export const updateApp = async (updatedData) => {

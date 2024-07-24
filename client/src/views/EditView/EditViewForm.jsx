@@ -4,7 +4,6 @@ import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import Debugger from "./Debugger";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
@@ -28,8 +27,6 @@ const EditViewForm = (props) => {
 	const { register, handleSubmit, reset, watch, setValue } = useForm({
 		defaultValues: defaultValues,
 	});
-	const [currentApp, setCurrentApp] = useState(selectedApp);
-	const [currentTags, setCurrentTags] = useState([]);
 	const debugMode = import.meta.env.VITE_DEBUG;
 
 	useEffect(() => {
@@ -69,13 +66,6 @@ const EditViewForm = (props) => {
 		reset({
 			defaultValues: EMPTY_APP,
 		});
-		// forceUpdate();
-	};
-
-	const hoistValues = (tags) => {
-		console.log("Hoisting tags: ", tags);
-		setCurrentTags(tags);
-		setValue({ tags: tags });
 	};
 
 	return (
@@ -104,7 +94,6 @@ const EditViewForm = (props) => {
 				isNewApp={isNewApp}
 				tags={rootStore.use.selectedApp()?.tags || ""}
 				editMode={rootStore.get.editMode()}
-				hoistValues={hoistValues}
 				setValue={setValue}
 			/>
 			{/* <input type="text" name="tags" {...register("tags")} /> */}

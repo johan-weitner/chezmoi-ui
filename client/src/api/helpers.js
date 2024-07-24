@@ -1,6 +1,8 @@
 import { APP_FORM } from "constants/appForm";
 import { appModelInstallerFields } from "api/appModel";
 
+const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+
 /**
  * Helper functions
  */
@@ -37,10 +39,11 @@ export const mapEntityToDb = (app) => {
     if (validKeys.includes(key)) {
       entity[key] = app[key];
     }
-  }); if (app.tags?.length > 0) {
+  });
+  if (app.tags?.length > 0) {
     entity.tags = JSON.stringify(app.tags);
   }
-  console.log(`Mapped app data:
+  DEBUG && console.log(`Mapped app data:
     - Entity:`, entity);
   return entity;
 };
@@ -52,25 +55,4 @@ export const transformNullValues = (app) => {
     }
   }
   return app;
-};
-
-export const mapTagsToComponent = (tags) => {
-  console.log('<<<<<< Mapping tags to component >>>>>>', tags);
-  if (!tags) return "";
-  if (tags[0]?.label) return tags;
-  let tagCollection = tags;
-  console.log("Mapping tags to component: ", tagCollection);
-  if (typeof tags === "string") {
-    tagCollection = JSON.parse(tags);
-  }
-  console.log("Mapping tags to component: ", tagCollection);
-  let i = 0;
-  const reMappedTags = Array.isArray(tagCollection) && tagCollection?.map((tag) => {
-    return {
-      id: ++i,
-      label: tag.value || tag.label,
-    };
-  });
-  console.log("Re-mapped tags: ", reMappedTags);
-  return JSON.stringify(reMappedTags);
 };

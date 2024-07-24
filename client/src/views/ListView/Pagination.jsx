@@ -5,22 +5,32 @@ import { filterModel } from "api/filters";
 import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {
-	const { currentPage, totalCount, currentFilter, gotoPage, pageCount } = props;
+	const { totalCount, currentFilter, gotoPage, pageCount } = props;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
-		DEBUG &&
-			console.log(`Pagination.jsx:
-			currentPage: ${currentPage},
-			Total: ${totalCount},
+		setCurrentPage(rootStore.get.page());
+		debugProps();
+	}, []);
+
+	useEffect(() => {
+		setCurrentPage(rootStore.get.page());
+		debugProps();
+	}, [rootStore.get.page()]);
+
+	const debugProps = () => {
+		console.log(`Pagination.jsx:
+			currentPage: ${rootStore.get.page()},
+			Total: ${rootStore.get.pageCount()},
 			Count: ${pageCount});
 			currentFilter: ${currentFilter}`);
-	}, []);
+	};
 
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
 			<Pagination
-				total={rootStore.get.pageCount()}
+				total={totalCount}
 				value={rootStore.get.page()}
 				gap={15}
 				onChange={gotoPage}

@@ -1,11 +1,9 @@
 import { createSelector } from "reselect";
 import { rootStore } from "./store";
-import { isStartOfPage, isEndOfPage, findIndex } from "api/helpers";
+import { findIndex } from "api/helpers";
 
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
-
-// FIXME: Memoize appCollection selector, then remove React Query.
 
 const getAppCollection = (state) => state.appCollection;
 export const getPage = (state) => state.page;
@@ -19,7 +17,6 @@ export const getSelectedApp = (state) => state.selectedApp;
 export const getSelectedAppKey = (state) => state.selectedAppKey;
 export const getEditMode = (state) => state.editMode;
 
-// getAppCollection: memozied selector returning appCollection
 const getMemoizedAppCollection = createSelector(
   [getAppCollection],
   (appCollection) => appCollection
@@ -32,8 +29,6 @@ export const getPreviousKey = (state) => {
   }
   return appCollection[0].key;
 };
-
-
 
 export const getNextKey = () => {
   const index = getCurrentIndex();
@@ -58,7 +53,8 @@ export const selectPageContent = () => {
   const slice = (Array.isArray(appCollection) && appCollection.length > 20)
     && appCollection.slice(skip, cutoff) || [];
 
-  rootStore.set.selectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key);
+  rootStore.set.selectedAppKey(inReverse ?
+    slice[slice.length - 1]?.key : slice[0]?.key);
 
   DEBUG && pageContent && console.log(pageContent[0]?.key);
   DEBUG && pageContent && console.log(slice[0]?.key);
@@ -74,13 +70,13 @@ export const getCurrentIndex = () => {
 
 export const selectApp = (selectedAppKey) => {
   const appCollection = rootStore.get.appCollection();
-  console.log('SELECTORS: selectApp: ', appCollection);
+  DEBUG && console.log('SELECTORS: selectApp: ', appCollection);
   return rootStore.get.appCollection().find((app) => app.key === selectedAppKey);
 };
 
 export const selectAppByKey = (key) => {
   const app = rootStore.get.appCollection().find((app) => app.key === key);
-  console.log(`SELECTORS:
+  DEBUG && console.log(`SELECTORS:
     - AppKey: ${app.key}
     - Tags: "${app.tags}"`);
   if (!app) {

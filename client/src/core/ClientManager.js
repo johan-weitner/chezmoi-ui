@@ -15,7 +15,7 @@ import {
 	saveNewApp,
 } from "api/appCollectionApi";
 import { filterModel } from "api/filters";
-import { transformNullValues, mapTagsToComponent } from "../api/helpers";
+import { transformNullValues } from "../api/helpers";
 
 export const useClientManager = () => {
 	const { store } = rootStore;
@@ -26,13 +26,11 @@ export const useClientManager = () => {
 
 	const useBootstrap = () => {
 		return useEffect(() => {
-			if (
-				rootStore.get.appCollection() &&
-				rootStore.get.appCollection().length > 0
-			) {
+			if (rootStore.get.appCollection() &&
+				rootStore.get.appCollection().length > 0) {
 				return;
 			}
-			console.log("--=== ClientManager: Seeding client... ===--");
+			DEBUG && console.log("--=== ClientManager: Seeding client... ===--");
 			rootStore.set.isLoading(true);
 			seedStore().then((apps) => {
 				DEBUG &&
@@ -194,7 +192,7 @@ export const useClientManager = () => {
 	};
 
 	const getPageContent = () => {
-		const apps = selectPageContent(state);
+		const apps = selectPageContent();
 		rootStore.set.pageContent(apps);
 		return apps;
 	};
@@ -223,12 +221,9 @@ export const useClientManager = () => {
 	};
 
 	const editItem = (appKey) => {
-		console.log(`ClientManager: Editing app with key: ${appKey}`);
+		DEBUG && console.log(`ClientManager: Editing app with key: ${appKey}`);
 		if (appKey) {
 			const app = selectAppByKey(appKey);
-			// const tags = mapTagsToComponent(app.tags);
-			const tags = app.tags;
-			console.log(`ClientManager: Fixed tags: ${tags}`);
 			rootStore.set.selectedApp(transformNullValues({ ...app }));
 			rootStore.set.selectedAppKey(appKey);
 			rootStore.set.isNewApp(false);
@@ -278,7 +273,7 @@ export const useClientManager = () => {
 	};
 
 	const addItem = () => {
-		console.log("Adding new item");
+		DEBUG && console.log("Adding new item");
 		rootStore.set.selectedApp(null);
 		rootStore.set.selectedAppKey(null);
 		rootStore.set.isNewApp(true);
@@ -301,7 +296,7 @@ export const useClientManager = () => {
 					rootStore.set.pageContent([...pageContent, app]);
 				}
 				setIsLoading(false);
-				toast.success("App added successfully");
+				toast.success("App successfully added");
 			})
 			.catch((err) => {
 				console.error("ClientManager: Error saving new app: ", err);

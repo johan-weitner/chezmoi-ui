@@ -15,6 +15,10 @@ import {
 	getCount,
 	getPage,
 	updateApp,
+	addAppTags,
+	deleteAppTag,
+	getTagsByAppId,
+	getAllTags,
 	getAppsWithoutInstaller,
 	getAppsWithoutUrls,
 	getAppsWithoutDesc,
@@ -125,6 +129,50 @@ app.delete("/deleteNode", (req, res) => {
 		});
 });
 
+app.get("/getAllTags", (req, res) => {
+	getAllTags(appId).then((tags) => {
+		attachHeaders(res).json(tags);
+	});
+});
+
+app.get("/getTagsByAppId", (req, res) => {
+	const { appId } = req.query;
+	getTagsByAppId(appId).then((tags) => {
+		attachHeaders(res).json(tags);
+	});
+});
+
+app.post("/addAppTags", (req, res) => {
+	console.log("Req.body: ", req.body);
+	const { tagId, appId } = req.body.data;
+	console.log("Req params: ", req.body.data);
+	addAppTags(tagId, appId)
+		.then((res) => {
+			attachHeaders(res).status(200).json(res);
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
+
+app.delete("/deleteAppTag", (req, res) => {
+	const { appId, tagId } = req.body.data;
+	console.log("Req params: ", req.body.data);
+	deleteAppTag(tagId, appId)
+		.then((res) => {
+			attachHeaders(res).status(200).json(res);
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
+
+
+
 app.get("/getAppsWithoutInstaller", (req, res) => {
 	getAppsWithoutInstaller().then((apps) => {
 		attachHeaders(res).json(apps);
@@ -148,25 +196,6 @@ app.get("/getAppsWithoutName", (req, res) => {
 		attachHeaders(res).json(apps);
 	});
 });
-
-// app.post("/save", (req, res) => {
-// 	if (isEmpty(req.body)) {
-// 		attachHeaders(res).status(500).json({
-// 			error: "No data provided",
-// 		});
-// 		return;
-// 	}
-// 	try {
-// 		const jsonStr = JSON.stringify(req.body, null, 2);
-// 		// fs.writeFileSync(targetFilePath, jsonStr, "utf8");
-// 		// attachHeaders(res).status(200).json(jsonStr);
-// 	} catch (err) {
-// 		attachHeaders(res).status(500).json({
-// 			error: err,
-// 		});
-// 		return;
-// 	}
-// });
 
 app.listen(port, () => {
 	log.info(`\nServer is listening at port ${port} `);

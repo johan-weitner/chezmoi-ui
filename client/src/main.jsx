@@ -14,17 +14,17 @@ const theme = createTheme({});
 printTitleCard();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-	// <React.StrictMode>
-	<MantineProvider theme={theme} forceColorScheme="dark">
-		<MainView />
-		<Toaster
-			position="top-right"
-			theme="dark"
-			expand
-			richColors
-			closeButton
-			pauseWhenPageIsHidden
-		/>
-	</MantineProvider>,
-	// </React.StrictMode>,
+	<React.StrictMode>
+		<MantineProvider theme={theme} forceColorScheme="dark">
+			<MainView />
+			<Toaster
+				position="top-right"
+				theme="dark"
+				expand
+				richColors
+				closeButton
+				pauseWhenPageIsHidden
+			/>
+		</MantineProvider>
+	</React.StrictMode>,
 );
