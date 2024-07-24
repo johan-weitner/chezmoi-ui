@@ -170,7 +170,7 @@ export const getTagsByAppId = async (appId) => {
 };
 
 export const getAllTags = async () => {
-	const apps = await prisma[APPLICATION].findMany();
+	const apps = await prisma[TAG].findMany();
 	return apps;
 };
 /**

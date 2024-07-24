@@ -16,6 +16,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Split ClientManager into three distinct managers: Apps, pages and tags. Filters?",
+                    "id": "kdyn7vfju51lzpq6s5m9ev55"
+                },
+                {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
                 },
@@ -231,5 +235,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721779588931
+    "timestamp": 1721833700977
 }

@@ -4,19 +4,16 @@ import { mapEntityToDb, transformNullValues } from "./helpers";
 const BASE_URL = '/api';
 
 export const fetchApps = async () => {
+	console.log("Fetching all apps...")
 	const apps = await axios
 		.get(`${BASE_URL}/software`)
 		.then((response) => {
+			console.log("### Got: ", response.data)
 			return response.data;
 		})
 		.catch((error) => {
 			throw error;
 		});
-	for (const app of apps) {
-		if (app.tags === null) {
-			app.tags = "";
-		}
-	}
 	return apps;
 };
 
@@ -115,5 +112,42 @@ export const addApp = (data) => {
 		}
 	}
 }
+
+
+// addAppTags deleteAppTag getTagsByAppId getAllTags
+export const getAllTags = async () => {
+	const tags = await axios
+		.get(`${BASE_URL}/getAllTags`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	// const tagStrArr = tags.map(tag => tag.name);
+	return tags;
+};
+
+export const addAppTags = tags => { };
+
+export const deleteAppTag = tag => { };
+
+export const getTagsByAppId = async (
+	appId,
+) => {
+	const tags = await axios
+		.get(`${BASE_URL}/getTagsByAppId?appId=${appId}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+
+	console.log(`Got tags for appId $(appId): `, tags);
+	return tags;
+};
+
+
 
 export const getAllApps = fetchApps;

@@ -130,7 +130,7 @@ app.delete("/deleteNode", (req, res) => {
 });
 
 app.get("/getAllTags", (req, res) => {
-	getAllTags(appId).then((tags) => {
+	getAllTags().then((tags) => {
 		attachHeaders(res).json(tags);
 	});
 });

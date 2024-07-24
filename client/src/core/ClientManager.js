@@ -13,6 +13,10 @@ import {
 	deleteApp,
 	updateApp,
 	saveNewApp,
+	getAllTags,
+	addAppTags,
+	deleteAppTag,
+	getTagsByAppId
 } from "api/appCollectionApi";
 import { filterModel } from "api/filters";
 import { transformNullValues } from "../api/helpers";
@@ -26,8 +30,10 @@ export const useClientManager = () => {
 
 	const useBootstrap = () => {
 		return useEffect(() => {
-			if (rootStore.get.appCollection() &&
-				rootStore.get.appCollection().length > 0) {
+			if (
+				rootStore.get.appCollection() &&
+				rootStore.get.appCollection().length > 0
+			) {
 				return;
 			}
 			DEBUG && console.log("--=== ClientManager: Seeding client... ===--");
@@ -63,37 +69,42 @@ export const useClientManager = () => {
 	};
 
 	const seedStore = async () => {
-		getAllApps().then((apps) => {
-			DEBUG && console
-				.log(
-					`ClientManager: Seeding app collection: Got ${apps?.length} apps`,
-				)
-				.catch((err) => {
-					toast.error("Error fetching app collection: ", err);
-				});
-			const totalCount = apps?.length || 0;
-			const pageCount = Math.ceil(apps.length / PAGE_SIZE);
+		const apps = await getAllApps()
+			.then((apps) => {
+				const totalCount = apps?.length || 0;
+				const pageCount = apps && Math.ceil(apps.length / PAGE_SIZE);
+				rootStore.set.appCollection(apps);
+				rootStore.set.totalCount(totalCount);
+				rootStore.set.pageCount(pageCount);
+				rootStore.set.page(1);
 
-			DEBUG &&
+				true &&
+					console.log(
+						`ClientManager: Seeding app collection: Got ${apps?.length} apps`,
+					);
+				// true &&
 				console.log(`ClientManager:
-			totalCount: ${totalCount},
-			pageCount: ${pageCount},
-			PAGE_SIZE: ${PAGE_SIZE}`);
+						totalCount: ${totalCount},
+						pageCount: ${pageCount},
+						PAGE_SIZE: ${PAGE_SIZE}`);
 
-			rootStore.set.appCollection(apps);
-			rootStore.set.totalCount(totalCount);
-			rootStore.set.pageCount(pageCount);
-			rootStore.set.page(1);
-
-			DEBUG &&
+				// true &&
 				console.log(`ClientManager: Populated global state:
 				appCollection: ${rootStore.get.appCollection()?.length}
 				totalCount: ${rootStore.get.totalCount()}
 				pageCount: ${rootStore.get.pageCount()}
 				page: ${rootStore.get.page()}`);
+			})
+			.catch((err) => {
+				toast.error("Error fetching app collection: ", err);
+			});
 
-			return openFirstPage();
+		getAllTags().then(tags => {
+			rootStore.set.allowedTags(tags);
+			console.log('Seeded store with tags: ', rootStore.get.allowedTags());
 		});
+
+		return openFirstPage();
 	};
 
 	const setSelectedAppKey = (key) => {
@@ -235,6 +246,12 @@ export const useClientManager = () => {
 			- isNewApp flag set: ${rootStore.get.isNewApp()}`);
 	};
 
+	const getAppTags = async (appId) => {
+		const tags = await getTagsByAppId(appId);
+		console.log('ClientManager got tags for app: ', tags);
+		return tags;
+	};
+
 	const updateItem = (app) => {
 		const appKey = app.key;
 		DEBUG &&
@@ -346,6 +363,7 @@ export const useClientManager = () => {
 		useBootstrap,
 		usePageSwitch,
 		applyFilter,
-		clearFilter
+		clearFilter,
+		getAppTags
 	};
 };

@@ -21,6 +21,7 @@ export const rootStore = createStore('root')({
   filteredList: null,
   selectedApp: null,
   selectedAppKey: null,
+  allowedTags: null,
   editMode: false,
   isNewApp: false,
   isLoading: false,
