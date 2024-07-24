@@ -118,7 +118,7 @@ export const getTagCount = async () => {
 	return count;
 };
 
-export const addAppTags = async (tagId, appId) => {
+export const addAppTag = async (tagId, appId) => {
 	try {
 		const appTag = await prisma.ApplicationTag.create({
 			data: {
@@ -130,6 +130,81 @@ export const addAppTags = async (tagId, appId) => {
 		return appTag;
 	} catch (e) {
 		console.log(e.message, e);
+		return e;
+	}
+};
+
+export const addAppTagsx = async (appId, tagId) => {
+	console.log("PRISMA: TagId: ", tagId, Array.isArray(tagId));
+	const objArr = tagId.map((tag) => {
+		return { id: tag };
+	});
+	try {
+		const appTag = await prisma.ApplicationTag.create({
+			data: {
+				applicationId: appId,
+				tagId: tagId,
+			},
+		});
+		console.log(appTag);
+		return appTag;
+	} catch (e) {
+		console.log(e.message, e);
+		return e;
+	}
+};
+
+export const addAppTags1 = async (articleId, tagIds) => {
+	try {
+		const article = await prisma[APPLICATION].update({
+			where: {
+				id: articleId,
+			},
+			data: {
+				tags: {
+					connect: tagIds.map(tagId => ({ id: tagId })),
+				},
+			},
+		});
+		console.log("Updated article with tags:", article);
+		return article;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const addAppTags = async (articleId, tagIds) => {
+	try {
+		const connections = tagIds.map(tagId => {
+			return prisma.ApplicationTag.create({
+				data: {
+					applicationId: articleId,
+					tagId: tagId,
+				},
+			});
+		});
+
+		// Execute all connection operations concurrently
+		await Promise.all(connections);
+
+		console.log("Tags connected to the article successfully.");
+		return "Success";
+
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const updateArticleTags = async (articleId, tagIds) => {
+	try {
+		await deleteAllAppTags(articleId);
+		await addAppTags(articleId, tagIds);
+		console.log("Article tags updated successfully.");
+		return "Success";
+	} catch (e) {
+		console.error("Failed to update article tags:", e.message, e);
 		return e;
 	}
 };
@@ -150,13 +225,28 @@ export const deleteAppTag = async (tagId, appId) => {
 	}
 };
 
+export const deleteAllAppTags = async (appId) => {
+	try {
+		const result = await prisma.ApplicationTag.deleteMany({
+			where: {
+				applicationId: appId
+			},
+		});
+		console.log(`${result.count} relation(s) deleted.`);
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
 export const getTagsByAppId = async (appId) => {
 	try {
 		const tags = await prisma.Tag.findMany({
 			where: {
 				apps: {
 					some: {
-						applicationId: appId,
+						applicationId: Number.parseInt(appId, 10),
 					},
 				},
 			},

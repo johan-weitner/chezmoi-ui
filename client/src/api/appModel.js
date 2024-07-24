@@ -1,4 +1,5 @@
 export const appModelFieldTypes = {
+  id: 'id',
   name: 'name',
   key: 'key',
   desc: 'desc',
@@ -54,6 +55,7 @@ export const appModelInstallerFields = [
 ];
 
 export const appViewModel = {
+  id: null,
   name: null,
   hasInstallers: null,
   edited: null,

@@ -19,6 +19,7 @@ import {
 	deleteAppTag,
 	getTagsByAppId,
 	getAllTags,
+	updateArticleTags,
 	getAppsWithoutInstaller,
 	getAppsWithoutUrls,
 	getAppsWithoutDesc,
@@ -137,7 +138,7 @@ app.get("/getAllTags", (req, res) => {
 
 app.get("/getTagsByAppId", (req, res) => {
 	const { appId } = req.query;
-	getTagsByAppId(appId).then((tags) => {
+	getTagsByAppId(Number.parseInt(appId, 10)).then((tags) => {
 		attachHeaders(res).json(tags);
 	});
 });
@@ -146,7 +147,7 @@ app.post("/addAppTags", (req, res) => {
 	console.log("Req.body: ", req.body);
 	const { tagId, appId } = req.body.data;
 	console.log("Req params: ", req.body.data);
-	addAppTags(tagId, appId)
+	updateArticleTags(tagId, appId)
 		.then((res) => {
 			attachHeaders(res).status(200).json(res);
 		})

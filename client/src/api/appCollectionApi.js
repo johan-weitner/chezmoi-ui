@@ -114,7 +114,6 @@ export const addApp = (data) => {
 }
 
 
-// addAppTags deleteAppTag getTagsByAppId getAllTags
 export const getAllTags = async () => {
 	const tags = await axios
 		.get(`${BASE_URL}/getAllTags`)
@@ -128,7 +127,23 @@ export const getAllTags = async () => {
 	return tags;
 };
 
-export const addAppTags = tags => { };
+export const addAppTags = async (appId, tags) => {
+	console.log('Saving app tags: ', tags);
+	const res = await axios
+		.post(`${BASE_URL}/addAppTags`, {
+			data: {
+				appId: appId,
+				tagId: tags
+			}
+		})
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return res;
+};
 
 export const deleteAppTag = tag => { };
 
@@ -136,7 +151,7 @@ export const getTagsByAppId = async (
 	appId,
 ) => {
 	const tags = await axios
-		.get(`${BASE_URL}/getTagsByAppId?appId=${appId}`)
+		.get(`${BASE_URL}/getTagsByAppId?appId=${Number.parseInt(appId, 10)}`)
 		.then((response) => {
 			return response.data;
 		})

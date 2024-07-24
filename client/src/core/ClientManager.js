@@ -321,6 +321,20 @@ export const useClientManager = () => {
 			});
 	};
 
+	const tagApp = async (appId, tagIds) => {
+		rootStore.set.isLoading(true);
+		await addAppTags(tagIds, appId)
+			.then(() => {
+				rootStore.set.isLoading(false);
+				toast.success("Tags added");
+			})
+			.catch((err) => {
+				rootStore.set.isLoading(false);
+				console.error("ClientManager: Error adding tag: ", err);
+				toast.error("Error adding tag");
+			});
+	};
+
 	const applyFilter = (filter) => {
 		DEBUG && console.log(`ClientManager: Apply filter: ${filter}`);
 		rootStore.set.activeFilter(filter);
@@ -364,6 +378,7 @@ export const useClientManager = () => {
 		usePageSwitch,
 		applyFilter,
 		clearFilter,
-		getAppTags
+		getAppTags,
+		tagApp
 	};
 };
