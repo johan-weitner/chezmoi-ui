@@ -41,8 +41,6 @@ const EditViewForm = (props) => {
 		reset(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
 
-	useEffect(() => {}, [watch()]);
-
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
@@ -64,6 +62,10 @@ const EditViewForm = (props) => {
 
 	const hoistAppTags = (tagsIds) => {
 		setAppTags(tagsIds);
+	};
+
+	const closeModal = () => {
+		rootStore.set.editMode(false);
 	};
 
 	return (
@@ -93,7 +95,7 @@ const EditViewForm = (props) => {
 					zIndex: "9999",
 				}}
 			>
-				<Button onClick={() => closePopover()} className={btn.cancelBtn}>
+				<Button onClick={() => closeModal()} className={btn.cancelBtn}>
 					Cancel
 				</Button>
 				<Button

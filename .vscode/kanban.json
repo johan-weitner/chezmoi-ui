@@ -7,10 +7,6 @@
                 {
                     "text": "Duplicate key issue",
                     "id": "eoqq9wmkh22y4zg8n4iz8wr4"
-                },
-                {
-                    "text": "Form fields in edit view lock up",
-                    "id": "ya0nwatcn0bs682yydp702gj"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -67,6 +63,10 @@
                 {
                     "text": "Re-enable Spotlight search",
                     "id": "x1p0pd7uh9926lwh25hjvb0y"
+                },
+                {
+                    "text": "Form fields in edit view lock up",
+                    "id": "ya0nwatcn0bs682yydp702gj"
                 },
                 {
                     "text": "Fix modal height so it flows with window height - fullscreen?",
@@ -247,5 +247,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721936513474
+    "timestamp": 1721937442826
 }
