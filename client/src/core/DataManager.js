@@ -10,7 +10,7 @@ import {
   getAllTags,
   addAppTags,
 } from "api/appCollectionApi";
-import { useListManager } from "./ListManager";
+import { usePageManager } from "./PageManager";
 
 export const useDataManager = () => {
   const { store } = rootStore;
@@ -18,7 +18,7 @@ export const useDataManager = () => {
   const { page, pageCount, getTotalSize } = state;
   const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
   const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
-  const { gotoPage, getPageContent } = useListManager();
+  const { gotoPage, getPageContent } = usePageManager();
 
   const useBootstrap = () => {
     return useEffect(() => {

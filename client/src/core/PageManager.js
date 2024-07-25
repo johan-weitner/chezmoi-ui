@@ -1,7 +1,7 @@
 import { selectPageContent } from "store/selectors";
 import { rootStore } from "store/store";
 
-export const useListManager = () => {
+export const usePageManager = () => {
   const { store } = rootStore;
   const state = store.getState();
 

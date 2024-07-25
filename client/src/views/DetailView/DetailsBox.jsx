@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Badge, Button, Group, Text, rem } from "@mantine/core";
+import { nanoid } from "nanoid";
 import { ICON } from "constants/icons";
 import { EditedIndicator } from "components/Indicator";
 import {
@@ -85,7 +86,7 @@ const DetailsBox = (props) => {
 					{rootStore.get.selectedAppTags()?.map((tag) => {
 						return (
 							<Badge
-								key={tag}
+								key={nanoid()}
 								variant="filled"
 								color="blue"
 								style={{ marginRight: "5px" }}

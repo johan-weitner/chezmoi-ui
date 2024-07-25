@@ -3,12 +3,7 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [
-                {
-                    "text": "Duplicate key issue",
-                    "id": "eoqq9wmkh22y4zg8n4iz8wr4"
-                }
-            ],
+            "tasks": [],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
@@ -51,6 +46,10 @@
                 {
                     "text": "Fix saving - parallel saving of article and tags not working",
                     "id": "nm9j3m7conc3z1nxchbwnx94"
+                },
+                {
+                    "text": "Duplicate key issue",
+                    "id": "eoqq9wmkh22y4zg8n4iz8wr4"
                 },
                 {
                     "text": "Tags are not persisted",
@@ -247,5 +246,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721937442826
+    "timestamp": 1721937741676
 }
