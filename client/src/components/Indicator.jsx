@@ -1,6 +1,6 @@
 import { Loader, rem } from "@mantine/core";
-import { ICON } from "../constants/icons";
-import classes from "./MainView/MainView.module.css";
+import { ICON } from "constants/icons";
+import classes from "./icons.module.css";
 
 export const FetchIndicator = ({ isFetching, cssClass }) => {
 	return (
@@ -27,7 +27,7 @@ export const MarkUnPopulated = () => <span className={classes.red}>✗</span>;
 export const WarningSign = () => (
 	<>
 		<span className={classes.red}>⚠</span>
-		<span className={classes.red}>No installer specified</span>
+		<span className={classes.red}> No installer specified</span>
 	</>
 );
 

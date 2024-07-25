@@ -5,6 +5,7 @@ import {
 	getCount,
 	getTagCount,
 	isEmptyDb,
+	isEmptyTagsTable,
 	seedDb,
 	seedTags,
 } from "../db/prisma.js";
@@ -131,9 +132,14 @@ const _seedDbIfEmpty = async () => {
 		await getCount().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
-		await seedTags(tags);
-		await getTagCount().then((count) => {
-			log.info(`Done seeding Tag table with ${count} tags`);
-		});
+
 	}
+
+	// if (isEmptyTagsTable()) {
+	// 	log.info("Empty tags table - seeding tags...");
+	// 	await seedTags(tags);
+	// 	await getTagCount().then((count) => {
+	// 		log.info(`Done seeding Tag table with ${count} tags`);
+	// 	});
+	// }
 };

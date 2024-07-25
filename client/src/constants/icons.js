@@ -25,8 +25,9 @@ import {
 	IconTrash,
 	IconWorldCode,
 	IconX,
+	IconPlayerTrackPrev,
+	IconPlayerTrackNext
 } from "@tabler/icons-react";
-import classes from "components/MainView/MainHeader.module.css";
 
 /**
  * An object containing references to various Tabler icons used throughout the application.
@@ -60,10 +61,12 @@ export const ICON = {
 	check: IconCheck,
 	menu: IconMenu2,
 	search: IconSearch,
+	prev: IconPlayerTrackPrev,
+	next: IconPlayerTrackNext,
 };
 
 export const INDICATOR = {
-	populated: { css: classes.green, icon: "✓" },
-	unpopulated: { css: classes.red, icon: "✗" },
-	warning: { css: classes.red, icon: "⚠" },
+	populated: { css: 'green', icon: "✓" },
+	unpopulated: { css: 'red', icon: "✗" },
+	warning: { css: 'red', icon: "⚠" },
 };

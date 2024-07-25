@@ -18,8 +18,8 @@
     "start": "./scripts/start.sh",
     "start:force": "./scripts/start.sh --force",
     "stop": "./scripts/stop.sh",
-    "prod": "./scripts/start.sh --deploy",
-    "prod:force": "./scripts/start.sh --force --deploy",
+    "deploy": "./scripts/start.sh --deploy",
+    "deploy:force": "./scripts/start.sh --force --prod",
     "checkports": "./scripts/check-port-usage.sh",
     "installDeps": "./scripts/install-deps.sh",
     "lint": "./scripts/lint.sh",
@@ -33,12 +33,5 @@
     "@changesets/cli": "^2.27.7"
   },
   "type": "module",
-  "devDependencies": {
-    "turbo": "^2.0.7"
-  },
-  "engines": {
-    "node": ">=20",
-    "pnpm": ">=9"
-  },
   "packageManager": "pnpm@9.4.0"
 }

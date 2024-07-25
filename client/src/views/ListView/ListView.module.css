@@ -1,0 +1,103 @@
+.paginationContainer {
+  margin:20px 0;
+}
+
+.pagination {
+  margin:0 !important;
+  padding:0 !important;
+}
+
+.paginationInfo {
+  margin:0 !important;
+  padding:0 !important;
+}
+
+.cardTitleAddIcon {
+  position: absolute !important;
+  top: 33px;
+  top: 38px !important;
+  right: 24px !important;
+  background-color: transparent !important;
+}
+
+.active {
+  background-color: #007bff !important;
+  color: white !important;
+}
+
+.scrollContainer {
+  text-align: left;
+	overflow: scroll;
+	height: calc(100vh - 150px);
+}
+
+@keyframes glow {
+  from {
+    box-shadow: none;
+    border-color: #999;
+    color: #FFF;
+  }
+
+  to {
+    box-shadow: 0 0 20px #3391ff;
+    border-color: #3391ff;
+    color: #3391ff;
+  }
+}
+
+.itemBox,
+.itemDetailBox,
+.itemDetailBoxFixed {
+  text-align: left;
+  border-radius: 8px;
+  border: 1px solid #999;
+  background-color: #292929;
+  padding: 10px 25px;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+  cursor: pointer !important;
+}
+
+.itemDetailBox,
+.itemDetailBoxFixed {
+
+  /* position: -webkit-sticky;
+  position: sticky;
+  top: 300px;
+  left: calc(50% - 250px) !important; */
+  cursor: default !important;
+  /* width: 537px;
+  margin-left: 25px;
+  z-index: 999;
+  overflow-y: auto;
+  max-height: calc(100vh - 300px); */
+}
+
+.itemDetailBoxFixed {
+  position: fixed !important;
+  top: 200px !important;
+  left: 0;
+}
+
+/*
+overflow-y: auto;
+max-height: calc(100vh - 300px);
+*/
+.itemBox:hover {
+  animation-duration: .5s;
+  animation-name: glow;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.selected {
+  padding-left: 10px;
+  padding-bottom: 0;
+  background-color: #3391ff;
+  border-radius: 8px;
+  margin-bottom: 5px;
+
+  button {
+    margin: 0;
+  }
+}

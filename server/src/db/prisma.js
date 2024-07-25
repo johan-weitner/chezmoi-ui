@@ -5,20 +5,7 @@ const prisma = new PrismaClient();
 const APPLICATION = "application";
 const TAG = "tag";
 const APP = "app";
-
-async function main() {
-	log.info("Set up db connection...");
-}
-
-main()
-	.then(async () => {
-		await prisma.$disconnect();
-	})
-	.catch(async (e) => {
-		console.error(e);
-		await prisma.$disconnect();
-		process.exit(1);
-	});
+const APP_TAG = "ApplicationTag";
 
 export const seedDb = async (data) => {
 	log.info("Seeding Application table with initial data...	");
@@ -33,12 +20,10 @@ export const seedDb = async (data) => {
 };
 
 export const seedTags = async (data) => {
-	log.info(JSON.stringify(data, null, 2));
 	await prisma
 		.$transaction([prisma[TAG].createMany({ data })])
 		.then(() => {
 			log.info("Seeded db with tags");
-			log.info(JSON.stringify(data, null, 2));
 		})
 		.catch((e) => {
 			log.error(e.message);
@@ -46,15 +31,12 @@ export const seedTags = async (data) => {
 };
 
 export const addApp = async (data) => {
-	console.log("PRISMA: Adding app: ", data);
 	try {
 		const app = await prisma[APPLICATION].create({
 			data: {
 				...data,
 			},
 		});
-		// log.info("PRISMA: Adding app: ", data);
-		log.info("PRISMA: Returned: ", app);
 		return app;
 	} catch (e) {
 		log.error(e.message);
@@ -80,12 +62,14 @@ export const getAppByKey = async (key) => {
 		where: {
 			key: key,
 		},
+		include: {
+			appTags: true,
+		},
 	});
 	return app;
 };
 
 export const updateApp = async (data) => {
-	log.info("PRISMA: Updating app with data: ", data);
 	const app = await prisma[APPLICATION].update({
 		where: {
 			key: data.key,
@@ -94,12 +78,10 @@ export const updateApp = async (data) => {
 			...data,
 		},
 	});
-	log.info("PRISMA: Updated app: ", app);
 	return app;
 };
 
 export const deleteApp = async (key) => {
-	log.info("Key: ", key);
 	if (!key) {
 		log.error("Invalid key: ", key);
 		return null;
@@ -117,10 +99,116 @@ export const getCount = async () => {
 	return count;
 };
 
+/**
+ * Tag API
+ */
 export const getTagCount = async () => {
 	const count = await prisma[TAG].count();
 	return count;
 };
+
+export const addAppTag = async (tagId, appId) => {
+	try {
+		const appTag = await prisma.ApplicationTag.create({
+			data: {
+				applicationId: appId,
+				tagId: tagId,
+			},
+		});
+		return appTag;
+	} catch (e) {
+		log.info(e.message, e);
+		return e;
+	}
+};
+
+export const addAppTags = async (appId, tagIds) => {
+	try {
+		const connections = tagIds?.map(tagId => {
+			return prisma.ApplicationTag.create({
+				data: {
+					applicationId: appId,
+					tagId: tagId,
+				},
+			});
+		});
+
+		// Execute all connection operations concurrently
+		await Promise.all(connections);
+
+		return { appId: appId, tags: tagIds };
+
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const updateArticleTags = async (appId, tagIds) => {
+	try {
+		await deleteAllAppTags(appId);
+		await addAppTags(appId, tagIds);
+		return { appId: appId, tags: tagIds };
+	} catch (e) {
+		console.error("Failed to update article tags:", e.message, e);
+		return e;
+	}
+};
+
+export const deleteAppTag = async (tagId, appId) => {
+	try {
+		const result = await prisma.ApplicationTag.deleteMany({
+			where: {
+				applicationId: appId,
+				tagId: tagId,
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const deleteAllAppTags = async (appId) => {
+	try {
+		const result = await prisma.ApplicationTag.deleteMany({
+			where: {
+				applicationId: appId
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const getTagsByAppId = async (appId) => {
+	try {
+		const tags = await prisma.Tag.findMany({
+			where: {
+				apps: {
+					some: {
+						applicationId: Number.parseInt(appId, 10),
+					},
+				},
+			},
+		});
+		return tags;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const getAllTags = async () => {
+	const tags = await prisma[TAG].findMany();
+	return tags;
+};
+/**
+ * /Tag API
+ */
 
 export const getAppsWithoutInstaller = async (key) => {
 	const app = await prisma[APPLICATION].findMany({
@@ -185,3 +273,8 @@ export const isEmptyDb = async () => {
 	count === 0 && log.info("Database is empty - seeding...");
 	return count === 0;
 };
+
+export const isEmptyTagsTable = async () => {
+	const count = await getTagCount();
+	return count === 0;
+}
