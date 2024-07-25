@@ -32,38 +32,6 @@ export const APP_FORM = {
 	],
 };
 
-export const EMPTY_APP2 = {
-	name: null,
-	key: null,
-	desc: null,
-	bin: null,
-	short: null,
-	home: null,
-	docs: null,
-	github: null,
-	whalebrew: null,
-	apt: null,
-	brew: null,
-	cask: null,
-	cargo: null,
-	npm: null,
-	pip: null,
-	pipx: null,
-	gem: null,
-	script: null,
-	choco: null,
-	scoop: null,
-	winget: null,
-	pkgdarwin: null,
-	ansible: null,
-	binary: null,
-	yay: null,
-	appstore: null,
-	pacman: null,
-	port: null,
-	tags: null,
-};
-
 export const EMPTY_APP = {
 	name: "",
 	key: "",
