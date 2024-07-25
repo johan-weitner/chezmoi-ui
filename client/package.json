@@ -64,6 +64,7 @@
     "sass": "^1.77.8",
     "turbo": "^2.0.9",
     "vite": "^5.3.4",
+    "vite-plugin-html": "^3.2.2",
     "vitest": "^2.0.4",
     "zukeeper": "^1.0.2",
     "zustymiddleware": "^1.2.0"

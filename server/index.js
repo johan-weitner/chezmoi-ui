@@ -172,6 +172,21 @@ app.delete("/deleteAppTag", (req, res) => {
 		});
 });
 
+// TODO: Read req param and decide file based on it
+app.get('/download', (req, res) => {
+	const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+
+	const filename = path.basename(file);
+	const mimetype = mime.getType(file);
+
+	res.setHeader(`Content-disposition', 'attachment; filename=${filename}`);
+	res.setHeader('Content-type', mimetype);
+
+	res.download(file);
+	// const filestream = fs.createReadStream(file);
+	// filestream.pipe(res);
+});
+
 
 
 app.get("/getAppsWithoutInstaller", (req, res) => {

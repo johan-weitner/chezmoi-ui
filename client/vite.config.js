@@ -8,7 +8,9 @@ import path from "node:path";
 
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react()
+  ],
   test: {
     globals: true,
     environment: 'happy-dom',
