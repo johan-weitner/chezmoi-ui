@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Badge, Button, Group, Text, rem } from "@mantine/core";
 import { ICON } from "constants/icons";
 import { EditedIndicator } from "components/Indicator";
@@ -10,12 +11,11 @@ import { appModelInstallerFields } from "api/appModel";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
 import { useClientManager } from "core/ClientManager";
-import { rootStore } from "../../store/store";
+import { rootStore } from "store/store";
 
 const DetailsBox = (props) => {
 	const { selectedApp, editMode } = props;
-	const { editItem, deleteItem } = useClientManager();
-	const tags = [];
+	const { editItem, deleteItem, getAppTags } = useClientManager();
 	const indicateEdit = selectedApp?.edited ? <EditedIndicator /> : null;
 
 	const appHasInstaller = (app) => {
@@ -79,18 +79,19 @@ const DetailsBox = (props) => {
 					</Text>
 				)}
 			</div>
-			{tags && (
-				<div>
-					{tags?.map((tag) => {
+			{rootStore.use.selectedAppTags() && (
+				<div style={{ marginTop: "10px" }}>
+					Tags ({rootStore.get.selectedAppTags()?.length}):{" "}
+					{rootStore.get.selectedAppTags()?.map((tag) => {
 						return (
 							<Badge
-								key={tag?.value}
+								key={tag}
 								variant="filled"
 								color="blue"
 								style={{ marginRight: "5px" }}
 								size="sm"
 							>
-								{tag?.value}
+								{tag.name}
 							</Badge>
 						);
 					})}

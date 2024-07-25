@@ -20,7 +20,8 @@ const PaginationBar = (props) => {
 	}, [rootStore.get.page()]);
 
 	const debugProps = () => {
-		console.log(`Pagination.jsx:
+		DEBUG &&
+			console.log(`Pagination.jsx:
 			currentPage: ${rootStore.get.page()},
 			Total: ${rootStore.get.pageCount()},
 			Count: ${pageCount});

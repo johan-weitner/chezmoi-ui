@@ -20,12 +20,10 @@ export const seedDb = async (data) => {
 };
 
 export const seedTags = async (data) => {
-	log.info(JSON.stringify(data, null, 2));
 	await prisma
 		.$transaction([prisma[TAG].createMany({ data })])
 		.then(() => {
 			log.info("Seeded db with tags");
-			log.info(JSON.stringify(data, null, 2));
 		})
 		.catch((e) => {
 			log.error(e.message);
@@ -33,15 +31,12 @@ export const seedTags = async (data) => {
 };
 
 export const addApp = async (data) => {
-	console.log("PRISMA: Adding app: ", data);
 	try {
 		const app = await prisma[APPLICATION].create({
 			data: {
 				...data,
 			},
 		});
-		// log.info("PRISMA: Adding app: ", data);
-		log.info("PRISMA: Returned: ", app);
 		return app;
 	} catch (e) {
 		log.error(e.message);
@@ -71,14 +66,10 @@ export const getAppByKey = async (key) => {
 			appTags: true,
 		},
 	});
-	log.info("App: ", app);
 	return app;
 };
 
 export const updateApp = async (data) => {
-	log.info("PRISMA: Updating app with data: ", data);
-	log.info("PRISMA: Prisma object: ", prisma);
-	console.log("PRISMA: Prisma object: ", prisma);
 	const app = await prisma[APPLICATION].update({
 		where: {
 			key: data.key,
@@ -87,12 +78,10 @@ export const updateApp = async (data) => {
 			...data,
 		},
 	});
-	log.info("PRISMA: Updated app: ", app);
 	return app;
 };
 
 export const deleteApp = async (key) => {
-	log.info("Key: ", key);
 	if (!key) {
 		log.error("Invalid key: ", key);
 		return null;
@@ -126,60 +115,19 @@ export const addAppTag = async (tagId, appId) => {
 				tagId: tagId,
 			},
 		});
-		console.log(appTag);
 		return appTag;
 	} catch (e) {
-		console.log(e.message, e);
+		log.info(e.message, e);
 		return e;
 	}
 };
 
-export const addAppTagsx = async (appId, tagId) => {
-	console.log("PRISMA: TagId: ", tagId, Array.isArray(tagId));
-	const objArr = tagId.map((tag) => {
-		return { id: tag };
-	});
+export const addAppTags = async (appId, tagIds) => {
 	try {
-		const appTag = await prisma.ApplicationTag.create({
-			data: {
-				applicationId: appId,
-				tagId: tagId,
-			},
-		});
-		console.log(appTag);
-		return appTag;
-	} catch (e) {
-		console.log(e.message, e);
-		return e;
-	}
-};
-
-export const addAppTags1 = async (articleId, tagIds) => {
-	try {
-		const article = await prisma[APPLICATION].update({
-			where: {
-				id: articleId,
-			},
-			data: {
-				tags: {
-					connect: tagIds.map(tagId => ({ id: tagId })),
-				},
-			},
-		});
-		console.log("Updated article with tags:", article);
-		return article;
-	} catch (e) {
-		console.error(e.message, e);
-		return e;
-	}
-};
-
-export const addAppTags = async (articleId, tagIds) => {
-	try {
-		const connections = tagIds.map(tagId => {
+		const connections = tagIds?.map(tagId => {
 			return prisma.ApplicationTag.create({
 				data: {
-					applicationId: articleId,
+					applicationId: appId,
 					tagId: tagId,
 				},
 			});
@@ -188,8 +136,7 @@ export const addAppTags = async (articleId, tagIds) => {
 		// Execute all connection operations concurrently
 		await Promise.all(connections);
 
-		console.log("Tags connected to the article successfully.");
-		return "Success";
+		return { appId: appId, tags: tagIds };
 
 	} catch (e) {
 		console.error(e.message, e);
@@ -197,12 +144,11 @@ export const addAppTags = async (articleId, tagIds) => {
 	}
 };
 
-export const updateArticleTags = async (articleId, tagIds) => {
+export const updateArticleTags = async (appId, tagIds) => {
 	try {
-		await deleteAllAppTags(articleId);
-		await addAppTags(articleId, tagIds);
-		console.log("Article tags updated successfully.");
-		return "Success";
+		await deleteAllAppTags(appId);
+		await addAppTags(appId, tagIds);
+		return { appId: appId, tags: tagIds };
 	} catch (e) {
 		console.error("Failed to update article tags:", e.message, e);
 		return e;
@@ -217,7 +163,6 @@ export const deleteAppTag = async (tagId, appId) => {
 				tagId: tagId,
 			},
 		});
-		console.log(`${result.count} relation(s) deleted.`);
 		return result;
 	} catch (e) {
 		console.error(e.message, e);
@@ -232,7 +177,6 @@ export const deleteAllAppTags = async (appId) => {
 				applicationId: appId
 			},
 		});
-		console.log(`${result.count} relation(s) deleted.`);
 		return result;
 	} catch (e) {
 		console.error(e.message, e);
@@ -251,7 +195,6 @@ export const getTagsByAppId = async (appId) => {
 				},
 			},
 		});
-		console.log("Tags related to the application:", tags);
 		return tags;
 	} catch (e) {
 		console.error(e.message, e);
@@ -260,8 +203,8 @@ export const getTagsByAppId = async (appId) => {
 };
 
 export const getAllTags = async () => {
-	const apps = await prisma[TAG].findMany();
-	return apps;
+	const tags = await prisma[TAG].findMany();
+	return tags;
 };
 /**
  * /Tag API

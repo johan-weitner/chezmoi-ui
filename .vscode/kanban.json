@@ -5,8 +5,8 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Fix modal height so it flows with window height - fullscreen?",
-                    "id": "smr1ij98maxxarwesbuefuna"
+                    "text": "Fix saving - parallel saving of article and tags not working",
+                    "id": "nm9j3m7conc3z1nxchbwnx94"
                 }
             ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
@@ -32,7 +32,7 @@
                     "id": "zr5lbe1szmgbkjmlquooxbed"
                 },
                 {
-                    "text": "YAML and JSON export",
+                    "text": "YAML and JSON export. Consider filtered exports.",
                     "id": "m8r2xwf6j6mail84wo9pq5p2"
                 },
                 {
@@ -59,6 +59,10 @@
                 {
                     "text": "Re-enable Spotlight search",
                     "id": "x1p0pd7uh9926lwh25hjvb0y"
+                },
+                {
+                    "text": "Fix modal height so it flows with window height - fullscreen?",
+                    "id": "smr1ij98maxxarwesbuefuna"
                 },
                 {
                     "text": "Re-enable toasts, (in ClientManager)",
@@ -235,5 +239,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721833700977
+    "timestamp": 1721910921661
 }

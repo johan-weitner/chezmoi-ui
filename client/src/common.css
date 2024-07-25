@@ -7,7 +7,8 @@
 }
 
 .card {
-  border: rem(1px) solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5));
+  /* border: rem(1px) solid light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-5)); */
+  border: 10px solid #444 !important;
   padding-top:20px !important;
 }
 

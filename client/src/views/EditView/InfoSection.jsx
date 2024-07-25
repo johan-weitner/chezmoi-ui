@@ -51,7 +51,7 @@ const InfoSection = (props) => {
 						<Text component="label" htmlFor="desc" size="sm" fw={500}>
 							Description
 						</Text>
-						<Textarea id="desc" rows="8" {...register("desc")} />
+						<Textarea id="desc" rows="5" {...register("desc")} />
 					</Group>
 				</SimpleGrid>
 			</Fieldset>

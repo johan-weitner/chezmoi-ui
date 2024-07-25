@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { Button, Group } from "@mantine/core";
+import { Button, Flex } from "@mantine/core";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
 import { useForm } from "react-hook-form";
-import Debugger from "./Debugger";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
@@ -14,12 +13,14 @@ import { rootStore } from "../../store/store";
 
 const EditViewForm = (props) => {
 	const [isNewApp, setIsNewApp] = useState(true);
+	const [appTags, setAppTags] = useState();
 	const {
 		updateItem,
 		saveNewItem,
 		closePopover,
 		selectedApp,
 		setSelectedAppKey,
+		tagApp,
 	} = useClientManager();
 
 	const defaultValues =
@@ -31,58 +32,78 @@ const EditViewForm = (props) => {
 
 	useEffect(() => {
 		const app = rootStore.get.selectedAppKey();
-		console.log(app);
 		if (!app) {
-			console.log("EditViewForm: Is new app - resetting form");
 			setIsNewApp(true);
 			resetForm();
 			return;
 		}
-		console.log("Is NOT new app");
 		setIsNewApp(false);
 		reset(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
 
-	useEffect(() => {
-		console.log("Watch form - Tags: ", watch().tags);
-	}, [watch()]);
+	useEffect(() => {}, [watch()]);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
 		if (rootStore.get.isNewApp()) {
-			console.log("Saving NEW app");
-			saveNewItem(data);
+			saveNewItem(data, appTags);
 		} else {
-			console.log("Updating EXISTING app");
-			updateItem(data);
+			console.log("%%%%% SAVED", data, appTags);
+			updateItem(data, appTags);
 		}
 		setSelectedAppKey(null);
 		rootStore.set.editMode(false);
 	};
 
 	const resetForm = () => {
-		console.log("Resetting form...");
 		reset({
 			defaultValues: EMPTY_APP,
 		});
 	};
 
+	const hoistAppTags = (tagsIds) => {
+		setAppTags(tagsIds);
+	};
+
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			style={{ padding: "0 !important", margin: "0 !important" }}
+			style={{
+				padding: "0 !important",
+				margin: "0 !important",
+			}}
 		>
 			<h2 className={css.editDetailHeader}>
 				{rootStore.use.selectedApp()?.name || "New application"}
 			</h2>
-			{debugMode && (
-				<Debugger
-					selectedApp={selectedApp}
-					isNewApp={isNewApp}
-					resetForm={resetForm}
-				/>
-			)}
+			<Flex
+				mih={50}
+				bg="rgba(0, 0, 0, .3)"
+				gap="md"
+				justify="flex-end"
+				align="flex-start"
+				direction="row"
+				wrap="wrap"
+				style={{
+					backgroundColor: "#222",
+					position: "absolute",
+					top: "30px",
+					right: "15px",
+					zIndex: "9999",
+				}}
+			>
+				<Button onClick={() => closePopover()} className={btn.cancelBtn}>
+					Cancel
+				</Button>
+				<Button
+					type="submit"
+					className={btn.saveBtn}
+					leftSection={<ICON.save />}
+				>
+					Save
+				</Button>
+			</Flex>
 			<InfoSection
 				formPartOne={formPartOne}
 				register={register}
@@ -94,26 +115,13 @@ const EditViewForm = (props) => {
 				isNewApp={isNewApp}
 				tags={rootStore.use.selectedApp()?.tags || ""}
 				editMode={rootStore.get.editMode()}
-				setValue={setValue}
+				hoistAppTags={hoistAppTags}
 			/>
-			{/* <input type="text" name="tags" {...register("tags")} /> */}
 			<InstallerSection
 				formPartTwo={formPartTwo}
 				register={register}
 				isNewApp={isNewApp}
 			/>
-			<Group justify="center">
-				<Button onClick={() => closePopover()} className={btn.cancelBtn}>
-					Cancel
-				</Button>
-				<Button
-					type="submit"
-					className={btn.saveBtn}
-					leftSection={<ICON.save />}
-				>
-					Save
-				</Button>
-			</Group>
 		</form>
 	);
 };

@@ -46,11 +46,11 @@ export const useClientManager = () => {
 
 				DEBUG &&
 					console.log(`ClientManager:
-			Page: ${page},
-			Total: ${getTotalSize(rootStore.store.getState())},
-			Count: ${pageCount}`);
+						Page: ${page},
+						Total: ${getTotalSize(rootStore.store.getState())},
+						Count: ${pageCount}`);
+				DEBUG && console.log("--=== ClientManager: Done seeding client! ===--");
 				rootStore.set.isLoading(false);
-				console.log("--=== ClientManager: Done seeding client! ===--");
 			});
 		}, []);
 	};
@@ -78,22 +78,22 @@ export const useClientManager = () => {
 				rootStore.set.pageCount(pageCount);
 				rootStore.set.page(1);
 
-				true &&
+				DEBUG &&
 					console.log(
 						`ClientManager: Seeding app collection: Got ${apps?.length} apps`,
 					);
-				// true &&
-				console.log(`ClientManager:
+				DEBUG &&
+					console.log(`ClientManager:
 						totalCount: ${totalCount},
 						pageCount: ${pageCount},
 						PAGE_SIZE: ${PAGE_SIZE}`);
 
-				// true &&
-				console.log(`ClientManager: Populated global state:
-				appCollection: ${rootStore.get.appCollection()?.length}
-				totalCount: ${rootStore.get.totalCount()}
-				pageCount: ${rootStore.get.pageCount()}
-				page: ${rootStore.get.page()}`);
+				DEBUG &&
+					console.log(`ClientManager: Populated global state:
+						appCollection: ${rootStore.get.appCollection()?.length}
+						totalCount: ${rootStore.get.totalCount()}
+						pageCount: ${rootStore.get.pageCount()}
+						page: ${rootStore.get.page()}`);
 			})
 			.catch((err) => {
 				toast.error("Error fetching app collection: ", err);
@@ -101,27 +101,32 @@ export const useClientManager = () => {
 
 		getAllTags().then(tags => {
 			rootStore.set.allowedTags(tags);
-			console.log('Seeded store with tags: ', rootStore.get.allowedTags());
 		});
 
 		return openFirstPage();
 	};
 
 	const setSelectedAppKey = (key) => {
-		console.log(`ClientManager: Set selected app key: ${key}`);
+		console.log("Selected app key: ", key);
 		rootStore.set.selectedAppKey(key);
-		console.log(
-			`ClientManager: Selected app key: ${rootStore.get.selectedAppKey()}`,
-		);
 		rootStore.set.isLoading(true);
+		if (key === null) return;
 		const app = fetchApp(key)
 			.then((app) => {
 				rootStore.set.isLoading(false);
 				rootStore.set.selectedApp(app);
-				console.log(
+
+				getAppTags(app.id).then((tags) => {
+					rootStore.set.selectedAppTags(tags);
+				}).catch((err) => {
+					console.error(err);
+					toast.error("Error fetching tags");
+				});
+
+				true && console.log(
 					`ClientManager: Set app object in store:
 					- Key: ${rootStore.get.selectedApp()?.key}
-					- Tags: ${rootStore.get.selectedApp()?.tags}`,
+					- Tags: ${rootStore.set.selectedAppTags()}`
 				);
 			})
 			.catch((err) => {
@@ -138,7 +143,6 @@ export const useClientManager = () => {
 	};
 
 	const gotoPage = (page) => {
-		console.log(`ClientManager: Goto page: ${page}`);
 		rootStore.set.page(page);
 		const apps = selectPageContent(state);
 		rootStore.set.pageContent(apps);
@@ -209,7 +213,6 @@ export const useClientManager = () => {
 	};
 
 	const deleteItem = (appKey) => {
-		console.log(`ClientManager: Delete app: ${appKey}`);
 		const apps = rootStore.get.appCollection();
 		const pageContent = rootStore.get.pageContent();
 		rootStore.set.isLoading(true);
@@ -217,12 +220,9 @@ export const useClientManager = () => {
 			.then(() => {
 				const newList = apps.filter((app) => app.key !== appKey);
 				const newPage = pageContent.filter((app) => app.key !== appKey);
-				console.log("New list: ", newList);
-				console.log("New page: ", newPage);
 				rootStore.set.appCollection(newList);
 				rootStore.set.pageContent(newPage);
 				rootStore.set.isLoading(false);
-				console.log("ClientManager: App deleted");
 				toast.success("App deleted successfully");
 			})
 			.catch((err) => {
@@ -252,12 +252,18 @@ export const useClientManager = () => {
 		return tags;
 	};
 
-	const updateItem = (app) => {
+	const updateItem = (app, appTags) => {
 		const appKey = app.key;
 		DEBUG &&
 			console.log(`ClientManager: Updating app:
 			- Tags: ${app.tags}`);
 		setIsLoading(true);
+		console.log('Saving tags for app with id: ', app.id);
+		tagApp(Number.parseInt(app.id, 10), appTags).then((res) => {
+			console.log('Tagged app: ', res);
+		}).catch(e => {
+			console.error(e);
+		});
 		const apps = rootStore.get.appCollection();
 		updateApp(app)
 			.then(() => {
@@ -297,17 +303,19 @@ export const useClientManager = () => {
 		rootStore.set.editMode(true);
 		DEBUG &&
 			console.log(`ClientManager:
-			- Edit flag set: ${rootStore.get.editMode()}
-			- isNewApp flag set: ${rootStore.get.isNewApp() === null}
-			- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);
+				- Edit flag set: ${rootStore.get.editMode()}
+				- isNewApp flag set: ${rootStore.get.isNewApp() === null}
+				- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);
 	};
 
-	const saveNewItem = (app) => {
+	const saveNewItem = (app, tagIds) => {
 		setIsLoading(true);
 		const apps = rootStore.get.appCollection();
 		const pageContent = rootStore.get.pageContent();
 		saveNewApp(app)
-			.then(() => {
+			.then((newApp) => {
+				console.log('!!! Saved new app with id: ', newApp?.id);
+				tagApp(newApp?.id, tagIds);
 				rootStore.set.appCollection([...apps, app]);
 				if (page === pageCount.length) {
 					rootStore.set.pageContent([...pageContent, app]);
@@ -322,16 +330,17 @@ export const useClientManager = () => {
 	};
 
 	const tagApp = async (appId, tagIds) => {
+		console.log('<<< Tags: ', tagIds);
 		rootStore.set.isLoading(true);
-		await addAppTags(tagIds, appId)
+		await addAppTags(appId, tagIds)
 			.then(() => {
 				rootStore.set.isLoading(false);
 				toast.success("Tags added");
 			})
 			.catch((err) => {
 				rootStore.set.isLoading(false);
-				console.error("ClientManager: Error adding tag: ", err);
-				toast.error("Error adding tag");
+				console.log("ClientManager: Error adding tag: ", err);
+				// toast.error("Error adding tag");
 			});
 	};
 

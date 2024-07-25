@@ -5,28 +5,28 @@ import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
 import { rootStore } from "store/store";
 import { selectAppByKey } from "store/selectors";
+import { useClientManager } from "../../core/ClientManager";
 
 const List = (props) => {
 	const { deleteItem, editItem } = props;
 	const selectedKey = rootStore.get.selectedAppKey();
 	const [currentKey, setCurrentKey] = useState(selectedKey);
 	const [activeFilter, setActiveFilter] = useState(selectedKey);
-
-	// rootStore.get.filteredList() === null &&
+	const { setSelectedAppKey } = useClientManager();
 
 	useEffect(() => {
 		setCurrentKey(rootStore.get.selectedAppKey());
 	}, [rootStore.use.selectedAppKey()]);
 
 	useEffect(() => {
-		console.log("FilteredList: ", rootStore.get.filteredList());
 		setActiveFilter(rootStore.get.activeFilter());
 	}, [rootStore.use.activeFilter()]);
 
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
-		rootStore.set.selectedAppKey(key);
-		rootStore.set.selectedApp(selectAppByKey(key));
+		// rootStore.set.selectedAppKey(key);
+		// rootStore.set.selectedApp(selectAppByKey(key));
+		setSelectedAppKey(key);
 	};
 
 	const skeleton = Array(20);

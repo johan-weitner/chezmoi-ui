@@ -7,6 +7,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import EditViewForm from "./EditViewForm";
 import { rootStore } from "store/store";
 import { useClientManager } from "core/ClientManager";
+import "../../App.css";
 
 const EditView = forwardRef(function EditView(props, ref) {
 	const { theme } = props;
@@ -33,24 +34,18 @@ const EditView = forwardRef(function EditView(props, ref) {
 			}}
 			radius="10"
 			size="auto"
-			transitionProps={{ duration: 2500, transition: "pop" }}
+			// transitionProps={{ duration: 2500, transition: "pop" }}
 			shadow="xl"
-			style={{
-				height: "100vh !important",
-				bottom: "0 !important",
-				flexGrow: "1 !important",
-				maxHeight: "fit-content !important",
-				flexBasis: "fit-content !important",
-				minHeight: "fit-content !important",
-			}}
+			fullScreen
+			transitionProps={{ transition: "fade", duration: 200 }}
 		>
 			<Card style={{ backgroundColor: "#222" }}>
 				<ErrorBoundary
 					fallbackRender={(error) => (
 						<FallbackComponent error={error.message} />
 					)}
+					style={{ margin: "0 !important" }}
 				>
-					{/* {rootStore.get.selectedApp() || isNewApp ? ( */}
 					<EditViewForm
 						isPopoverOpen={rootStore.use.editMode()}
 						closePopover={() => rootStore.set.editMode(false)}
@@ -63,7 +58,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 						forceUpdate={forceUpdate}
 						randomId={randomId}
 					/>
-					{/* ) : null} */}
 				</ErrorBoundary>
 			</Card>
 		</Modal>

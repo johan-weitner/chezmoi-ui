@@ -10,6 +10,8 @@ body {
   background-color: #121516;
 }
 
+
+
 .appShellHeader {
   position: relative !important;
   padding: 0 20px;
@@ -52,12 +54,6 @@ body {
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
 .card {
   padding: 2em;
 }
@@ -66,13 +62,6 @@ body {
   color: #888;
 }
 
-/* a selector that catches span tags with the attribute "data-tagcontainer" */
-/* *:has[data-tagcontainer] {
-  width: 100%;
-  border-radius: 4px;
-  background-color:#999;
-  font-family: monospace;
-} */
 .tagify {
   width: 100%;
   background-color: #262a2b;
@@ -85,11 +74,6 @@ body {
   background-color: #262a2b;
 }
 
-/* .tagify__tag,
- .tagify__tag > div,
- .tagify__tag > x  {
-  background-color:#ccc !important;
- } */
 .tagify__tag {
   border: 1px solid #FFF;
   border-radius: 3px;
@@ -103,12 +87,19 @@ body {
 .mantine-Modal-body {
   background-color: #222 !important;
   color: #FFF;
-  /* margin-top: 50px; */
   position: absolute;
   top: 120px;
   width: 1000px;
-  height: 800px !important;
-  ;
+  height:auto;
+}
+
+.mantine-Modal-root,
+.mantine-Modal-content,
+.mantine-Modal-inner,
+.mantine-Modal-body {
+  height: 90vh !important;
+  max-height:1500px !important;
+  border-radius: 20px !important;
 }
 
 .mantine-Modal-body {

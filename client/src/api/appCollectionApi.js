@@ -4,11 +4,9 @@ import { mapEntityToDb, transformNullValues } from "./helpers";
 const BASE_URL = '/api';
 
 export const fetchApps = async () => {
-	console.log("Fetching all apps...")
 	const apps = await axios
 		.get(`${BASE_URL}/software`)
 		.then((response) => {
-			console.log("### Got: ", response.data)
 			return response.data;
 		})
 		.catch((error) => {
@@ -42,10 +40,7 @@ export const fetchApp = async (key) => {
 		.catch((error) => {
 			throw error;
 		});
-
-	console.log('Throttled fetchApp');
 	return transformNullValues(app);
-
 };
 
 export const updateApp = async (updatedData) => {
@@ -128,11 +123,12 @@ export const getAllTags = async () => {
 };
 
 export const addAppTags = async (appId, tags) => {
-	console.log('Saving app tags: ', tags);
-	const res = await axios
+	console.log("AppId: ", Number.parseInt(appId, 10) || appId, typeof appId);
+	console.log('Tags: ', tags);
+	return axios
 		.post(`${BASE_URL}/addAppTags`, {
 			data: {
-				appId: appId,
+				appId: Number.parseInt(appId, 10),
 				tagId: tags
 			}
 		})
@@ -142,7 +138,6 @@ export const addAppTags = async (appId, tags) => {
 		.catch((error) => {
 			throw error;
 		});
-	return res;
 };
 
 export const deleteAppTag = tag => { };
@@ -159,7 +154,7 @@ export const getTagsByAppId = async (
 			throw error;
 		});
 
-	console.log(`Got tags for appId $(appId): `, tags);
+	console.log('Got tags for appId: ', appId, tags);
 	return tags;
 };
 
