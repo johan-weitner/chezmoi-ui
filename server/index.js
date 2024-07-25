@@ -15,6 +15,11 @@ import {
 	getCount,
 	getPage,
 	updateApp,
+	addAppTags,
+	deleteAppTag,
+	getTagsByAppId,
+	getAllTags,
+	updateArticleTags,
 	getAppsWithoutInstaller,
 	getAppsWithoutUrls,
 	getAppsWithoutDesc,
@@ -38,18 +43,18 @@ const attachHeaders = (res) => {
 };
 
 app.get("/", (req, res) => {
-	attachHeaders(res).redirect("/software");
+	res.redirect("/software");
 });
 
 app.get("/software", (req, res) => {
 	getAllApps().then((apps) => {
-		attachHeaders(res).json(apps);
+		res.json(apps);
 	});
 });
 
 app.get("/getCount", (req, res) => {
 	getCount().then((count) => {
-		attachHeaders(res).json({ count: count });
+		res.json({ count: count });
 	});
 });
 
@@ -58,12 +63,12 @@ app.post("/page", (req, res) => {
 		body: { skip, take },
 	} = req;
 	getPage(Number.parseInt(skip, 10), Number.parseInt(take, 10)).then((apps) => {
-		attachHeaders(res).json(apps);
+		res.json(apps);
 	});
 });
 
 app.get("/rawlist", (req, res) => {
-	attachHeaders(res).set("Content-Type", "text/plain");
+	res.set("Content-Type", "text/plain");
 
 	softwareArray = fs.readFileSync(targetFilePath, "utf8");
 	const yamlData = YAML.stringify(softwareArray);
@@ -74,7 +79,7 @@ app.get("/rawlist", (req, res) => {
 app.get("/getApp", (req, res) => {
 	const { key } = req.query;
 	getAppByKey(key).then((app) => {
-		attachHeaders(res).json(app);
+		res.json(app);
 	});
 });
 
@@ -89,7 +94,7 @@ app.post("/updateNode", (req, res) => {
 	}
 	updateApp(body)
 		.then((app) => {
-			attachHeaders(res).status(200).json(app);
+			res.status(200).json(app);
 		})
 		.catch((e) => {
 			res.status(500).json({
@@ -104,7 +109,7 @@ app.post("/addNode", (req, res) => {
 	console.log("Req params: ", data);
 	addApp(data)
 		.then((app) => {
-			attachHeaders(res).status(200).json(app);
+			res.status(200).json(app);
 		})
 		.catch((e) => {
 			res.status(500).json({
@@ -116,7 +121,7 @@ app.post("/addNode", (req, res) => {
 app.delete("/deleteNode", (req, res) => {
 	deleteApp(req.query.key)
 		.then((result) => {
-			attachHeaders(res).status(200).json(result);
+			res.status(200).json(result);
 		})
 		.catch((e) => {
 			res.status(500).json({
@@ -125,48 +130,88 @@ app.delete("/deleteNode", (req, res) => {
 		});
 });
 
+app.get("/getAllTags", (req, res) => {
+	getAllTags().then((tags) => {
+		res.json(tags);
+	});
+});
+
+app.get("/getTagsByAppId", (req, res) => {
+	const { appId } = req.query;
+	getTagsByAppId(Number.parseInt(appId, 10)).then((tags) => {
+		res.json(tags);
+	});
+});
+
+app.post("/addAppTags", (req, res) => {
+	console.log("Req.body: ", req.body);
+	const { tagId, appId } = req.body.data;
+	console.log("Req params: ", req.body.data);
+	updateArticleTags(appId, tagId)
+		.then(() => {
+			res.status(200).json();
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
+
+app.delete("/deleteAppTag", (req, res) => {
+	const { appId, tagId } = req.body.data;
+	console.log("Req params: ", req.body.data);
+	deleteAppTag(tagId, appId)
+		.then((res) => {
+			res.status(200).json(res);
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
+
+// TODO: Read req param and decide file based on it
+app.get('/download', (req, res) => {
+	const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+
+	const filename = path.basename(file);
+	const mimetype = mime.getType(file);
+
+	res.setHeader(`Content-disposition', 'attachment; filename=${filename}`);
+	res.setHeader('Content-type', mimetype);
+
+	res.download(file);
+	// const filestream = fs.createReadStream(file);
+	// filestream.pipe(res);
+});
+
+
+
 app.get("/getAppsWithoutInstaller", (req, res) => {
 	getAppsWithoutInstaller().then((apps) => {
-		attachHeaders(res).json(apps);
+		res.json(apps);
 	});
 });
 
 app.get("/getAppsWithoutUrls", (req, res) => {
 	getAppsWithoutUrls().then((apps) => {
-		attachHeaders(res).json(apps);
+		res.json(apps);
 	});
 });
 
 app.get("/getAppsWithoutDesc", (req, res) => {
 	getAppsWithoutDesc().then((apps) => {
-		attachHeaders(res).json(apps);
+		res.json(apps);
 	});
 });
 
 app.get("/getAppsWithoutName", (req, res) => {
 	getAppsWithoutName().then((apps) => {
-		attachHeaders(res).json(apps);
+		res.json(apps);
 	});
 });
-
-// app.post("/save", (req, res) => {
-// 	if (isEmpty(req.body)) {
-// 		attachHeaders(res).status(500).json({
-// 			error: "No data provided",
-// 		});
-// 		return;
-// 	}
-// 	try {
-// 		const jsonStr = JSON.stringify(req.body, null, 2);
-// 		// fs.writeFileSync(targetFilePath, jsonStr, "utf8");
-// 		// attachHeaders(res).status(200).json(jsonStr);
-// 	} catch (err) {
-// 		attachHeaders(res).status(500).json({
-// 			error: err,
-// 		});
-// 		return;
-// 	}
-// });
 
 app.listen(port, () => {
 	log.info(`\nServer is listening at port ${port} `);

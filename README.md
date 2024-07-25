@@ -1,6 +1,6 @@
 # Chezmoi UI
 
-A quick stab at a UI for managing a list of applications to feed a Chezmoi setup9.
+A quick stab at a UI for managing a list of applications to feed a Chezmoi setup.
 
 ## Background
 
@@ -61,7 +61,7 @@ On subsequent use, skip the `--build` flag. (A re-build is of course needed if y
 
 [MIT](https://opensource.org/license/MIT)
 
-(c) 2024 Johan Weitner
+© 2024 Johan Weitner
 
 
 [![Made with Prisma](http://made-with.prisma.io/dark.svg)](https://prisma.io)

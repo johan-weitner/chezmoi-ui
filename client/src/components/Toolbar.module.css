@@ -25,8 +25,7 @@
   align-items: center;
   justify-content: center;
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
-  background-color: #FFF;
-  border: 1px solid #933;
+  background-color: transparent;
 
   &:hover {
     /* background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)); */
