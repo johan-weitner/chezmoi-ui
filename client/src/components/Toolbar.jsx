@@ -1,15 +1,15 @@
 import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
 import {
+	IconDownload,
 	IconPlayerTrackNext,
 	IconPlayerTrackPrev,
-	IconDownload,
 } from "@tabler/icons-react";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import "@yaireo/tagify/dist/tagify.css";
-import { useClientManager } from "core/ClientManager";
 import classes from "components/Toolbar.module.css";
+import { useClientManager } from "core/ClientManager";
 import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {

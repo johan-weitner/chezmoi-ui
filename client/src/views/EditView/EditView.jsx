@@ -3,10 +3,10 @@ import "@yaireo/tagify/dist/tagify.css";
 import { Card, Modal } from "@mantine/core";
 import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
-import { ErrorBoundary } from "react-error-boundary";
-import EditViewForm from "./EditViewForm";
-import { rootStore } from "store/store";
 import { useClientManager } from "core/ClientManager";
+import { ErrorBoundary } from "react-error-boundary";
+import { rootStore } from "store/store";
+import EditViewForm from "./EditViewForm";
 import "../../App.css";
 
 const EditView = forwardRef(function EditView(props, ref) {

@@ -1,7 +1,7 @@
 import { Kbd, Text } from "@mantine/core";
-import classes from "views/MainView/MainView.module.css";
 import { keyboardShortcuts } from "constants/keyboardShortcuts";
 import { nanoid } from "nanoid";
+import classes from "views/MainView/MainView.module.css";
 import s from "./DetailView.module.css";
 
 const Legend = (props) => {

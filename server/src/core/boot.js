@@ -132,7 +132,6 @@ const _seedDbIfEmpty = async () => {
 		await getCount().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
-
 	}
 
 	// if (isEmptyTagsTable()) {

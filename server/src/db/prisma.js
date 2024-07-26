@@ -4,8 +4,6 @@ import { log } from "../util/winston.js";
 const prisma = new PrismaClient();
 const APPLICATION = "application";
 const TAG = "tag";
-const APP = "app";
-const APP_TAG = "ApplicationTag";
 
 export const seedDb = async (data) => {
 	log.info("Seeding Application table with initial data...	");
@@ -124,7 +122,7 @@ export const addAppTag = async (tagId, appId) => {
 
 export const addAppTags = async (appId, tagIds) => {
 	try {
-		const connections = tagIds?.map(tagId => {
+		const connections = tagIds?.map((tagId) => {
 			return prisma.ApplicationTag.create({
 				data: {
 					applicationId: appId,
@@ -137,7 +135,6 @@ export const addAppTags = async (appId, tagIds) => {
 		await Promise.all(connections);
 
 		return { appId: appId, tags: tagIds };
-
 	} catch (e) {
 		console.error(e.message, e);
 		return e;
@@ -174,7 +171,7 @@ export const deleteAllAppTags = async (appId) => {
 	try {
 		const result = await prisma.ApplicationTag.deleteMany({
 			where: {
-				applicationId: appId
+				applicationId: appId,
 			},
 		});
 		return result;
@@ -277,4 +274,4 @@ export const isEmptyDb = async () => {
 export const isEmptyTagsTable = async () => {
 	const count = await getTagCount();
 	return count === 0;
-}
+};

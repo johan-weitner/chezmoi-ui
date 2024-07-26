@@ -1,11 +1,11 @@
-import { useState, useEffect } from "react";
 import { Card, Skeleton } from "@mantine/core";
-import classes from "./ListView.module.css";
+import { useEffect, useState } from "react";
+import { selectAppByKey } from "store/selectors";
+import { rootStore } from "store/store";
+import { useClientManager } from "../../core/ClientManager";
 import { ListItem } from "./ListItem";
 import { ListSkeleton } from "./ListSkeleton";
-import { rootStore } from "store/store";
-import { selectAppByKey } from "store/selectors";
-import { useClientManager } from "../../core/ClientManager";
+import classes from "./ListView.module.css";
 
 const List = (props) => {
 	const { deleteItem, editItem } = props;

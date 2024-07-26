@@ -18,6 +18,8 @@ import {
 	IconEdit,
 	IconMenu2,
 	IconPackages,
+	IconPlayerTrackNext,
+	IconPlayerTrackPrev,
 	IconReload,
 	IconScript,
 	IconSearch,
@@ -25,8 +27,6 @@ import {
 	IconTrash,
 	IconWorldCode,
 	IconX,
-	IconPlayerTrackPrev,
-	IconPlayerTrackNext
 } from "@tabler/icons-react";
 
 /**
@@ -66,7 +66,7 @@ export const ICON = {
 };
 
 export const INDICATOR = {
-	populated: { css: 'green', icon: "✓" },
-	unpopulated: { css: 'red', icon: "✗" },
-	warning: { css: 'red', icon: "⚠" },
+	populated: { css: "green", icon: "✓" },
+	unpopulated: { css: "red", icon: "✗" },
+	warning: { css: "red", icon: "⚠" },
 };

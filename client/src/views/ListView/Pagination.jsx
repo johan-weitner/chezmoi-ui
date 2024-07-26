@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Stack, Text, Pagination } from "@mantine/core";
-import { rootStore } from "store/store";
+import { Pagination, Stack, Text } from "@mantine/core";
 import { filterModel } from "api/filters";
+import { useEffect, useState } from "react";
+import { rootStore } from "store/store";
 import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {

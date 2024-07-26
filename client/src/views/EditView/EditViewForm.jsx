@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
 import { Button, Flex } from "@mantine/core";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
 import { ICON } from "constants/icons";
+import { useClientManager } from "core/ClientManager";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { rootStore } from "../../store/store";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
-import { useClientManager } from "core/ClientManager";
-import { rootStore } from "../../store/store";
 
 const EditViewForm = (props) => {
 	const [isNewApp, setIsNewApp] = useState(true);

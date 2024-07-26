@@ -11,19 +11,19 @@
  * @param {function} props.gotoNext - Function to navigate to the next app.
  * @returns {JSX.Element} The rendered DetailView component.
  */
-import { Card, Stack, useMantineTheme, Text } from "@mantine/core";
+import { Card, Stack, Text, useMantineTheme } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
+import { useClientManager } from "core/ClientManager";
 import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import StickyBox from "react-sticky-box";
+import { rootStore } from "store/store";
+import EditView from "views/EditView/EditView";
 // import EditView from "views/EditView/EditView";
 import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
-import EditView from "views/EditView/EditView";
 import Legend from "./Legend";
-import { useClientManager } from "core/ClientManager";
-import { rootStore } from "store/store";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);

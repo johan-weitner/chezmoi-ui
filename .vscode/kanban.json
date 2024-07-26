@@ -5,6 +5,10 @@
             "title": "Bugs",
             "tasks": [
                 {
+                    "text": "Start script in root not working",
+                    "id": "v2abo0hm00omhs51lastn0rk"
+                },
+                {
                     "text": "Pagination is broken",
                     "id": "g34usmphhtwv8e7x71ce10gn"
                 }
@@ -15,6 +19,10 @@
         {
             "title": "To-Do",
             "tasks": [
+                {
+                    "text": "Consider breaking server-side Prisma API into smaller pieces based on entity",
+                    "id": "u1x9o9x7wyxp82xnl94zvoo9"
+                },
                 {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
@@ -251,5 +259,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722013422572
+    "timestamp": 1722022154658
 }

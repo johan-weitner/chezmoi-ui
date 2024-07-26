@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
 	ActionIcon,
 	Button,
@@ -11,10 +10,11 @@ import {
 	rem,
 	useMantineTheme,
 } from "@mantine/core";
+import { IconDownload, IconFilter, IconMenu2 } from "@tabler/icons-react";
 import { filterModel } from "api/filters";
-import { useClientManager } from "core/ClientManager";
 import { ICON } from "constants/icons";
-import { IconMenu2, IconFilter, IconDownload } from "@tabler/icons-react";
+import { useClientManager } from "core/ClientManager";
+import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import SearchWidget from "./SearchWidget";
 // import css from "./ListView.module.css";

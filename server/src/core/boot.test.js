@@ -1,38 +1,137 @@
-import { seedDb, getCount, seedTags, getTagCount, isEmptyDb } from "../db/prisma.js";
-import { log } from "../util/log.js";
+import fs from "node:fs";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import YAML from "yaml";
+import { getCount, isEmptyDb, seedDb } from "../db/prisma";
+import { log } from "../util/log";
+import { styles } from "../util/styles";
+import {
+	_checkEnvVars,
+	_checkFileExistence,
+	_seedDbIfEmpty,
+	_setupFileData,
+	boot,
+	stripTrailingWhitespace,
+} from "./boot";
+import { softwareYamlPath } from "./config";
 
-jest.mock("../db/prisma.js");
-jest.mock("../util/log.js");
+vi.mock("node:fs");
+vi.mock("yaml");
+vi.mock("../util/log");
+vi.mock("../util/styles");
+vi.mock("./config");
+vi.mock("../db/prisma");
 
-describe("_seedDbIfEmpty", () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
+describe("boot.js", () => {
+	beforeEach(() => {
+		vi.clearAllMocks();
+	});
 
-  it("should seed the database if it is empty", async () => {
-    isEmptyDb.mockResolvedValueOnce(true);
-    seedDb.mockResolvedValueOnce();
-    getCount.mockResolvedValueOnce(10);
-    seedTags.mockResolvedValueOnce();
-    getTagCount.mockResolvedValueOnce(5);
+	describe("boot", () => {
+		it("should call necessary functions and log messages", () => {
+			vi.spyOn(console, "log").mockImplementation(() => {});
+			softwareYamlPath.mockReturnValue("/path/to/source.yaml");
+			fs.existsSync.mockReturnValue(true);
+			isEmptyDb.mockResolvedValue(true);
+			getCount.mockResolvedValue(10);
 
-    await _seedDbIfEmpty();
+			boot();
 
-    expect(log.info).toHaveBeenCalledWith("Empty db - seeding tables...");
-    expect(log.info).toHaveBeenCalledWith("Set up db connection...");
-    expect(log.info).toHaveBeenCalledWith(`Done seeding Application table with 10 apps`);
-    expect(log.info).toHaveBeenCalledWith(`Done seeding Tag table with 5 tags`);
-  });
+			expect(log.info).toHaveBeenCalledWith("  © 2024 Johan Weitner");
+			expect(log.info).toHaveBeenCalledWith(
+				expect.stringContaining("STARTING BACKEND SERVER"),
+			);
+			expect(log.info).toHaveBeenCalledWith(
+				expect.stringContaining("Path to source file"),
+			);
+		});
+	});
 
-  it("should not seed the database if it is not empty", async () => {
-    isEmptyDb.mockResolvedValueOnce(false);
+	describe("_checkEnvVars", () => {
+		it("should log error and exit if softwareYamlPath is missing", () => {
+			softwareYamlPath.mockReturnValue(undefined);
+			const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => {});
 
-    await _seedDbIfEmpty();
+			_checkEnvVars();
 
-    expect(log.info).toHaveBeenCalledWith("Set up db connection...");
-    expect(seedDb).not.toHaveBeenCalled();
-    expect(getCount).not.toHaveBeenCalled();
-    expect(seedTags).not.toHaveBeenCalled();
-    expect(getTagCount).not.toHaveBeenCalled();
-  });
+			expect(log.error).toHaveBeenCalledWith(
+				expect.stringContaining("Missing environment variable"),
+			);
+			expect(exitSpy).toHaveBeenCalledWith(1);
+		});
+	});
+
+	describe("_checkFileExistence", () => {
+		it("should log error and exit if source file does not exist", () => {
+			softwareYamlPath.mockReturnValue("/path/to/source.yaml");
+			fs.existsSync.mockReturnValue(false);
+			const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => {});
+
+			_checkFileExistence();
+
+			expect(log.error).toHaveBeenCalledWith(
+				expect.stringContaining("Source file is missing"),
+			);
+			expect(exitSpy).toHaveBeenCalledWith(1);
+		});
+
+		it("should return sourceExists as true if source file exists", () => {
+			softwareYamlPath.mockReturnValue("/path/to/source.yaml");
+			fs.existsSync.mockReturnValue(true);
+
+			const result = _checkFileExistence();
+
+			expect(result.sourceExists).toBe(true);
+		});
+	});
+
+	describe("_setupFileData", () => {
+		it("should read and parse YAML file correctly", () => {
+			softwareYamlPath.mockReturnValue("/path/to/source.yaml");
+			const yamlContent = 'softwarePackages:\n  key1:\n    name: "Software 1"';
+			fs.readFileSync.mockReturnValue(yamlContent);
+			YAML.parse.mockReturnValue({
+				softwarePackages: { key1: { name: "Software 1" } },
+			});
+
+			const result = _setupFileData();
+
+			expect(result.softwareArray).toEqual([
+				{ name: "Software 1", key: "key1" },
+			]);
+			expect(result.keys).toEqual(["key1"]);
+		});
+	});
+
+	describe("stripTrailingWhitespace", () => {
+		it("should remove trailing whitespace from strings", () => {
+			expect(stripTrailingWhitespace("test ")).toBe("test");
+			expect(stripTrailingWhitespace("test")).toBe("test");
+			expect(stripTrailingWhitespace("")).toBe("");
+			expect(stripTrailingWhitespace(null)).toBe("");
+		});
+	});
+
+	describe("_seedDbIfEmpty", () => {
+		it("should seed the database if it is empty", async () => {
+			isEmptyDb.mockResolvedValue(true);
+			const softwareData = { key1: { name: "Software 1" } };
+			const keys = ["key1"];
+			vi.spyOn(global, "_setupFileData").mockReturnValue({
+				software: softwareData,
+				keys,
+			});
+			getCount.mockResolvedValue(10);
+
+			await _seedDbIfEmpty();
+
+			expect(log.info).toHaveBeenCalledWith(
+				expect.stringContaining("Set up db connection"),
+			);
+			expect(log.info).toHaveBeenCalledWith(
+				expect.stringContaining("Empty db - seeding tables"),
+			);
+			expect(seedDb).toHaveBeenCalled();
+			expect(getCount).toHaveBeenCalled();
+		});
+	});
 });

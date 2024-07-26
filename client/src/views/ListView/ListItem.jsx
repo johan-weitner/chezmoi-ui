@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
-import { rem, Text } from "@mantine/core";
+import { Text, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
-import { ErrorBoundary } from "react-error-boundary";
-import { ICON } from "constants/icons";
 import { EditedIndicator } from "components/Indicator";
-import classes from "./ListView.module.css";
+import { ICON } from "constants/icons";
+import { useEffect, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { rootStore } from "store/store";
+import classes from "./ListView.module.css";
 
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =

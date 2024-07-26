@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
 import { Badge, Button, Group, Text, rem } from "@mantine/core";
-import { nanoid } from "nanoid";
-import { ICON } from "constants/icons";
+import { appModelInstallerFields } from "api/appModel";
 import { EditedIndicator } from "components/Indicator";
 import {
 	MarkPopulated,
 	MarkUnPopulated,
 	WarningSign,
 } from "components/Indicator";
-import { appModelInstallerFields } from "api/appModel";
+import { ICON } from "constants/icons";
+import { useClientManager } from "core/ClientManager";
+import { nanoid } from "nanoid";
+import { useEffect, useState } from "react";
+import { rootStore } from "store/store";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
-import { useClientManager } from "core/ClientManager";
-import { rootStore } from "store/store";
 
 const DetailsBox = (props) => {
 	const { selectedApp, editMode } = props;

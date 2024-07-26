@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { Group, Title } from "@mantine/core";
+import { useEffect } from "react";
 import React from "react";
 import { rootStore } from "../store/store";
 import BarSpinner from "./BarSpinner";

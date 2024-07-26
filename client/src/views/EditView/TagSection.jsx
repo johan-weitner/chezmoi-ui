@@ -1,15 +1,15 @@
+import {
+	Autocomplete,
+	Fieldset,
+	InputBase,
+	MultiSelect,
+	Pill,
+	TagsInput,
+} from "@mantine/core";
+import { useClientManager } from "core/ClientManager";
 import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
-import {
-	TagsInput,
-	MultiSelect,
-	Autocomplete,
-	Pill,
-	InputBase,
-	Fieldset,
-} from "@mantine/core";
 import { rootStore } from "store/store";
-import { useClientManager } from "core/ClientManager";
 
 const TagSection = (props) => {
 	const { hoistAppTags } = props;

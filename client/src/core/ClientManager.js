@@ -1,8 +1,8 @@
 import { rootStore } from "store/store";
 import { useDataManager } from "./DataManager";
+import { useFilterManager } from "./FilterManager";
 import { usePageManager } from "./PageManager";
 import { useSelectionManager } from "./SelectionManager";
-import { useFilterManager } from "./FilterManager";
 
 export const useClientManager = () => {
 	const { store } = rootStore;
