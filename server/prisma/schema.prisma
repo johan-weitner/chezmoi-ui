@@ -14,35 +14,34 @@ datasource db {
 model Application {
   id        Int              @id @default(autoincrement())
   key       String           @unique
-  name      String
-  edited    String?
-  desc      String?
-  tags      String?          @default("")
-  bin       String?
-  short     String?
+  name      String           @default("")
+  edited    String?          @default("")
+  desc      String?          @default("")
+  bin       String?          @default("")
+  short     String?          @default("")
   home      String
-  docs      String?
-  github    String?
-  whalebrew String?
-  apt       String?
-  brew      String?
-  cask      String?
-  cargo     String?
-  npm       String?
-  pip       String?
-  pipx      String?
-  gem       String?
-  script    String?
-  choco     String?
-  scoop     String?
-  winget    String?
-  pkgdarwin String?
-  ansible   String?
-  binary    String?
-  yay       String?
-  appstore  String?
-  pacman    String?
-  port      String?
+  docs      String?          @default("")
+  github    String?          @default("")
+  whalebrew String?          @default("")
+  apt       String?          @default("")
+  brew      String?          @default("")
+  cask      String?          @default("")
+  cargo     String?          @default("")
+  npm       String?          @default("")
+  pip       String?          @default("")
+  pipx      String?          @default("")
+  gem       String?          @default("")
+  script    String?          @default("")
+  choco     String?          @default("")
+  scoop     String?          @default("")
+  winget    String?          @default("")
+  pkgdarwin String?          @default("")
+  ansible   String?          @default("")
+  binary    String?          @default("")
+  yay       String?          @default("")
+  appstore  String?          @default("")
+  pacman    String?          @default("")
+  port      String?          @default("")
   appTags   ApplicationTag[]
 }
 
