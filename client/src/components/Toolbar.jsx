@@ -1,5 +1,9 @@
 import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
-import { IconPlayerTrackNext, IconPlayerTrackPrev } from "@tabler/icons-react";
+import {
+	IconPlayerTrackNext,
+	IconPlayerTrackPrev,
+	IconDownload,
+} from "@tabler/icons-react";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
@@ -10,7 +14,7 @@ import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {
 	const [active, setActive] = useState(null);
-	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext } =
+	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext, downloadYaml } =
 		useClientManager();
 	const stroke = 1.5;
 
@@ -52,13 +56,23 @@ const Toolbar = (props) => {
 			label: "Go to next",
 			action: gotoNext,
 		},
+		{
+			Icon: (
+				<IconDownload
+					style={{ width: rem(20), height: rem(20) }}
+					stroke={stroke}
+				/>
+			),
+			label: "Download YAML",
+			action: () => window.open("/api/download"),
+		},
 	];
 
 	const onClick = (action) => {
 		typeof action === "function" && action();
 	};
 
-	const NavbarLink = ({ Icon, label, active, action }) => {
+	const NavbarLink = ({ Icon, label, active, action, link }) => {
 		return (
 			<Tooltip
 				label={label}
@@ -69,6 +83,7 @@ const Toolbar = (props) => {
 					onClick={() => onClick(action)}
 					className={classes.link}
 					data-active={active || null}
+					link={link}
 				>
 					{Icon}
 				</UnstyledButton>

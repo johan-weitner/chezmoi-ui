@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Card } from "@mantine/core";
+import { Card, Flex } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "./ListView.module.css";

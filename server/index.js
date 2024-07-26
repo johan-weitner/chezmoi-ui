@@ -26,6 +26,7 @@ import {
 	getAppsWithoutName
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
+import { getYamlExport } from "./src/util/export.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
@@ -174,17 +175,19 @@ app.delete("/deleteAppTag", (req, res) => {
 
 // TODO: Read req param and decide file based on it
 app.get('/download', (req, res) => {
-	const file = `${__dirname}/upload-folder/dramaticpenguin.MOV`;
+	getYamlExport().then(apps => {
+		const yamlFile = YAML.stringify(apps);
 
-	const filename = path.basename(file);
-	const mimetype = mime.getType(file);
+		const filename = `software-custom-${new Date().getTime()}.yaml`;
+		const mimetype = "text/x-yaml";
 
-	res.setHeader(`Content-disposition', 'attachment; filename=${filename}`);
-	res.setHeader('Content-type', mimetype);
+		res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+		res.setHeader('Content-type', mimetype);
 
-	res.download(file);
-	// const filestream = fs.createReadStream(file);
-	// filestream.pipe(res);
+		res.write(yamlFile);
+		// const filestream = fs.createReadStream(file);
+		// filestream.pipe(res);
+	});
 });
 
 

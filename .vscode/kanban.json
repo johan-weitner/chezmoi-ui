@@ -3,7 +3,12 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Pagination is broken",
+                    "id": "g34usmphhtwv8e7x71ce10gn"
+                }
+            ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
@@ -246,5 +251,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1721937741676
+    "timestamp": 1722013422572
 }

@@ -14,7 +14,7 @@ import {
 import { filterModel } from "api/filters";
 import { useClientManager } from "core/ClientManager";
 import { ICON } from "constants/icons";
-import { IconMenu2 } from "@tabler/icons-react";
+import { IconMenu2, IconFilter, IconDownload } from "@tabler/icons-react";
 import commonCss from "./ListView.module.css";
 import SearchWidget from "./SearchWidget";
 // import css from "./ListView.module.css";
@@ -51,7 +51,7 @@ export const ListViewHeader = (props) => {
 							size="xl"
 						>
 							<Tooltip label="Open filter menu" position="top">
-								<IconMenu2 size={24} />
+								<IconFilter size={24} />
 							</Tooltip>
 						</ActionIcon>
 					</Menu.Target>

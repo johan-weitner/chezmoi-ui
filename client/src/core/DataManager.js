@@ -215,6 +215,10 @@ export const useDataManager = () => {
       });
   };
 
+  const downloadYaml = () => {
+    console.log('Downloading YAML...');
+  };
+
   const setIsLoading = (flag) => {
     rootStore.set.isLoading(flag);
   };
@@ -235,5 +239,6 @@ export const useDataManager = () => {
     tagApp,
     setIsLoading,
     setIsEditMode,
+    downloadYaml
   };
 };
