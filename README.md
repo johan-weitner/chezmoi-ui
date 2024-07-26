@@ -48,9 +48,9 @@ On subsequent use, skip the `--build` flag. (A re-build is of course needed if y
 - I'm not sure if it's that there's a lot of poorly formatted text in the source document, or if the YAML parser I'm using is a bit funky, (or both), but the output end result does look a bit wonky in places - as in lots of conspicuous whitespace. It is legit YAML though. And I guess the idea is for you to edit the metadata of the apps you want to keep anyway, so... And in the end that whitespace isn't rendered in web browsers, making it a moot point. (But it is annoying enough that I'll an eye out for a solution).
 
 ## The stack
-- React
+- React 18
 - Mantine UI
-- React Query
+- Zustand + Zustand-X + Reselect
 - Prisma
 - Vite
 - TurboRepo

@@ -6,7 +6,6 @@ import path from "node:path";
 
 // https://vitejs.dev/config/ // add env varible specified in .env file
 
-
 export default defineConfig({
   plugins: [
     react()
