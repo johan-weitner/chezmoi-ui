@@ -4,6 +4,7 @@ import { IconFileText, IconSearch } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { useClientManager } from "../../core/ClientManager";
 import { rootStore } from "../../store/store";
+import "components/neumorphic.css";
 
 const actions = [];
 const SearchWidget = (props) => {
@@ -36,10 +37,11 @@ const SearchWidget = (props) => {
 			<ActionIcon
 				onClick={spotlight.open}
 				size="xl"
-				style={{ position: "absolute", top: "40px", right: "100px" }}
+				style={{ position: "absolute", top: "25px", right: "120px" }}
+				className="neubtn"
 			>
 				<Tooltip label="Free text search for apps" position="top">
-					<IconSearch size={24} />
+					<IconSearch size={24} color="#999" />
 				</Tooltip>
 			</ActionIcon>
 			<Spotlight

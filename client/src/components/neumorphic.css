@@ -1,0 +1,70 @@
+/*
+<div class="clock" role="img"></div>
+*/
+/* Dark theme */
+	:root {
+    --hue: 222;
+	--bg: hsl(var(--hue),10%,90%);
+	--fg: hsl(var(--hue),10%,10%);
+	--primary: hsl(var(--hue),90%,50%);
+	--shadow1: hsl(var(--hue),10%,80%);
+	--shadow2: hsl(var(--hue),10%,100%);
+	--trans-dur: 0.3s;
+	/* font-size: calc(16px + (24 - 16) * (100vw - 320px) / (2560 - 320)); */
+
+		--bg: hsl(var(--hue),10%,20%);
+		--fg: hsl(var(--hue),10%,90%);
+		--shadow1: hsl(var(--hue),10%,10%);
+		--shadow2: hsl(var(--hue),10%,30%);
+	}
+
+
+.neubtncontainer {
+	background-color: transparent;
+	color: var(--fg);
+	display: flex;
+	font: 1em/1.5 sans-serif;
+	/* height: 100vh; */
+}
+.neubtnIcon {
+  position:relative;
+  top:4px;
+}
+.neubtnIcon:hover {
+  color:#fff;
+}
+.neubtn{
+	animation-duration: 0.6s;
+	animation-timing-function: ease-in-out;
+	animation-fill-mode: forwards;
+	animation-name: neuanim;
+	background-color: var(--bg);
+	border-radius: 50%;
+	box-shadow:
+		0 0 0 var(--shadow1),
+		0 0 0 var(--shadow2);
+	margin: auto;
+	position: relative;
+	width: 16em;
+	height: 16em;
+  width: 3em;
+	height: 3em;
+  cursor:pointer;
+  border:none;
+}
+
+@keyframes neuanim {
+	from,
+	25% {
+		box-shadow:
+			0 0 0 var(--shadow1),
+			0 0 0 var(--shadow2);
+	}
+	50%,
+	to {
+		box-shadow:
+			0.75em 0.75em 1.5em var(--shadow1),
+			-0.75em -0.75em 1.5em var(--shadow2);
+	}
+}
+

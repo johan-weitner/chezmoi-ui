@@ -2,6 +2,24 @@
   top: 105px !important;
 }
 
+.appTitle {
+  text-align: left;
+  font-weight: normal;
+  font-size: 2em;
+  margin: 0 0 10px 0;
+
+}
+
+.indicator {
+    height:26px;
+    width:30px;
+    display:inline-block;
+
+    svg {
+      position:static !important;
+    }
+  }
+
 .legendTable {
   width: 100%;
   border-collapse: collapse;

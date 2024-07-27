@@ -12,11 +12,13 @@ import {
 } from "@mantine/core";
 import { IconDownload, IconFilter, IconMenu2 } from "@tabler/icons-react";
 import { filterModel } from "api/filters";
+import NeuButton from "components/NeuButton";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import SearchWidget from "./SearchWidget";
+import "components/neumorphic.css";
 // import css from "./ListView.module.css";
 
 export const ListViewHeader = (props) => {
@@ -42,16 +44,17 @@ export const ListViewHeader = (props) => {
 					shadow="md"
 					width={250}
 					offset={8}
-					style={{ position: "absolute", top: "40px", right: "50px" }}
+					style={{ position: "absolute", top: "25px", right: "50px" }}
 				>
 					<Menu.Target>
 						<ActionIcon
 							variant="filled"
 							aria-label="Open filter menu"
 							size="xl"
+							className="neubtn"
 						>
 							<Tooltip label="Open filter menu" position="top">
-								<IconFilter size={24} />
+								<IconFilter size={24} color="#999" />
 							</Tooltip>
 						</ActionIcon>
 					</Menu.Target>

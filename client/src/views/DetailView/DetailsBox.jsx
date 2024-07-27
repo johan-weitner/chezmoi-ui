@@ -1,4 +1,4 @@
-import { Badge, Button, Group, Text, rem } from "@mantine/core";
+import { Badge, Button, Flex, Group, Text, rem } from "@mantine/core";
 import { appModelInstallerFields } from "api/appModel";
 import { EditedIndicator } from "components/Indicator";
 import {
@@ -9,10 +9,10 @@ import {
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
 import { rootStore } from "store/store";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
+import s from "./DetailView.module.css";
 
 const DetailsBox = (props) => {
 	const { selectedApp, editMode } = props;
@@ -30,31 +30,26 @@ const DetailsBox = (props) => {
 
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>
-			<h2
-				style={{
-					textAlign: "left",
-					fontWeight: "normal",
-					fontSize: "2em",
-					margin: "0 0 10px 0",
-				}}
-			>
-				<a
-					href={selectedApp?.home || selectedApp?.github || null}
-					target="_blank"
-					style={{ fontWeight: "normal", textDecoration: "none" }}
-					title="Open homepage in new window"
-					rel="noreferrer"
-				>
-					{selectedApp?.name || (
-						<Text size="lg">
-							<MarkUnPopulated />
-							{" Missing Name - "}
-							<i style={{ color: "#636363" }}>(Key: "{selectedApp?.key}")</i>
-						</Text>
-					)}
-				</a>
-				{indicateEdit}
-			</h2>
+			<Flex justify="flex-start" align="flex-start" gap="10">
+				<h2 className={s.appTitle}>
+					<a
+						href={selectedApp?.home || selectedApp?.github || null}
+						target="_blank"
+						style={{ fontWeight: "normal", textDecoration: "none" }}
+						title="Open homepage in new window"
+						rel="noreferrer"
+					>
+						{selectedApp?.name || (
+							<Text size="lg">
+								<MarkUnPopulated />
+								{" Missing Name - "}
+								<i style={{ color: "#636363" }}>(Key: "{selectedApp?.key}")</i>
+							</Text>
+						)}
+					</a>
+				</h2>
+				<div className={s.indicator}>{indicateEdit} </div>
+			</Flex>
 
 			{selectedApp.short && (
 				<Text className={classes.short}>{selectedApp.short}</Text>

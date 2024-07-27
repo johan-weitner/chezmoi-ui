@@ -16,6 +16,7 @@ import {
 	IconDeviceFloppy,
 	IconDownload,
 	IconEdit,
+	IconFilter,
 	IconMenu2,
 	IconPackages,
 	IconPlayerTrackNext,
@@ -63,6 +64,7 @@ export const ICON = {
 	search: IconSearch,
 	prev: IconPlayerTrackPrev,
 	next: IconPlayerTrackNext,
+	filter: IconFilter,
 };
 
 export const INDICATOR = {
