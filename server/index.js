@@ -185,34 +185,12 @@ app.get('/download', (req, res) => {
 		res.setHeader('Content-type', mimetype);
 
 		res.write(yamlFile);
-		// const filestream = fs.createReadStream(file);
-		// filestream.pipe(res);
-	});
-});
+		res.end();
 
-
-
-app.get("/getAppsWithoutInstaller", (req, res) => {
-	getAppsWithoutInstaller().then((apps) => {
-		res.json(apps);
-	});
-});
-
-app.get("/getAppsWithoutUrls", (req, res) => {
-	getAppsWithoutUrls().then((apps) => {
-		res.json(apps);
-	});
-});
-
-app.get("/getAppsWithoutDesc", (req, res) => {
-	getAppsWithoutDesc().then((apps) => {
-		res.json(apps);
-	});
-});
-
-app.get("/getAppsWithoutName", (req, res) => {
-	getAppsWithoutName().then((apps) => {
-		res.json(apps);
+	}).catch(e => {
+		res.status(500).json({
+			error: e.message,
+		});
 	});
 });
 

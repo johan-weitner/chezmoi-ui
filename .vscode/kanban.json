@@ -20,6 +20,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Consider writing Playwright E2E tests",
+                    "id": "o32wx470s6ni0ns2h0emxx2r"
+                },
+                {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
                 },
@@ -268,5 +272,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722104404180
+    "timestamp": 1722108933188
 }
