@@ -30,7 +30,7 @@ export const useSelectionManager = () => {
 
 				true &&
 					console.log(
-						`ClientManager: Set app object in store:
+						`SelectionManager: Set app object in store:
 					- Key: ${rootStore.get.selectedApp()?.key}
 					- Tags: ${rootStore.set.selectedAppTags()}`,
 					);
@@ -73,7 +73,7 @@ export const useSelectionManager = () => {
 	};
 
 	const editItem = (appKey) => {
-		DEBUG && console.log(`ClientManager: Editing app with key: ${appKey}`);
+		DEBUG && console.log(`SelectionManager: Editing app with key: ${appKey}`);
 		if (appKey) {
 			const app = selectAppByKey(appKey);
 			rootStore.set.selectedApp(transformNullValues({ ...app }));
@@ -82,14 +82,14 @@ export const useSelectionManager = () => {
 		}
 		rootStore.set.editMode(true);
 		DEBUG &&
-			console.log(`ClientManager:
+			console.log(`SelectionManager:
 			- Edit flag set: ${rootStore.get.editMode()}
 			- isNewApp flag set: ${rootStore.get.isNewApp()}`);
 	};
 
 	const getAppTags = async (appId) => {
 		const tags = await getTagsByAppId(appId);
-		console.log("ClientManager got tags for app: ", tags);
+		console.log("SelectionManager got tags for app: ", tags);
 		return tags;
 	};
 
@@ -100,7 +100,7 @@ export const useSelectionManager = () => {
 		rootStore.set.isNewApp(true);
 		rootStore.set.editMode(true);
 		DEBUG &&
-			console.log(`ClientManager:
+			console.log(`SelectionManager:
 				- Edit flag set: ${rootStore.get.editMode()}
 				- isNewApp flag set: ${rootStore.get.isNewApp() === null}
 				- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);

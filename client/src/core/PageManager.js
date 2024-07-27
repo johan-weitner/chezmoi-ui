@@ -20,7 +20,7 @@ export const usePageManager = () => {
 
 	const gotoPrevPage = () => {
 		const page = rootStore.get.page();
-		if (page > 0) {
+		if (page > 1) {
 			rootStore.set.page(page - 1);
 			getPageContent();
 		}
@@ -28,7 +28,7 @@ export const usePageManager = () => {
 	const gotoNextPage = () => {
 		const page = rootStore.get.page();
 		const pageCount = rootStore.get.pageCount();
-		if (page < pageCount - 1) {
+		if (page < pageCount) {
 			rootStore.set.page(page + 1);
 			getPageContent();
 		}

@@ -9,7 +9,7 @@ export const useFilterManager = () => {
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
 	const applyFilter = (filter) => {
-		DEBUG && console.log(`ClientManager: Apply filter: ${filter}`);
+		DEBUG && console.log(`FilterManager: Apply filter: ${filter}`);
 		rootStore.set.activeFilter(filter);
 		const filteredApps = filterModel[filter].method();
 		rootStore.set.filteredList(filteredApps);

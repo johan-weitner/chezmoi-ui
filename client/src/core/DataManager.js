@@ -26,22 +26,23 @@ export const useDataManager = () => {
 				rootStore.get.appCollection() &&
 				rootStore.get.appCollection().length > 0
 			) {
+				console.warn("Found no apps");
 				return;
 			}
-			DEBUG && console.log("--=== ClientManager: Seeding client... ===--");
+			DEBUG && console.log("--=== DataManager: Seeding client... ===--");
 			rootStore.set.isLoading(true);
 			seedStore().then((apps) => {
 				DEBUG &&
-					console.log("ClientManager: Fetched data payload: ", apps?.length);
+					console.log("DataManager: Fetched data payload: ", apps?.length);
 				const list = getPageContent();
 				rootStore.set.pageContent(list);
 
 				DEBUG &&
-					console.log(`ClientManager:
+					console.log(`DataManager:
 						Page: ${page},
 						Total: ${getTotalSize(rootStore.store.getState())},
 						Count: ${pageCount}`);
-				DEBUG && console.log("--=== ClientManager: Done seeding client! ===--");
+				DEBUG && console.log("--=== DataManager: Done seeding client! ===--");
 				rootStore.set.isLoading(false);
 			});
 		}, []);
@@ -72,16 +73,16 @@ export const useDataManager = () => {
 
 				DEBUG &&
 					console.log(
-						`ClientManager: Seeding app collection: Got ${apps?.length} apps`,
+						`DataManager: Seeding app collection: Got ${apps?.length} apps`,
 					);
 				DEBUG &&
-					console.log(`ClientManager:
+					console.log(`DataManager:
 						totalCount: ${totalCount},
 						pageCount: ${pageCount},
 						PAGE_SIZE: ${PAGE_SIZE}`);
 
 				DEBUG &&
-					console.log(`ClientManager: Populated global state:
+					console.log(`DataManager: Populated global state:
 						appCollection: ${rootStore.get.appCollection()?.length}
 						totalCount: ${rootStore.get.totalCount()}
 						pageCount: ${rootStore.get.pageCount()}
@@ -129,7 +130,7 @@ export const useDataManager = () => {
 				toast.success("App deleted successfully");
 			})
 			.catch((err) => {
-				console.error("ClientManager: Error deleting app: ", err);
+				console.error("DataManager: Error deleting app: ", err);
 				toast.error("Error deleting app");
 			});
 	};
@@ -137,7 +138,7 @@ export const useDataManager = () => {
 	const updateItem = (app, appTags) => {
 		const appKey = app.key;
 		DEBUG &&
-			console.log(`ClientManager: Updating app:
+			console.log(`DataManager: Updating app:
 			- Tags: ${app.tags}`);
 		setIsLoading(true);
 		console.log("Saving tags for app with id: ", app.id);
@@ -167,14 +168,14 @@ export const useDataManager = () => {
 
 				if (DEBUG) {
 					const updatedApp = selectAppByKey(appKey);
-					console.log(`ClientManager: Updated app in store:
+					console.log(`DataManager: Updated app in store:
 						- Tags: ${updatedApp.tags}`);
 				}
 
 				toast.success("App updated successfully");
 			})
 			.catch((err) => {
-				console.error("ClientManager: Error updating app: ", err);
+				console.error("DataManager: Error updating app: ", err);
 				toast.error("Error updating app");
 			});
 	};
@@ -195,7 +196,7 @@ export const useDataManager = () => {
 				toast.success("App successfully added");
 			})
 			.catch((err) => {
-				console.error("ClientManager: Error saving new app: ", err);
+				console.error("DataManager: Error saving new app: ", err);
 				toast.error("Error saving new app");
 			});
 	};
@@ -210,7 +211,7 @@ export const useDataManager = () => {
 			})
 			.catch((err) => {
 				rootStore.set.isLoading(false);
-				console.log("ClientManager: Error adding tag: ", err);
+				console.log("DataManager: Error adding tag: ", err);
 				// toast.error("Error adding tag");
 			});
 	};

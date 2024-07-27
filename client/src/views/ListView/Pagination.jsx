@@ -19,6 +19,10 @@ const PaginationBar = (props) => {
 		debugProps();
 	}, [rootStore.get.page()]);
 
+	useEffect(() => {
+		debugProps();
+	}, [rootStore.get.pageCount()]);
+
 	const debugProps = () => {
 		DEBUG &&
 			console.log(`Pagination.jsx:
@@ -31,8 +35,8 @@ const PaginationBar = (props) => {
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
 			<Pagination
-				total={totalCount}
-				value={rootStore.get.page()}
+				total={rootStore.use.pageCount()}
+				value={rootStore.use.page()}
 				gap={15}
 				onChange={gotoPage}
 				className={css.pagination}

@@ -3,26 +3,13 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [
-                {
-                    "text": "Start script in root not working",
-                    "id": "v2abo0hm00omhs51lastn0rk"
-                },
-                {
-                    "text": "Pagination is broken",
-                    "id": "g34usmphhtwv8e7x71ce10gn"
-                }
-            ],
+            "tasks": [],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
         {
             "title": "To-Do",
             "tasks": [
-                {
-                    "text": "Consider breaking server-side Prisma API into smaller pieces based on entity",
-                    "id": "u1x9o9x7wyxp82xnl94zvoo9"
-                },
                 {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
@@ -36,10 +23,6 @@
                     "id": "zr5lbe1szmgbkjmlquooxbed"
                 },
                 {
-                    "text": "YAML and JSON export. Consider filtered exports.",
-                    "id": "m8r2xwf6j6mail84wo9pq5p2"
-                },
-                {
                     "text": "LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
                 }
@@ -49,13 +32,30 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Pagination is broken",
+                    "id": "g34usmphhtwv8e7x71ce10gn"
+                },
+                {
+                    "text": "YAML and JSON export. Consider filtered exports.",
+                    "id": "m8r2xwf6j6mail84wo9pq5p2"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Consider breaking server-side Prisma API into smaller pieces based on entity",
+                    "id": "u1x9o9x7wyxp82xnl94zvoo9"
+                },
+                {
+                    "text": "Start script in root not working",
+                    "id": "v2abo0hm00omhs51lastn0rk"
+                },
                 {
                     "text": "Fix saving - parallel saving of article and tags not working",
                     "id": "nm9j3m7conc3z1nxchbwnx94"
@@ -259,5 +259,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722022154658
+    "timestamp": 1722091486561
 }
