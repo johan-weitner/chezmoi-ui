@@ -38,12 +38,12 @@ echo $pid > /tmp/srvprocess.pid
 
 if [ "$1" = "--deploy" ] || [ "$2" = "--deploy" ]; then
   echo "Building client, deploying and starting prod server..."
-  pnpm run deploy &
+  turbo run deploy --cwd=./client &
   pid=$!
   echo $pid > /tmp/clientprocess.pid
 else
   echo "Starting dev server..."
-  pnpm run dev &
+  turbo run dev --cwd=./client &
   pid=$!
   echo $pid > /tmp/clientprocess.pid
 fi

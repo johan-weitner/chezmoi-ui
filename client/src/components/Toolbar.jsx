@@ -7,7 +7,6 @@ import {
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
-import "@yaireo/tagify/dist/tagify.css";
 import classes from "components/Toolbar.module.css";
 import { useClientManager } from "core/ClientManager";
 import BarSpinner from "./BarSpinner";

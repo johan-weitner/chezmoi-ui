@@ -1,5 +1,4 @@
 import { nanoid } from "nanoid";
-import "@yaireo/tagify/dist/tagify.css";
 import {
 	Fieldset,
 	Group,

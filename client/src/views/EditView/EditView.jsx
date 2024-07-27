@@ -1,5 +1,4 @@
 import { forwardRef, useEffect, useState } from "react";
-import "@yaireo/tagify/dist/tagify.css";
 import { Card, Modal } from "@mantine/core";
 import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";

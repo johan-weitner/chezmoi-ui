@@ -7,7 +7,6 @@ import { MantineProvider, createTheme } from "@mantine/core";
 import { Toaster } from "sonner";
 import { printTitleCard } from "utils/titleCard.js";
 import MainView from "views/MainView/MainView";
-import "@yaireo/tagify/dist/tagify.css";
 import "./App.css";
 
 const theme = createTheme({});
