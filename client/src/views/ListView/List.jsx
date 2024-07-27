@@ -34,6 +34,7 @@ const List = (props) => {
 			c="dimmed"
 			mt="sm"
 			className={classes.scrollContainer}
+			data-testid="listContainer"
 		>
 			<Skeleton visible={rootStore?.use?.isLoading()}>
 				{!activeFilter &&

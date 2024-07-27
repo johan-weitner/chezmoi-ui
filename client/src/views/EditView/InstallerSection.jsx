@@ -7,7 +7,7 @@ const InstallerSection = (props) => {
 	const { formPartTwo, register } = props;
 
 	return (
-		<Fieldset legend="Installers">
+		<Fieldset legend="Installers" data-testid="formSectionInstallers">
 			<SimpleGrid
 				cols={{ base: 1, md: 4 }}
 				spacing="xs"

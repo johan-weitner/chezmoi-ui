@@ -14,7 +14,11 @@ const InfoSection = (props) => {
 
 	return (
 		<div>
-			<Fieldset legend="Info" style={{ paddingTop: "0 !important" }}>
+			<Fieldset
+				legend="Info"
+				style={{ paddingTop: "0 !important" }}
+				data-testid="formSectionInfo"
+			>
 				<SimpleGrid
 					cols={{ base: 1, md: 2 }}
 					spacing="xs"

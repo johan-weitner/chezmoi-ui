@@ -23,7 +23,7 @@ const Header = (props) => {
 			m={0}
 			style={{ height: "100px" }}
 		>
-			<div className={classes.navbar}>
+			<div className={classes.navbar} data-testid="mainHeader">
 				<Group
 					justify="flex-start"
 					className={classes.headerLogo}

@@ -42,11 +42,13 @@ const PaginationBar = (props) => {
 				className={css.pagination}
 				size={"sm"}
 				withEdges={true}
+				data-testid="paginationWidget"
 			/>
 			<Text
 				size="xs"
 				style={{ textAlign: "left", margin: "10px 0 0 20px" }}
 				className={css.paginationInfo}
+				data-testid="paginationText"
 			>
 				{currentFilter && (
 					<span>

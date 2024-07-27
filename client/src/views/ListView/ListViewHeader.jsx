@@ -52,6 +52,7 @@ export const ListViewHeader = (props) => {
 							aria-label="Open filter menu"
 							size="xl"
 							className="neubtn"
+							data-testid="filterMenuButton"
 						>
 							<Tooltip label="Open filter menu" position="top">
 								<IconFilter size={24} color="#999" />
@@ -70,6 +71,7 @@ export const ListViewHeader = (props) => {
 								borderTop: "1px solid #444",
 								borderBottom: "1px solid #444",
 							}}
+							data-testid="clearFilterMenuItem"
 						>
 							Restore filter
 						</Menu.Item>
@@ -78,6 +80,7 @@ export const ListViewHeader = (props) => {
 								key={nanoid()}
 								onClick={() => applyFilter(key)}
 								className={key === useFilter ? css.active : null}
+								data-testid={`$(key)FilterMenuItem`}
 							>
 								{filterModel[key].title}
 								{key === useFilter ? <span> ✓</span> : null}

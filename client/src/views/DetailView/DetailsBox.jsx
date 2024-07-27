@@ -31,7 +31,7 @@ const DetailsBox = (props) => {
 	return (
 		<div id="itemDetailBox" className={classes.itemDetailBox}>
 			<Flex justify="flex-start" align="flex-start" gap="10">
-				<h2 className={s.appTitle}>
+				<h2 className={s.appTitle} data-testid="detailViewAppTitle">
 					<a
 						href={selectedApp?.home || selectedApp?.github || null}
 						target="_blank"
@@ -52,31 +52,39 @@ const DetailsBox = (props) => {
 			</Flex>
 
 			{selectedApp.short && (
-				<Text className={classes.short}>{selectedApp.short}</Text>
+				<Text className={classes.short} data-testid="detailViewShortText">
+					{selectedApp.short}
+				</Text>
 			)}
 			{selectedApp.desc && (
-				<Text className={classes.desc}>{selectedApp.desc}</Text>
+				<Text className={classes.desc} data-testid="detailViewDescText">
+					{selectedApp.desc}
+				</Text>
 			)}
 
 			<div className={classes.indicatorGroup}>
-				<Text size="sm">
+				<Text size="sm" data-testid="indicatorHomepage">
 					{selectedApp.home ? <MarkPopulated /> : <MarkUnPopulated />} Homepage
 				</Text>
-				<Text size="sm">
+				<Text size="sm" data-testid="indicatorDocs">
 					{selectedApp.docs ? <MarkPopulated /> : <MarkUnPopulated />}{" "}
 					Documentation
 				</Text>
-				<Text size="sm">
+				<Text size="sm" data-testid="indicatorGithub">
 					{selectedApp.github ? <MarkPopulated /> : <MarkUnPopulated />} Github
 				</Text>
 				{!appHasInstaller(selectedApp) && (
-					<Text size="sm" style={{ marginTop: "6px" }}>
+					<Text
+						size="sm"
+						style={{ marginTop: "6px" }}
+						data-testid="indicatorNoInstallerWarning"
+					>
 						<WarningSign />
 					</Text>
 				)}
 			</div>
 			{rootStore.use.selectedAppTags() && (
-				<div style={{ marginTop: "10px" }}>
+				<div style={{ marginTop: "10px" }} data-testid="detailViewTags">
 					Tags:{" "}
 					{rootStore.get.selectedAppTags()?.map((tag) => {
 						return (
@@ -98,6 +106,7 @@ const DetailsBox = (props) => {
 				<Button
 					onClick={() => editItem(rootStore.get.selectedAppKey())}
 					className={classes.editBtn}
+					data-testid="detailViewEditBtn"
 					leftSection={
 						<ICON.edit
 							style={{
@@ -115,6 +124,7 @@ const DetailsBox = (props) => {
 				<Button
 					onClick={() => deleteItem(selectedApp.key)}
 					className={classes.deleteBtn}
+					data-testid="detailViewDeletetBtn"
 					leftSection={
 						<ICON.remove
 							style={{

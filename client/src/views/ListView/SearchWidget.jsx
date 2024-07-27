@@ -68,6 +68,7 @@ const SearchWidget = (props) => {
 				style={{ position: "absolute", top: "25px", right: "120px" }}
 				className="neubtn"
 				onClick={() => setIsOpen(!isOpen)}
+				data-testid="searchButton"
 			>
 				<Tooltip label="Free text search for apps" position="top">
 					<IconSearch size={24} color="#999" />
@@ -80,6 +81,7 @@ const SearchWidget = (props) => {
 						zIndex: "99999",
 					}}
 					ref={ref}
+					data-testid="searchWidget"
 				>
 					<header className="searchWidgetHeader">
 						<div style={{ width: 500 }}>

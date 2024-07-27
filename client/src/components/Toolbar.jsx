@@ -91,7 +91,7 @@ const Toolbar = (props) => {
 	};
 
 	return (
-		<nav className={classes.navbar}>
+		<nav className={classes.navbar} data-testid="navBar">
 			<Group justify="flex-start" className={classes.navbarMain}>
 				<Flex justify="flex-start" gap={10}>
 					{menuData.map((menuItem, index) => {

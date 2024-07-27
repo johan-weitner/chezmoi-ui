@@ -14,6 +14,7 @@ const Legend = (props) => {
 					fontSize: "2em",
 					margin: "0 0 10px 0",
 				}}
+				data-testid="legendHeader"
 			>
 				Legend
 			</h2>

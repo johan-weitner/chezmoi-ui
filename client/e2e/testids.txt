@@ -1,0 +1,36 @@
+Test ids
+------------
+mainHeader
+navBar
+
+
+filterMenuButton
+    clearFilterMenuItem
+    $(key)FilterMenuItem
+
+searchButton
+spotlight
+
+paginationWidget
+paginationText
+
+listContainer
+
+detailViewHeaderText
+detailViewAppTitle
+detailViewShortText
+detailViewDescText
+indicatorHomepage
+indicatorDocs
+indicatorNoInstallerWarning
+detailViewTags
+detailViewEditBtn
+detailViewDeletetBtn
+legendHeader
+
+editViewHeader
+editViewCancelBtn
+editViewSaveBtn
+formSectionInfo
+formSectionTags
+formSectionInstallers

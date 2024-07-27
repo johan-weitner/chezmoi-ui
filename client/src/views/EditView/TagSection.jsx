@@ -45,7 +45,7 @@ const TagSection = (props) => {
 	};
 
 	return (
-		<Fieldset legend="Tags">
+		<Fieldset legend="Tags" data-testid="formSectionTags">
 			<div style={{ width: "100%" }}>
 				<TagsInput
 					placeholder="Pick tag from list"

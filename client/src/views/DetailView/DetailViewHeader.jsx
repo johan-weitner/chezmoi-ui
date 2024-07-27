@@ -20,6 +20,7 @@ const DetailViewHeader = (props) => {
 					className={commonCss.cardTitle}
 					mt="md"
 					style={{ textAlign: "left" }}
+					data-testid="detailViewHeaderText"
 				>
 					{hasSelection ? "Detail view" : "Legend"}
 				</Text>

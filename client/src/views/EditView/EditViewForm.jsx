@@ -75,7 +75,7 @@ const EditViewForm = (props) => {
 				margin: "0 !important",
 			}}
 		>
-			<h2 className={css.editDetailHeader}>
+			<h2 className={css.editDetailHeader} data-testid="editViewHeader">
 				{rootStore.use.selectedApp()?.name || "New application"}
 			</h2>
 			<Flex
@@ -94,13 +94,18 @@ const EditViewForm = (props) => {
 					zIndex: "9999",
 				}}
 			>
-				<Button onClick={() => closeModal()} className={btn.cancelBtn}>
+				<Button
+					onClick={() => closeModal()}
+					className={btn.cancelBtn}
+					data-testid="editViewCancelBtn"
+				>
 					Cancel
 				</Button>
 				<Button
 					type="submit"
 					className={btn.saveBtn}
 					leftSection={<ICON.save />}
+					data-testid="editViewSaveBtn"
 				>
 					Save
 				</Button>
