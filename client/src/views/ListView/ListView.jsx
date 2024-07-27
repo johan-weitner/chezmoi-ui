@@ -21,6 +21,7 @@ const ListView = (props) => {
 		gotoPrevPage,
 		gotoNextPage,
 		useBootstrap,
+		clearAppSelection,
 	} = useClientManager();
 
 	useBootstrap();

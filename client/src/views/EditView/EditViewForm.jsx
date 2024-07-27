@@ -47,7 +47,6 @@ const EditViewForm = (props) => {
 		if (rootStore.get.isNewApp()) {
 			saveNewItem(data, appTags);
 		} else {
-			console.log("%%%%% SAVED", data, appTags);
 			updateItem(data, appTags);
 		}
 		setSelectedAppKey(null);

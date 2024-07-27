@@ -3,14 +3,16 @@ import { toast } from "sonner";
 import { getNextKey, getPreviousKey, selectAppByKey } from "store/selectors";
 import { rootStore } from "store/store";
 import { transformNullValues } from "../api/helpers";
+import { usePageManager } from "./PageManager";
 
 export const useSelectionManager = () => {
 	const { store } = rootStore;
 	const state = store.getState();
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+	const { gotoNextPage, gotoPrevPage } = usePageManager();
 
 	const setSelectedAppKey = (key) => {
-		console.log("Selected app key: ", key);
+		DEBUG && console.log("Selected app key: ", key);
 		rootStore.set.selectedAppKey(key);
 		rootStore.set.isLoading(true);
 		if (key === null) return;
@@ -28,7 +30,7 @@ export const useSelectionManager = () => {
 						toast.error("Error fetching tags");
 					});
 
-				true &&
+				DEBUG &&
 					console.log(
 						`SelectionManager: Set app object in store:
 					- Key: ${rootStore.get.selectedApp()?.key}
@@ -89,7 +91,7 @@ export const useSelectionManager = () => {
 
 	const getAppTags = async (appId) => {
 		const tags = await getTagsByAppId(appId);
-		console.log("SelectionManager got tags for app: ", tags);
+		DEBUG && console.log("SelectionManager got tags for app: ", tags);
 		return tags;
 	};
 
@@ -106,6 +108,11 @@ export const useSelectionManager = () => {
 				- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);
 	};
 
+	const clearAppSelection = () => {
+		rootStore.set.selectedApp(null);
+		rootStore.set.selectedAppKey(null);
+	};
+
 	return {
 		setSelectedAppKey,
 		selectPrevApp,
@@ -113,5 +120,6 @@ export const useSelectionManager = () => {
 		editItem,
 		getAppTags,
 		addItem,
+		clearAppSelection
 	};
 };

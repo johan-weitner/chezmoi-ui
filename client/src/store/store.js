@@ -1,7 +1,7 @@
 import { filterModel } from "api/filters";
 import { createStore } from "zustand-x";
 
-export const useStore = () => {};
+export const useStore = () => { };
 
 const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
 
@@ -32,12 +32,3 @@ const getState = () => {
 	return rootStore.store.getState();
 };
 
-const downloadGenericYaml = () => {
-	console.log("Not implemented...");
-};
-const downloadGenericJson = () => {
-	console.log("Not implemented...");
-};
-const downloadInstallDoctorYaml = () => {
-	console.log("Not implemented...");
-};

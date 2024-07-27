@@ -140,11 +140,11 @@ export const useDataManager = () => {
 		DEBUG &&
 			console.log(`DataManager: Updating app:
 			- Tags: ${app.tags}`);
+		DEBUG && console.log("Saving tags for app with id: ", app.id);
 		setIsLoading(true);
-		console.log("Saving tags for app with id: ", app.id);
 		tagApp(Number.parseInt(app.id, 10), appTags)
 			.then((res) => {
-				console.log("Tagged app: ", res);
+				DEBUG && console.log("Tagged app: ", res);
 			})
 			.catch((e) => {
 				console.error(e);
@@ -186,7 +186,7 @@ export const useDataManager = () => {
 		const pageContent = rootStore.get.pageContent();
 		saveNewApp(app)
 			.then((newApp) => {
-				console.log("!!! Saved new app with id: ", newApp?.id);
+				DEBUG && console.log("!!! Saved new app with id: ", newApp?.id);
 				tagApp(newApp?.id, tagIds);
 				rootStore.set.appCollection([...apps, app]);
 				if (page === pageCount.length) {
@@ -202,7 +202,7 @@ export const useDataManager = () => {
 	};
 
 	const tagApp = async (appId, tagIds) => {
-		console.log("<<< Tags: ", tagIds);
+		DEBUG && console.log("<<< Tags: ", tagIds);
 		rootStore.set.isLoading(true);
 		await addAppTags(appId, tagIds)
 			.then(() => {

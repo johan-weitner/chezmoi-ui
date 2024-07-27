@@ -15,7 +15,7 @@ const propsList = [
 ];
 
 export const printTitleCard = () => {
-	console.clear();
+	// console.clear();
 	titleCard.map((row) => console.log(row, "color:purple"));
 	console.log(tagLine, "color:darkorange; font-weight:bold");
 	propsList.map((row) => console.log(row, "color:darkgreen"));

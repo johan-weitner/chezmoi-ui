@@ -21,7 +21,6 @@ const TagSection = (props) => {
 	useEffect(() => {
 		if (!rootStore.get.selectedApp()) return;
 		getAppTags(rootStore.get.selectedApp().id).then((tags) => {
-			console.log("Tag component got tags for app: ", tags);
 			setAppTags(getStrArray(tags));
 		});
 	}, []);
@@ -37,22 +36,12 @@ const TagSection = (props) => {
 	};
 
 	const onChange = (value) => {
-		// console.log("Is array: ", Array.isArray(value));
 		const tagsIds = value.map((tag) => {
 			return getTagId(tag);
 		});
 		setAppTagIds("tags", tagsIds);
 		setAppTags(value);
 		hoistAppTags(tagsIds);
-		// try {
-		// 	tagApp(rootStore.get.selectedApp().id, tagsIds).then((res) => {
-		// 		console.log(res);
-		// 		setAppTagIds("tags", tagsIds);
-		// 		setAppTags(value);
-		// 	});
-		// } catch (e) {
-		// 	console.error(e);
-		// }
 	};
 
 	return (

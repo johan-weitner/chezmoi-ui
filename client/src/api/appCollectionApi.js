@@ -2,6 +2,7 @@ import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 
 const BASE_URL = "/api";
+const DEBUG = import.meta.env.VITE_DEBNUG === "true";
 
 export const fetchApps = async () => {
 	const apps = await axios
@@ -52,7 +53,7 @@ export const updateApp = async (updatedData) => {
 			tags: updatedNode.tags === null ? "" : updatedNode.tags,
 		})
 		.then((response) => {
-			console.log(
+			DEBUG && console.log(
 				`API: Updating app:
 		- Tags: `,
 				response.data,
@@ -67,7 +68,7 @@ export const updateApp = async (updatedData) => {
 export const saveNewApp = async (data) => {
 	const app = mapEntityToDb(data);
 	const fixedNullValuesApp = transformNullValues(app);
-	console.log("API: Saving new app:", fixedNullValuesApp);
+	DEBUG && console.log("API: Saving new app:", fixedNullValuesApp);
 
 	return axios
 		.post(`${BASE_URL}/addNode`, {
@@ -103,7 +104,7 @@ export const deleteApp = async (key) => {
 export const addApp = (data) => {
 	const app = mapEntityToDb(data);
 	app.edited = "true";
-	console.log("Mapped app data:", app);
+	DEBUG && console.log("API: Mapped app data:", app);
 	for (const key of Object.keys(app)) {
 		if (!app[key]) {
 			app[key] = "";
@@ -125,8 +126,11 @@ export const getAllTags = async () => {
 };
 
 export const addAppTags = async (appId, tags) => {
-	console.log("AppId: ", Number.parseInt(appId, 10) || appId, typeof appId);
-	console.log("Tags: ", tags);
+	if (DEBUG) {
+		console.log("AppId: ", Number.parseInt(appId, 10) || appId, typeof appId);
+		console.log("Tags: ", tags);
+	}
+
 	return axios
 		.post(`${BASE_URL}/addAppTags`, {
 			data: {
@@ -142,7 +146,7 @@ export const addAppTags = async (appId, tags) => {
 		});
 };
 
-export const deleteAppTag = (tag) => {};
+export const deleteAppTag = (tag) => { };
 
 export const getTagsByAppId = async (appId) => {
 	const tags = await axios
@@ -154,7 +158,7 @@ export const getTagsByAppId = async (appId) => {
 			throw error;
 		});
 
-	console.log("Got tags for appId: ", appId, tags);
+	DEBUG && console.log("Got tags for appId: ", appId, tags);
 	return tags;
 };
 

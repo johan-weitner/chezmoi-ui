@@ -3,7 +3,16 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
+                    "id": "n5a5xe8el34kw9qgsziu3hnr"
+                },
+                {
+                    "text": "SERVER: Broken tests:\n- boot.spec.js\n- prisma.spec.js",
+                    "id": "lwwhhysj4i9t6illxc1iejko"
+                }
+            ],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
@@ -21,10 +30,6 @@
                 {
                     "text": "Cleanup",
                     "id": "zr5lbe1szmgbkjmlquooxbed"
-                },
-                {
-                    "text": "LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
-                    "id": "sfkt8exlnp0dxds69zu0iei9"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -48,6 +53,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "NOFIX: LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
+                    "id": "sfkt8exlnp0dxds69zu0iei9"
+                },
                 {
                     "text": "Consider breaking server-side Prisma API into smaller pieces based on entity",
                     "id": "u1x9o9x7wyxp82xnl94zvoo9"
@@ -259,5 +268,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722091486561
+    "timestamp": 1722104404180
 }
