@@ -17,7 +17,6 @@ export default defineConfig({
   resolve: {
     alias: {
       api: `${path.resolve(__dirname, "./src/api/")}`,
-      // assets: path.resolve(__dirname, "./src/assets"),
       components: `${path.resolve(__dirname, "./src/components/")}`,
       constants: path.resolve(__dirname, "./src/constants"),
       core: path.resolve(__dirname, "./src/core"),
@@ -28,15 +27,8 @@ export default defineConfig({
     }
   },
   server: {
-    port: process.env.FRONTEND_SRV_PORT || 8080,
-    strictPort: true,
-    proxy: {
-      '/api': {
-        target: process.env.BACKEND_URL || 'http://localhost:3000',
-        changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '')
-      }
-    }
+    port: process.env.FRONTEND_SRV_PORT || 8000,
+    strictPort: true
   },
   env: {
     DEBUG: process.env.DEBUG || false,

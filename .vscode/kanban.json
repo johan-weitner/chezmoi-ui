@@ -5,6 +5,10 @@
             "title": "Bugs",
             "tasks": [
                 {
+                    "text": "Docker images are broken",
+                    "id": "h4qp19d423ngjbha8vkmipk8"
+                },
+                {
                     "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
                     "id": "n5a5xe8el34kw9qgsziu3hnr"
                 },
@@ -34,6 +38,10 @@
                 {
                     "text": "Cleanup",
                     "id": "zr5lbe1szmgbkjmlquooxbed"
+                },
+                {
+                    "text": "YAML and JSON export. Consider filtered exports.",
+                    "id": "m8r2xwf6j6mail84wo9pq5p2"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -41,22 +49,17 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Pagination is broken",
-                    "id": "g34usmphhtwv8e7x71ce10gn"
-                },
-                {
-                    "text": "YAML and JSON export. Consider filtered exports.",
-                    "id": "m8r2xwf6j6mail84wo9pq5p2"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Pagination is broken",
+                    "id": "g34usmphhtwv8e7x71ce10gn"
+                },
                 {
                     "text": "NOFIX: LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
                     "id": "sfkt8exlnp0dxds69zu0iei9"
@@ -272,5 +275,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722108933188
+    "timestamp": 1722112323270
 }

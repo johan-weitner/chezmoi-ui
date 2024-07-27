@@ -1,24 +1,17 @@
-# Base image
 FROM node:latest
 
-# Set working directory
 WORKDIR /app
 
-# Copy server files
 COPY server/ .
 COPY server/.env.docker .env
 
-# Install dependencies
-RUN if [ ! -x "$(command -v pnpm)" ]; then npm install -g pnpm; fi && if [ ! -d "node_modules" ]; then pnpm install; fi
+RUN npm install -g pnpm && pnpm install
 
-RUN if [ ! -f "/var/db-data/dev.db" ]; then \
-  mkdir -p /var/db-data && \
-  pnpx prisma migrate dev --schema=./prisma/schema.prisma; \
-  pnpx prisma migrate deploy --schema=./prisma/schema.prisma; \
-  fi
+RUN mkdir -p /var/db-data
 
-# Expose server port
+RUN pnpx prisma migrate dev --schema=./prisma/schema.prisma
+RUN pnpx prisma migrate deploy --schema=./prisma/schema.prisma;
+
 EXPOSE 3000
 
-# Start server
-# CMD ["node", "index.js"]
+CMD node index.js
