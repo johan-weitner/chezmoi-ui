@@ -5,10 +5,6 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Docker images are broken",
-                    "id": "h4qp19d423ngjbha8vkmipk8"
-                },
-                {
                     "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
                     "id": "n5a5xe8el34kw9qgsziu3hnr"
                 },
@@ -24,24 +20,20 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Consider filtered exports.",
+                    "id": "kuhaj2mjgyko68edft16fwmp"
+                },
+                {
+                    "text": "Replace Spotlight with more performant widget",
+                    "id": "ibgs0h64kh7fun4blygpu2pm"
+                },
+                {
                     "text": "Consider writing Playwright E2E tests",
                     "id": "o32wx470s6ni0ns2h0emxx2r"
                 },
                 {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
-                },
-                {
-                    "text": "Generate tests",
-                    "id": "hgq9yj2ke92gg8sk3jh42s5l"
-                },
-                {
-                    "text": "Cleanup",
-                    "id": "zr5lbe1szmgbkjmlquooxbed"
-                },
-                {
-                    "text": "YAML and JSON export. Consider filtered exports.",
-                    "id": "m8r2xwf6j6mail84wo9pq5p2"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -57,8 +49,24 @@
             "title": "Done",
             "tasks": [
                 {
+                    "text": "Docker images are broken",
+                    "id": "h4qp19d423ngjbha8vkmipk8"
+                },
+                {
+                    "text": "YAML export",
+                    "id": "m8r2xwf6j6mail84wo9pq5p2"
+                },
+                {
                     "text": "Pagination is broken",
                     "id": "g34usmphhtwv8e7x71ce10gn"
+                },
+                {
+                    "text": "Generate tests",
+                    "id": "hgq9yj2ke92gg8sk3jh42s5l"
+                },
+                {
+                    "text": "Cleanup",
+                    "id": "zr5lbe1szmgbkjmlquooxbed"
                 },
                 {
                     "text": "NOFIX: LOW PRIO: Switch to Lefhook: https://github.com/evilmartians/lefthook\nhttps://biomejs.dev/recipes/git-hooks/",
@@ -275,5 +283,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722112323270
+    "timestamp": 1722121938426
 }
