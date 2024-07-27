@@ -63,7 +63,7 @@ const Toolbar = (props) => {
 				/>
 			),
 			label: "Download YAML",
-			action: () => window.open("/api/download"),
+			action: () => window.open(`${import.meta.env.VITE_BACKEND_URL}/download`),
 		},
 	];
 

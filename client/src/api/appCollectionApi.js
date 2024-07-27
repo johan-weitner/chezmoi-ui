@@ -1,7 +1,7 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 
-const BASE_URL = process.env.VITE_API_URL || "http://localhost:3000";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
 
 export const fetchApps = async () => {
