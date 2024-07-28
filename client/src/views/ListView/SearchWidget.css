@@ -5,9 +5,8 @@
 
 .searchWidget {
   position:absolute;
-  top:95px;
-  left:23px;
-  right:50px;
+  top:70px;
+  left:-310px;
   border-radius:20px !important;
   color:#FFF !important;
   background-color:#2e2e2e;
@@ -24,6 +23,11 @@
   border-color:#111 !important;
   border-radius:10px;
   width:100% !important;
+
+
+  .wrapper {
+
+  }
 
   input {
     color:#FFF !important;

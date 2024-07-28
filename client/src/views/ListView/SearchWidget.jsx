@@ -65,7 +65,6 @@ const SearchWidget = (props) => {
 		<ActionIcon.Group>
 			<ActionIcon
 				size="xl"
-				style={{ position: "absolute", top: "25px", right: "120px" }}
 				className="neubtn"
 				onClick={() => setIsOpen(!isOpen)}
 			>
@@ -81,21 +80,27 @@ const SearchWidget = (props) => {
 					}}
 					ref={ref}
 				>
-					<header className="searchWidgetHeader">
-						<div style={{ width: 500 }}>
-							<ReactSearchAutocomplete
-								items={
-									rootStore.get.appCollection()?.length &&
-									rootStore.get.appCollection()
-								}
-								styling={styling}
-								resultStringKeyName="name"
-								onSelect={handleOnSelect}
-								autoFocus
-								formatResult={formatResult}
-							/>
-						</div>
-					</header>
+					<ErrorBoundary
+						fallbackRender={(error) => (
+							<FallbackComponent error={error.message} />
+						)}
+					>
+						<header className="searchWidgetHeader">
+							<div style={{ width: 500 }}>
+								<ReactSearchAutocomplete
+									items={
+										rootStore.get.appCollection()?.length &&
+										rootStore.get.appCollection()
+									}
+									styling={styling}
+									resultStringKeyName="name"
+									onSelect={handleOnSelect}
+									autoFocus
+									formatResult={formatResult}
+								/>
+							</div>
+						</header>
+					</ErrorBoundary>
 				</div>
 			)}
 		</ActionIcon.Group>

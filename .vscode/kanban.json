@@ -24,14 +24,6 @@
                     "id": "kuhaj2mjgyko68edft16fwmp"
                 },
                 {
-                    "text": "Replace Spotlight with more performant widget",
-                    "id": "ibgs0h64kh7fun4blygpu2pm"
-                },
-                {
-                    "text": "Consider writing Playwright E2E tests",
-                    "id": "o32wx470s6ni0ns2h0emxx2r"
-                },
-                {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
                 }
@@ -48,6 +40,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Replace Spotlight with more performant widget",
+                    "id": "ibgs0h64kh7fun4blygpu2pm"
+                },
                 {
                     "text": "Docker images are broken",
                     "id": "h4qp19d423ngjbha8vkmipk8"
@@ -111,6 +107,10 @@
                 {
                     "text": "Re-enable toasts, (in ClientManager)",
                     "id": "s7e3i4g9n7448nbpru5fop8k"
+                },
+                {
+                    "text": "WONTFIX: Consider writing Playwright E2E tests",
+                    "id": "o32wx470s6ni0ns2h0emxx2r"
                 },
                 {
                     "text": "Re-enable filtering",
@@ -283,5 +283,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722121938426
+    "timestamp": 1722192003146
 }
