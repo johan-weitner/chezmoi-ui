@@ -9,7 +9,7 @@ filterMenuButton
     $(key)FilterMenuItem
 
 searchButton
-spotlight
+searchWidget
 
 paginationWidget
 paginationText
