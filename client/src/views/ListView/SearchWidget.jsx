@@ -1,36 +1,42 @@
 import { ActionIcon, Tooltip, rem } from "@mantine/core";
 import { Spotlight, spotlight } from "@mantine/spotlight";
-import { IconFileText, IconSearch } from "@tabler/icons-react";
-import { useEffect, useMemo } from "react";
+import { IconBox, IconSearch } from "@tabler/icons-react";
+import { useEffect, useState, useMemo, useCallback } from "react";
 import { useClientManager } from "../../core/ClientManager";
 import { rootStore } from "../../store/store";
+import { ErrorBoundary } from "react-error-boundary";
+import FallbackComponent from "components/FallbackComponent";
+
 import "components/neumorphic.css";
 
 const SearchWidget = (props) => {
-	const { setSelectedAppKey } = useClientManager();
-	const actions = [];
+	const [data, setData] = useState([]);
+	const { setSelectedAppKey, getSearchBase } = useClientManager();
+
+	useEffect(() => {
+		setData(getResultset());
+	}, [rootStore.use.appCollection()]);
+
+	const getResultset = useCallback(() => {
+		const appCollection = getSearchBase();
+		const data = [];
+		console.log("appCollection: ", appCollection);
+		appCollection?.map((app) => {
+			data.push({
+				...app,
+				onClick: () => openApp(app.key),
+				leftSection: (
+					<IconBox style={{ width: rem(24), height: rem(24) }} stroke={1.5} />
+				),
+			});
+		});
+		console.log("<<< Slimmed data set: ", data);
+		return data;
+	}, [rootStore.get.appCollection()]);
 
 	const openApp = (key) => {
 		setSelectedAppKey(key);
 	};
-
-	useMemo(() => {
-		const appCollection = rootStore.get.appCollection();
-		appCollection?.map((app) => {
-			actions.push({
-				id: app.key,
-				label: app.name,
-				description: app.short,
-				onClick: () => openApp(app.key),
-				leftSection: (
-					<IconFileText
-						style={{ width: rem(24), height: rem(24) }}
-						stroke={1.5}
-					/>
-				),
-			});
-		});
-	}, [rootStore.use.appCollection()]);
 
 	return (
 		<ActionIcon.Group>
@@ -44,22 +50,28 @@ const SearchWidget = (props) => {
 					<IconSearch size={24} color="#999" />
 				</Tooltip>
 			</ActionIcon>
-			{actions && (
-				<Spotlight
-					actions={actions}
-					nothingFound="Nothing found..."
-					highlightQuery
-					searchProps={{
-						leftSection: (
-							<IconSearch
-								style={{ width: rem(20), height: rem(20) }}
-								stroke={1.5}
-							/>
-						),
-						placeholder: "Search apps...",
-					}}
-				/>
-			)}
+			<ErrorBoundary
+				fallbackRender={(error) => (
+					<FallbackComponent error={error.message} style={{ width: "100%" }} />
+				)}
+			>
+				{data && (
+					<Spotlight
+						actions={data}
+						nothingFound="Nothing found..."
+						highlightQuery
+						searchProps={{
+							leftSection: (
+								<IconSearch
+									style={{ width: rem(20), height: rem(20) }}
+									stroke={1.5}
+								/>
+							),
+							placeholder: "Search apps...",
+						}}
+					/>
+				)}
+			</ErrorBoundary>
 		</ActionIcon.Group>
 	);
 };

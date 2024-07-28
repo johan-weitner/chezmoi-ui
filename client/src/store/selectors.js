@@ -1,11 +1,10 @@
 import { findIndex } from "api/helpers";
 import { createSelector } from "reselect";
 import { rootStore } from "./store";
-
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
-const getAppCollection = (state) => state.appCollection;
+const getAppCollection = (state) => state?.appCollection;
 export const getPage = (state) => state.page;
 export const getPageCount = (state) => state.pageCount;
 export const getPageContent = (state) => state.pageContent;
@@ -21,6 +20,20 @@ const getMemoizedAppCollection = createSelector(
 	[getAppCollection],
 	(appCollection) => appCollection,
 );
+
+export const getSearchBase = () => {
+	const { appCollection } =
+		rootStore.store.getState();
+	console.log(appCollection);
+	return appCollection?.map((app) => {
+		return {
+			id: app.key,
+			label: app.name,
+			description: app.short
+		};
+	});
+};
+
 export const getPreviousKey = (state) => {
 	const appCollection = rootStore.get.appCollection();
 	const index = getCurrentIndex(state);
