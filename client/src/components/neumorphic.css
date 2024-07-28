@@ -51,6 +51,21 @@
 	height: 3em;
   cursor:pointer;
   border:none;
+	border-end-end-radius: auto;
+  border-start-end-radius: auto;
+}
+
+.neubtn:hover{
+	background-color:transparent;
+}
+
+.neubtn:active{
+	box-shadow:
+		0 0 0 var(--shadow1),
+		0 0 0 var(--shadow2),
+		inset 0 0 0 var(--shadow1),
+		inset 0 0 0 var(--shadow2);
+		background-color:transparent;
 }
 
 @keyframes neuanim {

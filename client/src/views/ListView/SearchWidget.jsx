@@ -1,6 +1,7 @@
-import { ActionIcon, Text, Tooltip, rem } from "@mantine/core";
-import { IconFileText, IconSearch } from "@tabler/icons-react";
-import { useEffect, useState } from "react";
+import { ActionIcon, Text, Tooltip } from "@mantine/core";
+import { IconSearch } from "@tabler/icons-react";
+import { useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { useClientManager } from "../../core/ClientManager";
 import { rootStore } from "../../store/store";
 import "components/neumorphic.css";
@@ -10,18 +11,11 @@ import "./SearchWidget.css";
 const SearchWidget = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const { setSelectedAppKey } = useClientManager();
+	useHotkeys("alt + f", () => setIsOpen(true));
 
 	const openApp = (key) => {
 		console.log("Open app", key);
 		setSelectedAppKey(key);
-	};
-
-	const handleOnSearch = (string, results) => {
-		// console.log(string, results);
-	};
-
-	const handleOnHover = (result) => {
-		// console.log(result);
 	};
 
 	const handleOnSelect = (item) => {
@@ -31,6 +25,23 @@ const SearchWidget = (props) => {
 
 	const handleOnFocus = () => {
 		console.log("Focused");
+	};
+
+	const styling = {
+		height: "50px",
+		border: "1px solid #111",
+		borderRadius: "24px",
+		backgroundColor: "#222",
+		boxShadow: "rgba(32, 33, 36, 0.28) 0px 1px 6px 0px",
+		hoverBackgroundColor: "#333",
+		color: "#FFF",
+		fontSize: "16px",
+		fontFamily: "Arial",
+		iconColor: "grey",
+		lineColor: "#111",
+		placeholderColor: "grey",
+		clearIconMargin: "3px 14px 0 0",
+		searchIconMargin: "0 0 0 16px",
 	};
 
 	const formatResult = (item) => {
@@ -65,20 +76,17 @@ const SearchWidget = (props) => {
 					}}
 				>
 					<header className="searchWidgetHeader">
-						<div style={{ width: 400 }}>
+						<div style={{ width: 500 }}>
 							<ReactSearchAutocomplete
 								items={
 									rootStore.get.appCollection()?.length &&
 									rootStore.get.appCollection()
 								}
+								styling={styling}
 								resultStringKeyName="name"
-								onSearch={handleOnSearch}
-								onHover={handleOnHover}
 								onSelect={handleOnSelect}
-								onFocus={handleOnFocus}
 								autoFocus
 								formatResult={formatResult}
-								style={{ backgroundColor: "#222" }}
 							/>
 						</div>
 					</header>
