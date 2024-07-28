@@ -1,6 +1,6 @@
 import { fetchApp, getTagsByAppId } from "api/appCollectionApi";
 import { toast } from "sonner";
-import { getNextKey, getPreviousKey, selectAppByKey } from "store/selectors";
+import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
 import { rootStore } from "store/store";
 import { transformNullValues } from "../api/helpers";
 import { usePageManager } from "./PageManager";
@@ -120,6 +120,7 @@ export const useSelectionManager = () => {
 		editItem,
 		getAppTags,
 		addItem,
-		clearAppSelection
+		clearAppSelection,
+		getSearchBase
 	};
 };

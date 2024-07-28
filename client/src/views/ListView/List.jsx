@@ -1,5 +1,6 @@
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect, useState } from "react";
+import { nanoid } from "nanoid";
 import { selectAppByKey } from "store/selectors";
 import { rootStore } from "store/store";
 import { useClientManager } from "../../core/ClientManager";
@@ -23,8 +24,6 @@ const List = (props) => {
 
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
-		// rootStore.set.selectedAppKey(key);
-		// rootStore.set.selectedApp(selectAppByKey(key));
 		setSelectedAppKey(key);
 	};
 
@@ -44,7 +43,7 @@ const List = (props) => {
 								selectedAppKey={currentKey}
 								setSelectedAppKey={selectNewApp}
 								app={item}
-								key={item.key}
+								key={nanoid()}
 								deleteItem={deleteItem}
 								editItem={editItem}
 							/>
@@ -57,7 +56,7 @@ const List = (props) => {
 								selectedAppKey={currentKey}
 								setSelectedAppKey={selectNewApp}
 								app={item}
-								key={item.key}
+								key={nanoid()}
 								deleteItem={deleteItem}
 								editItem={editItem}
 							/>

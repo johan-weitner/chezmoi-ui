@@ -19,7 +19,7 @@ import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import SearchWidget from "./SearchWidget";
 import "components/neumorphic.css";
-// import css from "./ListView.module.css";
+import { nanoid } from "nanoid";
 
 export const ListViewHeader = (props) => {
 	const theme = useMantineTheme();
@@ -75,7 +75,7 @@ export const ListViewHeader = (props) => {
 						</Menu.Item>
 						{Object.keys(filterModel).map((key) => (
 							<Menu.Item
-								key={key}
+								key={nanoid()}
 								onClick={() => applyFilter(key)}
 								className={key === useFilter ? css.active : null}
 							>
