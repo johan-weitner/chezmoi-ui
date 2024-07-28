@@ -77,7 +77,7 @@ const DetailsBox = (props) => {
 			</div>
 			{rootStore.use.selectedAppTags() && (
 				<div style={{ marginTop: "10px" }}>
-					Tags ({rootStore.get.selectedAppTags()?.length}):{" "}
+					Tags:{" "}
 					{rootStore.get.selectedAppTags()?.map((tag) => {
 						return (
 							<Badge
