@@ -2,6 +2,7 @@ import { ActionIcon, Text, Tooltip } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
+import { useClickOutside } from "@mantine/hooks";
 import { useClientManager } from "../../core/ClientManager";
 import { rootStore } from "../../store/store";
 import "components/neumorphic.css";
@@ -10,6 +11,7 @@ import "./SearchWidget.css";
 
 const SearchWidget = (props) => {
 	const [isOpen, setIsOpen] = useState(false);
+	const ref = useClickOutside(() => setIsOpen(false));
 	const { setSelectedAppKey } = useClientManager();
 	useHotkeys("alt + f", () => setIsOpen(true));
 
@@ -74,6 +76,7 @@ const SearchWidget = (props) => {
 					style={{
 						zIndex: "99999",
 					}}
+					ref={ref}
 				>
 					<header className="searchWidgetHeader">
 						<div style={{ width: 500 }}>
