@@ -1,16 +1,16 @@
 import {
 	ActionIcon,
-	Button,
+	Flex,
 	Group,
 	Menu,
 	Text,
-	TextInput,
 	Tooltip,
-	UnstyledButton,
 	rem,
 	useMantineTheme,
 } from "@mantine/core";
-import { IconDownload, IconFilter, IconMenu2 } from "@tabler/icons-react";
+import { IconDownload, IconFilter, IconCirclePlus } from "@tabler/icons-react";
+import { useClickOutside } from "@mantine/hooks";
+import { rootStore } from "store/store";
 import { filterModel } from "api/filters";
 import NeuButton from "components/NeuButton";
 import { ICON } from "constants/icons";
@@ -18,13 +18,23 @@ import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import SearchWidget from "./SearchWidget";
+import ExportFilter from "./ExportFilter";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 
 export const ListViewHeader = (props) => {
 	const theme = useMantineTheme();
 	const [useFilter, setUseFilter] = useState(null);
-	const { applyFilter, clearFilter, selectAppByKey } = useClientManager();
+	const [exportIsOpen, setExportIsOpen] = useState(false);
+	const ref = useClickOutside(() => setExportIsOpen(false));
+
+	const { addItem, applyFilter, clearFilter, getAppTags } = useClientManager();
+
+	const tags = getAppTags();
+
+	const handleChange = (tagId, isChecked) => {
+		console.log("Tag", tagId, isChecked);
+	};
 
 	return (
 		<>
@@ -39,13 +49,28 @@ export const ListViewHeader = (props) => {
 					Applications
 				</Text>
 			</Group>
-			<Group>
-				<Menu
-					shadow="md"
-					width={250}
-					offset={8}
-					style={{ position: "absolute", top: "25px", right: "50px" }}
+			<Flex
+				justify="flex-end"
+				align="flex-end"
+				gap="15"
+				style={{
+					position: "absolute",
+					top: "20px",
+					right: "20px",
+				}}
+			>
+				<ActionIcon
+					variant="filled"
+					aria-label="Open filter menu"
+					size="xl"
+					className="neubtn"
+					onClick={() => addItem()}
 				>
+					<Tooltip label="Add new app" position="top">
+						<IconCirclePlus size={24} color="#999" />
+					</Tooltip>
+				</ActionIcon>
+				<Menu shadow="md" width={250} offset={8}>
 					<Menu.Target>
 						<ActionIcon
 							variant="filled"
@@ -86,7 +111,19 @@ export const ListViewHeader = (props) => {
 					</Menu.Dropdown>
 				</Menu>
 				<SearchWidget />
-			</Group>
+				<ActionIcon
+					variant="filled"
+					aria-label="Export YAML file"
+					size="xl"
+					className="neubtn"
+					onClick={() => setExportIsOpen(true)}
+				>
+					<Tooltip label="Add new app" position="top">
+						<IconDownload size={24} color="#999" />
+					</Tooltip>
+				</ActionIcon>
+			</Flex>
+			{exportIsOpen && <ExportFilter setExportIsOpen={setExportIsOpen} />}
 		</>
 	);
 };

@@ -26,7 +26,7 @@ import {
 	getAppsWithoutName
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
-import { getYamlExport } from "./src/util/export.js";
+import { getYamlExport, getFilteredYamlExport } from "./src/util/export.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
@@ -179,6 +179,34 @@ app.get('/download', (req, res) => {
 		const yamlFile = YAML.stringify(apps);
 
 		const filename = `software-custom-${new Date().getTime()}.yaml`;
+		const mimetype = "text/x-yaml";
+
+		res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+		res.setHeader('Content-type', mimetype);
+
+		res.write(yamlFile);
+		res.end();
+
+	}).catch(e => {
+		res.status(500).json({
+			error: e.message,
+		});
+	});
+});
+
+app.get('/filtered-download', (req, res) => {
+	const { tags } = req.query;
+	const tagsArray = tags.split(",");
+	log.info(`Tags: - ${tagsArray}, - ${typeof tagsArray} - ${Array.isArray(tagsArray)}`);
+	const tagIntArray = tagsArray.map(tag => {
+		return Number.parseInt(tag, 10);
+	})
+	getFilteredYamlExport(tagIntArray).then(apps => {
+		const yamlFile = YAML.stringify(apps);
+
+		const filename = `software-custom-(${tagsArray.join("-")})-${new Date().getTime()}.yaml`;
+		log.info(`Filename: - ${filename}`);
+		// const filename = `software-custom-${new Date().getTime()}.yaml`;
 		const mimetype = "text/x-yaml";
 
 		res.setHeader('Content-disposition', `attachment; filename=${filename}`);
