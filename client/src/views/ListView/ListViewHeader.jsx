@@ -59,29 +59,29 @@ export const ListViewHeader = (props) => {
 					right: "20px",
 				}}
 			>
-				<ActionIcon
-					variant="filled"
-					aria-label="Open filter menu"
-					size="xl"
-					className="neubtn"
-					onClick={() => addItem()}
-				>
-					<Tooltip label="Add new app" position="top">
+				<Tooltip label="Add new app" position="top">
+					<ActionIcon
+						variant="filled"
+						aria-label="Open filter menu"
+						size="xl"
+						className="neubtn"
+						onClick={() => addItem()}
+					>
 						<IconCirclePlus size={24} color="#999" />
-					</Tooltip>
-				</ActionIcon>
+					</ActionIcon>
+				</Tooltip>
 				<Menu shadow="md" width={250} offset={8}>
 					<Menu.Target>
-						<ActionIcon
-							variant="filled"
-							aria-label="Open filter menu"
-							size="xl"
-							className="neubtn"
-						>
-							<Tooltip label="Open filter menu" position="top">
+						<Tooltip label="Open filter menu" position="top">
+							<ActionIcon
+								variant="filled"
+								aria-label="Open filter menu"
+								size="xl"
+								className="neubtn"
+							>
 								<IconFilter size={24} color="#999" />
-							</Tooltip>
-						</ActionIcon>
+							</ActionIcon>
+						</Tooltip>
 					</Menu.Target>
 					<Menu.Dropdown>
 						<Menu.Label style={{ fontWeight: "bold" }}>
@@ -111,17 +111,17 @@ export const ListViewHeader = (props) => {
 					</Menu.Dropdown>
 				</Menu>
 				<SearchWidget />
-				<ActionIcon
-					variant="filled"
-					aria-label="Export YAML file"
-					size="xl"
-					className="neubtn"
-					onClick={() => setExportIsOpen(true)}
-				>
-					<Tooltip label="Add new app" position="top">
+				<Tooltip label="Export YAML file" position="top">
+					<ActionIcon
+						variant="filled"
+						aria-label="Export YAML file"
+						size="xl"
+						className="neubtn"
+						onClick={() => setExportIsOpen(true)}
+					>
 						<IconDownload size={24} color="#999" />
-					</Tooltip>
-				</ActionIcon>
+					</ActionIcon>
+				</Tooltip>
 			</Flex>
 			{exportIsOpen && <ExportFilter setExportIsOpen={setExportIsOpen} />}
 		</>

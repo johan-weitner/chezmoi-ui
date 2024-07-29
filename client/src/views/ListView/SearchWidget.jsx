@@ -63,15 +63,15 @@ const SearchWidget = (props) => {
 
 	return (
 		<ActionIcon.Group>
-			<ActionIcon
-				size="xl"
-				className="neubtn"
-				onClick={() => setIsOpen(!isOpen)}
-			>
-				<Tooltip label="Free text search for apps" position="top">
+			<Tooltip label="Free text search for apps" position="top">
+				<ActionIcon
+					size="xl"
+					className="neubtn"
+					onClick={() => setIsOpen(!isOpen)}
+				>
 					<IconSearch size={24} color="#999" />
-				</Tooltip>
-			</ActionIcon>
+				</ActionIcon>
+			</Tooltip>
 			{isOpen && (
 				<div
 					className="searchWidget"
