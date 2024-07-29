@@ -58,7 +58,7 @@ const PaginationBar = (props) => {
 					</span>
 				)}
 				Page {rootStore.get.page()} of {rootStore.get.pageCount()} ⋅{" "}
-				{rootStore.get.pageCount()} apps in total.
+				{rootStore.get.totalCount()} apps in total.
 			</Text>
 		</Stack>
 	);

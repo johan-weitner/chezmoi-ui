@@ -71,14 +71,39 @@ Windows:
 The scripts take care of building the images if they are missing, as well as starting the Docker service if it's down. But you can of course handle Docker manually if you prefer. The database is of course located on a dedicated volume, so it's persisted between sessions.
 
 ## Proposed workflow
-In my experience, when working through very large datasets like these it helps to do it in two or more passes, with increasing scrutiny: First weed out the obvious lemons, at a relatively high velocity, preferrably directly from the list view, using keyboard shortcuts. And so on, however many passes seem adequate, until it's time for a more precise review of the remaining applications. Once you're somewhat happy with the list you can start adding your own favourites. And once you have a list that is wholly your own, it should hopefully be a lot easier to maintain it. Again, the challenge here is to consciously deliberate over a very large list that hides a surprising amount of gems - without losing one's mind, or giving up. Hopefully this UI makes it a little easier than reading through the YAML file...
+Install.Doctor's curated list is a bit "everything for everyone", meaning there's no way you'll be interested in all the fields the list covers. In my experience, when working through very large datasets like these it helps to do it in two or more passes, with increasing scrutiny: First weed out the obvious lemons, at a relatively high velocity, preferrably directly from the list view, using keyboard shortcuts. And so on, however many passes seem adequate, until it's reasonable to do a more precise review of the remaining applications. Once you're somewhat happy with the list you can start adding your own favourites. And once you have a list that is wholly your own, it should hopefully be a lot easier to maintain it. Again, the challenge here is to consciously deliberate over a very large list that hides a surprising amount of gems - without losing one's mind, or giving up.  Hopefully this UI makes it a little easier than reading through the YAML file...
 
-It's up to you how you value the metadata though: Functionally there is no need to fill in the empty fields, (unless name or installation method is missing). But you have the choice. The homepage field is mandatory though, (although it isn't validated for an URL). No attempt has been made to make this fool proof. I figure if you're interested in this particular rabbit hole, you have a fairly good idea of what you're doing.
+It's up to you how you value the metadata though: Functionally there is no need to fill in the empty fields, (unless name or installation method is missing). But you have the choice. The homepage field is mandatory though, (although it isn't validated for a URL). In general: No attempt has been made to make this fool proof. I figure if you're interested in this particular rabbit hole, you have a fairly good idea of what you're doing.
 
 ## The tags
-I opted to keep a whitelist for the tags, to avoid tag chaos. But I realise my choice selection can't be for everyone. So, the easiest way to change the tag list is to navigate to the `server`directory and run `pnpx prisma studio`. It opens a web UI for Prisma, the ORM framework used here. Click on the `Tag` table and edit it like you would in any other database manager.
+I opted to keep a whitelist for the tags, to avoid tag chaos. But I realise my choice selection can't be for everyone. So, the easiest way to change the tag list is to navigate to the `server` directory and run `pnpx prisma studio`. It opens a web UI for Prisma, the ORM framework used here. Click on the `Tag` table and edit it like you would in any other database manager.
+
+## The UI
+After first starting Chezmoi UI, the backend takes a moment to seed the database, but it should be done by the time you open a browser. Opening `http://localhost:8000` you should see this. Note the keyboard shortcuts listed in the right hand column - it's a good idea to learn them. A check mark in the list view means the item has been edited, giving a hint of the work left to do
+
+![](./assets/start.png)
+
+Selecting an app in the list, you should see the detail view. It shows the name, the short description and the longer description of the app. Iconography indicates if any of the homepage, Github and documentation URLs are missing, as well as the tags associated with the app.  Hitting the Edit button opens the edit view.
+
+![](./assets/app-selection.png)
+
+Edit view: Only name, key (must be unique) and homepage are mandatory - (specified as `NOT_NULL` on database table level). The rest is opt-in and depends largely on your needs and preferences. But this is what makes the data model compatible with Install.Doctor - it tracks their model, since they provide the source document that started this whole thing. I haven't tested it, but in theory the output from Chezmoi UI should plug right into Install.Doctor. The tags are my addition, and they add another dimension of filtering that might be useful depending on your range of environments.
+
+![](./assets/edit-view.png)
+
+### Menu menu
+
+1. Add a new application to the list
+   ![](./assets/menu-add-new-app.png)
+2. Open the filter menu
+   ![](./assets/menu-open-filter-menu.png)
+3. Search for an app
+   ![](./assets/menu-free-text.png)
+4. Export YAML file
+   ![](./assets/menu-yaml-export.png)
 
 ## The stack
+
 - [React 18](https://react.dev/)
 - [Mantine UI](https://mantine.dev/)
 - [Zustand](https://github.com/pmndrs/zustand) + [Zustand-X](https://github.com/udecode/zustand-x) + [Reselect](https://reselect.js.org/)
@@ -87,6 +112,7 @@ I opted to keep a whitelist for the tags, to avoid tag chaos. But I realise my c
 - [Vite](https://vitest.dev/)
 - [TurboRepo](https://turbo.build/)
 - [Node 20+](https://nodejs.org/)
+- [Docker](https://www.docker.com/) (optional)
 
 
 ## License
