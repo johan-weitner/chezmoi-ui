@@ -23,6 +23,7 @@ const ExportFilter = (props) => {
 	const { setExportIsOpen } = props;
 	const [selectedTags, setSelectedTags] = useState([]);
 	const ref = useClickOutside(() => setExportIsOpen(false));
+	const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 	useEffect(() => {
 		console.log("Selected tags: ", selectedTags);
@@ -38,6 +39,8 @@ const ExportFilter = (props) => {
 
 	const downloadYaml = () => {
 		console.log("Download YAML filtered on tags: ", selectedTags);
+		if (selectedTags.length === 0) return window.open(`${BASE_URL}/download`);
+		window.open(`${BASE_URL}/filtered-download?tags=${selectedTags.join(",")}`);
 	};
 
 	return (
