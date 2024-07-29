@@ -20,8 +20,8 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Consider filtered exports.",
-                    "id": "kuhaj2mjgyko68edft16fwmp"
+                    "text": "Export: Print associated tags",
+                    "id": "xw63gpxaxtgi0rdemsqubr4k"
                 },
                 {
                     "text": "Finalize README",
@@ -33,7 +33,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Filtered exports.",
+                    "id": "kuhaj2mjgyko68edft16fwmp"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -283,5 +288,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722192003146
+    "timestamp": 1722239934542
 }
