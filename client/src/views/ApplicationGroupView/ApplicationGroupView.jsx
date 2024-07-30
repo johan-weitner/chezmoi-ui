@@ -58,3 +58,26 @@ const ApplicationGroupView = (props) => {
 };
 
 export default ApplicationGroupView;
+
+/*
+I have a dataset with group nodes that holds string arrays, like so:
+
+{
+  group1: ["item1", "item2", "item3"],
+  group2: ["item4", "item5", "item6"],
+  // and so on...
+}
+
+But it also contains "meta groups" that assembles groups into "super nodes", like so:
+
+{
+  metaGroup1: ["group1", "group2"],
+  metaGroup2: ["group3", "group4"],
+  // and so on...
+}
+
+My problem is the meta nodes don't simply reference the groups, they duplicate the content of the referenced groups.
+So I need code that is invoked when an array is found within the string array held by the group node, and then matches
+that array with the group node that originally holds it, and replaces that array duplicate with the name of the group node,
+preferrably prefixed with an underscore, to indicate it's a group name reference.
+*/

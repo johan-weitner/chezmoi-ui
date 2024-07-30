@@ -1,5 +1,6 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
+import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
@@ -20,7 +21,10 @@ export const fetchAppGroups = async () => {
 	const apps = await axios
 		.get(`${BASE_URL}/software-groups`)
 		.then((response) => {
-			return response.data;
+			const { data } = response;
+			testProcessMetaGroups();
+			const processedData = data?.groups && processMetaGroups(data.groups);
+			return { ...data, groups: processedData };
 		})
 		.catch((error) => {
 			throw error;
