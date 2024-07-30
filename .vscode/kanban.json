@@ -28,6 +28,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
+                    "id": "sk38oxq3x0o9nolxc95ikpv8"
+                },
+                {
                     "text": "Consider implementing software groups, like Install.Doctor",
                     "id": "mjuxek5kuk1q0u5evc1n109k"
                 },
@@ -311,5 +315,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722283892058
+    "timestamp": 1722343594815
 }
