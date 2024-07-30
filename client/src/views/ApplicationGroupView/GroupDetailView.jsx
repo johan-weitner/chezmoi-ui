@@ -30,6 +30,13 @@ const GroupDetailView = (props) => {
 		setCurrentList(rootStore.get.selectedGroup());
 	}, [rootStore.get.selectedGroup()]);
 
+	const getOutputString = (item) => {
+		if (typeof item === "string") {
+			return (item.indexOf("_") === 0) ? (<b onClick={() => rootStore.set.selectedGroupKey(item.substring(1))}>Includes: {item.substring(1)}</b>) : item;
+		}
+		return <span style={{ fontStyle: "italic", color: "#999" }}>[Array]</span>;
+	}
+
 	return (
 		<Container
 			size="lg"
@@ -96,13 +103,7 @@ const GroupDetailView = (props) => {
 										key={nanoid()}
 										className={s.listItem}
 									>
-										{typeof item === "string" ? (
-											item
-										) : (
-											<span style={{ fontStyle: "italic", color: "#999" }}>
-												[Array]
-											</span>
-										)}
+										{getOutputString(item)}
 									</List.Item>
 								);
 							})}
