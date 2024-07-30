@@ -1,3 +1,11 @@
+/**
+ * The YAML to JSON conversion - like JSON - can't have nodes referencing eachother.
+ * Instead, the referenced node is copied to the node that references it, creating
+ * redundancy. So we need to process the JSON data and reverse-engineer the nodes
+ * with redundat data and restore the references to the original nodes.
+ * Due to the structure of Install.Doctor's data, it's done recursively
+ */
+
 export const processMetaGroups = (data) => {
   if (!data || typeof data !== 'object') {
     console.log("Invalid data: ", data);
@@ -10,7 +18,7 @@ export const processMetaGroups = (data) => {
 
   for (const [group, items] of Object.entries(data)) {
     if (!Array.isArray(items) || items.length === 0 || typeof items[0] !== 'string') continue;
-    groupMap[JSON.stringify(items)] = group;
+    groupMap[JSON.stringify(items.flat())] = group;
   }
 
   const replaceArrayWithGroupReference = (metaGroup) => {
@@ -33,7 +41,8 @@ export const processMetaGroups = (data) => {
   }
 
   for (const [key, value] of Object.entries(data)) {
-    data[key] = value.flat(Number.Infinity).sort();
+    // data[key] = value.flat(Number.Infinity).sort();
+    data[key].flat().sort();
   }
 
   console.log("Processed data: ", data);

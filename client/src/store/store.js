@@ -4,8 +4,10 @@ import { createStore } from "zustand-x";
 export const useStore = () => { };
 
 const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
+export const MAIN_VIEWS = ["apps", "groups", "tags", "settings"];
 
 export const rootStore = createStore("root")({
+	mainView: MAIN_VIEWS[0],
 	appCollection: null,
 	appGroups: [],
 	appGroupKeys: [],

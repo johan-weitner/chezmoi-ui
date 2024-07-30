@@ -23,6 +23,7 @@ import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 
 export const ListViewHeader = (props) => {
+	const { isGroupView } = props;
 	const theme = useMantineTheme();
 	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
@@ -38,17 +39,19 @@ export const ListViewHeader = (props) => {
 
 	return (
 		<>
-			<Group className={commonCss.cardTitleContainer}>
-				<ICON.allApps
-					style={{ width: rem(50), height: rem(50) }}
-					stroke={2}
-					color={theme.colors.blue[6]}
-					className={commonCss.cardTitleIcon}
-				/>
-				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
-					Applications
-				</Text>
-			</Group>
+			{!isGroupView && (
+				<Group className={commonCss.cardTitleContainer}>
+					<ICON.allApps
+						style={{ width: rem(50), height: rem(50) }}
+						stroke={2}
+						color={theme.colors.blue[6]}
+						className={commonCss.cardTitleIcon}
+					/>
+					<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
+						Applications
+					</Text>
+				</Group>
+			)}
 			<Flex
 				justify="flex-end"
 				align="flex-end"
@@ -59,17 +62,19 @@ export const ListViewHeader = (props) => {
 					right: "20px",
 				}}
 			>
-				<Tooltip label="Add new app" position="top">
-					<ActionIcon
-						variant="filled"
-						aria-label="Open filter menu"
-						size="xl"
-						className="neubtn"
-						onClick={() => addItem()}
-					>
-						<IconCirclePlus size={24} color="#999" />
-					</ActionIcon>
-				</Tooltip>
+				{!isGroupView && (
+					<Tooltip label="Add new app" position="top">
+						<ActionIcon
+							variant="filled"
+							aria-label="Add new app"
+							size="xl"
+							className="neubtn"
+							onClick={() => addItem()}
+						>
+							<IconCirclePlus size={24} color="#999" />
+						</ActionIcon>
+					</Tooltip>
+				)}
 				<Menu
 					shadow="md"
 					width={250}
@@ -116,19 +121,23 @@ export const ListViewHeader = (props) => {
 					</Menu.Dropdown>
 				</Menu>
 				<SearchWidget />
-				<Tooltip label="Export YAML file" position="top">
-					<ActionIcon
-						variant="filled"
-						aria-label="Export YAML file"
-						size="xl"
-						className="neubtn"
-						onClick={() => setExportIsOpen(true)}
-					>
-						<IconDownload size={24} color="#999" />
-					</ActionIcon>
-				</Tooltip>
+				{!isGroupView && (
+					<Tooltip label="Export YAML file" position="top">
+						<ActionIcon
+							variant="filled"
+							aria-label="Export YAML file"
+							size="xl"
+							className="neubtn"
+							onClick={() => setExportIsOpen(true)}
+						>
+							<IconDownload size={24} color="#999" />
+						</ActionIcon>
+					</Tooltip>
+				)}
 			</Flex>
-			{exportIsOpen && <ExportFilter setExportIsOpen={setExportIsOpen} />}
+			{!isGroupView && exportIsOpen && (
+				<ExportFilter setExportIsOpen={setExportIsOpen} />
+			)}
 		</>
 	);
 };

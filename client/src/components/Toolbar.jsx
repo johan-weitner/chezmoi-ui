@@ -17,6 +17,7 @@ import { useState } from "react";
 import classes from "components/Toolbar.module.css";
 import { useClientManager } from "core/ClientManager";
 import BarSpinner from "./BarSpinner";
+import { rootStore, MAIN_VIEWS } from "../store/store";
 
 const Toolbar = (props) => {
 	const { setShowAppGroupView } = props;
@@ -25,13 +26,24 @@ const Toolbar = (props) => {
 		useClientManager();
 	const stroke = 1.5;
 
+	const openAppsView = () => {
+		rootStore.set.mainView(MAIN_VIEWS[0]);
+		setShowAppGroupView(false);
+	};
+
+	const openGroupsView = () => {
+		rootStore.set.mainView(MAIN_VIEWS[1]);
+		setShowAppGroupView(true);
+	};
+
 	const menuData = [
 		{
 			Icon: (
 				<ICON.add style={{ width: rem(20), height: rem(20) }} stroke={stroke} />
 			),
 			label: "Applications",
-			action: () => setShowAppGroupView(false),
+			mainViewKey: MAIN_VIEWS[0],
+			action: () => openAppsView(),
 		},
 		{
 			Icon: (
@@ -41,7 +53,8 @@ const Toolbar = (props) => {
 				/>
 			),
 			label: "Application Groups",
-			action: () => setShowAppGroupView(true),
+			mainViewKey: MAIN_VIEWS[1],
+			action: () => openGroupsView(),
 		},
 	];
 
@@ -49,15 +62,15 @@ const Toolbar = (props) => {
 		typeof action === "function" && action();
 	};
 
-	const NavbarLink = ({ Icon, label, active, action, link }) => {
+	const NavbarLink = ({ Icon, label, active, action, link, className }) => {
 		return (
 			<Button
 				onClick={() => onClick(action)}
-				className={classes.navbarLink}
 				size="sm"
 				data-active={active || null}
 				link={link}
 				variant="light"
+				className={className}
 			>
 				{label}
 			</Button>
@@ -74,6 +87,11 @@ const Toolbar = (props) => {
 								{...menuItem}
 								key={nanoid()}
 								onClick={() => setActive(index)}
+								className={
+									rootStore.get.mainView() === menuItem.mainViewKey
+										? classes.navbarLinkActive
+										: classes.navbarLink
+								}
 							/>
 						);
 					})}

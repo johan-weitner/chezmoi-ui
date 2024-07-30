@@ -1,4 +1,4 @@
-import { Card, Flex } from "@mantine/core";
+import { Card, Space } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
 import { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
 
 const ListView = (props) => {
+	const { isGroupView } = props;
 	const {
 		deleteItem,
 		editItem,
@@ -40,7 +41,8 @@ const ListView = (props) => {
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
-				<ListViewHeader />
+				<ListViewHeader isGroupView={isGroupView} />
+				{isGroupView && <Space h="xl" mb={30} />}
 				<PaginationBar gotoPage={gotoPage} />
 				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
