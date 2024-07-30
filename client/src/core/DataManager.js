@@ -5,6 +5,7 @@ import {
 	getAllTags,
 	saveNewApp,
 	updateApp,
+	fetchAppGroups
 } from "api/appCollectionApi";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -96,7 +97,17 @@ export const useDataManager = () => {
 			rootStore.set.allowedTags(tags);
 		});
 
+		refreshAppGroupData();
+
 		return openFirstPage();
+	};
+
+	const refreshAppGroupData = async () => {
+		fetchAppGroups().then((data) => {
+			const { groups } = data;
+			rootStore.set.appGroups(groups);
+			rootStore.set.appGroupKeys(Object.keys(groups));
+		});
 	};
 
 	const openFirstPage = () => {

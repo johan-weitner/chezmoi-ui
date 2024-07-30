@@ -7,6 +7,8 @@ const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
 
 export const rootStore = createStore("root")({
 	appCollection: null,
+	appGroups: [],
+	appGroupKeys: [],
 	totalCount: 0,
 	page: 0,
 	pageCount: 0,
@@ -20,6 +22,8 @@ export const rootStore = createStore("root")({
 	selectedApp: null,
 	selectedAppKey: null,
 	selectedAppTags: null,
+	selectedGroup: null,
+	selectedGroupKey: null,
 	allowedTags: null,
 	editMode: false,
 	isNewApp: false,

@@ -16,6 +16,18 @@ export const fetchApps = async () => {
 	return apps;
 };
 
+export const fetchAppGroups = async () => {
+	const apps = await axios
+		.get(`${BASE_URL}/software-groups`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return apps;
+};
+
 export const fetchAppPage = async (page = 1, limit = 20) => {
 	const apps = (await fetchApps()) || [];
 	return getPageSlice(page, limit, apps);

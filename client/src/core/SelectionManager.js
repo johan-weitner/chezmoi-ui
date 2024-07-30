@@ -2,7 +2,7 @@ import { fetchApp, getTagsByAppId } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
 import { rootStore } from "store/store";
-import { transformNullValues } from "../api/helpers";
+import { transformNullValues } from "api/helpers";
 import { usePageManager } from "./PageManager";
 
 export const useSelectionManager = () => {
@@ -40,6 +40,13 @@ export const useSelectionManager = () => {
 			.catch((err) => {
 				toast.error("Error fetching app: ", err);
 			});
+	};
+
+	const setSelectedGroupKey = (key) => {
+		true && console.log("Selected group key: ", key);
+		rootStore.set.selectedGroupKey(key);
+		rootStore.set.selectedGroup(rootStore.get.appGroups()[key]);
+		console.log("Set selected group: ", rootStore.get.selectedGroup());
 	};
 
 	const _isFirstOnPage = (appKey) => {
@@ -121,6 +128,7 @@ export const useSelectionManager = () => {
 		getAppTags,
 		addItem,
 		clearAppSelection,
-		getSearchBase
+		getSearchBase,
+		setSelectedGroupKey
 	};
 };

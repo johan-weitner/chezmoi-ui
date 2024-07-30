@@ -5,7 +5,7 @@ import cors from "cors";
 import express from "express";
 import YAML from "yaml";
 import { isEmpty } from "./src/core/api.js";
-import { boot } from "./src/core/boot.js";
+import { boot, setupGroupData } from "./src/core/boot.js";
 import { tags } from "./src/db/fixtures/tags.js";
 import {
 	addApp,
@@ -51,30 +51,6 @@ app.get("/software", (req, res) => {
 	getAllApps().then((apps) => {
 		res.json(apps);
 	});
-});
-
-app.get("/getCount", (req, res) => {
-	getCount().then((count) => {
-		res.json({ count: count });
-	});
-});
-
-app.post("/page", (req, res) => {
-	const {
-		body: { skip, take },
-	} = req;
-	getPage(Number.parseInt(skip, 10), Number.parseInt(take, 10)).then((apps) => {
-		res.json(apps);
-	});
-});
-
-app.get("/rawlist", (req, res) => {
-	res.set("Content-Type", "text/plain");
-
-	softwareArray = fs.readFileSync(targetFilePath, "utf8");
-	const yamlData = YAML.stringify(softwareArray);
-
-	res.send(yamlData);
 });
 
 app.get("/getApp", (req, res) => {
@@ -219,6 +195,14 @@ app.get('/filtered-download', (req, res) => {
 		res.status(500).json({
 			error: e.message,
 		});
+	});
+});
+
+app.get("/software-groups", (req, res) => {
+	const { groups, groupKeys } = setupGroupData();
+	res.json({
+		groups: groups,
+		groupKeys: groupKeys
 	});
 });
 

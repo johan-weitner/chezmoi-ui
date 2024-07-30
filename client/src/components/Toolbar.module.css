@@ -6,15 +6,21 @@
   height: 50px;
   background-color: #121516 !important;
   padding: 0;
-  margin: -15px auto 0 auto;
+  margin: 10px auto 0 auto;
 
 }
-
-
 
 .navbarMain {
   margin-top: 0;
   z-index: 999;
+}
+
+.navbarLink {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.navbarLink:hover {
+  border:1px solid #75c0fc;
 }
 
 .link {

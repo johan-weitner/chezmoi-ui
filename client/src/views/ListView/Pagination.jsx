@@ -5,7 +5,7 @@ import { rootStore } from "store/store";
 import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {
-	const { totalCount, currentFilter, gotoPage, pageCount } = props;
+	const { gotoPage } = props;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const [currentPage, setCurrentPage] = useState(1);
 
@@ -28,7 +28,6 @@ const PaginationBar = (props) => {
 			console.log(`Pagination.jsx:
 			currentPage: ${rootStore.get.page()},
 			Total: ${rootStore.get.pageCount()},
-			Count: ${pageCount});
 			currentFilter: ${currentFilter}`);
 	};
 
@@ -48,17 +47,19 @@ const PaginationBar = (props) => {
 				style={{ textAlign: "left", margin: "10px 0 0 20px" }}
 				className={css.paginationInfo}
 			>
-				{currentFilter && (
+				{(rootStore.use.activeFilter() && (
 					<span>
 						{"Filtered by "}
 						<b>
-							{filterModel[rootStore.use.activeFilter()].title.toLowerCase()}
+							{filterModel[rootStore.get.activeFilter()]?.title?.toLowerCase()}
 						</b>
-						{" ⋅ "}
+					</span>
+				)) || (
+					<span>
+						Page {rootStore.get.page()} of {rootStore.get.pageCount()} ⋅{" "}
+						{rootStore.get.totalCount()} apps in total.
 					</span>
 				)}
-				Page {rootStore.get.page()} of {rootStore.get.pageCount()} ⋅{" "}
-				{rootStore.get.totalCount()} apps in total.
 			</Text>
 		</Stack>
 	);

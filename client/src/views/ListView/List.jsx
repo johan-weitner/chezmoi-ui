@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { selectAppByKey } from "store/selectors";
 import { rootStore } from "store/store";
-import { useClientManager } from "../../core/ClientManager";
+import { useClientManager } from "core/ClientManager";
 import { ListItem } from "./ListItem";
 import classes from "./ListView.module.css";
 

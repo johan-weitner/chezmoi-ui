@@ -3,8 +3,8 @@ import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useClickOutside } from "@mantine/hooks";
-import { useClientManager } from "../../core/ClientManager";
-import { rootStore } from "../../store/store";
+import { useClientManager } from "core/ClientManager";
+import { rootStore } from "store/store";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
 

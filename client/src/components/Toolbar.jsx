@@ -1,4 +1,11 @@
-import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
+import {
+	Flex,
+	Group,
+	Tooltip,
+	Button,
+	UnstyledButton,
+	rem,
+} from "@mantine/core";
 import {
 	IconDownload,
 	IconPlayerTrackNext,
@@ -12,6 +19,7 @@ import { useClientManager } from "core/ClientManager";
 import BarSpinner from "./BarSpinner";
 
 const Toolbar = (props) => {
+	const { setShowAppGroupView } = props;
 	const [active, setActive] = useState(null);
 	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext, downloadYaml } =
 		useClientManager();
@@ -22,8 +30,8 @@ const Toolbar = (props) => {
 			Icon: (
 				<ICON.add style={{ width: rem(20), height: rem(20) }} stroke={stroke} />
 			),
-			label: "Add new app",
-			action: addItem,
+			label: "Applications",
+			action: () => setShowAppGroupView(false),
 		},
 		{
 			Icon: (
@@ -32,38 +40,8 @@ const Toolbar = (props) => {
 					stroke={stroke}
 				/>
 			),
-			label: "Delete app",
-			action: deleteItem,
-		},
-		{
-			Icon: (
-				<IconPlayerTrackPrev
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Go to previous",
-			action: gotoPrev,
-		},
-		{
-			Icon: (
-				<IconPlayerTrackNext
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Go to next",
-			action: gotoNext,
-		},
-		{
-			Icon: (
-				<IconDownload
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Download YAML",
-			action: () => window.open(`${import.meta.env.VITE_BACKEND_URL}/download`),
+			label: "Application Groups",
+			action: () => setShowAppGroupView(true),
 		},
 	];
 
@@ -73,20 +51,16 @@ const Toolbar = (props) => {
 
 	const NavbarLink = ({ Icon, label, active, action, link }) => {
 		return (
-			<Tooltip
-				label={label}
-				position="bottom"
-				transitionProps={{ duration: 0 }}
+			<Button
+				onClick={() => onClick(action)}
+				className={classes.navbarLink}
+				size="sm"
+				data-active={active || null}
+				link={link}
+				variant="light"
 			>
-				<UnstyledButton
-					onClick={() => onClick(action)}
-					className={classes.link}
-					data-active={active || null}
-					link={link}
-				>
-					{Icon}
-				</UnstyledButton>
-			</Tooltip>
+				{label}
+			</Button>
 		);
 	};
 

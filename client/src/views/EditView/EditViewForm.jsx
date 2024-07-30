@@ -5,7 +5,7 @@ import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { rootStore } from "../../store/store";
+import { rootStore } from "store/store";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";

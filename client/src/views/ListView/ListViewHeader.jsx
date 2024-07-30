@@ -70,7 +70,12 @@ export const ListViewHeader = (props) => {
 						<IconCirclePlus size={24} color="#999" />
 					</ActionIcon>
 				</Tooltip>
-				<Menu shadow="md" width={250} offset={8}>
+				<Menu
+					shadow="md"
+					width={250}
+					offset={8}
+					style={{ backgroundColor: "#222 !important" }}
+				>
 					<Menu.Target>
 						<Tooltip label="Open filter menu" position="top">
 							<ActionIcon

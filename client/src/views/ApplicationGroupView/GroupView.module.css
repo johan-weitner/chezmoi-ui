@@ -1,0 +1,16 @@
+.listItem {
+  padding:20px 10px;
+  border-radius:10px;
+}
+
+.listItem:nth-child(odd) {
+  background-color: #444;
+}
+
+.backBtn {
+  border-radius:50%;
+}
+
+.backBtn:hover {
+  border: 2px solid #007bff;
+}

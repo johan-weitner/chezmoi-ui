@@ -41,13 +41,7 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				<ListViewHeader />
-				<PaginationBar
-					currentPage={rootStore.get.page()}
-					totalCount={rootStore.get.appCollection()?.length}
-					currentFilter={rootStore.get.activeFilter()}
-					gotoPage={gotoPage}
-					pageCount={rootStore.get.pageCount()}
-				/>
+				<PaginationBar gotoPage={gotoPage} />
 				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
 		</ErrorBoundary>
