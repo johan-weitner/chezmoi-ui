@@ -29,6 +29,8 @@ import {
 	IconWorldCode,
 	IconX,
 	IconFolders,
+	IconArrowRight,
+	IconArrowLeft,
 } from "@tabler/icons-react";
 
 /**
@@ -67,7 +69,9 @@ export const ICON = {
 	next: IconPlayerTrackNext,
 	filter: IconFilter,
 	folders: IconFolders,
-	packages: IconPackages
+	packages: IconPackages,
+	arrowRight: IconArrowRight,
+	arrowLeft: IconArrowLeft,
 };
 
 export const INDICATOR = {

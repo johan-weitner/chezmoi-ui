@@ -1,5 +1,16 @@
 import { useState, useEffect } from "react";
-import { Container, Group, Card, rem, Text, SimpleGrid } from "@mantine/core";
+import {
+	Container,
+	Group,
+	Card,
+	rem,
+	Text,
+	SimpleGrid,
+	Title,
+	ActionIcon,
+	ThemeIcon,
+	List,
+} from "@mantine/core";
 import { rootStore } from "store/store";
 import { nanoid } from "nanoid";
 import "../../common.css";
@@ -10,10 +21,13 @@ import ListView from "views/ListView/ListView";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "views/ListView/ListView.module.css";
 import { ICON } from "constants/icons";
+import { IconArrowLeft, IconPackages } from "@tabler/icons-react";
+import s from "./GroupView.module.css";
 
 const ApplicationGroupView = (props) => {
 	const [groups, setGroups] = useState(null);
 	const [groupKeys, setGroupKeys] = useState(null);
+
 	useEffect(() => {
 		setGroups(rootStore.get.appGroups());
 		setGroupKeys(rootStore.get.appGroupKeys());
@@ -22,6 +36,11 @@ const ApplicationGroupView = (props) => {
 
 	const deleteItem = () => {};
 	const editItem = () => {};
+	const selectNewGroup = (key) => {
+		console.log("Selecting group: ", key);
+		setCurrentKey(key);
+		setSelectedGroupKey(key);
+	};
 
 	return (
 		<Container

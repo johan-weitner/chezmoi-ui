@@ -7,6 +7,7 @@ import {
 	Tooltip,
 	rem,
 	useMantineTheme,
+	Title,
 } from "@mantine/core";
 import { IconDownload, IconFilter, IconCirclePlus } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
@@ -59,19 +60,17 @@ export const ListViewHeader = (props) => {
 					right: "20px",
 				}}
 			>
-				{!isGroupView && (
-					<Tooltip label="Add new app" position="top">
-						<ActionIcon
-							variant="filled"
-							aria-label="Add new app"
-							size="xl"
-							className="neubtn"
-							onClick={() => addItem()}
-						>
-							<IconCirclePlus size={24} color="#999" />
-						</ActionIcon>
-					</Tooltip>
-				)}
+				<Tooltip label="Add new app" position="top">
+					<ActionIcon
+						variant="filled"
+						aria-label="Add new app"
+						size="xl"
+						className="neubtn"
+						onClick={() => addItem()}
+					>
+						<IconCirclePlus size={24} color="#999" />
+					</ActionIcon>
+				</Tooltip>
 				<Menu
 					shadow="md"
 					width={250}

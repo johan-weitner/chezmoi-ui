@@ -1,10 +1,8 @@
-import { Card, Space } from "@mantine/core";
+import { Card } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
-import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useHotkeys } from "react-hotkeys-hook";
-import { rootStore } from "store/store";
 import List from "./List";
 import commonCss from "./ListView.module.css";
 import { ListViewHeader } from "./ListViewHeader";
@@ -42,7 +40,15 @@ const ListView = (props) => {
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
 				{!isGroupView && <ListViewHeader />}
-				<PaginationBar gotoPage={gotoPage} />
+				<div
+					style={{
+						marginTop: "-30px",
+						marginBottom: "-20px",
+						zIndex: "999999",
+					}}
+				>
+					<PaginationBar gotoPage={gotoPage} />
+				</div>
 				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
 		</ErrorBoundary>

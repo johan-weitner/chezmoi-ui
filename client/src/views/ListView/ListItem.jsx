@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
+import { MAIN_VIEWS } from "store/store";
 
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
@@ -46,33 +47,54 @@ export const ListItem = (props) => {
 						</Text>
 					)}
 				</button>
-				<ICON.edit
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "45px",
-						top: "14px",
-						cursor: "pointer",
-					}}
-					stroke={2}
-					color="white"
-					onClick={() => editItem(app.key, true)}
-				/>
-				<ICON.remove
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "15px",
-						top: "14px",
-						cursor: "pointer",
-					}}
-					stroke={2}
-					color="white"
-					onClick={() => deleteItem(app.key)}
-				/>
-				{indicateEdit}
+				{rootStore.use.mainView() === MAIN_VIEWS[0] && (
+					<>
+						<ICON.edit
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "45px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => editItem(app.key, true)}
+						/>
+						<ICON.remove
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "15px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => deleteItem(app.key)}
+						/>
+						{indicateEdit}
+					</>
+				)}
+				{rootStore.use.mainView() === MAIN_VIEWS[1] && (
+					<>
+						<ICON.arrowRight
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "15px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => editItem(app.key, true)}
+						/>
+					</>
+				)}
 			</div>
 		</ErrorBoundary>
 	);

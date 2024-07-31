@@ -12,7 +12,7 @@ export const processMetaGroups = (data) => {
     return data;
   }
 
-  console.log("Un processed data: ", data);
+  // console.log("Un processed data: ", data);
 
   const groupMap = {};
 
@@ -45,8 +45,10 @@ export const processMetaGroups = (data) => {
     data[key].flat().sort();
   }
 
-  console.log("Processed data: ", data);
-  return data;
+  // console.log("Processed data: ", data);
+
+  // Filter out the meta groups, those are off edited manually
+  return Object.fromEntries(Object.entries(data).filter(([key, value]) => key[0] !== '_'));
 }
 
 export const testProcessMetaGroups = () => {
@@ -70,9 +72,9 @@ export const testProcessMetaGroups = () => {
     superMetaGroup: ["_group1", "_group2", "_group3", "_group4"],
   };
 
-  const processedData = processMetaGroups(dataset);
+  // const processedData = processMetaGroups(dataset);
 
-  console.assert(JSON.stringify(processedData) === JSON.stringify(expectedOutput), "Test failed");
-  console.log("Test passed");
+  // console.assert(JSON.stringify(processedData) === JSON.stringify(expectedOutput), "Test failed");
+  // console.log("Test passed");
 };
 

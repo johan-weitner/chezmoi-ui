@@ -1,6 +1,16 @@
 .listItem {
   padding:20px 10px;
   border-radius:10px;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.listItem:hover {
+  border:2px solid #007bff;
+  animation-duration: .5s;
+  animation-name: glow;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .listItem:nth-child(odd) {
@@ -13,4 +23,18 @@
 
 .backBtn:hover {
   border: 2px solid #007bff;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: none;
+    border-color: transparent;
+    color: #FFF;
+  }
+
+  to {
+    box-shadow: 0 0 20px #3391ff;
+    border-color: #3391ff;
+    color: #007bff;
+  }
 }

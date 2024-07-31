@@ -32,10 +32,22 @@ const GroupDetailView = (props) => {
 
 	const getOutputString = (item) => {
 		if (typeof item === "string") {
-			return (item.indexOf("_") === 0) ? (<b onClick={() => rootStore.set.selectedGroupKey(item.substring(1))}>Includes: {item.substring(1)}</b>) : item;
+			return item.indexOf("_") === 0 ? (
+				<b>Includes: {item.substring(1)}</b>
+			) : (
+				item
+			);
 		}
 		return <span style={{ fontStyle: "italic", color: "#999" }}>[Array]</span>;
-	}
+	};
+
+	const onClickItem = (item) => {
+		typeof item === "string" && item.indexOf("_") === 0
+			? (item) => {
+					rootStore.set.selectedGroupKey(item.substring(1));
+				}
+			: null;
+	};
 
 	return (
 		<Container
@@ -102,6 +114,7 @@ const GroupDetailView = (props) => {
 										mt={0}
 										key={nanoid()}
 										className={s.listItem}
+										onClick={(item) => onClickItem(item)}
 									>
 										{getOutputString(item)}
 									</List.Item>
