@@ -8,6 +8,8 @@ import {
 	isEmptyTagsTable,
 	seedDb,
 	seedTags,
+	seedGroups,
+	getGroupCount
 } from "../db/prisma.js";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
@@ -39,6 +41,7 @@ const _checkEnvVars = () => {
 		log.error(error("Missing environment variable"));
 		log.error(
 			error(
+				"\x1b[31m%s\x1b[0m",
 				"Please set SOURCE_FILE and SOURCE_GRP_FILE in either a .env file or in your environment",
 			),
 		);
@@ -74,8 +77,8 @@ const _setupFileData = () => {
 	keys = Object.keys(software);
 
 	const softwareGroupYaml = fs.readFileSync(softwareGroupYamlPath, "utf8");
-	groups = YAML.parse(softwareGroupYaml).softwareGroups;
-	groupKeys = Object.keys(software);
+	const groups = YAML.parse(softwareGroupYaml).softwareGroups;
+	const groupKeys = Object.keys(software);
 
 	for (let i = 0; i < keys.length; i++) {
 		softwareArray.push(software[keys[i]]);
@@ -149,6 +152,7 @@ const _seedDbIfEmpty = async () => {
 		await getCount().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
+		doSeedGroups();
 	}
 
 	// if (isEmptyTagsTable()) {
@@ -158,4 +162,19 @@ const _seedDbIfEmpty = async () => {
 	// 		log.info(`Done seeding Tag table with ${count} tags`);
 	// 	});
 	// }
+};
+
+
+const doSeedGroups = async () => {
+	const { groups } = _setupFileData();
+	const groupData = Object.keys(groups).map((key) => {
+		if (key.indexOf("_" === 0)) return;
+		return {
+			name: key
+		};
+	});
+	await seedGroups(groupData);
+	await getGroupCount().then((count) => {
+		log.info(`Done seeding Group table with ${count} groups`);
+	});
 };

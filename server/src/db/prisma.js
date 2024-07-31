@@ -28,6 +28,22 @@ export const seedTags = async (data) => {
 		});
 };
 
+export const seedGroups = async (data) => {
+	await prisma
+		.$transaction([prisma.Group.createMany({ data })])
+		.then(() => {
+			log.info("Seeded db with tags");
+		})
+		.catch((e) => {
+			log.error(e.message);
+		});
+};
+
+export const getGroupCount = async () => {
+	const count = await prisma.Group.count();
+	return count;
+};
+
 export const addApp = async (data) => {
 	try {
 		const app = await prisma[APPLICATION].create({
@@ -39,6 +55,50 @@ export const addApp = async (data) => {
 	} catch (e) {
 		log.error(e.message);
 		throw e;
+	}
+};
+
+export const getAllGroups = async () => {
+	const apps = await prisma.Group.findMany();
+	return apps;
+};
+
+export const getGroupByName = async (name) => {
+	const group = await prisma.Group.findFirst({
+		where: {
+			name: name,
+		},
+	});
+	return group;
+};
+
+export const addAppToGroup = async (groupId, appId) => {
+	try {
+		const appGroup = await prisma.ApplicationGroup.create({
+			data: {
+				applicationId: appId,
+				groupId: groupId,
+			},
+		});
+		return appGroup;
+	} catch (e) {
+		log.info(e.message, e);
+		return e;
+	}
+};
+
+export const removeAppFromGroup = async (groupId, appId) => {
+	try {
+		const result = await prisma.ApplicationGroup.deleteMany({
+			where: {
+				applicationId: appId,
+				groupId: groupId,
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
 	}
 };
 

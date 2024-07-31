@@ -12,18 +12,16 @@ import {
 	deleteApp,
 	getAllApps,
 	getAppByKey,
-	getCount,
-	getPage,
 	updateApp,
 	addAppTags,
 	deleteAppTag,
 	getTagsByAppId,
 	getAllTags,
 	updateArticleTags,
-	getAppsWithoutInstaller,
-	getAppsWithoutUrls,
-	getAppsWithoutDesc,
-	getAppsWithoutName
+	getAllGroups,
+	getGroupByName,
+	addAppToGroup,
+	removeAppFromGroup
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
 import { getYamlExport, getFilteredYamlExport } from "./src/util/export.js";
@@ -206,6 +204,26 @@ app.get("/software-groups", (req, res) => {
 	});
 });
 
+app.get("/groups", (req, res) => {
+	const groups = getAllGroups().then(groups => {
+		res.json({
+			groups: groups,
+		});
+	}).catch(e => {
+		res.status(500).json({
+			error: e.message,
+		});
+	});;
+});
+
+//
+
 app.listen(port, () => {
 	log.info(`\nServer is listening at port ${port} `);
 });
+
+
+// getAllGroups,
+// 	getGroupByName,
+// 	addAppToGroup,
+// 	removeAppFromGroup
