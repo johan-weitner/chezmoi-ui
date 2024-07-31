@@ -44,9 +44,10 @@ export const useSelectionManager = () => {
 
 	const setSelectedGroupKey = (key) => {
 		true && console.log("Selected group key: ", key);
-		rootStore.set.selectedGroupKey(key);
+		rootStore.set.selectedGroupKey(rootStore.get.appGroupKeys()[key - 1]);
 		rootStore.set.selectedGroup(rootStore.get.appGroups()[key]);
-		// console.log("Set selected group: ", rootStore.get.selectedGroup());
+		rootStore.set.selectedGroupId(rootStore.get.appGroups()[key].id);
+		console.log("Set selected group: ", rootStore.get.selectedGroup());
 	};
 
 	const _isFirstOnPage = (appKey) => {

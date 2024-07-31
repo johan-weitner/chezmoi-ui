@@ -1,18 +1,6 @@
 import { useState, useEffect } from "react";
-import {
-	Container,
-	Group,
-	Card,
-	rem,
-	Text,
-	SimpleGrid,
-	Title,
-	ActionIcon,
-	ThemeIcon,
-	List,
-} from "@mantine/core";
+import { Container, Group, Card, rem, Text, SimpleGrid } from "@mantine/core";
 import { rootStore } from "store/store";
-import { nanoid } from "nanoid";
 import "../../common.css";
 import GroupList from "./GroupList";
 import GroupDetailView from "./GroupDetailView";
@@ -21,8 +9,6 @@ import ListView from "views/ListView/ListView";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "views/ListView/ListView.module.css";
 import { ICON } from "constants/icons";
-import { IconArrowLeft, IconPackages } from "@tabler/icons-react";
-import s from "./GroupView.module.css";
 
 const ApplicationGroupView = (props) => {
 	const [groups, setGroups] = useState(null);
@@ -32,6 +18,7 @@ const ApplicationGroupView = (props) => {
 		setGroups(rootStore.get.appGroups());
 		setGroupKeys(rootStore.get.appGroupKeys());
 		console.log("groups", JSON.stringify(groups, null, 2));
+		console.log("Store: ", rootStore.store.getState());
 	}, [rootStore.get.appGroups(), rootStore.get.appGroupKeys()]);
 
 	const deleteItem = () => {};

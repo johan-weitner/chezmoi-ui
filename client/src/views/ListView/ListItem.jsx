@@ -7,25 +7,39 @@ import { ErrorBoundary } from "react-error-boundary";
 import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
 import { MAIN_VIEWS } from "store/store";
+import { useGroupManager } from "core/GroupManager";
+import { getSelectedGroupId } from "store/selectors";
 
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
 	// const selectedKey = rootStore.get.selectedAppKey();
-	// const [currentKey, setCurrentKey] = useState(selectedKey);
+	const [isGroupMode, setIsGroupMode] = useState(false);
+	const [selectedGroupId, setSelectedGroupId] = useState(false);
 
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
+	const { putAppInGroup } = useGroupManager();
+
+	useEffect(() => {
+		setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
+	}, [rootStore.use.mainView()]);
 
 	// useEffect(() => {
-	// 	setCurrentKey(rootStore.get.selectedAppKey());
-	// }, [rootStore.use.selectedAppKey()]);
+	// 	setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
+	// 	console.log("ListItem: ", rootStore.get.selectedGroup());
+	// }, [rootStore.use.se()]);
 
-	// const selectNewApp = () => {
-	// 	setCurrentKey(app.key);
-	// 	rootStore.set.selectedAppKey(app.key);
-	// };
+	const selectApp = (key) => {
+		if (rootStore.get.mainView() === MAIN_VIEWS[0]) {
+			console.log("setSelectedAppKey: ", key);
+			setSelectedAppKey(key);
+		} else if (rootStore.get.mainView() === MAIN_VIEWS[1]) {
+			console.log("putAppInGroup: ", key);
+			putAppInGroup(key);
+		}
+	};
 
 	return (
 		<ErrorBoundary
@@ -35,18 +49,35 @@ export const ListItem = (props) => {
 				style={{ position: "relative", width: "100%" }}
 				className={className}
 			>
-				<button
-					className={classes.itemBox}
-					onClick={() => setSelectedAppKey(app?.key)}
-					style={{ width: "100%" }}
-					type="button"
-				>
-					{app?.name || (
-						<Text size="sm" style={{ color: "#333 !important" }}>
-							<i>[ Missing Name ]</i> - ({app?.key})
-						</Text>
-					)}
-				</button>
+				{isGroupMode ? (
+					<button
+						className={classes.itemBox}
+						onClick={() =>
+							putAppInGroup(rootStore.get.selectedGroupId(), app?.id)
+						}
+						style={{ width: "100%" }}
+						type="button"
+					>
+						{app?.name || (
+							<Text size="sm" style={{ color: "#333 !important" }}>
+								<i>[ Missing Name ]</i> - ({app?.key})
+							</Text>
+						)}
+					</button>
+				) : (
+					<button
+						className={classes.itemBox}
+						onClick={() => selectApp(app?.key)}
+						style={{ width: "100%" }}
+						type="button"
+					>
+						{app?.name || (
+							<Text size="sm" style={{ color: "#333 !important" }}>
+								<i>[ Missing Name ]</i> - ({app?.key})
+							</Text>
+						)}
+					</button>
+				)}
 				{rootStore.use.mainView() === MAIN_VIEWS[0] && (
 					<>
 						<ICON.edit

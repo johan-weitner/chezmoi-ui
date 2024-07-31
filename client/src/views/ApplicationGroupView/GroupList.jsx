@@ -85,16 +85,17 @@ const GroupList = (props) => {
 					</ThemeIcon>
 				}
 			>
-				{rootStore?.use?.appGroupKeys()?.map((item) => {
+				{rootStore.use.appGroups()?.map((item) => {
+					console.log(item);
 					return (
 						<List.Item
 							mb={0}
 							mt={0}
 							key={nanoid()}
 							className={s.listItem}
-							onClick={() => selectNewGroup(item)}
+							onClick={() => selectNewGroup(item.id)}
 						>
-							{item}
+							{item.name}
 						</List.Item>
 					);
 				})}

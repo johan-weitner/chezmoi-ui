@@ -47,7 +47,7 @@ const GroupListItem = (props) => {
 					style={{ width: "100%" }}
 					type="button"
 				>
-					{group}
+					{group.name}
 				</button>
 				{/* <ICON.edit
 					style={{

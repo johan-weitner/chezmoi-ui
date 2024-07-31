@@ -40,10 +40,10 @@ export const processMetaGroups = (data) => {
     }
   }
 
-  for (const [key, value] of Object.entries(data)) {
-    // data[key] = value.flat(Number.Infinity).sort();
-    data[key].flat().sort();
-  }
+  // for (const [key, value] of Object.entries(data)) {
+  //   data[key] = value;
+  //   // data[key].flat().sort();
+  // }
 
   // console.log("Processed data: ", data);
 

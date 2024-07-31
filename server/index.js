@@ -21,7 +21,9 @@ import {
 	getAllGroups,
 	getGroupByName,
 	addAppToGroup,
-	removeAppFromGroup
+	removeAppFromGroup,
+	getAppsByGroup,
+	getGroupById
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
 import { getYamlExport, getFilteredYamlExport } from "./src/util/export.js";
@@ -205,7 +207,8 @@ app.get("/software-groups", (req, res) => {
 });
 
 app.get("/groups", (req, res) => {
-	const groups = getAllGroups().then(groups => {
+	getAllGroups().then(groups => {
+		console.log("SERVER: Got groups: ", groups?.length);
 		res.json({
 			groups: groups,
 		});
@@ -216,7 +219,61 @@ app.get("/groups", (req, res) => {
 	});;
 });
 
-//
+// getAppsByGroup
+app.get("/group-apps", (req, res) => {
+	const { groupId } = req.query;
+	getAppsByGroup(groupId).then(apps => {
+		res.json({
+			apps: apps,
+		});
+	}).catch(e => {
+		res.status(500).json({
+			error: e.message,
+		});
+	});;
+});
+
+app.get("/getGroupById", (req, res) => {
+	const { groupId } = req.query;
+	getGroupById(groupId).then(group => {
+		res.json({
+			group: group,
+		});
+	}).catch(e => {
+		res.status(500).json({
+			error: e.message,
+		});
+	});;
+});
+
+app.post("/addAppToGroup", (req, res) => {
+	console.log("Req.body: ", req.body);
+	const { groupId, appId } = req.body.data;
+	console.log("Req params: ", req.body.data);
+	addAppToGroup(groupId, appId)
+		.then(() => {
+			res.status(200).json();
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
+
+app.delete("/removeAppFromGroup", (req, res) => {
+	const { groupId, appId } = req.body.data;
+	console.log("Req params: ", req.body.data);
+	removeAppFromGroup(groupId, appId)
+		.then((res) => {
+			res.status(200).json(res);
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
 
 app.listen(port, () => {
 	log.info(`\nServer is listening at port ${port} `);

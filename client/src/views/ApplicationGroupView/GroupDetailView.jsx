@@ -14,6 +14,7 @@ import StickyBox from "react-sticky-box";
 import { rootStore } from "store/store";
 import { nanoid } from "nanoid";
 import s from "./GroupView.module.css";
+import { useGroupManager } from "../../core/GroupManager";
 
 const FallBack = () => {
 	return (
@@ -24,30 +25,14 @@ const FallBack = () => {
 };
 
 const GroupDetailView = (props) => {
-	const [currentList, setCurrentList] = useState(null);
+	const { getAppsInGroup } = useGroupManager();
 
 	useEffect(() => {
-		setCurrentList(rootStore.get.selectedGroup());
-	}, [rootStore.get.selectedGroup()]);
-
-	const getOutputString = (item) => {
-		if (typeof item === "string") {
-			return item.indexOf("_") === 0 ? (
-				<b>Includes: {item.substring(1)}</b>
-			) : (
-				item
-			);
-		}
-		return <span style={{ fontStyle: "italic", color: "#999" }}>[Array]</span>;
-	};
-
-	const onClickItem = (item) => {
-		typeof item === "string" && item.indexOf("_") === 0
-			? (item) => {
-					rootStore.set.selectedGroupKey(item.substring(1));
-				}
-			: null;
-	};
+		getAppsInGroup(rootStore.get.selectedGroup()?.id).then((apps) => {
+			rootStore.set.selectedGroup(apps);
+		});
+		console.log("GroupDetailView: ", rootStore.get.selectedGroup());
+	}, [rootStore.get.selectedGroupKey()]);
 
 	return (
 		<Container
@@ -95,33 +80,31 @@ const GroupDetailView = (props) => {
 						</ActionIcon>
 						{rootStore.get.selectedGroupKey()}
 					</Title>
-					{(rootStore.use.selectedGroup() && (
-						<List
-							spacing="md"
-							size="md"
-							pl="3px"
-							center
-							icon={
-								<ThemeIcon color="#007bff" size={24} radius="xl">
-									<IconPackages style={{ width: rem(16), height: rem(16) }} />
-								</ThemeIcon>
-							}
-						>
-							{rootStore.get.selectedGroup().map((item) => {
-								return (
-									<List.Item
-										mb={0}
-										mt={0}
-										key={nanoid()}
-										className={s.listItem}
-										onClick={(item) => onClickItem(item)}
-									>
-										{getOutputString(item)}
-									</List.Item>
-								);
-							})}
-						</List>
-					)) || <FallBack />}
+					<List
+						spacing="md"
+						size="md"
+						pl="3px"
+						center
+						icon={
+							<ThemeIcon color="#007bff" size={24} radius="xl">
+								<IconPackages style={{ width: rem(16), height: rem(16) }} />
+							</ThemeIcon>
+						}
+					>
+						{rootStore.use.appsInSelectedGroup()?.map((item) => {
+							return (
+								<List.Item
+									mb={0}
+									mt={0}
+									key={nanoid()}
+									className={s.listItem}
+									onClick={(item) => onClickItem(item)}
+								>
+									{item.name}
+								</List.Item>
+							);
+						})}
+					</List>
 				</Card>
 			</StickyBox>
 		</Container>

@@ -26,6 +26,8 @@ export const rootStore = createStore("root")({
 	selectedAppTags: null,
 	selectedGroup: null,
 	selectedGroupKey: null,
+	selectedGroupId: null,
+	appsInSelectedGroup: null,
 	allowedTags: null,
 	editMode: false,
 	isNewApp: false,

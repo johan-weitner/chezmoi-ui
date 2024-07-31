@@ -59,8 +59,9 @@ export const addApp = async (data) => {
 };
 
 export const getAllGroups = async () => {
-	const apps = await prisma.Group.findMany();
-	return apps;
+	console.log("*** getAllGroups ***");
+	const groups = await prisma.Group.findMany();
+	return groups;
 };
 
 export const getGroupByName = async (name) => {
@@ -72,17 +73,27 @@ export const getGroupByName = async (name) => {
 	return group;
 };
 
+export const getGroupById = async (groupId) => {
+	const group = await prisma.Group.findFirst({
+		where: {
+			id: Number.parseInt(groupId, 10),
+		},
+	});
+	return group;
+};
+
 export const addAppToGroup = async (groupId, appId) => {
+	log.info("Adding app to group: ", groupId, appId);
 	try {
 		const appGroup = await prisma.ApplicationGroup.create({
 			data: {
-				applicationId: appId,
-				groupId: groupId,
+				applicationId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
 			},
 		});
 		return appGroup;
 	} catch (e) {
-		log.info(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -91,8 +102,8 @@ export const removeAppFromGroup = async (groupId, appId) => {
 	try {
 		const result = await prisma.ApplicationGroup.deleteMany({
 			where: {
-				applicationId: appId,
-				groupId: groupId,
+				applicationId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
 			},
 		});
 		return result;
@@ -100,6 +111,19 @@ export const removeAppFromGroup = async (groupId, appId) => {
 		console.error(e.message, e);
 		return e;
 	}
+};
+
+// Get all apps in a group
+export const getAppsByGroup = async (groupId) => {
+	const apps = await prisma.ApplicationGroup.findMany({
+		where: {
+			groupId: Number.parseInt(groupId, 10),
+		},
+		include: {
+			application: true,
+		},
+	});
+	return apps;
 };
 
 export const getAllApps = async () => {

@@ -4,14 +4,14 @@ import {
 	getAllApps,
 	getAllTags,
 	saveNewApp,
-	updateApp,
-	fetchAppGroups
+	updateApp
 } from "api/appCollectionApi";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { selectAppByKey, selectPageContent } from "store/selectors";
 import { rootStore } from "store/store";
 import { usePageManager } from "./PageManager";
+import { useGroupManager } from "./GroupManager";
 
 export const useDataManager = () => {
 	const { store } = rootStore;
@@ -20,6 +20,7 @@ export const useDataManager = () => {
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const { gotoPage, getPageContent } = usePageManager();
+	const { seedGroups } = useGroupManager();
 
 	const useBootstrap = () => {
 		return useEffect(() => {
@@ -46,6 +47,7 @@ export const useDataManager = () => {
 				DEBUG && console.log("--=== DataManager: Done seeding client! ===--");
 				rootStore.set.isLoading(false);
 			});
+			seedGroups();
 		}, []);
 	};
 
@@ -97,17 +99,9 @@ export const useDataManager = () => {
 			rootStore.set.allowedTags(tags);
 		});
 
-		refreshAppGroupData();
+		seedGroups();
 
 		return openFirstPage();
-	};
-
-	const refreshAppGroupData = async () => {
-		fetchAppGroups().then((data) => {
-			const { groups } = data;
-			rootStore.set.appGroups(groups);
-			rootStore.set.appGroupKeys(Object.keys(groups));
-		});
 	};
 
 	const openFirstPage = () => {
