@@ -9,7 +9,8 @@ import {
 	seedDb,
 	seedTags,
 	seedGroups,
-	getGroupCount
+	getGroupCount,
+	getAllGroups
 } from "../db/prisma.js";
 import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
@@ -106,9 +107,9 @@ const stripTrailingWhitespace = (str) => {
 	return str.replace(/\s+$/, "");
 };
 
-const _seedDbIfEmpty = async () => {
+const _seedDbIfEmpty = async (forceSeed) => {
 	log.info("Set up db connection...");
-	const emptyDb = await isEmptyDb();
+	const emptyDb = forceSeed || await isEmptyDb();
 
 	if (emptyDb) {
 		log.info("Empty db - seeding tables...");
@@ -168,10 +169,11 @@ const _seedDbIfEmpty = async () => {
 const doSeedGroups = async () => {
 	const { groups } = _setupFileData();
 	const groupData = Object.keys(groups).map((key) => {
-		if (key.indexOf("_" === 0)) return;
-		return {
-			name: key
-		};
+		if (key.indexOf("_" !== 0)) {
+			return {
+				name: key
+			};
+		}
 	});
 	await seedGroups(groupData);
 	await getGroupCount().then((count) => {
