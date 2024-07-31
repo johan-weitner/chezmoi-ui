@@ -29,7 +29,7 @@ const PaginationBar = (props) => {
 			currentPage: ${rootStore.get.page()},
 			Total: ${rootStore.get.pageCount()},
 			currentFilter: ${currentFilter}`);
-	};
+	}; // boundaries siblings
 
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
@@ -41,6 +41,8 @@ const PaginationBar = (props) => {
 				className={css.pagination}
 				size={"sm"}
 				withEdges={true}
+				boundaries={0}
+				withControls={false}
 			/>
 			<Text
 				size="xs"

@@ -23,7 +23,6 @@ import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 
 export const ListViewHeader = (props) => {
-	const { isGroupView } = props;
 	const theme = useMantineTheme();
 	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
@@ -39,19 +38,17 @@ export const ListViewHeader = (props) => {
 
 	return (
 		<>
-			{!isGroupView && (
-				<Group className={commonCss.cardTitleContainer}>
-					<ICON.allApps
-						style={{ width: rem(50), height: rem(50) }}
-						stroke={2}
-						color={theme.colors.blue[6]}
-						className={commonCss.cardTitleIcon}
-					/>
-					<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
-						Applications
-					</Text>
-				</Group>
-			)}
+			<Group className={commonCss.cardTitleContainer}>
+				<ICON.allApps
+					style={{ width: rem(50), height: rem(50) }}
+					stroke={2}
+					color={theme.colors.blue[6]}
+					className={commonCss.cardTitleIcon}
+				/>
+				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
+					Applications
+				</Text>
+			</Group>
 			<Flex
 				justify="flex-end"
 				align="flex-end"
@@ -121,23 +118,19 @@ export const ListViewHeader = (props) => {
 					</Menu.Dropdown>
 				</Menu>
 				<SearchWidget />
-				{!isGroupView && (
-					<Tooltip label="Export YAML file" position="top">
-						<ActionIcon
-							variant="filled"
-							aria-label="Export YAML file"
-							size="xl"
-							className="neubtn"
-							onClick={() => setExportIsOpen(true)}
-						>
-							<IconDownload size={24} color="#999" />
-						</ActionIcon>
-					</Tooltip>
-				)}
+				<Tooltip label="Export YAML file" position="top">
+					<ActionIcon
+						variant="filled"
+						aria-label="Export YAML file"
+						size="xl"
+						className="neubtn"
+						onClick={() => setExportIsOpen(true)}
+					>
+						<IconDownload size={24} color="#999" />
+					</ActionIcon>
+				</Tooltip>
 			</Flex>
-			{!isGroupView && exportIsOpen && (
-				<ExportFilter setExportIsOpen={setExportIsOpen} />
-			)}
+			{exportIsOpen && <ExportFilter setExportIsOpen={setExportIsOpen} />}
 		</>
 	);
 };

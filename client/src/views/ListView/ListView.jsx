@@ -41,8 +41,7 @@ const ListView = (props) => {
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
-				<ListViewHeader isGroupView={isGroupView} />
-				{isGroupView && <Space h="xl" mb={30} />}
+				{!isGroupView && <ListViewHeader />}
 				<PaginationBar gotoPage={gotoPage} />
 				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
