@@ -10,6 +10,7 @@ import Legend from "./Legend";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "views/ListView/ListView.module.css";
 import { ICON } from "constants/icons";
+import Toolbar from "./Toolbar";
 
 const ApplicationGroupView = (props) => {
 	const [groups, setGroups] = useState(null);
@@ -47,6 +48,7 @@ const ApplicationGroupView = (props) => {
 						Groups
 					</Text>
 				</Group>
+				<Toolbar />
 
 				<SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" py={12}>
 					<ErrorBoundary
