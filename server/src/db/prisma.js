@@ -310,64 +310,6 @@ export const getAllTags = async () => {
  * /Tag API
  */
 
-export const getAppsWithoutInstaller = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			whalebrew: "",
-			apt: "",
-			brew: "",
-			cask: "",
-			cargo: "",
-			npm: "",
-			pip: "",
-			pipx: "",
-			gem: "",
-			script: "",
-			choco: "",
-			scoop: "",
-			winget: "",
-			pkgdarwin: "",
-			ansible: "",
-			binary: "",
-			yay: "",
-			appstore: "",
-			pacman: "",
-			port: "",
-		},
-	});
-	return app;
-};
-
-export const getAppsWithoutUrls = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			home: "",
-			docs: "",
-			github: "",
-		},
-	});
-	return app;
-};
-
-export const getAppsWithoutDesc = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			short: "",
-			desc: "",
-		},
-	});
-	return app;
-};
-
-export const getAppsWithoutName = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			name: "",
-		},
-	});
-	return app;
-};
-
 export const isEmptyDb = async () => {
 	const count = await getCount();
 	count === 0 && log.info("Database is empty - seeding...");

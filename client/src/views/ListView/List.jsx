@@ -12,7 +12,12 @@ const List = (props) => {
 	const selectedKey = rootStore.get.selectedAppKey();
 	const [currentKey, setCurrentKey] = useState(selectedKey);
 	const [activeFilter, setActiveFilter] = useState(selectedKey);
-	const { setSelectedAppKey } = useClientManager();
+	const { setSelectedAppKey, getPageContent } = useClientManager();
+
+	useEffect(() => {
+		console.log("App collection refreshed");
+		getPageContent();
+	}, [rootStore.use.appCollection()]);
 
 	useEffect(() => {
 		setCurrentKey(rootStore.get.selectedAppKey());

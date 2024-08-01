@@ -66,5 +66,6 @@ top:6px;
     box-shadow: 0 0 20px #3391ff;
     border-color: #3391ff;
     color: #007bff;
+    text-shadow:0 0 10px #007bff;
   }
 }

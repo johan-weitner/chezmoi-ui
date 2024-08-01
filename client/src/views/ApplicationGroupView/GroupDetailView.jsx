@@ -8,14 +8,9 @@ import {
 	List,
 	ThemeIcon,
 	ActionIcon,
+	Tooltip,
 } from "@mantine/core";
-import {
-	IconArrowLeft,
-	IconPackages,
-	IconX,
-	IconCircleX,
-	IconTrash,
-} from "@tabler/icons-react";
+import { IconArrowLeft, IconPackages, IconTrash } from "@tabler/icons-react";
 import StickyBox from "react-sticky-box";
 import { rootStore } from "store/store";
 import { nanoid } from "nanoid";
@@ -60,17 +55,20 @@ const GroupDetailView = (props) => {
 					}}
 				>
 					<Title fw="normal" ta="left" mb={30} className={s.groupTitle}>
-						<ActionIcon
-							size="xl"
-							variant="light"
-							mr={20}
-							ml={-10}
-							p={5}
-							onClick={() => rootStore.set.selectedGroupKey(null)}
-							className={s.backBtn}
-						>
-							<IconArrowLeft size={28} />
-						</ActionIcon>
+						<Tooltip label="Return to group list - [BACKSPACE]">
+							<ActionIcon
+								size="xl"
+								variant="light"
+								mr={20}
+								ml={-10}
+								p={5}
+								onClick={() => rootStore.set.selectedGroupKey(null)}
+								className={s.backBtn}
+							>
+								<IconArrowLeft size={28} />
+							</ActionIcon>
+						</Tooltip>
+
 						{rootStore.get.selectedGroupKey()}
 					</Title>
 					<List
@@ -94,18 +92,23 @@ const GroupDetailView = (props) => {
 									style={{ position: "relative" }}
 								>
 									{item.name}
-									<ActionIcon
-										size="med"
-										variant="light"
-										p={5}
-										onClick={() =>
-											kickAppFromGroup(rootStore.get.selectedGroupId(), item.id)
-										}
-										color="orange"
-										className={s.deleteBtn}
-									>
-										<IconTrash size={28} />
-									</ActionIcon>
+									<Tooltip label="Remove app from group">
+										<ActionIcon
+											size="med"
+											variant="light"
+											p={5}
+											onClick={() =>
+												kickAppFromGroup(
+													rootStore.get.selectedGroupId(),
+													item.id,
+												)
+											}
+											color="orange"
+											className={s.deleteBtn}
+										>
+											<IconTrash size={28} />
+										</ActionIcon>
+									</Tooltip>
 								</List.Item>
 							);
 						})}

@@ -42,6 +42,7 @@ model Application {
   appstore         String?            @default("")
   pacman           String?            @default("")
   port             String?            @default("")
+  done             Boolean            @default(false)
   appTags          ApplicationTag[]
   ApplicationGroup ApplicationGroup[]
 }

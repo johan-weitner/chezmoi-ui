@@ -43,6 +43,12 @@ const ListView = (props) => {
 			: gotoNextGroup();
 	};
 
+	const returnToList = () => {
+		rootStore.get.mainView() === MAIN_VIEWS[0]
+			? clearAppSelection()
+			: returnToGroups();
+	};
+
 	useBootstrap();
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
@@ -52,7 +58,7 @@ const ListView = (props) => {
 	useHotkeys("alt + e", () => editItem());
 	useHotkeys("shift + alt + left", () => gotoPrevPage());
 	useHotkeys("shift + alt + right", () => gotoNextPage());
-	useHotkeys("alt + w", () => clearAppSelection());
+	useHotkeys("alt + w", () => returnToList());
 	useHotkeys("backspace", () => returnToGroups());
 
 	const style =

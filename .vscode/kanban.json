@@ -28,16 +28,12 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Export: Install.Doctor format - (incl groups)",
+                    "id": "uwr11f3ugqrwja7kg9t1cuwk"
+                },
+                {
                     "text": "Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
                     "id": "sk38oxq3x0o9nolxc95ikpv8"
-                },
-                {
-                    "text": "Consider implementing software groups, like Install.Doctor",
-                    "id": "mjuxek5kuk1q0u5evc1n109k"
-                },
-                {
-                    "text": "Consider adding \"DONE\" button to edit view, persisted as a flag in db table.\n- Maybe grey out apps flagged \"done\"\n- Maybe quick filter for hiding them",
-                    "id": "gcebj66jqybs2kut1c98h8sq"
                 },
                 {
                     "text": "Fix README: 2x .env\nInstall Turbo, or remove dependency",
@@ -57,13 +53,22 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Consider adding \"DONE\" button to edit view, persisted as a flag in db table.\n- Maybe grey out apps flagged \"done\"\n- Maybe quick filter for hiding them",
+                    "id": "gcebj66jqybs2kut1c98h8sq"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Consider implementing software groups, like Install.Doctor",
+                    "id": "mjuxek5kuk1q0u5evc1n109k"
+                },
                 {
                     "text": "Finalize README",
                     "id": "qw0qi112gg72nyjn12k9p0td"
@@ -315,5 +320,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722343594815
+    "timestamp": 1722516788714
 }

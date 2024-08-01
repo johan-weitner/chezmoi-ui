@@ -6,6 +6,7 @@ import GroupList from "./GroupList";
 import GroupDetailView from "./GroupDetailView";
 import FallbackComponent from "components/FallbackComponent";
 import ListView from "views/ListView/ListView";
+import Legend from "./Legend";
 import { ErrorBoundary } from "react-error-boundary";
 import commonCss from "views/ListView/ListView.module.css";
 import { ICON } from "constants/icons";
@@ -64,7 +65,9 @@ const ApplicationGroupView = (props) => {
 							<FallbackComponent error={error.message} />
 						)}
 					>
-						{rootStore.use.selectedGroupKey() && <GroupDetailView />}
+						{(rootStore.use.selectedGroupKey() && <GroupDetailView />) || (
+							<Legend />
+						)}
 					</ErrorBoundary>
 				</SimpleGrid>
 			</Card>

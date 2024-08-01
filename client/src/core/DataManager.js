@@ -4,7 +4,8 @@ import {
 	getAllApps,
 	getAllTags,
 	saveNewApp,
-	updateApp
+	updateApp,
+	markAppDone
 } from "api/appCollectionApi";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -112,7 +113,7 @@ export const useDataManager = () => {
 		return apps;
 	};
 
-	const refreshAppCollection = () => {
+	const refreshAppCollection = async () => {
 		getAllApps().then((apps) => {
 			rootStore.set.appCollection(apps);
 			rootStore.set.pageCount(
@@ -206,6 +207,20 @@ export const useDataManager = () => {
 			});
 	};
 
+	const flagAppDone = async (app, flag = true) => {
+		markAppDone(app, flag)
+			.then(() => {
+				refreshAppCollection().then(res => {
+					toast.success("App marked as done");
+				});
+
+			})
+			.catch((err) => {
+				console.error("DataManager: Error marking app as done: ", err);
+				toast.error("Error marking app as done");
+			});
+	};
+
 	const tagApp = async (appId, tagIds) => {
 		DEBUG && console.log("<<< Tags: ", tagIds);
 		rootStore.set.isLoading(true);
@@ -246,5 +261,6 @@ export const useDataManager = () => {
 		setIsLoading,
 		setIsEditMode,
 		downloadYaml,
+		flagAppDone
 	};
 };

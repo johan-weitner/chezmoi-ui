@@ -36,8 +36,8 @@ importers:
         specifier: ^3.11.0
         version: 3.11.0(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: ^5.51.15
-        version: 5.51.15(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)
+        specifier: ^5.51.16
+        version: 5.51.16(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)
       '@welldone-software/why-did-you-render':
         specifier: ^8.0.3
         version: 8.0.3(react@18.3.1)
@@ -88,7 +88,7 @@ importers:
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       vitest-dom:
         specifier: ^0.1.1
-        version: 0.1.1(vitest@2.0.4(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3))
+        version: 0.1.1(vitest@2.0.5(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3))
       yaml:
         specifier: ^2.5.0
         version: 2.5.0
@@ -124,8 +124,8 @@ importers:
         specifier: ^14.12.3
         version: 14.12.3
       husky:
-        specifier: ^9.1.3
-        version: 9.1.3
+        specifier: ^9.1.4
+        version: 9.1.4
       lint-staged:
         specifier: ^15.2.7
         version: 15.2.7
@@ -139,8 +139,8 @@ importers:
         specifier: ^7.0.1
         version: 7.0.1(postcss@8.4.40)
       turbo:
-        specifier: ^2.0.9
-        version: 2.0.9
+        specifier: ^2.0.11
+        version: 2.0.11
       vite:
         specifier: ^5.3.5
         version: 5.3.5(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
@@ -148,8 +148,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2(vite@5.3.5(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3))
       vitest:
-        specifier: ^2.0.4
-        version: 2.0.4(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
+        specifier: ^2.0.5
+        version: 2.0.5(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
 
 packages:
 
@@ -689,13 +689,13 @@ packages:
   '@tanstack/query-core@5.51.9':
     resolution: {integrity: sha512-HsAwaY5J19MD18ykZDS3aVVh+bAt0i7m6uQlFC2b77DLV9djo+xEN7MWQAQQTR8IM+7r/zbozTQ7P0xr0bHuew==}
 
-  '@tanstack/query-devtools@5.51.15':
-    resolution: {integrity: sha512-1oSCl+PsCa/aBCGVM2ZdcQLuQ0QYmKXJJB264twEMVM1M0n5CI40trtywORPF+wLGuZNIZzkKL7j/98mOLAIag==}
+  '@tanstack/query-devtools@5.51.16':
+    resolution: {integrity: sha512-ajwuq4WnkNCMj/Hy3KR8d3RtZ6PSKc1dD2vs2T408MdjgKzQ3klVoL6zDgVO7X+5jlb5zfgcO3thh4ojPhfIaw==}
 
-  '@tanstack/react-query-devtools@5.51.15':
-    resolution: {integrity: sha512-bvGvJoncjZ3irEofoFevptj5BPkDpQrp2+dZhtFqPUZXRT6MAKPmOqtSmZPfacLR5jQLpqw/7d3Zxr173z7WDA==}
+  '@tanstack/react-query-devtools@5.51.16':
+    resolution: {integrity: sha512-nX/LeBMba9S9/kKfOrPDUiBXkpc5To8JbssABOadukPB093SF8+NdSO5/2RY72aE0pBwaru2THyM4WX5rEnuAw==}
     peerDependencies:
-      '@tanstack/react-query': ^5.51.15
+      '@tanstack/react-query': ^5.51.16
       react: ^18 || ^19
 
   '@tanstack/react-query@5.51.11':
@@ -777,23 +777,23 @@ packages:
     peerDependencies:
       vite: ^4.2.0 || ^5.0.0
 
-  '@vitest/expect@2.0.4':
-    resolution: {integrity: sha512-39jr5EguIoanChvBqe34I8m1hJFI4+jxvdOpD7gslZrVQBKhh8H9eD7J/LJX4zakrw23W+dITQTDqdt43xVcJw==}
+  '@vitest/expect@2.0.5':
+    resolution: {integrity: sha512-yHZtwuP7JZivj65Gxoi8upUN2OzHTi3zVfjwdpu2WrvCZPLwsJ2Ey5ILIPccoW23dd/zQBlJ4/dhi7DWNyXCpA==}
 
-  '@vitest/pretty-format@2.0.4':
-    resolution: {integrity: sha512-RYZl31STbNGqf4l2eQM1nvKPXE0NhC6Eq0suTTePc4mtMQ1Fn8qZmjV4emZdEdG2NOWGKSCrHZjmTqDCDoeFBw==}
+  '@vitest/pretty-format@2.0.5':
+    resolution: {integrity: sha512-h8k+1oWHfwTkyTkb9egzwNMfJAEx4veaPSnMeKbVSjp4euqGSbQlm5+6VHwTr7u4FJslVVsUG5nopCaAYdOmSQ==}
 
-  '@vitest/runner@2.0.4':
-    resolution: {integrity: sha512-Gk+9Su/2H2zNfNdeJR124gZckd5st4YoSuhF1Rebi37qTXKnqYyFCd9KP4vl2cQHbtuVKjfEKrNJxHHCW8thbQ==}
+  '@vitest/runner@2.0.5':
+    resolution: {integrity: sha512-TfRfZa6Bkk9ky4tW0z20WKXFEwwvWhRY+84CnSEtq4+3ZvDlJyY32oNTJtM7AW9ihW90tX/1Q78cb6FjoAs+ig==}
 
-  '@vitest/snapshot@2.0.4':
-    resolution: {integrity: sha512-or6Mzoz/pD7xTvuJMFYEtso1vJo1S5u6zBTinfl+7smGUhqybn6VjzCDMhmTyVOFWwkCMuNjmNNxnyXPgKDoPw==}
+  '@vitest/snapshot@2.0.5':
+    resolution: {integrity: sha512-SgCPUeDFLaM0mIUHfaArq8fD2WbaXG/zVXjRupthYfYGzc8ztbFbu6dUNOblBG7XLMR1kEhS/DNnfCZ2IhdDew==}
 
-  '@vitest/spy@2.0.4':
-    resolution: {integrity: sha512-uTXU56TNoYrTohb+6CseP8IqNwlNdtPwEO0AWl+5j7NelS6x0xZZtP0bDWaLvOfUbaYwhhWp1guzXUxkC7mW7Q==}
+  '@vitest/spy@2.0.5':
+    resolution: {integrity: sha512-c/jdthAhvJdpfVuaexSrnawxZz6pywlTPe84LUB2m/4t3rl2fTo9NFGBG4oWgaD+FTgDDV8hJ/nibT7IfH3JfA==}
 
-  '@vitest/utils@2.0.4':
-    resolution: {integrity: sha512-Zc75QuuoJhOBnlo99ZVUkJIuq4Oj0zAkrQ2VzCqNCx6wAwViHEh5Fnp4fiJTE9rA+sAoXRf00Z9xGgfEzV6fzQ==}
+  '@vitest/utils@2.0.5':
+    resolution: {integrity: sha512-d8HKbqIcya+GR67mkZbrzhS5kKhtp8dQLcmRZLGTscGVg7yImT82cIrhtn2L8+VujWcy6KZweApgNmPsTAO/UQ==}
 
   '@welldone-software/why-did-you-render@8.0.3':
     resolution: {integrity: sha512-bb5bKPMStYnocyTBVBu4UTegZdBqzV1mPhxc0UIV/S43KFUSRflux9gvzJfu2aM4EWLJ3egTvdjOi+viK+LKGA==}
@@ -1356,8 +1356,8 @@ packages:
     resolution: {integrity: sha512-AXcZb6vzzrFAUE61HnN4mpLqd/cSIwNQjtNWR0euPm6y0iqx3G4gOXaIDdtdDwZmhwe82LA6+zinmW4UBWVePQ==}
     engines: {node: '>=16.17.0'}
 
-  husky@9.1.3:
-    resolution: {integrity: sha512-ET3TQmQgdIu0pt+jKkpo5oGyg/4MQZpG6xcam5J5JyNJV+CBT23OBpCF15bKHKycRyMH9k6ONy8g2HdGIsSkMQ==}
+  husky@9.1.4:
+    resolution: {integrity: sha512-bho94YyReb4JV7LYWRWxZ/xr6TtOTt8cMfmQ39MQYJ7f/YE268s3GdghGwi+y4zAeqewE5zYLvuhV0M0ijsDEA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -2059,38 +2059,38 @@ packages:
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
-  turbo-darwin-64@2.0.9:
-    resolution: {integrity: sha512-owlGsOaExuVGBUfrnJwjkL1BWlvefjSKczEAcpLx4BI7Oh6ttakOi+JyomkPkFlYElRpjbvlR2gP8WIn6M/+xQ==}
+  turbo-darwin-64@2.0.11:
+    resolution: {integrity: sha512-YlHEEhcm+jI1BSZoLugGHUWDfRXaNaQIv7tGQBfadYjo9kixBnqoTOU6s1ubOrQMID+lizZZQs79GXwqM6vohg==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.0.9:
-    resolution: {integrity: sha512-XAXkKkePth5ZPPE/9G9tTnPQx0C8UTkGWmNGYkpmGgRr8NedW+HrPsi9N0HcjzzIH9A4TpNYvtiV+WcwdaEjKA==}
+  turbo-darwin-arm64@2.0.11:
+    resolution: {integrity: sha512-K/YW+hWzRQ/wGmtffxllH4M1tgy8OlwgXODrIiAGzkSpZl9+pIsem/F86UULlhsIeavBYK/LS5+dzV3DPMjJ9w==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.0.9:
-    resolution: {integrity: sha512-l9wSgEjrCFM1aG16zItBsZ206ZlhSSx1owB8Cgskfv0XyIXRGHRkluihiaxkp+UeU5WoEfz4EN5toc+ICA0q0w==}
+  turbo-linux-64@2.0.11:
+    resolution: {integrity: sha512-mv8CwGP06UPweMh1Vlp6PI6OWnkuibxfIJ4Vlof7xqjohAaZU5FLqeOeHkjQflH/6YrCVuS9wrK0TFOu+meTtA==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.0.9:
-    resolution: {integrity: sha512-gRnjxXRne18B27SwxXMqL3fJu7jw/8kBrOBTBNRSmZZiG1Uu3nbnP7b4lgrA/bCku6C0Wligwqurvtpq6+nFHA==}
+  turbo-linux-arm64@2.0.11:
+    resolution: {integrity: sha512-wLE5tl4oriTmHbuayc0ki0csaCplmVLj+uCWtecM/mfBuZgNS9ICNM9c4sB+Cfl5tlBBFeepqRNgvRvn8WeVZg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.0.9:
-    resolution: {integrity: sha512-ZVo0apxUvaRq4Vm1qhsfqKKhtRgReYlBVf9MQvVU1O9AoyydEQvLDO1ryqpXDZWpcHoFxHAQc9msjAMtE5K2lA==}
+  turbo-windows-64@2.0.11:
+    resolution: {integrity: sha512-tja3zvVCSWu3HizOoeQv0qDJ+GeWGWRFOOM6a8i3BYnXLgGKAaDZFcjwzgC50tWiAw4aowIVR4OouwIyRhLBaQ==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.0.9:
-    resolution: {integrity: sha512-sGRz7c5Pey6y7y9OKi8ypbWNuIRPF9y8xcMqL56OZifSUSo+X2EOsOleR9MKxQXVaqHPGOUKWsE6y8hxBi9pag==}
+  turbo-windows-arm64@2.0.11:
+    resolution: {integrity: sha512-sYjXP6k94Bqh99R+y3M1Ks6LRIEZybMz+7enA8GKl6JJ2ZFaXxTnS6q+/2+ii1+rRwxohj5OBb4gxODcF8Jd4w==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.0.9:
-    resolution: {integrity: sha512-QaLaUL1CqblSKKPgLrFW3lZWkWG4pGBQNW+q1ScJB5v1D/nFWtsrD/yZljW/bdawg90ihi4/ftQJ3h6fz1FamA==}
+  turbo@2.0.11:
+    resolution: {integrity: sha512-imDlFFAvitbCm1JtDFJ6eG882qwxHUmVT2noPb3p2jq5o5DuXOchMbkVS9kUeC3/4WpY5N0GBZ3RvqNyjHZw1Q==}
     hasBin: true
 
   type-fest@4.21.0:
@@ -2190,8 +2190,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  vite-node@2.0.4:
-    resolution: {integrity: sha512-ZpJVkxcakYtig5iakNeL7N3trufe3M6vGuzYAr4GsbCTwobDeyPJpE4cjDhhPluv8OvQCFzu2LWp6GkoKRITXA==}
+  vite-node@2.0.5:
+    resolution: {integrity: sha512-LdsW4pxj0Ot69FAoXZ1yTnA9bjGohr2yNBU7QKRxpz8ITSkhuDl6h3zS/tvgz4qrNjeRnvrWeXQ8ZF7Um4W00Q==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
@@ -2233,15 +2233,15 @@ packages:
     peerDependencies:
       vitest: '>=0.31.0'
 
-  vitest@2.0.4:
-    resolution: {integrity: sha512-luNLDpfsnxw5QSW4bISPe6tkxVvv5wn2BBs/PuDRkhXZ319doZyLOBr1sjfB5yCEpTiU7xCAdViM8TNVGPwoog==}
+  vitest@2.0.5:
+    resolution: {integrity: sha512-8GUxONfauuIdeSl5f9GTgVEpg5BTOlplET4WEDaeY2QBiN8wSm68vxN/tb5z405OwppfoCavnwXafiaYBC/xOA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
       '@edge-runtime/vm': '*'
       '@types/node': ^18.0.0 || >=20.0.0
-      '@vitest/browser': 2.0.4
-      '@vitest/ui': 2.0.4
+      '@vitest/browser': 2.0.5
+      '@vitest/ui': 2.0.5
       happy-dom: '*'
       jsdom: '*'
     peerDependenciesMeta:
@@ -2782,11 +2782,11 @@ snapshots:
 
   '@tanstack/query-core@5.51.9': {}
 
-  '@tanstack/query-devtools@5.51.15': {}
+  '@tanstack/query-devtools@5.51.16': {}
 
-  '@tanstack/react-query-devtools@5.51.15(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-query-devtools@5.51.16(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@tanstack/query-devtools': 5.51.15
+      '@tanstack/query-devtools': 5.51.16
       '@tanstack/react-query': 5.51.11(react@18.3.1)
       react: 18.3.1
 
@@ -2880,35 +2880,35 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@vitest/expect@2.0.4':
+  '@vitest/expect@2.0.5':
     dependencies:
-      '@vitest/spy': 2.0.4
-      '@vitest/utils': 2.0.4
+      '@vitest/spy': 2.0.5
+      '@vitest/utils': 2.0.5
       chai: 5.1.1
       tinyrainbow: 1.2.0
 
-  '@vitest/pretty-format@2.0.4':
+  '@vitest/pretty-format@2.0.5':
     dependencies:
       tinyrainbow: 1.2.0
 
-  '@vitest/runner@2.0.4':
+  '@vitest/runner@2.0.5':
     dependencies:
-      '@vitest/utils': 2.0.4
+      '@vitest/utils': 2.0.5
       pathe: 1.1.2
 
-  '@vitest/snapshot@2.0.4':
+  '@vitest/snapshot@2.0.5':
     dependencies:
-      '@vitest/pretty-format': 2.0.4
+      '@vitest/pretty-format': 2.0.5
       magic-string: 0.30.10
       pathe: 1.1.2
 
-  '@vitest/spy@2.0.4':
+  '@vitest/spy@2.0.5':
     dependencies:
       tinyspy: 3.0.0
 
-  '@vitest/utils@2.0.4':
+  '@vitest/utils@2.0.5':
     dependencies:
-      '@vitest/pretty-format': 2.0.4
+      '@vitest/pretty-format': 2.0.5
       estree-walker: 3.0.3
       loupe: 3.1.1
       tinyrainbow: 1.2.0
@@ -3513,7 +3513,7 @@ snapshots:
 
   human-signals@5.0.0: {}
 
-  husky@9.1.3: {}
+  husky@9.1.4: {}
 
   iconv-lite@0.4.24:
     dependencies:
@@ -4188,32 +4188,32 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  turbo-darwin-64@2.0.9:
+  turbo-darwin-64@2.0.11:
     optional: true
 
-  turbo-darwin-arm64@2.0.9:
+  turbo-darwin-arm64@2.0.11:
     optional: true
 
-  turbo-linux-64@2.0.9:
+  turbo-linux-64@2.0.11:
     optional: true
 
-  turbo-linux-arm64@2.0.9:
+  turbo-linux-arm64@2.0.11:
     optional: true
 
-  turbo-windows-64@2.0.9:
+  turbo-windows-64@2.0.11:
     optional: true
 
-  turbo-windows-arm64@2.0.9:
+  turbo-windows-arm64@2.0.11:
     optional: true
 
-  turbo@2.0.9:
+  turbo@2.0.11:
     optionalDependencies:
-      turbo-darwin-64: 2.0.9
-      turbo-darwin-arm64: 2.0.9
-      turbo-linux-64: 2.0.9
-      turbo-linux-arm64: 2.0.9
-      turbo-windows-64: 2.0.9
-      turbo-windows-arm64: 2.0.9
+      turbo-darwin-64: 2.0.11
+      turbo-darwin-arm64: 2.0.11
+      turbo-linux-64: 2.0.11
+      turbo-linux-arm64: 2.0.11
+      turbo-windows-64: 2.0.11
+      turbo-windows-arm64: 2.0.11
 
   type-fest@4.21.0: {}
 
@@ -4283,7 +4283,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  vite-node@2.0.4(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3):
+  vite-node@2.0.5(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3):
     dependencies:
       cac: 6.7.14
       debug: 4.3.5(supports-color@5.5.0)
@@ -4328,7 +4328,7 @@ snapshots:
       sugarss: 4.0.1(postcss@8.4.40)
       terser: 5.31.3
 
-  vitest-dom@0.1.1(vitest@2.0.4(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)):
+  vitest-dom@0.1.1(vitest@2.0.5(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)):
     dependencies:
       aria-query: 5.3.0
       chalk: 5.3.0
@@ -4336,17 +4336,17 @@ snapshots:
       dom-accessibility-api: 0.6.3
       lodash-es: 4.17.21
       redent: 4.0.0
-      vitest: 2.0.4(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
+      vitest: 2.0.5(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
 
-  vitest@2.0.4(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3):
+  vitest@2.0.5(@types/node@20.14.10)(happy-dom@14.12.3)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3):
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@vitest/expect': 2.0.4
-      '@vitest/pretty-format': 2.0.4
-      '@vitest/runner': 2.0.4
-      '@vitest/snapshot': 2.0.4
-      '@vitest/spy': 2.0.4
-      '@vitest/utils': 2.0.4
+      '@vitest/expect': 2.0.5
+      '@vitest/pretty-format': 2.0.5
+      '@vitest/runner': 2.0.5
+      '@vitest/snapshot': 2.0.5
+      '@vitest/spy': 2.0.5
+      '@vitest/utils': 2.0.5
       chai: 5.1.1
       debug: 4.3.5(supports-color@5.5.0)
       execa: 8.0.1
@@ -4357,7 +4357,7 @@ snapshots:
       tinypool: 1.0.0
       tinyrainbow: 1.2.0
       vite: 5.3.5(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
-      vite-node: 2.0.4(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
+      vite-node: 2.0.5(@types/node@20.14.10)(sass@1.77.8)(sugarss@4.0.1(postcss@8.4.40))(terser@5.31.3)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 20.14.10

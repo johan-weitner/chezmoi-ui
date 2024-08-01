@@ -58,6 +58,18 @@
   cursor: pointer !important;
 }
 
+.itemBoxGrey {
+  text-align: left;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background-color: #292929;
+  padding: 10px 25px;
+  margin-bottom: 5px;
+  font-size: 1.2em;
+  cursor: pointer !important;
+  opacity:.5 !important;
+}
+
 .itemDetailBox,
 .itemDetailBoxFixed {
 

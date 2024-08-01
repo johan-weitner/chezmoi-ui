@@ -9,6 +9,7 @@ export const fetchApps = async () => {
 	const apps = await axios
 		.get(`${BASE_URL}/software`)
 		.then((response) => {
+			console.log("API: Fetched apps: ", response.data);
 			return response.data;
 		})
 		.catch((error) => {
@@ -109,19 +110,20 @@ export const fetchApp = async (key) => {
 };
 
 export const updateApp = async (updatedData) => {
-	const updatedNode = mapEntityToDb(updatedData);
+	console.log("API: Updating app: ", updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
-			...updatedNode,
+			...updatedData,
 			edited: "true",
-			tags: updatedNode.tags === null ? "" : updatedNode.tags,
+			tags: updatedData.tags === null ? "" : updatedData.tags,
 		})
 		.then((response) => {
-			DEBUG && console.log(
-				`API: Updating app:
+			DEBUG &&
+				console.log(
+					`API: Updating app:
 		- Tags: `,
-				response.data,
-			);
+					response.data,
+				);
 			return response.data;
 		})
 		.catch((error) => {
@@ -176,6 +178,20 @@ export const addApp = (data) => {
 	}
 };
 
+export const markAppDone = async (app, flag) => {
+	console.log("Marking app as done: ", app);
+	const flaggedApp = Object.assign(app, { done: flag });
+	console.log("Flagged app: ", flaggedApp, typeof app);
+	updateApp(flaggedApp)
+		.then((response) => {
+			console.log("App marked as done: ", response);
+			return response;
+		})
+		.catch((error) => {
+			throw error;
+		});
+};
+
 export const getAllTags = async () => {
 	const tags = await axios
 		.get(`${BASE_URL}/getAllTags`)
@@ -185,7 +201,6 @@ export const getAllTags = async () => {
 		.catch((error) => {
 			throw error;
 		});
-	// const tagStrArr = tags.map(tag => tag.name);
 	return tags;
 };
 

@@ -22,6 +22,10 @@ export const ListItem = (props) => {
 	const { putAppInGroup } = useGroupManager();
 
 	useEffect(() => {
+		console.log("App: ", app);
+	}, []);
+
+	useEffect(() => {
 		setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
 	}, [rootStore.use.mainView()]);
 
@@ -58,7 +62,7 @@ export const ListItem = (props) => {
 					</button>
 				) : (
 					<button
-						className={classes.itemBox}
+						className={app?.done ? classes.itemBoxGrey : classes.itemBox}
 						onClick={() => selectApp(app?.key)}
 						style={{ width: "100%" }}
 						type="button"
@@ -67,11 +71,12 @@ export const ListItem = (props) => {
 							<Text size="sm" style={{ color: "#333 !important" }}>
 								<i>[ Missing Name ]</i> - ({app?.key})
 							</Text>
-						)}
+						)}{" "}
+						- ({app.done})
 					</button>
 				)}
 				{rootStore.use.mainView() === MAIN_VIEWS[0] && (
-					<>
+					<div style={app?.done ? { display: "none" } : { display: "block" }}>
 						<ICON.edit
 							style={{
 								width: rem(20),
@@ -99,7 +104,7 @@ export const ListItem = (props) => {
 							onClick={() => deleteItem(app.key)}
 						/>
 						{indicateEdit}
-					</>
+					</div>
 				)}
 				{rootStore.use.mainView() === MAIN_VIEWS[1] && (
 					<>

@@ -33,7 +33,7 @@ export const appHasInstaller = (app) => {
 
 export const mapEntityToDb = (app) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
-	const validKeys = [...formPartOne, ...formPartTwo].map((item) => item.name);
+	const validKeys = [...formPartOne, ...formPartTwo, "done"].map((item) => item.name);
 	const entity = { tags: app.tags };
 	Object.keys(app).map((key) => {
 		if (validKeys.includes(key)) {
@@ -54,7 +54,7 @@ export const mapEntityToDb = (app) => {
 
 export const transformNullValues = (app) => {
 	for (const key of Object.keys(app)) {
-		if (!app[key]) {
+		if (app[key] === null || app[key] === undefined) {
 			app[key] = "";
 		}
 	}
