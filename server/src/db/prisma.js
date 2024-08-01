@@ -90,6 +90,9 @@ export const addAppToGroup = async (groupId, appId) => {
 				applicationId: Number.parseInt(appId, 10),
 				groupId: Number.parseInt(groupId, 10),
 			},
+			include: {
+				application: true,
+			},
 		});
 		return appGroup;
 	} catch (e) {
@@ -99,6 +102,7 @@ export const addAppToGroup = async (groupId, appId) => {
 };
 
 export const removeAppFromGroup = async (groupId, appId) => {
+	log.info("Removing app from group: ", groupId, appId);
 	try {
 		const result = await prisma.ApplicationGroup.deleteMany({
 			where: {

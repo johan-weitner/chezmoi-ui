@@ -13,7 +13,6 @@ import { getSelectedGroupId } from "store/selectors";
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
-	// const selectedKey = rootStore.get.selectedAppKey();
 	const [isGroupMode, setIsGroupMode] = useState(false);
 	const [selectedGroupId, setSelectedGroupId] = useState(false);
 
@@ -26,17 +25,10 @@ export const ListItem = (props) => {
 		setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
 	}, [rootStore.use.mainView()]);
 
-	// useEffect(() => {
-	// 	setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
-	// 	console.log("ListItem: ", rootStore.get.selectedGroup());
-	// }, [rootStore.use.se()]);
-
 	const selectApp = (key) => {
 		if (rootStore.get.mainView() === MAIN_VIEWS[0]) {
-			console.log("setSelectedAppKey: ", key);
 			setSelectedAppKey(key);
 		} else if (rootStore.get.mainView() === MAIN_VIEWS[1]) {
-			console.log("putAppInGroup: ", key);
 			putAppInGroup(key);
 		}
 	};
@@ -121,8 +113,7 @@ export const ListItem = (props) => {
 								cursor: "pointer",
 							}}
 							stroke={2}
-							color="white"
-							onClick={() => editItem(app.key, true)}
+							color="#393"
 						/>
 					</>
 				)}

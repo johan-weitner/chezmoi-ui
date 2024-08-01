@@ -3,6 +3,7 @@ import {
 } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { rootStore } from "store/store";
+import { getAppById } from "store/selectors";
 
 const DEBUG = true;
 
@@ -36,20 +37,20 @@ export const useGroupManager = () => {
   };
 
   const getAppsInGroup = async (groupId) => {
+    if (!groupId) return;
     rootStore.set.isLoading(true);
     await fetchAppsInGroup(groupId)
       .then((data) => {
         rootStore.set.isLoading(false);
-        console.log("Response: ", data.apps);
+        if (!data) throw new Error(`No data returned for group: ${groupId}`);
         const apps = Object.values(data.apps).map(item => { return item.application });
         rootStore.set.appsInSelectedGroup(Object.values(apps));
-        console.log("Setting apps in group: ", rootStore.get.appsInSelectedGroup());
       })
       .catch((err) => {
         rootStore.set.isLoading(false);
         rootStore.set.error(err);
         toast.error(err?.message);
-        console.log("GroupManager: Error fetching apps in group: ", err);
+        console.error("GroupManager: Error fetching apps in group: ", err);
       });
   };
 
@@ -60,8 +61,12 @@ export const useGroupManager = () => {
     }
     rootStore.set.isLoading(true);
     await addAppToGroup(groupId, appId)
-      .then(() => {
+      .then((newApp) => {
         rootStore.set.isLoading(false);
+        const apps = rootStore.get.appsInSelectedGroup();
+        if (newApp?.application?.name) {
+          rootStore.set.appsInSelectedGroup([...apps, newApp.application]);
+        }
         toast.success("Added app to the group");
       })
       .catch((err) => {
@@ -77,6 +82,9 @@ export const useGroupManager = () => {
     await removeAppFromGroup(groupId, appId)
       .then(() => {
         rootStore.set.isLoading(false);
+        const apps = rootStore.get.appsInSelectedGroup();
+        const newApps = apps.filter(app => app.id !== appId);
+        rootStore.set.appsInSelectedGroup(newApps);
       })
       .catch((err) => {
         rootStore.set.isLoading(false);

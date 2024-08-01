@@ -1,8 +1,12 @@
-.listItem {
+.listItem, .ulistItem {
   padding:20px 10px;
   border-radius:10px;
   cursor:pointer;
   border:2px solid transparent;
+}
+
+.ulistItem {
+  cursor:default;
 }
 
 .listItem:hover {
@@ -13,7 +17,7 @@
   animation-fill-mode: forwards;
 }
 
-.listItem:nth-child(odd) {
+.listItem:nth-child(odd), .ulistItem:nth-child(odd) {
   background-color: #444;
 }
 

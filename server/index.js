@@ -247,12 +247,10 @@ app.get("/getGroupById", (req, res) => {
 });
 
 app.post("/addAppToGroup", (req, res) => {
-	console.log("Req.body: ", req.body);
 	const { groupId, appId } = req.body.data;
-	console.log("Req params: ", req.body.data);
 	addAppToGroup(groupId, appId)
-		.then(() => {
-			res.status(200).json();
+		.then((appGroup) => {
+			res.status(200).json(appGroup);
 		})
 		.catch((e) => {
 			res.status(500).json({
@@ -262,11 +260,11 @@ app.post("/addAppToGroup", (req, res) => {
 });
 
 app.delete("/removeAppFromGroup", (req, res) => {
-	const { groupId, appId } = req.body.data;
-	console.log("Req params: ", req.body.data);
+	console.log("Req.body: ", req.body);
+	const { groupId, appId } = req.body;
 	removeAppFromGroup(groupId, appId)
-		.then((res) => {
-			res.status(200).json(res);
+		.then((data) => {
+			res.status(200).json(data);
 		})
 		.catch((e) => {
 			res.status(500).json({

@@ -9,7 +9,13 @@ import {
 	ThemeIcon,
 	ActionIcon,
 } from "@mantine/core";
-import { IconArrowLeft, IconPackages } from "@tabler/icons-react";
+import {
+	IconArrowLeft,
+	IconPackages,
+	IconX,
+	IconCircleX,
+	IconTrash,
+} from "@tabler/icons-react";
 import StickyBox from "react-sticky-box";
 import { rootStore } from "store/store";
 import { nanoid } from "nanoid";
@@ -25,7 +31,7 @@ const FallBack = () => {
 };
 
 const GroupDetailView = (props) => {
-	const { getAppsInGroup } = useGroupManager();
+	const { getAppsInGroup, kickAppFromGroup } = useGroupManager();
 
 	useEffect(() => {
 		getAppsInGroup(rootStore.get.selectedGroup()?.id).then((apps) => {
@@ -97,10 +103,27 @@ const GroupDetailView = (props) => {
 									mb={0}
 									mt={0}
 									key={nanoid()}
-									className={s.listItem}
-									onClick={(item) => onClickItem(item)}
+									className={s.ulistItem}
+									style={{ position: "relative" }}
 								>
 									{item.name}
+									<ActionIcon
+										size="med"
+										variant="light"
+										p={5}
+										onClick={() =>
+											kickAppFromGroup(rootStore.get.selectedGroupId(), item.id)
+										}
+										color="orange"
+										style={{
+											position: "absolute",
+											right: "10px",
+											top: "16px",
+											border: "1px solid orange",
+										}}
+									>
+										<IconTrash size={28} />
+									</ActionIcon>
 								</List.Item>
 							);
 						})}
