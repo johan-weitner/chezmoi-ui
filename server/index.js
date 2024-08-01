@@ -26,7 +26,7 @@ import {
 	getGroupById
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
-import { getYamlExport, getFilteredYamlExport } from "./src/util/export.js";
+import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
@@ -271,6 +271,25 @@ app.delete("/removeAppFromGroup", (req, res) => {
 				error: e.message,
 			});
 		});
+});
+
+app.get("/groupedApps", (req, res) => {
+	getInstallDoctorExport().then((groups) => {
+		const yamlFile = YAML.stringify(groups);
+
+		const filename = `software-groups-${new Date().getTime()}.yaml`;
+		const mimetype = "text/x-yaml";
+
+		res.setHeader('Content-disposition', `attachment; filename=${filename}`);
+		res.setHeader('Content-type', mimetype);
+
+		res.write(yamlFile);
+		res.end();
+	}).catch(e => {
+		res.status(500).json({
+			error: e.message,
+		});
+	});
 });
 
 app.listen(port, () => {

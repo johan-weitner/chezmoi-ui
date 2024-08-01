@@ -15,7 +15,7 @@ const List = (props) => {
 	const { setSelectedAppKey, getPageContent } = useClientManager();
 
 	useEffect(() => {
-		console.log("App collection refreshed");
+		// console.log("App collection refreshed");
 		getPageContent();
 	}, [rootStore.use.appCollection()]);
 

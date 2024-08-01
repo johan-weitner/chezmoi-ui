@@ -31,6 +31,7 @@ export const rootStore = createStore("root")({
 	allowedTags: null,
 	editMode: false,
 	isNewApp: false,
+	hideCompleted: false,
 	isLoading: false,
 	error: null,
 	middlewares: ["devtools"],

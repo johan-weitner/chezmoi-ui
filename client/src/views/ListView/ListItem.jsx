@@ -14,7 +14,6 @@ export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
 	const [isGroupMode, setIsGroupMode] = useState(false);
-	const [selectedGroupId, setSelectedGroupId] = useState(false);
 
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
@@ -22,7 +21,7 @@ export const ListItem = (props) => {
 	const { putAppInGroup } = useGroupManager();
 
 	useEffect(() => {
-		console.log("App: ", app);
+		// console.log("App: ", app);
 	}, []);
 
 	useEffect(() => {

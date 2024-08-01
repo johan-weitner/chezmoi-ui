@@ -1,4 +1,5 @@
-import { Card } from "@mantine/core";
+import { useState } from "react";
+import { Card, Group, Text, Checkbox } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
 import { useGroupManager } from "../../core/GroupManager";
@@ -11,6 +12,7 @@ import PaginationBar from "./Pagination";
 import { rootStore, MAIN_VIEWS } from "store/store";
 
 const ListView = (props) => {
+	const [hideCompleted, setHideCompleted] = useState(false);
 	const { isGroupView } = props;
 	const {
 		deleteItem,
@@ -49,6 +51,11 @@ const ListView = (props) => {
 			: returnToGroups();
 	};
 
+	const toggleHideCompleted = () => {
+		setHideCompleted(!hideCompleted);
+		rootStore.set.hideCompleted(!hideCompleted);
+	};
+
 	useBootstrap();
 	useHotkeys("alt + b", () => gotoPrev());
 	useHotkeys("alt + n", () => gotoNext());
@@ -75,6 +82,16 @@ const ListView = (props) => {
 				<div style={{ style }}>
 					<PaginationBar gotoPage={gotoPage} />
 				</div>
+				{/* <Group> // TODO: Implement hideCompleted
+					<Checkbox
+						checked={hideCompleted}
+						onClick={() => toggleHideCompleted()}
+					/>
+					<Text size="sm" ta={"left"}>
+						Hide completed items
+					</Text>
+				</Group> */}
+
 				<List deleteItem={deleteItem} editItem={editItem} />
 			</Card>
 		</ErrorBoundary>

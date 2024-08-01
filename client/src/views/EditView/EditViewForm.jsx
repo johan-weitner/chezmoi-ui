@@ -113,7 +113,7 @@ const EditViewForm = (props) => {
 					className={isDone ? btn.greenBtn : btn.cancelBtn}
 					leftSection={isDone ? <ICON.check /> : null}
 				>
-					Mark as complete
+					{isDone ? "Unmark" : "Mark"} as complete
 				</Button>
 				<Button onClick={() => closeModal()} className={btn.cancelBtn}>
 					Cancel

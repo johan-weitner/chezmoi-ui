@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { log } from "../util/winston.js";
+import { application } from "express";
 
 const prisma = new PrismaClient();
 const APPLICATION = "application";
@@ -59,8 +60,24 @@ export const addApp = async (data) => {
 };
 
 export const getAllGroups = async () => {
-	console.log("*** getAllGroups ***");
 	const groups = await prisma.Group.findMany();
+	return groups;
+};
+
+export const getGroupedApplications = async () => {
+	const groups = await prisma.Group.findMany({
+		include: {
+			apps: {
+				select: {
+					application: {
+						select: {
+							name: true,
+						}
+					}
+				}
+			}
+		}
+	});
 	return groups;
 };
 
