@@ -32,7 +32,6 @@ const GroupList = (props) => {
 	useEffect(() => {
 		setGroups(rootStore.get.appGroups());
 		setGroupKeys(rootStore.get.appGroupKeys());
-		console.log("groups", JSON.stringify(groups, null, 2));
 	}, [rootStore.get.appGroups(), rootStore.get.appGroupKeys()]);
 
 	const deleteItem = () => {};
@@ -86,7 +85,6 @@ const GroupList = (props) => {
 				}
 			>
 				{rootStore.use.appGroups()?.map((item) => {
-					console.log(item);
 					return (
 						<List.Item
 							mb={0}

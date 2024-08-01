@@ -17,8 +17,6 @@ const ApplicationGroupView = (props) => {
 	useEffect(() => {
 		setGroups(rootStore.get.appGroups());
 		setGroupKeys(rootStore.get.appGroupKeys());
-		console.log("groups", JSON.stringify(groups, null, 2));
-		console.log("Store: ", rootStore.store.getState());
 	}, [rootStore.get.appGroups(), rootStore.get.appGroupKeys()]);
 
 	const deleteItem = () => {};

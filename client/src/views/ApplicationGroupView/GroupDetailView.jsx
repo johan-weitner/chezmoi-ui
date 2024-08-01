@@ -21,6 +21,7 @@ import { rootStore } from "store/store";
 import { nanoid } from "nanoid";
 import s from "./GroupView.module.css";
 import { useGroupManager } from "../../core/GroupManager";
+import { getSelectedGroupId } from "../../store/selectors";
 
 const FallBack = () => {
 	return (
@@ -34,10 +35,7 @@ const GroupDetailView = (props) => {
 	const { getAppsInGroup, kickAppFromGroup } = useGroupManager();
 
 	useEffect(() => {
-		getAppsInGroup(rootStore.get.selectedGroup()?.id).then((apps) => {
-			rootStore.set.selectedGroup(apps);
-		});
-		console.log("GroupDetailView: ", rootStore.get.selectedGroup());
+		getAppsInGroup(getSelectedGroupId());
 	}, [rootStore.get.selectedGroupKey()]);
 
 	return (
@@ -61,18 +59,7 @@ const GroupDetailView = (props) => {
 						border: "1px solid #222",
 					}}
 				>
-					<Title
-						fw="normal"
-						ta="left"
-						mb={30}
-						style={{
-							backgroundColor: "#252525",
-							padding: "10px 20px",
-							borderRadius: "10px",
-							border: "1px solid #444",
-							boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
-						}}
-					>
+					<Title fw="normal" ta="left" mb={30} className={s.groupTitle}>
 						<ActionIcon
 							size="xl"
 							variant="light"
@@ -115,12 +102,7 @@ const GroupDetailView = (props) => {
 											kickAppFromGroup(rootStore.get.selectedGroupId(), item.id)
 										}
 										color="orange"
-										style={{
-											position: "absolute",
-											right: "10px",
-											top: "16px",
-											border: "1px solid orange",
-										}}
+										className={s.deleteBtn}
 									>
 										<IconTrash size={28} />
 									</ActionIcon>

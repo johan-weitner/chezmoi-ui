@@ -115,8 +115,9 @@ export const getFilteredList = (filter, appCollection) => {
 };
 
 export const getSelectedGroupId = () => {
-	const selectedGroup = rootStore.get.selectedGroup();
-	return selectedGroup?.id;
+	const selectedGroupKey = rootStore.get.selectedGroupKey();
+	const group = rootStore.get.appGroups().find((group) => group.name === selectedGroupKey);
+	return group?.id;
 };
 
 export { getMemoizedAppCollection as getAppCollection };

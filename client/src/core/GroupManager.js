@@ -3,9 +3,9 @@ import {
 } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { rootStore } from "store/store";
-import { getAppById } from "store/selectors";
+import { getAppById, getSelectedGroupId } from "store/selectors";
 
-const DEBUG = true;
+const DEBUG = import.meta.env.VITE_DEBUG === "true";
 
 export const useGroupManager = () => {
 
@@ -94,6 +94,30 @@ export const useGroupManager = () => {
       });
   };
 
-  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup };
+  const gotoPrevGroup = () => {
+    const groupKeys = rootStore.get.appGroupKeys();
+    const currentIndex = groupKeys.indexOf(rootStore.get.selectedGroupKey());
+    if (currentIndex === 0) {
+      return;
+    }
+
+    rootStore.set.selectedGroupKey(groupKeys[currentIndex - 1]);
+    // rootStore.set.selectedGroup(groups[currentIndex - 1]);
+
+    getAppsInGroup(getSelectedGroupId());
+  };
+
+  const gotoNextGroup = () => {
+    const groupKeys = rootStore.get.appGroupKeys();
+    const currentIndex = groupKeys.indexOf(rootStore.get.selectedGroupKey());
+    if (currentIndex === groupKeys.length - 1) {
+      return;
+    }
+    rootStore.set.selectedGroupKey(groupKeys[currentIndex + 1]);
+    // rootStore.set.selectedGroup(rootStore.get.appGroups[currentIndex + 1]);
+    getAppsInGroup(getSelectedGroupId());
+  };
+
+  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup };
 };
 
