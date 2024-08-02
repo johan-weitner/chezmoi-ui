@@ -42,18 +42,8 @@ const GroupDetailView = (props) => {
 				width: "100%",
 			}}
 		>
-			<StickyBox offsetTop={0} offsetBottom={0}>
-				<Card
-					size="lg"
-					shadow="lg"
-					radius="md"
-					padding="xl"
-					ta="left"
-					style={{
-						backgroundColor: "#363636",
-						border: "1px solid #222",
-					}}
-				>
+			<StickyBox offsetTop={110}>
+				<Card size="lg" shadow="lg" radius="md" padding="xl" ta="left">
 					<Title fw="normal" ta="left" mb={30} className={s.groupTitle}>
 						<Tooltip label="Return to group list - [BACKSPACE]">
 							<ActionIcon

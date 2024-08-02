@@ -1,3 +1,14 @@
+.mainTitle {
+  font-size:2em !important;
+}
+
+.groupListHeader {
+  padding:20px;
+  margin-top:10px;
+  background-color:#333;
+  border-radius:10px;
+}
+
 .listItem, .ulistItem {
   padding:20px 10px;
   border-radius:10px;
@@ -53,6 +64,13 @@ top:6px;
 
 .deleteBtn:hover {
   box-shadow: 0 0 20px orange;
+}
+
+.itemDetailBox {
+  padding:33px;
+  background-color:#363636;
+  height:400px;
+  border-radius:10px;
 }
 
 @keyframes glow {

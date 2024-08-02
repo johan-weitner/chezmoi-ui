@@ -1,8 +1,8 @@
-import { Kbd, Text } from "@mantine/core";
+import { Kbd, Text, Title } from "@mantine/core";
 import { keyboardShortcuts } from "constants/keyboardShortcuts";
 import { nanoid } from "nanoid";
-import classes from "views/MainView/MainView.module.css";
 import s from "views/DetailView/DetailView.module.css";
+import css from "./GroupView.module.css";
 
 const Legend = (props) => {
 	const keyboardShortcuts = [
@@ -29,17 +29,21 @@ const Legend = (props) => {
 	];
 
 	return (
-		<div id="itemDetailBox" className={classes.itemDetailBox}>
-			<h2
+		<div id="itemDetailBox" className={css.itemDetailBox}>
+			<Title
+				fw="normal"
+				ta="left"
+				mb={30}
 				style={{
-					textAlign: "left",
-					fontWeight: "normal",
-					fontSize: "2em",
-					margin: "0 0 10px 0",
+					backgroundColor: "#252525",
+					padding: "10px 20px",
+					borderRadius: "10px",
+					border: "1px solid #444",
+					boxShadow: "10px 10px 30px rgba(0,0,0,0.3)",
 				}}
 			>
 				Legend
-			</h2>
+			</Title>
 			<table className={s.legendTable}>
 				<thead>
 					<tr>
