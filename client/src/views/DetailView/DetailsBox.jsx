@@ -52,10 +52,14 @@ const DetailsBox = (props) => {
 			</Flex>
 
 			{selectedApp.short && (
-				<Text className={classes.short}>{selectedApp.short}</Text>
+				<Text size="xl" mb="20">
+					{selectedApp.short}
+				</Text>
 			)}
 			{selectedApp.desc && (
-				<Text className={classes.desc}>{selectedApp.desc}</Text>
+				<Text size="lg" mb="20">
+					{selectedApp.desc}
+				</Text>
 			)}
 
 			<div className={classes.indicatorGroup}>

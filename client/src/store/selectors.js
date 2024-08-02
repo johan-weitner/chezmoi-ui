@@ -101,9 +101,23 @@ export const selectAppByKey = (key) => {
 	return app;
 };
 
+export const getAppById = (id) => {
+	const app = rootStore.get.appCollection().find((app) => app.id === id);
+	if (!app) {
+		throw new Error(`App with id ${id} not found`);
+	}
+	return app;
+};
+
 export const getFilteredList = (filter, appCollection) => {
 	const filters = rootStore.get.filterModel();
 	return filters[filter].method(appCollection) || [];
+};
+
+export const getSelectedGroupId = () => {
+	const selectedGroupKey = rootStore.get.selectedGroupKey();
+	const group = rootStore.get.appGroups().find((group) => group.name === selectedGroupKey);
+	return group?.id;
 };
 
 export { getMemoizedAppCollection as getAppCollection };

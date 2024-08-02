@@ -19,7 +19,7 @@ import {
 	selectPageContent,
 } from "store/selectors";
 import { rootStore } from "store/store";
-import { transformNullValues } from "../api/helpers";
+import { transformNullValues } from "api/helpers";
 
 export const useClientManager = () => {
 	const { store } = rootStore;

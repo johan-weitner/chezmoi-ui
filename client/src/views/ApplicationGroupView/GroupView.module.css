@@ -1,0 +1,71 @@
+.listItem, .ulistItem {
+  padding:20px 10px;
+  border-radius:10px;
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+.ulistItem {
+  cursor:default;
+}
+
+.listItem:hover {
+  border:2px solid #007bff;
+  animation-duration: .5s;
+  animation-name: glow;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+.listItem:nth-child(odd), .ulistItem:nth-child(odd) {
+  background-color: #444;
+}
+
+.groupTitle {
+  font-size:1.5em !important;
+  /* background-color: #252525; */
+  /* background-color:rgba(5,1,50,1); */
+  background: linear-gradient(180deg, rgba(5,1,50,1) 0%, rgb(16, 50, 69) 100%);
+  padding: 10px 20px 20px 20px;
+  border-radius: 10px;
+  border: 1px solid #004;
+  box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
+  line-height:100%;
+  text-shadow:1px 1px 5px rgba(0,0,0,1);
+}
+
+.backBtn {
+  border-radius:50%;
+position:relative;
+top:6px;
+}
+
+.backBtn:hover {
+  border: 2px solid #007bff;
+}
+
+.deleteBtn {
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  border: 1px solid orange;
+}
+
+.deleteBtn:hover {
+  box-shadow: 0 0 20px orange;
+}
+
+@keyframes glow {
+  from {
+    box-shadow: none;
+    border-color: transparent;
+    color: #FFF;
+  }
+
+  to {
+    box-shadow: 0 0 20px #3391ff;
+    border-color: #3391ff;
+    color: #007bff;
+    text-shadow:0 0 10px #007bff;
+  }
+}

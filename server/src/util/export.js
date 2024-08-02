@@ -1,7 +1,9 @@
-import { getAllApps, getAppsByTag } from "../db/prisma.js";
+import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } from "../db/prisma.js";
 
 export const getYamlExport = async () => {
-	const apps = await getAllApps();
+	// const apps = await getAllApps();
+	const apps = await getAllAppsWithTags();
+	console.log(apps);
 	const output = formatYaml(apps);
 	return output;
 };
@@ -10,6 +12,11 @@ export const getFilteredYamlExport = async (tags) => {
 	const apps = await getAppsByTag(tags);
 	const output = formatYaml(apps);
 	return output;
+};
+
+export const getInstallDoctorExport = async () => {
+	const groups = await getGroupedApplications();
+	return formatInstallDoctorYaml(groups);
 };
 
 const formatYaml = (apps) => {
@@ -47,7 +54,10 @@ const formatYaml = (apps) => {
 			appstore,
 			pacman,
 			port,
+			appTags
 		} = app;
+
+		console.log("App tags: ", appTags);
 
 		output.softwarePackages.push({
 			[key]: {
@@ -78,9 +88,25 @@ const formatYaml = (apps) => {
 				appstore,
 				pacman,
 				port,
+				tags: appTags.map(tag => tag.tag.name),
 			},
 		});
 	}
 
 	return output;
+};
+
+const formatInstallDoctorYaml = (groups) => {
+	const softwareGroups = [];
+
+	for (const group of groups) {
+		const {
+			name, apps
+		} = group;
+
+		softwareGroups.push({
+			[name]: apps.map(app => app.application.name),
+		});
+	}
+	return { softwareGroups: softwareGroups };
 };

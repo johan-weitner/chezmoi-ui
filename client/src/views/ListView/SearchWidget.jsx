@@ -3,8 +3,8 @@ import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useClickOutside } from "@mantine/hooks";
-import { useClientManager } from "../../core/ClientManager";
-import { rootStore } from "../../store/store";
+import { useClientManager } from "core/ClientManager";
+import { rootStore } from "store/store";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
 
@@ -13,7 +13,8 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./SearchWidget.css";
 
 const SearchWidget = (props) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const { groupView } = props;
+	const [isOpen, setIsOpen] = useState(groupView);
 	const ref = useClickOutside(() => setIsOpen(false));
 	const { setSelectedAppKey } = useClientManager();
 	useHotkeys("alt + f", () => setIsOpen(true));
@@ -63,15 +64,17 @@ const SearchWidget = (props) => {
 
 	return (
 		<ActionIcon.Group>
-			<Tooltip label="Free text search for apps" position="top">
-				<ActionIcon
-					size="xl"
-					className="neubtn"
-					onClick={() => setIsOpen(!isOpen)}
-				>
-					<IconSearch size={24} color="#999" />
-				</ActionIcon>
-			</Tooltip>
+			{!groupView && (
+				<Tooltip label="Free text search for apps" position="top">
+					<ActionIcon
+						size="xl"
+						className="neubtn"
+						onClick={() => setIsOpen(!isOpen)}
+					>
+						<IconSearch size={24} color="#999" />
+					</ActionIcon>
+				</Tooltip>
+			)}
 			{isOpen && (
 				<div
 					className="searchWidget"

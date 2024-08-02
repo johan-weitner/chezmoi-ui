@@ -3,6 +3,7 @@ import { useDataManager } from "./DataManager";
 import { useFilterManager } from "./FilterManager";
 import { usePageManager } from "./PageManager";
 import { useSelectionManager } from "./SelectionManager";
+import { useGroupManager } from "./GroupManager";
 
 export const useClientManager = () => {
 	const { store } = rootStore;
@@ -10,6 +11,7 @@ export const useClientManager = () => {
 	const pageManager = usePageManager();
 	const selectionManager = useSelectionManager();
 	const filtermanager = useFilterManager();
+	const groupManager = useGroupManager();
 	const { gotoPage } = pageManager;
 
 	return {
@@ -19,5 +21,6 @@ export const useClientManager = () => {
 		...pageManager,
 		...selectionManager,
 		...filtermanager,
+		...groupManager
 	};
 };

@@ -5,12 +5,14 @@ import {
 	getAllTags,
 	saveNewApp,
 	updateApp,
+	markAppDone
 } from "api/appCollectionApi";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { selectAppByKey, selectPageContent } from "store/selectors";
 import { rootStore } from "store/store";
 import { usePageManager } from "./PageManager";
+import { useGroupManager } from "./GroupManager";
 
 export const useDataManager = () => {
 	const { store } = rootStore;
@@ -19,6 +21,7 @@ export const useDataManager = () => {
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const { gotoPage, getPageContent } = usePageManager();
+	const { seedGroups } = useGroupManager();
 
 	const useBootstrap = () => {
 		return useEffect(() => {
@@ -45,6 +48,7 @@ export const useDataManager = () => {
 				DEBUG && console.log("--=== DataManager: Done seeding client! ===--");
 				rootStore.set.isLoading(false);
 			});
+			seedGroups();
 		}, []);
 	};
 
@@ -96,6 +100,8 @@ export const useDataManager = () => {
 			rootStore.set.allowedTags(tags);
 		});
 
+		seedGroups();
+
 		return openFirstPage();
 	};
 
@@ -107,7 +113,7 @@ export const useDataManager = () => {
 		return apps;
 	};
 
-	const refreshAppCollection = () => {
+	const refreshAppCollection = async () => {
 		getAllApps().then((apps) => {
 			rootStore.set.appCollection(apps);
 			rootStore.set.pageCount(
@@ -201,13 +207,27 @@ export const useDataManager = () => {
 			});
 	};
 
+	const flagAppDone = async (app, flag = true) => {
+		markAppDone(app, flag)
+			.then(() => {
+				refreshAppCollection().then(res => {
+					toast.success("App marked as done");
+				});
+
+			})
+			.catch((err) => {
+				console.error("DataManager: Error marking app as done: ", err);
+				toast.error("Error marking app as done");
+			});
+	};
+
 	const tagApp = async (appId, tagIds) => {
 		DEBUG && console.log("<<< Tags: ", tagIds);
 		rootStore.set.isLoading(true);
 		await addAppTags(appId, tagIds)
 			.then(() => {
 				rootStore.set.isLoading(false);
-				toast.success("Tags added");
+				// toast.success("Tags added");
 			})
 			.catch((err) => {
 				rootStore.set.isLoading(false);
@@ -241,5 +261,6 @@ export const useDataManager = () => {
 		setIsLoading,
 		setIsEditMode,
 		downloadYaml,
+		flagAppDone
 	};
 };

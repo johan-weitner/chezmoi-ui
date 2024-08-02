@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { log } from "../util/winston.js";
+import { application } from "express";
 
 const prisma = new PrismaClient();
 const APPLICATION = "application";
@@ -28,6 +29,22 @@ export const seedTags = async (data) => {
 		});
 };
 
+export const seedGroups = async (data) => {
+	await prisma
+		.$transaction([prisma.Group.createMany({ data })])
+		.then(() => {
+			log.info("Seeded db with tags");
+		})
+		.catch((e) => {
+			log.error(e.message);
+		});
+};
+
+export const getGroupCount = async () => {
+	const count = await prisma.Group.count();
+	return count;
+};
+
 export const addApp = async (data) => {
 	try {
 		const app = await prisma[APPLICATION].create({
@@ -42,10 +59,159 @@ export const addApp = async (data) => {
 	}
 };
 
+export const getAllGroups = async () => {
+	const groups = await prisma.Group.findMany();
+	return groups;
+};
+
+export const getGroupedApplications = async () => {
+	const groups = await prisma.Group.findMany({
+		include: {
+			apps: {
+				select: {
+					application: {
+						select: {
+							name: true,
+						}
+					}
+				}
+			}
+		}
+	});
+	return groups;
+};
+
+export const getGroupByName = async (name) => {
+	const group = await prisma.Group.findFirst({
+		where: {
+			name: name,
+		},
+	});
+	return group;
+};
+
+export const getGroupById = async (groupId) => {
+	const group = await prisma.Group.findFirst({
+		where: {
+			id: Number.parseInt(groupId, 10),
+		},
+	});
+	return group;
+};
+
+export const addAppToGroup = async (groupId, appId) => {
+	log.info("Adding app to group: ", groupId, appId);
+	try {
+		const appGroup = await prisma.ApplicationGroup.create({
+			data: {
+				applicationId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
+			},
+			include: {
+				application: true,
+			},
+		});
+		return appGroup;
+	} catch (e) {
+		log.error(e.message, e);
+		return e;
+	}
+};
+
+export const removeAppFromGroup = async (groupId, appId) => {
+	log.info("Removing app from group: ", groupId, appId);
+	try {
+		const result = await prisma.ApplicationGroup.deleteMany({
+			where: {
+				applicationId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+// Get all apps in a group
+export const getAppsByGroup = async (groupId) => {
+	const apps = await prisma.ApplicationGroup.findMany({
+		where: {
+			groupId: Number.parseInt(groupId, 10),
+		},
+		include: {
+			application: true,
+		},
+	});
+	return apps;
+};
+
+export const getGroupsByApp = async (appId) => {
+	const apps = await prisma.ApplicationGroup.findMany({
+		where: {
+			applicationId: Number.parseInt(appId, 10),
+		},
+		include: {
+			group: {
+				select: {
+					name: true,
+				},
+			},
+		},
+	});
+	return apps;
+};
+
 export const getAllApps = async () => {
 	const apps = await prisma[APPLICATION].findMany();
 	return apps;
 };
+
+export const getAllAppsWithTags = async () => {
+	const apps = await prisma[APPLICATION].findMany({
+		include: {
+			appTags: {
+				select: {
+					tag: {
+						select: {
+							name: true,
+						},
+					}
+				}
+			},
+			ApplicationGroup: {
+				select: {
+					group: {
+						select: {
+							name: true,
+						},
+					}
+				}
+			},
+		},
+	});
+	console.log("First app: ", apps[1]);
+	return apps;
+};
+/*
+export const getGroupedApplications = async () => {
+	const groups = await prisma.Group.findMany({
+		include: {
+			apps: {
+				select: {
+					application: {
+						select: {
+							name: true,
+						}
+					}
+				}
+			}
+		}
+	});
+	return groups;
+};
+*/
 
 export const getAppsByTag = async (tags) => {
 	const apps = await prisma[APPLICATION].findMany({
@@ -197,6 +363,7 @@ export const deleteAllAppTags = async (appId) => {
 };
 
 export const getTagsByAppId = async (appId) => {
+	if (!appId) return;
 	try {
 		const tags = await prisma.Tag.findMany({
 			where: {
@@ -221,64 +388,6 @@ export const getAllTags = async () => {
 /**
  * /Tag API
  */
-
-export const getAppsWithoutInstaller = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			whalebrew: "",
-			apt: "",
-			brew: "",
-			cask: "",
-			cargo: "",
-			npm: "",
-			pip: "",
-			pipx: "",
-			gem: "",
-			script: "",
-			choco: "",
-			scoop: "",
-			winget: "",
-			pkgdarwin: "",
-			ansible: "",
-			binary: "",
-			yay: "",
-			appstore: "",
-			pacman: "",
-			port: "",
-		},
-	});
-	return app;
-};
-
-export const getAppsWithoutUrls = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			home: "",
-			docs: "",
-			github: "",
-		},
-	});
-	return app;
-};
-
-export const getAppsWithoutDesc = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			short: "",
-			desc: "",
-		},
-	});
-	return app;
-};
-
-export const getAppsWithoutName = async (key) => {
-	const app = await prisma[APPLICATION].findMany({
-		where: {
-			name: "",
-		},
-	});
-	return app;
-};
 
 export const isEmptyDb = async () => {
 	const count = await getCount();

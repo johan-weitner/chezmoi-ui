@@ -6,25 +6,35 @@ import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
+import { MAIN_VIEWS } from "store/store";
+import { useGroupManager } from "core/GroupManager";
+import { getSelectedGroupId } from "store/selectors";
 
 export const ListItem = (props) => {
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
-	// const selectedKey = rootStore.get.selectedAppKey();
-	// const [currentKey, setCurrentKey] = useState(selectedKey);
+	const [isGroupMode, setIsGroupMode] = useState(false);
 
 	const className =
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
+	const { putAppInGroup } = useGroupManager();
 
-	// useEffect(() => {
-	// 	setCurrentKey(rootStore.get.selectedAppKey());
-	// }, [rootStore.use.selectedAppKey()]);
+	useEffect(() => {
+		// console.log("App: ", app);
+	}, []);
 
-	// const selectNewApp = () => {
-	// 	setCurrentKey(app.key);
-	// 	rootStore.set.selectedAppKey(app.key);
-	// };
+	useEffect(() => {
+		setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
+	}, [rootStore.use.mainView()]);
+
+	const selectApp = (key) => {
+		if (rootStore.get.mainView() === MAIN_VIEWS[0]) {
+			setSelectedAppKey(key);
+		} else if (rootStore.get.mainView() === MAIN_VIEWS[1]) {
+			putAppInGroup(key);
+		}
+	};
 
 	return (
 		<ErrorBoundary
@@ -34,45 +44,82 @@ export const ListItem = (props) => {
 				style={{ position: "relative", width: "100%" }}
 				className={className}
 			>
-				<button
-					className={classes.itemBox}
-					onClick={() => setSelectedAppKey(app?.key)}
-					style={{ width: "100%" }}
-					type="button"
-				>
-					{app?.name || (
-						<Text size="sm" style={{ color: "#333 !important" }}>
-							<i>[ Missing Name ]</i> - ({app?.key})
-						</Text>
-					)}
-				</button>
-				<ICON.edit
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "45px",
-						top: "14px",
-						cursor: "pointer",
-					}}
-					stroke={2}
-					color="white"
-					onClick={() => editItem(app.key, true)}
-				/>
-				<ICON.remove
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "15px",
-						top: "14px",
-						cursor: "pointer",
-					}}
-					stroke={2}
-					color="white"
-					onClick={() => deleteItem(app.key)}
-				/>
-				{indicateEdit}
+				{isGroupMode ? (
+					<button
+						className={classes.itemBox}
+						onClick={() =>
+							putAppInGroup(rootStore.get.selectedGroupId(), app?.id)
+						}
+						style={{ width: "100%" }}
+						type="button"
+					>
+						{app?.name || (
+							<Text size="sm" style={{ color: "#333 !important" }}>
+								<i>[ Missing Name ]</i> - ({app?.key})
+							</Text>
+						)}
+					</button>
+				) : (
+					<button
+						className={app?.done ? classes.itemBoxGrey : classes.itemBox}
+						onClick={() => selectApp(app?.key)}
+						style={{ width: "100%" }}
+						type="button"
+					>
+						{app?.name || (
+							<Text size="sm" style={{ color: "#333 !important" }}>
+								<i>[ Missing Name ]</i> - ({app?.key})
+							</Text>
+						)}{" "}
+					</button>
+				)}
+				{rootStore.use.mainView() === MAIN_VIEWS[0] && (
+					<div style={app?.done ? { display: "none" } : { display: "block" }}>
+						<ICON.edit
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "45px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => editItem(app.key, true)}
+						/>
+						<ICON.remove
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "15px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => deleteItem(app.key)}
+						/>
+						{indicateEdit}
+					</div>
+				)}
+				{rootStore.use.mainView() === MAIN_VIEWS[1] && (
+					<>
+						<ICON.arrowRight
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "15px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="#393"
+						/>
+					</>
+				)}
 			</div>
 		</ErrorBoundary>
 	);

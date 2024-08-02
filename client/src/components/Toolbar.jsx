@@ -1,4 +1,11 @@
-import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
+import {
+	Flex,
+	Group,
+	Tooltip,
+	Button,
+	UnstyledButton,
+	rem,
+} from "@mantine/core";
 import {
 	IconDownload,
 	IconPlayerTrackNext,
@@ -10,20 +17,33 @@ import { useState } from "react";
 import classes from "components/Toolbar.module.css";
 import { useClientManager } from "core/ClientManager";
 import BarSpinner from "./BarSpinner";
+import { rootStore, MAIN_VIEWS } from "../store/store";
 
 const Toolbar = (props) => {
+	const { setShowAppGroupView } = props;
 	const [active, setActive] = useState(null);
 	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext, downloadYaml } =
 		useClientManager();
 	const stroke = 1.5;
+
+	const openAppsView = () => {
+		rootStore.set.mainView(MAIN_VIEWS[0]);
+		setShowAppGroupView(false);
+	};
+
+	const openGroupsView = () => {
+		rootStore.set.mainView(MAIN_VIEWS[1]);
+		setShowAppGroupView(true);
+	};
 
 	const menuData = [
 		{
 			Icon: (
 				<ICON.add style={{ width: rem(20), height: rem(20) }} stroke={stroke} />
 			),
-			label: "Add new app",
-			action: addItem,
+			label: "Applications",
+			mainViewKey: MAIN_VIEWS[0],
+			action: () => openAppsView(),
 		},
 		{
 			Icon: (
@@ -32,38 +52,9 @@ const Toolbar = (props) => {
 					stroke={stroke}
 				/>
 			),
-			label: "Delete app",
-			action: deleteItem,
-		},
-		{
-			Icon: (
-				<IconPlayerTrackPrev
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Go to previous",
-			action: gotoPrev,
-		},
-		{
-			Icon: (
-				<IconPlayerTrackNext
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Go to next",
-			action: gotoNext,
-		},
-		{
-			Icon: (
-				<IconDownload
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Download YAML",
-			action: () => window.open(`${import.meta.env.VITE_BACKEND_URL}/download`),
+			label: "Application Groups",
+			mainViewKey: MAIN_VIEWS[1],
+			action: () => openGroupsView(),
 		},
 	];
 
@@ -71,22 +62,18 @@ const Toolbar = (props) => {
 		typeof action === "function" && action();
 	};
 
-	const NavbarLink = ({ Icon, label, active, action, link }) => {
+	const NavbarLink = ({ Icon, label, active, action, link, className }) => {
 		return (
-			<Tooltip
-				label={label}
-				position="bottom"
-				transitionProps={{ duration: 0 }}
+			<Button
+				onClick={() => onClick(action)}
+				size="sm"
+				data-active={active || null}
+				link={link}
+				variant="light"
+				className={className}
 			>
-				<UnstyledButton
-					onClick={() => onClick(action)}
-					className={classes.link}
-					data-active={active || null}
-					link={link}
-				>
-					{Icon}
-				</UnstyledButton>
-			</Tooltip>
+				{label}
+			</Button>
 		);
 	};
 
@@ -100,6 +87,11 @@ const Toolbar = (props) => {
 								{...menuItem}
 								key={nanoid()}
 								onClick={() => setActive(index)}
+								className={
+									rootStore.get.mainView() === menuItem.mainViewKey
+										? classes.navbarLinkActive
+										: classes.navbarLink
+								}
 							/>
 						);
 					})}

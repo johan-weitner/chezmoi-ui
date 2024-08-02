@@ -1,5 +1,6 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
+import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
@@ -14,6 +15,82 @@ export const fetchApps = async () => {
 			throw error;
 		});
 	return apps;
+};
+
+export const fetchAppGroups = async () => {
+	const apps = await axios
+		.get(`${BASE_URL}/groups`)
+		.then((response) => {
+			const { data } = response;
+			// testProcessMetaGroups();
+			const processedData = data?.groups && processMetaGroups(data.groups);
+			return { ...processedData };
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return apps;
+}; // fetchAppsInGroup,
+
+export const fetchAppsInGroup = async (groupId) => {
+	if (!groupId) return;
+	const apps = await axios
+		.get(`${BASE_URL}/group-apps?groupId=${groupId}`)
+		.then((response) => {
+			const { data } = response;
+			testProcessMetaGroups();
+			const processedData = data?.groups && processMetaGroups(data.groups);
+			return { ...data, groups: processedData };
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return apps;
+};
+
+export const fetchGroupApps = async (appId) => {
+	if (!appId) return;
+	const groups = await axios
+		.get(`${BASE_URL}/app-groups?appId=${appId}`)
+		.then((response) => {
+			return response;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return groups;
+};
+
+export const addAppToGroup = async (groupId, appId) => {
+	return axios
+		.post(`${BASE_URL}/addAppToGroup`, {
+			data: {
+				appId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
+			},
+		})
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+};
+
+export const removeAppFromGroup = async (groupId, appId) => {
+	return axios
+		.delete(`${BASE_URL}/removeAppFromGroup`, {
+			data: {
+				appId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
+			},
+		})
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
 };
 
 export const fetchAppPage = async (page = 1, limit = 20) => {
@@ -45,19 +122,19 @@ export const fetchApp = async (key) => {
 };
 
 export const updateApp = async (updatedData) => {
-	const updatedNode = mapEntityToDb(updatedData);
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
-			...updatedNode,
+			...updatedData,
 			edited: "true",
-			tags: updatedNode.tags === null ? "" : updatedNode.tags,
+			tags: updatedData.tags === null ? "" : updatedData.tags,
 		})
 		.then((response) => {
-			DEBUG && console.log(
-				`API: Updating app:
+			DEBUG &&
+				console.log(
+					`API: Updating app:
 		- Tags: `,
-				response.data,
-			);
+					response.data,
+				);
 			return response.data;
 		})
 		.catch((error) => {
@@ -112,6 +189,17 @@ export const addApp = (data) => {
 	}
 };
 
+export const markAppDone = async (app, flag) => {
+	const flaggedApp = Object.assign(app, { done: flag });
+	updateApp(flaggedApp)
+		.then((response) => {
+			return response;
+		})
+		.catch((error) => {
+			throw error;
+		});
+};
+
 export const getAllTags = async () => {
 	const tags = await axios
 		.get(`${BASE_URL}/getAllTags`)
@@ -121,7 +209,6 @@ export const getAllTags = async () => {
 		.catch((error) => {
 			throw error;
 		});
-	// const tagStrArr = tags.map(tag => tag.name);
 	return tags;
 };
 

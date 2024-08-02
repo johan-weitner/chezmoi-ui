@@ -126,6 +126,12 @@ kbd {
   box-shadow: 5px 5px 10px rgba(0,0,0,0.5);
 }
 
+.mantine-Menu-dropdown {
+  background-color: #222 !important;
+  color: #FFF;
+  box-shadow:20px 20px 40px rgba(0,0,0,0.4)
+}
+
 .debugTable {
   background-color: #333;
   color: #FFF;

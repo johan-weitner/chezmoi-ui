@@ -4,9 +4,13 @@ import { createStore } from "zustand-x";
 export const useStore = () => { };
 
 const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
+export const MAIN_VIEWS = ["apps", "groups", "tags", "settings"];
 
 export const rootStore = createStore("root")({
+	mainView: MAIN_VIEWS[0],
 	appCollection: null,
+	appGroups: [],
+	appGroupKeys: [],
 	totalCount: 0,
 	page: 0,
 	pageCount: 0,
@@ -20,9 +24,15 @@ export const rootStore = createStore("root")({
 	selectedApp: null,
 	selectedAppKey: null,
 	selectedAppTags: null,
+	selectedAppGroups: null,
+	selectedGroup: null,
+	selectedGroupKey: null,
+	selectedGroupId: null,
+	appsInSelectedGroup: null,
 	allowedTags: null,
 	editMode: false,
 	isNewApp: false,
+	hideCompleted: false,
 	isLoading: false,
 	error: null,
 	middlewares: ["devtools"],

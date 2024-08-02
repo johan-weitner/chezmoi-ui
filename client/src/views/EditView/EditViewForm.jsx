@@ -5,15 +5,18 @@ import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { rootStore } from "../../store/store";
+import { rootStore } from "store/store";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
+import GroupSection from "./GroupSection";
 
 const EditViewForm = (props) => {
 	const [isNewApp, setIsNewApp] = useState(true);
 	const [appTags, setAppTags] = useState();
+	const [appGroups, setAppGroups] = useState();
+	const [isDone, setIsDone] = useState(false);
 	const {
 		updateItem,
 		saveNewItem,
@@ -21,6 +24,8 @@ const EditViewForm = (props) => {
 		selectedApp,
 		setSelectedAppKey,
 		tagApp,
+		flagAppDone,
+		getGroupsByApp,
 	} = useClientManager();
 
 	const defaultValues =
@@ -32,14 +37,22 @@ const EditViewForm = (props) => {
 
 	useEffect(() => {
 		const app = rootStore.get.selectedAppKey();
+
 		if (!app) {
 			setIsNewApp(true);
+			setIsDone(false);
 			resetForm();
 			return;
 		}
+
 		setIsNewApp(false);
+		setIsDone(rootStore.get.selectedApp()?.done);
 		reset(rootStore.get.selectedApp());
 	}, [rootStore.use.selectedApp()]);
+
+	useEffect(() => {
+		setIsDone(rootStore.get.selectedApp()?.done);
+	}, []);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
@@ -65,6 +78,12 @@ const EditViewForm = (props) => {
 
 	const closeModal = () => {
 		rootStore.set.editMode(false);
+	};
+
+	const flipDoneFlag = () => {
+		flagAppDone(rootStore.get.selectedApp(), !isDone).then((app) => {
+			setIsDone(!isDone);
+		});
 	};
 
 	return (
@@ -94,6 +113,13 @@ const EditViewForm = (props) => {
 					zIndex: "9999",
 				}}
 			>
+				<Button
+					onClick={() => flipDoneFlag()}
+					className={isDone ? btn.greenBtn : btn.cancelBtn}
+					leftSection={isDone ? <ICON.check /> : null}
+				>
+					{isDone ? "Unmark" : "Mark"} as complete
+				</Button>
 				<Button onClick={() => closeModal()} className={btn.cancelBtn}>
 					Cancel
 				</Button>
@@ -109,6 +135,14 @@ const EditViewForm = (props) => {
 				formPartOne={formPartOne}
 				register={register}
 				isNewApp={isNewApp}
+			/>
+			<GroupSection
+				register={register}
+				appKey={selectedApp?.key}
+				isNewApp={isNewApp}
+				tags={rootStore.use.selectedAppGroups() || []}
+				editMode={rootStore.get.editMode()}
+				hoistAppTags={hoistAppTags}
 			/>
 			<TagSection
 				register={register}

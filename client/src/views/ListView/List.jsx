@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { selectAppByKey } from "store/selectors";
 import { rootStore } from "store/store";
-import { useClientManager } from "../../core/ClientManager";
+import { useClientManager } from "core/ClientManager";
 import { ListItem } from "./ListItem";
 import classes from "./ListView.module.css";
 
@@ -12,7 +12,12 @@ const List = (props) => {
 	const selectedKey = rootStore.get.selectedAppKey();
 	const [currentKey, setCurrentKey] = useState(selectedKey);
 	const [activeFilter, setActiveFilter] = useState(selectedKey);
-	const { setSelectedAppKey } = useClientManager();
+	const { setSelectedAppKey, getPageContent } = useClientManager();
+
+	useEffect(() => {
+		// console.log("App collection refreshed");
+		getPageContent();
+	}, [rootStore.use.appCollection()]);
 
 	useEffect(() => {
 		setCurrentKey(rootStore.get.selectedAppKey());

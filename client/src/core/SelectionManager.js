@@ -2,14 +2,16 @@ import { fetchApp, getTagsByAppId } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
 import { rootStore } from "store/store";
-import { transformNullValues } from "../api/helpers";
+import { transformNullValues } from "api/helpers";
 import { usePageManager } from "./PageManager";
+import { useGroupManager } from "./GroupManager";
 
 export const useSelectionManager = () => {
 	const { store } = rootStore;
 	const state = store.getState();
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const { gotoNextPage, gotoPrevPage } = usePageManager();
+	const { getGroupsByApp } = useGroupManager();
 
 	const setSelectedAppKey = (key) => {
 		DEBUG && console.log("Selected app key: ", key);
@@ -30,6 +32,10 @@ export const useSelectionManager = () => {
 						toast.error("Error fetching tags");
 					});
 
+				getGroupsByApp(app.id).then((groups) => {
+					rootStore.set.selectedAppGroups(groups);
+				});
+
 				DEBUG &&
 					console.log(
 						`SelectionManager: Set app object in store:
@@ -40,6 +46,12 @@ export const useSelectionManager = () => {
 			.catch((err) => {
 				toast.error("Error fetching app: ", err);
 			});
+	};
+
+	const setSelectedGroupKey = (key) => {
+		rootStore.set.selectedGroupKey(rootStore.get.appGroupKeys()[key - 1]);
+		rootStore.set.selectedGroup(rootStore.get.appGroups()[key]);
+		rootStore.set.selectedGroupId(rootStore.get.appGroups()[key].id);
 	};
 
 	const _isFirstOnPage = (appKey) => {
@@ -121,6 +133,7 @@ export const useSelectionManager = () => {
 		getAppTags,
 		addItem,
 		clearAppSelection,
-		getSearchBase
+		getSearchBase,
+		setSelectedGroupKey
 	};
 };

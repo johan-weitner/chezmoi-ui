@@ -7,6 +7,7 @@ import {
 	Tooltip,
 	rem,
 	useMantineTheme,
+	Title,
 } from "@mantine/core";
 import { IconDownload, IconFilter, IconCirclePlus } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
@@ -62,7 +63,7 @@ export const ListViewHeader = (props) => {
 				<Tooltip label="Add new app" position="top">
 					<ActionIcon
 						variant="filled"
-						aria-label="Open filter menu"
+						aria-label="Add new app"
 						size="xl"
 						className="neubtn"
 						onClick={() => addItem()}
@@ -70,7 +71,12 @@ export const ListViewHeader = (props) => {
 						<IconCirclePlus size={24} color="#999" />
 					</ActionIcon>
 				</Tooltip>
-				<Menu shadow="md" width={250} offset={8}>
+				<Menu
+					shadow="md"
+					width={250}
+					offset={8}
+					style={{ backgroundColor: "#222 !important" }}
+				>
 					<Menu.Target>
 						<Tooltip label="Open filter menu" position="top">
 							<ActionIcon

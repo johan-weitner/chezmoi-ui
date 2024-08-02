@@ -3,7 +3,8 @@
   background-color: #555 !important;
 }
 
-.editBtn {
+.editBtn,
+.saveBtn {
   background-color: var(--mantine-color-blue-filled) !important;
 }
 
@@ -11,6 +12,6 @@
   background-color: #933 !important;
 }
 
-.saveBtn {
+.greenBtn {
   background-color: #393 !important;
 }
