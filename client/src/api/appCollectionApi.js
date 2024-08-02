@@ -249,4 +249,9 @@ export const getTagsByAppId = async (appId) => {
 	return tags;
 };
 
+export const updateTagWhiteList = async (tags) => {
+	console.log("Not implemented", tags);
+	return tags?.map(tag => { return { id: 0, name: tag } });
+};
+
 export const getAllApps = fetchApps;

@@ -5,7 +5,8 @@ import {
 	getAllTags,
 	saveNewApp,
 	updateApp,
-	markAppDone
+	markAppDone,
+	updateTagWhiteList
 } from "api/appCollectionApi";
 import { useEffect } from "react";
 import { toast } from "sonner";
@@ -236,6 +237,19 @@ export const useDataManager = () => {
 			});
 	};
 
+	const updateAllowedTags = async (tags) => {
+		rootStore.set.isLoading(false);
+		console.log("DataManager: Updating allowed tags: ", tags);
+		updateTagWhiteList(tags).then((newTags) => {
+			rootStore.set.allowedTags(newTags);
+			return newTags;
+		}).catch((err) => {
+			rootStore.set.isLoading(false);
+			console.log("DataManager: Error updating tag list: ", err);
+			toast.error("Error adding tag");
+		});
+	};
+
 	const downloadYaml = () => {
 		console.log("Downloading YAML...");
 	};
@@ -261,6 +275,7 @@ export const useDataManager = () => {
 		setIsLoading,
 		setIsEditMode,
 		downloadYaml,
-		flagAppDone
+		flagAppDone,
+		updateAllowedTags
 	};
 };

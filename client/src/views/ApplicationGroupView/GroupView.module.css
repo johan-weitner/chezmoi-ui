@@ -1,54 +1,56 @@
 .mainTitle {
-  font-size:2em !important;
+  font-size: 2em !important;
 }
 
 .groupListHeader {
-  padding:20px;
-  margin-top:10px;
-  background-color:#333;
-  border-radius:10px;
+  padding: 20px;
+  margin-top: 10px;
+  background-color: #333;
+  border-radius: 10px;
 }
 
-.listItem, .ulistItem {
-  padding:20px 10px;
-  border-radius:10px;
-  cursor:pointer;
-  border:2px solid transparent;
+.listItem,
+.ulistItem {
+  padding: 20px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid transparent;
 }
 
 .ulistItem {
-  cursor:default;
+  cursor: default;
 }
 
 .listItem:hover {
-  border:2px solid #007bff;
+  border: 2px solid #007bff;
   animation-duration: .5s;
   animation-name: glow;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
 
-.listItem:nth-child(odd), .ulistItem:nth-child(odd) {
+.listItem:nth-child(odd),
+.ulistItem:nth-child(odd) {
   background-color: #444;
 }
 
 .groupTitle {
-  font-size:1.5em !important;
+  font-size: 1.5em !important;
   /* background-color: #252525; */
   /* background-color:rgba(5,1,50,1); */
-  background: linear-gradient(180deg, rgba(5,1,50,1) 0%, rgb(16, 50, 69) 100%);
+  background: linear-gradient(180deg, rgba(5, 1, 50, 1) 0%, rgb(16, 50, 69) 100%);
   padding: 10px 20px 20px 20px;
   border-radius: 10px;
   border: 1px solid #004;
-  box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
-  line-height:100%;
-  text-shadow:1px 1px 5px rgba(0,0,0,1);
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.3);
+  line-height: 100%;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 1);
 }
 
 .backBtn {
-  border-radius:50%;
-position:relative;
-top:6px;
+  border-radius: 50%;
+  position: relative;
+  top: 6px;
 }
 
 .backBtn:hover {
@@ -67,10 +69,12 @@ top:6px;
 }
 
 .itemDetailBox {
-  padding:33px;
-  background-color:#363636;
-  height:400px;
-  border-radius:10px;
+  padding: 33px;
+  background-color: #363636;
+  height: 500px !important;
+  border-radius: 10px;
+  text-align: left;
+  ;
 }
 
 @keyframes glow {
@@ -84,6 +88,6 @@ top:6px;
     box-shadow: 0 0 20px #3391ff;
     border-color: #3391ff;
     color: #007bff;
-    text-shadow:0 0 10px #007bff;
+    text-shadow: 0 0 10px #007bff;
   }
 }
