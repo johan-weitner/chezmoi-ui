@@ -11,6 +11,7 @@ import {
 	addApp,
 	deleteApp,
 	getAllApps,
+	getAllAppsWithTags,
 	getAppByKey,
 	updateApp,
 	addAppTags,
@@ -23,6 +24,7 @@ import {
 	addAppToGroup,
 	removeAppFromGroup,
 	getAppsByGroup,
+	getGroupsByApp,
 	getGroupById
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
@@ -48,7 +50,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/software", (req, res) => {
-	getAllApps().then((apps) => {
+	getAllAppsWithTags().then((apps) => {
 		res.json(apps);
 	});
 });
@@ -164,6 +166,7 @@ app.get('/download', (req, res) => {
 		res.end();
 
 	}).catch(e => {
+		console.log("Error: ", e);
 		res.status(500).json({
 			error: e.message,
 		});
@@ -227,6 +230,21 @@ app.get("/group-apps", (req, res) => {
 			apps: apps,
 		});
 	}).catch(e => {
+		console.error(e.message);
+		res.status(500).json({
+			error: e.message,
+		});
+	});;
+});
+
+app.get("/app-groups", (req, res) => {
+	const { appId } = req.query;
+	getGroupsByApp(appId).then(groups => {
+		res.json({
+			groups: groups,
+		});
+	}).catch(e => {
+		console.error(e.message);
 		res.status(500).json({
 			error: e.message,
 		});

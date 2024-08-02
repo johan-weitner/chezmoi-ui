@@ -147,10 +147,71 @@ export const getAppsByGroup = async (groupId) => {
 	return apps;
 };
 
+export const getGroupsByApp = async (appId) => {
+	const apps = await prisma.ApplicationGroup.findMany({
+		where: {
+			applicationId: Number.parseInt(appId, 10),
+		},
+		include: {
+			group: {
+				select: {
+					name: true,
+				},
+			},
+		},
+	});
+	return apps;
+};
+
 export const getAllApps = async () => {
 	const apps = await prisma[APPLICATION].findMany();
 	return apps;
 };
+
+export const getAllAppsWithTags = async () => {
+	const apps = await prisma[APPLICATION].findMany({
+		include: {
+			appTags: {
+				select: {
+					tag: {
+						select: {
+							name: true,
+						},
+					}
+				}
+			},
+			ApplicationGroup: {
+				select: {
+					group: {
+						select: {
+							name: true,
+						},
+					}
+				}
+			},
+		},
+	});
+	console.log("First app: ", apps[1]);
+	return apps;
+};
+/*
+export const getGroupedApplications = async () => {
+	const groups = await prisma.Group.findMany({
+		include: {
+			apps: {
+				select: {
+					application: {
+						select: {
+							name: true,
+						}
+					}
+				}
+			}
+		}
+	});
+	return groups;
+};
+*/
 
 export const getAppsByTag = async (tags) => {
 	const apps = await prisma[APPLICATION].findMany({
@@ -302,6 +363,7 @@ export const deleteAllAppTags = async (appId) => {
 };
 
 export const getTagsByAppId = async (appId) => {
+	if (!appId) return;
 	try {
 		const tags = await prisma.Tag.findMany({
 			where: {

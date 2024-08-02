@@ -48,6 +48,33 @@ export const fetchAppsInGroup = async (groupId) => {
 	return apps;
 };
 
+export const fetchGroupApps = async (appId) => {
+	if (!appId) return;
+	const groups = await axios
+		.get(`${BASE_URL}/app-groups?appId=${appId}`)
+		.then((response) => {
+			// const { data: { groups } } = response;
+			console.log("Got group relations: ", response);
+
+			// {
+			// 	"groups": [
+			// 		{
+			// 			"applicationId": 2,
+			// 			"groupId": 3,
+			// 			"group": {
+			// 				"name": "Android"
+			// 			}
+			// 		}
+			// 	]
+			// }
+			return response;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return groups;
+};
+
 export const addAppToGroup = async (groupId, appId) => {
 	return axios
 		.post(`${BASE_URL}/addAppToGroup`, {

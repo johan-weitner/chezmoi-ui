@@ -71,7 +71,6 @@ export const ListItem = (props) => {
 								<i>[ Missing Name ]</i> - ({app?.key})
 							</Text>
 						)}{" "}
-						- ({app.done})
 					</button>
 				)}
 				{rootStore.use.mainView() === MAIN_VIEWS[0] && (

@@ -11,20 +11,18 @@ import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
 import { rootStore } from "store/store";
 
-const TagSection = (props) => {
-	const { hoistAppTags } = props;
-	const [appTags, setAppTags] = useState();
-	const [appTagIds, setAppTagIds] = useState();
-	const { getAppTags, tagApp } = useClientManager();
-	const whiteList = rootStore.get.allowedTags().map((tag) => tag.name);
+const GroupSection = (props) => {
+	const { hoistAppTags, groups } = props;
+	const [appGroups, setAppGroups] = useState();
+	const { getAppTags, tagApp, getGroupsByApp } = useClientManager();
+	const whiteList = rootStore.get.appGroups().map((group) => group.name);
 
 	useEffect(() => {
-		if (!rootStore.get.selectedApp()) return;
-		getAppTags(rootStore.get.selectedApp().id).then((tags) => {
-			console.log("Tags: ", tags);
-			setAppTags(getStrArray(tags));
+		// if (!rootStore.get.selectedApp()) return;
+		getGroupsByApp(rootStore.get.selectedApp()?.id).then((groups) => {
+			setAppGroups(groups);
 		});
-	}, []);
+	}, [rootStore.get.selectedAppKey()]);
 
 	const getTagId = (tagName) => {
 		const tagListModel = rootStore.get.allowedTags();
@@ -37,20 +35,20 @@ const TagSection = (props) => {
 	};
 
 	const onChange = (value) => {
-		const tagsIds = value.map((tag) => {
-			return getTagId(tag);
-		});
-		setAppTagIds("tags", tagsIds);
-		setAppTags(value);
-		hoistAppTags(tagsIds);
+		// const tagsIds = value.map((tag) => {
+		// 	return getTagId(tag);
+		// });
+		// setAppTagIds("tags", tagsIds);
+		// setAppTags(value);
+		// hoistAppTags(tagsIds);
 	};
 
 	return (
-		<Fieldset legend="Tags">
+		<Fieldset legend="Group memberships">
 			<div style={{ width: "100%" }}>
 				<TagsInput
 					placeholder="Pick tag from list"
-					value={appTags || []}
+					value={rootStore.use.selectedAppGroups() || []}
 					data={whiteList}
 					onChange={onChange}
 					pointer
@@ -60,4 +58,4 @@ const TagSection = (props) => {
 	);
 };
 
-export default TagSection;
+export default GroupSection;

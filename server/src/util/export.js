@@ -1,7 +1,9 @@
-import { getAllApps, getAppsByTag, getGroupedApplications } from "../db/prisma.js";
+import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } from "../db/prisma.js";
 
 export const getYamlExport = async () => {
-	const apps = await getAllApps();
+	// const apps = await getAllApps();
+	const apps = await getAllAppsWithTags();
+	console.log(apps);
 	const output = formatYaml(apps);
 	return output;
 };
@@ -52,7 +54,10 @@ const formatYaml = (apps) => {
 			appstore,
 			pacman,
 			port,
+			appTags
 		} = app;
+
+		console.log("App tags: ", appTags);
 
 		output.softwarePackages.push({
 			[key]: {
@@ -83,6 +88,7 @@ const formatYaml = (apps) => {
 				appstore,
 				pacman,
 				port,
+				tags: appTags.map(tag => tag.tag.name),
 			},
 		});
 	}

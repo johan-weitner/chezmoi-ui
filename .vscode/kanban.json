@@ -5,6 +5,14 @@
             "title": "Bugs",
             "tasks": [
                 {
+                    "text": "Putting app in group is unreliable",
+                    "id": "cfk4h8x2ife74ynph8dl2fro"
+                },
+                {
+                    "text": "App list in group view doesn't update reliably after marking app done",
+                    "id": "muil1ae2oim5exu1aq3lyoof"
+                },
+                {
                     "text": "Prisma setup not happening on fresh install",
                     "id": "l93qu67dl8ym6y48hpuugiaf"
                 },
@@ -28,10 +36,6 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Add app to group in app edit view - re-use tag implementation",
-                    "id": "us255od0cg1wraiyexb7t1r0"
-                },
-                {
                     "text": "Impl hide completed",
                     "id": "se75bul5vh0re5e8kryvaafa"
                 },
@@ -50,10 +54,6 @@
                 {
                     "text": "Consider enable editing tag whitelist - re-use existing tag implementation",
                     "id": "fzadug132eolcd30po3oiyzy"
-                },
-                {
-                    "text": "Export: Print associated tags",
-                    "id": "xw63gpxaxtgi0rdemsqubr4k"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -61,7 +61,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Add app to group in app edit view - re-use tag implementation",
+                    "id": "us255od0cg1wraiyexb7t1r0"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -75,6 +80,10 @@
                 {
                     "text": "Consider implementing software groups, like Install.Doctor",
                     "id": "mjuxek5kuk1q0u5evc1n109k"
+                },
+                {
+                    "text": "Export: Print associated tags",
+                    "id": "xw63gpxaxtgi0rdemsqubr4k"
                 },
                 {
                     "text": "Finalize README",
@@ -327,5 +336,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722534694756
+    "timestamp": 1722589770689
 }

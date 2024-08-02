@@ -10,10 +10,12 @@ import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
+import GroupSection from "./GroupSection";
 
 const EditViewForm = (props) => {
 	const [isNewApp, setIsNewApp] = useState(true);
 	const [appTags, setAppTags] = useState();
+	const [appGroups, setAppGroups] = useState();
 	const [isDone, setIsDone] = useState(false);
 	const {
 		updateItem,
@@ -23,6 +25,7 @@ const EditViewForm = (props) => {
 		setSelectedAppKey,
 		tagApp,
 		flagAppDone,
+		getGroupsByApp,
 	} = useClientManager();
 
 	const defaultValues =
@@ -34,12 +37,14 @@ const EditViewForm = (props) => {
 
 	useEffect(() => {
 		const app = rootStore.get.selectedAppKey();
+
 		if (!app) {
 			setIsNewApp(true);
 			setIsDone(false);
 			resetForm();
 			return;
 		}
+
 		setIsNewApp(false);
 		setIsDone(rootStore.get.selectedApp()?.done);
 		reset(rootStore.get.selectedApp());
@@ -130,6 +135,14 @@ const EditViewForm = (props) => {
 				formPartOne={formPartOne}
 				register={register}
 				isNewApp={isNewApp}
+			/>
+			<GroupSection
+				register={register}
+				appKey={selectedApp?.key}
+				isNewApp={isNewApp}
+				tags={rootStore.use.selectedAppGroups() || []}
+				editMode={rootStore.get.editMode()}
+				hoistAppTags={hoistAppTags}
 			/>
 			<TagSection
 				register={register}

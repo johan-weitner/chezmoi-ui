@@ -1,5 +1,5 @@
 import {
-  fetchAppGroups, fetchAppsInGroup, addAppToGroup, removeAppFromGroup
+  fetchAppGroups, fetchAppsInGroup, addAppToGroup, removeAppFromGroup, fetchGroupApps
 } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { rootStore } from "store/store";
@@ -53,6 +53,40 @@ export const useGroupManager = () => {
         console.error("GroupManager: Error fetching apps in group: ", err);
       });
   };
+
+
+
+
+  const getGroupsByApp = async (appId) => {
+    if (!appId) return;
+    rootStore.set.isLoading(true);
+    await fetchGroupApps(appId)
+      .then((res) => {
+        rootStore.set.isLoading(false);
+        const { data } = res;
+        const groups = data.groups;
+        console.log("GroupManager: Got groups by app: ", groups, Array.isArray(groups));
+        const groupArr = groups?.map(group => {
+          return {
+            id: group.groupId,
+            name: group.group.name,
+          };
+        });
+        console.log("Group arr: ", groupArr);
+
+        return groupArr;
+      })
+      .catch((err) => {
+        rootStore.set.isLoading(false);
+        rootStore.set.error(err);
+        toast.error(err?.message);
+        console.error("GroupManager: Error fetching app's group memberships: ", err);
+      });
+  };
+
+
+
+
 
   const putAppInGroup = async (groupId, appId) => {
     console.log("GroupManager: Adding app to group: ", groupId, appId);
@@ -118,6 +152,6 @@ export const useGroupManager = () => {
     getAppsInGroup(getSelectedGroupId());
   };
 
-  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup };
+  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup, getGroupsByApp };
 };
 
