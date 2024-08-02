@@ -249,8 +249,38 @@ export const getTagsByAppId = async (appId) => {
 	return tags;
 };
 
+export const getTagId = tagName => {
+	const found = existingTags.find(item => item.name === tagName);
+	return found ? found.id : -1;
+}
+
 export const updateTagWhiteList = async (tags) => {
-	console.log("Not implemented", tags);
+	const existingTags = await getAllTags();
+	const existingTagNames = existingTags.map(tag => tag.name);
+	const newTags = tags.filter(tag => !existingTagNames.includes(tag));
+	const removedTags = existingTagNames.filter(tag => !tags.includes(tag));
+
+	console.log("Not Existing tags", existingTags);
+	console.log("New tags", newTags);
+	console.log("Removed tags", removedTags);
+
+	if (removedTags.length > 0) {
+		const tagsToRemove = removedTags.map(tag => {
+			return existingTags.find(item => item.name === tag).id;
+		});
+		console.log("Tags to remove", tagsToRemove);
+	}
+
+	if (newTags.length > 0) {
+		const tagsToAdd = newTags.map(tag => {
+			return {
+				name: tag
+			};
+		});
+		console.log("Tags to add", tagsToAdd);
+	}
+
+
 	return tags?.map(tag => { return { id: 0, name: tag } });
 };
 

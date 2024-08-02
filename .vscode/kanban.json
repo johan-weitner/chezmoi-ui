@@ -36,6 +36,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Clean up patterns",
+                    "id": "ybb3biegh54mooyoomikzyja"
+                },
+                {
                     "text": "Consolidate look'n'feel in app and group views",
                     "id": "e9wmxsahf33esakrkqa4k20a"
                 },
@@ -50,10 +54,6 @@
                 {
                     "text": "Fix README: 2x .env\nInstall Turbo, or remove dependency",
                     "id": "wmopiiii5gmx0fzatluf4z14"
-                },
-                {
-                    "text": "Consider enable editing tag whitelist - re-use existing tag implementation",
-                    "id": "fzadug132eolcd30po3oiyzy"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -61,7 +61,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Consider enable editing tag whitelist - re-use existing tag implementation",
+                    "id": "fzadug132eolcd30po3oiyzy"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -339,5 +344,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722616572530
+    "timestamp": 1722631887760
 }
