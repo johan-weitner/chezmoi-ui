@@ -278,11 +278,9 @@ app.post("/addAppToGroup", (req, res) => {
 });
 
 app.delete("/removeAppFromGroup", (req, res) => {
-	console.log("Req.body: ", req.body);
 	const { groupId, appId } = req.body;
 	removeAppFromGroup(groupId, appId)
 		.then((data) => {
-			console.log("Removed app from group: ", data);
 			res.status(200).json(data);
 		})
 		.catch((e) => {
