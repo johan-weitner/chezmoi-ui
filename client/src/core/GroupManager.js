@@ -69,14 +69,12 @@ export const useGroupManager = () => {
         rootStore.set.isLoading(false);
         const { data } = res;
         const groups = data.groups;
-        console.log("GroupManager: Got groups by app: ", groups, Array.isArray(groups));
         const groupArr = groups?.map(group => {
           return {
             id: group.groupId,
             name: group.group.name,
           };
         });
-        console.log("Group arr: ", groupArr);
         rootStore.set.selectedAppGroups(groupArr);
         return groupArr;
       })
@@ -97,7 +95,6 @@ export const useGroupManager = () => {
 
 
   const putAppInGroup = async (groupId, appId) => {
-    console.log("GroupManager: Adding app to group: ", groupId, appId);
     if (!groupId || !appId) {
       return;
     }

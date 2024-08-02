@@ -78,8 +78,6 @@ export const addAppToGroup = async (groupId, appId) => {
 };
 
 export const removeAppFromGroup = async (groupId, appId) => {
-	console.log("groupId: ", groupId);
-	console.log("appId: ", appId);
 	return axios
 		.delete(`${BASE_URL}/removeAppFromGroup`, {
 			data: {
@@ -88,7 +86,6 @@ export const removeAppFromGroup = async (groupId, appId) => {
 			},
 		})
 		.then((response) => {
-			console.log("<<< Removed group relation");
 			return response.data;
 		})
 		.catch((error) => {

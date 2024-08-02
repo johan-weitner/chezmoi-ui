@@ -27,10 +27,7 @@ const GroupSection = (props) => {
 	useEffect(() => {
 		getGroupsByApp(rootStore.get.selectedApp().id).then((groups) => {
 			const grps = rootStore.get.selectedAppGroups();
-			console.log("Groups: ", groups);
 			setAppGroups(grps?.map((group) => group.name));
-			// setAppGroups(grps);
-			console.log("GroupSection: App groups in local state: ", appGroups);
 		});
 	}, []);
 
@@ -38,10 +35,7 @@ const GroupSection = (props) => {
 		// if (!rootStore.get.selectedApp()) return;
 		getGroupsByApp(rootStore.get.selectedApp().id).then((groups) => {
 			const grps = rootStore.get.selectedAppGroups();
-			console.log("Groups: ", groups);
 			setAppGroups(grps?.map((group) => group.name));
-			// setAppGroups(grps);
-			console.log("GroupSection: App groups in local state: ", appGroups);
 		});
 	}, [rootStore.get.selectedAppKey()]);
 
@@ -70,14 +64,12 @@ const GroupSection = (props) => {
 		// (groupId, appId)
 		kickAppFromGroup(getGroupId(value), rootStore.get.selectedApp().id).then(
 			() => {
-				console.log("GroupSection: Removed app from group: ");
 				setAppGroups(appGroups.filter((group) => group !== value));
 			},
 		);
 	};
 
 	const onChange = (value) => {
-		console.log("GroupSection: OnChange value: ", value);
 		const oldValues = appGroups;
 		setAppGroups(value);
 		if (value.length > oldValues.length) {
@@ -86,15 +78,9 @@ const GroupSection = (props) => {
 				getGroupId(newGroup[0]),
 				rootStore.get.selectedApp().id,
 			).then(() => {
-				console.log("GroupSection: Added app to group: ", newGroup);
+				// console.log("GroupSection: Added app to group: ", newGroup);
 			});
 		}
-		// const groupIds = value.map((group) => {
-		// 	return getGroupId(group);
-		// });
-		// setAppTagIds("tags", groupIds);
-		// setAppTags(value);
-		// hoistAppTags(groupIds);
 	};
 
 	return (

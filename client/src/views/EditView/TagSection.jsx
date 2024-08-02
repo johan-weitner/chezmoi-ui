@@ -21,7 +21,7 @@ const TagSection = (props) => {
 	useEffect(() => {
 		if (!rootStore.get.selectedApp()) return;
 		getAppTags(rootStore.get.selectedApp().id).then((tags) => {
-			console.log("Tags: ", tags);
+			// console.log("Tags: ", tags);
 			setAppTags(getStrArray(tags));
 		});
 	}, []);
