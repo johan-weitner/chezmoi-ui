@@ -57,6 +57,10 @@ export const useGroupManager = () => {
 
 
 
+
+
+
+
   const getGroupsByApp = async (appId) => {
     if (!appId) return;
     rootStore.set.isLoading(true);
@@ -73,7 +77,7 @@ export const useGroupManager = () => {
           };
         });
         console.log("Group arr: ", groupArr);
-
+        rootStore.set.selectedAppGroups(groupArr);
         return groupArr;
       })
       .catch((err) => {
@@ -88,6 +92,10 @@ export const useGroupManager = () => {
 
 
 
+
+
+
+
   const putAppInGroup = async (groupId, appId) => {
     console.log("GroupManager: Adding app to group: ", groupId, appId);
     if (!groupId || !appId) {
@@ -97,7 +105,7 @@ export const useGroupManager = () => {
     await addAppToGroup(groupId, appId)
       .then((newApp) => {
         rootStore.set.isLoading(false);
-        const apps = rootStore.get.appsInSelectedGroup();
+        const apps = rootStore.get.appsInSelectedGroup() || [];
         if (newApp?.application?.name) {
           rootStore.set.appsInSelectedGroup([...apps, newApp.application]);
         }
@@ -117,8 +125,30 @@ export const useGroupManager = () => {
       .then(() => {
         rootStore.set.isLoading(false);
         const apps = rootStore.get.appsInSelectedGroup();
-        const newApps = apps.filter(app => app.id !== appId);
+        const newApps = apps?.filter(app => app.id !== appId);
         rootStore.set.appsInSelectedGroup(newApps);
+        const groups = rootStore.get.selectedAppGroups();
+        const newGroups = groups?.filter(group => group.id !== groupId);
+        rootStore.set.selectedAppGroups(newGroups);
+      })
+      .catch((err) => {
+        rootStore.set.isLoading(false);
+        rootStore.set.error(err);
+        toast.error(err);
+        console.log("GroupManager: Error removing app from group: ", err);
+      });
+  };
+
+  const removeAllGroupRelations = async (groupIds, appId) => {
+    rootStore.set.isLoading(true);
+    const promises = groupIds.map(groupId => {
+      return kickAppFromGroup(groupId, appId);
+    });
+
+    await Promise.all(promises)
+      .then(() => {
+        rootStore.set.isLoading(false);
+        toast.success("Removed app from all groups");
       })
       .catch((err) => {
         rootStore.set.isLoading(false);
@@ -152,6 +182,6 @@ export const useGroupManager = () => {
     getAppsInGroup(getSelectedGroupId());
   };
 
-  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup, getGroupsByApp };
+  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup, getGroupsByApp, removeAllGroupRelations };
 };
 

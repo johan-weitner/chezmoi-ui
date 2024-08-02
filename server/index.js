@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/software", (req, res) => {
-	getAllAppsWithTags().then((apps) => {
+	getAllApps().then((apps) => {
 		res.json(apps);
 	});
 });
@@ -282,9 +282,11 @@ app.delete("/removeAppFromGroup", (req, res) => {
 	const { groupId, appId } = req.body;
 	removeAppFromGroup(groupId, appId)
 		.then((data) => {
+			console.log("Removed app from group: ", data);
 			res.status(200).json(data);
 		})
 		.catch((e) => {
+			console.error(e.message);
 			res.status(500).json({
 				error: e.message,
 			});

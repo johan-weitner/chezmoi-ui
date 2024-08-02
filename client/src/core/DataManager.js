@@ -227,7 +227,7 @@ export const useDataManager = () => {
 		await addAppTags(appId, tagIds)
 			.then(() => {
 				rootStore.set.isLoading(false);
-				toast.success("Tags added");
+				// toast.success("Tags added");
 			})
 			.catch((err) => {
 				rootStore.set.isLoading(false);

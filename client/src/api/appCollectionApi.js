@@ -22,7 +22,7 @@ export const fetchAppGroups = async () => {
 		.get(`${BASE_URL}/groups`)
 		.then((response) => {
 			const { data } = response;
-			testProcessMetaGroups();
+			// testProcessMetaGroups();
 			const processedData = data?.groups && processMetaGroups(data.groups);
 			return { ...processedData };
 		})
@@ -53,20 +53,6 @@ export const fetchGroupApps = async (appId) => {
 	const groups = await axios
 		.get(`${BASE_URL}/app-groups?appId=${appId}`)
 		.then((response) => {
-			// const { data: { groups } } = response;
-			console.log("Got group relations: ", response);
-
-			// {
-			// 	"groups": [
-			// 		{
-			// 			"applicationId": 2,
-			// 			"groupId": 3,
-			// 			"group": {
-			// 				"name": "Android"
-			// 			}
-			// 		}
-			// 	]
-			// }
 			return response;
 		})
 		.catch((error) => {
@@ -92,6 +78,8 @@ export const addAppToGroup = async (groupId, appId) => {
 };
 
 export const removeAppFromGroup = async (groupId, appId) => {
+	console.log("groupId: ", groupId);
+	console.log("appId: ", appId);
 	return axios
 		.delete(`${BASE_URL}/removeAppFromGroup`, {
 			data: {
@@ -100,6 +88,7 @@ export const removeAppFromGroup = async (groupId, appId) => {
 			},
 		})
 		.then((response) => {
+			console.log("<<< Removed group relation");
 			return response.data;
 		})
 		.catch((error) => {
