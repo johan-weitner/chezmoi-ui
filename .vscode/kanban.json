@@ -40,10 +40,6 @@
                     "id": "se75bul5vh0re5e8kryvaafa"
                 },
                 {
-                    "text": "Export: Install.Doctor format - (incl groups)",
-                    "id": "uwr11f3ugqrwja7kg9t1cuwk"
-                },
-                {
                     "text": "Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
                     "id": "sk38oxq3x0o9nolxc95ikpv8"
                 },
@@ -61,18 +57,21 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Add app to group in app edit view - re-use tag implementation",
-                    "id": "us255od0cg1wraiyexb7t1r0"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Export: Install.Doctor format - (incl groups)",
+                    "id": "uwr11f3ugqrwja7kg9t1cuwk"
+                },
+                {
+                    "text": "Add app to group in app edit view - re-use tag implementation",
+                    "id": "us255od0cg1wraiyexb7t1r0"
+                },
                 {
                     "text": "Consider adding \"DONE\" button to edit view, persisted as a flag in db table.\n- Maybe grey out apps flagged \"done\"\n- Maybe quick filter for hiding them",
                     "id": "gcebj66jqybs2kut1c98h8sq"
@@ -336,5 +335,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722589770689
+    "timestamp": 1722610787002
 }
