@@ -36,6 +36,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Consolidate look'n'feel in app and group views",
+                    "id": "e9wmxsahf33esakrkqa4k20a"
+                },
+                {
                     "text": "Impl hide completed",
                     "id": "se75bul5vh0re5e8kryvaafa"
                 },
@@ -335,5 +339,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722610787002
+    "timestamp": 1722616572530
 }

@@ -5,7 +5,10 @@ import {
 	MultiSelect,
 	Pill,
 	TagsInput,
+	ActionIcon,
+	Tooltip,
 } from "@mantine/core";
+import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useCallback, useRef, useState } from "react";
 import { useEffect } from "react";
@@ -46,7 +49,7 @@ const TagSection = (props) => {
 	};
 
 	return (
-		<Fieldset legend="Tags">
+		<Fieldset legend="Tags" style={{ position: "relative" }}>
 			<div style={{ width: "100%" }}>
 				<TagsInput
 					placeholder="Pick tag from list"
@@ -56,6 +59,21 @@ const TagSection = (props) => {
 					pointer
 				/>
 			</div>
+			<Tooltip label="Edit tag collection">
+				<ActionIcon
+					variant="light"
+					p={0}
+					size={40}
+					style={{
+						borderRadius: "50%",
+						position: "absolute",
+						top: "-45px",
+						right: "10px",
+					}}
+				>
+					<ICON.edit />
+				</ActionIcon>
+			</Tooltip>
 		</Fieldset>
 	);
 };
