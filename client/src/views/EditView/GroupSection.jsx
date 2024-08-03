@@ -28,7 +28,10 @@ const GroupSection = (props) => {
 	const allGroups = useSelector((state) => state.root.appGroups);
 	const whiteList = allGroups.map((group) => group.name);
 	const selectedApp = useSelector((state) => state.root.selectedApp);
-	const selectedAppGroups = useSelector((state) => state.root.selectedAppGroups);
+	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const selectedAppGroups = useSelector(
+		(state) => state.root.selectedAppGroups,
+	);
 
 	useEffect(() => {
 		getGroupsByApp(selectedApp.id).then((groups) => {
@@ -39,9 +42,9 @@ const GroupSection = (props) => {
 	useEffect(() => {
 		// if (!rootStore.get.selectedApp()) return;
 		getGroupsByApp(selectedApp.id).then((groups) => {
-			setAppGroups(selectedAppGroups?.map((group) => group.name));
+			setAppGroups(groups?.map((group) => group.name));
 		});
-	}, [rootStore.get.selectedAppKey()]);
+	}, [selectedAppKey]);
 
 	const getGroupId = (groupName) => {
 		const found = allGroups.find((item) => item.name === groupName);
@@ -49,11 +52,9 @@ const GroupSection = (props) => {
 	};
 
 	const onRemove = (value) => {
-		kickAppFromGroup(getGroupId(value), selectedApp.id).then(
-			() => {
-				setAppGroups(appGroups.filter((group) => group !== value));
-			},
-		);
+		kickAppFromGroup(getGroupId(value), selectedApp.id).then(() => {
+			setAppGroups(appGroups.filter((group) => group !== value));
+		});
 	};
 
 	const onChange = (value) => {
@@ -61,10 +62,7 @@ const GroupSection = (props) => {
 		setAppGroups(value);
 		if (value.length > oldValues.length) {
 			const newGroup = value.filter((group) => !oldValues.includes(group));
-			putAppInGroup(
-				getGroupId(newGroup[0]),
-				selectedApp.id,
-			).then(() => {
+			putAppInGroup(getGroupId(newGroup[0]), selectedApp.id).then(() => {
 				// console.log("GroupSection: Added app to group: ", newGroup);
 			});
 		}

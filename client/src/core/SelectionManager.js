@@ -49,6 +49,7 @@ export const useSelectionManager = () => {
 					});
 
 				getGroupsByApp(app.id).then((groups) => {
+					console.log("SelectionManager: Groups for app: ", groups);
 					dispatch(setSelectedAppGroups(groups));
 				});
 			})
@@ -70,7 +71,7 @@ export const useSelectionManager = () => {
 	};
 
 	const _isLastOnPage = (appKey) => {
-		const pageContent = getState().root.pageContent;
+		const pageContent = getState().pageContent;
 		return appKey === pageContent[pageContent?.length - 1]?.key;
 	};
 

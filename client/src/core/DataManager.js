@@ -107,9 +107,10 @@ export const useDataManager = () => {
 	const deleteItem = (appKey) => {
 		const apps = getState().appCollection;
 		const pageContent = getState().pageContent;
+		const appId = apps.find((app) => app.key === appKey).id;
 		dispatch(setIsLoading(true));
 
-		deleteApp(appKey)
+		deleteApp(appId)
 			.then(() => {
 				const newList = apps.filter((app) => app.key !== appKey);
 				const newPage = pageContent.filter((app) => app.key !== appKey);

@@ -6,7 +6,7 @@ const BarSpinner = () => {
 			loading={true}
 			size={50}
 			color="#3391ff"
-			style={{ top: "150px", left: "0", zIndex: "999999" }}
+			style={{ top: "160px", left: "0", zIndex: "999999" }}
 		/>
 	);
 };

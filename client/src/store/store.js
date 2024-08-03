@@ -40,10 +40,6 @@ export const rootStore = createStore("root")({
 	middlewares: ["devtools"],
 });
 
-// const getState = () => {
-// 	return rootStore.store.getState();
-// };
-
 
 /**********
  * Redux Tool Kit
@@ -59,7 +55,6 @@ const initialState = {
 	pageContent: null,
 	pageSize: PAGE_SIZE,
 	inReverse: false,
-	// filterModel: filterModel,
 	activeFilter: null,
 	filteredList: null,
 	selectedApp: null,

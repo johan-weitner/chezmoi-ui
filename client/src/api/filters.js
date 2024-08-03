@@ -1,11 +1,13 @@
 import { rootStore } from "store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { store, getState } from "store/store";
 
 const _isColumnEmpty = (column) => {
 	return column === "" || column === null;
 };
 
 export const filterNoInstallerApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => {
 		return (
 			_isColumnEmpty(item.whalebrew) &&
@@ -32,7 +34,7 @@ export const filterNoInstallerApps = () => {
 };
 
 export const filterNoUrlsApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => {
 		return (
 			_isColumnEmpty(item.home) &&
@@ -43,12 +45,12 @@ export const filterNoUrlsApps = () => {
 };
 
 export const filterNoDescsApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => _isColumnEmpty(item.desc));
 };
 
 export const filterNoNamesApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => _isColumnEmpty(item.name));
 };
 

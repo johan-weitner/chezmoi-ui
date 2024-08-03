@@ -13,10 +13,10 @@ import {
   setSelectedGroup,
   setIsLoading,
   setError,
-  setSelectedGroupKey
+  setSelectedGroupKey,
+  setAppGroups,
+  setAppGroupKeys
 } from "store/store";
-
-const DEBUG = import.meta.env.VITE_DEBUG === "true";
 
 export const useGroupManager = () => {
   const { dispatch } = store;
@@ -37,6 +37,7 @@ export const useGroupManager = () => {
         dispatch(setAppGroupKeys(groupKeys));
       })
       .catch((err) => {
+        console.error("GroupManager: Error fetching groups: ", err);
         toast.error("Error fetching groups: ", err);
       });
   };
@@ -62,7 +63,7 @@ export const useGroupManager = () => {
   const getGroupsByApp = async (appId) => {
     if (!appId) return;
     toggleIsLoading(true);
-    await fetchGroupApps(appId)
+    const groups = await fetchGroupApps(appId)
       .then((res) => {
         toggleIsLoading(false);
         const { data } = res;
@@ -73,6 +74,7 @@ export const useGroupManager = () => {
             name: group.group.name,
           };
         });
+        console.log("GroupManager: Groups for app: ", groupArr);
         dispatch(setSelectedAppGroups(groupArr));
         return groupArr;
       })
@@ -82,13 +84,14 @@ export const useGroupManager = () => {
         toast.error(err?.message);
         console.error("GroupManager: Error fetching app's group memberships: ", err);
       });
+    return groups;
   };
 
   const putAppInGroup = async (groupId, appId) => {
     if (!groupId || !appId) {
       return;
     }
-    rootStore.set.isLoading(true);
+    toggleIsLoading(true);
     await addAppToGroup(groupId, appId)
       .then((newApp) => {
         toggleIsLoading(false);
@@ -170,6 +173,14 @@ export const useGroupManager = () => {
     getAppsInGroup(getSelectedGroupId());
   };
 
-  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup, getGroupsByApp, removeAllGroupRelations };
+  return {
+    seedGroups,
+    getAppsInGroup,
+    putAppInGroup,
+    kickAppFromGroup,
+    gotoPrevGroup,
+    gotoNextGroup,
+    getGroupsByApp,
+    removeAllGroupRelations
+  };
 };
-

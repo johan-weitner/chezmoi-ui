@@ -164,12 +164,12 @@ export const saveNewApp = async (data) => {
 		});
 };
 
-export const deleteApp = async (key) => {
-	console.log("Deleting app with key: ", key);
+export const deleteApp = async (id) => {
+	console.log("Deleting app with id: ", id);
 	const result = await axios
 		.delete(`${BASE_URL}/deleteNode`, {
 			params: {
-				key: key,
+				id: id,
 			},
 		})
 		.then((response) => {

@@ -268,14 +268,18 @@ export const updateApp = async (data) => {
 	return app;
 };
 
-export const deleteApp = async (key) => {
-	if (!key) {
-		log.error("Invalid key: ", key);
+export const deleteApp = async (id) => {
+	if (!id) {
+		log.error("Invalid id: ", id);
 		return null;
 	}
+
+	const intId = Number.parseInt(id, 10);
+	await removeTagRelationsByAppId(intId);
+	await removeGroupRelationsByAppId(intId);
 	const app = await prisma[APPLICATION].delete({
 		where: {
-			key: key,
+			id: intId,
 		},
 	});
 	return app;
@@ -401,6 +405,34 @@ const removeTagRelationsByTagId = async (tagIds) => {
 				tagId: {
 					in: tagIds
 				},
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+const removeTagRelationsByAppId = async (appId) => {
+	try {
+		const result = await prisma.ApplicationTag.deleteMany({
+			where: {
+				applicationId: appId,
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+const removeGroupRelationsByAppId = async (appId) => {
+	try {
+		const result = await prisma.ApplicationGroup.deleteMany({
+			where: {
+				applicationId: appId,
 			},
 		});
 		return result;
