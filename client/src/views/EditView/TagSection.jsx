@@ -8,38 +8,39 @@ import {
 	Flex,
 	Button,
 } from "@mantine/core";
+import { useSelector, useDispatch } from "react-redux";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
-import { rootStore } from "store/store";
 
 const TagSection = (props) => {
 	const { hoistAppTags } = props;
 	const [appTags, setAppTags] = useState();
+	const selectedApp = useSelector((state) => state.root.selectedApp);
+	const allowedTags = useSelector((state) => state.root.allowedTags);
 
 	const [appTagIds, setAppTagIds] = useState();
 	const [editTagList, setEditTagList] = useState(false);
 	const { getAppTags, tagApp, updateAllowedTags } = useClientManager();
-	const whiteList = rootStore.get.allowedTags().map((tag) => tag.name);
+	const whiteList = allowedTags.map((tag) => tag.name);
 	const [tagList, setTagList] = useState(whiteList);
 
+
 	useEffect(() => {
-		if (!rootStore.get.selectedApp()) return;
-		getAppTags(rootStore.get.selectedApp().id).then((tags) => {
-			// console.log("Tags: ", tags);
+		if (!selectedApp) return;
+		getAppTags(selectedApp.id).then((tags) => {
 			setAppTags(getStrArray(tags));
 		});
-		setTagList(rootStore.get.allowedTags().map((tag) => tag.name));
+		setTagList(allowedTags.map((tag) => tag.name));
 	}, []);
 
 	useEffect(() => {
-		setTagList(rootStore.get.allowedTags().map((tag) => tag.name));
-	}, [rootStore.get.allowedTags()]);
+		setTagList(allowedTags.map((tag) => tag.name));
+	}, [allowedTags]);
 
 	const getTagId = (tagName) => {
-		const tagListModel = rootStore.get.allowedTags();
-		const found = tagListModel.find((item) => item.name === tagName);
+		const found = allowedTags.find((item) => item.name === tagName);
 		return found ? found.id : -1;
 	};
 
@@ -58,9 +59,6 @@ const TagSection = (props) => {
 
 	const onChangeTagList = (value) => {
 		setTagList(value);
-		// updateAllowedTags(value).then(() => {
-		// 	setTagList(value);
-		// });
 	};
 
 	const saveTagListChanges = (tags) => {
@@ -76,7 +74,7 @@ const TagSection = (props) => {
 				<TagsInput
 					placeholder="Pick tag from list"
 					value={appTags || []}
-					data={rootStore.get.allowedTags().map((tag) => tag.name)}
+					data={allowedTags.map((tag) => tag.name)}
 					onChange={onChange}
 					pointer
 					disabled={editTagList}

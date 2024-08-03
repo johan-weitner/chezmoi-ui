@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Card, Modal } from "@mantine/core";
 import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
@@ -7,11 +8,16 @@ import { ErrorBoundary } from "react-error-boundary";
 import { rootStore } from "store/store";
 import EditViewForm from "./EditViewForm";
 import "../../App.css";
+import {setEditMode} from "store/store";
 
 const EditView = forwardRef(function EditView(props, ref) {
+	const dispatch = useDispatch();
 	const { theme } = props;
-	const { editMode, setIsEditMode, selectedApp, gotoPrev, gotoNext } =
+	const { setIsEditMode, gotoPrev, gotoNext } =
 		useClientManager();
+
+	const editMode = useSelector((state) => state.root.editMode);
+	const selectedApp = useSelector((state) => state.root.selectedApp);
 
 	const [isNewApp, setIsNewApp] = useState(!selectedApp); // FIXME
 	const forceUpdate = useForceUpdate();
@@ -24,7 +30,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 
 	return (
 		<Modal
-			opened={rootStore.use.editMode()}
+			opened={editMode}
 			keepMounted={false}
 			onClose={() => setIsEditMode(false)}
 			overlayProps={{
@@ -46,10 +52,9 @@ const EditView = forwardRef(function EditView(props, ref) {
 					style={{ margin: "0 !important" }}
 				>
 					<EditViewForm
-						isPopoverOpen={rootStore.use.editMode()}
-						closePopover={() => rootStore.set.editMode(false)}
-						selectedApp={rootStore.use.selectedApp()}
-						setSelectedAppKey={() => {}}
+						isPopoverOpen={editMode}
+						closePopover={() => dispatch(setEditMode(false))}
+						selectedApp={selectedApp}
 						gotoPrev={gotoPrev}
 						gotoNext={gotoNext}
 						theme={theme}

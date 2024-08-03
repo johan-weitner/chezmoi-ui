@@ -2,9 +2,7 @@ import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
 import {
-	getState,
-	setActiveFilter,
-	setFilteredList
+	getState
 } from "store/store";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
@@ -167,6 +165,7 @@ export const saveNewApp = async (data) => {
 };
 
 export const deleteApp = async (key) => {
+	console.log("Deleting app with key: ", key);
 	const result = await axios
 		.delete(`${BASE_URL}/deleteNode`, {
 			params: {
