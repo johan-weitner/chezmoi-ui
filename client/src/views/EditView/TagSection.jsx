@@ -6,7 +6,7 @@ import {
 	Card,
 	Title,
 	Flex,
-	Button
+	Button,
 } from "@mantine/core";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
@@ -30,11 +30,11 @@ const TagSection = (props) => {
 			// console.log("Tags: ", tags);
 			setAppTags(getStrArray(tags));
 		});
-		setTagList(rootStore.get.allowedTags().map((tag) => tag.name))
+		setTagList(rootStore.get.allowedTags().map((tag) => tag.name));
 	}, []);
 
 	useEffect(() => {
-		setTagList(rootStore.get.allowedTags().map((tag) => tag.name))
+		setTagList(rootStore.get.allowedTags().map((tag) => tag.name));
 	}, [rootStore.get.allowedTags()]);
 
 	const getTagId = (tagName) => {
@@ -63,12 +63,12 @@ const TagSection = (props) => {
 		// });
 	};
 
-	const saveTagListChanges = tags => {
+	const saveTagListChanges = (tags) => {
 		updateAllowedTags(tags).then((newTags) => {
 			setTagList(newTags);
 			setEditTagList(false);
 		});
-	}
+	};
 
 	return (
 		<Fieldset legend="Tags" style={{ position: "relative" }}>
@@ -76,7 +76,7 @@ const TagSection = (props) => {
 				<TagsInput
 					placeholder="Pick tag from list"
 					value={appTags || []}
-					data={whiteList}
+					data={rootStore.get.allowedTags().map((tag) => tag.name)}
 					onChange={onChange}
 					pointer
 					disabled={editTagList}
@@ -98,19 +98,23 @@ const TagSection = (props) => {
 					<ICON.edit />
 				</ActionIcon>
 			</Tooltip>
-			{editTagList && (<Card mt={10}>
-				<Title fw="normal" size="xl">Edit  tags</Title>
-				<TagsInput
-					placeholder="Click to edit"
-					value={tagList || []}
-					onChange={onChangeTagList}
-					pointer
-					disabled={!editTagList}
-				/>
-				<Flex justify="end">
-					<Button onClick={ () => saveTagListChanges(tagList)}>Save</Button>
-				</Flex>
-			</Card>)}
+			{editTagList && (
+				<Card mt={10}>
+					<Title fw="normal" size="xl">
+						Edit tags
+					</Title>
+					<TagsInput
+						placeholder="Click to edit"
+						value={tagList || []}
+						onChange={onChangeTagList}
+						pointer
+						disabled={!editTagList}
+					/>
+					<Flex justify="end">
+						<Button onClick={() => saveTagListChanges(tagList)}>Save</Button>
+					</Flex>
+				</Card>
+			)}
 		</Fieldset>
 	);
 };

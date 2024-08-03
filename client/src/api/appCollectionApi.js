@@ -262,13 +262,7 @@ export const updateTagWhiteList = async (tags) => {
 	const existingTagNames = existingTags.map(tag => tag.name);
 	const newTags = tags.filter(tag => !existingTagNames.includes(tag));
 	const removedTags = existingTagNames.filter(tag => !tags.includes(tag));
-
-	console.log("Not Existing tags", existingTags);
-	console.log("New tags", newTags);
-	console.log("Removed tags", removedTags);
-
 	let tagsToRemove = [];
-	let tagsToAdd = [];
 
 	if (removedTags.length > 0) {
 		tagsToRemove = removedTags.map(tag => {
@@ -292,7 +286,6 @@ export const updateTagWhiteList = async (tags) => {
 			throw error;
 		});
 
-	// return tags?.map(tag => { return { id: 0, name: tag } });
 	return allowedTags;
 };
 
