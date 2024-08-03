@@ -12,6 +12,7 @@ export const useFilterManager = () => {
 		dispatch(setActiveFilter(filter));
 
 		const filteredApps = filterModel[filter].method();
+		console.log("Filtered apps: ", filteredApps);
 		dispatch(setFilteredList(filteredApps));
 	};
 

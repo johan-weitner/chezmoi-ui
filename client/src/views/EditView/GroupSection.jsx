@@ -29,18 +29,20 @@ const GroupSection = (props) => {
 	const whiteList = allGroups.map((group) => group.name);
 	const selectedApp = useSelector((state) => state.root.selectedApp);
 	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const isNewApp = useSelector((state) => state.root.isNewApp);
 	const selectedAppGroups = useSelector(
 		(state) => state.root.selectedAppGroups,
 	);
 
 	useEffect(() => {
+		if (isNewApp) return;
 		getGroupsByApp(selectedApp.id).then((groups) => {
 			setAppGroups(selectedAppGroups?.map((group) => group.name));
 		});
 	}, []);
 
 	useEffect(() => {
-		// if (!rootStore.get.selectedApp()) return;
+		if (isNewApp) return;
 		getGroupsByApp(selectedApp.id).then((groups) => {
 			setAppGroups(groups?.map((group) => group.name));
 		});

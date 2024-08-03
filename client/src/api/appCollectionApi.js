@@ -193,8 +193,10 @@ export const addApp = (data) => {
 };
 
 export const markAppDone = async (app, flag) => {
-	const flaggedApp = Object.assign(app, { done: flag });
-	updateApp(flaggedApp)
+	// const flaggedApp = Object.assign(app, { done: flag });
+	const update = { key: app.key, done: flag };
+	console.log("Flagged app: ", update);
+	updateApp(update)
 		.then((response) => {
 			return response;
 		})

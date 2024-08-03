@@ -10,22 +10,32 @@ import { useSelector, useDispatch } from "react-redux";
 const List = (props) => {
 	const dispatch = useDispatch();
 	const { deleteItem, editItem } = props;
-	const selectedKey = rootStore.get.selectedAppKey();
+	const selectedKey = useSelector((state) => state.root.selectedAppKey);
+	const mainView = useSelector((state) => state.root.mainView);
 	const [currentKey, setCurrentKey] = useState(selectedKey);
-	const [activeFilter, setActiveFilter] = useState(selectedKey);
+	const [currentFilter, setCurrentFilter] = useState(selectedKey);
 	const { setSelectedAppKey, getPageContent } = useClientManager();
+
+	const {
+		appCollection,
+		activeFilter,
+		filteredList,
+		selectedAppKey,
+		pageContent,
+		isLoading,
+	} = useSelector((state) => state.root);
 
 	useEffect(() => {
 		getPageContent();
-	}, [useSelector((state) => state.root.appCollection)]);
+	}, [appCollection]);
 
 	useEffect(() => {
-		setCurrentKey(rootStore.get.selectedAppKey());
-	}, [useSelector((state) => state.root.selectedAppKey)]);
+		setCurrentKey(selectedAppKey);
+	}, [selectedAppKey]);
 
 	useEffect(() => {
-		setActiveFilter(rootStore.get.activeFilter());
-	}, [useSelector((state) => state.root.activeFilter)]);
+		setCurrentFilter(activeFilter);
+	}, [activeFilter]);
 
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
@@ -40,8 +50,8 @@ const List = (props) => {
 			mt="sm"
 			className={classes.scrollContainer}
 		>
-			<Skeleton visible={rootStore?.use?.isLoading()}>
-				{!activeFilter &&
+			<Skeleton visible={isLoading}>
+				{!currentFilter &&
 					useSelector((state) => state.root.pageContent)?.map((item) => {
 						return (
 							<ListItem
@@ -51,25 +61,25 @@ const List = (props) => {
 								key={nanoid()}
 								deleteItem={deleteItem}
 								editItem={editItem}
+								mainView={mainView}
 							/>
 						);
 					})}
-				{activeFilter &&
+				{currentFilter &&
 					// rootStore?.use?.filteredList()?.map((item) => {
-					useSelector((state) => state.root.filteredList)
-						?.filteredList()
-						?.map((item) => {
-							return (
-								<ListItem
-									selectedAppKey={currentKey}
-									setSelectedAppKey={selectNewApp}
-									app={item}
-									key={nanoid()}
-									deleteItem={deleteItem}
-									editItem={editItem}
-								/>
-							);
-						})}
+					useSelector((state) => state.root.filteredList)?.map((item) => {
+						return (
+							<ListItem
+								selectedAppKey={currentKey}
+								setSelectedAppKey={selectNewApp}
+								app={item}
+								key={nanoid()}
+								deleteItem={deleteItem}
+								editItem={editItem}
+								mainView={mainView}
+							/>
+						);
+					})}
 			</Skeleton>
 		</Card>
 	);

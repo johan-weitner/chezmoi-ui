@@ -4,28 +4,25 @@ import { EditedIndicator } from "components/Indicator";
 import { ICON } from "constants/icons";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
-import { MAIN_VIEWS } from "store/store";
+import { MAIN_VIEWS, getState } from "store/store";
 import { useGroupManager } from "core/GroupManager";
 import { useSelector, useDispatch } from "react-redux";
-import { getSelectedGroupId } from "store/selectors";
 
 export const ListItem = (props) => {
 	const dispatch = useDispatch();
-	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
-		props;
-	const [isGroupMode, setIsGroupMode] = useState(false);
-
-	const className =
-		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
+	const {
+		selectedAppKey,
+		setSelectedAppKey,
+		app,
+		deleteItem,
+		editItem,
+		mainView,
+	} = props;
+	const [isGroupMode, setIsGroupMode] = useState(mainView);
+	const [appKey, setAppKey] = useState(selectedAppKey);
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
 	const { putAppInGroup } = useGroupManager();
-	const mainView = useSelector((state) => state.root.mainView);
-
-	useEffect(() => {
-		// console.log("App: ", app);
-	}, []);
 
 	useEffect(() => {
 		setIsGroupMode(mainView === MAIN_VIEWS[1]);
@@ -45,7 +42,7 @@ export const ListItem = (props) => {
 		>
 			<div
 				style={{ position: "relative", width: "100%" }}
-				className={className}
+				className={selectedAppKey === app.key ? classes.selected : null}
 			>
 				{isGroupMode ? (
 					<button

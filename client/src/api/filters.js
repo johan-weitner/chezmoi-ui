@@ -35,6 +35,7 @@ export const filterNoInstallerApps = () => {
 
 export const filterNoUrlsApps = () => {
 	const apps = getState().appCollection;
+	console.log("Apps: ", apps);
 	return apps.filter((item) => {
 		return (
 			_isColumnEmpty(item.home) &&
