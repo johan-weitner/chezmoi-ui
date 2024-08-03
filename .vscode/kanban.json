@@ -36,6 +36,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Refactor global store with Redux Tool Kit",
+                    "id": "mqxyyif1ihmmslyznmbssldu"
+                },
+                {
                     "text": "Clean up patterns",
                     "id": "ybb3biegh54mooyoomikzyja"
                 },
@@ -343,5 +347,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722651600262
+    "timestamp": 1722680336175
 }

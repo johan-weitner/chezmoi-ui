@@ -1,38 +1,30 @@
-import {
-	Flex,
-	Group,
-	Tooltip,
-	Button,
-	UnstyledButton,
-	rem,
-} from "@mantine/core";
-import {
-	IconDownload,
-	IconPlayerTrackNext,
-	IconPlayerTrackPrev,
-} from "@tabler/icons-react";
+import { Flex, Group, Button, rem } from "@mantine/core";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import classes from "components/Toolbar.module.css";
 import { useClientManager } from "core/ClientManager";
 import BarSpinner from "./BarSpinner";
-import { rootStore, MAIN_VIEWS } from "../store/store";
+import { MAIN_VIEWS } from "store/store";
+import { setMainView } from "store/store";
+import { useSelector, useDispatch } from "react-redux";
 
 const Toolbar = (props) => {
 	const { setShowAppGroupView } = props;
 	const [active, setActive] = useState(null);
-	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext, downloadYaml } =
-		useClientManager();
+	const { isLoading } = useClientManager();
 	const stroke = 1.5;
+	const dispatch = useDispatch();
+
+	const mainView = useSelector((state) => state.root.mainView);
 
 	const openAppsView = () => {
-		rootStore.set.mainView(MAIN_VIEWS[0]);
+		dispatch(setMainView(MAIN_VIEWS[0]));
 		setShowAppGroupView(false);
 	};
 
 	const openGroupsView = () => {
-		rootStore.set.mainView(MAIN_VIEWS[1]);
+		dispatch(setMainView(MAIN_VIEWS[1]));
 		setShowAppGroupView(true);
 	};
 
@@ -62,7 +54,7 @@ const Toolbar = (props) => {
 		typeof action === "function" && action();
 	};
 
-	const NavbarLink = ({ Icon, label, active, action, link, className }) => {
+	const NavbarLink = ({ label, active, action, link, className }) => {
 		return (
 			<Button
 				onClick={() => onClick(action)}
@@ -88,7 +80,7 @@ const Toolbar = (props) => {
 								key={nanoid()}
 								onClick={() => setActive(index)}
 								className={
-									rootStore.get.mainView() === menuItem.mainViewKey
+									mainView === menuItem.mainViewKey
 										? classes.navbarLinkActive
 										: classes.navbarLink
 								}
