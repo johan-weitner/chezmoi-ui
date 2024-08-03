@@ -6,17 +6,20 @@ import { getAppById, getSelectedGroupId } from "store/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import {
   rootStore,
+  getState,
+  store,
   setAppsInSelectedGroup,
   setSelectedAppGroups,
   setSelectedGroup,
   setIsLoading,
   setError,
+  setSelectedGroupKey
 } from "store/store";
 
 const DEBUG = import.meta.env.VITE_DEBUG === "true";
 
 export const useGroupManager = () => {
-  const dispatch = useDispatch();
+  const { dispatch } = store;
 
   const toggleIsLoading = (isLoading) => {
     dispatch(toggleIsLoading(isLoading));
@@ -89,9 +92,8 @@ export const useGroupManager = () => {
     await addAppToGroup(groupId, appId)
       .then((newApp) => {
         toggleIsLoading(false);
-        const apps = useSelector((state) => state.root.appsInSelectedGroup) || [];
+        const apps = getState().appsInSelectedGroup || [];
         if (newApp?.application?.name) {
-          rootStore.set.appsInSelectedGroup([...apps, newApp.application]);
           dispatch(setAppsInSelectedGroup([...apps, newApp.application]));
         }
         toast.success("Added app to the group");
@@ -109,10 +111,10 @@ export const useGroupManager = () => {
     await removeAppFromGroup(groupId, appId)
       .then(() => {
         toggleIsLoading(false);
-        const apps = useSelector((state) => state.root.appsInSelectedGroup) || [];
+        const apps = getState().appsInSelectedGroup || [];
         const newApps = apps?.filter(app => app.id !== appId);
         dispatch(setAppsInSelectedGroup(newApps));
-        const groups = useSelector((state) => state.root.selectedAppGroups);
+        const groups = getState().selectedAppGroups;
         const newGroups = groups?.filter(group => group.id !== groupId);
         dispatch(setSelectedAppGroups(newGroups));
       })
@@ -144,9 +146,9 @@ export const useGroupManager = () => {
   };
 
   const gotoPrevGroup = () => {
-    const groupKeys = useSelector((state) => state.root.appGroupKeys);
+    const groupKeys = getState().appGroupKeys;
     const currentIndex = groupKeys.indexOf(
-      useSelector((state) => state.root.selectedGroupKey));
+      getState().selectedGroupKey);
     if (currentIndex === 0) {
       return;
     }
@@ -158,9 +160,9 @@ export const useGroupManager = () => {
   };
 
   const gotoNextGroup = () => {
-    const groupKeys = useSelector((state) => state.root.appGroupKeys);
+    const groupKeys = getState().appGroupKeys;
     const currentIndex = groupKeys.indexOf(
-      useSelector((state) => state.root.selectedGroupKey));
+      getState().selectedGroupKey);
     if (currentIndex === groupKeys.length - 1) {
       return;
     }

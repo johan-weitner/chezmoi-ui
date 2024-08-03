@@ -9,11 +9,12 @@ import {
 	updateTagWhiteList
 } from "api/appCollectionApi";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { toast } from "sonner";
-import { selectAppByKey, selectPageContent } from "store/selectors";
+import { selectPageContent } from "store/selectors";
 import {
 	rootStore,
+	getState,
+	store,
 	setIsLoading,
 	setAppCollection,
 	setPageContent,
@@ -28,21 +29,18 @@ import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
 
 export const useDataManager = () => {
-	const dispatch = useDispatch();
-	const { store } = rootStore;
-	const state = store.getState();
-	const { page, pageCount, getTotalSize } = state;
+	const { dispatch } = store;
+	const { page, pageCount } = getState();
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
-	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const { gotoPage, getPageContent } = usePageManager();
 	const { seedGroups } = useGroupManager();
 
 	const useBootstrap = () => {
 		return useEffect(() => {
-			const appCollection = useSelector((state) => state.root.appCollection);
+			const appCollection = getState().appCollection;
 			if (
-				appCollection() &&
-				appCollection().length > 0
+				appCollection &&
+				appCollection.length > 0
 			) {
 				// console.warn("Found no apps");
 				return;
@@ -50,7 +48,7 @@ export const useDataManager = () => {
 			dispatch(setIsLoading(true));
 			seedStore().then((apps) => {
 				setPageContent(getPageContent());
-				setIsLoading(false);
+				toggleLoading(false);
 			});
 			seedGroups();
 		}, []);
@@ -58,14 +56,14 @@ export const useDataManager = () => {
 
 	const usePageSwitch = () => {
 		return useEffect(() => {
-			const appCollection = useSelector((state) => state.root.appCollection);
+			const appCollection = getState().appCollection;
 			if (!appCollection()) {
 				return;
 			}
 			dispatch(setIsLoading(true));
 			setPageContent(getPageContent());
-			setIsLoading(false);
-		}, [rootStore.use.page()]);
+			toggleLoading(false);
+		}, [getState().page]);
 	};
 
 	const seedStore = async () => {
@@ -92,7 +90,7 @@ export const useDataManager = () => {
 	};
 
 	const openFirstPage = () => {
-		const apps = selectPageContent(state);
+		const apps = selectPageContent(getState());
 		gotoPage(1);
 		dispatch(setSelectedAppKey(apps[0]?.key));
 		dispatch / setPageContent(apps);
@@ -102,13 +100,13 @@ export const useDataManager = () => {
 	const refreshAppCollection = async () => {
 		getAllApps().then((apps) => {
 			dispatch(setAppCollection(apps));
-			dispatch(setPageCount(Math.ceil(apps.length / rootStore.get.pageSize()),));
+			dispatch(setPageCount(Math.ceil(apps.length / getState().pageSize),));
 		});
 	};
 
 	const deleteItem = (appKey) => {
-		const apps = useSelector((state) => state.root.appCollection);
-		const pageContent = useSelector((state) => state.root.pageContent);
+		const apps = getState().appCollection;
+		const pageContent = getState().pageContent;
 		dispatch(setIsLoading(true));
 
 		deleteApp(appKey)
@@ -117,7 +115,7 @@ export const useDataManager = () => {
 				const newPage = pageContent.filter((app) => app.key !== appKey);
 				dispatch(setAppCollection(newList));
 				dispatch(setPageContent(newPage));
-				setIsLoading(false);
+				toggleLoading(false);
 				toast.success("App deleted successfully");
 			})
 			.catch((err) => {
@@ -128,7 +126,7 @@ export const useDataManager = () => {
 
 	const updateItem = (app, appTags) => {
 		const appKey = app.key;
-		setIsLoading(true);
+		toggleLoading(true);
 		tagApp(Number.parseInt(app.id, 10), appTags)
 			.then((res) => {
 				// DEBUG && console.log("Tagged app: ", res);
@@ -136,10 +134,10 @@ export const useDataManager = () => {
 			.catch((e) => {
 				console.error(e);
 			});
-		const apps = useSelector((state) => state.root.appCollection);
+		const apps = getState().appCollection;
 		updateApp(app)
 			.then(() => {
-				rootStore.set.appCollection([
+				rootStore.set.appCollection([ // FIXME!!!
 					...apps,
 					{
 						...app,
@@ -150,8 +148,8 @@ export const useDataManager = () => {
 				const index = apps.findIndex((item) => item.key === app.key);
 				apps[index] = app;
 				dispatch(setAppCollection(apps));
-				gotoPage(rootStore.get.page());
-				setIsLoading(false);
+				gotoPage(getState().page);
+				toggleLoading(false);
 				toast.success("App updated successfully");
 			})
 			.catch((err) => {
@@ -162,8 +160,8 @@ export const useDataManager = () => {
 
 	const saveNewItem = (app, tagIds) => {
 		dispatch(setIsLoading(true));
-		const apps = useSelector((state) => state.root.appCollection);
-		const pageContent = useSelector((state) => state.root.pageContent);
+		const apps = getState().appCollection;
+		const pageContent = getState().pageContent;
 		saveNewApp(app)
 			.then((newApp) => {
 				tagApp(newApp?.id, tagIds);
@@ -171,7 +169,7 @@ export const useDataManager = () => {
 				if (page === pageCount.length) {
 					dispatch(setPageCount([...pageContent, app]));
 				}
-				setIsLoading(false);
+				toggleLoading(false);
 				toast.success("App successfully added");
 			})
 			.catch((err) => {
@@ -198,11 +196,11 @@ export const useDataManager = () => {
 		dispatch(setIsLoading(true));
 		await addAppTags(appId, tagIds)
 			.then(() => {
-				setIsLoading(false);
+				toggleLoading(false);
 				// toast.success("Tags added");
 			})
 			.catch((err) => {
-				setIsLoading(false);
+				toggleLoading(false);
 				console.log("DataManager: Error adding tag: ", err);
 				// toast.error("Error adding tag");
 			});
@@ -224,7 +222,7 @@ export const useDataManager = () => {
 		console.log("Downloading YAML...");
 	};
 
-	const setIsLoading = (flag) => {
+	const toggleLoading = (flag) => {
 		dispatch(setIsLoading(flag));
 	};
 
@@ -242,7 +240,7 @@ export const useDataManager = () => {
 		deleteItem,
 		saveNewItem,
 		tagApp,
-		setIsLoading,
+		setIsLoading: toggleLoading,
 		setIsEditMode,
 		downloadYaml,
 		flagAppDone,

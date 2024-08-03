@@ -164,7 +164,15 @@ export const getGroupsByApp = async (appId) => {
 };
 
 export const getAllApps = async () => {
-	const apps = await prisma[APPLICATION].findMany();
+	const apps = await prisma[APPLICATION].findMany({
+		select: {
+			id: true,
+			key: true,
+			name: true,
+			edited: true,
+			done: true
+		},
+	});
 	return apps;
 };
 

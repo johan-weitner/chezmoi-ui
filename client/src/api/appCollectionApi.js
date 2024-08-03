@@ -1,7 +1,11 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
-import { rootStore } from "store/store";
+import {
+	getState,
+	setActiveFilter,
+	setFilteredList
+} from "store/store";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
@@ -23,7 +27,6 @@ export const fetchAppGroups = async () => {
 		.get(`${BASE_URL}/groups`)
 		.then((response) => {
 			const { data } = response;
-			// testProcessMetaGroups();
 			const processedData = data?.groups && processMetaGroups(data.groups);
 			return { ...processedData };
 		})
@@ -31,7 +34,7 @@ export const fetchAppGroups = async () => {
 			throw error;
 		});
 	return apps;
-}; // fetchAppsInGroup,
+};
 
 export const fetchAppsInGroup = async (groupId) => {
 	if (!groupId) return;
@@ -251,14 +254,14 @@ export const getTagsByAppId = async (appId) => {
 };
 
 export const getTagId = tagName => {
-	const existingTags = rootStore.get.allowedTags();
+	const existingTags = getState().allowedTags;
 	const found = existingTags.find(item => item.name === tagName);
 	console.log("Found tag: ", found);
 	return found ? found.id : -1;
 }
 
 export const updateTagWhiteList = async (tags) => {
-	const existingTags = rootStore.get.allowedTags();
+	const existingTags = getState().allowedTags;
 	const existingTagNames = existingTags.map(tag => tag.name);
 	const newTags = tags.filter(tag => !existingTagNames.includes(tag));
 	const removedTags = existingTagNames.filter(tag => !tags.includes(tag));

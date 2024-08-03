@@ -1,13 +1,14 @@
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { selectAppByKey } from "store/selectors";
 import { rootStore } from "store/store";
 import { useClientManager } from "core/ClientManager";
 import { ListItem } from "./ListItem";
 import classes from "./ListView.module.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const List = (props) => {
+	const dispatch = useDispatch();
 	const { deleteItem, editItem } = props;
 	const selectedKey = rootStore.get.selectedAppKey();
 	const [currentKey, setCurrentKey] = useState(selectedKey);
@@ -15,17 +16,16 @@ const List = (props) => {
 	const { setSelectedAppKey, getPageContent } = useClientManager();
 
 	useEffect(() => {
-		// console.log("App collection refreshed");
 		getPageContent();
-	}, [rootStore.use.appCollection()]);
+	}, [useSelector((state) => state.root.appCollection)]);
 
 	useEffect(() => {
 		setCurrentKey(rootStore.get.selectedAppKey());
-	}, [rootStore.use.selectedAppKey()]);
+	}, [useSelector((state) => state.root.selectedAppKey)]);
 
 	useEffect(() => {
 		setActiveFilter(rootStore.get.activeFilter());
-	}, [rootStore.use.activeFilter()]);
+	}, [useSelector((state) => state.root.activeFilter)]);
 
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
@@ -42,7 +42,7 @@ const List = (props) => {
 		>
 			<Skeleton visible={rootStore?.use?.isLoading()}>
 				{!activeFilter &&
-					rootStore?.use?.pageContent()?.map((item) => {
+					useSelector((state) => state.root.pageContent)?.map((item) => {
 						return (
 							<ListItem
 								selectedAppKey={currentKey}
@@ -55,18 +55,21 @@ const List = (props) => {
 						);
 					})}
 				{activeFilter &&
-					rootStore?.use?.filteredList()?.map((item) => {
-						return (
-							<ListItem
-								selectedAppKey={currentKey}
-								setSelectedAppKey={selectNewApp}
-								app={item}
-								key={nanoid()}
-								deleteItem={deleteItem}
-								editItem={editItem}
-							/>
-						);
-					})}
+					// rootStore?.use?.filteredList()?.map((item) => {
+					useSelector((state) => state.root.filteredList)
+						?.filteredList()
+						?.map((item) => {
+							return (
+								<ListItem
+									selectedAppKey={currentKey}
+									setSelectedAppKey={selectNewApp}
+									app={item}
+									key={nanoid()}
+									deleteItem={deleteItem}
+									editItem={editItem}
+								/>
+							);
+						})}
 			</Skeleton>
 		</Card>
 	);

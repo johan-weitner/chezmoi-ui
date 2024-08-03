@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Card, Group, Text, Checkbox } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
@@ -9,10 +9,13 @@ import List from "./List";
 import commonCss from "./ListView.module.css";
 import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
-import { rootStore, MAIN_VIEWS } from "store/store";
+import { MAIN_VIEWS } from "store/store";
+import { useSelector, useDispatch } from "react-redux";
+import { setSelectedGroup, setSelectedGroupKey } from "store/store";
 
 const ListView = (props) => {
-	const [hideCompleted, setHideCompleted] = useState(false);
+	const dispatch = useDispatch();
+	// const [hideCompleted, setHideCompleted] = useState(false);
 	const { isGroupView } = props;
 	const {
 		deleteItem,
@@ -27,34 +30,29 @@ const ListView = (props) => {
 		clearAppSelection,
 	} = useClientManager();
 	const { gotoPrevGroup, gotoNextGroup } = useGroupManager();
+	const mainView = useSelector((state) => state.root.mainView);
 
 	const returnToGroups = () => {
-		if (rootStore.get.mainView() === MAIN_VIEWS[0]) return;
-		rootStore.set.selectedGroup(null);
-		rootStore.set.selectedGroupKey(null);
+		if (mainView === MAIN_VIEWS[0]) return;
+		dispatch(setSelectedGroup(null));
+		dispatch(setSelectedGroupKey(null));
 	};
 
 	const gotoPrev = () => {
-		rootStore.get.mainView() === MAIN_VIEWS[0]
-			? selectPrevApp()
-			: gotoPrevGroup();
+		mainView === MAIN_VIEWS[0] ? selectPrevApp() : gotoPrevGroup();
 	};
 	const gotoNext = () => {
-		rootStore.get.mainView() === MAIN_VIEWS[0]
-			? selectNextApp()
-			: gotoNextGroup();
+		mainView === MAIN_VIEWS[0] ? selectNextApp() : gotoNextGroup();
 	};
 
 	const returnToList = () => {
-		rootStore.get.mainView() === MAIN_VIEWS[0]
-			? clearAppSelection()
-			: returnToGroups();
+		mainView === MAIN_VIEWS[0] ? clearAppSelection() : returnToGroups();
 	};
 
-	const toggleHideCompleted = () => {
-		setHideCompleted(!hideCompleted);
-		rootStore.set.hideCompleted(!hideCompleted);
-	};
+	// const toggleHideCompleted = () => {
+	// 	setHideCompleted(!hideCompleted);
+	// 	rootStore.set.hideCompleted(!hideCompleted);
+	// };
 
 	useBootstrap();
 	useHotkeys("alt + b", () => gotoPrev());
@@ -69,7 +67,7 @@ const ListView = (props) => {
 	useHotkeys("backspace", () => returnToGroups());
 
 	const style =
-		rootStore.get.mainView() === MAIN_VIEWS[1]
+		mainView === MAIN_VIEWS[1]
 			? { marginTop: "-30px", marginBottom: "-20px" }
 			: null;
 

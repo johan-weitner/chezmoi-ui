@@ -2,30 +2,45 @@ import { fetchApp, getTagsByAppId } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
 import { rootStore } from "store/store";
+import { useSelector, useDispatch } from "react-redux";
+import {
+	getState,
+	store,
+	setIsLoading,
+	setSelectedApp,
+	setSelectedAppTags,
+	setSelectedAppGroups,
+	setSelectedGroupKey,
+	setSelectedGroup,
+	setIsNewApp,
+	setInReverse,
+	setEditMode
+} from "store/store";
 import { transformNullValues } from "api/helpers";
 import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
 
 export const useSelectionManager = () => {
-	const { store } = rootStore;
-	const state = store.getState();
-	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+	const { dispatch } = store;
 	const { gotoNextPage, gotoPrevPage } = usePageManager();
 	const { getGroupsByApp } = useGroupManager();
 
+	const toggleLoading = (isLoading) => {
+		dispatch(setIsLoading(isLoading));
+	};
+
 	const setSelectedAppKey = (key) => {
-		DEBUG && console.log("Selected app key: ", key);
-		rootStore.set.selectedAppKey(key);
-		rootStore.set.isLoading(true);
+		dispatch(setSelectedAppKey(key));
+		toggleLoading(true);
 		if (key === null) return;
 		const app = fetchApp(key)
 			.then((app) => {
-				rootStore.set.isLoading(false);
-				rootStore.set.selectedApp(app);
+				toggleLoading(false);
+				dispatch(setSelectedApp(app));
 
 				getAppTags(app.id)
 					.then((tags) => {
-						rootStore.set.selectedAppTags(tags);
+						dispatch(setSelectedAppTags(tags));
 					})
 					.catch((err) => {
 						console.error(err);
@@ -33,96 +48,78 @@ export const useSelectionManager = () => {
 					});
 
 				getGroupsByApp(app.id).then((groups) => {
-					rootStore.set.selectedAppGroups(groups);
+					dispatch(setSelectedAppGroups(groups));
 				});
-
-				DEBUG &&
-					console.log(
-						`SelectionManager: Set app object in store:
-					- Key: ${rootStore.get.selectedApp()?.key}
-					- Tags: ${rootStore.set.selectedAppTags()}`,
-					);
 			})
 			.catch((err) => {
+				console.error(err);
 				toast.error("Error fetching app: ", err);
 			});
 	};
 
-	const setSelectedGroupKey = (key) => {
-		rootStore.set.selectedGroupKey(rootStore.get.appGroupKeys()[key - 1]);
-		rootStore.set.selectedGroup(rootStore.get.appGroups()[key]);
-		rootStore.set.selectedGroupId(rootStore.get.appGroups()[key].id);
+	const selectGroup = (key) => {
+		dispatch(setSelectedGroupKey(key));
+		dispatch(setSelectedGroup(getState().appGroups[key]));
+		dispatch(setSelectedGroup(getState().appGroups[key].id));
 	};
 
 	const _isFirstOnPage = (appKey) => {
-		const pageContent = rootStore.get.pageContent();
+		const pageContent = getState().pageContent;
 		return appKey === pageContent[0]?.key;
 	};
 
 	const _isLastOnPage = (appKey) => {
-		const pageContent = rootStore.get.pageContent();
+		const pageContent = getState().root.pageContent;
 		return appKey === pageContent[pageContent?.length - 1]?.key;
 	};
 
 	const selectPrevApp = () => {
-		const currentKey = rootStore.get.selectedAppKey();
-		const prevKey = getPreviousKey(state);
+		const currentKey = getState().selectedAppKey;
+		const prevKey = getPreviousKey(getState());
 		const prevApp = selectAppByKey(prevKey);
-		rootStore.set.selectedApp(prevApp);
-		rootStore.set.selectedAppKey(prevKey);
+		dispatch(setSelectedApp(prevApp));
+		dispatch(setSelectedAppKey(prevKey));
 		if (_isFirstOnPage(currentKey)) {
-			rootStore.set.inReverse(true);
+			dispatch(setInReverse(true));
 			gotoPrevPage();
 		}
 	};
 
 	const selectNextApp = () => {
-		const currentKey = rootStore.get.selectedAppKey();
-		const nextKey = getNextKey(state);
+		const currentKey = getState().selectedAppKey;
+		const nextKey = getNextKey(getState());
 		const nextApp = selectAppByKey(nextKey);
-		rootStore.set.selectedApp(nextApp);
-		rootStore.set.selectedAppKey(nextKey);
-		rootStore.set.inReverse(false);
+		dispatch(setSelectedApp(nextApp));
+		dispatch(setSelectedAppKey(nextKey));
+		dispatch(setInReverse(false));
 		_isLastOnPage(currentKey) && gotoNextPage();
 	};
 
 	const editItem = (appKey) => {
-		DEBUG && console.log(`SelectionManager: Editing app with key: ${appKey}`);
 		if (appKey) {
 			const app = selectAppByKey(appKey);
-			rootStore.set.selectedApp(transformNullValues({ ...app }));
-			rootStore.set.selectedAppKey(appKey);
-			rootStore.set.isNewApp(false);
+			dispatch(setSelectedApp(transformNullValues({ ...app })));
+			dispatch(setSelectedAppKey(appKey));
+			dispatch(setIsNewApp(false));
 		}
-		rootStore.set.editMode(true);
-		DEBUG &&
-			console.log(`SelectionManager:
-			- Edit flag set: ${rootStore.get.editMode()}
-			- isNewApp flag set: ${rootStore.get.isNewApp()}`);
+		dispatch(setEditMode(true));
 	};
 
 	const getAppTags = async (appId) => {
 		const tags = await getTagsByAppId(appId);
-		DEBUG && console.log("SelectionManager got tags for app: ", tags);
 		return tags;
 	};
 
 	const addItem = () => {
-		DEBUG && console.log("Adding new item");
-		rootStore.set.selectedApp(null);
-		rootStore.set.selectedAppKey(null);
-		rootStore.set.isNewApp(true);
-		rootStore.set.editMode(true);
-		DEBUG &&
-			console.log(`SelectionManager:
-				- Edit flag set: ${rootStore.get.editMode()}
-				- isNewApp flag set: ${rootStore.get.isNewApp() === null}
-				- Emptied app selection: ${rootStore.get.selectedAppKey() === null}`);
+		dispatch(setSelectedAppKey(null));
+		dispatch(setSelectedAppKey(null));
+		dispatch(setIsNewApp(true));
+		dispatch(setEditMode(true));
 	};
 
 	const clearAppSelection = () => {
-		rootStore.set.selectedApp(null);
-		rootStore.set.selectedAppKey(null);
+		dispatch(setSelectedApp(null));
+		dispatch(setSelectedAppKey(null));
 	};
 
 	return {
@@ -134,6 +131,6 @@ export const useSelectionManager = () => {
 		addItem,
 		clearAppSelection,
 		getSearchBase,
-		setSelectedGroupKey
+		setSelectedGroupKey: selectGroup
 	};
 };

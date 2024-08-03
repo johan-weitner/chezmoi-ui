@@ -1,12 +1,12 @@
 import { filterModel } from "api/filters";
-import { useSelector, useDispatch } from "react-redux";
 import {
+	store,
 	setActiveFilter,
 	setFilteredList
 } from "store/store";
 
 export const useFilterManager = () => {
-	const dispatch = useDispatch();
+	const { dispatch } = store;
 
 	const applyFilter = (filter) => {
 		dispatch(setActiveFilter(filter));

@@ -153,7 +153,7 @@ export const useStore = () => {
 	return { state, dispatch };
 };
 
-const getState = () => {
+export const getState = () => {
 	return store.getState().root;
 };
 
