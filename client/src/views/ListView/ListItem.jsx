@@ -8,9 +8,11 @@ import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
 import { MAIN_VIEWS } from "store/store";
 import { useGroupManager } from "core/GroupManager";
+import { useSelector, useDispatch } from "react-redux";
 import { getSelectedGroupId } from "store/selectors";
 
 export const ListItem = (props) => {
+	const dispatch = useDispatch();
 	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
 		props;
 	const [isGroupMode, setIsGroupMode] = useState(false);
@@ -19,19 +21,20 @@ export const ListItem = (props) => {
 		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
 	const { putAppInGroup } = useGroupManager();
+	const mainView = useSelector((state) => state.root.mainView);
 
 	useEffect(() => {
 		// console.log("App: ", app);
 	}, []);
 
 	useEffect(() => {
-		setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
-	}, [rootStore.use.mainView()]);
+		setIsGroupMode(mainView === MAIN_VIEWS[1]);
+	}, [mainView]);
 
 	const selectApp = (key) => {
-		if (rootStore.get.mainView() === MAIN_VIEWS[0]) {
+		if (mainView === MAIN_VIEWS[0]) {
 			setSelectedAppKey(key);
-		} else if (rootStore.get.mainView() === MAIN_VIEWS[1]) {
+		} else if (mainView === MAIN_VIEWS[1]) {
 			putAppInGroup(key);
 		}
 	};
@@ -48,7 +51,10 @@ export const ListItem = (props) => {
 					<button
 						className={classes.itemBox}
 						onClick={() =>
-							putAppInGroup(rootStore.get.selectedGroupId(), app?.id)
+							putAppInGroup(
+								useSelector((state) => state.root.selectedGroupId),
+								app?.id,
+							)
 						}
 						style={{ width: "100%" }}
 						type="button"
@@ -73,7 +79,7 @@ export const ListItem = (props) => {
 						)}{" "}
 					</button>
 				)}
-				{rootStore.use.mainView() === MAIN_VIEWS[0] && (
+				{mainView === MAIN_VIEWS[0] && (
 					<div style={app?.done ? { display: "none" } : { display: "block" }}>
 						<ICON.edit
 							style={{
@@ -104,7 +110,7 @@ export const ListItem = (props) => {
 						{indicateEdit}
 					</div>
 				)}
-				{rootStore.use.mainView() === MAIN_VIEWS[1] && (
+				{mainView === MAIN_VIEWS[1] && (
 					<>
 						<ICON.arrowRight
 							style={{

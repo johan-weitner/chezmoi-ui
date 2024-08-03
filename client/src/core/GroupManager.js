@@ -22,7 +22,7 @@ export const useGroupManager = () => {
   const { dispatch } = store;
 
   const toggleIsLoading = (isLoading) => {
-    dispatch(toggleIsLoading(isLoading));
+    dispatch(setIsLoading(isLoading));
   };
 
   const seedGroups = async () => {

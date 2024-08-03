@@ -8,6 +8,7 @@ import {
 	store,
 	setIsLoading,
 	setSelectedApp,
+	setSelectedAppKey,
 	setSelectedAppTags,
 	setSelectedAppGroups,
 	setSelectedGroupKey,
@@ -29,7 +30,7 @@ export const useSelectionManager = () => {
 		dispatch(setIsLoading(isLoading));
 	};
 
-	const setSelectedAppKey = (key) => {
+	const selectAppKey = (key) => {
 		dispatch(setSelectedAppKey(key));
 		toggleLoading(true);
 		if (key === null) return;
@@ -78,7 +79,7 @@ export const useSelectionManager = () => {
 		const prevKey = getPreviousKey(getState());
 		const prevApp = selectAppByKey(prevKey);
 		dispatch(setSelectedApp(prevApp));
-		dispatch(setSelectedAppKey(prevKey));
+		selectAppKey(prevKey);
 		if (_isFirstOnPage(currentKey)) {
 			dispatch(setInReverse(true));
 			gotoPrevPage();
@@ -90,7 +91,7 @@ export const useSelectionManager = () => {
 		const nextKey = getNextKey(getState());
 		const nextApp = selectAppByKey(nextKey);
 		dispatch(setSelectedApp(nextApp));
-		dispatch(setSelectedAppKey(nextKey));
+		selectAppKey(nextKey);
 		dispatch(setInReverse(false));
 		_isLastOnPage(currentKey) && gotoNextPage();
 	};
@@ -99,7 +100,7 @@ export const useSelectionManager = () => {
 		if (appKey) {
 			const app = selectAppByKey(appKey);
 			dispatch(setSelectedApp(transformNullValues({ ...app })));
-			dispatch(setSelectedAppKey(appKey));
+			selectAppKey(appKey);
 			dispatch(setIsNewApp(false));
 		}
 		dispatch(setEditMode(true));
@@ -111,19 +112,19 @@ export const useSelectionManager = () => {
 	};
 
 	const addItem = () => {
-		dispatch(setSelectedAppKey(null));
-		dispatch(setSelectedAppKey(null));
+		dispatch(setSelectedApp(null));
+		selectAppKey(null);
 		dispatch(setIsNewApp(true));
 		dispatch(setEditMode(true));
 	};
 
 	const clearAppSelection = () => {
 		dispatch(setSelectedApp(null));
-		dispatch(setSelectedAppKey(null));
+		selectAppKey(null);
 	};
 
 	return {
-		setSelectedAppKey,
+		setSelectedAppKey: selectAppKey,
 		selectPrevApp,
 		selectNextApp,
 		editItem,

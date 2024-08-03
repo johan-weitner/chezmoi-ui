@@ -24,22 +24,21 @@ import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
+import { useSelector, useDispatch } from "react-redux";
 
 const DetailView = (props) => {
+	const dispatch = useDispatch();
 	const [currentApp, setCurrentApp] = useState(null);
-	const [editMode, setEditMode] = useState(null);
 	const modalRef = useRef();
 	const theme = useMantineTheme();
+	const selectedApp = useSelector((state) => state.root.selectedApp);
+	const editMode = useSelector((state) => state.root.editMode);
 
 	const { gotoPrev, gotoNext } = useClientManager();
 
 	useEffect(() => {
-		setCurrentApp(rootStore.get.selectedApp());
-	}, [rootStore.use.selectedApp()]);
-
-	useEffect(() => {
-		setEditMode(rootStore.get.editMode());
-	}, [rootStore.use.editMode()]);
+		setCurrentApp(selectedApp);
+	}, [selectedApp]);
 
 	// 	// const appTags = app?.tags && JSON.parse(app.tags);
 	// 	// appTags && setTags(appTags);

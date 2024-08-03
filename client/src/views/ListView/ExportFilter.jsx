@@ -12,14 +12,15 @@ import {
 import { IconX } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
 import { rootStore } from "store/store";
-import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 const ExportFilter = (props) => {
+	const dispatch = useDispatch();
 	const { setExportIsOpen } = props;
 	const [selectedTags, setSelectedTags] = useState([]);
 	const ref = useClickOutside(() => setExportIsOpen(false));
@@ -49,8 +50,8 @@ const ExportFilter = (props) => {
 				YAML Export
 			</Title>
 			<Text size="lg" mb="40px">
-				Choose what tag(s) to filter the export on, or leave empty to export
-				everything.
+				Choose what tag(s) to filter the export on, or leave empty to export a
+				complete list.
 			</Text>
 			<Table mb={30}>
 				<Table.Thead>
@@ -60,7 +61,7 @@ const ExportFilter = (props) => {
 					</Table.Tr>
 				</Table.Thead>
 				<Table.Tbody>
-					{rootStore.get.allowedTags()?.map((tag) => (
+					{useSelector((state) => state.root.allowedTags)?.map((tag) => (
 						<Table.Tr key={nanoid()}>
 							<Table.Td>
 								<Checkbox
