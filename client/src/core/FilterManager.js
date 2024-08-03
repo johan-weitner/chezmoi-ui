@@ -1,23 +1,23 @@
 import { filterModel } from "api/filters";
-import { rootStore } from "store/store";
+import { useSelector, useDispatch } from "react-redux";
+import {
+	setActiveFilter,
+	setFilteredList
+} from "store/store";
 
 export const useFilterManager = () => {
-	const { store } = rootStore;
-	const state = store.getState();
-	const { page, pageCount, getTotalSize } = state;
-	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
-	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+	const dispatch = useDispatch();
 
 	const applyFilter = (filter) => {
-		DEBUG && console.log(`FilterManager: Apply filter: ${filter}`);
-		rootStore.set.activeFilter(filter);
+		dispatch(setActiveFilter(filter));
+
 		const filteredApps = filterModel[filter].method();
-		rootStore.set.filteredList(filteredApps);
+		dispatch(setFilteredList(filteredApps));
 	};
 
 	const clearFilter = () => {
-		rootStore.set.activeFilter(null);
-		rootStore.set.filteredList(null);
+		dispatch(setActiveFilter(null));
+		dispatch(setFilteredList(null));
 	};
 
 	return { applyFilter, clearFilter };

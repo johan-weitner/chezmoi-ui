@@ -1,35 +1,42 @@
 import { selectPageContent } from "store/selectors";
-import { rootStore } from "store/store";
+import { useSelector, useDispatch } from "react-redux";
+import {
+	rootStore,
+	setPage,
+	setPageContent,
+	setPageCount
+} from "store/store";
 
 export const usePageManager = () => {
+	const dispatch = useDispatch();
 	const { store } = rootStore;
 	const state = store.getState();
 
 	const gotoPage = (page) => {
-		rootStore.set.page(page);
+		dispatch(setPage(page));
 		const apps = selectPageContent(state);
-		rootStore.set.pageContent(apps);
+		dispatch(setPageContent(apps));
 		return apps;
 	};
 
 	const getPageContent = () => {
 		const apps = selectPageContent();
-		rootStore.set.pageContent(apps);
+		dispatch(setPageContent(apps));
 		return apps;
 	};
 
 	const gotoPrevPage = () => {
-		const page = rootStore.get.page();
+		const page = useSelector((state) => state.root.page);
 		if (page > 1) {
-			rootStore.set.page(page - 1);
+			dispatch(setPage(page - 1));
 			getPageContent();
 		}
 	};
 	const gotoNextPage = () => {
-		const page = rootStore.get.page();
-		const pageCount = rootStore.get.pageCount();
+		const page = useSelector((state) => state.root.page);
+		const pageCount = useSelector((state) => state.root.pageCount);
 		if (page < pageCount) {
-			rootStore.set.page(page + 1);
+			dispatch(setPage(page + 1));
 			getPageContent();
 		}
 	};
