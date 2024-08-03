@@ -61,18 +61,17 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Consider enable editing tag whitelist - re-use existing tag implementation",
-                    "id": "fzadug132eolcd30po3oiyzy"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Consider enable editing tag whitelist - re-use existing tag implementation",
+                    "id": "fzadug132eolcd30po3oiyzy"
+                },
                 {
                     "text": "Export: Install.Doctor format - (incl groups)",
                     "id": "uwr11f3ugqrwja7kg9t1cuwk"
@@ -344,5 +343,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722631887760
+    "timestamp": 1722651600262
 }

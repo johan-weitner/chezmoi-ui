@@ -385,6 +385,64 @@ export const getAllTags = async () => {
 	const tags = await prisma[TAG].findMany();
 	return tags;
 };
+
+const removeTagRelationsByTagId = async (tagIds) => {
+	try {
+		const result = await prisma.ApplicationTag.deleteMany({
+			where: {
+				tagId: {
+					in: tagIds
+				},
+			},
+		});
+		return result;
+	} catch (e) {
+		console.error(e.message, e);
+		return e;
+	}
+};
+
+export const updateAllowedTags = async (diffObj) => {
+	const { removeTags, addTags } = diffObj;
+	log.info("--- Updating tags: ", diffObj);
+	log.info("removeTags: ", removeTags);
+	log.info("addTags: ", addTags);
+
+	if (removeTags?.length > 0) {
+		removeTagRelationsByTagId(removeTags).then(() => {
+			prisma[TAG].deleteMany({
+				where: {
+					id: {
+						in: removeTags
+					},
+				},
+			}).then(() => {
+				log.info("Removed tags: ", removeTags);
+			}).catch((e) => {
+				log.error(e.message, e);
+				throw e;
+			});
+		});
+	}
+
+	if (addTags?.length > 0) {
+		await prisma[TAG].createMany({
+			data: addTags.map((tag) => {
+				return {
+					name: tag,
+				};
+			}),
+		}).then(() => {
+			log.info("Added tags: ", addTags);
+		}).catch((e) => {
+			log.error(e.message, e);
+			throw e;
+		});
+	}
+
+	const allowedTags = await prisma[TAG].findMany();
+	return allowedTags;
+};
 /**
  * /Tag API
  */

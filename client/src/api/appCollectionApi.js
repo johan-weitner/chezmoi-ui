@@ -1,6 +1,7 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
+import { rootStore } from "store/store";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
@@ -250,12 +251,14 @@ export const getTagsByAppId = async (appId) => {
 };
 
 export const getTagId = tagName => {
+	const existingTags = rootStore.get.allowedTags();
 	const found = existingTags.find(item => item.name === tagName);
+	console.log("Found tag: ", found);
 	return found ? found.id : -1;
 }
 
 export const updateTagWhiteList = async (tags) => {
-	const existingTags = await getAllTags();
+	const existingTags = rootStore.get.allowedTags();
 	const existingTagNames = existingTags.map(tag => tag.name);
 	const newTags = tags.filter(tag => !existingTagNames.includes(tag));
 	const removedTags = existingTagNames.filter(tag => !tags.includes(tag));
@@ -264,24 +267,33 @@ export const updateTagWhiteList = async (tags) => {
 	console.log("New tags", newTags);
 	console.log("Removed tags", removedTags);
 
+	let tagsToRemove = [];
+	let tagsToAdd = [];
+
 	if (removedTags.length > 0) {
-		const tagsToRemove = removedTags.map(tag => {
-			return existingTags.find(item => item.name === tag).id;
+		tagsToRemove = removedTags.map(tag => {
+			return getTagId(tag);
 		});
 		console.log("Tags to remove", tagsToRemove);
 	}
 
-	if (newTags.length > 0) {
-		const tagsToAdd = newTags.map(tag => {
-			return {
-				name: tag
-			};
+	const allowedTags = await axios
+		.post(`${BASE_URL}/updateAllowedTags`, {
+			data: {
+				removeTags: tagsToRemove,
+				addTags: newTags,
+			},
+		})
+		.then((response) => {
+			console.log("Allowed tags updated: ", response.data);
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
 		});
-		console.log("Tags to add", tagsToAdd);
-	}
 
-
-	return tags?.map(tag => { return { id: 0, name: tag } });
+	// return tags?.map(tag => { return { id: 0, name: tag } });
+	return allowedTags;
 };
 
 export const getAllApps = fetchApps;

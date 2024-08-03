@@ -25,7 +25,8 @@ import {
 	removeAppFromGroup,
 	getAppsByGroup,
 	getGroupsByApp,
-	getGroupById
+	getGroupById,
+	updateAllowedTags
 } from "./src/db/prisma.js";
 import { log } from "./src/util/winston.js";
 import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
@@ -308,6 +309,20 @@ app.get("/groupedApps", (req, res) => {
 			error: e.message,
 		});
 	});
+});
+
+app.post("/updateAllowedTags", (req, res) => {
+	const { data } = req.body;
+	updateAllowedTags(data)
+		.then((allowedTags) => {
+			res.status(200).json(allowedTags);
+		})
+		.catch((e) => {
+			console.error(e.message);
+			res.status(500).json({
+				error: e.message,
+			});
+		});
 });
 
 app.listen(port, () => {
