@@ -176,13 +176,18 @@ app.get('/download', (req, res) => {
 	});
 });
 
+// start: Tags: - 3, 4, - object - true
+// start: App tags: undefined
+// start: Error:  Cannot read properties of undefined(reading 'map')
 app.get('/filtered-download', (req, res) => {
 	const { tags } = req.query;
 	const tagsArray = tags.split(",");
-	log.debug(`Tags: - ${tagsArray}, - ${typeof tagsArray} - ${Array.isArray(tagsArray)}`);
+	log.debug(`Tags: - ${tagsArray} - isArray: ${Array.isArray(tagsArray)}`);
 	const tagIntArray = tagsArray.map(tag => {
 		return Number.parseInt(tag, 10);
-	})
+	});
+	log.debug(`TagIntArray: - ${tagIntArray} - isArray: ${Array.isArray(tagsArray)}`);
+
 	getFilteredYamlExport(tagIntArray).then(apps => {
 		const yamlFile = YAML.stringify(apps);
 

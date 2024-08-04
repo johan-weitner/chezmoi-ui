@@ -36,7 +36,7 @@ export const useDataManager = () => {
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const { gotoPage, getPageContent } = usePageManager();
 	const { seedGroups } = useGroupManager();
-	const { setSelectedAppKey } = useSelectionManager();
+	// const { setSelectedAppKey } = useSelectionManager();
 
 	const useBootstrap = () => {
 		return useEffect(() => {
@@ -45,7 +45,6 @@ export const useDataManager = () => {
 				appCollection &&
 				appCollection.length > 0
 			) {
-				log.warn("Found no apps");
 				return;
 			}
 			dispatch(setIsLoading(true));

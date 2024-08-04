@@ -52,8 +52,8 @@ const ApplicationGroupView = (props) => {
 				<Text fz="xl" fw={500} className={s.mainTitle} mt="md">
 					Groups
 				</Text>
+				<Toolbar />
 			</Group>
-			<Toolbar />
 
 			<SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" py={12}>
 				<ErrorBoundary

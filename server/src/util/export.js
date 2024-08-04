@@ -11,6 +11,7 @@ export const getYamlExport = async () => {
 
 export const getFilteredYamlExport = async (tags) => {
 	const apps = await getAppsByTag(tags);
+	log.debug("Export: Filtered apps: ", apps?.length);
 	const output = formatYaml(apps);
 	return output;
 };
@@ -89,7 +90,7 @@ const formatYaml = (apps) => {
 				appstore,
 				pacman,
 				port,
-				tags: appTags.map(tag => tag.tag.name),
+				tags: appTags?.map(tag => tag.tag.name),
 			},
 		});
 	}

@@ -15,7 +15,7 @@ import {
 import { styles } from "../util/styles.js";
 import { softwareYamlPath, softwareGroupYamlPath } from "./config.js";
 import { printAppLogo } from "./logo.js";
-import { log } from "util/log.js";
+import { log } from "../util/log.js";
 
 export const { success, warn, error, bold, italic, check, cross, wsign } =
 	styles;

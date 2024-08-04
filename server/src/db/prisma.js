@@ -238,6 +238,17 @@ export const getAppsByTag = async (tags) => {
 				},
 			},
 		},
+		include: {
+			appTags: {
+				select: {
+					tag: {
+						select: {
+							name: true,
+						},
+					},
+				},
+			}
+		},
 	});
 	return apps;
 };
