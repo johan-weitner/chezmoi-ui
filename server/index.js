@@ -28,7 +28,7 @@ import {
 	getGroupById,
 	updateAllowedTags
 } from "./src/db/prisma.js";
-import { log } from "./src/util/winston.js";
+import { log } from "./src/util/logger.js";
 import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
 
 const app = express();

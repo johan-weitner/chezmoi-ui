@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { log } from "../util/winston.js";
+import { log } from "../util/logger.js";
 import { application } from "express";
 
 const prisma = new PrismaClient();
@@ -141,10 +141,16 @@ export const getAppsByGroup = async (groupId) => {
 			groupId: Number.parseInt(groupId, 10),
 		},
 		include: {
-			application: true,
+			application: {
+				select: {
+					id: true,
+					name: true,
+					key: true
+				}
+			},
 		},
 	});
-	return apps;
+	return apps.map((app) => app.application);
 };
 
 export const getGroupsByApp = async (appId) => {

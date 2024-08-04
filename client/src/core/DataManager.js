@@ -95,7 +95,7 @@ export const useDataManager = () => {
 		const apps = selectPageContent(getState());
 		gotoPage(1);
 		dispatch(setSelectedAppKey(apps[0]?.key));
-		dispatch / setPageContent(apps);
+		dispatch(setPageContent(apps));
 		return apps;
 	};
 

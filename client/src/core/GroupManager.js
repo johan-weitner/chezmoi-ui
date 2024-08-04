@@ -11,6 +11,7 @@ import {
   setAppsInSelectedGroup,
   setSelectedAppGroups,
   setSelectedGroup,
+  setSelectedGroupId,
   setIsLoading,
   setError,
   setSelectedGroupKey,
@@ -40,6 +41,19 @@ export const useGroupManager = () => {
         console.error("GroupManager: Error fetching groups: ", err);
         toast.error("Error fetching groups: ", err);
       });
+  };
+
+  const selectGroup = (groupId) => {
+    dispatch(setSelectedGroup(getGroupById(groupId)));
+    dispatch(setSelectedGroupId(groupId));
+    fetchAppsInGroup(groupId).then(data => {
+      dispatch(setAppsInSelectedGroup(data.apps));
+    });
+  };
+
+  const getGroupById = (groupId) => {
+    if (!groupId) return;
+    return getState().appGroups.find((group) => group.id === groupId);
   };
 
   const getAppsInGroup = async (groupId) => {
@@ -149,38 +163,37 @@ export const useGroupManager = () => {
   };
 
   const gotoPrevGroup = () => {
-    const groupKeys = getState().appGroupKeys;
-    const currentIndex = groupKeys.indexOf(
-      getState().selectedGroupKey);
+    const groups = getState().appGroups;
+    const currentIndex = groups.indexOf(
+      getState().selectedGroup);
     if (currentIndex === 0) {
       return;
     }
-
-    rootStore.set.selectedGroupKey(groupKeys[currentIndex - 1]);
-    dispatch(setSelectedGroup(groupKeys[currentIndex - 1]));
-
-    getAppsInGroup(getSelectedGroupId());
+    const newId = groups[currentIndex - 1]?.id;
+    selectGroup(newId);
   };
 
   const gotoNextGroup = () => {
-    const groupKeys = getState().appGroupKeys;
-    const currentIndex = groupKeys.indexOf(
-      getState().selectedGroupKey);
-    if (currentIndex === groupKeys.length - 1) {
+    const groups = getState().appGroups;
+    const currentIndex = groups.indexOf(
+      getState().selectedGroup);
+    if (currentIndex === groups.length - 1) {
       return;
     }
-    dispatch(setSelectedGroupKey(groupKeys[currentIndex + 1]));
-    getAppsInGroup(getSelectedGroupId());
+    const newId = groups[currentIndex + 1]?.id;
+    selectGroup(newId);
   };
 
   return {
     seedGroups,
+    selectGroup,
     getAppsInGroup,
     putAppInGroup,
     kickAppFromGroup,
     gotoPrevGroup,
     gotoNextGroup,
     getGroupsByApp,
-    removeAllGroupRelations
+    removeAllGroupRelations,
+    getGroupById
   };
 };

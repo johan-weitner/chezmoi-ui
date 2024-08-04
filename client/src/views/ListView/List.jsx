@@ -10,8 +10,9 @@ import { useSelector, useDispatch } from "react-redux";
 const List = (props) => {
 	const dispatch = useDispatch();
 	const { deleteItem, editItem } = props;
-	const selectedKey = useSelector((state) => state.root.selectedAppKey);
-	const mainView = useSelector((state) => state.root.mainView);
+	const { selectedKey, mainView, selectedGroupId } = useSelector(
+		(state) => state.root,
+	);
 	const [currentKey, setCurrentKey] = useState(selectedKey);
 	const [currentFilter, setCurrentFilter] = useState(selectedKey);
 	const { setSelectedAppKey, getPageContent } = useClientManager();
@@ -62,6 +63,7 @@ const List = (props) => {
 								deleteItem={deleteItem}
 								editItem={editItem}
 								mainView={mainView}
+								selectedGroupId={selectedGroupId}
 							/>
 						);
 					})}
@@ -77,6 +79,7 @@ const List = (props) => {
 								deleteItem={deleteItem}
 								editItem={editItem}
 								mainView={mainView}
+								selectedGroupId={selectedGroupId}
 							/>
 						);
 					})}

@@ -18,6 +18,7 @@ export const ListItem = (props) => {
 		deleteItem,
 		editItem,
 		mainView,
+		selectedGroupId,
 	} = props;
 	const [isGroupMode, setIsGroupMode] = useState(mainView);
 	const [appKey, setAppKey] = useState(selectedAppKey);
@@ -47,12 +48,7 @@ export const ListItem = (props) => {
 				{isGroupMode ? (
 					<button
 						className={classes.itemBox}
-						onClick={() =>
-							putAppInGroup(
-								useSelector((state) => state.root.selectedGroupId),
-								app?.id,
-							)
-						}
+						onClick={() => putAppInGroup(selectedGroupId, app?.id)}
 						style={{ width: "100%" }}
 						type="button"
 					>
