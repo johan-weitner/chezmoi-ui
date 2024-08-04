@@ -1,72 +1,48 @@
-import {
-	Autocomplete,
-	Fieldset,
-	InputBase,
-	MultiSelect,
-	Pill,
-	TagsInput,
-} from "@mantine/core";
+import { Fieldset, TagsInput } from "@mantine/core";
+import { useSelector, useDispatch } from "react-redux";
 import { useClientManager } from "core/ClientManager";
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
-import { rootStore } from "store/store";
+import { log } from "utils/logger";
 
 const GroupSection = (props) => {
-	const { hoistAppTags, groups } = props;
+	const dispatch = useDispatch();
 	const [appGroups, setAppGroups] = useState();
-	const {
-		getAppTags,
-		tagApp,
-		getGroupsByApp,
-		removeAllGroupRelations,
-		putAppInGroup,
-		kickAppFromGroup,
-	} = useClientManager();
-	const whiteList = rootStore.get.appGroups().map((group) => group.name);
+	const { getGroupsByApp, putAppInGroup, kickAppFromGroup } =
+		useClientManager();
+
+	const allGroups = useSelector((state) => state.root.appGroups);
+	const whiteList = allGroups.map((group) => group.name);
+	const selectedApp = useSelector((state) => state.root.selectedApp);
+	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const isNewApp = useSelector((state) => state.root.isNewApp);
+	const selectedAppGroups = useSelector(
+		(state) => state.root.selectedAppGroups,
+	);
 
 	useEffect(() => {
-		getGroupsByApp(rootStore.get.selectedApp().id).then((groups) => {
-			const grps = rootStore.get.selectedAppGroups();
-			setAppGroups(grps?.map((group) => group.name));
+		if (isNewApp) return;
+		getGroupsByApp(selectedApp.id).then((groups) => {
+			setAppGroups(selectedAppGroups?.map((group) => group.name));
 		});
 	}, []);
 
 	useEffect(() => {
-		// if (!rootStore.get.selectedApp()) return;
-		getGroupsByApp(rootStore.get.selectedApp().id).then((groups) => {
-			const grps = rootStore.get.selectedAppGroups();
-			setAppGroups(grps?.map((group) => group.name));
+		if (isNewApp) return;
+		getGroupsByApp(selectedApp.id).then((groups) => {
+			setAppGroups(groups?.map((group) => group.name));
 		});
-	}, [rootStore.get.selectedAppKey()]);
+	}, [selectedAppKey]);
 
 	const getGroupId = (groupName) => {
-		const groupListModel = rootStore.get.appGroups();
-		const found = groupListModel.find((item) => item.name === groupName);
+		const found = allGroups.find((item) => item.name === groupName);
 		return found ? found.id : -1;
 	};
 
-	const getStrArray = (arr) => {
-		return Array.isArray(arr) && arr.map((t) => t.name);
-	};
-
-	const saveGroupRelations = (groupIds) => {
-		const groups = groupIds.map((group) => {
-			return getGroupId(group);
-		});
-		removeAllGroupRelations(rootStore.get.selectedApp().id).then(() => {
-			const promises = groups.map((groups) => {
-				return putAppInGroup(group, rootStore.get.selectedApp().id);
-			});
-		});
-	};
-
 	const onRemove = (value) => {
-		// (groupId, appId)
-		kickAppFromGroup(getGroupId(value), rootStore.get.selectedApp().id).then(
-			() => {
-				setAppGroups(appGroups.filter((group) => group !== value));
-			},
-		);
+		kickAppFromGroup(getGroupId(value), selectedApp.id).then(() => {
+			setAppGroups(appGroups.filter((group) => group !== value));
+		});
 	};
 
 	const onChange = (value) => {
@@ -74,11 +50,8 @@ const GroupSection = (props) => {
 		setAppGroups(value);
 		if (value.length > oldValues.length) {
 			const newGroup = value.filter((group) => !oldValues.includes(group));
-			putAppInGroup(
-				getGroupId(newGroup[0]),
-				rootStore.get.selectedApp().id,
-			).then(() => {
-				// console.log("GroupSection: Added app to group: ", newGroup);
+			putAppInGroup(getGroupId(newGroup[0]), selectedApp.id).then(() => {
+				log.debug("GroupSection: Added app to group: ", newGroup);
 			});
 		}
 	};

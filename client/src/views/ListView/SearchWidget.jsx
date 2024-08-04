@@ -7,20 +7,24 @@ import { useClientManager } from "core/ClientManager";
 import { rootStore } from "store/store";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
+import { useSelector, useDispatch } from "react-redux";
+import { log } from "utils/logger";
 
 import "components/neumorphic.css";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./SearchWidget.css";
 
 const SearchWidget = (props) => {
+	const dispatch = useDispatch();
 	const { groupView } = props;
 	const [isOpen, setIsOpen] = useState(groupView);
 	const ref = useClickOutside(() => setIsOpen(false));
 	const { setSelectedAppKey } = useClientManager();
+	const appCollection = useSelector((state) => state.root.appCollection);
 	useHotkeys("alt + f", () => setIsOpen(true));
 
 	const openApp = (key) => {
-		console.log("Open app", key);
+		log.debug("Open app", key);
 		setSelectedAppKey(key);
 	};
 
@@ -30,7 +34,7 @@ const SearchWidget = (props) => {
 	};
 
 	const handleOnFocus = () => {
-		console.log("Focused");
+		log.debug("Focused");
 	};
 
 	const styling = {
@@ -91,10 +95,7 @@ const SearchWidget = (props) => {
 						<header className="searchWidgetHeader">
 							<div style={{ width: 500 }}>
 								<ReactSearchAutocomplete
-									items={
-										rootStore.get.appCollection()?.length &&
-										rootStore.get.appCollection()
-									}
+									items={appCollection?.length && appCollection}
 									styling={styling}
 									resultStringKeyName="name"
 									onSelect={handleOnSelect}

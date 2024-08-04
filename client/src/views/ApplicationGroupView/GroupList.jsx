@@ -1,51 +1,14 @@
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { nanoid } from "nanoid";
-import { selectAppByKey } from "store/selectors";
-import { rootStore } from "store/store";
-import { useClientManager } from "core/ClientManager";
-import GroupListItem from "./GroupListItem";
-import classes from "../ListView/ListView.module.css";
-import {
-	Container,
-	Group,
-	rem,
-	Text,
-	SimpleGrid,
-	ActionIcon,
-	ThemeIcon,
-	List,
-	Card,
-	Skeleton,
-	Title,
-} from "@mantine/core";
+import { rem, ThemeIcon, List, Card, Title } from "@mantine/core";
 import "../../common.css";
 import { IconPackages } from "@tabler/icons-react";
 import s from "./GroupView.module.css";
+import { useGroupManager } from "core/GroupManager";
 
 const GroupList = (props) => {
-	const selectedKey = rootStore.get.selectedGroupKey();
-	const [currentKey, setCurrentKey] = useState(selectedKey);
-	const { setSelectedGroupKey } = useClientManager();
-	const [groups, setGroups] = useState(null);
-	const [groupKeys, setGroupKeys] = useState(null);
-
-	useEffect(() => {
-		setGroups(rootStore.get.appGroups());
-		setGroupKeys(rootStore.get.appGroupKeys());
-	}, [rootStore.get.appGroups(), rootStore.get.appGroupKeys()]);
-
-	const deleteItem = () => {};
-	const editItem = () => {};
-
-	useEffect(() => {
-		setCurrentKey(rootStore.get.selectedGroupKey());
-	}, [rootStore.use.selectedGroupKey()]);
-
-	const selectNewGroup = (key) => {
-		// console.log("Selecting group: ", key);
-		setCurrentKey(key);
-		setSelectedGroupKey(key);
-	};
+	const { selectGroup } = useGroupManager();
+	const appGroups = useSelector((state) => state.root.appGroups);
 
 	return (
 		<Card
@@ -84,14 +47,14 @@ const GroupList = (props) => {
 					</ThemeIcon>
 				}
 			>
-				{rootStore.use.appGroups()?.map((item) => {
+				{appGroups?.map((item) => {
 					return (
 						<List.Item
 							mb={0}
 							mt={0}
 							key={nanoid()}
 							className={s.listItem}
-							onClick={() => selectNewGroup(item.id)}
+							onClick={() => selectGroup(item.id)}
 						>
 							{item.name}
 						</List.Item>
@@ -100,31 +63,6 @@ const GroupList = (props) => {
 			</List>
 		</Card>
 	);
-
-	// return (
-	// 	<Card
-	// 		shadow="md"
-	// 		fz="sm"
-	// 		c="dimmed"
-	// 		mt="sm"
-	// 		className={classes.scrollContainer}
-	// 	>
-	// 		<Skeleton visible={rootStore?.use?.isLoading()}>
-	// 			{rootStore?.use?.appGroupKeys()?.map((item) => {
-	// 				return (
-	// 					<GroupListItem
-	// 						selectedGroupKey={currentKey}
-	// 						setSelectedGroupKey={selectNewGroup}
-	// 						group={item}
-	// 						key={nanoid()}
-	// 						deleteItem={() => {}}
-	// 						editItem={() => {}}
-	// 					/>
-	// 				);
-	// 			})}
-	// 		</Skeleton>
-	// 	</Card>
-	// );
 };
 
 // List.whyDidYouRender = true;

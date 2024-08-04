@@ -12,21 +12,23 @@ import {
 import { IconX } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
 import { rootStore } from "store/store";
-import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { log } from "utils/logger";
 
 const ExportFilter = (props) => {
+	const dispatch = useDispatch();
 	const { setExportIsOpen } = props;
 	const [selectedTags, setSelectedTags] = useState([]);
 	const ref = useClickOutside(() => setExportIsOpen(false));
 	const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 	useEffect(() => {
-		console.log("Selected tags: ", selectedTags);
+		log.debug("Selected tags: ", selectedTags);
 	}, [selectedTags]);
 
 	const handleChange = (tagId, e) => {
@@ -38,7 +40,7 @@ const ExportFilter = (props) => {
 	};
 
 	const downloadYaml = () => {
-		console.log("Download YAML filtered on tags: ", selectedTags);
+		log.debug("Download YAML filtered on tags: ", selectedTags);
 		if (selectedTags.length === 0) return window.open(`${BASE_URL}/download`);
 		window.open(`${BASE_URL}/filtered-download?tags=${selectedTags.join(",")}`);
 	};
@@ -49,8 +51,8 @@ const ExportFilter = (props) => {
 				YAML Export
 			</Title>
 			<Text size="lg" mb="40px">
-				Choose what tag(s) to filter the export on, or leave empty to export
-				everything.
+				Choose what tag(s) to filter the export on, or leave empty to export a
+				complete list.
 			</Text>
 			<Table mb={30}>
 				<Table.Thead>
@@ -60,7 +62,7 @@ const ExportFilter = (props) => {
 					</Table.Tr>
 				</Table.Thead>
 				<Table.Tbody>
-					{rootStore.get.allowedTags()?.map((tag) => (
+					{useSelector((state) => state.root.allowedTags)?.map((tag) => (
 						<Table.Tr key={nanoid()}>
 							<Table.Td>
 								<Checkbox

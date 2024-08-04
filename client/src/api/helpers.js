@@ -1,5 +1,6 @@
 import { appModelInstallerFields } from "api/appModel";
 import { APP_FORM } from "constants/appForm";
+import { log } from 'utils/logger';
 
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 
@@ -43,12 +44,11 @@ export const mapEntityToDb = (app) => {
 	if (app.tags?.length > 0) {
 		entity.tags = JSON.stringify(app.tags);
 	}
-	DEBUG &&
-		console.log(
-			`Mapped app data:
+	log.debug(
+		`Mapped app data:
     - Entity:`,
-			entity,
-		);
+		entity,
+	);
 	return entity;
 };
 

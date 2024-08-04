@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Group, Card, rem, Text, SimpleGrid } from "@mantine/core";
 import { rootStore } from "store/store";
 import "../../common.css";
@@ -14,21 +15,21 @@ import Toolbar from "./Toolbar";
 import s from "./GroupView.module.css";
 
 const ApplicationGroupView = (props) => {
+	const dispatch = useDispatch();
 	const [groups, setGroups] = useState(null);
 	const [groupKeys, setGroupKeys] = useState(null);
 
+	const appGroups = useSelector((state) => state.root.appGroups);
+	const appGroupKeys = useSelector((state) => state.root.appGroupKeys);
+	const selectedGroupId = useSelector((state) => state.root.selectedGroupId);
+
 	useEffect(() => {
-		setGroups(rootStore.get.appGroups());
-		setGroupKeys(rootStore.get.appGroupKeys());
-	}, [rootStore.get.appGroups(), rootStore.get.appGroupKeys()]);
+		setGroups(appGroups);
+		setGroupKeys(appGroupKeys);
+	}, [appGroups, appGroupKeys]);
 
 	const deleteItem = () => {};
 	const editItem = () => {};
-	const selectNewGroup = (key) => {
-		console.log("Selecting group: ", key);
-		setCurrentKey(key);
-		setSelectedGroupKey(key);
-	};
 
 	return (
 		<>
@@ -51,8 +52,8 @@ const ApplicationGroupView = (props) => {
 				<Text fz="xl" fw={500} className={s.mainTitle} mt="md">
 					Groups
 				</Text>
+				<Toolbar />
 			</Group>
-			<Toolbar />
 
 			<SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" py={12}>
 				<ErrorBoundary
@@ -60,7 +61,7 @@ const ApplicationGroupView = (props) => {
 						<FallbackComponent error={error.message} />
 					)}
 				>
-					{rootStore.use.selectedGroupKey() ? (
+					{selectedGroupId ? (
 						<ListView isGroupView={true} />
 					) : (
 						<GroupList deleteItem={deleteItem} editItem={editItem} />
@@ -71,9 +72,7 @@ const ApplicationGroupView = (props) => {
 						<FallbackComponent error={error.message} />
 					)}
 				>
-					{(rootStore.use.selectedGroupKey() && <GroupDetailView />) || (
-						<Legend />
-					)}
+					{(selectedGroupId && <GroupDetailView />) || <Legend />}
 				</ErrorBoundary>
 			</SimpleGrid>
 			{/* </Card> */}

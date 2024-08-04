@@ -4,34 +4,35 @@ import { EditedIndicator } from "components/Indicator";
 import { ICON } from "constants/icons";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
-import { MAIN_VIEWS } from "store/store";
+import { MAIN_VIEWS, getState } from "store/store";
 import { useGroupManager } from "core/GroupManager";
-import { getSelectedGroupId } from "store/selectors";
+import { useSelector, useDispatch } from "react-redux";
 
 export const ListItem = (props) => {
-	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
-		props;
-	const [isGroupMode, setIsGroupMode] = useState(false);
-
-	const className =
-		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
+	const dispatch = useDispatch();
+	const {
+		selectedAppKey,
+		setSelectedAppKey,
+		app,
+		deleteItem,
+		editItem,
+		mainView,
+		selectedGroupId,
+	} = props;
+	const [isGroupMode, setIsGroupMode] = useState(mainView);
+	const [appKey, setAppKey] = useState(selectedAppKey);
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
 	const { putAppInGroup } = useGroupManager();
 
 	useEffect(() => {
-		// console.log("App: ", app);
-	}, []);
-
-	useEffect(() => {
-		setIsGroupMode(rootStore.get.mainView() === MAIN_VIEWS[1]);
-	}, [rootStore.use.mainView()]);
+		setIsGroupMode(mainView === MAIN_VIEWS[1]);
+	}, [mainView]);
 
 	const selectApp = (key) => {
-		if (rootStore.get.mainView() === MAIN_VIEWS[0]) {
+		if (mainView === MAIN_VIEWS[0]) {
 			setSelectedAppKey(key);
-		} else if (rootStore.get.mainView() === MAIN_VIEWS[1]) {
+		} else if (mainView === MAIN_VIEWS[1]) {
 			putAppInGroup(key);
 		}
 	};
@@ -42,14 +43,12 @@ export const ListItem = (props) => {
 		>
 			<div
 				style={{ position: "relative", width: "100%" }}
-				className={className}
+				className={selectedAppKey === app.key ? classes.selected : null}
 			>
 				{isGroupMode ? (
 					<button
 						className={classes.itemBox}
-						onClick={() =>
-							putAppInGroup(rootStore.get.selectedGroupId(), app?.id)
-						}
+						onClick={() => putAppInGroup(selectedGroupId, app?.id)}
 						style={{ width: "100%" }}
 						type="button"
 					>
@@ -73,7 +72,7 @@ export const ListItem = (props) => {
 						)}{" "}
 					</button>
 				)}
-				{rootStore.use.mainView() === MAIN_VIEWS[0] && (
+				{mainView === MAIN_VIEWS[0] && (
 					<div style={app?.done ? { display: "none" } : { display: "block" }}>
 						<ICON.edit
 							style={{
@@ -104,7 +103,7 @@ export const ListItem = (props) => {
 						{indicateEdit}
 					</div>
 				)}
-				{rootStore.use.mainView() === MAIN_VIEWS[1] && (
+				{mainView === MAIN_VIEWS[1] && (
 					<>
 						<ICON.arrowRight
 							style={{

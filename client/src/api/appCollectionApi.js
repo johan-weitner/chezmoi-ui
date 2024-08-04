@@ -1,7 +1,10 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
-import { rootStore } from "store/store";
+import {
+	getState
+} from "store/store";
+import { log } from 'utils/logger';
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
@@ -23,7 +26,6 @@ export const fetchAppGroups = async () => {
 		.get(`${BASE_URL}/groups`)
 		.then((response) => {
 			const { data } = response;
-			// testProcessMetaGroups();
 			const processedData = data?.groups && processMetaGroups(data.groups);
 			return { ...processedData };
 		})
@@ -31,7 +33,7 @@ export const fetchAppGroups = async () => {
 			throw error;
 		});
 	return apps;
-}; // fetchAppsInGroup,
+};
 
 export const fetchAppsInGroup = async (groupId) => {
 	if (!groupId) return;
@@ -130,12 +132,11 @@ export const updateApp = async (updatedData) => {
 			tags: updatedData.tags === null ? "" : updatedData.tags,
 		})
 		.then((response) => {
-			DEBUG &&
-				console.log(
-					`API: Updating app:
+			log.debug(
+				`API: Updating app:
 		- Tags: `,
-					response.data,
-				);
+				response.data,
+			);
 			return response.data;
 		})
 		.catch((error) => {
@@ -146,7 +147,7 @@ export const updateApp = async (updatedData) => {
 export const saveNewApp = async (data) => {
 	const app = mapEntityToDb(data);
 	const fixedNullValuesApp = transformNullValues(app);
-	DEBUG && console.log("API: Saving new app:", fixedNullValuesApp);
+	log.debug("API: Saving new app:", fixedNullValuesApp);
 
 	return axios
 		.post(`${BASE_URL}/addNode`, {
@@ -163,11 +164,12 @@ export const saveNewApp = async (data) => {
 		});
 };
 
-export const deleteApp = async (key) => {
+export const deleteApp = async (id) => {
+	log.debug("Deleting app with id: ", id);
 	const result = await axios
 		.delete(`${BASE_URL}/deleteNode`, {
 			params: {
-				key: key,
+				id: id,
 			},
 		})
 		.then((response) => {
@@ -182,7 +184,7 @@ export const deleteApp = async (key) => {
 export const addApp = (data) => {
 	const app = mapEntityToDb(data);
 	app.edited = "true";
-	DEBUG && console.log("API: Mapped app data:", app);
+	log.debug("API: Mapped app data:", app);
 	for (const key of Object.keys(app)) {
 		if (!app[key]) {
 			app[key] = "";
@@ -191,8 +193,10 @@ export const addApp = (data) => {
 };
 
 export const markAppDone = async (app, flag) => {
-	const flaggedApp = Object.assign(app, { done: flag });
-	updateApp(flaggedApp)
+	// const flaggedApp = Object.assign(app, { done: flag });
+	const update = { key: app.key, done: flag };
+	log.debug("Flagged app: ", update);
+	updateApp(update)
 		.then((response) => {
 			return response;
 		})
@@ -215,8 +219,8 @@ export const getAllTags = async () => {
 
 export const addAppTags = async (appId, tags) => {
 	if (DEBUG) {
-		console.log("AppId: ", Number.parseInt(appId, 10) || appId, typeof appId);
-		console.log("Tags: ", tags);
+		log.debug("AppId: ", Number.parseInt(appId, 10) || appId, typeof appId);
+		log.debug("Tags: ", tags);
 	}
 
 	return axios
@@ -246,19 +250,19 @@ export const getTagsByAppId = async (appId) => {
 			throw error;
 		});
 
-	DEBUG && console.log("Got tags for appId: ", appId, tags);
+	log.debug("Got tags for appId: ", appId, tags);
 	return tags;
 };
 
 export const getTagId = tagName => {
-	const existingTags = rootStore.get.allowedTags();
+	const existingTags = getState().allowedTags;
 	const found = existingTags.find(item => item.name === tagName);
-	console.log("Found tag: ", found);
+	log.debug("Found tag: ", found);
 	return found ? found.id : -1;
 }
 
 export const updateTagWhiteList = async (tags) => {
-	const existingTags = rootStore.get.allowedTags();
+	const existingTags = getState().allowedTags;
 	const existingTagNames = existingTags.map(tag => tag.name);
 	const newTags = tags.filter(tag => !existingTagNames.includes(tag));
 	const removedTags = existingTagNames.filter(tag => !tags.includes(tag));
@@ -268,7 +272,7 @@ export const updateTagWhiteList = async (tags) => {
 		tagsToRemove = removedTags.map(tag => {
 			return getTagId(tag);
 		});
-		console.log("Tags to remove", tagsToRemove);
+		log.debug("Tags to remove", tagsToRemove);
 	}
 
 	const allowedTags = await axios
@@ -279,7 +283,7 @@ export const updateTagWhiteList = async (tags) => {
 			},
 		})
 		.then((response) => {
-			console.log("Allowed tags updated: ", response.data);
+			log.debug("Allowed tags updated: ", response.data);
 			return response.data;
 		})
 		.catch((error) => {

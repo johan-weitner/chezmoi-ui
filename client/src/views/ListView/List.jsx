@@ -1,31 +1,42 @@
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { selectAppByKey } from "store/selectors";
 import { rootStore } from "store/store";
 import { useClientManager } from "core/ClientManager";
 import { ListItem } from "./ListItem";
 import classes from "./ListView.module.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const List = (props) => {
+	const dispatch = useDispatch();
 	const { deleteItem, editItem } = props;
-	const selectedKey = rootStore.get.selectedAppKey();
+	const { selectedKey, mainView, selectedGroupId } = useSelector(
+		(state) => state.root,
+	);
 	const [currentKey, setCurrentKey] = useState(selectedKey);
-	const [activeFilter, setActiveFilter] = useState(selectedKey);
+	const [currentFilter, setCurrentFilter] = useState(selectedKey);
 	const { setSelectedAppKey, getPageContent } = useClientManager();
 
+	const {
+		appCollection,
+		activeFilter,
+		filteredList,
+		selectedAppKey,
+		pageContent,
+		isLoading,
+	} = useSelector((state) => state.root);
+
 	useEffect(() => {
-		// console.log("App collection refreshed");
 		getPageContent();
-	}, [rootStore.use.appCollection()]);
+	}, [appCollection]);
 
 	useEffect(() => {
-		setCurrentKey(rootStore.get.selectedAppKey());
-	}, [rootStore.use.selectedAppKey()]);
+		setCurrentKey(selectedAppKey);
+	}, [selectedAppKey]);
 
 	useEffect(() => {
-		setActiveFilter(rootStore.get.activeFilter());
-	}, [rootStore.use.activeFilter()]);
+		setCurrentFilter(activeFilter);
+	}, [activeFilter]);
 
 	const selectNewApp = (key) => {
 		setCurrentKey(key);
@@ -40,9 +51,9 @@ const List = (props) => {
 			mt="sm"
 			className={classes.scrollContainer}
 		>
-			<Skeleton visible={rootStore?.use?.isLoading()}>
-				{!activeFilter &&
-					rootStore?.use?.pageContent()?.map((item) => {
+			<Skeleton visible={isLoading}>
+				{!currentFilter &&
+					useSelector((state) => state.root.pageContent)?.map((item) => {
 						return (
 							<ListItem
 								selectedAppKey={currentKey}
@@ -51,11 +62,14 @@ const List = (props) => {
 								key={nanoid()}
 								deleteItem={deleteItem}
 								editItem={editItem}
+								mainView={mainView}
+								selectedGroupId={selectedGroupId}
 							/>
 						);
 					})}
-				{activeFilter &&
-					rootStore?.use?.filteredList()?.map((item) => {
+				{currentFilter &&
+					// rootStore?.use?.filteredList()?.map((item) => {
+					useSelector((state) => state.root.filteredList)?.map((item) => {
 						return (
 							<ListItem
 								selectedAppKey={currentKey}
@@ -64,6 +78,8 @@ const List = (props) => {
 								key={nanoid()}
 								deleteItem={deleteItem}
 								editItem={editItem}
+								mainView={mainView}
+								selectedGroupId={selectedGroupId}
 							/>
 						);
 					})}

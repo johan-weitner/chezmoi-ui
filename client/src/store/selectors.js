@@ -3,28 +3,30 @@ import { createSelector } from "reselect";
 import { rootStore } from "./store";
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+import { useSelector, useDispatch } from "react-redux";
+import {
+	getState,
+	store,
+	setSelectedAppKey,
+} from "store/store";
+import { filterModel } from "api/filters";
 
-const getAppCollection = (state) => state?.appCollection;
-export const getPage = (state) => state.page;
-export const getPageCount = (state) => state.pageCount;
-export const getPageContent = (state) => state.pageContent;
-export const getPageSize = (state) => state.pageSize;
-export const getInReverse = (state) => state.inReverse;
-export const getFilterModel = (state) => state.filterModel;
-export const getActiveFilter = (state) => state.activeFilter;
-export const getSelectedApp = (state) => state.selectedApp;
-export const getSelectedAppKey = (state) => state.selectedAppKey;
-export const getEditMode = (state) => state.editMode;
+const { dispatch } = store;
 
-const getMemoizedAppCollection = createSelector(
-	[getAppCollection],
-	(appCollection) => appCollection,
-);
+export const getAppCollection = getState().appCollection;
+export const getPage = getState().page;
+export const getPageCount = getState().pageCount;
+export const getPageContent = getState().pageContent;
+export const getPageSize = getState().pageSize;
+export const getInReverse = getState().inReverse;
+export const getFilterModel = getState().filterModel;
+export const getActiveFilter = getState().activeFilter;
+export const getSelectedApp = getState().selectedApp;
+export const getSelectedAppKey = getState().selectedAppKey;
+export const getEditMode = getState().editMode;
 
 export const getSearchBase = () => {
-	const { appCollection } =
-		rootStore.store.getState();
-	console.log(appCollection);
+	const appCollection = getState().appCollection;
 	return appCollection?.map((app) => {
 		return {
 			id: app.key,
@@ -35,8 +37,8 @@ export const getSearchBase = () => {
 };
 
 export const getPreviousKey = (state) => {
-	const appCollection = rootStore.get.appCollection();
-	const index = getCurrentIndex(state);
+	const appCollection = getState().appCollection;
+	const index = getCurrentIndex();
 	if (index > 0) {
 		return appCollection[index - 1].key;
 	}
@@ -45,7 +47,7 @@ export const getPreviousKey = (state) => {
 
 export const getNextKey = () => {
 	const index = getCurrentIndex();
-	const appCollection = rootStore.get.appCollection();
+	const appCollection = getState().appCollection;
 	if (index < rootStore.get.totalCount() - 1) {
 		return appCollection[index + 1].key;
 	}
@@ -53,48 +55,32 @@ export const getNextKey = () => {
 };
 
 export const selectPageContent = () => {
-	DEBUG && console.log("SELECTOR: selectPageContent");
-	const { appCollection, page, inReverse, pageContent } =
-		rootStore.store.getState();
+	const { appCollection, page, inReverse } = getState();
 	const skip = page < 2 ? 0 : (page - 1) * PAGE_SIZE;
 	const cutoff = skip + Number.parseInt(PAGE_SIZE, 10);
-	DEBUG && console.log("Slicing: ", page, skip, cutoff);
 	const slice =
 		(Array.isArray(appCollection) &&
 			appCollection.length > 20 &&
 			appCollection.slice(skip, cutoff)) ||
 		[];
-
-	rootStore.set.selectedAppKey(
-		inReverse ? slice[slice.length - 1]?.key : slice[0]?.key,
-	);
-
-	DEBUG && pageContent && console.log(pageContent[0]?.key);
-	DEBUG && pageContent && console.log(slice[0]?.key);
-	DEBUG && console.log(pageContent);
+	dispatch(setSelectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key));
 	return slice;
 };
 
 export const getCurrentIndex = () => {
-	const appCollection = rootStore.get.appCollection();
-	const selectedAppKey = rootStore.get.selectedAppKey();
+	const appCollection = getState().appCollection;
+	const selectedAppKey = getState().selectedAppKey;
 	return findIndex(selectedAppKey, appCollection);
 };
 
 export const selectApp = (selectedAppKey) => {
-	const appCollection = rootStore.get.appCollection();
-	DEBUG && console.log("SELECTORS: selectApp: ", appCollection);
-	return rootStore.get
-		.appCollection()
-		.find((app) => app.key === selectedAppKey);
+	const appCollection = getState().appCollection;
+	return appCollection.find((app) => app.key === selectedAppKey);
 };
 
 export const selectAppByKey = (key) => {
-	const app = rootStore.get.appCollection().find((app) => app.key === key);
-	DEBUG &&
-		console.log(`SELECTORS:
-    - AppKey: ${app.key}
-    - Tags: "${app.tags}"`);
+	const appCollection = getState().appCollection;
+	const app = appCollection.find((app) => app.key === key);
 	if (!app) {
 		throw new Error(`App with key ${key} not found`);
 	}
@@ -102,7 +88,8 @@ export const selectAppByKey = (key) => {
 };
 
 export const getAppById = (id) => {
-	const app = rootStore.get.appCollection().find((app) => app.id === id);
+	const appCollection = getState().appCollection;
+	const app = appCollection.find((app) => app.id === id);
 	if (!app) {
 		throw new Error(`App with id ${id} not found`);
 	}
@@ -110,14 +97,13 @@ export const getAppById = (id) => {
 };
 
 export const getFilteredList = (filter, appCollection) => {
-	const filters = rootStore.get.filterModel();
-	return filters[filter].method(appCollection) || [];
+	return filterModel[filter].method(appCollection) || [];
 };
 
 export const getSelectedGroupId = () => {
-	const selectedGroupKey = rootStore.get.selectedGroupKey();
-	const group = rootStore.get.appGroups().find((group) => group.name === selectedGroupKey);
+	const selectedGroupKey = getState().selectedGroupKey;
+	const appGroups = getState().appGroups;
+	const group = appGroups.find((group) => group.name === selectedGroupKey);
 	return group?.id;
 };
 
-export { getMemoizedAppCollection as getAppCollection };

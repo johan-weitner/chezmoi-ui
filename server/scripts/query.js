@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { log } from 'utils/logger';
 
 const prisma = new PrismaClient()
 
@@ -23,10 +24,10 @@ const addAppTags = async (tagId, appId) => {
         tagId: tagId,
       },
     });
-    console.log(appTag);
+    log.info(appTag);
     return appTag;
   } catch (e) {
-    console.log(e.message, e);
+    log.error(e.message, e);
     return e;
   }
 };
@@ -39,10 +40,10 @@ const deleteAppTag = async (tagId, appId) => {
         tagId: tagId,
       },
     });
-    console.log(`${result.count} relation(s) deleted.`);
+    log.info(`${result.count} relation(s) deleted.`);
     return result;
   } catch (e) {
-    console.error(e.message, e);
+    log.error(e.message, e);
     return e;
   }
 };
@@ -58,10 +59,10 @@ const getTagsByAppId = async (appId) => {
         },
       },
     });
-    console.log("Tags related to the application:", tags);
+    log.info("Tags related to the application:", tags);
     return tags;
   } catch (e) {
-    console.error(e.message, e);
+    log.error(e.message, e);
     return e;
   }
 };
@@ -80,7 +81,7 @@ main()
     await prisma.$disconnect()
   })
   .catch(async (e) => {
-    console.error(e)
+    log.error(e)
     await prisma.$disconnect()
     process.exit(1)
   })

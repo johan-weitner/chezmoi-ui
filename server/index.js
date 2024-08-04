@@ -28,11 +28,13 @@ import {
 	getGroupById,
 	updateAllowedTags
 } from "./src/db/prisma.js";
-import { log } from "./src/util/winston.js";
+import { log } from "./src/util/logger.js";
 import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
 
 const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
+
+log.setLevel(process.env.LOG_LEVEL || "INFO");
 boot(); // Set up auxillary infrastructure
 
 app.set("json spaces", 2);
@@ -84,9 +86,9 @@ app.post("/updateNode", (req, res) => {
 });
 
 app.post("/addNode", (req, res) => {
-	console.log("Req.body: ", req.body);
+	log.debug("Req.body: ", req.body);
 	const { data } = req.body;
-	console.log("Req params: ", data);
+	log.debug("Req params: ", data);
 	addApp(data)
 		.then((app) => {
 			res.status(200).json(app);
@@ -124,9 +126,9 @@ app.get("/getTagsByAppId", (req, res) => {
 });
 
 app.post("/addAppTags", (req, res) => {
-	console.log("Req.body: ", req.body);
+	log.debug("Req.body: ", req.body);
 	const { tagId, appId } = req.body.data;
-	console.log("Req params: ", req.body.data);
+	log.debug("Req params: ", req.body.data);
 	updateArticleTags(appId, tagId)
 		.then(() => {
 			res.status(200).json();
@@ -140,7 +142,7 @@ app.post("/addAppTags", (req, res) => {
 
 app.delete("/deleteAppTag", (req, res) => {
 	const { appId, tagId } = req.body.data;
-	console.log("Req params: ", req.body.data);
+	log.debug("Req params: ", req.body.data);
 	deleteAppTag(tagId, appId)
 		.then((res) => {
 			res.status(200).json(res);
@@ -167,25 +169,30 @@ app.get('/download', (req, res) => {
 		res.end();
 
 	}).catch(e => {
-		console.log("Error: ", e);
+		log.error("Error: ", e);
 		res.status(500).json({
 			error: e.message,
 		});
 	});
 });
 
+// start: Tags: - 3, 4, - object - true
+// start: App tags: undefined
+// start: Error:  Cannot read properties of undefined(reading 'map')
 app.get('/filtered-download', (req, res) => {
 	const { tags } = req.query;
 	const tagsArray = tags.split(",");
-	log.info(`Tags: - ${tagsArray}, - ${typeof tagsArray} - ${Array.isArray(tagsArray)}`);
+	log.debug(`Tags: - ${tagsArray} - isArray: ${Array.isArray(tagsArray)}`);
 	const tagIntArray = tagsArray.map(tag => {
 		return Number.parseInt(tag, 10);
-	})
+	});
+	log.debug(`TagIntArray: - ${tagIntArray} - isArray: ${Array.isArray(tagsArray)}`);
+
 	getFilteredYamlExport(tagIntArray).then(apps => {
 		const yamlFile = YAML.stringify(apps);
 
 		const filename = `software-custom-(${tagsArray.join("-")})-${new Date().getTime()}.yaml`;
-		log.info(`Filename: - ${filename}`);
+		log.debug(`Filename: - ${filename}`);
 		// const filename = `software-custom-${new Date().getTime()}.yaml`;
 		const mimetype = "text/x-yaml";
 
@@ -196,6 +203,7 @@ app.get('/filtered-download', (req, res) => {
 		res.end();
 
 	}).catch(e => {
+		log.error("Error: ", e.message);
 		res.status(500).json({
 			error: e.message,
 		});
@@ -212,7 +220,7 @@ app.get("/software-groups", (req, res) => {
 
 app.get("/groups", (req, res) => {
 	getAllGroups().then(groups => {
-		console.log("SERVER: Got groups: ", groups?.length);
+		log.debug("SERVER: Got groups: ", groups?.length);
 		res.json({
 			groups: groups,
 		});
@@ -231,7 +239,7 @@ app.get("/group-apps", (req, res) => {
 			apps: apps,
 		});
 	}).catch(e => {
-		console.error(e.message);
+		log.error(e.message);
 		res.status(500).json({
 			error: e.message,
 		});
@@ -245,7 +253,7 @@ app.get("/app-groups", (req, res) => {
 			groups: groups,
 		});
 	}).catch(e => {
-		console.error(e.message);
+		log.error(e.message);
 		res.status(500).json({
 			error: e.message,
 		});
@@ -285,7 +293,7 @@ app.delete("/removeAppFromGroup", (req, res) => {
 			res.status(200).json(data);
 		})
 		.catch((e) => {
-			console.error(e.message);
+			log.error(e.message);
 			res.status(500).json({
 				error: e.message,
 			});
@@ -318,7 +326,7 @@ app.post("/updateAllowedTags", (req, res) => {
 			res.status(200).json(allowedTags);
 		})
 		.catch((e) => {
-			console.error(e.message);
+			log.error(e.message);
 			res.status(500).json({
 				error: e.message,
 			});
@@ -328,9 +336,3 @@ app.post("/updateAllowedTags", (req, res) => {
 app.listen(port, () => {
 	log.info(`\nServer is listening at port ${port} `);
 });
-
-
-// getAllGroups,
-// 	getGroupByName,
-// 	addAppToGroup,
-// 	removeAppFromGroup

@@ -13,11 +13,15 @@ import { rootStore } from "store/store";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
 import s from "./DetailView.module.css";
+import { useSelector, useDispatch } from "react-redux";
 
 const DetailsBox = (props) => {
+	const dispatch = useDispatch();
 	const { selectedApp, editMode } = props;
 	const { editItem, deleteItem, getAppTags } = useClientManager();
 	const indicateEdit = selectedApp?.edited ? <EditedIndicator /> : null;
+	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const selectedAppTags = useSelector((state) => state.root.selectedAppTags);
 
 	const appHasInstaller = (app) => {
 		for (const field of appModelInstallerFields) {
@@ -79,10 +83,10 @@ const DetailsBox = (props) => {
 					</Text>
 				)}
 			</div>
-			{rootStore.use.selectedAppTags() && (
+			{selectedAppTags && (
 				<div style={{ marginTop: "10px" }}>
 					Tags:{" "}
-					{rootStore.get.selectedAppTags()?.map((tag) => {
+					{selectedAppTags?.map((tag) => {
 						return (
 							<Badge
 								key={nanoid()}
@@ -100,7 +104,7 @@ const DetailsBox = (props) => {
 
 			<Group justify="center" p="md">
 				<Button
-					onClick={() => editItem(rootStore.get.selectedAppKey())}
+					onClick={() => editItem(selectedAppKey)}
 					className={classes.editBtn}
 					leftSection={
 						<ICON.edit

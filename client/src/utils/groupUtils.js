@@ -1,3 +1,4 @@
+import { log } from 'utils/logger';
 /**
  * The YAML to JSON conversion - like JSON - can't have nodes referencing eachother.
  * Instead, the referenced node is copied to the node that references it, creating
@@ -8,11 +9,11 @@
 
 export const processMetaGroups = (data) => {
   if (!data || typeof data !== 'object') {
-    console.log("Invalid data: ", data);
+    log.debug("Invalid data: ", data);
     return data;
   }
 
-  // console.log("Un processed data: ", data);
+  // log.debug("Un processed data: ", data);
 
   const groupMap = {};
 
@@ -45,7 +46,7 @@ export const processMetaGroups = (data) => {
   //   // data[key].flat().sort();
   // }
 
-  // console.log("Processed data: ", data);
+  // log.debug("Processed data: ", data);
 
   // Filter out the meta groups, those are off edited manually
   return Object.fromEntries(Object.entries(data).filter(([key, value]) => key[0] !== '_'));
@@ -74,7 +75,7 @@ export const testProcessMetaGroups = () => {
 
   // const processedData = processMetaGroups(dataset);
 
-  // console.assert(JSON.stringify(processedData) === JSON.stringify(expectedOutput), "Test failed");
-  // console.log("Test passed");
+  // consolee.assert(JSON.stringify(processedData) === JSON.stringify(expectedOutput), "Test failed");
+  // log.info("Test passed");
 };
 

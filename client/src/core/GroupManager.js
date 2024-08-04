@@ -2,71 +2,85 @@ import {
   fetchAppGroups, fetchAppsInGroup, addAppToGroup, removeAppFromGroup, fetchGroupApps
 } from "api/appCollectionApi";
 import { toast } from "sonner";
-import { rootStore } from "store/store";
 import { getAppById, getSelectedGroupId } from "store/selectors";
-
-const DEBUG = import.meta.env.VITE_DEBUG === "true";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  rootStore,
+  getState,
+  store,
+  setAppsInSelectedGroup,
+  setSelectedAppGroups,
+  setSelectedGroup,
+  setSelectedGroupId,
+  setIsLoading,
+  setError,
+  setSelectedGroupKey,
+  setAppGroups,
+  setAppGroupKeys
+} from "store/store";
+import { log } from 'utils/logger';
 
 export const useGroupManager = () => {
+  const { dispatch } = store;
+
+  const toggleIsLoading = (isLoading) => {
+    dispatch(setIsLoading(isLoading));
+  };
 
   const seedGroups = async () => {
     await fetchAppGroups()
       .then((groups) => {
         const groupsArray = Object.values(groups);
-
         if (!groupsArray) {
           return;
         }
-        rootStore.set.appGroups(groupsArray);
+        dispatch(setAppGroups(groupsArray));
         const groupKeys = groupsArray.map(group => { return group.name; });
-        rootStore.set.appGroupKeys(groupKeys);
-
-        DEBUG &&
-          console.log(
-            `GroupManager: Seeding groups: Got ${groupsArray?.length} groups`,
-          );
-
-        DEBUG &&
-          console.log(`GroupManager: Populated global state:
-						Groups: ${rootStore.get.appGroups()?.length}
-						Group keys: ${rootStore.get.appGroupKeys()?.length}`);
+        dispatch(setAppGroupKeys(groupKeys));
       })
       .catch((err) => {
+        log.error("GroupManager: Error fetching groups: ", err);
         toast.error("Error fetching groups: ", err);
       });
   };
 
+  const selectGroup = (groupId) => {
+    dispatch(setSelectedGroup(getGroupById(groupId)));
+    dispatch(setSelectedGroupId(groupId));
+    fetchAppsInGroup(groupId).then(data => {
+      dispatch(setAppsInSelectedGroup(data.apps));
+    });
+  };
+
+  const getGroupById = (groupId) => {
+    if (!groupId) return;
+    return getState().appGroups.find((group) => group.id === groupId);
+  };
+
   const getAppsInGroup = async (groupId) => {
     if (!groupId) return;
-    rootStore.set.isLoading(true);
+    toggleIsLoading(true);
     await fetchAppsInGroup(groupId)
       .then((data) => {
-        rootStore.set.isLoading(false);
+        toggleIsLoading(false);
         if (!data) throw new Error(`No data returned for group: ${groupId}`);
         const apps = Object.values(data.apps).map(item => { return item.application });
-        rootStore.set.appsInSelectedGroup(Object.values(apps));
+        dispatch(setAppsInSelectedGroup(Object.values(apps)));
       })
       .catch((err) => {
-        rootStore.set.isLoading(false);
-        rootStore.set.error(err);
+        toggleIsLoading(false);
+        dispatch(setError(err));
         toast.error(err?.message);
-        console.error("GroupManager: Error fetching apps in group: ", err);
+        log.error("GroupManager: Error fetching apps in group: ", err);
       });
   };
 
-
-
-
-
-
-
-
   const getGroupsByApp = async (appId) => {
     if (!appId) return;
-    rootStore.set.isLoading(true);
-    await fetchGroupApps(appId)
+    toggleIsLoading(true);
+    const groups = await fetchGroupApps(appId)
       .then((res) => {
-        rootStore.set.isLoading(false);
+        toggleIsLoading(false);
         const { data } = res;
         const groups = data.groups;
         const groupArr = groups?.map(group => {
@@ -75,110 +89,112 @@ export const useGroupManager = () => {
             name: group.group.name,
           };
         });
-        rootStore.set.selectedAppGroups(groupArr);
+        log.debug("GroupManager: Groups for app: ", groupArr);
+        dispatch(setSelectedAppGroups(groupArr));
         return groupArr;
       })
       .catch((err) => {
-        rootStore.set.isLoading(false);
-        rootStore.set.error(err);
+        toggleIsLoading(false);
+        dispatch(setError(err));
         toast.error(err?.message);
-        console.error("GroupManager: Error fetching app's group memberships: ", err);
+        log.error("GroupManager: Error fetching app's group memberships: ", err);
       });
+    return groups;
   };
-
-
-
-
-
-
-
-
 
   const putAppInGroup = async (groupId, appId) => {
     if (!groupId || !appId) {
       return;
     }
-    rootStore.set.isLoading(true);
+    toggleIsLoading(true);
     await addAppToGroup(groupId, appId)
       .then((newApp) => {
-        rootStore.set.isLoading(false);
-        const apps = rootStore.get.appsInSelectedGroup() || [];
+        toggleIsLoading(false);
+        const apps = getState().appsInSelectedGroup || [];
         if (newApp?.application?.name) {
-          rootStore.set.appsInSelectedGroup([...apps, newApp.application]);
+          dispatch(setAppsInSelectedGroup([...apps, newApp.application]));
         }
         toast.success("Added app to the group");
       })
       .catch((err) => {
-        rootStore.set.isLoading(false);
-        rootStore.set.error(err);
+        toggleIsLoading(false);
+        dispatch(setError(err));
         toast.error(err);
-        console.log("GroupManager: Error adding app to group: ", err);
+        log.debug("GroupManager: Error adding app to group: ", err);
       });
   };
 
   const kickAppFromGroup = async (groupId, appId) => {
-    rootStore.set.isLoading(true);
+    toggleIsLoading(true);
     await removeAppFromGroup(groupId, appId)
       .then(() => {
-        rootStore.set.isLoading(false);
-        const apps = rootStore.get.appsInSelectedGroup();
+        toggleIsLoading(false);
+        const apps = getState().appsInSelectedGroup || [];
         const newApps = apps?.filter(app => app.id !== appId);
-        rootStore.set.appsInSelectedGroup(newApps);
-        const groups = rootStore.get.selectedAppGroups();
+        dispatch(setAppsInSelectedGroup(newApps));
+        const groups = getState().selectedAppGroups;
         const newGroups = groups?.filter(group => group.id !== groupId);
-        rootStore.set.selectedAppGroups(newGroups);
+        dispatch(setSelectedAppGroups(newGroups));
       })
       .catch((err) => {
-        rootStore.set.isLoading(false);
-        rootStore.set.error(err);
+        toggleIsLoading(false);
+        dispatch(setError(err));
         toast.error(err);
-        console.log("GroupManager: Error removing app from group: ", err);
+        log.debug("GroupManager: Error removing app from group: ", err);
       });
   };
 
   const removeAllGroupRelations = async (groupIds, appId) => {
-    rootStore.set.isLoading(true);
+    toggleIsLoading(true);
     const promises = groupIds.map(groupId => {
       return kickAppFromGroup(groupId, appId);
     });
 
     await Promise.all(promises)
       .then(() => {
-        rootStore.set.isLoading(false);
+        toggleIsLoading(false);
         toast.success("Removed app from all groups");
       })
       .catch((err) => {
-        rootStore.set.isLoading(false);
-        rootStore.set.error(err);
+        toggleIsLoading(false);
+        dispatch(setError(err));
         toast.error(err);
-        console.log("GroupManager: Error removing app from group: ", err);
+        log.debug("GroupManager: Error removing app from group: ", err);
       });
   };
 
   const gotoPrevGroup = () => {
-    const groupKeys = rootStore.get.appGroupKeys();
-    const currentIndex = groupKeys.indexOf(rootStore.get.selectedGroupKey());
+    const groups = getState().appGroups;
+    const currentIndex = groups.indexOf(
+      getState().selectedGroup);
     if (currentIndex === 0) {
       return;
     }
-
-    rootStore.set.selectedGroupKey(groupKeys[currentIndex - 1]);
-    // rootStore.set.selectedGroup(groups[currentIndex - 1]);
-
-    getAppsInGroup(getSelectedGroupId());
+    const newId = groups[currentIndex - 1]?.id;
+    selectGroup(newId);
   };
 
   const gotoNextGroup = () => {
-    const groupKeys = rootStore.get.appGroupKeys();
-    const currentIndex = groupKeys.indexOf(rootStore.get.selectedGroupKey());
-    if (currentIndex === groupKeys.length - 1) {
+    const groups = getState().appGroups;
+    const currentIndex = groups.indexOf(
+      getState().selectedGroup);
+    if (currentIndex === groups.length - 1) {
       return;
     }
-    rootStore.set.selectedGroupKey(groupKeys[currentIndex + 1]);
-    // rootStore.set.selectedGroup(rootStore.get.appGroups[currentIndex + 1]);
-    getAppsInGroup(getSelectedGroupId());
+    const newId = groups[currentIndex + 1]?.id;
+    selectGroup(newId);
   };
 
-  return { seedGroups, getAppsInGroup, putAppInGroup, kickAppFromGroup, gotoPrevGroup, gotoNextGroup, getGroupsByApp, removeAllGroupRelations };
+  return {
+    seedGroups,
+    selectGroup,
+    getAppsInGroup,
+    putAppInGroup,
+    kickAppFromGroup,
+    gotoPrevGroup,
+    gotoNextGroup,
+    getGroupsByApp,
+    removeAllGroupRelations,
+    getGroupById
+  };
 };
-

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { log } from "../util/winston.js";
+import { log } from "../util/logger.js";
 import { application } from "express";
 
 const prisma = new PrismaClient();
@@ -100,7 +100,7 @@ export const getGroupById = async (groupId) => {
 };
 
 export const addAppToGroup = async (groupId, appId) => {
-	log.info("Adding app to group: ", groupId, appId);
+	log.debug("Adding app to group: ", groupId, appId);
 	try {
 		const appGroup = await prisma.ApplicationGroup.create({
 			data: {
@@ -119,7 +119,7 @@ export const addAppToGroup = async (groupId, appId) => {
 };
 
 export const removeAppFromGroup = async (groupId, appId) => {
-	log.info("Removing app from group: ", groupId, appId);
+	log.debug("Removing app from group: ", groupId, appId);
 	try {
 		const result = await prisma.ApplicationGroup.deleteMany({
 			where: {
@@ -129,7 +129,7 @@ export const removeAppFromGroup = async (groupId, appId) => {
 		});
 		return result;
 	} catch (e) {
-		console.error(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -141,10 +141,16 @@ export const getAppsByGroup = async (groupId) => {
 			groupId: Number.parseInt(groupId, 10),
 		},
 		include: {
-			application: true,
+			application: {
+				select: {
+					id: true,
+					name: true,
+					key: true
+				}
+			},
 		},
 	});
-	return apps;
+	return apps.map((app) => app.application);
 };
 
 export const getGroupsByApp = async (appId) => {
@@ -164,7 +170,15 @@ export const getGroupsByApp = async (appId) => {
 };
 
 export const getAllApps = async () => {
-	const apps = await prisma[APPLICATION].findMany();
+	const apps = await prisma[APPLICATION].findMany({
+		select: {
+			id: true,
+			key: true,
+			name: true,
+			edited: true,
+			done: true
+		},
+	});
 	return apps;
 };
 
@@ -191,7 +205,7 @@ export const getAllAppsWithTags = async () => {
 			},
 		},
 	});
-	console.log("First app: ", apps[1]);
+	log.debug("First app: ", apps[1]);
 	return apps;
 };
 /*
@@ -223,6 +237,17 @@ export const getAppsByTag = async (tags) => {
 					},
 				},
 			},
+		},
+		include: {
+			appTags: {
+				select: {
+					tag: {
+						select: {
+							name: true,
+						},
+					},
+				},
+			}
 		},
 	});
 	return apps;
@@ -260,14 +285,18 @@ export const updateApp = async (data) => {
 	return app;
 };
 
-export const deleteApp = async (key) => {
-	if (!key) {
-		log.error("Invalid key: ", key);
+export const deleteApp = async (id) => {
+	if (!id) {
+		log.error("Invalid id: ", id);
 		return null;
 	}
+
+	const intId = Number.parseInt(id, 10);
+	await removeTagRelationsByAppId(intId);
+	await removeGroupRelationsByAppId(intId);
 	const app = await prisma[APPLICATION].delete({
 		where: {
-			key: key,
+			id: intId,
 		},
 	});
 	return app;
@@ -296,7 +325,7 @@ export const addAppTag = async (tagId, appId) => {
 		});
 		return appTag;
 	} catch (e) {
-		log.info(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -317,7 +346,7 @@ export const addAppTags = async (appId, tagIds) => {
 
 		return { appId: appId, tags: tagIds };
 	} catch (e) {
-		console.error(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -328,7 +357,7 @@ export const updateArticleTags = async (appId, tagIds) => {
 		await addAppTags(appId, tagIds);
 		return { appId: appId, tags: tagIds };
 	} catch (e) {
-		console.error("Failed to update article tags:", e.message, e);
+		log.error("Failed to update article tags:", e.message, e);
 		return e;
 	}
 };
@@ -343,7 +372,7 @@ export const deleteAppTag = async (tagId, appId) => {
 		});
 		return result;
 	} catch (e) {
-		console.error(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -357,7 +386,7 @@ export const deleteAllAppTags = async (appId) => {
 		});
 		return result;
 	} catch (e) {
-		console.error(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -376,7 +405,7 @@ export const getTagsByAppId = async (appId) => {
 		});
 		return tags;
 	} catch (e) {
-		console.error(e.message, e);
+		log.error(e.message, e);
 		return e;
 	}
 };
@@ -397,16 +426,44 @@ const removeTagRelationsByTagId = async (tagIds) => {
 		});
 		return result;
 	} catch (e) {
-		console.error(e.message, e);
+		log.error(e.message, e);
+		return e;
+	}
+};
+
+const removeTagRelationsByAppId = async (appId) => {
+	try {
+		const result = await prisma.ApplicationTag.deleteMany({
+			where: {
+				applicationId: appId,
+			},
+		});
+		return result;
+	} catch (e) {
+		log.error(e.message, e);
+		return e;
+	}
+};
+
+const removeGroupRelationsByAppId = async (appId) => {
+	try {
+		const result = await prisma.ApplicationGroup.deleteMany({
+			where: {
+				applicationId: appId,
+			},
+		});
+		return result;
+	} catch (e) {
+		log.error(e.message, e);
 		return e;
 	}
 };
 
 export const updateAllowedTags = async (diffObj) => {
 	const { removeTags, addTags } = diffObj;
-	log.info("--- Updating tags: ", diffObj);
-	log.info("removeTags: ", removeTags);
-	log.info("addTags: ", addTags);
+	log.debug("--- Updating tags: ", diffObj);
+	log.debug("removeTags: ", removeTags);
+	log.debug("addTags: ", addTags);
 
 	if (removeTags?.length > 0) {
 		removeTagRelationsByTagId(removeTags).then(() => {
@@ -417,7 +474,7 @@ export const updateAllowedTags = async (diffObj) => {
 					},
 				},
 			}).then(() => {
-				log.info("Removed tags: ", removeTags);
+				log.debug("Removed tags: ", removeTags);
 			}).catch((e) => {
 				log.error(e.message, e);
 				throw e;
@@ -433,7 +490,7 @@ export const updateAllowedTags = async (diffObj) => {
 				};
 			}),
 		}).then(() => {
-			log.info("Added tags: ", addTags);
+			log.debug("Added tags: ", addTags);
 		}).catch((e) => {
 			log.error(e.message, e);
 			throw e;

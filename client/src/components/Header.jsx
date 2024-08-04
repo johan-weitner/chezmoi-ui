@@ -1,18 +1,14 @@
 import { Group, Title, Container } from "@mantine/core";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import React from "react";
-import { rootStore } from "store/store";
-import BarSpinner from "./BarSpinner";
+import GridSpinner from "./GridSpinner";
 import classes from "./Header.module.css";
 import Toolbar from "./Toolbar";
 import logo from "./logo.svg";
 
 const Header = (props) => {
 	const { setShowAppGroupView } = props;
-	const [isLoading, setIsLoading] = React.useState(false);
-	useEffect(() => {
-		setIsLoading(rootStore.get.isLoading());
-	}, [rootStore.use.isLoading()]);
+	const isLoading = useSelector((state) => state.root.isLoading);
 
 	return (
 		<Group
@@ -31,11 +27,13 @@ const Header = (props) => {
 					style={{ backgroundColor: "#121516 !important" }}
 				>
 					<img src={logo} alt="Logo" className={classes.logo} />
-					<Title className={classes.logoTitle}>Chezmoi UI</Title>
+					<Title className={classes.logoTitle} mr={10}>
+						Chezmoi UI
+					</Title>
+					{isLoading && <GridSpinner />}
 				</Group>
 				<Toolbar setShowAppGroupView={setShowAppGroupView} />
 			</Container>
-			<div style={{ marginTop: "80px" }}>{isLoading && <BarSpinner />}</div>
 		</Group>
 	);
 };

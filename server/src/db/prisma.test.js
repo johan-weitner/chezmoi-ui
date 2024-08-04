@@ -212,7 +212,6 @@ describe("Database operations", () => {
 			const error = new Error("Adding failed");
 			prisma.ApplicationTag.create.mockRejectedValueOnce(error);
 			const result = await db.addAppTags(1, [1, 2]);
-			expect(console.error).toHaveBeenCalledWith(error.message, error);
 			expect(result).toEqual(error);
 		});
 	});
@@ -235,82 +234,78 @@ describe("Database operations", () => {
 			const error = new Error("Updating failed");
 			prisma.ApplicationTag.deleteMany.mockRejectedValueOnce(error);
 			const result = await db.updateArticleTags(1, [1, 2]);
-			expect(console.error).toHaveBeenCalledWith(
-				"Failed to update article tags:",
+			"Failed to update article tags:",
 				error.message,
 				error,
 			);
-			expect(result).toEqual(error);
+		expect(result).toEqual(error);
+	});
+});
+
+describe("deleteAppTag", () => {
+	it("should delete an application tag", async () => {
+		const resultData = { count: 1 };
+		prisma.ApplicationTag.deleteMany.mockResolvedValueOnce(resultData);
+		const result = await db.deleteAppTag(1, 1);
+		expect(result).toEqual(resultData);
+		expect(prisma.ApplicationTag.deleteMany).toHaveBeenCalledWith({
+			where: { applicationId: 1, tagId: 1 },
 		});
 	});
 
-	describe("deleteAppTag", () => {
-		it("should delete an application tag", async () => {
-			const resultData = { count: 1 };
-			prisma.ApplicationTag.deleteMany.mockResolvedValueOnce(resultData);
-			const result = await db.deleteAppTag(1, 1);
-			expect(result).toEqual(resultData);
-			expect(prisma.ApplicationTag.deleteMany).toHaveBeenCalledWith({
-				where: { applicationId: 1, tagId: 1 },
-			});
-		});
+	it("should log an error if deleting an application tag fails", async () => {
+		const error = new Error("Deleting failed");
+		prisma.ApplicationTag.deleteMany.mockRejectedValueOnce(error);
+		const result = await db.deleteAppTag(1, 1);
+		expect(result).toEqual(error);
+	});
+});
 
-		it("should log an error if deleting an application tag fails", async () => {
-			const error = new Error("Deleting failed");
-			prisma.ApplicationTag.deleteMany.mockRejectedValueOnce(error);
-			const result = await db.deleteAppTag(1, 1);
-			expect(console.error).toHaveBeenCalledWith(error.message, error);
-			expect(result).toEqual(error);
+describe("deleteAllAppTags", () => {
+	it("should delete all application tags", async () => {
+		const resultData = { count: 1 };
+		prisma.ApplicationTag.deleteMany.mockResolvedValueOnce(resultData);
+		const result = await db.deleteAllAppTags(1);
+		expect(result).toEqual(resultData);
+		expect(prisma.ApplicationTag.deleteMany).toHaveBeenCalledWith({
+			where: { applicationId: 1 },
 		});
 	});
 
-	describe("deleteAllAppTags", () => {
-		it("should delete all application tags", async () => {
-			const resultData = { count: 1 };
-			prisma.ApplicationTag.deleteMany.mockResolvedValueOnce(resultData);
-			const result = await db.deleteAllAppTags(1);
-			expect(result).toEqual(resultData);
-			expect(prisma.ApplicationTag.deleteMany).toHaveBeenCalledWith({
-				where: { applicationId: 1 },
-			});
-		});
+	it("should log an error if deleting all application tags fails", async () => {
+		const error = new Error("Deleting failed");
+		prisma.ApplicationTag.deleteMany.mockRejectedValueOnce(error);
+		const result = await db.deleteAllAppTags(1);
+		expect(result).toEqual(error);
+	});
+});
 
-		it("should log an error if deleting all application tags fails", async () => {
-			const error = new Error("Deleting failed");
-			prisma.ApplicationTag.deleteMany.mockRejectedValueOnce(error);
-			const result = await db.deleteAllAppTags(1);
-			expect(console.error).toHaveBeenCalledWith(error.message, error);
-			expect(result).toEqual(error);
+describe("getTagsByAppId", () => {
+	it("should fetch tags by application ID", async () => {
+		const tags = [{ key: "test" }];
+		prisma.tag.findMany.mockResolvedValueOnce(tags);
+		const result = await db.getTagsByAppId(1);
+		expect(result).toEqual(tags);
+		expect(prisma.tag.findMany).toHaveBeenCalledWith({
+			where: { apps: { some: { applicationId: 1 } } },
 		});
 	});
 
-	describe("getTagsByAppId", () => {
-		it("should fetch tags by application ID", async () => {
-			const tags = [{ key: "test" }];
-			prisma.tag.findMany.mockResolvedValueOnce(tags);
-			const result = await db.getTagsByAppId(1);
-			expect(result).toEqual(tags);
-			expect(prisma.tag.findMany).toHaveBeenCalledWith({
-				where: { apps: { some: { applicationId: 1 } } },
-			});
-		});
-
-		it("should log an error if fetching tags by application ID fails", async () => {
-			const error = new Error("Fetching failed");
-			prisma.tag.findMany.mockRejectedValueOnce(error);
-			const result = await db.getTagsByAppId(1);
-			expect(console.error).toHaveBeenCalledWith(error.message, error);
-			expect(result).toEqual(error);
-		});
+	it("should log an error if fetching tags by application ID fails", async () => {
+		const error = new Error("Fetching failed");
+		prisma.tag.findMany.mockRejectedValueOnce(error);
+		const result = await db.getTagsByAppId(1);
+		expect(result).toEqual(error);
 	});
+});
 
-	describe("getAllTags", () => {
-		it("should fetch all tags", async () => {
-			const tags = [{ key: "test" }];
-			prisma.tag.findMany.mockResolvedValueOnce(tags);
-			const result = await db.getAllTags();
-			expect(result).toEqual(tags);
-			expect(prisma.tag.findMany).toHaveBeenCalled();
-		});
+describe("getAllTags", () => {
+	it("should fetch all tags", async () => {
+		const tags = [{ key: "test" }];
+		prisma.tag.findMany.mockResolvedValueOnce(tags);
+		const result = await db.getAllTags();
+		expect(result).toEqual(tags);
+		expect(prisma.tag.findMany).toHaveBeenCalled();
 	});
+});
 });

@@ -7,13 +7,10 @@ import {
 	Tooltip,
 	rem,
 	useMantineTheme,
-	Title,
 } from "@mantine/core";
 import { IconDownload, IconFilter, IconCirclePlus } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
-import { rootStore } from "store/store";
 import { filterModel } from "api/filters";
-import NeuButton from "components/NeuButton";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
@@ -22,19 +19,17 @@ import SearchWidget from "./SearchWidget";
 import ExportFilter from "./ExportFilter";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
+import { log } from "utils/logger";
 
 export const ListViewHeader = (props) => {
 	const theme = useMantineTheme();
 	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
 	const ref = useClickOutside(() => setExportIsOpen(false));
-
 	const { addItem, applyFilter, clearFilter, getAppTags } = useClientManager();
 
-	const tags = getAppTags();
-
 	const handleChange = (tagId, isChecked) => {
-		console.log("Tag", tagId, isChecked);
+		log.debug("Tag", tagId, isChecked);
 	};
 
 	return (
