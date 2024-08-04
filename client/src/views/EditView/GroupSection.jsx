@@ -1,29 +1,15 @@
-import {
-	Autocomplete,
-	Fieldset,
-	InputBase,
-	MultiSelect,
-	Pill,
-	TagsInput,
-} from "@mantine/core";
+import { Fieldset, TagsInput } from "@mantine/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useClientManager } from "core/ClientManager";
-import { useCallback, useRef, useState } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
-import { rootStore } from "store/store";
+import { log } from "utils/logger";
 
 const GroupSection = (props) => {
 	const dispatch = useDispatch();
-	const { hoistAppTags, groups } = props;
 	const [appGroups, setAppGroups] = useState();
-	const {
-		getAppTags,
-		tagApp,
-		getGroupsByApp,
-		removeAllGroupRelations,
-		putAppInGroup,
-		kickAppFromGroup,
-	} = useClientManager();
+	const { getGroupsByApp, putAppInGroup, kickAppFromGroup } =
+		useClientManager();
 
 	const allGroups = useSelector((state) => state.root.appGroups);
 	const whiteList = allGroups.map((group) => group.name);
@@ -65,7 +51,7 @@ const GroupSection = (props) => {
 		if (value.length > oldValues.length) {
 			const newGroup = value.filter((group) => !oldValues.includes(group));
 			putAppInGroup(getGroupId(newGroup[0]), selectedApp.id).then(() => {
-				// console.log("GroupSection: Added app to group: ", newGroup);
+				log.debug("GroupSection: Added app to group: ", newGroup);
 			});
 		}
 	};

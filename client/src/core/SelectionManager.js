@@ -20,6 +20,7 @@ import {
 import { transformNullValues } from "api/helpers";
 import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
+import { log } from 'utils/logger';
 
 export const useSelectionManager = () => {
 	const { dispatch } = store;
@@ -44,17 +45,17 @@ export const useSelectionManager = () => {
 						dispatch(setSelectedAppTags(tags));
 					})
 					.catch((err) => {
-						console.error(err);
+						log.error(err);
 						toast.error("Error fetching tags");
 					});
 
 				getGroupsByApp(app.id).then((groups) => {
-					console.log("SelectionManager: Groups for app: ", groups);
+					log.debug("SelectionManager: Groups for app: ", groups);
 					dispatch(setSelectedAppGroups(groups));
 				});
 			})
 			.catch((err) => {
-				console.error(err);
+				log.error(err);
 				toast.error("Error fetching app: ", err);
 			});
 	};

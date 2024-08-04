@@ -8,6 +8,7 @@ import { rootStore } from "store/store";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
 import { useSelector, useDispatch } from "react-redux";
+import { log } from "utils/logger";
 
 import "components/neumorphic.css";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
@@ -23,7 +24,7 @@ const SearchWidget = (props) => {
 	useHotkeys("alt + f", () => setIsOpen(true));
 
 	const openApp = (key) => {
-		console.log("Open app", key);
+		log.debug("Open app", key);
 		setSelectedAppKey(key);
 	};
 
@@ -33,7 +34,7 @@ const SearchWidget = (props) => {
 	};
 
 	const handleOnFocus = () => {
-		console.log("Focused");
+		log.debug("Focused");
 	};
 
 	const styling = {

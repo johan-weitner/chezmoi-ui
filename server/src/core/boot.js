@@ -12,10 +12,10 @@ import {
 	getGroupCount,
 	getAllGroups
 } from "../db/prisma.js";
-import { log } from "../util/log.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath, softwareGroupYamlPath } from "./config.js";
 import { printAppLogo } from "./logo.js";
+import { log } from "util/log.js";
 
 export const { success, warn, error, bold, italic, check, cross, wsign } =
 	styles;
@@ -85,7 +85,7 @@ const _setupFileData = () => {
 		softwareArray.push(software[keys[i]]);
 		softwareArray[i].key = keys[i];
 	}
-	console.log(italic(`List size: ${keys.length}`));
+	log.info(italic(`List size: ${keys.length}`));
 
 	return { softwareArray, software, keys, groups, groupKeys };
 };
@@ -95,9 +95,9 @@ export const setupGroupData = () => {
 	let groupKeys = [];
 	const softwareGroupYaml = fs.readFileSync(softwareGroupYamlPath, "utf8");
 	groups = YAML.parse(softwareGroupYaml)?.softwareGroups;
-	console.log("Groups: ", groups);
+	log.info("Groups: ", groups);
 	groupKeys = groups && Object.keys(groups);
-	console.log(italic(`Group list size: ${groupKeys?.length}`));
+	log.info(italic(`Group list size: ${groupKeys?.length}`));
 
 	return { groups, groupKeys };
 };

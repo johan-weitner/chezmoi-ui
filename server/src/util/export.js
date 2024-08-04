@@ -1,9 +1,10 @@
 import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } from "../db/prisma.js";
+import { log } from "./logger.js";
 
 export const getYamlExport = async () => {
 	// const apps = await getAllApps();
 	const apps = await getAllAppsWithTags();
-	console.log(apps);
+	log.debug(apps);
 	const output = formatYaml(apps);
 	return output;
 };
@@ -57,7 +58,7 @@ const formatYaml = (apps) => {
 			appTags
 		} = app;
 
-		console.log("App tags: ", appTags);
+		log.debug("App tags: ", appTags);
 
 		output.softwarePackages.push({
 			[key]: {

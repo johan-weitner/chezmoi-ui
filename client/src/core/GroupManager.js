@@ -18,6 +18,7 @@ import {
   setAppGroups,
   setAppGroupKeys
 } from "store/store";
+import { log } from 'utils/logger';
 
 export const useGroupManager = () => {
   const { dispatch } = store;
@@ -38,7 +39,7 @@ export const useGroupManager = () => {
         dispatch(setAppGroupKeys(groupKeys));
       })
       .catch((err) => {
-        console.error("GroupManager: Error fetching groups: ", err);
+        log.error("GroupManager: Error fetching groups: ", err);
         toast.error("Error fetching groups: ", err);
       });
   };
@@ -70,7 +71,7 @@ export const useGroupManager = () => {
         toggleIsLoading(false);
         dispatch(setError(err));
         toast.error(err?.message);
-        console.error("GroupManager: Error fetching apps in group: ", err);
+        log.error("GroupManager: Error fetching apps in group: ", err);
       });
   };
 
@@ -88,7 +89,7 @@ export const useGroupManager = () => {
             name: group.group.name,
           };
         });
-        console.log("GroupManager: Groups for app: ", groupArr);
+        log.debug("GroupManager: Groups for app: ", groupArr);
         dispatch(setSelectedAppGroups(groupArr));
         return groupArr;
       })
@@ -96,7 +97,7 @@ export const useGroupManager = () => {
         toggleIsLoading(false);
         dispatch(setError(err));
         toast.error(err?.message);
-        console.error("GroupManager: Error fetching app's group memberships: ", err);
+        log.error("GroupManager: Error fetching app's group memberships: ", err);
       });
     return groups;
   };
@@ -119,7 +120,7 @@ export const useGroupManager = () => {
         toggleIsLoading(false);
         dispatch(setError(err));
         toast.error(err);
-        console.log("GroupManager: Error adding app to group: ", err);
+        log.debug("GroupManager: Error adding app to group: ", err);
       });
   };
 
@@ -139,7 +140,7 @@ export const useGroupManager = () => {
         toggleIsLoading(false);
         dispatch(setError(err));
         toast.error(err);
-        console.log("GroupManager: Error removing app from group: ", err);
+        log.debug("GroupManager: Error removing app from group: ", err);
       });
   };
 
@@ -158,7 +159,7 @@ export const useGroupManager = () => {
         toggleIsLoading(false);
         dispatch(setError(err));
         toast.error(err);
-        console.log("GroupManager: Error removing app from group: ", err);
+        log.debug("GroupManager: Error removing app from group: ", err);
       });
   };
 

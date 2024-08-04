@@ -1,6 +1,7 @@
 import { rootStore } from "store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { store, getState } from "store/store";
+import { log } from 'utils/logger';
 
 const _isColumnEmpty = (column) => {
 	return column === "" || column === null;
@@ -35,7 +36,7 @@ export const filterNoInstallerApps = () => {
 
 export const filterNoUrlsApps = () => {
 	const apps = getState().appCollection;
-	console.log("Apps: ", apps);
+	log.debug("Apps: ", apps);
 	return apps.filter((item) => {
 		return (
 			_isColumnEmpty(item.home) &&

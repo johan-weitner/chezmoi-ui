@@ -4,6 +4,7 @@ import { filterModel } from "api/filters";
 import { useEffect, useState } from "react";
 import { rootStore } from "store/store";
 import css from "./ListView.module.css";
+import { log } from "utils/logger";
 
 const PaginationBar = (props) => {
 	const dispatch = useDispatch();
@@ -29,8 +30,7 @@ const PaginationBar = (props) => {
 	}, [pageCount]);
 
 	const debugProps = () => {
-		DEBUG &&
-			console.log(`Pagination.jsx:
+		log.debug(`Pagination.jsx:
 			currentPage: ${page},
 			Total: ${pageCount},
 			currentFilter: ${activeFilter}`);

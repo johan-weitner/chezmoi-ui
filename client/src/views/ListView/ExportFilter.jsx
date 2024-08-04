@@ -18,6 +18,7 @@ import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { log } from "utils/logger";
 
 const ExportFilter = (props) => {
 	const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const ExportFilter = (props) => {
 	const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 	useEffect(() => {
-		console.log("Selected tags: ", selectedTags);
+		log.debug("Selected tags: ", selectedTags);
 	}, [selectedTags]);
 
 	const handleChange = (tagId, e) => {
@@ -39,7 +40,7 @@ const ExportFilter = (props) => {
 	};
 
 	const downloadYaml = () => {
-		console.log("Download YAML filtered on tags: ", selectedTags);
+		log.debug("Download YAML filtered on tags: ", selectedTags);
 		if (selectedTags.length === 0) return window.open(`${BASE_URL}/download`);
 		window.open(`${BASE_URL}/filtered-download?tags=${selectedTags.join(",")}`);
 	};

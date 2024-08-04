@@ -28,6 +28,7 @@ import {
 import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
 import { useSelectionManager } from "./SelectionManager";
+import { log } from 'utils/logger';
 
 export const useDataManager = () => {
 	const { dispatch } = store;
@@ -44,7 +45,7 @@ export const useDataManager = () => {
 				appCollection &&
 				appCollection.length > 0
 			) {
-				// console.warn("Found no apps");
+				log.warn("Found no apps");
 				return;
 			}
 			dispatch(setIsLoading(true));
@@ -122,7 +123,7 @@ export const useDataManager = () => {
 				toast.success("App deleted successfully");
 			})
 			.catch((err) => {
-				console.error("DataManager: Error deleting app: ", err);
+				log.error("DataManager: Error deleting app: ", err);
 				toast.error("Error deleting app");
 			});
 	};
@@ -132,10 +133,10 @@ export const useDataManager = () => {
 		toggleLoading(true);
 		tagApp(Number.parseInt(app.id, 10), appTags)
 			.then((res) => {
-				// DEBUG && console.log("Tagged app: ", res);
+				log.debuglog("Tagged app: ", res);
 			})
 			.catch((e) => {
-				console.error(e);
+				log.error(e);
 			});
 		const apps = getState().appCollection;
 		updateApp(app)
@@ -156,7 +157,7 @@ export const useDataManager = () => {
 				toast.success("App updated successfully");
 			})
 			.catch((err) => {
-				console.error("DataManager: Error updating app: ", err);
+				log.error("DataManager: Error updating app: ", err);
 				toast.error("Error updating app");
 			});
 	};
@@ -176,7 +177,7 @@ export const useDataManager = () => {
 				toast.success("App successfully added");
 			})
 			.catch((err) => {
-				console.error("DataManager: Error saving new app: ", err);
+				log.error("DataManager: Error saving new app: ", err);
 				toast.error("Error saving new app");
 			});
 	};
@@ -190,7 +191,7 @@ export const useDataManager = () => {
 				setSelectedAppKey(app.key);
 			})
 			.catch((err) => {
-				console.error("DataManager: Error marking app as done: ", err);
+				log.error("DataManager: Error marking app as done: ", err);
 				toast.error("Error marking app as done");
 			});
 	};
@@ -204,7 +205,7 @@ export const useDataManager = () => {
 			})
 			.catch((err) => {
 				toggleLoading(false);
-				console.log("DataManager: Error adding tag: ", err);
+				log.log("DataManager: Error adding tag: ", err);
 				// toast.error("Error adding tag");
 			});
 	};
@@ -216,13 +217,13 @@ export const useDataManager = () => {
 			return newTags;
 		}).catch((err) => {
 			dispatch(setIsLoading(false));
-			console.log("DataManager: Error updating tag list: ", err);
+			log.log("DataManager: Error updating tag list: ", err);
 			toast.error("Error adding tag");
 		});
 	};
 
 	const downloadYaml = () => {
-		console.log("Downloading YAML...");
+		log.info("Downloading YAML...");
 	};
 
 	const toggleLoading = (flag) => {

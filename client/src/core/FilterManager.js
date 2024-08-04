@@ -4,6 +4,7 @@ import {
 	setActiveFilter,
 	setFilteredList
 } from "store/store";
+import { log } from 'utils/logger';
 
 export const useFilterManager = () => {
 	const { dispatch } = store;
@@ -12,7 +13,7 @@ export const useFilterManager = () => {
 		dispatch(setActiveFilter(filter));
 
 		const filteredApps = filterModel[filter].method();
-		console.log("Filtered apps: ", filteredApps);
+		log.debug("Filtered apps: ", filteredApps);
 		dispatch(setFilteredList(filteredApps));
 	};
 
