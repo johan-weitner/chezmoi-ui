@@ -60,7 +60,7 @@
                     "id": "sk38oxq3x0o9nolxc95ikpv8"
                 },
                 {
-                    "text": "Fix README: 2x .env\nInstall Turbo, or remove dependency",
+                    "text": "Fix README: 2x .env\nInstall Turbo, or remove dependency. Or script it.",
                     "id": "wmopiiii5gmx0fzatluf4z14"
                 }
             ],
@@ -69,18 +69,17 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Refactor global store with Redux Tool Kit",
-                    "id": "mqxyyif1ihmmslyznmbssldu"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Refactor global store with Redux Tool Kit",
+                    "id": "mqxyyif1ihmmslyznmbssldu"
+                },
                 {
                     "text": "Consider enable editing tag whitelist - re-use existing tag implementation",
                     "id": "fzadug132eolcd30po3oiyzy"
@@ -356,5 +355,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722720925525
+    "timestamp": 1722863031779
 }

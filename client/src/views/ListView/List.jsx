@@ -9,6 +9,7 @@ import { useSelector } from "store/store";
 const List = (props) => {
 	const { deleteItem, editItem } = props;
 	const pageContent = useSelector((state) => state.root.pageContent);
+	const filteredList = useSelector((state) => state.root.filteredList);
 	const appCollection = useSelector((state) => state.root.appCollection);
 	const activeFilter = useSelector((state) => state.root.activeFilter);
 	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
@@ -69,8 +70,11 @@ const List = (props) => {
 						/>
 					);
 				})}
+			{!currentFilter && pageContent?.length === 0 && (
+				<span>Found no apps</span>
+			)}
 			{currentFilter &&
-				state.filteredList?.map((item) => {
+				filteredList?.map((item) => {
 					return (
 						<ListItem
 							setSelectedAppKey={selectNewApp}
@@ -83,6 +87,9 @@ const List = (props) => {
 						/>
 					);
 				})}
+			{currentFilter && filteredList?.length === 0 && (
+				<span>Found no apps</span>
+			)}
 		</Card>
 	);
 };

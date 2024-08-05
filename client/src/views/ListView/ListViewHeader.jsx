@@ -26,11 +26,7 @@ export const ListViewHeader = (props) => {
 	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
 	const ref = useClickOutside(() => setExportIsOpen(false));
-	const { addItem, applyFilter, clearFilter, getAppTags } = useClientManager();
-
-	const handleChange = (tagId, isChecked) => {
-		log.debug("Tag", tagId, isChecked);
-	};
+	const { addItem, applyFilter, clearFilter } = useClientManager();
 
 	return (
 		<>

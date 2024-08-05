@@ -6,6 +6,9 @@ const prisma = new PrismaClient();
 const APPLICATION = "application";
 const TAG = "tag";
 
+/**
+ * Bootstrap API
+ */
 export const seedDb = async (data) => {
 	log.info("Seeding Application table with initial data...	");
 	await prisma
@@ -39,11 +42,9 @@ export const seedGroups = async (data) => {
 			log.error(e.message);
 		});
 };
+// /Bootstrap API
 
-export const getGroupCount = async () => {
-	const count = await prisma.Group.count();
-	return count;
-};
+
 
 export const addApp = async (data) => {
 	try {
@@ -59,116 +60,9 @@ export const addApp = async (data) => {
 	}
 };
 
-export const getAllGroups = async () => {
-	const groups = await prisma.Group.findMany();
-	return groups;
-};
-
-export const getGroupedApplications = async () => {
-	const groups = await prisma.Group.findMany({
-		include: {
-			apps: {
-				select: {
-					application: {
-						select: {
-							name: true,
-						}
-					}
-				}
-			}
-		}
-	});
-	return groups;
-};
-
-export const getGroupByName = async (name) => {
-	const group = await prisma.Group.findFirst({
-		where: {
-			name: name,
-		},
-	});
-	return group;
-};
-
-export const getGroupById = async (groupId) => {
-	const group = await prisma.Group.findFirst({
-		where: {
-			id: Number.parseInt(groupId, 10),
-		},
-	});
-	return group;
-};
-
-export const addAppToGroup = async (groupId, appId) => {
-	log.debug("Adding app to group: ", groupId, appId);
-	try {
-		const appGroup = await prisma.ApplicationGroup.create({
-			data: {
-				applicationId: Number.parseInt(appId, 10),
-				groupId: Number.parseInt(groupId, 10),
-			},
-			include: {
-				application: true,
-			},
-		});
-		return appGroup;
-	} catch (e) {
-		log.error(e.message, e);
-		return e;
-	}
-};
-
-export const removeAppFromGroup = async (groupId, appId) => {
-	log.debug("Removing app from group: ", groupId, appId);
-	try {
-		const result = await prisma.ApplicationGroup.deleteMany({
-			where: {
-				applicationId: Number.parseInt(appId, 10),
-				groupId: Number.parseInt(groupId, 10),
-			},
-		});
-		return result;
-	} catch (e) {
-		log.error(e.message, e);
-		return e;
-	}
-};
-
-// Get all apps in a group
-export const getAppsByGroup = async (groupId) => {
-	const apps = await prisma.ApplicationGroup.findMany({
-		where: {
-			groupId: Number.parseInt(groupId, 10),
-		},
-		include: {
-			application: {
-				select: {
-					id: true,
-					name: true,
-					key: true
-				}
-			},
-		},
-	});
-	return apps.map((app) => app.application);
-};
-
-export const getGroupsByApp = async (appId) => {
-	const apps = await prisma.ApplicationGroup.findMany({
-		where: {
-			applicationId: Number.parseInt(appId, 10),
-		},
-		include: {
-			group: {
-				select: {
-					name: true,
-				},
-			},
-		},
-	});
-	return apps;
-};
-
+/**
+ * Application API
+ */
 export const getAllApps = async () => {
 	const apps = await prisma[APPLICATION].findMany({
 		select: {
@@ -208,24 +102,6 @@ export const getAllAppsWithTags = async () => {
 	log.debug("First app: ", apps[1]);
 	return apps;
 };
-/*
-export const getGroupedApplications = async () => {
-	const groups = await prisma.Group.findMany({
-		include: {
-			apps: {
-				select: {
-					application: {
-						select: {
-							name: true,
-						}
-					}
-				}
-			}
-		}
-	});
-	return groups;
-};
-*/
 
 export const getAppsByTag = async (tags) => {
 	const apps = await prisma[APPLICATION].findMany({
@@ -306,6 +182,91 @@ export const getCount = async () => {
 	const count = await prisma[APPLICATION].count();
 	return count;
 };
+
+
+export const filterAppsByNoInstallers = async () => {
+	const apps = await prisma[APPLICATION].findMany({
+		select: {
+			id: true,
+			key: true,
+			name: true,
+			edited: true
+		},
+		where: {
+			whalebrew: "",
+			apt: "",
+			brew: "",
+			cask: "",
+			cargo: "",
+			npm: "",
+			pip: "",
+			pipx: "",
+			gem: "",
+			script: "",
+			choco: "",
+			scoop: "",
+			winget: "",
+			pkgdarwin: "",
+			ansible: "",
+			binary: "",
+			yay: "",
+			appstore: "",
+			pacman: "",
+			port: "",
+		},
+	});
+	return apps;
+};
+
+export const filterAppsByNoUrls = async () => {
+	const apps = await prisma[APPLICATION].findMany({
+		select: {
+			id: true,
+			key: true,
+			name: true,
+			edited: true
+		},
+		where: {
+			home: "",
+			docs: "",
+			github: "",
+		},
+	});
+	return apps;
+};
+
+export const filterAppsByNoName = async () => {
+	const apps = await prisma[APPLICATION].findMany({
+		select: {
+			id: true,
+			key: true,
+			name: true,
+			edited: true
+		},
+		where: {
+			name: ""
+		},
+	});
+	return apps;
+};
+
+export const filterAppsByNoDesc = async () => {
+	const apps = await prisma[APPLICATION].findMany({
+		select: {
+			id: true,
+			key: true,
+			name: true,
+			edited: true
+		},
+		where: {
+			desc: ""
+		},
+	});
+	return apps;
+};
+
+// /Application API
+
 
 /**
  * Tag API
@@ -500,10 +461,134 @@ export const updateAllowedTags = async (diffObj) => {
 	const allowedTags = await prisma[TAG].findMany();
 	return allowedTags;
 };
-/**
- * /Tag API
- */
+// /Tag API
 
+
+
+/**
+ *
+ * Groups API
+ */
+export const getAllGroups = async () => {
+	const groups = await prisma.Group.findMany();
+	return groups;
+};
+
+export const getGroupCount = async () => {
+	const count = await prisma.Group.count();
+	return count;
+};
+
+export const getGroupedApplications = async () => {
+	const groups = await prisma.Group.findMany({
+		include: {
+			apps: {
+				select: {
+					application: {
+						select: {
+							name: true,
+						}
+					}
+				}
+			}
+		}
+	});
+	return groups;
+};
+
+export const getGroupByName = async (name) => {
+	const group = await prisma.Group.findFirst({
+		where: {
+			name: name,
+		},
+	});
+	return group;
+};
+
+export const getGroupById = async (groupId) => {
+	const group = await prisma.Group.findFirst({
+		where: {
+			id: Number.parseInt(groupId, 10),
+		},
+	});
+	return group;
+};
+
+export const addAppToGroup = async (groupId, appId) => {
+	log.debug("Adding app to group: ", groupId, appId);
+	try {
+		const appGroup = await prisma.ApplicationGroup.create({
+			data: {
+				applicationId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
+			},
+			include: {
+				application: true,
+			},
+		});
+		return appGroup;
+	} catch (e) {
+		log.error(e.message, e);
+		return e;
+	}
+};
+
+export const removeAppFromGroup = async (groupId, appId) => {
+	log.debug("Removing app from group: ", groupId, appId);
+	try {
+		const result = await prisma.ApplicationGroup.deleteMany({
+			where: {
+				applicationId: Number.parseInt(appId, 10),
+				groupId: Number.parseInt(groupId, 10),
+			},
+		});
+		return result;
+	} catch (e) {
+		log.error(e.message, e);
+		return e;
+	}
+};
+
+// Get all apps in a group
+export const getAppsByGroup = async (groupId) => {
+	const apps = await prisma.ApplicationGroup.findMany({
+		where: {
+			groupId: Number.parseInt(groupId, 10),
+		},
+		include: {
+			application: {
+				select: {
+					id: true,
+					name: true,
+					key: true
+				}
+			},
+		},
+	});
+	return apps.map((app) => app.application);
+};
+
+export const getGroupsByApp = async (appId) => {
+	const apps = await prisma.ApplicationGroup.findMany({
+		where: {
+			applicationId: Number.parseInt(appId, 10),
+		},
+		include: {
+			group: {
+				select: {
+					name: true,
+				},
+			},
+		},
+	});
+	return apps;
+};
+// /Groups API
+
+
+/**
+ * Utils
+ */
 export const isEmptyDb = async () => {
 	const count = await getCount();
 	count === 0 && log.info("Database is empty - seeding...");
