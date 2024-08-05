@@ -1,45 +1,35 @@
+import React from "react";
 import { Card, Skeleton } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import { rootStore } from "store/store";
 import { useClientManager } from "core/ClientManager";
 import { ListItem } from "./ListItem";
 import classes from "./ListView.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 
 const List = (props) => {
-	const dispatch = useDispatch();
 	const { deleteItem, editItem } = props;
-	const { selectedKey, mainView, selectedGroupId } = useSelector(
-		(state) => state.root,
-	);
-	const [currentKey, setCurrentKey] = useState(selectedKey);
+	const pageContent = useSelector((state) => state.root.pageContent);
+	const appCollection = useSelector((state) => state.root.appCollection);
+	const isLoading = useSelector((state) => state.root.isLoading);
+	const activeFilter = useSelector((state) => state.root.activeFilter);
+	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const selectedKey = useSelector((state) => state.root.selectedKey);
+	const mainView = useSelector((state) => state.root.mainView);
 	const [currentFilter, setCurrentFilter] = useState(selectedKey);
 	const { setSelectedAppKey, getPageContent } = useClientManager();
-
-	const {
-		appCollection,
-		activeFilter,
-		filteredList,
-		selectedAppKey,
-		pageContent,
-		isLoading,
-	} = useSelector((state) => state.root);
 
 	useEffect(() => {
 		getPageContent();
 	}, [appCollection]);
 
-	useEffect(() => {
-		setCurrentKey(selectedAppKey);
-	}, [selectedAppKey]);
+	useEffect(() => {}, [selectedAppKey]);
 
 	useEffect(() => {
 		setCurrentFilter(activeFilter);
 	}, [activeFilter]);
 
 	const selectNewApp = (key) => {
-		setCurrentKey(key);
 		setSelectedAppKey(key);
 	};
 
@@ -53,33 +43,30 @@ const List = (props) => {
 		>
 			<Skeleton visible={isLoading}>
 				{!currentFilter &&
-					useSelector((state) => state.root.pageContent)?.map((item) => {
+					pageContent?.map((item) => {
 						return (
 							<ListItem
-								selectedAppKey={currentKey}
 								setSelectedAppKey={selectNewApp}
 								app={item}
-								key={nanoid()}
+								key={`${item.key}-${item.id}`}
 								deleteItem={deleteItem}
 								editItem={editItem}
 								mainView={mainView}
-								selectedGroupId={selectedGroupId}
+								isSelected={selectedAppKey === item.key}
 							/>
 						);
 					})}
 				{currentFilter &&
-					// rootStore?.use?.filteredList()?.map((item) => {
-					useSelector((state) => state.root.filteredList)?.map((item) => {
+					state.filteredList?.map((item) => {
 						return (
 							<ListItem
-								selectedAppKey={currentKey}
 								setSelectedAppKey={selectNewApp}
 								app={item}
-								key={nanoid()}
+								key={`${item.key}-${item.id}`}
 								deleteItem={deleteItem}
 								editItem={editItem}
 								mainView={mainView}
-								selectedGroupId={selectedGroupId}
+								isSelected={selectedAppKey === item.key}
 							/>
 						);
 					})}
@@ -88,5 +75,6 @@ const List = (props) => {
 	);
 };
 
-// List.whyDidYouRender = true;
+List.whyDidYouRender = true;
+
 export default List;

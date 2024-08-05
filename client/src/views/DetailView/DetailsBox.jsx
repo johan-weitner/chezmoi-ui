@@ -12,7 +12,8 @@ import { nanoid } from "nanoid";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
 import s from "./DetailView.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 
 const DetailsBox = (props) => {
 	const dispatch = useDispatch();

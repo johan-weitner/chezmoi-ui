@@ -1,5 +1,5 @@
 import { Group, Title, Container } from "@mantine/core";
-import { useSelector } from "react-redux";
+import { useSelector } from "store/store";
 import React from "react";
 import GridSpinner from "./GridSpinner";
 import classes from "./Header.module.css";

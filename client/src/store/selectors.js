@@ -2,7 +2,8 @@ import { findIndex } from "api/helpers";
 import { createSelector } from "reselect";
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import {
 	getState,
 	store,

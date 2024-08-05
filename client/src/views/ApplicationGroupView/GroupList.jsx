@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "store/store";
 import { nanoid } from "nanoid";
 import { rem, ThemeIcon, List, Card, Title } from "@mantine/core";
 import "../../common.css";

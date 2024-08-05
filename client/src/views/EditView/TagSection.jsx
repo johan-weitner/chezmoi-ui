@@ -8,7 +8,7 @@ import {
 	Flex,
 	Button,
 } from "@mantine/core";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
@@ -25,7 +25,6 @@ const TagSection = (props) => {
 	const { getAppTags, tagApp, updateAllowedTags } = useClientManager();
 	const whiteList = allowedTags.map((tag) => tag.name);
 	const [tagList, setTagList] = useState(whiteList);
-
 
 	useEffect(() => {
 		if (!selectedApp) return;

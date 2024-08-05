@@ -2,28 +2,19 @@ import { Text, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { EditedIndicator } from "components/Indicator";
 import { ICON } from "constants/icons";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import classes from "./ListView.module.css";
-import { MAIN_VIEWS, getState } from "store/store";
+import { MAIN_VIEWS, useSelector } from "store/store";
 import { useGroupManager } from "core/GroupManager";
-import { useSelector, useDispatch } from "react-redux";
 
-export const ListItem = (props) => {
-	const dispatch = useDispatch();
-	const {
-		selectedAppKey,
-		setSelectedAppKey,
-		app,
-		deleteItem,
-		editItem,
-		mainView,
-		selectedGroupId,
-	} = props;
+export const ListItem = React.memo((props) => {
+	const { setSelectedAppKey, app, deleteItem, editItem, mainView, isSelected } =
+		props;
 	const [isGroupMode, setIsGroupMode] = useState(mainView);
-	const [appKey, setAppKey] = useState(selectedAppKey);
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
 	const { putAppInGroup } = useGroupManager();
+	const selectedGroupId = useSelector((state) => state.root.selectedGroupId);
 
 	useEffect(() => {
 		setIsGroupMode(mainView === MAIN_VIEWS[1]);
@@ -43,7 +34,7 @@ export const ListItem = (props) => {
 		>
 			<div
 				style={{ position: "relative", width: "100%" }}
-				className={selectedAppKey === app.key ? classes.selected : null}
+				className={isSelected ? classes.selected : null}
 			>
 				{isGroupMode ? (
 					<button
@@ -122,4 +113,5 @@ export const ListItem = (props) => {
 			</div>
 		</ErrorBoundary>
 	);
-};
+});
+ListItem.whyDidYouRender = true;

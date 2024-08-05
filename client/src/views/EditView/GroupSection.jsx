@@ -1,5 +1,6 @@
 import { Fieldset, TagsInput } from "@mantine/core";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import { useEffect } from "react";

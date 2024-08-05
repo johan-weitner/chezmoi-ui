@@ -1,49 +1,12 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { useSelector, useDispatch } from 'react-redux';;
+import { useDispatch } from 'react-redux';
+import { useSelector } from "react-redux";
 import { filterModel } from "api/filters";
-import { createStore } from "zustand-x";
-
-// export const useStore = () => { };
+import { createTrackedSelector } from 'react-tracked';
 
 const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
 export const MAIN_VIEWS = ["apps", "groups", "tags", "settings"];
 
-export const rootStore = createStore("root")({
-	mainView: MAIN_VIEWS[0],
-	appCollection: null,
-	appGroups: [],
-	appGroupKeys: [],
-	totalCount: 0,
-	page: 0,
-	pageCount: 0,
-	pageContent: null,
-	getTotalSize: (state) => state.appCollection?.length || 0,
-	pageSize: PAGE_SIZE,
-	inReverse: false,
-	filterModel: filterModel,
-	activeFilter: null,
-	filteredList: null,
-	selectedApp: null,
-	selectedAppKey: null,
-	selectedAppTags: null,
-	selectedAppGroups: null,
-	selectedGroup: null,
-	selectedGroupKey: null,
-	selectedGroupId: null,
-	appsInSelectedGroup: null,
-	allowedTags: null,
-	editMode: false,
-	isNewApp: false,
-	hideCompleted: false,
-	isLoading: false,
-	error: null,
-	middlewares: ["devtools"],
-});
-
-
-/**********
- * Redux Tool Kit
- */
 const initialState = {
 	mainView: MAIN_VIEWS[0],
 	appCollection: null,
@@ -133,6 +96,7 @@ export const {
 	setError,
 } = rootSlice.actions;
 
+
 export const store = configureStore({
 	reducer: {
 		root: rootSlice.reducer,
@@ -141,15 +105,35 @@ export const store = configureStore({
 	devTools: process.env.NODE_ENV !== 'production',
 });
 
+const useTrackedSelector = createTrackedSelector(useSelector);
+
 export const useStore = () => {
 	const dispatch = useDispatch();
-	const state = useSelector((state) => state.root);
+	const state = useTrackedSelector((state) => state.root);
 
 	return { state, dispatch };
+};
+
+const useCustomTrackedSelector = (selector) => {
+	const state = useTrackedSelector();
+	return selector(state);
 };
 
 export const getState = () => {
 	return store.getState().root;
 };
 
+export { useCustomTrackedSelector as useSelector };
 
+// const e = {
+// 	"stack": `Error\n    at http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:224:25\n
+// 	at memoizedSelector (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:46:38)\n
+// 		at getSnapshotWithSelector (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:74:22)\n
+// 			at mountSyncExternalStore (http://localhost:8000/node_modules/.vite/deps/chunk-3ZBFE22O.js?v=7d575e32:11427:28)\n
+// 			at Object.useSyncExternalStore (http://localhost:8000/node_modules/.vite/deps/chunk-3ZBFE22O.js?v=7d575e32:12114:22)\n
+// 			at useSyncExternalStore (http://localhost:8000/node_modules/.vite/deps/chunk-XO35FAC6.js?v=7d575e32:1120:29)\n
+// 			at useSyncExternalStoreWithSelector3 (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:81:23)\n
+// 			at useSelector2 (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:243:27)\n
+// 			at useTrackedSelector (http://localhost:8000/node_modules/.vite/deps/react-tracked.js?v=7d575e32:432:19)\n
+// 			at useCustomTrackedSelector (http://localhost:8000/src/store/store.js?t=1722856268004:153:17)`
+// }

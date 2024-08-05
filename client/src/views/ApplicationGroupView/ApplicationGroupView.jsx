@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { Container, Group, Card, rem, Text, SimpleGrid } from "@mantine/core";
 import "../../common.css";
 import GroupList from "./GroupList";

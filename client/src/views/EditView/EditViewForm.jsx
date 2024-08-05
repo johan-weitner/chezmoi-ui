@@ -1,4 +1,5 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { Button, Flex } from "@mantine/core";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
