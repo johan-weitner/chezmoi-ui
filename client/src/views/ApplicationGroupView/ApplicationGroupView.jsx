@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Container, Group, Card, rem, Text, SimpleGrid } from "@mantine/core";
-import { rootStore } from "store/store";
 import "../../common.css";
 import GroupList from "./GroupList";
 import GroupDetailView from "./GroupDetailView";

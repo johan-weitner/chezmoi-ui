@@ -5,16 +5,14 @@ import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
 import { ErrorBoundary } from "react-error-boundary";
-import { rootStore } from "store/store";
 import EditViewForm from "./EditViewForm";
 import "../../App.css";
-import {setEditMode} from "store/store";
+import { setEditMode } from "store/store";
 
 const EditView = forwardRef(function EditView(props, ref) {
 	const dispatch = useDispatch();
 	const { theme } = props;
-	const { setIsEditMode, gotoPrev, gotoNext } =
-		useClientManager();
+	const { setIsEditMode, gotoPrev, gotoNext } = useClientManager();
 
 	const editMode = useSelector((state) => state.root.editMode);
 	const selectedApp = useSelector((state) => state.root.selectedApp);

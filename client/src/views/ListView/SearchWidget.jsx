@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useClickOutside } from "@mantine/hooks";
 import { useClientManager } from "core/ClientManager";
-import { rootStore } from "store/store";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
 import { useSelector, useDispatch } from "react-redux";

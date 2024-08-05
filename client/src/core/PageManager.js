@@ -1,12 +1,9 @@
 import { selectPageContent } from "store/selectors";
-import { useSelector, useDispatch } from "react-redux";
 import {
 	getState,
 	store,
-	rootStore,
 	setPage,
 	setPageContent,
-	setPageCount
 } from "store/store";
 
 export const usePageManager = () => {

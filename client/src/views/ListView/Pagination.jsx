@@ -1,13 +1,11 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Pagination, Stack, Text } from "@mantine/core";
 import { filterModel } from "api/filters";
 import { useEffect, useState } from "react";
-import { rootStore } from "store/store";
 import css from "./ListView.module.css";
 import { log } from "utils/logger";
 
 const PaginationBar = (props) => {
-	const dispatch = useDispatch();
 	const { gotoPage } = props;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +19,7 @@ const PaginationBar = (props) => {
 	}, []);
 
 	useEffect(() => {
-		setCurrentPage(rootStore.get.page());
+		setCurrentPage(page);
 		debugProps();
 	}, [page]);
 

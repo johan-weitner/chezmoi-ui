@@ -51,7 +51,7 @@ const ListView = (props) => {
 
 	// const toggleHideCompleted = () => {
 	// 	setHideCompleted(!hideCompleted);
-	// 	rootStore.set.hideCompleted(!hideCompleted);
+	// 	store.set.hideCompleted(!hideCompleted);
 	// };
 
 	useBootstrap();

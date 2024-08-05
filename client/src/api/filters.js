@@ -1,4 +1,3 @@
-import { rootStore } from "store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { store, getState } from "store/store";
 import { log } from 'utils/logger';

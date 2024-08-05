@@ -13,7 +13,6 @@ import {
 } from "@mantine/core";
 import { IconArrowLeft, IconPackages, IconTrash } from "@tabler/icons-react";
 import StickyBox from "react-sticky-box";
-import { rootStore } from "store/store";
 import { nanoid } from "nanoid";
 import s from "./GroupView.module.css";
 import { useGroupManager } from "core/GroupManager";

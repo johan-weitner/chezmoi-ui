@@ -1,8 +1,6 @@
 import { fetchApp, getTagsByAppId } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
-import { rootStore } from "store/store";
-import { useSelector, useDispatch } from "react-redux";
 import {
 	getState,
 	store,
