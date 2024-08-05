@@ -97,5 +97,7 @@ const ListView = (props) => {
 	);
 };
 
-// ListView.whyDidYouRender = true;
+// ListView.whyDidYouRender = {
+// 	trackAllPureComponents: true,
+// };
 export default ListView;

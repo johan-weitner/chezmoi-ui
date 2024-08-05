@@ -1,8 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import { useSelector } from "react-redux";
-import { filterModel } from "api/filters";
-import { createTrackedSelector } from 'react-tracked';
+import { useDispatch, useSelector } from 'react-redux';
 
 const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE, 10);
 export const MAIN_VIEWS = ["apps", "groups", "tags", "settings"];
@@ -105,35 +102,15 @@ export const store = configureStore({
 	devTools: process.env.NODE_ENV !== 'production',
 });
 
-const useTrackedSelector = createTrackedSelector(useSelector);
-
 export const useStore = () => {
 	const dispatch = useDispatch();
-	const state = useTrackedSelector((state) => state.root);
+	const state = useSelector((state) => state.root);
 
 	return { state, dispatch };
-};
-
-const useCustomTrackedSelector = (selector) => {
-	const state = useTrackedSelector();
-	return selector(state);
 };
 
 export const getState = () => {
 	return store.getState().root;
 };
 
-export { useCustomTrackedSelector as useSelector };
-
-// const e = {
-// 	"stack": `Error\n    at http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:224:25\n
-// 	at memoizedSelector (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:46:38)\n
-// 		at getSnapshotWithSelector (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:74:22)\n
-// 			at mountSyncExternalStore (http://localhost:8000/node_modules/.vite/deps/chunk-3ZBFE22O.js?v=7d575e32:11427:28)\n
-// 			at Object.useSyncExternalStore (http://localhost:8000/node_modules/.vite/deps/chunk-3ZBFE22O.js?v=7d575e32:12114:22)\n
-// 			at useSyncExternalStore (http://localhost:8000/node_modules/.vite/deps/chunk-XO35FAC6.js?v=7d575e32:1120:29)\n
-// 			at useSyncExternalStoreWithSelector3 (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:81:23)\n
-// 			at useSelector2 (http://localhost:8000/node_modules/.vite/deps/react-redux.js?v=7d575e32:243:27)\n
-// 			at useTrackedSelector (http://localhost:8000/node_modules/.vite/deps/react-tracked.js?v=7d575e32:432:19)\n
-// 			at useCustomTrackedSelector (http://localhost:8000/src/store/store.js?t=1722856268004:153:17)`
-// }
+export { useSelector };

@@ -2,13 +2,13 @@ import { Text, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { EditedIndicator } from "components/Indicator";
 import { ICON } from "constants/icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import classes from "./ListView.module.css";
 import { MAIN_VIEWS, useSelector } from "store/store";
 import { useGroupManager } from "core/GroupManager";
 
-export const ListItem = React.memo((props) => {
+const ListItem = React.memo((props) => {
 	const { setSelectedAppKey, app, deleteItem, editItem, mainView, isSelected } =
 		props;
 	const [isGroupMode, setIsGroupMode] = useState(mainView);
@@ -20,13 +20,16 @@ export const ListItem = React.memo((props) => {
 		setIsGroupMode(mainView === MAIN_VIEWS[1]);
 	}, [mainView]);
 
-	const selectApp = (key) => {
-		if (mainView === MAIN_VIEWS[0]) {
-			setSelectedAppKey(key);
-		} else if (mainView === MAIN_VIEWS[1]) {
-			putAppInGroup(key);
-		}
-	};
+	const selectApp = useCallback(
+		(key) => {
+			if (mainView === MAIN_VIEWS[0]) {
+				setSelectedAppKey(key);
+			} else if (mainView === MAIN_VIEWS[1]) {
+				putAppInGroup(key);
+			}
+		},
+		[mainView, setSelectedAppKey, putAppInGroup],
+	);
 
 	return (
 		<ErrorBoundary
@@ -114,4 +117,7 @@ export const ListItem = React.memo((props) => {
 		</ErrorBoundary>
 	);
 });
+
 ListItem.whyDidYouRender = true;
+
+export default ListItem;

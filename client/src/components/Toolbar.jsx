@@ -3,7 +3,6 @@ import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import classes from "components/Toolbar.module.css";
-import BarSpinner from "./BarSpinner";
 import { MAIN_VIEWS } from "store/store";
 import { setMainView } from "store/store";
 import { useDispatch } from "react-redux";
@@ -16,7 +15,6 @@ const Toolbar = (props) => {
 	const dispatch = useDispatch();
 
 	const mainView = useSelector((state) => state.root.mainView);
-	const isLoading = useSelector((state) => state.root.isLoading);
 
 	const openAppsView = () => {
 		dispatch(setMainView(MAIN_VIEWS[0]));
@@ -89,7 +87,6 @@ const Toolbar = (props) => {
 					})}
 				</Flex>
 			</Group>
-			{isLoading && <BarSpinner />}
 		</nav>
 	);
 };
