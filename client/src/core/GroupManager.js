@@ -5,7 +5,6 @@ import { toast } from "sonner";
 import { getAppById, getSelectedGroupId } from "store/selectors";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  rootStore,
   getState,
   store,
   setAppsInSelectedGroup,

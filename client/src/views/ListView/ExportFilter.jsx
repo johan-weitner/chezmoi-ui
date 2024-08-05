@@ -11,7 +11,6 @@ import {
 } from "@mantine/core";
 import { IconX } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
-import { rootStore } from "store/store";
 import { useState } from "react";
 import commonCss from "./ListView.module.css";
 import "components/neumorphic.css";

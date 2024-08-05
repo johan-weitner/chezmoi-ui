@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 import { selectPageContent } from "store/selectors";
 import {
-	rootStore,
 	getState,
 	store,
 	setIsLoading,
@@ -140,13 +139,15 @@ export const useDataManager = () => {
 		const apps = getState().appCollection;
 		updateApp(app)
 			.then(() => {
-				rootStore.set.appCollection([ // FIXME!!!
-					...apps,
-					{
-						...app,
-						edited: "true",
-					},
-				]);
+				dispatch(
+					setAppCollection([
+						...apps,
+						{
+							...app,
+							edited: "true",
+						},
+					]),
+				);
 
 				const index = apps.findIndex((item) => item.key === app.key);
 				apps[index] = app;

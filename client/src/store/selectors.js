@@ -1,6 +1,5 @@
 import { findIndex } from "api/helpers";
 import { createSelector } from "reselect";
-import { rootStore } from "./store";
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 import { useSelector, useDispatch } from "react-redux";
@@ -47,8 +46,9 @@ export const getPreviousKey = (state) => {
 
 export const getNextKey = () => {
 	const index = getCurrentIndex();
+	const totalCount = getState().totalCount;
 	const appCollection = getState().appCollection;
-	if (index < rootStore.get.totalCount() - 1) {
+	if (index < totalCount - 1) {
 		return appCollection[index + 1].key;
 	}
 	return appCollection[appCollection?.length - 1].key;
