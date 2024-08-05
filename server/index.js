@@ -26,7 +26,11 @@ import {
 	getAppsByGroup,
 	getGroupsByApp,
 	getGroupById,
-	updateAllowedTags
+	updateAllowedTags,
+	filterAppsByNoInstallers,
+	filterAppsByNoUrls,
+	filterAppsByNoName,
+	filterAppsByNoDesc
 } from "./src/db/prisma.js";
 import { log } from "./src/util/logger.js";
 import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
@@ -56,6 +60,35 @@ app.get("/software", (req, res) => {
 	getAllApps().then((apps) => {
 		res.json(apps);
 	});
+});
+
+app.get("/filterBy", (req, res) => {
+	const { filter } = req.query;
+	switch (filter) {
+		case "installers":
+			filterAppsByNoInstallers().then(apps => {
+				res.json(apps);
+			});
+			break;
+
+		case "urls":
+			filterAppsByNoUrls().then(apps => {
+				res.json(apps);
+			});
+			break;
+
+		case "name":
+			filterAppsByNoName().then(apps => {
+				res.json(apps);
+			});
+			break;
+
+		case "desc":
+			filterAppsByNoDesc().then(apps => {
+				res.json(apps);
+			});
+			break;
+	}
 });
 
 app.get("/getApp", (req, res) => {

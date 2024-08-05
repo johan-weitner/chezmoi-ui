@@ -9,9 +9,8 @@ const PaginationBar = (props) => {
 	const { gotoPage } = props;
 	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const [currentPage, setCurrentPage] = useState(1);
-	const { page, pageCount, activeFilter, totalCount } = useSelector(
-		(state) => state.root,
-	);
+	const { page, pageCount, activeFilter, totalCount, filteredList } =
+		useSelector((state) => state.root);
 
 	useEffect(() => {
 		setCurrentPage(page);
@@ -46,6 +45,7 @@ const PaginationBar = (props) => {
 				withEdges={true}
 				boundaries={0}
 				withControls={false}
+				disabled={activeFilter}
 			/>
 			<Text
 				size="xs"
@@ -55,7 +55,8 @@ const PaginationBar = (props) => {
 				{(activeFilter && (
 					<span>
 						{"Filtered by "}
-						<b>{filterModel[activeFilter]?.title?.toLowerCase()}</b>
+						<b>{filterModel[activeFilter]?.title?.toLowerCase()}</b> ⋅{" "}
+						{filteredList?.length} apps in total.
 					</span>
 				)) || (
 					<span>

@@ -57,24 +57,20 @@ export const filterNoNamesApps = () => {
 };
 
 export const filterModel = {
-	noInstallers: {
-		key: "noInstallers",
-		method: filterNoInstallerApps,
+	installers: {
+		key: "installers",
 		title: "Apps without installers",
 	},
-	noUrls: {
-		key: "noUrls",
-		method: filterNoUrlsApps,
+	urls: {
+		key: "urls",
 		title: "Apps without URLs",
 	},
-	noDesc: {
-		key: "noDesc",
-		method: filterNoNamesApps,
+	name: {
+		key: "name",
 		title: "Apps without name",
 	},
-	noName: {
-		key: "noName",
-		method: filterNoDescsApps,
+	desc: {
+		key: "desc",
 		title: "Apps without description",
 	},
 };

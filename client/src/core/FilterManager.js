@@ -4,17 +4,24 @@ import {
 	setActiveFilter,
 	setFilteredList
 } from "store/store";
+import { fetchFilteredApps } from "api/appCollectionApi";
 import { log } from 'utils/logger';
+import { toast } from "sonner";
 
 export const useFilterManager = () => {
 	const { dispatch } = store;
 
-	const applyFilter = (filter) => {
-		dispatch(setActiveFilter(filter));
-
-		const filteredApps = filterModel[filter].method();
-		log.debug("Filtered apps: ", filteredApps);
-		dispatch(setFilteredList(filteredApps));
+	const applyFilter = async (filter) => {
+		const apps = await fetchFilteredApps(filter)
+			.then((data) => {
+				dispatch(setActiveFilter(filter));
+				dispatch(setFilteredList(data));
+				return data;
+			}).catch((e) => {
+				log.error(e.message);
+				toast.error(e.message);
+			});
+		return apps;
 	};
 
 	const clearFilter = () => {

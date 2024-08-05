@@ -21,6 +21,18 @@ export const fetchApps = async () => {
 	return apps;
 };
 
+export const fetchFilteredApps = async (filter) => {
+	const apps = await axios
+		.get(`${BASE_URL}/filterBy?filter=${filter}`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return apps;
+};
+
 export const fetchAppGroups = async () => {
 	const apps = await axios
 		.get(`${BASE_URL}/groups`)
