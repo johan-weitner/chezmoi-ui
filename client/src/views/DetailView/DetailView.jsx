@@ -9,7 +9,8 @@ import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 
 const DetailView = (props) => {
 	const dispatch = useDispatch();

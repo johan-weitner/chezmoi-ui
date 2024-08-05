@@ -6,7 +6,8 @@ import { useClickOutside } from "@mantine/hooks";
 import { useClientManager } from "core/ClientManager";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { log } from "utils/logger";
 
 import "components/neumorphic.css";

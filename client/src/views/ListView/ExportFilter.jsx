@@ -16,7 +16,8 @@ import commonCss from "./ListView.module.css";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { log } from "utils/logger";
 
 const ExportFilter = (props) => {

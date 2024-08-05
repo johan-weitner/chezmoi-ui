@@ -12,12 +12,11 @@ import { nanoid } from "nanoid";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
 import s from "./DetailView.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 
 const DetailsBox = (props) => {
-	const dispatch = useDispatch();
-	const { selectedApp, editMode } = props;
-	const { editItem, deleteItem, getAppTags } = useClientManager();
+	const { selectedApp } = props;
+	const { editItem, deleteItem } = useClientManager();
 	const indicateEdit = selectedApp?.edited ? <EditedIndicator /> : null;
 	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
 	const selectedAppTags = useSelector((state) => state.root.selectedAppTags);

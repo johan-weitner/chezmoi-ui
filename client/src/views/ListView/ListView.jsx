@@ -10,7 +10,8 @@ import commonCss from "./ListView.module.css";
 import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
 import { MAIN_VIEWS } from "store/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { setSelectedGroup, setSelectedGroupKey } from "store/store";
 
 const ListView = (props) => {
@@ -96,5 +97,7 @@ const ListView = (props) => {
 	);
 };
 
-// ListView.whyDidYouRender = true;
+// ListView.whyDidYouRender = {
+// 	trackAllPureComponents: true,
+// };
 export default ListView;

@@ -3,16 +3,14 @@ import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import classes from "components/Toolbar.module.css";
-import { useClientManager } from "core/ClientManager";
-import BarSpinner from "./BarSpinner";
 import { MAIN_VIEWS } from "store/store";
 import { setMainView } from "store/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 
 const Toolbar = (props) => {
 	const { setShowAppGroupView } = props;
 	const [active, setActive] = useState(null);
-	const { isLoading } = useClientManager();
 	const stroke = 1.5;
 	const dispatch = useDispatch();
 
@@ -89,7 +87,6 @@ const Toolbar = (props) => {
 					})}
 				</Flex>
 			</Group>
-			{isLoading && <BarSpinner />}
 		</nav>
 	);
 };
