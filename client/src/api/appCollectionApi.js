@@ -2,12 +2,21 @@ import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
 import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
 import {
-	getState
+	getState,
+	store,
+	setSelectedAppKey,
+	setSelectedApp,
+	setEditMode,
+	setIsNewApp
 } from "store/store";
 import { log } from 'utils/logger';
+import { useGroupManager } from "core/GroupManager";
+
+const { getGroupId } = useGroupManager();
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
+const { dispatch } = store;
 
 export const fetchApps = async () => {
 	const apps = await axios
@@ -136,12 +145,13 @@ export const fetchApp = async (key) => {
 	return transformNullValues(app);
 };
 
-export const updateApp = async (updatedData) => {
+export const updateApp = async (updatedData, tags, groups) => {
 	return axios
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedData,
+			appTags: tags,
+			ApplicationGroup: groups,
 			edited: "true",
-			tags: updatedData.tags === null ? "" : updatedData.tags,
 		})
 		.then((response) => {
 			log.debug(
@@ -156,19 +166,33 @@ export const updateApp = async (updatedData) => {
 		});
 };
 
+// saveNewItem(data, appTags, appGroups);
 export const saveNewApp = async (data) => {
+	log.info("API: Saving new app - in-data:", data);
+	const { appTags, ApplicationGroup } = data;
 	const app = mapEntityToDb(data);
 	const fixedNullValuesApp = transformNullValues(app);
-	log.debug("API: Saving new app:", fixedNullValuesApp);
+	log.info("API: Saving new app - fixed data:", fixedNullValuesApp);
+	const groups = ApplicationGroup?.map((group) => {
+		return getGroupId(group);
+	});
 
 	return axios
 		.post(`${BASE_URL}/addNode`, {
 			data: {
 				...fixedNullValuesApp,
+				appTags: appTags,
+				appGroups: groups,
 				edited: "true",
 			},
 		})
 		.then((response) => {
+			const { data } = response;
+			log.info("API: Saved new app - response:", data);
+			// dispatch(setIsNewApp(false));
+			// dispatch(setSelectedAppKey(data.key));
+			// dispatch(setSelectedApp(data));
+			// dispatch(setEditMode(true));
 			return response.data;
 		})
 		.catch((error) => {

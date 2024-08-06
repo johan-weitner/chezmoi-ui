@@ -134,7 +134,7 @@ app.post("/addNode", (req, res) => {
 });
 
 app.delete("/deleteNode", (req, res) => {
-	deleteApp(req.query.key)
+	deleteApp(req.query.id)
 		.then((result) => {
 			res.status(200).json(result);
 		})

@@ -8,6 +8,7 @@ import { log } from "utils/logger";
 
 const GroupSection = (props) => {
 	const dispatch = useDispatch();
+	const { hoistAppGroups } = props;
 	const [appGroups, setAppGroups] = useState();
 	const { getGroupsByApp, putAppInGroup, kickAppFromGroup } =
 		useClientManager();
@@ -41,14 +42,18 @@ const GroupSection = (props) => {
 	};
 
 	const onRemove = (value) => {
+		if (isNewApp) return;
 		kickAppFromGroup(getGroupId(value), selectedApp.id).then(() => {
 			setAppGroups(appGroups.filter((group) => group !== value));
+			hoistGroupApps(appGroups);
 		});
 	};
 
 	const onChange = (value) => {
 		const oldValues = appGroups;
 		setAppGroups(value);
+		hoistAppGroups(value);
+		if (isNewApp) return;
 		if (value.length > oldValues.length) {
 			const newGroup = value.filter((group) => !oldValues.includes(group));
 			putAppInGroup(getGroupId(newGroup[0]), selectedApp.id).then(() => {

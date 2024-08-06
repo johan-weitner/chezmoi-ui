@@ -92,7 +92,7 @@ const ListItem = React.memo((props) => {
 							}}
 							stroke={2}
 							color="white"
-							onClick={() => deleteItem(app.key)}
+							onClick={() => deleteItem(app?.id)}
 						/>
 						{indicateEdit}
 					</div>
