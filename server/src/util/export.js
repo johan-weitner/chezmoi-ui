@@ -1,4 +1,4 @@
-import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } from "../db/prisma.js";
+import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } from "../db/dbService.js";
 import { log } from "./logger.js";
 
 export const getYamlExport = async () => {

@@ -31,7 +31,7 @@ import {
 	filterAppsByNoUrls,
 	filterAppsByNoName,
 	filterAppsByNoDesc
-} from "./src/db/prisma.js";
+} from "./src/db/dbService.js";
 import { log } from "./src/util/logger.js";
 import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
 

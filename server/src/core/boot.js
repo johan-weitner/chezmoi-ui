@@ -11,7 +11,7 @@ import {
 	seedGroups,
 	getGroupCount,
 	getAllGroups
-} from "../db/prisma.js";
+} from "../db/dbService.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath, softwareGroupYamlPath } from "./config.js";
 import { printAppLogo } from "./logo.js";
