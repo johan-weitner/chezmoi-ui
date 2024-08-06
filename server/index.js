@@ -11,6 +11,7 @@ import {
 	addApp,
 	deleteApp,
 	getAllApps,
+	getAllUnfinishedApps,
 	getAllAppsWithTags,
 	getAppByKey,
 	updateApp,
@@ -58,6 +59,12 @@ app.get("/", (req, res) => {
 
 app.get("/software", (req, res) => {
 	getAllApps().then((apps) => {
+		res.json(apps);
+	});
+});
+
+app.get("/softwareNotDone", (req, res) => {
+	getAllUnfinishedApps().then((apps) => {
 		res.json(apps);
 	});
 });

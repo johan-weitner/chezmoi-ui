@@ -26,7 +26,13 @@ export const ListViewHeader = (props) => {
 	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
 	const ref = useClickOutside(() => setExportIsOpen(false));
-	const { addItem, applyFilter, clearFilter } = useClientManager();
+	const { addItem, applyFilter, clearFilter, refreshAppCollection } =
+		useClientManager();
+
+	const removeFilter = () => {
+		clearFilter();
+		refreshAppCollection(false);
+	};
 
 	return (
 		<>
@@ -85,7 +91,7 @@ export const ListViewHeader = (props) => {
 							FILTER APPS ON:
 						</Menu.Label>
 						<Menu.Item
-							onClick={() => clearFilter()}
+							onClick={() => removeFilter()}
 							leftSection={<ICON.startOver size={16} />}
 							style={{
 								fontWeight: "bold",
@@ -104,7 +110,13 @@ export const ListViewHeader = (props) => {
 								{filterModel[key].title}
 								{key === useFilter ? <span> ✓</span> : null}
 							</Menu.Item>
-						))}
+						))}{" "}
+						<Menu.Item
+							key={nanoid()}
+							onClick={() => refreshAppCollection(true)}
+						>
+							Hide completed applications
+						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>
 				<SearchWidget />
