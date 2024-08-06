@@ -135,17 +135,17 @@ export const getAppByKey = async (key) => {
 };
 
 export const addApp = async (data) => {
-	log.info("Adding app: ", data);
+	log.debug("Adding app: ", data);
 	const { appGroups, appTags, ...appData } = data;
 	const payload = {
 		appGroups: appGroups?.map(g => Number.parseInt(g, 10)),
 		appTags: appTags,
 		appData: appData
 	};
-	log.info("<<< Payload: ", payload);
+	log.debug("<<< Payload: ", payload);
 	try {
 		const app = await createApplicationWithGroupsAndTags(payload);
-		log.info("Created app: ", app);
+		log.debug("Created app: ", app);
 	} catch (e) {
 		log.error(e.message);
 		throw e;
@@ -219,7 +219,7 @@ export const deleteApp = async (id) => {
 				id: intId,
 			},
 		});
-		log.info("Deleted app: ", app);
+		log.debug("Deleted app: ", app);
 		return app;
 	} catch (e) {
 		log.error(e.message, e);

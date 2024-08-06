@@ -107,9 +107,7 @@ export const useDataManager = () => {
 	const deleteItem = (appId) => {
 		const apps = getState().appCollection;
 		const pageContent = getState().pageContent;
-		// const appId = apps.find((app) => app.key === appKey).id;
-		// dispatch(setIsLoading(true));
-		console.log("DataManager: Deleting app with it: ", appId);
+		log.debug("DataManager: Deleting app with it: ", appId);
 
 		deleteApp(appId)
 			.then(() => {
@@ -228,10 +226,6 @@ export const useDataManager = () => {
 		});
 	};
 
-	const downloadYaml = () => {
-		log.info("Downloading YAML...");
-	};
-
 	const toggleLoading = (flag) => {
 		dispatch(setIsLoading(flag));
 	};
@@ -252,7 +246,6 @@ export const useDataManager = () => {
 		tagApp,
 		setIsLoading: toggleLoading,
 		setIsEditMode,
-		downloadYaml,
 		flagAppDone,
 		updateAllowedTags
 	};
