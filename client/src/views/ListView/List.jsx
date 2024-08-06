@@ -1,31 +1,52 @@
-import { Card, Skeleton } from "@mantine/core";
+import React, { useCallback } from "react";
+import { Card } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
-import { selectAppByKey } from "store/selectors";
-import { rootStore } from "store/store";
-import { useClientManager } from "../../core/ClientManager";
-import { ListItem } from "./ListItem";
+import { useClientManager } from "core/ClientManager";
+import ListItem from "./ListItem";
 import classes from "./ListView.module.css";
+import { useSelector } from "store/store";
 
 const List = (props) => {
 	const { deleteItem, editItem } = props;
-	const selectedKey = rootStore.get.selectedAppKey();
-	const [currentKey, setCurrentKey] = useState(selectedKey);
-	const [activeFilter, setActiveFilter] = useState(selectedKey);
-	const { setSelectedAppKey } = useClientManager();
+	const pageContent = useSelector((state) => state.root.pageContent);
+	const filteredList = useSelector((state) => state.root.filteredList);
+	const appCollection = useSelector((state) => state.root.appCollection);
+	const activeFilter = useSelector((state) => state.root.activeFilter);
+	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const selectedKey = useSelector((state) => state.root.selectedKey);
+	const mainView = useSelector((state) => state.root.mainView);
+	const [currentFilter, setCurrentFilter] = useState(selectedKey);
+	const { setSelectedAppKey, getPageContent } = useClientManager();
 
 	useEffect(() => {
-		setCurrentKey(rootStore.get.selectedAppKey());
-	}, [rootStore.use.selectedAppKey()]);
+		getPageContent();
+	}, [appCollection]);
+
+	useEffect(() => {}, [selectedAppKey]);
 
 	useEffect(() => {
-		setActiveFilter(rootStore.get.activeFilter());
-	}, [rootStore.use.activeFilter()]);
+		setCurrentFilter(activeFilter);
+	}, [activeFilter]);
 
-	const selectNewApp = (key) => {
-		setCurrentKey(key);
-		setSelectedAppKey(key);
-	};
+	const selectNewApp = useCallback(
+		(key) => {
+			setSelectedAppKey(key);
+		},
+		[setSelectedAppKey],
+	);
+
+	const deleteListItem = useCallback(
+		(key) => {
+			deleteItem(key);
+		},
+		[setSelectedAppKey],
+	);
+	const editListItem = useCallback(
+		(key) => {
+			editItem(key);
+		},
+		[setSelectedAppKey],
+	);
 
 	return (
 		<Card

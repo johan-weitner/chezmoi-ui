@@ -1,3 +1,5 @@
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import { Button, Flex } from "@mantine/core";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
@@ -5,52 +7,65 @@ import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { rootStore } from "../../store/store";
 import css from "./EditView.module.css";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
+import GroupSection from "./GroupSection";
+import { setEditMode } from "../../store/store";
 
 const EditViewForm = (props) => {
-	const [isNewApp, setIsNewApp] = useState(true);
+	const dispatch = useDispatch();
+	const [newApp, setNewApp] = useState(true);
 	const [appTags, setAppTags] = useState();
+	const [appGroups, setAppGroups] = useState();
+	const [isDone, setIsDone] = useState(false);
 	const {
 		updateItem,
 		saveNewItem,
 		closePopover,
-		selectedApp,
 		setSelectedAppKey,
 		tagApp,
+		flagAppDone,
+		getGroupsByApp,
 	} = useClientManager();
 
-	const defaultValues =
-		isNewApp || !rootStore.get.selectedApp() ? EMPTY_APP : selectedApp;
-	const { register, handleSubmit, reset, watch, setValue } = useForm({
+	const { selectedApp, selectedAppKey, isNewApp, selectedAppGroups, editMode } =
+		useSelector((state) => state.root);
+
+	const defaultValues = newApp || !selectedApp ? EMPTY_APP : selectedApp;
+	const { register, handleSubmit, reset } = useForm({
 		defaultValues: defaultValues,
 	});
-	const debugMode = import.meta.env.VITE_DEBUG;
 
 	useEffect(() => {
-		const app = rootStore.get.selectedAppKey();
-		if (!app) {
-			setIsNewApp(true);
+		if (!selectedAppKey) {
+			setNewApp(true);
+			setIsDone(false);
 			resetForm();
 			return;
 		}
-		setIsNewApp(false);
-		reset(rootStore.get.selectedApp());
-	}, [rootStore.use.selectedApp()]);
+
+		setNewApp(false);
+		setIsDone(selectedApp?.done);
+		reset(selectedApp);
+	}, [selectedApp]);
+
+	useEffect(() => {
+		setIsDone(selectedApp?.done);
+	}, []);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
-		if (rootStore.get.isNewApp()) {
-			saveNewItem(data, appTags);
+		console.log("Groups: ", appGroups);
+		if (isNewApp) {
+			saveNewItem(data, appTags, appGroups);
 		} else {
-			updateItem(data, appTags);
+			updateItem(data, appTags, appGroups);
 		}
 		setSelectedAppKey(null);
-		rootStore.set.editMode(false);
+		dispatch(setEditMode(false));
 	};
 
 	const resetForm = () => {
@@ -64,7 +79,13 @@ const EditViewForm = (props) => {
 	};
 
 	const closeModal = () => {
-		rootStore.set.editMode(false);
+		dispatch(setEditMode(false));
+	};
+
+	const flipDoneFlag = () => {
+		flagAppDone(selectedApp, !isDone).then((app) => {
+			setIsDone(!isDone);
+		});
 	};
 
 	return (
@@ -113,20 +134,32 @@ const EditViewForm = (props) => {
 			<InfoSection
 				formPartOne={formPartOne}
 				register={register}
-				isNewApp={isNewApp}
+				isNewApp={newApp}
 			/>
-			<TagSection
-				register={register}
-				appKey={selectedApp?.key}
-				isNewApp={isNewApp}
-				tags={rootStore.use.selectedApp()?.tags || ""}
-				editMode={rootStore.get.editMode()}
-				hoistAppTags={hoistAppTags}
-			/>
+			{/* {!isNewApp && ( */}
+			<>
+				<GroupSection
+					register={register}
+					appKey={selectedApp?.key}
+					isNewApp={newApp}
+					tags={selectedAppGroups || []}
+					editMode={editMode}
+					hoistAppGroups={setAppGroups}
+				/>
+				<TagSection
+					register={register}
+					appKey={selectedApp?.key}
+					isNewApp={newApp}
+					tags={selectedApp?.tags || ""}
+					editMode={editMode}
+					hoistAppTags={hoistAppTags}
+				/>
+			</>
+			{/* )} */}
 			<InstallerSection
 				formPartTwo={formPartTwo}
 				register={register}
-				isNewApp={isNewApp}
+				isNewApp={newApp}
 			/>
 		</form>
 	);

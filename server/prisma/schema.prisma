@@ -12,37 +12,39 @@ datasource db {
 }
 
 model Application {
-  id        Int              @id @default(autoincrement())
-  key       String           @unique
-  name      String           @default("")
-  edited    String?          @default("")
-  desc      String?          @default("")
-  bin       String?          @default("")
-  short     String?          @default("")
-  home      String
-  docs      String?          @default("")
-  github    String?          @default("")
-  whalebrew String?          @default("")
-  apt       String?          @default("")
-  brew      String?          @default("")
-  cask      String?          @default("")
-  cargo     String?          @default("")
-  npm       String?          @default("")
-  pip       String?          @default("")
-  pipx      String?          @default("")
-  gem       String?          @default("")
-  script    String?          @default("")
-  choco     String?          @default("")
-  scoop     String?          @default("")
-  winget    String?          @default("")
-  pkgdarwin String?          @default("")
-  ansible   String?          @default("")
-  binary    String?          @default("")
-  yay       String?          @default("")
-  appstore  String?          @default("")
-  pacman    String?          @default("")
-  port      String?          @default("")
-  appTags   ApplicationTag[]
+  id               Int                @id @default(autoincrement())
+  key              String             @unique
+  name             String             @default("")
+  edited           String?            @default("")
+  desc             String?            @default("")
+  bin              String?            @default("")
+  short            String?            @default("")
+  home             String
+  docs             String?            @default("")
+  github           String?            @default("")
+  whalebrew        String?            @default("")
+  apt              String?            @default("")
+  brew             String?            @default("")
+  cask             String?            @default("")
+  cargo            String?            @default("")
+  npm              String?            @default("")
+  pip              String?            @default("")
+  pipx             String?            @default("")
+  gem              String?            @default("")
+  script           String?            @default("")
+  choco            String?            @default("")
+  scoop            String?            @default("")
+  winget           String?            @default("")
+  pkgdarwin        String?            @default("")
+  ansible          String?            @default("")
+  binary           String?            @default("")
+  yay              String?            @default("")
+  appstore         String?            @default("")
+  pacman           String?            @default("")
+  port             String?            @default("")
+  done             Boolean            @default(false)
+  appTags          ApplicationTag[]
+  ApplicationGroup ApplicationGroup[]
 }
 
 model Tag {
@@ -58,4 +60,19 @@ model ApplicationTag {
   tagId         Int
 
   @@id([applicationId, tagId])
+}
+
+model Group {
+  id   Int                @id @default(autoincrement())
+  name String             @unique
+  apps ApplicationGroup[]
+}
+
+model ApplicationGroup {
+  application   Application @relation(fields: [applicationId], references: [id])
+  applicationId Int
+  group         Group       @relation(fields: [groupId], references: [id])
+  groupId       Int
+
+  @@id([applicationId, groupId])
 }

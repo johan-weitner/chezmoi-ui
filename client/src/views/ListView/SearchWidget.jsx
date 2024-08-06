@@ -3,23 +3,28 @@ import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useClickOutside } from "@mantine/hooks";
-import { useClientManager } from "../../core/ClientManager";
-import { rootStore } from "../../store/store";
+import { useClientManager } from "core/ClientManager";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
+import { log } from "utils/logger";
 
 import "components/neumorphic.css";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./SearchWidget.css";
 
 const SearchWidget = (props) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const dispatch = useDispatch();
+	const { groupView } = props;
+	const [isOpen, setIsOpen] = useState(groupView);
 	const ref = useClickOutside(() => setIsOpen(false));
 	const { setSelectedAppKey } = useClientManager();
+	const appCollection = useSelector((state) => state.root.appCollection);
 	useHotkeys("alt + f", () => setIsOpen(true));
 
 	const openApp = (key) => {
-		console.log("Open app", key);
+		log.debug("Open app", key);
 		setSelectedAppKey(key);
 	};
 
@@ -29,7 +34,7 @@ const SearchWidget = (props) => {
 	};
 
 	const handleOnFocus = () => {
-		console.log("Focused");
+		log.debug("Focused");
 	};
 
 	const styling = {
@@ -63,17 +68,17 @@ const SearchWidget = (props) => {
 
 	return (
 		<ActionIcon.Group>
-			<ActionIcon
-				size="xl"
-				style={{ position: "absolute", top: "25px", right: "120px" }}
-				className="neubtn"
-				onClick={() => setIsOpen(!isOpen)}
-				data-testid="searchButton"
-			>
+			{!groupView && (
 				<Tooltip label="Free text search for apps" position="top">
-					<IconSearch size={24} color="#999" />
+					<ActionIcon
+						size="xl"
+						className="neubtn"
+						onClick={() => setIsOpen(!isOpen)}
+					>
+						<IconSearch size={24} color="#999" />
+					</ActionIcon>
 				</Tooltip>
-			</ActionIcon>
+			)}
 			{isOpen && (
 				<div
 					className="searchWidget"

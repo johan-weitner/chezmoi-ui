@@ -2,29 +2,34 @@ import { Text, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { EditedIndicator } from "components/Indicator";
 import { ICON } from "constants/icons";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { rootStore } from "store/store";
 import classes from "./ListView.module.css";
+import { MAIN_VIEWS, useSelector } from "store/store";
+import { useGroupManager } from "core/GroupManager";
 
-export const ListItem = (props) => {
-	const { selectedAppKey, setSelectedAppKey, app, deleteItem, editItem } =
+const ListItem = React.memo((props) => {
+	const { setSelectedAppKey, app, deleteItem, editItem, mainView, isSelected } =
 		props;
-	// const selectedKey = rootStore.get.selectedAppKey();
-	// const [currentKey, setCurrentKey] = useState(selectedKey);
-
-	const className =
-		selectedAppKey && selectedAppKey === app.key ? classes.selected : null;
+	const [isGroupMode, setIsGroupMode] = useState(mainView);
 	const indicateEdit = app?.edited ? <EditedIndicator /> : null;
+	const { putAppInGroup } = useGroupManager();
+	const selectedGroupId = useSelector((state) => state.root.selectedGroupId);
 
-	// useEffect(() => {
-	// 	setCurrentKey(rootStore.get.selectedAppKey());
-	// }, [rootStore.use.selectedAppKey()]);
+	useEffect(() => {
+		setIsGroupMode(mainView === MAIN_VIEWS[1]);
+	}, [mainView]);
 
-	// const selectNewApp = () => {
-	// 	setCurrentKey(app.key);
-	// 	rootStore.set.selectedAppKey(app.key);
-	// };
+	const selectApp = useCallback(
+		(key) => {
+			if (mainView === MAIN_VIEWS[0]) {
+				setSelectedAppKey(key);
+			} else if (mainView === MAIN_VIEWS[1]) {
+				putAppInGroup(key);
+			}
+		},
+		[mainView, setSelectedAppKey, putAppInGroup],
+	);
 
 	return (
 		<ErrorBoundary
@@ -32,48 +37,87 @@ export const ListItem = (props) => {
 		>
 			<div
 				style={{ position: "relative", width: "100%" }}
-				className={className}
+				className={isSelected ? classes.selected : null}
 			>
-				<button
-					className={classes.itemBox}
-					onClick={() => setSelectedAppKey(app?.key)}
-					style={{ width: "100%" }}
-					type="button"
-				>
-					{app?.name || (
-						<Text size="sm" style={{ color: "#333 !important" }}>
-							<i>[ Missing Name ]</i> - ({app?.key})
-						</Text>
-					)}
-				</button>
-				<ICON.edit
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "45px",
-						top: "14px",
-						cursor: "pointer",
-					}}
-					stroke={2}
-					color="white"
-					onClick={() => editItem(app.key, true)}
-				/>
-				<ICON.remove
-					style={{
-						width: rem(20),
-						height: rem(20),
-						position: "absolute",
-						right: "15px",
-						top: "14px",
-						cursor: "pointer",
-					}}
-					stroke={2}
-					color="white"
-					onClick={() => deleteItem(app.key)}
-				/>
-				{indicateEdit}
+				{isGroupMode ? (
+					<button
+						className={classes.itemBox}
+						onClick={() => putAppInGroup(selectedGroupId, app?.id)}
+						style={{ width: "100%" }}
+						type="button"
+					>
+						{app?.name || (
+							<Text size="sm" style={{ color: "#333 !important" }}>
+								<i>[ Missing Name ]</i> - ({app?.key})
+							</Text>
+						)}
+					</button>
+				) : (
+					<button
+						className={app?.done ? classes.itemBoxGrey : classes.itemBox}
+						onClick={() => selectApp(app?.key)}
+						style={{ width: "100%" }}
+						type="button"
+					>
+						{app?.name || (
+							<Text size="sm" style={{ color: "#333 !important" }}>
+								<i>[ Missing Name ]</i> - ({app?.key})
+							</Text>
+						)}{" "}
+					</button>
+				)}
+				{mainView === MAIN_VIEWS[0] && (
+					<div style={app?.done ? { display: "none" } : { display: "block" }}>
+						<ICON.edit
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "45px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => editItem(app.key, true)}
+						/>
+						<ICON.remove
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "15px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="white"
+							onClick={() => deleteItem(app?.id)}
+						/>
+						{indicateEdit}
+					</div>
+				)}
+				{mainView === MAIN_VIEWS[1] && (
+					<>
+						<ICON.arrowRight
+							style={{
+								width: rem(20),
+								height: rem(20),
+								position: "absolute",
+								right: "15px",
+								top: "14px",
+								cursor: "pointer",
+							}}
+							stroke={2}
+							color="#393"
+						/>
+					</>
+				)}
 			</div>
 		</ErrorBoundary>
 	);
-};
+});
+
+ListItem.whyDidYouRender = true;
+
+export default ListItem;

@@ -1,11 +1,14 @@
-import { rootStore } from "store/store";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
+import { store, getState } from "store/store";
+import { log } from 'utils/logger';
 
 const _isColumnEmpty = (column) => {
 	return column === "" || column === null;
 };
 
 export const filterNoInstallerApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => {
 		return (
 			_isColumnEmpty(item.whalebrew) &&
@@ -32,7 +35,8 @@ export const filterNoInstallerApps = () => {
 };
 
 export const filterNoUrlsApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
+	log.debug("Apps: ", apps);
 	return apps.filter((item) => {
 		return (
 			_isColumnEmpty(item.home) &&
@@ -43,34 +47,30 @@ export const filterNoUrlsApps = () => {
 };
 
 export const filterNoDescsApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => _isColumnEmpty(item.desc));
 };
 
 export const filterNoNamesApps = () => {
-	const apps = rootStore.get.appCollection();
+	const apps = getState().appCollection;
 	return apps.filter((item) => _isColumnEmpty(item.name));
 };
 
 export const filterModel = {
-	noInstallers: {
-		key: "noInstallers",
-		method: filterNoInstallerApps,
+	installers: {
+		key: "installers",
 		title: "Apps without installers",
 	},
-	noUrls: {
-		key: "noUrls",
-		method: filterNoUrlsApps,
+	urls: {
+		key: "urls",
 		title: "Apps without URLs",
 	},
-	noDesc: {
-		key: "noDesc",
-		method: filterNoNamesApps,
+	name: {
+		key: "name",
 		title: "Apps without name",
 	},
-	noName: {
-		key: "noName",
-		method: filterNoDescsApps,
+	desc: {
+		key: "desc",
 		title: "Apps without description",
 	},
 };

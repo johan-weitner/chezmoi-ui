@@ -1,35 +1,39 @@
 import { selectPageContent } from "store/selectors";
-import { rootStore } from "store/store";
+import {
+	getState,
+	store,
+	setPage,
+	setPageContent,
+} from "store/store";
 
 export const usePageManager = () => {
-	const { store } = rootStore;
-	const state = store.getState();
+	const { dispatch } = store;
 
 	const gotoPage = (page) => {
-		rootStore.set.page(page);
-		const apps = selectPageContent(state);
-		rootStore.set.pageContent(apps);
+		dispatch(setPage(page));
+		const apps = selectPageContent(getState());
+		dispatch(setPageContent(apps));
 		return apps;
 	};
 
 	const getPageContent = () => {
 		const apps = selectPageContent();
-		rootStore.set.pageContent(apps);
+		dispatch(setPageContent(apps));
 		return apps;
 	};
 
 	const gotoPrevPage = () => {
-		const page = rootStore.get.page();
+		const page = getState().page;
 		if (page > 1) {
-			rootStore.set.page(page - 1);
+			dispatch(setPage(page - 1));
 			getPageContent();
 		}
 	};
 	const gotoNextPage = () => {
-		const page = rootStore.get.page();
-		const pageCount = rootStore.get.pageCount();
+		const page = getState().page;
+		const pageCount = getState().pageCount;
 		if (page < pageCount) {
-			rootStore.set.page(page + 1);
+			dispatch(setPage(page + 1));
 			getPageContent();
 		}
 	};

@@ -12,8 +12,6 @@
   right: 0;
   position: fixed;
   background-color: #121516 !important;
-  border: 1px solid #933;
-  /* width: 100%; */
   z-index: 999;
 
   h1 {

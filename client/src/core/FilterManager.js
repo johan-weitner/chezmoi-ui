@@ -1,23 +1,32 @@
 import { filterModel } from "api/filters";
-import { rootStore } from "store/store";
+import {
+	store,
+	setActiveFilter,
+	setFilteredList
+} from "store/store";
+import { fetchFilteredApps } from "api/appCollectionApi";
+import { log } from 'utils/logger';
+import { toast } from "sonner";
 
 export const useFilterManager = () => {
-	const { store } = rootStore;
-	const state = store.getState();
-	const { page, pageCount, getTotalSize } = state;
-	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
-	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+	const { dispatch } = store;
 
-	const applyFilter = (filter) => {
-		DEBUG && console.log(`FilterManager: Apply filter: ${filter}`);
-		rootStore.set.activeFilter(filter);
-		const filteredApps = filterModel[filter].method();
-		rootStore.set.filteredList(filteredApps);
+	const applyFilter = async (filter) => {
+		const apps = await fetchFilteredApps(filter)
+			.then((data) => {
+				dispatch(setActiveFilter(filter));
+				dispatch(setFilteredList(data));
+				return data;
+			}).catch((e) => {
+				log.error(e.message);
+				toast.error(e.message);
+			});
+		return apps;
 	};
 
 	const clearFilter = () => {
-		rootStore.set.activeFilter(null);
-		rootStore.set.filteredList(null);
+		dispatch(setActiveFilter(null));
+		dispatch(setFilteredList(null));
 	};
 
 	return { applyFilter, clearFilter };

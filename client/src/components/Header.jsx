@@ -1,17 +1,14 @@
-import { Group, Title } from "@mantine/core";
-import { useEffect } from "react";
+import { Group, Title, Container } from "@mantine/core";
+import { useSelector } from "store/store";
 import React from "react";
-import { rootStore } from "../store/store";
-import BarSpinner from "./BarSpinner";
+import GridSpinner from "./GridSpinner";
 import classes from "./Header.module.css";
 import Toolbar from "./Toolbar";
 import logo from "./logo.svg";
 
 const Header = (props) => {
-	const [isLoading, setIsLoading] = React.useState(false);
-	useEffect(() => {
-		setIsLoading(rootStore.get.isLoading());
-	}, [rootStore.use.isLoading()]);
+	const { setShowAppGroupView } = props;
+	const isLoading = useSelector((state) => state.root.isLoading);
 
 	return (
 		<Group
@@ -23,18 +20,20 @@ const Header = (props) => {
 			m={0}
 			style={{ height: "100px" }}
 		>
-			<div className={classes.navbar} data-testid="mainHeader">
+			<Container size="xl">
 				<Group
 					justify="flex-start"
 					className={classes.headerLogo}
 					style={{ backgroundColor: "#121516 !important" }}
 				>
 					<img src={logo} alt="Logo" className={classes.logo} />
-					<Title className={classes.logoTitle}>Chezmoi UI</Title>
+					<Title className={classes.logoTitle} mr={10}>
+						Chezmoi UI
+					</Title>
+					{isLoading && <GridSpinner />}
 				</Group>
-				<Toolbar />
-			</div>
-			<div style={{ marginTop: "80px" }}>{isLoading && <BarSpinner />}</div>
+				<Toolbar setShowAppGroupView={setShowAppGroupView} />
+			</Container>
 		</Group>
 	);
 };

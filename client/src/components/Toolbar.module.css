@@ -3,18 +3,36 @@
   top: 44px;
   left: 0; */
   width: 1184px;
-  height: 50px;
+  height: 45px;
   background-color: #121516 !important;
   padding: 0;
-  margin: -15px auto 0 auto;
+  margin: 10px auto 0 auto;
 
 }
-
-
 
 .navbarMain {
   margin-top: 0;
   z-index: 999;
+}
+
+.navbarLink,
+.navbarLinkActive {
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.navbarLink:hover {
+  border:1px solid #75c0fc;
+}
+
+.navbarLinkActive {
+  border:2px solid #75c0fc;
+  box-shadow: inset 5px 5px 20px rgba(0,0,0, 0.5),
+    inset -5px -5px 20px rgba(255,255,255, 0.5);
+  text-shadow:1px 1px 3px rgba(0,0,0, 1.0)
+}
+
+.navbarLinkActive:hover {
+  border:none;
 }
 
 .link {

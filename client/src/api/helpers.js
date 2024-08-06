@@ -1,7 +1,10 @@
 import { appModelInstallerFields } from "api/appModel";
-import { APP_FORM } from "constants/appForm";
+import { APP_FORM, EMPTY_APP } from "constants/appForm";
+import { log } from 'utils/logger';
+import { useGroupManager } from "core/GroupManager";
 
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+const { getGroupId } = useGroupManager();
 
 /**
  * Helper functions
@@ -32,29 +35,33 @@ export const appHasInstaller = (app) => {
 };
 
 export const mapEntityToDb = (app) => {
+	log.debug(
+		`Mapping app data to database entity:
+		- App:`,
+		app);
+	// const { ApplicationGroup } = app;
+	// const groups = ApplicationGroup.map((group) => {
+	// 	return getGroupId(group);
+	// });
 	const { formPartOne, formPartTwo } = APP_FORM;
-	const validKeys = [...formPartOne, ...formPartTwo].map((item) => item.name);
-	const entity = { tags: app.tags };
+	const validKeys = [...formPartOne, ...formPartTwo, "done"].map((item) => item.name);
+	const entity = {};
 	Object.keys(app).map((key) => {
 		if (validKeys.includes(key)) {
 			entity[key] = app[key];
 		}
 	});
-	if (app.tags?.length > 0) {
-		entity.tags = JSON.stringify(app.tags);
-	}
-	DEBUG &&
-		console.log(
-			`Mapped app data:
+	log.debug(
+		`Mapped app data:
     - Entity:`,
-			entity,
-		);
+		entity,
+	);
 	return entity;
 };
 
 export const transformNullValues = (app) => {
 	for (const key of Object.keys(app)) {
-		if (!app[key]) {
+		if (app[key] === null || app[key] === undefined) {
 			app[key] = "";
 		}
 	}

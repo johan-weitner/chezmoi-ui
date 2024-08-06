@@ -1,29 +1,39 @@
-import { Flex, Group, Tooltip, UnstyledButton, rem } from "@mantine/core";
-import {
-	IconDownload,
-	IconPlayerTrackNext,
-	IconPlayerTrackPrev,
-} from "@tabler/icons-react";
+import { Flex, Group, Button, rem } from "@mantine/core";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
 import { useState } from "react";
 import classes from "components/Toolbar.module.css";
-import { useClientManager } from "core/ClientManager";
-import BarSpinner from "./BarSpinner";
+import { MAIN_VIEWS } from "store/store";
+import { setMainView } from "store/store";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 
 const Toolbar = (props) => {
+	const { setShowAppGroupView } = props;
 	const [active, setActive] = useState(null);
-	const { isLoading, addItem, deleteItem, gotoPrev, gotoNext, downloadYaml } =
-		useClientManager();
 	const stroke = 1.5;
+	const dispatch = useDispatch();
+
+	const mainView = useSelector((state) => state.root.mainView);
+
+	const openAppsView = () => {
+		dispatch(setMainView(MAIN_VIEWS[0]));
+		setShowAppGroupView(false);
+	};
+
+	const openGroupsView = () => {
+		dispatch(setMainView(MAIN_VIEWS[1]));
+		setShowAppGroupView(true);
+	};
 
 	const menuData = [
 		{
 			Icon: (
 				<ICON.add style={{ width: rem(20), height: rem(20) }} stroke={stroke} />
 			),
-			label: "Add new app",
-			action: addItem,
+			label: "Applications",
+			mainViewKey: MAIN_VIEWS[0],
+			action: () => openAppsView(),
 		},
 		{
 			Icon: (
@@ -32,38 +42,9 @@ const Toolbar = (props) => {
 					stroke={stroke}
 				/>
 			),
-			label: "Delete app",
-			action: deleteItem,
-		},
-		{
-			Icon: (
-				<IconPlayerTrackPrev
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Go to previous",
-			action: gotoPrev,
-		},
-		{
-			Icon: (
-				<IconPlayerTrackNext
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Go to next",
-			action: gotoNext,
-		},
-		{
-			Icon: (
-				<IconDownload
-					style={{ width: rem(20), height: rem(20) }}
-					stroke={stroke}
-				/>
-			),
-			label: "Download YAML",
-			action: () => window.open(`${import.meta.env.VITE_BACKEND_URL}/download`),
+			label: "Application Groups",
+			mainViewKey: MAIN_VIEWS[1],
+			action: () => openGroupsView(),
 		},
 	];
 
@@ -100,12 +81,16 @@ const Toolbar = (props) => {
 								{...menuItem}
 								key={nanoid()}
 								onClick={() => setActive(index)}
+								className={
+									mainView === menuItem.mainViewKey
+										? classes.navbarLinkActive
+										: classes.navbarLink
+								}
 							/>
 						);
 					})}
 				</Flex>
 			</Group>
-			{isLoading && <BarSpinner />}
 		</nav>
 	);
 };
