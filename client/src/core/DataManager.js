@@ -26,7 +26,6 @@ import {
 } from "store/store";
 import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
-import { useSelectionManager } from "./SelectionManager";
 import { log } from 'utils/logger';
 
 export const useDataManager = () => {
@@ -105,16 +104,17 @@ export const useDataManager = () => {
 		});
 	};
 
-	const deleteItem = (appKey) => {
+	const deleteItem = (appId) => {
 		const apps = getState().appCollection;
 		const pageContent = getState().pageContent;
-		const appId = apps.find((app) => app.key === appKey).id;
-		dispatch(setIsLoading(true));
+		// const appId = apps.find((app) => app.key === appKey).id;
+		// dispatch(setIsLoading(true));
+		console.log("DataManager: Deleting app with it: ", appId);
 
 		deleteApp(appId)
 			.then(() => {
-				const newList = apps.filter((app) => app.key !== appKey);
-				const newPage = pageContent.filter((app) => app.key !== appKey);
+				const newList = apps.filter((app) => app.id !== appId);
+				const newPage = pageContent.filter((app) => app.id !== appId);
 				dispatch(setAppCollection(newList));
 				dispatch(setPageContent(newPage));
 				toggleLoading(false);
@@ -131,7 +131,7 @@ export const useDataManager = () => {
 		toggleLoading(true);
 		tagApp(Number.parseInt(app.id, 10), appTags)
 			.then((res) => {
-				log.debuglog("Tagged app: ", res);
+				log.debug("Tagged app: ", res);
 			})
 			.catch((e) => {
 				log.error(e);
@@ -150,8 +150,9 @@ export const useDataManager = () => {
 				);
 
 				const index = apps.findIndex((item) => item.key === app.key);
-				apps[index] = app;
-				dispatch(setAppCollection(apps));
+				const newApps = [...apps];
+				newApps[index] = app;
+				dispatch(setAppCollection(newApps));
 				gotoPage(getState().page);
 				toggleLoading(false);
 				toast.success("App updated successfully");
@@ -162,13 +163,18 @@ export const useDataManager = () => {
 			});
 	};
 
-	const saveNewItem = (app, tagIds) => {
+	const saveNewItem = (app, tagIds, groups) => {
 		dispatch(setIsLoading(true));
 		const apps = getState().appCollection;
 		const pageContent = getState().pageContent;
-		saveNewApp(app)
+		saveNewApp({
+			...app,
+			appTags: tagIds,
+			ApplicationGroup: groups,
+			edited: "true",
+		})
 			.then((newApp) => {
-				tagApp(newApp?.id, tagIds);
+				// tagApp(newApp?.id, tagIds);
 				dispatch(setAppCollection([...apps, app]));
 				if (page === pageCount.length) {
 					dispatch(setPageCount([...pageContent, app]));

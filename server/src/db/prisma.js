@@ -45,21 +45,6 @@ export const seedGroups = async (data) => {
 // /Bootstrap API
 
 
-
-export const addApp = async (data) => {
-	try {
-		const app = await prisma[APPLICATION].create({
-			data: {
-				...data,
-			},
-		});
-		return app;
-	} catch (e) {
-		log.error(e.message);
-		throw e;
-	}
-};
-
 /**
  * Application API
  */
@@ -149,6 +134,65 @@ export const getAppByKey = async (key) => {
 	return app;
 };
 
+export const addApp = async (data) => {
+	log.info("Adding app: ", data);
+	const { appGroups, appTags, ...appData } = data;
+	const payload = {
+		appGroups: appGroups?.map(g => Number.parseInt(g, 10)),
+		appTags: appTags,
+		appData: appData
+	};
+	log.info("<<< Payload: ", payload);
+	try {
+		const app = await createApplicationWithGroupsAndTags(payload);
+		log.info("Created app: ", app);
+	} catch (e) {
+		log.error(e.message);
+		throw e;
+	}
+};
+
+const createApplicationWithGroupsAndTags = async (payload) => {
+	const {
+		appData,
+		appGroups,
+		appTags
+	} = payload;
+	return await prisma.$transaction(async (prisma) => {
+		const application = await prisma[APPLICATION].create({
+			data: {
+				...appData,
+			},
+		});
+
+		const applicationGroups = appGroups?.map(groupId => {
+			return prisma.ApplicationGroup.create({
+				data: {
+					applicationId: application.id,
+					groupId: groupId,
+				},
+			});
+		});
+
+		const applicationTags = appTags?.map(tagId => {
+			return prisma.ApplicationTag.create({
+				data: {
+					applicationId: application.id,
+					tagId: tagId,
+				},
+			});
+		});
+
+		try {
+			await Promise.all([...applicationGroups, ...applicationTags]);
+		} catch (e) {
+			log.error(e.message);
+			throw e;
+		}
+		return application;
+	});
+}
+
 export const updateApp = async (data) => {
 	const app = await prisma[APPLICATION].update({
 		where: {
@@ -162,20 +206,25 @@ export const updateApp = async (data) => {
 };
 
 export const deleteApp = async (id) => {
-	if (!id) {
-		log.error("Invalid id: ", id);
-		return null;
+	if (Number.isNaN(id)) {
+		throw new Error("Invalid id: ", id);
 	}
-
-	const intId = Number.parseInt(id, 10);
-	await removeTagRelationsByAppId(intId);
-	await removeGroupRelationsByAppId(intId);
-	const app = await prisma[APPLICATION].delete({
-		where: {
-			id: intId,
-		},
-	});
-	return app;
+	log.info("PRISMA: Deleting app: ", id);
+	try {
+		const intId = Number.parseInt(id, 10);
+		await removeTagRelationsByAppId(intId);
+		await removeGroupRelationsByAppId(intId);
+		const app = await prisma[APPLICATION].delete({
+			where: {
+				id: intId,
+			},
+		});
+		log.info("Deleted app: ", app);
+		return app;
+	} catch (e) {
+		log.error(e.message, e);
+		throw e;
+	}
 };
 
 export const getCount = async () => {

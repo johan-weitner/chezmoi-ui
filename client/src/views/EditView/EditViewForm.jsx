@@ -58,10 +58,11 @@ const EditViewForm = (props) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
+		console.log("Groups: ", appGroups);
 		if (isNewApp) {
-			saveNewItem(data, appTags);
+			saveNewItem(data, appTags, appGroups);
 		} else {
-			updateItem(data, appTags);
+			updateItem(data, appTags, appGroups);
 		}
 		setSelectedAppKey(null);
 		dispatch(setEditMode(false));
@@ -137,22 +138,26 @@ const EditViewForm = (props) => {
 				register={register}
 				isNewApp={newApp}
 			/>
-			<GroupSection
-				register={register}
-				appKey={selectedApp?.key}
-				isNewApp={newApp}
-				tags={selectedAppGroups || []}
-				editMode={editMode}
-				hoistAppTags={hoistAppTags}
-			/>
-			<TagSection
-				register={register}
-				appKey={selectedApp?.key}
-				isNewApp={newApp}
-				tags={selectedApp?.tags || ""}
-				editMode={editMode}
-				hoistAppTags={hoistAppTags}
-			/>
+			{/* {!isNewApp && ( */}
+			<>
+				<GroupSection
+					register={register}
+					appKey={selectedApp?.key}
+					isNewApp={newApp}
+					tags={selectedAppGroups || []}
+					editMode={editMode}
+					hoistAppGroups={setAppGroups}
+				/>
+				<TagSection
+					register={register}
+					appKey={selectedApp?.key}
+					isNewApp={newApp}
+					tags={selectedApp?.tags || ""}
+					editMode={editMode}
+					hoistAppTags={hoistAppTags}
+				/>
+			</>
+			{/* )} */}
 			<InstallerSection
 				formPartTwo={formPartTwo}
 				register={register}

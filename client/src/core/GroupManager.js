@@ -52,6 +52,11 @@ export const useGroupManager = () => {
     });
   };
 
+  const getGroupId = (groupName) => {
+    const found = getState().appGroups.find((item) => item.name === groupName);
+    return found ? found.id : -1;
+  };
+
   const getGroupById = (groupId) => {
     if (!groupId) return;
     return getState().appGroups.find((group) => group.id === groupId);
@@ -187,6 +192,7 @@ export const useGroupManager = () => {
 
   return {
     seedGroups,
+    getGroupId,
     selectGroup,
     getAppsInGroup,
     putAppInGroup,

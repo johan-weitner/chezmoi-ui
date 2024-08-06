@@ -36,10 +36,6 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Refactor filters to use endpoint calls",
-                    "id": "wr7rocd8wob9npc53lbr6paq"
-                },
-                {
                     "text": "Save relations in sequence to creating new app, to have a FK",
                     "id": "qioamai430gd3imzhfvojbtd"
                 },
@@ -76,6 +72,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Refactor filters to use endpoint calls",
+                    "id": "wr7rocd8wob9npc53lbr6paq"
+                },
                 {
                     "text": "Refactor global store with Redux Tool Kit",
                     "id": "mqxyyif1ihmmslyznmbssldu"
@@ -355,5 +355,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722863031779
+    "timestamp": 1722875453368
 }

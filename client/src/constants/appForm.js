@@ -61,5 +61,4 @@ export const EMPTY_APP = {
 	appstore: "",
 	pacman: "",
 	port: "",
-	tags: "",
 };
