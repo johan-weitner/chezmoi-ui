@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { log } from "../util/logger.js";
 import { application } from "express";
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({ errorFormat: "pretty" });
 const APPLICATION = "application";
 const TAG = "tag";
 
