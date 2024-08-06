@@ -5,8 +5,8 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Putting app in group is unreliable",
-                    "id": "cfk4h8x2ife74ynph8dl2fro"
+                    "text": "Navigating apps in Edit view, tag selection is not updated",
+                    "id": "botz2ake7j6qc7c1nmq8gcov"
                 },
                 {
                     "text": "App list in group view doesn't update reliably after marking app done",
@@ -35,10 +35,6 @@
         {
             "title": "To-Do",
             "tasks": [
-                {
-                    "text": "Save relations in sequence to creating new app, to have a FK",
-                    "id": "qioamai430gd3imzhfvojbtd"
-                },
                 {
                     "text": "Clean up patterns",
                     "id": "ybb3biegh54mooyoomikzyja"
@@ -72,6 +68,14 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Putting app in group is unreliable",
+                    "id": "cfk4h8x2ife74ynph8dl2fro"
+                },
+                {
+                    "text": "Save relations in sequence to creating new app, to have a FK",
+                    "id": "qioamai430gd3imzhfvojbtd"
+                },
                 {
                     "text": "Refactor filters to use endpoint calls",
                     "id": "wr7rocd8wob9npc53lbr6paq"
@@ -355,5 +359,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722875453368
+    "timestamp": 1722969285138
 }
