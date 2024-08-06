@@ -35,7 +35,7 @@ export const appHasInstaller = (app) => {
 };
 
 export const mapEntityToDb = (app) => {
-	log.info(
+	log.debug(
 		`Mapping app data to database entity:
 		- App:`,
 		app);

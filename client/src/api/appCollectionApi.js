@@ -168,11 +168,12 @@ export const updateApp = async (updatedData, tags, groups) => {
 
 // saveNewItem(data, appTags, appGroups);
 export const saveNewApp = async (data) => {
-	log.info("API: Saving new app - in-data:", data);
-	const { appTags, ApplicationGroup } = data;
+	log.debug("API: Saving new app - in-data:", data);
 	const app = mapEntityToDb(data);
 	const fixedNullValuesApp = transformNullValues(app);
-	log.info("API: Saving new app - fixed data:", fixedNullValuesApp);
+	log.debug("API: Saving new app - fixed data:", fixedNullValuesApp);
+
+	const { appTags, ApplicationGroup } = data;
 	const groups = ApplicationGroup?.map((group) => {
 		return getGroupId(group);
 	});
@@ -188,11 +189,7 @@ export const saveNewApp = async (data) => {
 		})
 		.then((response) => {
 			const { data } = response;
-			log.info("API: Saved new app - response:", data);
-			// dispatch(setIsNewApp(false));
-			// dispatch(setSelectedAppKey(data.key));
-			// dispatch(setSelectedApp(data));
-			// dispatch(setEditMode(true));
+			log.debug("API: Saved new app - response:", data);
 			return response.data;
 		})
 		.catch((error) => {
