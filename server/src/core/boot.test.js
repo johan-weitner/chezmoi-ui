@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import YAML from "yaml";
-import { getCount, isEmptyDb, seedDb } from "../db/prisma";
+import { getCount, isEmptyDb, seedDb } from "../db/dbService";
 import { log } from "../util/log";
 import { styles } from "../util/styles";
 import {
@@ -19,7 +19,7 @@ vi.mock("yaml");
 vi.mock("../util/log");
 vi.mock("../util/styles");
 vi.mock("./config");
-vi.mock("../db/prisma");
+vi.mock("../db/dbService");
 
 describe("boot.js", () => {
 	beforeEach(() => {
@@ -28,7 +28,7 @@ describe("boot.js", () => {
 
 	describe("boot", () => {
 		it("should call necessary functions and log messages", () => {
-			vi.spyOn(console, "log").mockImplementation(() => {});
+			vi.spyOn(console, "log").mockImplementation(() => { });
 			softwareYamlPath.mockReturnValue("/path/to/source.yaml");
 			fs.existsSync.mockReturnValue(true);
 			isEmptyDb.mockResolvedValue(true);
@@ -49,7 +49,7 @@ describe("boot.js", () => {
 	describe("_checkEnvVars", () => {
 		it("should log error and exit if softwareYamlPath is missing", () => {
 			softwareYamlPath.mockReturnValue(undefined);
-			const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => {});
+			const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => { });
 
 			_checkEnvVars();
 
@@ -64,7 +64,7 @@ describe("boot.js", () => {
 		it("should log error and exit if source file does not exist", () => {
 			softwareYamlPath.mockReturnValue("/path/to/source.yaml");
 			fs.existsSync.mockReturnValue(false);
-			const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => {});
+			const exitSpy = vi.spyOn(process, "exit").mockImplementation(() => { });
 
 			_checkFileExistence();
 

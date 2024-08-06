@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getAllApps } from "../db/prisma.js";
+import { getAllApps } from "../db/dbService.js";
 import { getYamlExport } from "./export.js";
 
-vi.mock("../db/prisma.js");
+vi.mock("../db/dbService.js");
 
 describe("getYamlExport", () => {
 	beforeEach(() => {
