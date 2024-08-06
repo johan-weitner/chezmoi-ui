@@ -44,10 +44,6 @@
                     "id": "e9wmxsahf33esakrkqa4k20a"
                 },
                 {
-                    "text": "Impl hide completed",
-                    "id": "se75bul5vh0re5e8kryvaafa"
-                },
-                {
                     "text": "Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
                     "id": "sk38oxq3x0o9nolxc95ikpv8"
                 },
@@ -68,6 +64,10 @@
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Impl hide completed",
+                    "id": "se75bul5vh0re5e8kryvaafa"
+                },
                 {
                     "text": "Putting app in group is unreliable",
                     "id": "cfk4h8x2ife74ynph8dl2fro"
@@ -359,5 +359,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1722969285138
+    "timestamp": 1722980662870
 }

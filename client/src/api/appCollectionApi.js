@@ -30,6 +30,18 @@ export const fetchApps = async () => {
 	return apps;
 };
 
+export const fetchUnfinishedApps = async () => {
+	const apps = await axios
+		.get(`${BASE_URL}/softwareNotDone`)
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return apps;
+};
+
 export const fetchFilteredApps = async (filter) => {
 	const apps = await axios
 		.get(`${BASE_URL}/filterBy?filter=${filter}`)

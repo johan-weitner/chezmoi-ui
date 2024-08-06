@@ -61,6 +61,7 @@ export const isEmptyTagsTable = async () => {
 import {
 	getAllApps,
 	getAllAppsWithTags,
+	getAllUnfinishedApps,
 	getAppsByTag,
 	getPage,
 	getAppByKey,
@@ -100,6 +101,7 @@ import {
 
 export {
 	getAllApps,
+	getAllUnfinishedApps,
 	getAllAppsWithTags,
 	getAppsByTag,
 	getPage,

@@ -2,6 +2,7 @@ import {
 	addAppTags,
 	deleteApp,
 	getAllApps,
+	fetchUnfinishedApps,
 	getAllTags,
 	saveNewApp,
 	updateApp,
@@ -97,11 +98,19 @@ export const useDataManager = () => {
 		return apps;
 	};
 
-	const refreshAppCollection = async () => {
-		getAllApps().then((apps) => {
-			dispatch(setAppCollection(apps));
-			dispatch(setPageCount(Math.ceil(apps.length / getState().pageSize),));
-		});
+	const refreshAppCollection = async (filterOutDoneApps = false) => {
+		if (filterOutDoneApps) {
+			fetchUnfinishedApps().then((apps) => {
+				dispatch(setAppCollection(apps));
+				dispatch(setPageCount(Math.ceil(apps.length / getState().pageSize),));
+			});
+		} else {
+			getAllApps().then((apps) => {
+				dispatch(setAppCollection(apps));
+				dispatch(setPageCount(Math.ceil(apps.length / getState().pageSize),));
+			});
+		}
+
 	};
 
 	const deleteItem = (appId) => {

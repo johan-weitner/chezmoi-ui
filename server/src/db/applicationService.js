@@ -19,6 +19,22 @@ const getAllApps = async () => {
   return apps;
 };
 
+const getAllUnfinishedApps = async () => {
+  const apps = await prisma[APPLICATION].findMany({
+    select: {
+      id: true,
+      key: true,
+      name: true,
+      edited: true,
+      done: true
+    },
+    where: {
+      done: false
+    }
+  });
+  return apps;
+};
+
 const getAllAppsWithTags = async () => {
   const apps = await prisma[APPLICATION].findMany({
     include: {
@@ -274,6 +290,7 @@ const filterAppsByNoDesc = async () => {
 
 export {
   getAllApps,
+  getAllUnfinishedApps,
   getAllAppsWithTags,
   getAppsByTag,
   getPage,
