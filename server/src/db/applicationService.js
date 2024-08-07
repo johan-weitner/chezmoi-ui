@@ -49,7 +49,7 @@ const getAllAppsWithTags = async () => {
           }
         }
       },
-      ApplicationGroup: {
+      appGroups: {
         select: {
           group: {
             select: {

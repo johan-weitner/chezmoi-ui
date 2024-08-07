@@ -1,6 +1,6 @@
 import express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import { log } from 'utils/logger';
+import { log } from '../src/utils/logger';
 
 // Initialize express app
 const app = express();

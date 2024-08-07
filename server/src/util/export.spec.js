@@ -15,7 +15,7 @@ describe("getYamlExport", () => {
 				id: 1,
 				key: "app1",
 				name: "App 1",
-				edited: "2023-01-01",
+				edited: true,
 				desc: "Description 1",
 				bin: "bin1",
 				short: "short1",

@@ -119,7 +119,8 @@ const _seedDbIfEmpty = async (forceSeed) => {
 			data.push({
 				key: stripTrailingWhitespace(software[key].key),
 				name: stripTrailingWhitespace(software[key]._name),
-				edited: stripTrailingWhitespace(software[key].edited),
+				edited: false,
+				done: false,
 				desc: stripTrailingWhitespace(software[key]._desc),
 				bin: stripTrailingWhitespace(software[key]._bin),
 				short: stripTrailingWhitespace(software[key]._short),
@@ -154,6 +155,7 @@ const _seedDbIfEmpty = async (forceSeed) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
 		doSeedGroups();
+		doSeedTags();
 	}
 
 	// if (isEmptyTagsTable()) {
@@ -178,5 +180,13 @@ const doSeedGroups = async () => {
 	await seedGroups(groupData);
 	await getGroupCount().then((count) => {
 		log.info(`Done seeding Group table with ${count} groups`);
+	});
+};
+
+const doSeedTags = async () => {
+	const tags = [{ name: "cli" }, { name: "desktop" }, { name: "mac" }, { name: "win" }, { name: "linux" }, { name: "dev" }, { name: "home" }];
+	await seedTags(tags);
+	await getTagCount().then((count) => {
+		log.info(`Done seeding Tag table with ${count} tags`);
 	});
 };
