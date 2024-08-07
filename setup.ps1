@@ -8,9 +8,9 @@ copy "server\.env.example" "server\.env"
 npm install -g pnpm
 pnpm install
 
-cd "server"
-pnpx prisma migrate dev --schema=./prisma/schema.prisma
-cd
+pushd "server"
+npx prisma migrate dev --schema=./prisma/schema.prisma
+popd
 
 echo ***** Done. *****
 echo Run 'pnpm start' to start the app.
