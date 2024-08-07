@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { log } from "../util/logger.js";
+import { removeTagRelationsByAppId } from "./tagService.js";
+import { removeGroupRelationsByAppId } from "./groupService.js";
 
 const prisma = new PrismaClient({ errorFormat: "pretty" });
 const APPLICATION = "application";

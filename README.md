@@ -1,25 +1,32 @@
 # Chezmoi UI
 
-A quick stab at a UI for managing a list of applications to feed a Chezmoi setup.
+A web UI application for managing a list of apps to seed/feed a Chezmoi setup.
+
+
 
 ## Background
 
 Trying out a bunch of dot file management tools it seemed to me most of them are either too sparse, (read: a CLI for creating soft links to a Git repo), or very complex and therefore error-prone, and therefore time-consuming, (read: Install.Doctor). But Chezmoi hits a sweet spot for me. Maintaining huge YAML lists on the other hand, not so much...
 
-I did like the way [Install.Doctor](https://github.com/megabyte-labs/install.doctor) approached the issue of maintaining a universal list of applications though, offering wide OS support from a unified source. Regardless of what OS I'm faced with, I want to be able to run a script and immediately feel at home. But - crucially - I don't want the maintenance of it to be another full-time job...
+I did like the way [Install.Doctor](https://github.com/megabyte-labs/install.doctor) approached the issue of maintaining a universal list of applications though, offering wide OS support from a unified source. Regardless of what OS I'm faced with, I want to be able to run a script and be able to feel at home. But - crucially - I don't want the maintenance of it to be another full-time job...
+
+
 
 ## What it is
 
-So this is a UI for Chezmoi users who like me would like to base a compatible application list on Install.Doctor's impressive curation. So I guess Install.Doctor users could find it useful too. It's just a simple SPA with a Node backend, and an even simpler SQLite db holding the list data, meant to run locally on your machine. So you need a current Node LTS - (eg. version 20.x and above). Or Docker, if you don't want to install Node.
+This is a UI for Chezmoi users who like me would like to base a compatible application list on Install.Doctor's impressive curation. So I guess Install.Doctor users could find it useful too. It's just a simple SPA with a Node backend, and an even simpler SQLite db holding the list data, meant to run locally on your machine. So you need a current Node LTS - (eg. version 20.x and above). Or Docker, if you don't want to install Node.
 
 Also I've added tags to the mix, as I have some vague plans on using them to control what apps get installed in different environments. If nothing else they could potentially be used for filtering, in order to produce multiple lists for various targets. Feel free to skip them if all you want to do is cull a gigantic list.
 
+
+
 ## Features
+
 - Web UI for editing a YAML-based list of applications in the Install.Doctor format
 - Run it locally in Node, or in a Docker container
-- Edit, remove, add your own apps
+- Edit metadata, remove, add your own apps
 - Keyboard shortcuts for speedy workflow
-- Search for applications
+- Quick search for applications
 - Quick link opens application homepage/Github page in new window
 - Iconography indicates
   - If URLs to homepage, Github page, documentation page are missing
@@ -31,35 +38,44 @@ Also I've added tags to the mix, as I have some vague plans on using them to con
   - Apps without a description
   - Apps without URLs to homepage/Github/docs
   - Apps without installation method
+  - Apps not marked completed; (eg. hide completed)
 - Tag applications to mark them for specific environments/use cases
-- Export edited list back to Install.Doctor YAML format
+- Export edited list back to Chezmoi/Install.Doctor YAML format
   - In its entirety
   - Or filtered on the tags of your choosing
+- Export group structure in Install.Doctor format. (Combine with the above to have a complete Install.Doctor "playbook")
+
+
 
 ## Get started
 
 1. Clone this repo
-1. Make sure you have Node 20+ installed
-1. (I strongly recommend using `pnpm`instead of `npm`simply because it's so much better and more robust. Besides, the "P" stands for performant. Go figure.)
-1. Rename `.env.example` --> `.env` and edit the file reference therein - (or simply reference the provided example file located in `server/examplefiles`).
-1. Run `pnpm installDeps` from the root directory
+
+1. Make sure you have Node 20+ installed. (Unless you prefer to use Docker images)
+
+   (I strongly recommend using `pnpm`instead of `npm`simply because it's so much more robust. Besides, the "P" stands for performant. Go figure.)
+
+1. Run `setup.sh`. Optionally review and adjust the `.env`files in the `server` and `client` directories respectively
+
 1. Run `pnpm start` from the root directory
 
 Chezmoi UI should now be available at `http://localhost:8000`.
 
-*N.B.* Don't forget to stop the servers with `pnpm stop` when you're done, or you might end up with a lot of zombie Node processes. (If you prefer you can of course navigate to `/client` and `/server` and run the `pnpm` commands to start the respective server).
+*N.B.* Don't forget to stop the servers with `pnpm stop` when you're done, or you might end up with a lot of zombie Node processes. (If you prefer you can of course navigate to `/client` and `/server` respectively and run attached processes in separate terminal windows).
 
 ### NPM/PNPM Commands
 | Command       | Description                                                  |
 | ------------- | ------------------------------------------------------------ |
-| `start`       | Start Chezmoi UI                                             |
-| `start:force` | Start Chezmoi UI after making sure ports 3000 and 8000 are free |
-| `stop`        | Stop Chezmoi UI                                              |
+| `start`       | Start Chezmoi UI servers                                     |
+| `start:force` | Start Chezmoi UI servers after aggressively making sure ports 3000 and 8000 are free |
+| `stop`        | Stop Chezmoi UI servers                                      |
 | `checkports`  | Check if and what processes are occupying ports 3000 and 8000 |
 | `installDeps` | Install third party dependencies                             |
 
 
+
 ## Run in Docker Container
+
 Alternatively, if you don't want to install Node, you can run Chezmoi UI in a Docker container:
 
 Mac/Linux:
@@ -68,18 +84,21 @@ Mac/Linux:
 Windows:
 ```./start.ps1```
 
-The scripts take care of building the images if they are missing, as well as starting the Docker service if it's down. But you can of course handle Docker manually if you prefer. The database is of course located on a dedicated volume, so it's persisted between sessions.
+For convenience, the scripts take care of building the images if they are missing, and starts the Docker service if it's down. But you can of course handle Docker manually if you prefer. The database is located on a dedicated volume, so it's persisted between sessions.
+
+
 
 ## Proposed workflow
-Install.Doctor's curated list is a bit "everything for everyone", meaning there's no way you'll be interested in all the fields the list covers. In my experience, when working through very large datasets like these it helps to do it in two or more passes, with increasing scrutiny: First weed out the obvious lemons, at a relatively high velocity, preferrably directly from the list view, using keyboard shortcuts. And so on, however many passes seem adequate, until it's reasonable to do a more precise review of the remaining applications. Once you're somewhat happy with the list you can start adding your own favourites. And once you have a list that is wholly your own, it should hopefully be a lot easier to maintain it. Again, the challenge here is to consciously deliberate over a very large list that hides a surprising amount of gems - without losing one's mind, or giving up.  Hopefully this UI makes it a little easier than reading through the YAML file...
+
+Install.Doctor's curated list is a bit of "everything for everyone", meaning there's no way you'll be interested in all the fields the list covers. In my experience, when working through very large datasets like these it helps to do it in two or more passes, with increasing scrutiny: First weed out the obvious lemons, at a relatively high velocity, preferrably directly from the list view, using keyboard shortcuts. And so on, however many passes seem adequate, until it's reasonable to do a more precise review of the remaining applications. Once you're somewhat happy with the list you can start adding your own favourites. And once you have a list that is wholly your own, it should hopefully be a lot easier to maintain it. Again, the challenge here is to consciously deliberate over a very large list that hides a surprising amount of gems - without losing one's mind, or giving up.  Hopefully this UI makes it a little easier than reading through the YAML file...
 
 It's up to you how you value the metadata though: Functionally there is no need to fill in the empty fields, (unless name or installation method is missing). But you have the choice. The homepage field is mandatory though, (although it isn't validated for a URL). In general: No attempt has been made to make this fool proof. I figure if you're interested in this particular rabbit hole, you have a fairly good idea of what you're doing.
 
-## The tags
-I opted to keep a whitelist for the tags, to avoid tag chaos. But I realise my choice selection can't be for everyone. So, the easiest way to change the tag list is to navigate to the `server` directory and run `pnpx prisma studio`. It opens a web UI for Prisma, the ORM framework used here. Click on the `Tag` table and edit it like you would in any other database manager.
+
 
 ## The UI
-After first starting Chezmoi UI, the backend takes a moment to seed the database, but it should be done by the time you open a browser. Opening `http://localhost:8000` you should see this. Note the keyboard shortcuts listed in the right hand column - it's a good idea to learn them. A check mark in the list view means the item has been edited, giving a hint of the work left to do
+
+After first starting Chezmoi UI, the backend takes a moment to seed the database, but it should be done by the time you've opened a browser. Opening `http://localhost:8000` you should see the below. Note the keyboard shortcuts listed in the right hand column - it's a good idea to learn them. A check mark in the list view means the item has been edited, giving a hint of the work left to do
 
 ![](./assets/start.png)
 
@@ -102,17 +121,20 @@ Edit view: Only name, key (must be unique) and homepage are mandatory - (specifi
 4. Export YAML file
    ![](./assets/menu-yaml-export.png)
 
+
+
 ## The stack
 
 - [React 18](https://react.dev/)
 - [Mantine UI](https://mantine.dev/)
-- [Zustand](https://github.com/pmndrs/zustand) + [Zustand-X](https://github.com/udecode/zustand-x) + [Reselect](https://reselect.js.org/)
-- [Prisma](https://www.prisma.io/)
+- [Redux Tool Kit](https://redux-toolkit.js.org/) + [Reselect](https://reselect.js.org/)
+- [Prisma ORM](https://www.prisma.io/)
 - [SQLite](https://www.sqlite.org/)
 - [Vite](https://vitest.dev/)
 - [TurboRepo](https://turbo.build/)
 - [Node 20+](https://nodejs.org/)
-- [Docker](https://www.docker.com/) (optional)
+- [Docker](https://www.docker.com/)
+
 
 
 ## License

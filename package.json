@@ -23,7 +23,9 @@
     "checkports": "./scripts/check-port-usage.sh",
     "installDeps": "./scripts/install-deps.sh",
     "lint": "./scripts/lint.sh",
-    "lint:fix": "./scripts/lint.sh -f"
+    "lint:fix": "./scripts/lint.sh -f",
+    "changeset": "changeset",
+    "changeset:rel": "changeset version"
   },
   "repository": {
     "type": "git",
