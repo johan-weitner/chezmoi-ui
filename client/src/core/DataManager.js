@@ -151,7 +151,7 @@ export const useDataManager = () => {
 						...apps,
 						{
 							...app,
-							edited: "true",
+							edited: true,
 						},
 					]),
 				);
@@ -178,7 +178,7 @@ export const useDataManager = () => {
 			...app,
 			appTags: tagIds,
 			ApplicationGroup: groups,
-			edited: "true",
+			edited: true,
 		})
 			.then((newApp) => {
 				// tagApp(newApp?.id, tagIds);

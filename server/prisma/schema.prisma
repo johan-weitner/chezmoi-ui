@@ -15,7 +15,6 @@ model Application {
   id               Int                @id @default(autoincrement())
   key              String             @unique
   name             String             @default("")
-  edited           String?            @default("")
   desc             String?            @default("")
   bin              String?            @default("")
   short            String?            @default("")
@@ -43,8 +42,9 @@ model Application {
   pacman           String?            @default("")
   port             String?            @default("")
   done             Boolean            @default(false)
+  edited           Boolean            @default(false)
   appTags          ApplicationTag[]
-  ApplicationGroup ApplicationGroup[]
+  appGroups        ApplicationGroup[]
 }
 
 model Tag {

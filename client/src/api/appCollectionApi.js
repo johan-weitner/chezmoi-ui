@@ -163,7 +163,7 @@ export const updateApp = async (updatedData, tags, groups) => {
 			...updatedData,
 			appTags: tags,
 			ApplicationGroup: groups,
-			edited: "true",
+			edited: true,
 		})
 		.then((response) => {
 			log.debug(
@@ -196,7 +196,7 @@ export const saveNewApp = async (data) => {
 				...fixedNullValuesApp,
 				appTags: appTags,
 				appGroups: groups,
-				edited: "true",
+				edited: true,
 			},
 		})
 		.then((response) => {
@@ -228,7 +228,7 @@ export const deleteApp = async (id) => {
 
 export const addApp = (data) => {
 	const app = mapEntityToDb(data);
-	app.edited = "true";
+	app.edited = true;
 	log.debug("API: Mapped app data:", app);
 	for (const key of Object.keys(app)) {
 		if (!app[key]) {
