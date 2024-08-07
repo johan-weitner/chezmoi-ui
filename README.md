@@ -132,8 +132,8 @@ Edit view: Only name, key (must be unique) and homepage are mandatory - (specifi
 - [SQLite](https://www.sqlite.org/)
 - [Vite](https://vitest.dev/)
 - [TurboRepo](https://turbo.build/)
-- [Node 20+](https://nodejs.org/) 
-- [Docker](https://www.docker.com/) 
+- [Node 20+](https://nodejs.org/)
+- [Docker](https://www.docker.com/)
 
 
 
