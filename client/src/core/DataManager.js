@@ -179,7 +179,7 @@ export const useDataManager = () => {
 			edited: true,
 		})
 			.then((newApp) => {
-				log.info("DataManager: saveNewItem: ", newApp);
+				log.debug("DataManager: saveNewItem: ", newApp);
 				dispatch(setAppCollection([...getState().appCollection, newApp]));
 				if (page === pageCount.length) {
 					dispatch(setPageContent([...pageContent, newApp]));

@@ -115,7 +115,7 @@ export const saveNewApp = async (data) => {
 		})
 		.then((response) => {
 			const { data } = response;
-			log.info("API: Saved new app - response:", data);
+			log.debug("API: Saved new app - response:", data);
 			return data;
 		})
 		.catch((error) => {

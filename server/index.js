@@ -4,7 +4,6 @@ import cors from "cors";
 import express from "express";
 import YAML from "yaml";
 import { ROUTES } from "./src/core/routes.js";
-import { isEmpty } from "./src/core/api.js";
 import { initialize, setupGroupData } from "./src/core/boot.js";
 import {
 	addApp,
@@ -104,7 +103,7 @@ app.get(ROUTES.getApp, (req, res) => {
 app.post(ROUTES.updateNode, (req, res) => {
 	const { body } = req;
 
-	if (isEmpty(body)) {
+	if (Object.keys(data).length === 0) {
 		res.status(500).json({
 			error: "No data provided",
 		});

@@ -1,14 +1,10 @@
 import { useSelector } from "react-redux";
 import { Pagination, Stack, Text } from "@mantine/core";
 import { filterModel } from "api/filterApi";
-import { useEffect, useState } from "react";
 import css from "./ListView.module.css";
-import { log } from "utils/logger";
-import { ICON } from "constants/icons";
 
 const PaginationBar = (props) => {
 	const { gotoPage } = props;
-	const [currentPage, setCurrentPage] = useState(1);
 	const { page, pageCount, activeFilter, totalCount, filteredList } =
 		useSelector((state) => state.root);
 	const hideCompleted = useSelector((state) => state.root.hideCompleted);
