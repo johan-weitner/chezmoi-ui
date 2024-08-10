@@ -97,10 +97,6 @@ export const getAppById = (id) => {
 	return app;
 };
 
-export const getFilteredList = (filter, appCollection) => {
-	return filterModel[filter].method(appCollection) || [];
-};
-
 export const getSelectedGroupId = () => {
 	const selectedGroupKey = getState().selectedGroupKey;
 	const appGroups = getState().appGroups;

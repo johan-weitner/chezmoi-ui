@@ -7,9 +7,6 @@ const prisma = new PrismaClient({ errorFormat: "pretty" });
 const APPLICATION = "application";
 const TAG = "tag";
 
-/**
- * Bootstrap API
- */
 export const seedDb = async (data) => {
 	log.info("Seeding Application table with initial data...	");
 	await prisma
@@ -44,9 +41,6 @@ export const seedGroups = async (data) => {
 		});
 };
 
-/**
- * Utils
- */
 export const isEmptyDb = async () => {
 	const count = await getCount();
 	count === 0 && log.info("Database is empty - seeding...");
@@ -67,6 +61,7 @@ import {
 	getAppByKey,
 	addApp,
 	updateApp,
+	updateAppField,
 	deleteApp,
 	filterAppsByNoInstallers,
 	filterAppsByNoUrls,
@@ -105,6 +100,7 @@ export {
 	getAppByKey,
 	addApp,
 	updateApp,
+	updateAppField,
 	deleteApp,
 	getCount,
 	filterAppsByNoInstallers,

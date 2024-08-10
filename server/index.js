@@ -12,6 +12,7 @@ import {
 	getAllUnfinishedApps,
 	getAppByKey,
 	updateApp,
+	updateAppField,
 	deleteAppTag,
 	getTagsByAppId,
 	getAllTags,
@@ -39,14 +40,7 @@ initialize(); // Set up auxillary infrastructure
 
 app.set("json spaces", 2);
 app.use(cors());
-app.use(express.json({ limit: "10mb" }));
-
-const attachHeaders = (res) => {
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
-	res.header("Access-Control-Allow-Headers", "Content-Type");
-	return res;
-};
+app.use(express.json({ limit: process.env.MAX_FILE_SIZE || "10mb" }));
 
 app.get("/", (req, res) => {
 	res.redirect(ROUTES.software);
@@ -103,13 +97,33 @@ app.get(ROUTES.getApp, (req, res) => {
 app.post(ROUTES.updateNode, (req, res) => {
 	const { body } = req;
 
-	if (Object.keys(data).length === 0) {
+	if (Object.keys(body).length === 0) {
 		res.status(500).json({
 			error: "No data provided",
 		});
 		return;
 	}
 	updateApp(body)
+		.then((app) => {
+			res.status(200).json(app);
+		})
+		.catch((e) => {
+			res.status(500).json({
+				error: e.message,
+			});
+		});
+});
+
+app.post(ROUTES.updateField, (req, res) => {
+	const { body } = req;
+
+	if (Object.keys(body).length === 0) {
+		res.status(500).json({
+			error: "No data provided",
+		});
+		return;
+	}
+	updateAppField(body)
 		.then((app) => {
 			res.status(200).json(app);
 		})
