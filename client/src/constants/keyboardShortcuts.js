@@ -20,11 +20,6 @@ export const keyboardShortcuts = [
 		action: "Add a new application",
 	},
 	{
-		keys: ["OPT", "BACKSPACE"],
-		hookString: "opt + backspace",
-		action: "Delete the selected application",
-	},
-	{
 		keys: ["SHIFT", "OPT", "←"],
 		hookString: "shift + opt + left",
 		action: "Go to previous page",

@@ -1,7 +1,4 @@
-/* --container-size: var(--container-size-xl); */
-
 .header {
-  /* height: rem(56px); */
   display: flex;
   justify-content: flex-start;
   align-items: left;
@@ -31,12 +28,6 @@
   right: 0;
   background-color: #121516 !important;
   z-index: 999;
-
-  /* height: 120px; */
-
-  div {
-    /* background-color: #121516 !important; */
-  }
 }
 
 .navbar {
@@ -47,7 +38,6 @@
 .headerLogo {
   width: 1184px;
   margin: 10px auto 0 auto;
-  /* background-image: linear-gradient(to bottom, #000000, #181a1b); */
 }
 
 .logoTitle {

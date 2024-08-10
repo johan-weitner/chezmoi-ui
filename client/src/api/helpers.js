@@ -2,9 +2,6 @@ import { appModelInstallerFields } from "api/appModel";
 import { APP_FORM } from "constants/appForm";
 import { log } from 'utils/logger';
 
-/**
- * Helper functions
- */
 export const isStartOfPage = (index) => {
 	return index === 0;
 };

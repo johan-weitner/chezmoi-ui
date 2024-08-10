@@ -1,15 +1,7 @@
 import axios from "axios";
-import { mapEntityToDb, transformNullValues } from "./helpers";
-import { processMetaGroups, testProcessMetaGroups } from "utils/groupUtils";
-import {
-  getState,
-  store,
-  setSelectedGroup
-} from "store/store";
+import { getState } from "store/store";
 import { log } from 'utils/logger';
-import { useClientManager } from "core/ClientManager";
 
-const { dispatch } = store;
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
 

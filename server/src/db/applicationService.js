@@ -5,8 +5,6 @@ import { removeGroupRelationsByAppId } from "./groupService.js";
 
 const prisma = new PrismaClient(); // { errorFormat: "pretty" }
 const APPLICATION = "application";
-const APP_TAGS = "ApplicationTag";
-const APP_GROUPS = "ApplicationGroup";
 
 const getAllApps = async () => {
   const apps = await prisma[APPLICATION].findMany({
@@ -101,7 +99,7 @@ const getAppByKey = async (key) => {
 
 const addApp = async (data) => {
   log.debug("Adding app: ", data);
-  const { appGroups, appTags, ...appData } = data;
+  const { appGroups, appTags, id, done, ...appData } = data;
   const payload = {
     appGroups: appGroups?.map(g => Number.parseInt(g, 10)),
     appTags: appTags,
@@ -111,6 +109,7 @@ const addApp = async (data) => {
   try {
     const app = await createApplicationWithGroupsAndTags(payload);
     log.debug("Created app: ", app);
+    return app;
   } catch (e) {
     log.error(e.message);
     throw e;
@@ -123,39 +122,26 @@ const createApplicationWithGroupsAndTags = async (payload) => {
     appGroups,
     appTags
   } = payload;
-  return await prisma.$transaction(async (prisma) => {
-    const application = await prisma[APPLICATION].create({
-      data: {
-        ...appData,
+  const { ...rest } = appData;
+  const application = await prisma[APPLICATION].create({
+    data: {
+      ...rest,
+      appGroups: {
+        connect: appGroups.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
       },
-    });
-
-    const applicationGroups = appGroups?.map(groupId => {
-      return prisma.ApplicationGroup.create({
-        data: {
-          applicationId: application.id,
-          groupId: groupId,
-        },
-      });
-    });
-
-    const applicationTags = appTags?.map(tagId => {
-      return prisma.ApplicationTag.create({
-        data: {
-          applicationId: application.id,
-          tagId: tagId,
-        },
-      });
-    });
-
-    try {
-      await Promise.all([...applicationGroups, ...applicationTags]);
-    } catch (e) {
-      log.error(e.message);
-      throw e;
+      appTags: {
+        connect: appTags.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
+      }
+    },
+    select: {
+      id: true,
+      key: true,
+      name: true,
+      edited: true,
+      done: true
     }
-    return application;
   });
+  return application;
 }
 
 async function updateApp(data) {
@@ -188,8 +174,6 @@ const deleteApp = async (id) => {
   log.debug("PRISMA: Deleting app: ", id);
   try {
     const intId = Number.parseInt(id, 10);
-    await removeTagRelationsByAppId(intId);
-    await removeGroupRelationsByAppId(intId);
     const app = await prisma[APPLICATION].delete({
       where: {
         id: intId,

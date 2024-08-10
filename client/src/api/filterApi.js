@@ -1,7 +1,6 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "store/store";
-import { store, getState } from "store/store";
+import { getState } from "store/store";
 import { log } from 'utils/logger';
+import { appHasInstaller } from "api/helpers";
 
 const _isColumnEmpty = (column) => {
 	return column === "" || column === null;
@@ -10,27 +9,9 @@ const _isColumnEmpty = (column) => {
 export const filterNoInstallerApps = () => {
 	const apps = getState().appCollection;
 	return apps.filter((item) => {
-		return (
-			_isColumnEmpty(item.whalebrew) &&
-			_isColumnEmpty(item.apt) &&
-			_isColumnEmpty(item.brew) &&
-			_isColumnEmpty(item.cask) &&
-			_isColumnEmpty(item.cargo) &&
-			_isColumnEmpty(item.npm) &&
-			_isColumnEmpty(item.pip) &&
-			_isColumnEmpty(item.pipx) &&
-			_isColumnEmpty(item.gem) &&
-			_isColumnEmpty(item.script) &&
-			_isColumnEmpty(item.choco) &&
-			_isColumnEmpty(item.scoop) &&
-			_isColumnEmpty(item.winget) &&
-			_isColumnEmpty(item.pkgdarwin) &&
-			_isColumnEmpty(item.ansible) &&
-			_isColumnEmpty(item.yay) &&
-			_isColumnEmpty(item.appstore) &&
-			_isColumnEmpty(item.pacman) &&
-			_isColumnEmpty(item.port)
-		);
+		if (!appHasInstaller(item)) {
+			return item;
+		}
 	});
 };
 
