@@ -19,7 +19,7 @@ const DetailsBox = (props) => {
 	const { editItem, deleteItem } = useClientManager();
 	const indicateEdit = selectedApp?.edited ? <EditedIndicator /> : null;
 	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
-	const selectedAppTags = useSelector((state) => state.root.selectedAppTags);
+	const selectedAppTags = selectedApp?.appTags;
 
 	const appHasInstaller = (app) => {
 		for (const field of appModelInstallerFields) {
@@ -52,7 +52,6 @@ const DetailsBox = (props) => {
 				</h2>
 				<div className={s.indicator}>{indicateEdit} </div>
 			</Flex>
-
 			{selectedApp.short && (
 				<Text size="xl" mb="20">
 					{selectedApp.short}
@@ -63,7 +62,6 @@ const DetailsBox = (props) => {
 					{selectedApp.desc}
 				</Text>
 			)}
-
 			<div className={classes.indicatorGroup}>
 				<Text size="sm">
 					{selectedApp.home ? <MarkPopulated /> : <MarkUnPopulated />} Homepage
@@ -99,7 +97,6 @@ const DetailsBox = (props) => {
 					})}
 				</div>
 			)}
-
 			<Group justify="center" p="md">
 				<Button
 					onClick={() => editItem(selectedAppKey)}

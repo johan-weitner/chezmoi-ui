@@ -13,35 +13,32 @@ import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import { useEffect } from "react";
+import { getTagId } from "api/fetchApi";
 
 const TagSection = (props) => {
 	const { hoistAppTags } = props;
 	const [appTags, setAppTags] = useState();
 	const selectedApp = useSelector((state) => state.root.selectedApp);
 	const allowedTags = useSelector((state) => state.root.allowedTags);
-
-	const [appTagIds, setAppTagIds] = useState();
 	const [editTagList, setEditTagList] = useState(false);
-	const { getAppTags, tagApp, updateAllowedTags } = useClientManager();
+	const { updateAllowedTags } = useClientManager();
 	const whiteList = allowedTags.map((tag) => tag.name);
 	const [tagList, setTagList] = useState(whiteList);
 
 	useEffect(() => {
 		if (!selectedApp) return;
-		getAppTags(selectedApp.id).then((tags) => {
-			setAppTags(getStrArray(tags));
-		});
+		setAppTags(getStrArray(selectedApp.appTags));
 		setTagList(allowedTags.map((tag) => tag.name));
 	}, []);
 
 	useEffect(() => {
+		if (!selectedApp) return;
+		setAppTags(getStrArray(selectedApp.appTags));
+	}, [selectedApp]);
+
+	useEffect(() => {
 		setTagList(allowedTags.map((tag) => tag.name));
 	}, [allowedTags]);
-
-	const getTagId = (tagName) => {
-		const found = allowedTags.find((item) => item.name === tagName);
-		return found ? found.id : -1;
-	};
 
 	const getStrArray = (arr) => {
 		return Array.isArray(arr) && arr.map((t) => t.name);
@@ -51,7 +48,6 @@ const TagSection = (props) => {
 		const tagsIds = value.map((tag) => {
 			return getTagId(tag);
 		});
-		setAppTagIds("tags", tagsIds);
 		setAppTags(value);
 		hoistAppTags(tagsIds);
 	};
@@ -105,7 +101,6 @@ const TagSection = (props) => {
 						value={tagList || []}
 						onChange={onChangeTagList}
 						pointer
-						disabled={!editTagList}
 					/>
 					<Flex justify="end">
 						<Button onClick={() => saveTagListChanges(tagList)}>Save</Button>

@@ -3,7 +3,7 @@ import { log } from "../util/logger.js";
 import { removeTagRelationsByAppId } from "./tagService.js";
 import { removeGroupRelationsByAppId } from "./groupService.js";
 
-const prisma = new PrismaClient({ errorFormat: "pretty" });
+const prisma = new PrismaClient(); // { errorFormat: "pretty" }
 const APPLICATION = "application";
 const APP_TAGS = "ApplicationTag";
 const APP_GROUPS = "ApplicationGroup";
@@ -42,20 +42,12 @@ const getAllAppsWithTags = async () => {
     include: {
       appTags: {
         select: {
-          tag: {
-            select: {
-              name: true,
-            },
-          }
+          name: true,
         }
       },
       appGroups: {
         select: {
-          group: {
-            select: {
-              name: true,
-            },
-          }
+          name: true,
         }
       },
     },
@@ -69,7 +61,7 @@ const getAppsByTag = async (tags) => {
     where: {
       appTags: {
         some: {
-          tagId: {
+          id: {
             in: tags,
           },
         },
@@ -78,11 +70,7 @@ const getAppsByTag = async (tags) => {
     include: {
       appTags: {
         select: {
-          tag: {
-            select: {
-              name: true,
-            },
-          },
+          name: true,
         },
       }
     },
@@ -105,6 +93,7 @@ const getAppByKey = async (key) => {
     },
     include: {
       appTags: true,
+      appGroups: true
     },
   });
   return app;
@@ -169,17 +158,28 @@ const createApplicationWithGroupsAndTags = async (payload) => {
   });
 }
 
-const updateApp = async (data) => {
-  const app = await prisma[APPLICATION].update({
-    where: {
-      key: data.key,
-    },
+async function updateApp(data) {
+  log.info("Updating app: ", data);
+  const { id, appGroups, appTags, ...rest } = data;
+  const applicationId = Number.parseInt(id, 10);
+
+  return await prisma.application.update({
+    where: { id: applicationId },
     data: {
-      ...data,
+      ...rest,
+      appGroups: {
+        set: appGroups.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
+      },
+      appTags: {
+        set: appTags.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
+      }
     },
+    include: {
+      appTags: true,
+      appGroups: true
+    }
   });
-  return app;
-};
+}
 
 const deleteApp = async (id) => {
   if (Number.isNaN(id)) {

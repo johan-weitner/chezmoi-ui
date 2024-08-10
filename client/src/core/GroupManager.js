@@ -1,22 +1,19 @@
 import {
-  fetchAppGroups, fetchAppsInGroup, addAppToGroup, removeAppFromGroup, fetchGroupApps
-} from "api/appCollectionApi";
+  fetchAppGroups,
+  fetchAppsInGroup,
+  addAppToGroup,
+  removeAppFromGroup
+} from "api/fetchApi";
 import { toast } from "sonner";
-import { getAppById, getSelectedGroupId } from "store/selectors";
-import { useDispatch } from "react-redux";
-import { useSelector } from "store/store";
 import {
   getState,
   store,
   setAppsInSelectedGroup,
-  setSelectedAppGroups,
   setSelectedGroup,
   setSelectedGroupId,
   setIsLoading,
   setError,
-  setSelectedGroupKey,
-  setAppGroups,
-  setAppGroupKeys
+  setAppGroups
 } from "store/store";
 import { log } from 'utils/logger';
 
@@ -35,8 +32,6 @@ export const useGroupManager = () => {
           return;
         }
         dispatch(setAppGroups(groupsArray));
-        const groupKeys = groupsArray.map(group => { return group.name; });
-        dispatch(setAppGroupKeys(groupKeys));
       })
       .catch((err) => {
         log.error("GroupManager: Error fetching groups: ", err);
@@ -45,10 +40,10 @@ export const useGroupManager = () => {
   };
 
   const selectGroup = (groupId) => {
-    dispatch(setSelectedGroup(getGroupById(groupId)));
+    const group = getGroupById(groupId)
     dispatch(setSelectedGroupId(groupId));
     fetchAppsInGroup(groupId).then(data => {
-      dispatch(setAppsInSelectedGroup(data.apps));
+      dispatch(setSelectedGroup({ ...group, Application: data.apps }));
     });
   };
 
@@ -62,49 +57,9 @@ export const useGroupManager = () => {
     return getState().appGroups.find((group) => group.id === groupId);
   };
 
-  const getAppsInGroup = async (groupId) => {
-    if (!groupId) return;
-    toggleIsLoading(true);
-    await fetchAppsInGroup(groupId)
-      .then((data) => {
-        toggleIsLoading(false);
-        if (!data) throw new Error(`No data returned for group: ${groupId}`);
-        const apps = Object.values(data.apps).map(item => { return item.application });
-        dispatch(setAppsInSelectedGroup(Object.values(apps)));
-      })
-      .catch((err) => {
-        toggleIsLoading(false);
-        dispatch(setError(err));
-        toast.error(err?.message);
-        log.error("GroupManager: Error fetching apps in group: ", err);
-      });
-  };
-
   const getGroupsByApp = async (appId) => {
     if (!appId) return;
-    toggleIsLoading(true);
-    const groups = await fetchGroupApps(appId)
-      .then((res) => {
-        toggleIsLoading(false);
-        const { data } = res;
-        const groups = data.groups;
-        const groupArr = groups?.map(group => {
-          return {
-            id: group.groupId,
-            name: group.group.name,
-          };
-        });
-        log.debug("GroupManager: Groups for app: ", groupArr);
-        dispatch(setSelectedAppGroups(groupArr));
-        return groupArr;
-      })
-      .catch((err) => {
-        toggleIsLoading(false);
-        dispatch(setError(err));
-        toast.error(err?.message);
-        log.error("GroupManager: Error fetching app's group memberships: ", err);
-      });
-    return groups;
+    return getState().selectedApp.appGroups;
   };
 
   const putAppInGroup = async (groupId, appId) => {
@@ -115,7 +70,7 @@ export const useGroupManager = () => {
     await addAppToGroup(groupId, appId)
       .then((newApp) => {
         toggleIsLoading(false);
-        const apps = getState().appsInSelectedGroup || [];
+        const apps = getState().selectedGroup.Application || [];
         if (newApp?.application?.name) {
           dispatch(setAppsInSelectedGroup([...apps, newApp.application]));
         }
@@ -125,21 +80,18 @@ export const useGroupManager = () => {
         toggleIsLoading(false);
         dispatch(setError(err));
         toast.error(err);
-        log.debug("GroupManager: Error adding app to group: ", err);
+        log.debug("GroupManager: Error adding app to group: ", err.response.data);
       });
   };
 
-  const kickAppFromGroup = async (groupId, appId) => {
+  const dropAppFromGroup = async (groupId, appId) => {
     toggleIsLoading(true);
+    log.debug("Removing app from group: ", groupId, appId);
     await removeAppFromGroup(groupId, appId)
-      .then(() => {
+      .then((updatedGroup) => {
         toggleIsLoading(false);
-        const apps = getState().appsInSelectedGroup || [];
-        const newApps = apps?.filter(app => app.id !== appId);
-        dispatch(setAppsInSelectedGroup(newApps));
-        const groups = getState().selectedAppGroups;
-        const newGroups = groups?.filter(group => group.id !== groupId);
-        dispatch(setSelectedAppGroups(newGroups));
+        log.debug("Removed app from group: ", updatedGroup);
+        dispatch(setSelectedGroup(updatedGroup));
       })
       .catch((err) => {
         toggleIsLoading(false);
@@ -152,7 +104,7 @@ export const useGroupManager = () => {
   const removeAllGroupRelations = async (groupIds, appId) => {
     toggleIsLoading(true);
     const promises = groupIds.map(groupId => {
-      return kickAppFromGroup(groupId, appId);
+      return dropAppFromGroup(groupId, appId);
     });
 
     await Promise.all(promises)
@@ -170,8 +122,8 @@ export const useGroupManager = () => {
 
   const gotoPrevGroup = () => {
     const groups = getState().appGroups;
-    const currentIndex = groups.indexOf(
-      getState().selectedGroup);
+    const found = groups.find((group) => group.id === getState().selectedGroup.id);
+    const currentIndex = groups.indexOf(found);
     if (currentIndex === 0) {
       return;
     }
@@ -181,8 +133,8 @@ export const useGroupManager = () => {
 
   const gotoNextGroup = () => {
     const groups = getState().appGroups;
-    const currentIndex = groups.indexOf(
-      getState().selectedGroup);
+    const found = groups.find((group) => group.id === getState().selectedGroup.id);
+    const currentIndex = groups.indexOf(found);
     if (currentIndex === groups.length - 1) {
       return;
     }
@@ -194,9 +146,8 @@ export const useGroupManager = () => {
     seedGroups,
     getGroupId,
     selectGroup,
-    getAppsInGroup,
     putAppInGroup,
-    kickAppFromGroup,
+    dropAppFromGroup,
     gotoPrevGroup,
     gotoNextGroup,
     getGroupsByApp,

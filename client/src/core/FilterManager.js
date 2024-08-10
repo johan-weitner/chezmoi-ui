@@ -1,10 +1,10 @@
-import { filterModel } from "api/filters";
+import { filterModel } from "api/filterApi";
 import {
 	store,
 	setActiveFilter,
 	setFilteredList
 } from "store/store";
-import { fetchFilteredApps } from "api/appCollectionApi";
+import { fetchFilteredApps } from "api/fetchApi";
 import { log } from 'utils/logger';
 import { toast } from "sonner";
 

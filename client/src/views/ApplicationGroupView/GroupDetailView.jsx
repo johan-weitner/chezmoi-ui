@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "store/store";
 import {
-	Text,
 	rem,
 	Container,
 	Card,
@@ -16,31 +14,15 @@ import { IconArrowLeft, IconPackages, IconTrash } from "@tabler/icons-react";
 import StickyBox from "react-sticky-box";
 import { nanoid } from "nanoid";
 import s from "./GroupView.module.css";
-import { useGroupManager } from "core/GroupManager";
-import { getSelectedGroupId } from "store/selectors";
+import { useClientManager } from "core/ClientManager";
 import { setSelectedGroupId } from "store/store";
-
-const FallBack = () => {
-	return (
-		<Text size="sm" style={{ color: "#666" }}>
-			[ Select a group in the list to the left ]
-		</Text>
-	);
-};
 
 const GroupDetailView = (props) => {
 	const dispatch = useDispatch();
 	const selectedGroup = useSelector((state) => state.root.selectedGroup);
-	const { getAppsInGroup, kickAppFromGroup } = useGroupManager();
-	const selectedGroupKey = useSelector((state) => state.root.selectedGroupKey);
+	const { Application } = selectedGroup ? selectedGroup : [];
+	const { dropAppFromGroup } = useClientManager();
 	const selectedGroupId = useSelector((state) => state.root.selectedGroupId);
-	const appsInSelectedGroup = useSelector(
-		(state) => state.root.appsInSelectedGroup,
-	);
-
-	// useEffect(() => {
-	// 	getAppsInGroup(selectedGroupId);
-	// }, [selectedGroupKey]);
 
 	return (
 		<Container
@@ -80,7 +62,7 @@ const GroupDetailView = (props) => {
 							</ThemeIcon>
 						}
 					>
-						{appsInSelectedGroup?.map((item) => {
+						{Application?.map((item) => {
 							return (
 								<List.Item
 									mb={0}
@@ -95,7 +77,7 @@ const GroupDetailView = (props) => {
 											size="med"
 											variant="light"
 											p={5}
-											onClick={() => kickAppFromGroup(selectedGroupId, item.id)}
+											onClick={() => dropAppFromGroup(selectedGroupId, item.id)}
 											color="orange"
 											className={s.deleteBtn}
 										>

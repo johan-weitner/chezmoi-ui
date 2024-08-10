@@ -6,17 +6,17 @@ A web UI application for managing a list of apps to seed/feed a Chezmoi setup.
 
 ## Background
 
-Trying out a bunch of dot file management tools it seemed to me most of them are either too sparse, (read: a CLI for creating soft links to a Git repo), or very complex and therefore error-prone, and therefore time-consuming, (read: Install.Doctor). But Chezmoi hits a sweet spot for me. Maintaining huge YAML lists on the other hand, not so much...
+Trying out a bunch of dot file management tools it seemed to me most of them are either too sparse, (read: a CLI for creating soft links to a Git repo), or very complex and time-consuming, (read: Install.Doctor). But Chezmoi hits a sweet spot for me. Maintaining huge YAML lists on the other hand, not so much...
 
-I did like the way [Install.Doctor](https://github.com/megabyte-labs/install.doctor) approached the issue of maintaining a universal list of applications though, offering wide OS support from a unified source. Regardless of what OS I'm faced with, I want to be able to run a script and be able to feel at home. But - crucially - I don't want the maintenance of it to be another full-time job...
+I did like the way [Install.Doctor](https://github.com/megabyte-labs/install.doctor) approached the issue of maintaining a universal list of applications though, offering wide OS support from a unified source. Regardless of what OS I'm faced with, I want to be able to run a script and be able to feel at home. But - crucially - I don't want another full-time job maintaining lists...
 
 
 
 ## What it is
 
-This is a UI for Chezmoi users who like me would like to base a compatible application list on Install.Doctor's impressive curation. So I guess Install.Doctor users could find it useful too. It's just a simple SPA with a Node backend, and an even simpler SQLite db holding the list data, meant to run locally on your machine. So you need a current Node LTS - (eg. version 20.x and above). Or Docker, if you don't want to install Node.
+So this is a UI for Chezmoi users who like me would like to base a compatible application list on Install.Doctor's impressive curation. But I guess Install.Doctor users could find it useful too. It's just a simple SPA with a Node backend, and an even simpler SQLite db holding the list data, meant to run locally on your machine. So you need a current Node LTS - (eg. version 20.x and above), or Docker if you don't want to install Node.
 
-Also I've added tags to the mix, as I have some vague plans on using them to control what apps get installed in different environments. If nothing else they could potentially be used for filtering, in order to produce multiple lists for various targets. Feel free to skip them if all you want to do is cull a gigantic list.
+Also I've added tags to the mix, as I have some vague plans on using them to control what apps get installed in different environments. If nothing else they can be used for filtering to produce multiple lists for various targets. Feel free to skip them if all you want to do is prune a gigantic list.
 
 
 
@@ -25,13 +25,13 @@ Also I've added tags to the mix, as I have some vague plans on using them to con
 - Web UI for editing a YAML-based list of applications in the Install.Doctor format
 - Run it locally in Node, or in a Docker container
 - Edit metadata, remove, add your own apps
-- Keyboard shortcuts for speedy workflow
+- Keyboard shortcuts for a speedy workflow
 - Quick search for applications
 - Quick link opens application homepage/Github page in new window
 - Iconography indicates
   - If URLs to homepage, Github page, documentation page are missing
   - If installation method isn't specified
-  - If an application has been edited, (eg. is "dirty" compared to the source list)
+  - If an application has been edited, (eg. is "dirty" compared to its original state)
   - The tags applied to an application
 - Filters showing:
   - Apps without a name
@@ -43,7 +43,7 @@ Also I've added tags to the mix, as I have some vague plans on using them to con
 - Export edited list back to Chezmoi/Install.Doctor YAML format
   - In its entirety
   - Or filtered on the tags of your choosing
-- Export group structure in Install.Doctor format. (Combine with the above to have a complete Install.Doctor "playbook")
+- Export group structure in Install.Doctor format. (Combine with the above to create a complete Install.Doctor "playbook")
 
 
 
@@ -53,7 +53,7 @@ Also I've added tags to the mix, as I have some vague plans on using them to con
 
 1. Make sure you have Node 20+ installed. (Unless you prefer to use Docker images)
 
-   (I strongly recommend using `pnpm`instead of `npm`simply because it's so much more robust. Besides, the "P" stands for performant. Go figure.)
+   (I strongly recommend using `pnpm`instead of `npm` because it's much more robust and performant).
 
 1. Run `setup.sh`. Optionally review and adjust the `.env`files in the `server` and `client` directories respectively
 
@@ -78,13 +78,10 @@ Chezmoi UI should now be available at `http://localhost:8000`.
 
 Alternatively, if you don't want to install Node, you can run Chezmoi UI in a Docker container:
 
-Mac/Linux:
-```./start.sh```
+From the root, run:
+```docker-compose up```
 
-Windows:
-```./start.ps1```
-
-For convenience, the scripts take care of building the images if they are missing, and starts the Docker service if it's down. But you can of course handle Docker manually if you prefer. The database is located on a dedicated volume, so it's persisted between sessions.
+The database is located on a dedicated volume, so it's persisted between sessions.
 
 
 

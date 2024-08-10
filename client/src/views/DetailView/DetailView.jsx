@@ -1,4 +1,4 @@
-import { Card, Stack, Text, useMantineTheme } from "@mantine/core";
+import { Card, Stack, useMantineTheme } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
 import { useEffect, useRef, useState } from "react";
@@ -9,17 +9,14 @@ import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
-import { useDispatch } from "react-redux";
 import { useSelector } from "store/store";
 
 const DetailView = (props) => {
-	const dispatch = useDispatch();
 	const [currentApp, setCurrentApp] = useState(null);
 	const modalRef = useRef();
 	const theme = useMantineTheme();
 	const selectedApp = useSelector((state) => state.root.selectedApp);
 	const editMode = useSelector((state) => state.root.editMode);
-
 	const { gotoPrev, gotoNext } = useClientManager();
 
 	useEffect(() => {

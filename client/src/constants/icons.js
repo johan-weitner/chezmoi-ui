@@ -4,7 +4,6 @@ import {
 	IconBeer,
 	IconBinary,
 	IconBook,
-	IconBottle,
 	IconBrandApple,
 	IconBrandGit,
 	IconBrandGolang,
@@ -31,12 +30,9 @@ import {
 	IconFolders,
 	IconArrowRight,
 	IconArrowLeft,
+	IconEye
 } from "@tabler/icons-react";
 
-/**
- * An object containing references to various Tabler icons used throughout the application.
- * These icons are used to represent different types of packages, commands, and other application-specific elements.
- */
 export const ICON = {
 	cargo: IconBrandRust,
 	taps: IconBarrel,
@@ -72,6 +68,7 @@ export const ICON = {
 	packages: IconPackages,
 	arrowRight: IconArrowRight,
 	arrowLeft: IconArrowLeft,
+	hide: IconEye
 };
 
 export const INDICATOR = {

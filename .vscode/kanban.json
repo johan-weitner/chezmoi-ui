@@ -5,22 +5,6 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "Navigating apps in Edit view, tag selection is not updated",
-                    "id": "botz2ake7j6qc7c1nmq8gcov"
-                },
-                {
-                    "text": "App list in group view doesn't update reliably after marking app done",
-                    "id": "muil1ae2oim5exu1aq3lyoof"
-                },
-                {
-                    "text": "Prisma setup not happening on fresh install",
-                    "id": "l93qu67dl8ym6y48hpuugiaf"
-                },
-                {
-                    "text": "Prisma throws non-critical errors",
-                    "id": "d5wwoy8zpiosv366es6oegx1"
-                },
-                {
                     "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
                     "id": "n5a5xe8el34kw9qgsziu3hnr"
                 },
@@ -36,6 +20,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "Finalize README",
+                    "id": "ycjyht1ry3zlaxdxtxdvbrc3"
+                },
+                {
                     "text": "Clean up patterns",
                     "id": "ybb3biegh54mooyoomikzyja"
                 },
@@ -44,12 +32,8 @@
                     "id": "e9wmxsahf33esakrkqa4k20a"
                 },
                 {
-                    "text": "Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
+                    "text": "VERSION_2: Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
                     "id": "sk38oxq3x0o9nolxc95ikpv8"
-                },
-                {
-                    "text": "Fix README: 2x .env\nInstall Turbo, or remove dependency. Or script it.",
-                    "id": "wmopiiii5gmx0fzatluf4z14"
                 }
             ],
             "id": "s4x8tk72jz2q1vxp1bjscz4o",
@@ -65,8 +49,28 @@
             "title": "Done",
             "tasks": [
                 {
+                    "text": "App list in group view doesn't update reliably after marking app done",
+                    "id": "muil1ae2oim5exu1aq3lyoof"
+                },
+                {
+                    "text": "Navigating apps in Edit view, tag selection is not updated",
+                    "id": "botz2ake7j6qc7c1nmq8gcov"
+                },
+                {
+                    "text": "Fix README: 2x .env\nInstall Turbo, or remove dependency. Or script it.",
+                    "id": "wmopiiii5gmx0fzatluf4z14"
+                },
+                {
                     "text": "Impl hide completed",
                     "id": "se75bul5vh0re5e8kryvaafa"
+                },
+                {
+                    "text": "Prisma throws non-critical errors",
+                    "id": "d5wwoy8zpiosv366es6oegx1"
+                },
+                {
+                    "text": "Prisma setup not happening on fresh install",
+                    "id": "l93qu67dl8ym6y48hpuugiaf"
                 },
                 {
                     "text": "Putting app in group is unreliable",
@@ -359,5 +363,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1723012110842
+    "timestamp": 1723115683947
 }

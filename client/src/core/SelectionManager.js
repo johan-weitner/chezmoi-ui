@@ -1,4 +1,4 @@
-import { fetchApp, getTagsByAppId } from "api/appCollectionApi";
+import { fetchApp } from "api/appCollectionApi";
 import { toast } from "sonner";
 import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
 import {
@@ -7,8 +7,6 @@ import {
 	setIsLoading,
 	setSelectedApp,
 	setSelectedAppKey,
-	setSelectedAppTags,
-	setSelectedAppGroups,
 	setSelectedGroupKey,
 	setSelectedGroup,
 	setIsNewApp,
@@ -38,19 +36,19 @@ export const useSelectionManager = () => {
 				toggleLoading(false);
 				dispatch(setSelectedApp(app));
 
-				getAppTags(app.id)
-					.then((tags) => {
-						dispatch(setSelectedAppTags(tags));
-					})
-					.catch((err) => {
-						log.error(err);
-						toast.error("Error fetching tags");
-					});
+				// getAppTags(app.id)
+				// 	.then((tags) => {
+				// 		dispatch(setSelectedAppTags(tags));
+				// 	})
+				// 	.catch((err) => {
+				// 		log.error(err);
+				// 		toast.error("Error fetching tags");
+				// 	});
 
-				getGroupsByApp(app.id).then((groups) => {
-					log.debug("SelectionManager: Groups for app: ", groups);
-					dispatch(setSelectedAppGroups(groups));
-				});
+				// getGroupsByApp(app.id).then((groups) => {
+				// 	log.debug("SelectionManager: Groups for app: ", groups);
+				// 	dispatch(setSelectedAppGroups(groups));
+				// });
 			})
 			.catch((err) => {
 				log.error(err);
@@ -106,10 +104,10 @@ export const useSelectionManager = () => {
 		dispatch(setEditMode(true));
 	};
 
-	const getAppTags = async (appId) => {
-		const tags = await getTagsByAppId(appId);
-		return tags;
-	};
+	// const getAppTags = async (appId) => {
+	// 	const tags = await getTagsByAppId(appId);
+	// 	return tags;
+	// };
 
 	const addItem = () => {
 		dispatch(setSelectedApp(null));
@@ -128,7 +126,7 @@ export const useSelectionManager = () => {
 		selectPrevApp,
 		selectNextApp,
 		editItem,
-		getAppTags,
+		// getAppTags,
 		addItem,
 		clearAppSelection,
 		getSearchBase,

@@ -9,41 +9,54 @@ import {
 	useMantineTheme,
 } from "@mantine/core";
 import { IconDownload, IconFilter, IconCirclePlus } from "@tabler/icons-react";
-import { useClickOutside } from "@mantine/hooks";
-import { filterModel } from "api/filters";
+import { filterModel } from "api/filterApi";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
-import commonCss from "./ListView.module.css";
+import s from "./ListView.module.css";
 import SearchWidget from "./SearchWidget";
 import ExportFilter from "./ExportFilter";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { log } from "utils/logger";
+import { useSelector, store, setHideCompleted } from "store/store";
 
 export const ListViewHeader = (props) => {
 	const theme = useMantineTheme();
 	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
-	const ref = useClickOutside(() => setExportIsOpen(false));
 	const { addItem, applyFilter, clearFilter, refreshAppCollection } =
 		useClientManager();
+	const activeFilter = useSelector((state) => state.root.activeFilter);
+	const hideCompleted = useSelector((state) => state.root.hideCompleted);
 
 	const removeFilter = () => {
 		clearFilter();
+		store.dispatch(setHideCompleted(false));
 		refreshAppCollection(false);
+	};
+
+	const hideCompletedApps = () => {
+		removeFilter();
+		store.dispatch(setHideCompleted(true));
+		refreshAppCollection(true);
+	};
+
+	const doFilter = (filter) => {
+		store.dispatch(setHideCompleted(false));
+		applyFilter(filter);
 	};
 
 	return (
 		<>
-			<Group className={commonCss.cardTitleContainer}>
+			<Group className={s.cardTitleContainer}>
 				<ICON.allApps
 					style={{ width: rem(50), height: rem(50) }}
 					stroke={2}
 					color={theme.colors.blue[6]}
-					className={commonCss.cardTitleIcon}
+					className={s.cardTitleIcon}
 				/>
-				<Text fz="xl" fw={500} className={commonCss.cardTitle} mt="md">
+				<Text fz="xl" fw={500} className={s.cardTitle} mt="md">
 					Applications
 				</Text>
 			</Group>
@@ -101,22 +114,27 @@ export const ListViewHeader = (props) => {
 						>
 							Restore filter
 						</Menu.Item>
+						<Menu.Item
+							onClick={() => hideCompletedApps()}
+							leftSection={<ICON.hide size={16} />}
+							style={{
+								fontWeight: "bold",
+								borderTop: "1px solid #444",
+								borderBottom: "1px solid #444",
+							}}
+						>
+							Hide completed apps {hideCompleted ? <span> ✓</span> : null}
+						</Menu.Item>
 						{Object.keys(filterModel).map((key) => (
 							<Menu.Item
 								key={nanoid()}
-								onClick={() => applyFilter(key)}
-								className={key === useFilter ? css.active : null}
+								onClick={() => doFilter(key)}
+								className={key === activeFilter ? s.active : null}
 							>
 								{filterModel[key].title}
-								{key === useFilter ? <span> ✓</span> : null}
+								{key === activeFilter ? <span> ✓</span> : null}
 							</Menu.Item>
 						))}{" "}
-						<Menu.Item
-							key={nanoid()}
-							onClick={() => refreshAppCollection(true)}
-						>
-							Hide completed applications
-						</Menu.Item>
 					</Menu.Dropdown>
 				</Menu>
 				<SearchWidget />

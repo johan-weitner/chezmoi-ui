@@ -20,7 +20,7 @@ import { log } from "../util/log.js";
 export const { success, warn, error, bold, italic, check, cross, wsign } =
 	styles;
 
-export const boot = () => {
+export const initialize = () => {
 	printAppLogo();
 	log.info("  © 2024 Johan Weitner");
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
@@ -151,22 +151,13 @@ const _seedDbIfEmpty = async (forceSeed) => {
 		});
 		log.info(Object.keys(data[0]));
 		await seedDb(data);
-		await getCount().then((count) => {
+		getCount().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
 		});
 		doSeedGroups();
 		doSeedTags();
 	}
-
-	// if (isEmptyTagsTable()) {
-	// 	log.info("Empty tags table - seeding tags...");
-	// 	await seedTags(tags);
-	// 	await getTagCount().then((count) => {
-	// 		log.info(`Done seeding Tag table with ${count} tags`);
-	// 	});
-	// }
 };
-
 
 const doSeedGroups = async () => {
 	const { groups } = _setupFileData();
@@ -178,15 +169,14 @@ const doSeedGroups = async () => {
 		}
 	});
 	await seedGroups(groupData);
-	await getGroupCount().then((count) => {
+	getGroupCount().then((count) => {
 		log.info(`Done seeding Group table with ${count} groups`);
 	});
 };
 
 const doSeedTags = async () => {
-	const tags = [{ name: "cli" }, { name: "desktop" }, { name: "mac" }, { name: "win" }, { name: "linux" }, { name: "dev" }, { name: "home" }];
 	await seedTags(tags);
-	await getTagCount().then((count) => {
+	getTagCount().then((count) => {
 		log.info(`Done seeding Tag table with ${count} tags`);
 	});
 };

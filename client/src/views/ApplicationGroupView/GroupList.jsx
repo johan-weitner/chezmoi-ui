@@ -4,10 +4,10 @@ import { rem, ThemeIcon, List, Card, Title } from "@mantine/core";
 import "../../common.css";
 import { IconPackages } from "@tabler/icons-react";
 import s from "./GroupView.module.css";
-import { useGroupManager } from "core/GroupManager";
+import { useClientManager } from "core/ClientManager";
 
 const GroupList = (props) => {
-	const { selectGroup } = useGroupManager();
+	const { selectGroup } = useClientManager();
 	const appGroups = useSelector((state) => state.root.appGroups);
 
 	return (

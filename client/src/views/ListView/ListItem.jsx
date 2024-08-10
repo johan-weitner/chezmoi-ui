@@ -118,6 +118,4 @@ const ListItem = React.memo((props) => {
 	);
 });
 
-ListItem.whyDidYouRender = true;
-
 export default ListItem;

@@ -8,7 +8,7 @@ import {
 	updateApp,
 	markAppDone,
 	updateTagWhiteList
-} from "api/appCollectionApi";
+} from "api/fetchApi";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { selectPageContent } from "store/selectors";
@@ -28,6 +28,8 @@ import {
 import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
 import { log } from 'utils/logger';
+import { mapEntityToDb } from "api/helpers";
+import { setSelectedApp } from "../store/store";
 
 export const useDataManager = () => {
 	const { dispatch } = store;
@@ -98,8 +100,8 @@ export const useDataManager = () => {
 		return apps;
 	};
 
-	const refreshAppCollection = async (filterOutDoneApps = false) => {
-		if (filterOutDoneApps) {
+	const refreshAppCollection = async (filterOutFinishedApps = false) => {
+		if (filterOutFinishedApps) {
 			fetchUnfinishedApps().then((apps) => {
 				dispatch(setAppCollection(apps));
 				dispatch(setPageCount(Math.ceil(apps.length / getState().pageSize),));
@@ -133,41 +135,44 @@ export const useDataManager = () => {
 			});
 	};
 
-	const updateItem = (app, appTags) => {
-		const appKey = app.key;
+	const updateItem = (app, appTags, appGroups) => {
+		const appEntity = mapEntityToDb(app);
+		log.debug("DataManager: updateItem: ", appEntity, appTags, appGroups);
 		toggleLoading(true);
-		tagApp(Number.parseInt(app.id, 10), appTags)
-			.then((res) => {
-				log.debug("Tagged app: ", res);
-			})
-			.catch((e) => {
-				log.error(e);
-			});
 		const apps = getState().appCollection;
-		updateApp(app)
-			.then(() => {
-				dispatch(
-					setAppCollection([
-						...apps,
-						{
-							...app,
-							edited: true,
-						},
-					]),
-				);
-
-				const index = apps.findIndex((item) => item.key === app.key);
-				const newApps = [...apps];
-				newApps[index] = app;
-				dispatch(setAppCollection(newApps));
-				gotoPage(getState().page);
+		updateApp(appEntity, appTags, appGroups)
+			.then((updatedApp) => {
+				dispatch(setSelectedApp({ ...updatedApp }));
 				toggleLoading(false);
 				toast.success("App updated successfully");
 			})
 			.catch((err) => {
-				log.error("DataManager: Error updating app: ", err);
+				log.error("DataManager: Error updating app: ", err.response.data.error);
 				toast.error("Error updating app");
 			});
+	};
+
+	const updateAppInCollection = app => {
+		const apps = getState().appCollection;
+		const index = apps.findIndex((item) => item.key === app.key);
+		log.debug(`DataManager: updateAppInCollection: ${app.key} at index ${index}`);
+		insertSlimmedAppAt(app, index);
+		gotoPage(getState().page);
+	};
+
+	const insertSlimmedAppAt = (app, index) => {
+		log.debug(`DataManager: insertSlimmedAppAt: ${app.key} at index ${index}`);
+		// return;
+		const apps = [...getState().appCollection];
+		apps[index] = {
+			id: app.id,
+			key: app.key,
+			name: app.name,
+			done: app.done || false,
+			edited: true,
+		};
+		log.debug(apps[index]);
+		dispatch(setAppCollection([...apps]));
 	};
 
 	const saveNewItem = (app, tagIds, groups) => {
@@ -176,15 +181,14 @@ export const useDataManager = () => {
 		const pageContent = getState().pageContent;
 		saveNewApp({
 			...app,
-			appTags: tagIds,
-			ApplicationGroup: groups,
+			appTags: tagIds || [],
+			ApplicationGroup: groups || [],
 			edited: true,
 		})
 			.then((newApp) => {
-				// tagApp(newApp?.id, tagIds);
-				dispatch(setAppCollection([...apps, app]));
+				updateAppInCollection(app);
 				if (page === pageCount.length) {
-					dispatch(setPageCount([...pageContent, app]));
+					dispatch(setPageContent([...pageContent, app]));
 				}
 				toggleLoading(false);
 				toast.success("App successfully added");
@@ -197,31 +201,28 @@ export const useDataManager = () => {
 
 	const flagAppDone = async (app, flag = true) => {
 		markAppDone(app, flag)
-			.then(() => {
-				refreshAppCollection().then(res => {
-					toast.success("App marked as done");
-				});
-				setSelectedAppKey(app.key);
+			.then((updatedApp) => {
+				updateAppInCollection({ ...app, done: flag });
 			})
 			.catch((err) => {
-				log.error("DataManager: Error marking app as done: ", err);
+				log.error("DataManager: Error marking app as done: ", err.response.data.error);
 				toast.error("Error marking app as done");
 			});
 	};
 
-	const tagApp = async (appId, tagIds) => {
-		dispatch(setIsLoading(true));
-		await addAppTags(appId, tagIds)
-			.then(() => {
-				toggleLoading(false);
-				// toast.success("Tags added");
-			})
-			.catch((err) => {
-				toggleLoading(false);
-				log.log("DataManager: Error adding tag: ", err);
-				// toast.error("Error adding tag");
-			});
-	};
+	// const tagApp = async (appId, tagIds) => {
+	// 	dispatch(setIsLoading(true));
+	// 	await addAppTags(appId, tagIds)
+	// 		.then(() => {
+	// 			toggleLoading(false);
+	// 			// toast.success("Tags added");
+	// 		})
+	// 		.catch((err) => {
+	// 			toggleLoading(false);
+	// 			log.log("DataManager: Error adding tag: ", err);
+	// 			// toast.error("Error adding tag");
+	// 		});
+	// };
 
 	const updateAllowedTags = async (tags) => {
 		dispatch(setIsLoading(true));
@@ -252,7 +253,7 @@ export const useDataManager = () => {
 		updateItem,
 		deleteItem,
 		saveNewItem,
-		tagApp,
+		// tagApp,
 		setIsLoading: toggleLoading,
 		setIsEditMode,
 		flagAppDone,

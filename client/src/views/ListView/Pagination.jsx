@@ -1,37 +1,17 @@
 import { useSelector } from "react-redux";
 import { Pagination, Stack, Text } from "@mantine/core";
-import { filterModel } from "api/filters";
+import { filterModel } from "api/filterApi";
 import { useEffect, useState } from "react";
 import css from "./ListView.module.css";
 import { log } from "utils/logger";
+import { ICON } from "constants/icons";
 
 const PaginationBar = (props) => {
 	const { gotoPage } = props;
-	const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
 	const [currentPage, setCurrentPage] = useState(1);
 	const { page, pageCount, activeFilter, totalCount, filteredList } =
 		useSelector((state) => state.root);
-
-	useEffect(() => {
-		setCurrentPage(page);
-		debugProps();
-	}, []);
-
-	useEffect(() => {
-		setCurrentPage(page);
-		debugProps();
-	}, [page]);
-
-	useEffect(() => {
-		debugProps();
-	}, [pageCount]);
-
-	const debugProps = () => {
-		log.debug(`Pagination.jsx:
-			currentPage: ${page},
-			Total: ${pageCount},
-			currentFilter: ${activeFilter}`);
-	};
+	const hideCompleted = useSelector((state) => state.root.hideCompleted);
 
 	return (
 		<Stack className={css.paginationContainer} justify="center" align="center">
@@ -61,6 +41,12 @@ const PaginationBar = (props) => {
 				)) || (
 					<span>
 						Page {page} of {pageCount} ⋅ {totalCount} apps in total.
+					</span>
+				)}
+				{hideCompleted && (
+					<span style={{ fontStyle: "italic", color: "#999" }}>
+						{" "}
+						(Hiding finished items)
 					</span>
 				)}
 			</Text>
