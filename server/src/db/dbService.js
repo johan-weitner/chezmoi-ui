@@ -75,7 +75,6 @@ import {
 } from "./applicationService.js";
 import {
 	addAppTag,
-	addAppTags,
 	updateArticleTags,
 	deleteAppTag,
 	deleteAllAppTags,
@@ -116,7 +115,6 @@ export {
 	filterAppsByNoDesc,
 	getTagCount,
 	addAppTag,
-	addAppTags,
 	updateArticleTags,
 	deleteAppTag,
 	deleteAllAppTags,

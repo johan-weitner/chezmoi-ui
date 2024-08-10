@@ -1,5 +1,4 @@
 import {
-	addAppTags,
 	deleteApp,
 	getAllApps,
 	fetchUnfinishedApps,
@@ -37,7 +36,6 @@ export const useDataManager = () => {
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const { gotoPage, getPageContent } = usePageManager();
 	const { seedGroups } = useGroupManager();
-	// const { setSelectedAppKey } = useSelectionManager();
 
 	const useBootstrap = () => {
 		return useEffect(() => {
@@ -88,7 +86,6 @@ export const useDataManager = () => {
 		});
 
 		seedGroups();
-
 		return openFirstPage();
 	};
 
@@ -112,7 +109,6 @@ export const useDataManager = () => {
 				dispatch(setPageCount(Math.ceil(apps.length / getState().pageSize),));
 			});
 		}
-
 	};
 
 	const deleteItem = (appId) => {
@@ -139,7 +135,6 @@ export const useDataManager = () => {
 		const appEntity = mapEntityToDb(app);
 		log.debug("DataManager: updateItem: ", appEntity, appTags, appGroups);
 		toggleLoading(true);
-		const apps = getState().appCollection;
 		updateApp(appEntity, appTags, appGroups)
 			.then((updatedApp) => {
 				dispatch(setSelectedApp({ ...updatedApp }));
@@ -162,7 +157,6 @@ export const useDataManager = () => {
 
 	const insertSlimmedAppAt = (app, index) => {
 		log.debug(`DataManager: insertSlimmedAppAt: ${app.key} at index ${index}`);
-		// return;
 		const apps = [...getState().appCollection];
 		apps[index] = {
 			id: app.id,
@@ -177,7 +171,6 @@ export const useDataManager = () => {
 
 	const saveNewItem = (app, tagIds, groups) => {
 		dispatch(setIsLoading(true));
-		const apps = getState().appCollection;
 		const pageContent = getState().pageContent;
 		saveNewApp({
 			...app,
@@ -186,9 +179,10 @@ export const useDataManager = () => {
 			edited: true,
 		})
 			.then((newApp) => {
-				updateAppInCollection(app);
+				log.info("DataManager: saveNewItem: ", newApp);
+				dispatch(setAppCollection([...getState().appCollection, newApp]));
 				if (page === pageCount.length) {
-					dispatch(setPageContent([...pageContent, app]));
+					dispatch(setPageContent([...pageContent, newApp]));
 				}
 				toggleLoading(false);
 				toast.success("App successfully added");
@@ -209,20 +203,6 @@ export const useDataManager = () => {
 				toast.error("Error marking app as done");
 			});
 	};
-
-	// const tagApp = async (appId, tagIds) => {
-	// 	dispatch(setIsLoading(true));
-	// 	await addAppTags(appId, tagIds)
-	// 		.then(() => {
-	// 			toggleLoading(false);
-	// 			// toast.success("Tags added");
-	// 		})
-	// 		.catch((err) => {
-	// 			toggleLoading(false);
-	// 			log.log("DataManager: Error adding tag: ", err);
-	// 			// toast.error("Error adding tag");
-	// 		});
-	// };
 
 	const updateAllowedTags = async (tags) => {
 		dispatch(setIsLoading(true));

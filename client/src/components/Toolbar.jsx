@@ -1,7 +1,6 @@
 import { Flex, Group, Button, rem } from "@mantine/core";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
-import { useState } from "react";
 import classes from "components/Toolbar.module.css";
 import { MAIN_VIEWS } from "store/store";
 import { setMainView } from "store/store";
@@ -10,7 +9,6 @@ import { useSelector } from "store/store";
 
 const Toolbar = (props) => {
 	const { setShowAppGroupView } = props;
-	const [active, setActive] = useState(null);
 	const stroke = 1.5;
 	const dispatch = useDispatch();
 
@@ -76,7 +74,6 @@ const Toolbar = (props) => {
 							<NavbarLink
 								{...menuItem}
 								key={nanoid()}
-								onClick={() => setActive(index)}
 								className={
 									mainView === menuItem.mainViewKey
 										? classes.navbarLinkActive

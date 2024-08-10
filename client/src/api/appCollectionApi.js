@@ -1,8 +1,5 @@
 import axios from "axios";
 import { mapEntityToDb, transformNullValues } from "./helpers";
-import {
-	store,
-} from "store/store";
 import { log } from 'utils/logger';
 import { useClientManager } from "core/ClientManager";
 
@@ -118,8 +115,8 @@ export const saveNewApp = async (data) => {
 		})
 		.then((response) => {
 			const { data } = response;
-			log.debug("API: Saved new app - response:", data);
-			return response.data;
+			log.info("API: Saved new app - response:", data);
+			return data;
 		})
 		.catch((error) => {
 			throw error;
@@ -142,17 +139,6 @@ export const deleteApp = async (id) => {
 		});
 	return result;
 };
-
-// export const addApp = (data) => {
-// 	const app = mapEntityToDb(data);
-// 	app.edited = true;
-// 	log.debug("API: Mapped app data:", app);
-// 	for (const key of Object.keys(app)) {
-// 		if (!app[key]) {
-// 			app[key] = "";
-// 		}
-// 	}
-// };
 
 export const markAppDone = async (app, flag) => {
 	const update = { id: app.id, done: flag };

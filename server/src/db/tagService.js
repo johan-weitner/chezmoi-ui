@@ -26,26 +26,7 @@ const addAppTag = async (tagId, appId) => {
   }
 };
 
-const addAppTags = async (appId, tagIds) => {
-  try {
-    const connections = tagIds?.map((tagId) => {
-      return prisma.ApplicationTag.create({
-        data: {
-          applicationId: appId,
-          tagId: tagId,
-        },
-      });
-    });
-
-    await Promise.all(connections);
-
-    return { appId: appId, tags: tagIds };
-  } catch (e) {
-    log.error(e.message, e);
-    return e;
-  }
-};
-
+//FIXME: Refactor to use Application update
 const updateArticleTags = async (appId, tagIds) => {
   try {
     await deleteAllAppTags(appId);
@@ -184,7 +165,6 @@ const updateAllowedTags = async (diffObj) => {
 export {
   getTagCount,
   addAppTag,
-  addAppTags,
   updateArticleTags,
   deleteAppTag,
   deleteAllAppTags,

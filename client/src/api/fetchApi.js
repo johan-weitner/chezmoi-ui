@@ -12,7 +12,7 @@ import {
   getAllApps
 } from './appCollectionApi';
 import { fetchAppGroups, fetchAppsInGroup, addAppToGroup, removeAppFromGroup } from './groupsApi';
-import { getAllTags, addAppTags, getTagId, updateTagWhiteList } from './tagsApi';
+import { getAllTags, getTagId, updateTagWhiteList } from './tagsApi';
 
 export {
   fetchApps,
@@ -31,7 +31,6 @@ export {
   addAppToGroup,
   removeAppFromGroup,
   getAllTags,
-  addAppTags,
   getTagId,
   updateTagWhiteList
 }

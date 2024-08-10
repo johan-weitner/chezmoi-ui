@@ -1,7 +1,4 @@
 .navbar {
-  /* position: absolute;
-  top: 44px;
-  left: 0; */
   width: 1184px;
   height: 45px;
   background-color: #121516 !important;
@@ -46,17 +43,8 @@
   background-color: transparent;
 
   &:hover {
-    /* background-color: light-dark(var(--mantine-color-gray-2), var(--mantine-color-dark-5)); */
     background-color: var(--mantine-color-blue-light);
     color: var(--mantine-color-blue-light-color);
   }
 
-  /* &[data-active] {
-
-    &,
-    &:hover {
-      background-color: var(--mantine-color-blue-light);
-      color: var(--mantine-color-blue-light-color);
-    }
-  } */
 }
