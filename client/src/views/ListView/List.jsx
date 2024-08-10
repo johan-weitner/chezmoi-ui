@@ -71,7 +71,7 @@ const List = (props) => {
 					);
 				})}
 			{!currentFilter && pageContent?.length === 0 && (
-				<span>Found no apps</span>
+				<span style={{ textAlign: "center" }}>Found no apps</span>
 			)}
 			{currentFilter &&
 				filteredList?.map((item) => {

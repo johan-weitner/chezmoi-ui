@@ -1,4 +1,4 @@
-import { findIndex } from "api/helpers";
+import { findIndexByKey } from "api/helpers";
 import { createSelector } from "reselect";
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
@@ -9,7 +9,7 @@ import {
 	store,
 	setSelectedAppKey,
 } from "store/store";
-import { filterModel } from "api/filters";
+import { filterModel } from "api/filterApi";
 
 const { dispatch } = store;
 
@@ -71,7 +71,7 @@ export const selectPageContent = () => {
 export const getCurrentIndex = () => {
 	const appCollection = getState().appCollection;
 	const selectedAppKey = getState().selectedAppKey;
-	return findIndex(selectedAppKey, appCollection);
+	return findIndexByKey(selectedAppKey, appCollection);
 };
 
 export const selectApp = (selectedAppKey) => {

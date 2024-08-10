@@ -1,10 +1,6 @@
 import { appModelInstallerFields } from "api/appModel";
-import { APP_FORM, EMPTY_APP } from "constants/appForm";
+import { APP_FORM } from "constants/appForm";
 import { log } from 'utils/logger';
-import { useGroupManager } from "core/GroupManager";
-
-const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
-const { getGroupId } = useGroupManager();
 
 /**
  * Helper functions
@@ -17,8 +13,12 @@ export const isEndOfPage = (index, ofTotalLength) => {
 	return index === ofTotalLength - 1;
 };
 
-export const findIndex = (key, list) => {
+export const findIndexByKey = (key, list) => {
 	return list.findIndex((item) => item.key === key);
+};
+
+export const findIndexById = (id, list) => {
+	return list.findIndex((item) => item.id === id);
 };
 
 export const isNullOrEmpty = (value) => {
@@ -39,13 +39,15 @@ export const mapEntityToDb = (app) => {
 		`Mapping app data to database entity:
 		- App:`,
 		app);
-	// const { ApplicationGroup } = app;
-	// const groups = ApplicationGroup.map((group) => {
-	// 	return getGroupId(group);
-	// });
+
 	const { formPartOne, formPartTwo } = APP_FORM;
 	const validKeys = [...formPartOne, ...formPartTwo, "done"].map((item) => item.name);
-	const entity = {};
+	const entity = {
+		id: app.id,
+		desc: app.desc,
+		done: app.done,
+		edited: true
+	};
 	Object.keys(app).map((key) => {
 		if (validKeys.includes(key)) {
 			entity[key] = app[key];

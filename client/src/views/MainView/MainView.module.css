@@ -1,8 +1,6 @@
 .mainContainer {
   position: static !important;
   padding: 70px 0 0 0;
-  /* background-color: #333; */
-  /* paddingTop: 0px; */
 }
 
 .link {
@@ -21,8 +19,6 @@
     color: var(--mantine-color-blue-light-color);
   }
 }
-
-
 
 .short {
   font-size: 1.2em !important;
@@ -43,12 +39,6 @@
   margin: 0;
 }
 
-/* .mainLinks {
-  margin: 0;
-  color: #FFF !important;
-  font-size: 1em !important;
-} */
-
 .overlay {
   position: fixed;
   top: 0;
@@ -62,23 +52,5 @@
   align-items: center;
   justify-content: center;
 }
-
-
-/* .popup input,
-.popup textarea {
-  background-color: #333;
-}
-
-.popup div {
-  text-align: left;
-} */
-
-
-
-
-
-
-
-
 
 

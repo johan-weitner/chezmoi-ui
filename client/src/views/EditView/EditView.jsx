@@ -14,17 +14,13 @@ const EditView = forwardRef(function EditView(props, ref) {
 	const dispatch = useDispatch();
 	const { theme } = props;
 	const { setIsEditMode, gotoPrev, gotoNext } = useClientManager();
-
 	const editMode = useSelector((state) => state.root.editMode);
 	const selectedApp = useSelector((state) => state.root.selectedApp);
-
 	const [isNewApp, setIsNewApp] = useState(!selectedApp); // FIXME
 	const forceUpdate = useForceUpdate();
 
-	// FIXME
 	useEffect(() => {
 		setIsNewApp(!selectedApp);
-		// forceUpdate();
 	}, [selectedApp]);
 
 	return (
@@ -38,10 +34,9 @@ const EditView = forwardRef(function EditView(props, ref) {
 			}}
 			radius="10"
 			size="auto"
-			// transitionProps={{ duration: 2500, transition: "pop" }}
 			shadow="xl"
 			fullScreen
-			transitionProps={{ transition: "fade", duration: 200 }}
+			transitionProps={{ transition: "pop", duration: 200 }}
 		>
 			<Card style={{ backgroundColor: "#222" }}>
 				<ErrorBoundary
@@ -50,17 +45,7 @@ const EditView = forwardRef(function EditView(props, ref) {
 					)}
 					style={{ margin: "0 !important" }}
 				>
-					<EditViewForm
-						isPopoverOpen={editMode}
-						closePopover={() => dispatch(setEditMode(false))}
-						selectedApp={selectedApp}
-						gotoPrev={gotoPrev}
-						gotoNext={gotoNext}
-						theme={theme}
-						isNewApp={isNewApp}
-						forceUpdate={forceUpdate}
-						randomId={randomId}
-					/>
+					<EditViewForm />
 				</ErrorBoundary>
 			</Card>
 		</Modal>

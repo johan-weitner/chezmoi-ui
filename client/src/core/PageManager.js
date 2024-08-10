@@ -18,7 +18,7 @@ export const usePageManager = () => {
 
 	const getPageContent = () => {
 		const apps = selectPageContent();
-		dispatch(setPageContent(apps));
+		dispatch(setPageContent([...apps]));
 		return apps;
 	};
 

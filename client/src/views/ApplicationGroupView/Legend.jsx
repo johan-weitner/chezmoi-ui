@@ -1,5 +1,4 @@
 import { Kbd, Text, Title } from "@mantine/core";
-import { keyboardShortcuts } from "constants/keyboardShortcuts";
 import { nanoid } from "nanoid";
 import s from "views/DetailView/DetailView.module.css";
 import css from "./GroupView.module.css";

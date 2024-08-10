@@ -4,7 +4,6 @@ import {
 	Group,
 	Title,
 	Text,
-	useMantineTheme,
 	Table,
 	Checkbox,
 	Card,
@@ -16,12 +15,10 @@ import commonCss from "./ListView.module.css";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useSelector } from "store/store";
 import { log } from "utils/logger";
 
 const ExportFilter = (props) => {
-	const dispatch = useDispatch();
 	const { setExportIsOpen } = props;
 	const [selectedTags, setSelectedTags] = useState([]);
 	const ref = useClickOutside(() => setExportIsOpen(false));
@@ -51,8 +48,8 @@ const ExportFilter = (props) => {
 				YAML Export
 			</Title>
 			<Text size="lg" mb="40px">
-				Choose what tag(s) to filter the export on, or leave empty to export a
-				complete list.
+				Choose what tag(s) to filter the export on, or leave empty to export the
+				whole list.
 			</Text>
 			<Table mb={30}>
 				<Table.Thead>

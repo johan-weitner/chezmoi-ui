@@ -18,6 +18,7 @@ export const getFilteredYamlExport = async (tags) => {
 
 export const getInstallDoctorExport = async () => {
 	const groups = await getGroupedApplications();
+	log.info("Groups: ", groups.length);
 	return formatInstallDoctorYaml(groups);
 };
 
@@ -26,10 +27,8 @@ const formatYaml = (apps) => {
 
 	for (const app of apps) {
 		const {
-			id,
 			key,
 			name,
-			edited,
 			desc,
 			bin,
 			short,
@@ -90,7 +89,7 @@ const formatYaml = (apps) => {
 				appstore,
 				pacman,
 				port,
-				tags: appTags?.map(tag => tag.tag.name),
+				tags: appTags?.map(tag => tag.name),
 			},
 		});
 	}
@@ -100,15 +99,21 @@ const formatYaml = (apps) => {
 
 const formatInstallDoctorYaml = (groups) => {
 	const softwareGroups = [];
+	log.info("Groups: ", groups.length);
 
 	for (const group of groups) {
 		const {
-			name, apps
+			name, Application
 		} = group;
 
+		const apps = [];
+		for (const app of Application) {
+			apps.push(app.name);
+		}
 		softwareGroups.push({
-			[name]: apps.map(app => app.application.name),
+			[name]: apps,
 		});
 	}
+	log.info("Software groups: ", softwareGroups);
 	return { softwareGroups: softwareGroups };
 };

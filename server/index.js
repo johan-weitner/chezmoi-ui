@@ -1,27 +1,23 @@
 import dotenv from "dotenv";
 dotenv.config();
-import fs from "node:fs";
 import cors from "cors";
 import express from "express";
 import YAML from "yaml";
+import { ROUTES } from "./src/core/routes.js";
 import { isEmpty } from "./src/core/api.js";
-import { boot, setupGroupData } from "./src/core/boot.js";
-import { tags } from "./src/db/fixtures/tags.js";
+import { initialize, setupGroupData } from "./src/core/boot.js";
 import {
 	addApp,
 	deleteApp,
 	getAllApps,
 	getAllUnfinishedApps,
-	getAllAppsWithTags,
 	getAppByKey,
 	updateApp,
-	addAppTags,
 	deleteAppTag,
 	getTagsByAppId,
 	getAllTags,
 	updateArticleTags,
 	getAllGroups,
-	getGroupByName,
 	addAppToGroup,
 	removeAppFromGroup,
 	getAppsByGroup,
@@ -40,7 +36,7 @@ const app = express();
 const port = process.env.BACKEND_SRV_PORT || 3000;
 
 log.setLevel(process.env.LOG_LEVEL || "INFO");
-boot(); // Set up auxillary infrastructure
+initialize(); // Set up auxillary infrastructure
 
 app.set("json spaces", 2);
 app.use(cors());
@@ -54,22 +50,22 @@ const attachHeaders = (res) => {
 };
 
 app.get("/", (req, res) => {
-	res.redirect("/software");
+	res.redirect(ROUTES.software);
 });
 
-app.get("/software", (req, res) => {
+app.get(ROUTES.software, (req, res) => {
 	getAllApps().then((apps) => {
 		res.json(apps);
 	});
 });
 
-app.get("/softwareNotDone", (req, res) => {
+app.get(ROUTES.softwareNotDone, (req, res) => {
 	getAllUnfinishedApps().then((apps) => {
 		res.json(apps);
 	});
 });
 
-app.get("/filterBy", (req, res) => {
+app.get(ROUTES.filterBy, (req, res) => {
 	const { filter } = req.query;
 	switch (filter) {
 		case "installers":
@@ -98,14 +94,14 @@ app.get("/filterBy", (req, res) => {
 	}
 });
 
-app.get("/getApp", (req, res) => {
+app.get(ROUTES.getApp, (req, res) => {
 	const { key } = req.query;
 	getAppByKey(key).then((app) => {
 		res.json(app);
 	});
 });
 
-app.post("/updateNode", (req, res) => {
+app.post(ROUTES.updateNode, (req, res) => {
 	const { body } = req;
 
 	if (isEmpty(body)) {
@@ -125,7 +121,7 @@ app.post("/updateNode", (req, res) => {
 		});
 });
 
-app.post("/addNode", (req, res) => {
+app.post(ROUTES.addNode, (req, res) => {
 	log.debug("Req.body: ", req.body);
 	const { data } = req.body;
 	log.debug("Req params: ", data);
@@ -140,7 +136,7 @@ app.post("/addNode", (req, res) => {
 		});
 });
 
-app.delete("/deleteNode", (req, res) => {
+app.delete(ROUTES.deleteNode, (req, res) => {
 	deleteApp(req.query.id)
 		.then((result) => {
 			res.status(200).json(result);
@@ -152,20 +148,20 @@ app.delete("/deleteNode", (req, res) => {
 		});
 });
 
-app.get("/getAllTags", (req, res) => {
+app.get(ROUTES.getAllTags, (req, res) => {
 	getAllTags().then((tags) => {
 		res.json(tags);
 	});
 });
 
-app.get("/getTagsByAppId", (req, res) => {
+app.get(ROUTES.getTagsByAppId, (req, res) => {
 	const { appId } = req.query;
 	getTagsByAppId(Number.parseInt(appId, 10)).then((tags) => {
 		res.json(tags);
 	});
 });
 
-app.post("/addAppTags", (req, res) => {
+app.post(ROUTES.addAppTags, (req, res) => {
 	log.debug("Req.body: ", req.body);
 	const { tagId, appId } = req.body.data;
 	log.debug("Req params: ", req.body.data);
@@ -180,7 +176,7 @@ app.post("/addAppTags", (req, res) => {
 		});
 });
 
-app.delete("/deleteAppTag", (req, res) => {
+app.delete(ROUTES.deleteAppTag, (req, res) => {
 	const { appId, tagId } = req.body.data;
 	log.debug("Req params: ", req.body.data);
 	deleteAppTag(tagId, appId)
@@ -194,8 +190,7 @@ app.delete("/deleteAppTag", (req, res) => {
 		});
 });
 
-// TODO: Read req param and decide file based on it
-app.get('/download', (req, res) => {
+app.get(ROUTES.download, (req, res) => {
 	getYamlExport().then(apps => {
 		const yamlFile = YAML.stringify(apps);
 
@@ -216,10 +211,7 @@ app.get('/download', (req, res) => {
 	});
 });
 
-// start: Tags: - 3, 4, - object - true
-// start: App tags: undefined
-// start: Error:  Cannot read properties of undefined(reading 'map')
-app.get('/filtered-download', (req, res) => {
+app.get(ROUTES.filteredDownload, (req, res) => {
 	const { tags } = req.query;
 	const tagsArray = tags.split(",");
 	log.debug(`Tags: - ${tagsArray} - isArray: ${Array.isArray(tagsArray)}`);
@@ -250,7 +242,7 @@ app.get('/filtered-download', (req, res) => {
 	});
 });
 
-app.get("/software-groups", (req, res) => {
+app.get(ROUTES.softwareGroups, (req, res) => {
 	const { groups, groupKeys } = setupGroupData();
 	res.json({
 		groups: groups,
@@ -258,7 +250,7 @@ app.get("/software-groups", (req, res) => {
 	});
 });
 
-app.get("/groups", (req, res) => {
+app.get(ROUTES.groups, (req, res) => {
 	getAllGroups().then(groups => {
 		log.debug("SERVER: Got groups: ", groups?.length);
 		res.json({
@@ -272,7 +264,7 @@ app.get("/groups", (req, res) => {
 });
 
 // getAppsByGroup
-app.get("/group-apps", (req, res) => {
+app.get(ROUTES.groupApps, (req, res) => {
 	const { groupId } = req.query;
 	getAppsByGroup(groupId).then(apps => {
 		res.json({
@@ -286,7 +278,7 @@ app.get("/group-apps", (req, res) => {
 	});;
 });
 
-app.get("/app-groups", (req, res) => {
+app.get(ROUTES.appGroups, (req, res) => {
 	const { appId } = req.query;
 	getGroupsByApp(appId).then(groups => {
 		res.json({
@@ -300,7 +292,7 @@ app.get("/app-groups", (req, res) => {
 	});;
 });
 
-app.get("/getGroupById", (req, res) => {
+app.get(ROUTES.getGroupById, (req, res) => {
 	const { groupId } = req.query;
 	getGroupById(groupId).then(group => {
 		res.json({
@@ -313,7 +305,7 @@ app.get("/getGroupById", (req, res) => {
 	});;
 });
 
-app.post("/addAppToGroup", (req, res) => {
+app.post(ROUTES.addAppToGroup, (req, res) => {
 	const { groupId, appId } = req.body.data;
 	addAppToGroup(groupId, appId)
 		.then((appGroup) => {
@@ -326,7 +318,7 @@ app.post("/addAppToGroup", (req, res) => {
 		});
 });
 
-app.delete("/removeAppFromGroup", (req, res) => {
+app.delete(ROUTES.removeAppFromGroup, (req, res) => {
 	const { groupId, appId } = req.body;
 	removeAppFromGroup(groupId, appId)
 		.then((data) => {
@@ -340,7 +332,7 @@ app.delete("/removeAppFromGroup", (req, res) => {
 		});
 });
 
-app.get("/groupedApps", (req, res) => {
+app.get(ROUTES.groupedApps, (req, res) => {
 	getInstallDoctorExport().then((groups) => {
 		const yamlFile = YAML.stringify(groups);
 
@@ -359,7 +351,7 @@ app.get("/groupedApps", (req, res) => {
 	});
 });
 
-app.post("/updateAllowedTags", (req, res) => {
+app.post(ROUTES.updateAllowedTags, (req, res) => {
 	const { data } = req.body;
 	updateAllowedTags(data)
 		.then((allowedTags) => {

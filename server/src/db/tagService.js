@@ -89,14 +89,13 @@ const deleteAllAppTags = async (appId) => {
 const getTagsByAppId = async (appId) => {
   if (!appId) return;
   try {
-    const tags = await prisma.Tag.findMany({
+    const tags = await prisma.Application.findFirst({
       where: {
-        apps: {
-          some: {
-            applicationId: Number.parseInt(appId, 10),
-          },
-        },
+        id: appId,
       },
+      select: {
+        appTags: true,
+      }
     });
     return tags;
   } catch (e) {

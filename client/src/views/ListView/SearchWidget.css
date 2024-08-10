@@ -24,11 +24,6 @@
   border-radius:10px;
   width:100% !important;
 
-
-  .wrapper {
-
-  }
-
   input {
     color:#FFF !important;
     border-radius:20px !important;
@@ -42,37 +37,10 @@
     box-shadow:10px 10px 20px rgba(0,0,0,0.2);
   }
 
-
 }
-
-/* .searchWidget ul {
-  box-shadow:20px 20px 40px rgba(0,0,0,0.2);
-}
-
-.searchWidget ul:hover,
-.searchWidget li:hover,
-.searchWidget div:hover,
-.searchWidget  p:hover {
-  background-color: #222 !important;
-  cursor:pointer;
-}
-
-.searchWidget ul * {
-    background-color: #222 !important;
-    cursor:pointer;
-} */
 
 .searchWidget *:hover,
 .searchWidget *:active {
 
     cursor:pointer;
 }
-
-/* .searchWidget ul li {
-  border-left:3px solid transparent;
-  cursor:pointer;
-}
-.searchWidget ul li:hover {
-  border-left:3px solid #3491ff;
-  cursor:pointer;
-} */

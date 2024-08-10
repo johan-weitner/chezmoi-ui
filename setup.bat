@@ -9,7 +9,7 @@ npm install -g pnpm
 pnpm install
 
 cd "server"
-pnpx prisma migrate dev --schema=./prisma/schema.prisma
+npx prisma migrate dev --schema=./prisma/schema.prisma
 cd
 
 echo ***** Done. *****

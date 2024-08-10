@@ -4,8 +4,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import classes from "../ListView/ListView.module.css";
 
 const GroupListItem = (props) => {
-	const { selectedGroupKey, setSelectedGroupKey, group, deleteItem, editItem } =
-		props;
+	const { selectedGroupKey, setSelectedGroupKey, group } = props;
 
 	const className =
 		selectedGroupKey && selectedGroupKey === group ? classes.selected : null;

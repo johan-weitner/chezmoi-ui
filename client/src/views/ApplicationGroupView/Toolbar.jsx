@@ -1,9 +1,9 @@
 import { ActionIcon, Flex, Tooltip, useMantineTheme } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
-import SearchWidget from "views/ListView/SearchWidget";
 import "components/neumorphic.css";
 
 const Toolbar = (props) => {
+	const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 	return (
 		<Flex
 			justify="flex-end"
@@ -15,14 +15,13 @@ const Toolbar = (props) => {
 				right: "30px",
 			}}
 		>
-			{/* <SearchWidget /> */}
 			<Tooltip label="Export Install.Doctor YAML file" position="bottom">
 				<ActionIcon
 					variant="filled"
 					aria-label="Export Install.Doctor YAML file"
 					size="xl"
 					className="neubtn"
-					onClick={() => window.open("http://localhost:3000/groupedApps")}
+					onClick={() => window.open(`${BACKEND_URL}/groupedApps`)}
 				>
 					<IconDownload size={24} color="#999" />
 				</ActionIcon>

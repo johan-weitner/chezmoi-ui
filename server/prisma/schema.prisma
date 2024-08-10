@@ -43,36 +43,36 @@ model Application {
   port             String?            @default("")
   done             Boolean            @default(false)
   edited           Boolean            @default(false)
-  appTags          ApplicationTag[]
-  appGroups        ApplicationGroup[]
+  appTags          Tag[]
+  appGroups        Group[]
 }
 
 model Tag {
   id   Int              @id @default(autoincrement())
   name String           @unique
-  apps ApplicationTag[]
+  Application Application[]
 }
 
-model ApplicationTag {
-  application   Application @relation(fields: [applicationId], references: [id])
-  applicationId Int
-  tag           Tag         @relation(fields: [tagId], references: [id])
-  tagId         Int
+// model ApplicationTag {
+//   application   Application @relation(fields: [applicationId], references: [id])
+//   applicationId Int
+//   tag           Tag         @relation(fields: [tagId], references: [id])
+//   tagId         Int
 
-  @@id([applicationId, tagId])
-}
+//   @@id([applicationId, tagId])
+// }
 
 model Group {
   id   Int                @id @default(autoincrement())
   name String             @unique
-  apps ApplicationGroup[]
+  Application Application[]
 }
 
-model ApplicationGroup {
-  application   Application @relation(fields: [applicationId], references: [id])
-  applicationId Int
-  group         Group       @relation(fields: [groupId], references: [id])
-  groupId       Int
+// model ApplicationGroup {
+//   application   Application @relation(fields: [applicationId], references: [id])
+//   applicationId Int
+//   group         Group       @relation(fields: [groupId], references: [id])
+//   groupId       Int
 
-  @@id([applicationId, groupId])
-}
+//   @@id([applicationId, groupId])
+// }

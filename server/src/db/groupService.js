@@ -1,10 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { log } from "../util/logger.js";
 
-const prisma = new PrismaClient({ errorFormat: "pretty" });
-const APPLICATION = "Application";
-const GROUPS = "Group";
-const APP_GROUPS = "ApplicationGroup";
+const prisma = new PrismaClient();
 
 const getAllGroups = async () => {
   const groups = await prisma.Group.findMany();
@@ -19,13 +16,10 @@ const getGroupCount = async () => {
 const getGroupedApplications = async () => {
   const groups = await prisma.Group.findMany({
     include: {
-      apps: {
+      Application: {
         select: {
-          application: {
-            select: {
-              name: true,
-            }
-          }
+          id: true,
+          name: true,
         }
       }
     }
@@ -38,6 +32,14 @@ const getGroupByName = async (name) => {
     where: {
       name: name,
     },
+    include: {
+      Application: {
+        select: {
+          id: true,
+          name: true
+        }
+      }
+    },
   });
   return group;
 };
@@ -47,6 +49,14 @@ const getGroupById = async (groupId) => {
     where: {
       id: Number.parseInt(groupId, 10),
     },
+    include: {
+      Application: {
+        select: {
+          id: true,
+          name: true
+        }
+      }
+    },
   });
   return group;
 };
@@ -54,13 +64,24 @@ const getGroupById = async (groupId) => {
 const addAppToGroup = async (groupId, appId) => {
   log.debug("Adding app to group: ", groupId, appId);
   try {
-    const appGroup = await prisma.ApplicationGroup.create({
+    const appGroup = await prisma.Group.update({
+      where: {
+        id: Number.parseInt(groupId, 10),
+      },
       data: {
-        applicationId: Number.parseInt(appId, 10),
-        groupId: Number.parseInt(groupId, 10),
+        Application: {
+          connect: {
+            id: Number.parseInt(appId, 10),
+          },
+        }
       },
       include: {
-        application: true,
+        Application: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
       },
     });
     return appGroup;
@@ -73,13 +94,27 @@ const addAppToGroup = async (groupId, appId) => {
 const removeAppFromGroup = async (groupId, appId) => {
   log.debug("Removing app from group: ", groupId, appId);
   try {
-    const result = await prisma.ApplicationGroup.deleteMany({
+    const appGroup = await prisma.Group.update({
       where: {
-        applicationId: Number.parseInt(appId, 10),
-        groupId: Number.parseInt(groupId, 10),
+        id: Number.parseInt(groupId, 10),
+      },
+      data: {
+        Application: {
+          disconnect: {
+            id: Number.parseInt(appId, 10),
+          },
+        }
+      },
+      include: {
+        Application: {
+          select: {
+            id: true,
+            name: true
+          }
+        },
       },
     });
-    return result;
+    return appGroup;
   } catch (e) {
     log.error(e.message, e);
     return e;
@@ -88,9 +123,14 @@ const removeAppFromGroup = async (groupId, appId) => {
 
 const removeGroupRelationsByAppId = async (appId) => {
   try {
-    const result = await prisma.ApplicationGroup.deleteMany({
+    const result = await prisma.Application.update({
       where: {
         applicationId: appId,
+      },
+      data: {
+        Application: {
+          set: []
+        },
       },
     });
     return result;
@@ -101,12 +141,12 @@ const removeGroupRelationsByAppId = async (appId) => {
 };
 
 const getAppsByGroup = async (groupId) => {
-  const apps = await prisma.ApplicationGroup.findMany({
+  const group = await prisma.Group.findFirst({
     where: {
-      groupId: Number.parseInt(groupId, 10),
+      id: Number.parseInt(groupId, 10),
     },
     include: {
-      application: {
+      Application: {
         select: {
           id: true,
           name: true,
@@ -115,20 +155,16 @@ const getAppsByGroup = async (groupId) => {
       },
     },
   });
-  return apps.map((app) => app.application);
+  return group.Application;
 };
 
 const getGroupsByApp = async (appId) => {
-  const apps = await prisma.ApplicationGroup.findMany({
+  const apps = await prisma.Application.findFirst({
     where: {
-      applicationId: Number.parseInt(appId, 10),
+      id: Number.parseInt(appId, 10),
     },
-    include: {
-      group: {
-        select: {
-          name: true,
-        },
-      },
+    select: {
+      appGroups: true,
     },
   });
   return apps;

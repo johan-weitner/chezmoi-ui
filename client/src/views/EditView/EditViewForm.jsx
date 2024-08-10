@@ -20,18 +20,12 @@ const EditViewForm = (props) => {
 	const [appTags, setAppTags] = useState();
 	const [appGroups, setAppGroups] = useState();
 	const [isDone, setIsDone] = useState(false);
-	const {
-		updateItem,
-		saveNewItem,
-		closePopover,
-		setSelectedAppKey,
-		tagApp,
-		flagAppDone,
-		getGroupsByApp,
-	} = useClientManager();
+	const { updateItem, saveNewItem, setSelectedAppKey, flagAppDone } =
+		useClientManager();
 
-	const { selectedApp, selectedAppKey, isNewApp, selectedAppGroups, editMode } =
-		useSelector((state) => state.root);
+	const selectedApp = useSelector((state) => state.root.selectedApp);
+	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
+	const isNewApp = useSelector((state) => state.root.isNewApp);
 
 	const defaultValues = newApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
@@ -58,7 +52,6 @@ const EditViewForm = (props) => {
 	const { formPartOne, formPartTwo } = APP_FORM;
 
 	const onSubmit = (data) => {
-		console.log("Groups: ", appGroups);
 		if (isNewApp) {
 			saveNewItem(data, appTags, appGroups);
 		} else {
@@ -89,13 +82,7 @@ const EditViewForm = (props) => {
 	};
 
 	return (
-		<form
-			onSubmit={handleSubmit(onSubmit)}
-			style={{
-				padding: "0 !important",
-				margin: "0 !important",
-			}}
-		>
+		<form onSubmit={handleSubmit(onSubmit)} className={css.editForm}>
 			<h2 className={css.editDetailHeader}>
 				{selectedApp?.name || "New application"}
 			</h2>
@@ -107,13 +94,7 @@ const EditViewForm = (props) => {
 				align="flex-start"
 				direction="row"
 				wrap="wrap"
-				style={{
-					backgroundColor: "#222",
-					position: "absolute",
-					top: "30px",
-					right: "15px",
-					zIndex: "9999",
-				}}
+				className={css.formContainer}
 			>
 				<Button
 					onClick={() => flipDoneFlag()}
@@ -133,36 +114,10 @@ const EditViewForm = (props) => {
 					Save
 				</Button>
 			</Flex>
-			<InfoSection
-				formPartOne={formPartOne}
-				register={register}
-				isNewApp={newApp}
-			/>
-			{/* {!isNewApp && ( */}
-			<>
-				<GroupSection
-					register={register}
-					appKey={selectedApp?.key}
-					isNewApp={newApp}
-					tags={selectedAppGroups || []}
-					editMode={editMode}
-					hoistAppGroups={setAppGroups}
-				/>
-				<TagSection
-					register={register}
-					appKey={selectedApp?.key}
-					isNewApp={newApp}
-					tags={selectedApp?.tags || ""}
-					editMode={editMode}
-					hoistAppTags={hoistAppTags}
-				/>
-			</>
-			{/* )} */}
-			<InstallerSection
-				formPartTwo={formPartTwo}
-				register={register}
-				isNewApp={newApp}
-			/>
+			<InfoSection formPartOne={formPartOne} register={register} />
+			<GroupSection hoistAppGroups={setAppGroups} />
+			<TagSection hoistAppTags={hoistAppTags} />
+			<InstallerSection formPartTwo={formPartTwo} register={register} />
 		</form>
 	);
 };

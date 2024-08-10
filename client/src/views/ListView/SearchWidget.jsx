@@ -15,7 +15,6 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./SearchWidget.css";
 
 const SearchWidget = (props) => {
-	const dispatch = useDispatch();
 	const { groupView } = props;
 	const [isOpen, setIsOpen] = useState(groupView);
 	const ref = useClickOutside(() => setIsOpen(false));
