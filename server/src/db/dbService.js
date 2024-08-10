@@ -80,8 +80,6 @@ import {
 	deleteAllAppTags,
 	getTagsByAppId,
 	getAllTags,
-	removeTagRelationsByTagId,
-	removeTagRelationsByAppId,
 	updateAllowedTags
 } from "./tagService.js";
 import {
@@ -120,8 +118,6 @@ export {
 	deleteAllAppTags,
 	getTagsByAppId,
 	getAllTags,
-	removeTagRelationsByTagId,
-	removeTagRelationsByAppId,
 	updateAllowedTags,
 	getAllGroups,
 	getGroupCount,

@@ -6,10 +6,8 @@ import { useClickOutside } from "@mantine/hooks";
 import { useClientManager } from "core/ClientManager";
 import { ErrorBoundary } from "react-error-boundary";
 import FallbackComponent from "components/FallbackComponent";
-import { useDispatch } from "react-redux";
 import { useSelector } from "store/store";
 import { log } from "utils/logger";
-
 import "components/neumorphic.css";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import "./SearchWidget.css";
@@ -30,10 +28,6 @@ const SearchWidget = (props) => {
 	const handleOnSelect = (item) => {
 		openApp(item.key);
 		setIsOpen(false);
-	};
-
-	const handleOnFocus = () => {
-		log.debug("Focused");
 	};
 
 	const styling = {

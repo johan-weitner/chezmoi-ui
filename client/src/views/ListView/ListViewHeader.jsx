@@ -23,7 +23,6 @@ import { useSelector, store, setHideCompleted } from "store/store";
 
 export const ListViewHeader = (props) => {
 	const theme = useMantineTheme();
-	const [useFilter, setUseFilter] = useState(null);
 	const [exportIsOpen, setExportIsOpen] = useState(false);
 	const { addItem, applyFilter, clearFilter, refreshAppCollection } =
 		useClientManager();
