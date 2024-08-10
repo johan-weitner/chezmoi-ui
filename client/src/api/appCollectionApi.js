@@ -70,26 +70,29 @@ export const fetchApp = async (key) => {
 	return transformNullValues(app);
 };
 
-export const updateApp = async (updatedData, tags = [], groups = []) => {
+export const updateApp = async (updatedData, tags, groups) => {
 	const { getGroupId } = useClientManager();
-	const groupIds = groups.map((group) => { return getGroupId(group) });
-	return axios
+	const groupIds = groups?.map((group) => { return getGroupId(group) });
+	if (tags) {
+		updatedData.appTags = tags;
+	}
+	if (groups) {
+		updatedData.appGroups = groupIds;
+	}
+
+	const updatedApp = await axios
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedData,
 			appTags: tags,
 			appGroups: groupIds
 		})
 		.then((response) => {
-			log.debug(
-				`API: Updating app:
-		- Tags: `,
-				response.data,
-			);
 			return response.data;
 		})
 		.catch((error) => {
 			throw error;
 		});
+	return updatedApp;
 };
 
 export const saveNewApp = async (data) => {
@@ -99,8 +102,8 @@ export const saveNewApp = async (data) => {
 	log.debug("API: Saving new app - fixed data:", fixedNullValuesApp);
 
 	const { getGroupId } = useClientManager();
-	const { appTags, ApplicationGroup } = data;
-	const groups = ApplicationGroup?.map((group) => {
+	const { appTags, appGroups } = data;
+	const groups = appGroups?.map((group) => {
 		return getGroupId(group);
 	});
 
@@ -143,13 +146,18 @@ export const deleteApp = async (id) => {
 export const markAppDone = async (app, flag) => {
 	const update = { id: app.id, done: flag };
 	log.debug("Flagged app: ", update);
-	updateApp(update)
+
+	const updatedApp = await axios
+		.post(`${BASE_URL}/updateField`, {
+			...update
+		})
 		.then((response) => {
-			return response;
+			return response.data;
 		})
 		.catch((error) => {
 			throw error;
 		});
+	return updatedApp;
 };
 
 export const getAllApps = fetchApps;

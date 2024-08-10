@@ -106,7 +106,7 @@ const addApp = async (data) => {
   log.debug("<<< Payload: ", payload);
   try {
     const app = await createApplicationWithGroupsAndTags(payload);
-    log.debug("Created app: ", app);
+    log.info("Created app: ", app);
     return app;
   } catch (e) {
     log.error(e.message);
@@ -142,27 +142,62 @@ const createApplicationWithGroupsAndTags = async (payload) => {
   return application;
 }
 
-async function updateApp(data) {
+const updateApp = async (data) => {
   log.info("Updating app: ", data);
   const { id, appGroups, appTags, ...rest } = data;
   const applicationId = Number.parseInt(id, 10);
 
-  return await prisma.application.update({
-    where: { id: applicationId },
-    data: {
-      ...rest,
-      appGroups: {
-        set: appGroups.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
+  try {
+    const updatedApp = await prisma.application.update({
+      where: { id: applicationId },
+      data: {
+        ...rest,
+        appGroups: {
+          set: appGroups.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
+        },
+        appTags: {
+          set: appTags.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
+        }
       },
-      appTags: {
-        set: appTags.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
+      include: {
+        appTags: true,
+        appGroups: true
       }
-    },
-    include: {
-      appTags: true,
-      appGroups: true
-    }
-  });
+    }).then((app) => {
+      log.info("Updated app: ", app);
+      return app;
+    });
+    return updatedApp;
+  } catch (e) {
+    log.error(e.message, e);
+    throw e;
+  }
+}
+
+const updateAppField = async (data) => {
+  log.info("Updating app: ", data);
+  const { id, ...rest } = data;
+  const applicationId = Number.parseInt(id, 10);
+
+  try {
+    const updatedApp = await prisma.application.update({
+      where: { id: applicationId },
+      data: {
+        ...rest,
+      },
+      include: {
+        appTags: true,
+        appGroups: true
+      }
+    }).then((app) => {
+      log.info("Updated app: ", app);
+      return app;
+    });
+    return updatedApp;
+  } catch (e) {
+    log.error(e.message, e);
+    throw e;
+  }
 }
 
 const deleteApp = async (id) => {
@@ -281,6 +316,7 @@ export {
   getAppByKey,
   addApp,
   updateApp,
+  updateAppField,
   deleteApp,
   getCount,
   filterAppsByNoInstallers,

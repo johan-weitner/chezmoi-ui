@@ -4,6 +4,7 @@ export const ROUTES = {
   filterBy: "/filterBy",
   getApp: "/getApp",
   updateNode: "/updateNode",
+  updateField: "/updateField",
   addNode: "/addNode",
   deleteNode: "/deleteNode",
   getAllTags: "/getAllTags",
