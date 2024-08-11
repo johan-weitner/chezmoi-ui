@@ -20,6 +20,10 @@
             "title": "To-Do",
             "tasks": [
                 {
+                    "text": "E2E tests",
+                    "id": "yts19kczauzjcggrq7nt86rt"
+                },
+                {
                     "text": "Finalize README",
                     "id": "ycjyht1ry3zlaxdxtxdvbrc3"
                 },
@@ -37,18 +41,17 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Consolidate look'n'feel in app and group views",
-                    "id": "e9wmxsahf33esakrkqa4k20a"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Consolidate look'n'feel in app and group views",
+                    "id": "e9wmxsahf33esakrkqa4k20a"
+                },
                 {
                     "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
                     "id": "n5a5xe8el34kw9qgsziu3hnr"
@@ -368,5 +371,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1723395389889
+    "timestamp": 1723404832862
 }
