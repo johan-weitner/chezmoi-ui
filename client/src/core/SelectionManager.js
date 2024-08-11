@@ -15,13 +15,11 @@ import {
 } from "store/store";
 import { transformNullValues } from "api/helpers";
 import { usePageManager } from "./PageManager";
-import { useGroupManager } from "./GroupManager";
 import { log } from 'utils/logger';
 
 export const useSelectionManager = () => {
 	const { dispatch } = store;
 	const { gotoNextPage, gotoPrevPage } = usePageManager();
-	const { getGroupsByApp } = useGroupManager();
 
 	const toggleLoading = (isLoading) => {
 		dispatch(setIsLoading(isLoading));
@@ -35,20 +33,6 @@ export const useSelectionManager = () => {
 			.then((app) => {
 				toggleLoading(false);
 				dispatch(setSelectedApp(app));
-
-				// getAppTags(app.id)
-				// 	.then((tags) => {
-				// 		dispatch(setSelectedAppTags(tags));
-				// 	})
-				// 	.catch((err) => {
-				// 		log.error(err);
-				// 		toast.error("Error fetching tags");
-				// 	});
-
-				// getGroupsByApp(app.id).then((groups) => {
-				// 	log.debug("SelectionManager: Groups for app: ", groups);
-				// 	dispatch(setSelectedAppGroups(groups));
-				// });
 			})
 			.catch((err) => {
 				log.error(err);
@@ -59,7 +43,6 @@ export const useSelectionManager = () => {
 	const selectGroup = (key) => {
 		dispatch(setSelectedGroupKey(key));
 		dispatch(setSelectedGroup(getState().appGroups[key]));
-		dispatch(setSelectedGroup(getState().appGroups[key].id));
 	};
 
 	const _isFirstOnPage = (appKey) => {
@@ -104,11 +87,6 @@ export const useSelectionManager = () => {
 		dispatch(setEditMode(true));
 	};
 
-	// const getAppTags = async (appId) => {
-	// 	const tags = await getTagsByAppId(appId);
-	// 	return tags;
-	// };
-
 	const addItem = () => {
 		dispatch(setSelectedApp(null));
 		selectAppKey(null);
@@ -126,7 +104,6 @@ export const useSelectionManager = () => {
 		selectPrevApp,
 		selectNextApp,
 		editItem,
-		// getAppTags,
 		addItem,
 		clearAppSelection,
 		getSearchBase,

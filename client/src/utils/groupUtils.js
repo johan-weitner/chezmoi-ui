@@ -13,8 +13,6 @@ export const processMetaGroups = (data) => {
     return data;
   }
 
-  // log.debug("Un processed data: ", data);
-
   const groupMap = {};
 
   for (const [group, items] of Object.entries(data)) {
@@ -40,15 +38,6 @@ export const processMetaGroups = (data) => {
       replaceArrayWithGroupReference(value);
     }
   }
-
-  // for (const [key, value] of Object.entries(data)) {
-  //   data[key] = value;
-  //   // data[key].flat().sort();
-  // }
-
-  // log.debug("Processed data: ", data);
-
-  // Filter out the meta groups, those are off edited manually
   return Object.fromEntries(Object.entries(data).filter(([key, value]) => key[0] !== '_'));
 }
 
