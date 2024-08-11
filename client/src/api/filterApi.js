@@ -2,7 +2,7 @@ import { getState } from "store/store";
 import { log } from 'utils/logger';
 import { appHasInstaller } from "api/helpers";
 
-const _isColumnEmpty = (column) => {
+export const isColumnEmpty = (column) => {
 	return column === "" || column === null;
 };
 
@@ -20,21 +20,21 @@ export const filterNoUrlsApps = () => {
 	log.debug("Apps: ", apps);
 	return apps.filter((item) => {
 		return (
-			_isColumnEmpty(item.home) &&
-			_isColumnEmpty(item.docs) &&
-			_isColumnEmpty(item.github)
+			isColumnEmpty(item.home) &&
+			isColumnEmpty(item.docs) &&
+			isColumnEmpty(item.github)
 		);
 	});
 };
 
 export const filterNoDescsApps = () => {
 	const apps = getState().appCollection;
-	return apps.filter((item) => _isColumnEmpty(item.desc));
+	return apps.filter((item) => isColumnEmpty(item.desc));
 };
 
 export const filterNoNamesApps = () => {
 	const apps = getState().appCollection;
-	return apps.filter((item) => _isColumnEmpty(item.name));
+	return apps.filter((item) => isColumnEmpty(item.name));
 };
 
 export const filterModel = {
