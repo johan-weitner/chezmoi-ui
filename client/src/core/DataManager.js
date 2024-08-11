@@ -39,26 +39,25 @@ export const useDataManager = () => {
 
 	const useBootstrap = () => {
 		return useEffect(() => {
-			const appCollection = getState().appCollection;
-			if (
-				appCollection &&
-				appCollection.length > 0
-			) {
-				return;
-			}
-			dispatch(setIsLoading(true));
+			// const appCollection = getState().appCollection;
+			// if (
+			// 	appCollection &&
+			// 	appCollection.length > 0
+			// ) {
+			// 	return;
+			// }
+			toggleLoading(true);
 			seedStore().then((apps) => {
 				setPageContent(getPageContent());
 				toggleLoading(false);
 			});
-			seedGroups();
 		}, []);
 	};
 
 	const usePageSwitch = () => {
 		return useEffect(() => {
 			const appCollection = getState().appCollection;
-			if (!appCollection()) {
+			if (!appCollection) {
 				return;
 			}
 			dispatch(setIsLoading(true));
@@ -66,6 +65,7 @@ export const useDataManager = () => {
 			toggleLoading(false);
 		}, [getState().page]);
 	};
+
 
 	const seedStore = async () => {
 		const apps = await getAllApps()
@@ -237,6 +237,6 @@ export const useDataManager = () => {
 		setIsLoading: toggleLoading,
 		setIsEditMode,
 		flagAppDone,
-		updateAllowedTags
+		updateAllowedTags,
 	};
 };

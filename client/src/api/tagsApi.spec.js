@@ -1,19 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import axios from 'axios';
 import { getState } from 'store/store';
-import { log } from 'utils/logger';
 import { getAllTags, addAppTags, getTagId, updateTagWhiteList } from './tagsApi';
+import { mockState } from 'store/mockStore';
+
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 vi.mock('axios');
 vi.mock('store/store', () => ({
   getState: vi.fn(),
 }));
-vi.mock('utils/logger', () => ({
-  log: {
-    debug: vi.fn(),
-    error: vi.fn(),
-  },
-}));
+
 
 describe('tagsApi', () => {
   beforeEach(() => {
