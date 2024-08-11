@@ -6,7 +6,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { useHotkeys } from "react-hotkeys-hook";
 import List from "./List";
 import commonCss from "./ListView.module.css";
-import { ListViewHeader } from "./ListViewHeader";
+// import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
 import { MAIN_VIEWS } from "store/store";
 import { useDispatch } from "react-redux";
@@ -70,7 +70,7 @@ const ListView = (props) => {
 			fallbackRender={(error) => <FallbackComponent error={error.message} />}
 		>
 			<Card shadow="md" radius="md" className={commonCss.card} padding="xl">
-				{!isGroupView && <ListViewHeader />}
+				{/* {!isGroupView && <ListViewHeader />} */}
 				<div style={{ style }}>
 					<PaginationBar gotoPage={gotoPage} />
 				</div>

@@ -1,14 +1,28 @@
 import { useState } from "react";
-import { Container, SimpleGrid, useMantineTheme } from "@mantine/core";
+import {
+	Container,
+	Group,
+	SimpleGrid,
+	Text,
+	rem,
+	useMantineTheme,
+} from "@mantine/core";
+import { IconDownload } from "@tabler/icons-react";
 import Header from "components/Header.jsx";
 import DetailView from "views/DetailView/DetailView.jsx";
 import ListView from "views/ListView/ListView.jsx";
 import classes from "./MainView.module.css";
-import ApplicationGroupView from "../ApplicationGroupView/ApplicationGroupView";
+import ApplicationGroupView from "views/ApplicationGroupView/ApplicationGroupView";
+import AppViewMenu from "./AppViewMenu";
+import GroupViewMenu from "./GroupViewMenu";
+import { ICON } from "constants/icons";
+import s from "views/ApplicationGroupView/GroupView.module.css";
+import commonCss from "views/ListView/ListView.module.css";
 
 const MainView = (props) => {
 	const [showAppGroupView, setShowAppGroupView] = useState(false);
 	const theme = useMantineTheme();
+	const HeaderIcon = showAppGroupView ? ICON.packages : ICON.box;
 
 	return (
 		<>
@@ -20,6 +34,18 @@ const MainView = (props) => {
 				}}
 			>
 				<Header setShowAppGroupView={setShowAppGroupView} />
+				<Group className={s.groupListHeader}>
+					<HeaderIcon
+						style={{ width: rem(50), height: rem(50) }}
+						stroke={2}
+						color="#238be6"
+						className={commonCss.cardTitleIcon}
+					/>
+					<Text fz="xl" fw={500} className={s.mainTitle} mt="md">
+						{showAppGroupView ? "Groups" : "Applications"}
+					</Text>
+					{showAppGroupView ? <GroupViewMenu /> : <AppViewMenu />}
+				</Group>
 				{showAppGroupView ? (
 					<ApplicationGroupView />
 				) : (
