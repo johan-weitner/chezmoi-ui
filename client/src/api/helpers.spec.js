@@ -1,6 +1,7 @@
 import {
 	appHasInstaller,
-	findIndex,
+	findIndexByKey,
+	findIndexById,
 	isEndOfPage,
 	isNullOrEmpty,
 	isStartOfPage,
@@ -31,7 +32,7 @@ describe("helpers", () => {
 		});
 	});
 
-	describe("findIndex", () => {
+	describe("findIndexByKey", () => {
 		it("should return the index of the item with the specified key", () => {
 			const list = [
 				{ key: "a", value: 1 },
@@ -39,9 +40,9 @@ describe("helpers", () => {
 				{ key: "c", value: 3 },
 			];
 
-			expect(findIndex("a", list)).toBe(0);
-			expect(findIndex("b", list)).toBe(1);
-			expect(findIndex("c", list)).toBe(2);
+			expect(findIndexByKey("a", list)).toBe(0);
+			expect(findIndexByKey("b", list)).toBe(1);
+			expect(findIndexByKey("c", list)).toBe(2);
 		});
 
 		it("should return -1 if the item with the specified key is not found", () => {
@@ -51,8 +52,33 @@ describe("helpers", () => {
 				{ key: "c", value: 3 },
 			];
 
-			expect(findIndex("d", list)).toBe(-1);
-			expect(findIndex("e", list)).toBe(-1);
+			expect(findIndexByKey("d", list)).toBe(-1);
+			expect(findIndexByKey("e", list)).toBe(-1);
+		});
+	});
+
+	describe("findIndexById", () => {
+		it("should return the index of the item with the specified id", () => {
+			const list = [
+				{ id: 1, value: 1 },
+				{ id: 2, value: 2 },
+				{ id: 3, value: 3 },
+			];
+
+			expect(findIndexById(1, list)).toBe(0);
+			expect(findIndexById(2, list)).toBe(1);
+			expect(findIndexById(3, list)).toBe(2);
+		});
+
+		it("should return -1 if the item with the specified id is not found", () => {
+			const list = [
+				{ id: 1, value: 1 },
+				{ id: 2, value: 2 },
+				{ id: 3, value: 3 },
+			];
+
+			expect(findIndexByKey(4, list)).toBe(-1);
+			expect(findIndexByKey(5, list)).toBe(-1);
 		});
 	});
 
@@ -99,10 +125,18 @@ describe("helpers", () => {
 			const appEntity = {
 				name: "App Name",
 				invalidKey: "Invalid Key Value",
+				id: 1,
+				desc: "",
+				done: false,
+				edited: true
 			};
 
 			const expectedEntity = {
 				name: "App Name",
+				id: 1,
+				desc: "",
+				done: false,
+				edited: true
 			};
 
 			expect(mapEntityToDb(appEntity)).toEqual(expectedEntity);

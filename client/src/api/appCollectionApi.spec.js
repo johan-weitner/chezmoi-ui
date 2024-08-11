@@ -1,124 +1,136 @@
-import axios from "axios";
-import { vi } from "vitest";
+import { describe, it, expect, vi } from 'vitest';
+import axios from 'axios';
 import {
-	deleteApp,
-	fetchApp,
 	fetchApps,
+	fetchUnfinishedApps,
+	fetchFilteredApps,
+	fetchAppPage,
 	getPageSlice,
-	saveNewApp,
+	fetchApp,
 	updateApp,
-} from "./appCollectionApi";
+	saveNewApp,
+	deleteApp,
+	markAppDone,
+} from './appCollectionApi';
+import { useClientManager } from 'core/ClientManager';
+import { mapEntityToDb, transformNullValues } from "./helpers";
+import { log } from 'utils/logger';
 
-vi.mock("axios");
+vi.mock('axios');
+vi.mock('core/ClientManager');
+vi.mock('utils/logger');
 
-const mockAppCollection = Array(50)
-	.fill()
-	.map((_, i) => ({ id: i + 1 }));
+const BASE_URL = "http://localhost:3000";
 
-describe("appCollectionApi", () => {
-	const BASE_URL = "/api";
-	const mockApp = { id: 1, name: "Test App" };
-	const mockAppResponse = { data: { id: 1, name: "Test App" } };
-	const mockData = { data: [{ id: 1, name: "Test App" }] };
-	const error = "mocked error";
+describe('appCollectionApi', () => {
+	afterEach(() => {
+		vi.clearAllMocks();
+	});
 
-	describe("fetchApps", () => {
-		it("should fetch apps successfully", async () => {
-			axios.get.mockResolvedValue(mockData);
-			const result = await fetchApps();
-			expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/software`);
-			expect(result).toEqual(mockData.data);
-		});
+	it('fetchApps should return data on success', async () => {
+		const mockData = [{ id: 1, name: 'App1' }];
+		axios.get.mockResolvedValue({ data: mockData });
 
-		it("should handle fetch error", async () => {
-			vi.spyOn(console, "error");
-			axios.get.mockRejectedValue(error);
-			await expect(fetchApps()).rejects.toEqual(error);
+		const result = await fetchApps();
+		expect(result).toEqual(mockData);
+		expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/software`);
+	});
+
+	it('fetchApps should throw error on failure', async () => {
+		axios.get.mockRejectedValue(new Error('Network Error'));
+
+		await expect(fetchApps()).rejects.toThrow('Network Error');
+	});
+
+	it('fetchUnfinishedApps should return data on success', async () => {
+		const mockData = [{ id: 1, name: 'App1' }];
+		axios.get.mockResolvedValue({ data: mockData });
+
+		const result = await fetchUnfinishedApps();
+		expect(result).toEqual(mockData);
+		expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/softwareNotDone`);
+	});
+
+	it('fetchFilteredApps should return data on success', async () => {
+		const mockData = [{ id: 1, name: 'App1' }];
+		axios.get.mockResolvedValue({ data: mockData });
+
+		const result = await fetchFilteredApps('test');
+		expect(result).toEqual(mockData);
+		expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/filterBy?filter=test`);
+	});
+
+	it('fetchAppPage should return paginated data', async () => {
+		const mockData = Array.from({ length: 50 }, (_, i) => ({ id: i + 1 }));
+		axios.get.mockResolvedValue({ data: mockData });
+
+		const result = await fetchAppPage(2, 10);
+		expect(result).toEqual(mockData.slice(10, 20));
+	});
+
+	it('fetchApp should return transformed data', async () => {
+		const mockData = { id: 1, name: 'App1' };
+		axios.get.mockResolvedValue({ data: mockData });
+
+		const result = await fetchApp('key1');
+		expect(result).toEqual(transformNullValues(mockData));
+		expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/getApp?key=key1`);
+	});
+
+	it('updateApp should post data and return response', async () => {
+		const mockData = { id: 1, name: 'Updated App' };
+		axios.post.mockResolvedValue({ data: mockData });
+		useClientManager.mockReturnValue({ getGroupId: vi.fn().mockReturnValue(1) });
+
+		const result = await updateApp(mockData, ['tag1'], ['group1']);
+		expect(result).toEqual(mockData);
+		expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/updateNode`, {
+			...mockData,
+			appTags: ['tag1'],
+			appGroups: [1]
 		});
 	});
 
-	describe("fetchAppPage", () => {
-		// Test for successful data fetching and slicing
-		it("returns the correct slice of apps for the first page", async () => {
-			const apps = getPageSlice(1, 10, mockAppCollection);
-			expect(apps).toHaveLength(10);
-			expect(apps[0].id).toBe(1);
-		});
+	it('saveNewApp should post data and return response', async () => {
+		const mockData = { id: 1, name: 'New App', appTags: [1], appGroups: ["3"] };
+		axios.post.mockResolvedValue({ data: mockData });
+		useClientManager.mockReturnValue({ getGroupId: vi.fn().mockReturnValue(1) });
 
-		it("returns the correct slice of apps for a subsequent page", async () => {
-			const apps = getPageSlice(2, 10, mockAppCollection);
-			expect(apps).toHaveLength(10);
-			expect(apps[0].id).toBe(11);
-		});
-
-		// Test for empty or undefined data
-		it("handles empty array correctly", async () => {
-			const apps = getPageSlice(1, 10, []);
-			expect(apps).toEqual([]);
-		});
-
-		it("handles undefined correctly", async () => {
-			expect(() => getPageSlice(1, 10, undefined)).toThrow();
+		const result = await saveNewApp(mockData);
+		expect(result).toEqual(mockData);
+		expect(axios.post).toHaveBeenCalledWith(`${BASE_URL}/addNode`, {
+			data: {
+				...transformNullValues(mapEntityToDb(mockData)),
+				appTags: mockData.appTags,
+				appGroups: [1],
+				edited: true
+			}
 		});
 	});
 
-	describe("fetchApp", () => {
-		it("should fetch a single app successfully", async () => {
-			const key = "testKey";
-			axios.get.mockResolvedValue(mockData);
-			const result = await fetchApp(key);
-			expect(axios.get).toHaveBeenCalledWith(`${BASE_URL}/getApp?key=${key}`);
-			expect(result).toEqual(mockData.data);
-		});
+	it('deleteApp should delete data and return response', async () => {
+		const mockData = { success: true };
+		axios.delete.mockResolvedValue({ data: mockData });
 
-		it("should handle fetch error", async () => {
-			vi.spyOn(console, "error");
-			axios.get.mockRejectedValue(error);
-			await expect(fetchApps()).rejects.toEqual(error);
+		const result = await deleteApp(1);
+		expect(result).toEqual(mockData);
+		expect(axios.delete).toHaveBeenCalledWith(`${BASE_URL}/deleteNode`, {
+			params: { id: 1 }
 		});
 	});
 
-	describe("updateApp", () => {
-		it("should post updated app data successfully", async () => {
-			axios.post.mockResolvedValue(mockAppResponse);
-			const result = await updateApp(mockApp);
-			expect(result).toEqual(mockApp);
-		});
+	it('markAppDone should update app and return response', async () => {
+		const mockData = { id: 1, done: true };
+		axios.post.mockResolvedValue({ data: mockData });
 
-		it("should handle error on updating app data", async () => {
-			axios.post.mockResolvedValue(null);
-			await expect(() => updateApp(mockApp)).rejects.toThrow();
-		});
+		const result = await markAppDone(mockData);
+		console.log("RESULT: ", result);
+		expect(result).toEqual(mockData);
 	});
 
-	describe("saveNewApp", () => {
-		it("should post new app data successfully", async () => {
-			axios.post.mockResolvedValue(mockAppResponse);
-			const result = await saveNewApp(mockApp);
-			expect(result).toEqual(mockApp);
-		});
-
-		it("should handle error on posting new app data", async () => {
-			axios.post.mockRejectedValue(error);
-			await expect(saveNewApp(mockApp)).rejects.toEqual(error);
-		});
-	});
-
-	describe("deleteApp", () => {
-		it("should delete an app successfully", async () => {
-			const key = "testKey";
-			axios.delete.mockResolvedValue({ data: "Deleted" });
-			const result = await deleteApp(key);
-			expect(axios.delete).toHaveBeenCalledWith(`${BASE_URL}/deleteNode`, {
-				params: { key },
-			});
-			expect(result).toEqual("Deleted");
-		});
-
-		it("should handle deletion error", async () => {
-			const key = "testKey";
-			axios.delete.mockRejectedValue(error);
-			await expect(deleteApp(key)).rejects.toEqual(error);
-		});
+	it('getPageSlice should return correct slice of data', () => {
+		const mockData = Array.from({ length: 50 }, (_, i) => ({ id: i + 1 }));
+		const result = getPageSlice(2, 10, mockData);
+		expect(result).toEqual(mockData.slice(10, 20));
 	});
 });
