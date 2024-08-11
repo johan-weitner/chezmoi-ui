@@ -11,7 +11,7 @@ import {
 import { IconX } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
 import { useState } from "react";
-import commonCss from "./ListView.module.css";
+import commonCss from "views/ListView/ListView.module.css";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
 import { useEffect } from "react";

@@ -30,7 +30,8 @@ import {
 	IconFolders,
 	IconArrowRight,
 	IconArrowLeft,
-	IconEye
+	IconEye,
+	IconBox
 } from "@tabler/icons-react";
 
 export const ICON = {
@@ -68,7 +69,8 @@ export const ICON = {
 	packages: IconPackages,
 	arrowRight: IconArrowRight,
 	arrowLeft: IconArrowLeft,
-	hide: IconEye
+	hide: IconEye,
+	box: IconBox
 };
 
 export const INDICATOR = {

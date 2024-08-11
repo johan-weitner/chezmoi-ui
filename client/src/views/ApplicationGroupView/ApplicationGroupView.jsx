@@ -16,37 +16,18 @@ const ApplicationGroupView = (props) => {
 	const selectedGroupId = useSelector((state) => state.root.selectedGroupId);
 
 	return (
-		<>
-			<Group className={s.groupListHeader}>
-				<ICON.packages
-					style={{ width: rem(50), height: rem(50) }}
-					stroke={2}
-					color="#238be6"
-					className={commonCss.cardTitleIcon}
-				/>
-				<Text fz="xl" fw={500} className={s.mainTitle} mt="md">
-					Groups
-				</Text>
-				<Toolbar />
-			</Group>
-
-			<SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" py={12}>
-				<ErrorBoundary
-					fallbackRender={(error) => (
-						<FallbackComponent error={error.message} />
-					)}
-				>
-					{selectedGroupId ? <ListView isGroupView={true} /> : <GroupList />}
-				</ErrorBoundary>
-				<ErrorBoundary
-					fallbackRender={(error) => (
-						<FallbackComponent error={error.message} />
-					)}
-				>
-					{(selectedGroupId && <GroupDetailView />) || <Legend />}
-				</ErrorBoundary>
-			</SimpleGrid>
-		</>
+		<SimpleGrid cols={{ base: 1, md: 2 }} spacing="sm" py={12}>
+			<ErrorBoundary
+				fallbackRender={(error) => <FallbackComponent error={error.message} />}
+			>
+				{selectedGroupId ? <ListView isGroupView={true} /> : <GroupList />}
+			</ErrorBoundary>
+			<ErrorBoundary
+				fallbackRender={(error) => <FallbackComponent error={error.message} />}
+			>
+				{(selectedGroupId && <GroupDetailView />) || <Legend />}
+			</ErrorBoundary>
+		</SimpleGrid>
 	);
 };
 
