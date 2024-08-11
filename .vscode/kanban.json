@@ -5,8 +5,8 @@
             "title": "Bugs",
             "tasks": [
                 {
-                    "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
-                    "id": "n5a5xe8el34kw9qgsziu3hnr"
+                    "text": "Create new app: Group relations are not saved",
+                    "id": "udc0588m9erqtk3v18gketj5"
                 },
                 {
                     "text": "SERVER: Broken tests:\n- boot.spec.js\n- prisma.spec.js",
@@ -28,10 +28,6 @@
                     "id": "ybb3biegh54mooyoomikzyja"
                 },
                 {
-                    "text": "Consolidate look'n'feel in app and group views",
-                    "id": "e9wmxsahf33esakrkqa4k20a"
-                },
-                {
                     "text": "VERSION_2: Consider Undo Manager: https://www.npmjs.com/package/undo-manager",
                     "id": "sk38oxq3x0o9nolxc95ikpv8"
                 }
@@ -41,13 +37,22 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Consolidate look'n'feel in app and group views",
+                    "id": "e9wmxsahf33esakrkqa4k20a"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "CLIENT: Broken tests:\n- selectors.spec.js\n- DataManager.spec.js\n- PageManager.spec.js\n- SelectionManager.spec.js",
+                    "id": "n5a5xe8el34kw9qgsziu3hnr"
+                },
                 {
                     "text": "App list in group view doesn't update reliably after marking app done",
                     "id": "muil1ae2oim5exu1aq3lyoof"
@@ -363,5 +368,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1723115683947
+    "timestamp": 1723395389889
 }

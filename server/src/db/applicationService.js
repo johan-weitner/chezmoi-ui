@@ -99,7 +99,7 @@ const addApp = async (data) => {
   log.debug("Adding app: ", data);
   const { appGroups, appTags, id, done, ...appData } = data;
   const payload = {
-    appGroups: appGroups?.map(g => Number.parseInt(g, 10)),
+    appGroups: appGroups, // ?.map(g => Number.parseInt(g, 10)),
     appTags: appTags,
     appData: appData
   };
@@ -125,10 +125,10 @@ const createApplicationWithGroupsAndTags = async (payload) => {
     data: {
       ...rest,
       appGroups: {
-        connect: appGroups.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
+        connect: appGroups?.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
       },
       appTags: {
-        connect: appTags.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
+        connect: appTags?.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
       }
     },
     select: {
@@ -153,10 +153,10 @@ const updateApp = async (data) => {
       data: {
         ...rest,
         appGroups: {
-          set: appGroups.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
+          set: appGroups?.map(groupId => { return { id: Number.parseInt(groupId, 10) } })
         },
         appTags: {
-          set: appTags.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
+          set: appTags?.map(tagId => { return { id: Number.parseInt(tagId, 10) } })
         }
       },
       include: {
