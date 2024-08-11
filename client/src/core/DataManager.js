@@ -92,7 +92,7 @@ export const useDataManager = () => {
 	const openFirstPage = () => {
 		const apps = selectPageContent(getState());
 		gotoPage(1);
-		dispatch(setSelectedAppKey(apps[0]?.key));
+		// dispatch(setSelectedAppKey(apps[0]?.key));
 		dispatch(setPageContent(apps));
 		return apps;
 	};
