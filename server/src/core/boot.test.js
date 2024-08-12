@@ -32,8 +32,6 @@ vi.mock('./config.js', () => ({
 	softwareGroupYamlPath: `.${import.meta.env.SOURCE_GRP_FILE}`
 }));
 
-console.log("softwareYamlPath: ", softwareYamlPath);
-
 describe('boot.js', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();

@@ -125,8 +125,6 @@ export const _seedDbIfEmpty = async (forceSeed) => {
 };
 
 export const mapDataSeed = (keys, software) => {
-	console.log("Keys: ", keys);
-	console.log("Software: ", software);
 	const data = [];
 	for (const key of keys) {
 		if (!software[key]) continue;
