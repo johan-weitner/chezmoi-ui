@@ -74,7 +74,7 @@ const DetailsBox = (props) => {
 					{selectedApp.github ? <MarkPopulated /> : <MarkUnPopulated />} Github
 				</Text>
 				{!appHasInstaller(selectedApp) && (
-					<Text size="sm" style={{ marginTop: "6px" }}>
+					<Text size="sm" style={{ marginTop: "6px" }} fw={700}>
 						<WarningSign />
 					</Text>
 				)}

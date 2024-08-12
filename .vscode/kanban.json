@@ -16,10 +16,6 @@
             "title": "To-Do",
             "tasks": [
                 {
-                    "text": "Fix free search widget appearance",
-                    "id": "jvbt3mk48i6pfmjxns4825ni"
-                },
-                {
                     "text": "Finalize README",
                     "id": "ycjyht1ry3zlaxdxtxdvbrc3"
                 },
@@ -37,7 +33,12 @@
         },
         {
             "title": "Doing",
-            "tasks": [],
+            "tasks": [
+                {
+                    "text": "Fix free search widget appearance",
+                    "id": "jvbt3mk48i6pfmjxns4825ni"
+                }
+            ],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
@@ -371,5 +372,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1723461585637
+    "timestamp": 1723467457006
 }
