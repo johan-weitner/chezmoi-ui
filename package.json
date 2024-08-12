@@ -35,6 +35,11 @@
     "@changesets/cli": "^2.27.7",
     "turbo": "^2.0.12"
   },
+  "workspaces": [
+    ".",
+    "client",
+    "server"
+  ],
   "type": "module",
   "packageManager": "pnpm@9.4.0"
 }
