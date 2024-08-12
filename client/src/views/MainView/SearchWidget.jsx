@@ -1,6 +1,6 @@
-import { ActionIcon, Text, Tooltip } from "@mantine/core";
+import { ActionIcon, Text, Title, Tooltip, Modal } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useClickOutside } from "@mantine/hooks";
 import { useClientManager } from "core/ClientManager";
@@ -15,10 +15,11 @@ import "./SearchWidget.css";
 const SearchWidget = (props) => {
 	const { groupView } = props;
 	const [isOpen, setIsOpen] = useState(groupView);
-	const ref = useClickOutside(() => setIsOpen(false));
 	const { setSelectedAppKey } = useClientManager();
 	const appCollection = useSelector((state) => state.root.appCollection);
 	useHotkeys("alt + f", () => setIsOpen(true));
+
+	const btnRef = useRef();
 
 	const openApp = (key) => {
 		log.debug("Open app", key);
@@ -32,11 +33,11 @@ const SearchWidget = (props) => {
 
 	const styling = {
 		height: "50px",
-		border: "1px solid #111",
+		border: "1px solid #666",
 		borderRadius: "24px",
-		backgroundColor: "#222",
+		backgroundColor: "#333",
 		boxShadow: "rgba(32, 33, 36, 0.28) 0px 1px 6px 0px",
-		hoverBackgroundColor: "#333",
+		hoverBackgroundColor: "#222",
 		color: "#FFF",
 		fontSize: "16px",
 		fontFamily: "Arial",
@@ -72,7 +73,32 @@ const SearchWidget = (props) => {
 					</ActionIcon>
 				</Tooltip>
 			)}
-			{isOpen && (
+			<Modal
+				opened={isOpen}
+				overlayProps={{
+					backgroundOpacity: 0.55,
+					blur: 7,
+				}}
+				keepMounted={false}
+				onClose={() => setIsOpen(false)}
+				radius="10"
+				size="auto"
+				shadow="xl"
+				transitionProps={{ transition: "pop", duration: 300 }}
+			>
+				<Title mt={20} mb={10} size={30} fw={500}>
+					Search applications
+				</Title>
+				<ReactSearchAutocomplete
+					items={appCollection?.length && appCollection}
+					styling={styling}
+					resultStringKeyName="name"
+					onSelect={handleOnSelect}
+					autoFocus
+					formatResult={formatResult}
+				/>
+			</Modal>
+			{/* {isOpen && (
 				<div
 					className="searchWidget"
 					style={{
@@ -99,7 +125,7 @@ const SearchWidget = (props) => {
 						</header>
 					</ErrorBoundary>
 				</div>
-			)}
+			)} */}
 		</ActionIcon.Group>
 	);
 };
