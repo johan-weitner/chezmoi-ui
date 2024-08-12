@@ -27,8 +27,8 @@ export const useSelectionManager = () => {
 
 	const selectAppKey = (key) => {
 		dispatch(setSelectedAppKey(key));
-		toggleLoading(true);
 		if (key === null) return;
+		toggleLoading(true);
 		const app = fetchApp(key)
 			.then((app) => {
 				toggleLoading(false);
