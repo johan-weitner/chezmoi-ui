@@ -3,22 +3,13 @@
     "cols": [
         {
             "title": "Bugs",
-            "tasks": [
-                {
-                    "text": "Create new app: Group relations are not saved",
-                    "id": "udc0588m9erqtk3v18gketj5"
-                }
-            ],
+            "tasks": [],
             "id": "hzj1iq8kv16tn6wgte41bfwn",
             "color": "#eb144c"
         },
         {
             "title": "To-Do",
             "tasks": [
-                {
-                    "text": "Finalize README",
-                    "id": "ycjyht1ry3zlaxdxtxdvbrc3"
-                },
                 {
                     "text": "Clean up patterns",
                     "id": "ybb3biegh54mooyoomikzyja"
@@ -33,18 +24,29 @@
         },
         {
             "title": "Doing",
-            "tasks": [
-                {
-                    "text": "Fix free search widget appearance",
-                    "id": "jvbt3mk48i6pfmjxns4825ni"
-                }
-            ],
+            "tasks": [],
             "id": "a4rk3cab77bidnwm67489nqu",
             "color": "#0693e3"
         },
         {
             "title": "Done",
             "tasks": [
+                {
+                    "text": "Finalize README",
+                    "id": "ycjyht1ry3zlaxdxtxdvbrc3"
+                },
+                {
+                    "text": "Remove debug logging in server",
+                    "id": "ov4ocewq31gzdqclyc6rfwx6"
+                },
+                {
+                    "text": "Create new app: Group relations are not saved",
+                    "id": "udc0588m9erqtk3v18gketj5"
+                },
+                {
+                    "text": "Fix free search widget appearance",
+                    "id": "jvbt3mk48i6pfmjxns4825ni"
+                },
                 {
                     "text": "Consolidate look'n'feel in app and group views",
                     "id": "e9wmxsahf33esakrkqa4k20a"
@@ -372,5 +374,5 @@
     ],
     "autosave": true,
     "saveToFile": true,
-    "timestamp": 1723467457006
+    "timestamp": 1723502127964
 }
