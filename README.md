@@ -92,28 +92,44 @@ It's up to you how you value the metadata though: Functionally there is no need 
 
 ## The UI
 
-After first starting Chezmoi UI, the backend takes a moment to seed the database, but it should be done by the time you've opened a browser. Opening `http://localhost:8000` you should see the below. Note the keyboard shortcuts listed in the right hand column - it's a good idea to learn them. A check mark in the list view means the item has been edited, giving a hint of the work left to do
+After first starting Chezmoi UI, the backend takes a moment to seed the database, but it should be done by the time you've opened a browser. Opening `http://localhost:8000` you should see the view below. Note the keyboard shortcuts listed in the right hand column - it's a good idea to learn them. A check mark in the list view means the item has been edited, giving a hint of the work left to do.
 
 ![](./assets/start.png)
 
-Selecting an app in the list, you should see the detail view. It shows the name, the short description and the longer description of the app. Iconography indicates if any of the homepage, Github and documentation URLs are missing, as well as the tags associated with the app.  Hitting the Edit button opens the edit view.
+
+Selecting an app in the list, you should see the detail view. It shows the name, the short description and the longer description of the app. Click the app title to open its homepage/Github page in a new window. Iconography indicates if any of the homepage, Github and documentation URLs are missing, as well as the tags associated with the app.  Hitting the Edit button opens the edit view.
 
 ![](./assets/app-selection.png)
 
-Edit view: Only name, key (must be unique) and homepage are mandatory - (specified as `NOT_NULL` on database table level). The rest is opt-in and depends largely on your needs and preferences. But this is what makes the data model compatible with Install.Doctor - it tracks their model, since they provide the source document that started this whole thing. I haven't tested it, but in theory the output from Chezmoi UI should plug right into Install.Doctor. The tags are my addition, and they add another dimension of filtering that might be useful depending on your range of environments.
 
-![](./assets/edit-view.png)
+Edit view: Only name, key (must be unique) and homepage are mandatory - (`NOT_NULL` on database table level). The rest is opt-in and depends largely on your needs and preferences. But this is what makes the data model compatible with Install.Doctor - it tracks their model, since they provide the source document that started this whole thing. I haven't tested it, but in theory the output from Chezmoi UI should plug right into Install.Doctor. The tags are my addition, and they add another dimension of filtering that might be useful depending on your range of environments.
 
-### Menu menu
+![](./assets/app-edit.png)
+
+
+
+### Main menu
 
 1. Add a new application to the list
-   ![](./assets/menu-add-new-app.png)
+   ![](./assets/menu-1.png)
 2. Open the filter menu
-   ![](./assets/menu-open-filter-menu.png)
+   ![](./assets/menu-2.png)
 3. Search for an app
-   ![](./assets/menu-free-text.png)
+   ![](./assets/menu-3.png)
 4. Export YAML file
-   ![](./assets/menu-yaml-export.png)
+   ![](./assets/menu-4.png)
+
+
+
+### Groups
+
+This is only relevant If you're an Install.Doctor user, then you might want to edit the way the applications are grouped by type. The Group view enables this, but you can also assign an application to a group in the Application edit view.
+![](./assets/start - groups.png)
+
+Selecting a group opens the edit view, where yu can move apps in and out of the group.
+![](./assets/group-edit.png)
+
+
 
 
 
