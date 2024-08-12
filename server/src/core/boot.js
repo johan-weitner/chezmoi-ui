@@ -37,7 +37,7 @@ export const initialize = () => {
 	_seedDbIfEmpty();
 };
 
-const _checkEnvVars = () => {
+export const _checkEnvVars = () => {
 	if (!softwareYamlPath || !softwareGroupYamlPath) {
 		log.error(error("Missing environment variable"));
 		log.error(
@@ -50,7 +50,7 @@ const _checkEnvVars = () => {
 	}
 };
 
-const _checkFileExistence = () => {
+export const _checkFileExistence = () => {
 	const sourceExists =
 		fs.existsSync(softwareYamlPath) && fs.existsSync(softwareGroupYamlPath);
 
@@ -68,7 +68,7 @@ const _checkFileExistence = () => {
 	return { sourceExists };
 };
 
-const _setupFileData = () => {
+export const _setupFileData = () => {
 	let software = [];
 	const softwareArray = [];
 	let keys = [];
@@ -102,54 +102,19 @@ export const setupGroupData = () => {
 	return { groups, groupKeys };
 };
 
-const stripTrailingWhitespace = (str) => {
+export const stripTrailingWhitespace = (str) => {
 	if (!str || typeof str !== "string") return "";
 	return str.replace(/\s+$/, "");
 };
 
-const _seedDbIfEmpty = async (forceSeed) => {
+export const _seedDbIfEmpty = async (forceSeed) => {
 	log.info("Set up db connection...");
 	const emptyDb = forceSeed || await isEmptyDb();
 
 	if (emptyDb) {
 		log.info("Empty db - seeding tables...");
 		const { software, keys } = _setupFileData();
-		const data = [];
-		keys.forEach((key, index) => {
-			data.push({
-				key: stripTrailingWhitespace(software[key].key),
-				name: stripTrailingWhitespace(software[key]._name),
-				edited: false,
-				done: false,
-				desc: stripTrailingWhitespace(software[key]._desc),
-				bin: stripTrailingWhitespace(software[key]._bin),
-				short: stripTrailingWhitespace(software[key]._short),
-				home: stripTrailingWhitespace(software[key]._home),
-				docs: stripTrailingWhitespace(software[key]._docs),
-				github: stripTrailingWhitespace(software[key]._github),
-				whalebrew: stripTrailingWhitespace(software[key].whalebrew),
-				apt: stripTrailingWhitespace(software[key].apt),
-				brew: stripTrailingWhitespace(software[key].brew),
-				cask: stripTrailingWhitespace(software[key].cask),
-				cargo: stripTrailingWhitespace(software[key].cargo),
-				npm: stripTrailingWhitespace(software[key].npm),
-				pip: stripTrailingWhitespace(software[key].pip),
-				pipx: stripTrailingWhitespace(software[key].pipx),
-				gem: stripTrailingWhitespace(software[key].gem),
-				script: stripTrailingWhitespace(software[key].script),
-				choco: stripTrailingWhitespace(software[key].choco),
-				scoop: stripTrailingWhitespace(software[key].scoop),
-				winget: stripTrailingWhitespace(software[key].winget),
-				pkgdarwin: stripTrailingWhitespace(software[key].pkgdarwin),
-				ansible: stripTrailingWhitespace(software[key].ansible),
-				binary: stripTrailingWhitespace(software[key].binary),
-				yay: stripTrailingWhitespace(software[key].yay),
-				appstore: stripTrailingWhitespace(software[key].appstore),
-				pacman: stripTrailingWhitespace(software[key].pacman),
-				port: stripTrailingWhitespace(software[key].port),
-			});
-		});
-		log.info(Object.keys(data[0]));
+		const data = mapDataSeed(keys, software);
 		await seedDb(data);
 		getCount().then((count) => {
 			log.info(`Done seeding Application table with ${count} apps`);
@@ -159,10 +124,55 @@ const _seedDbIfEmpty = async (forceSeed) => {
 	}
 };
 
+export const mapDataSeed = (keys, software) => {
+	console.log("Keys: ", keys);
+	console.log("Software: ", software);
+	const data = [];
+	for (const key of keys) {
+		if (!software[key]) continue;
+		data.push({
+			key: stripTrailingWhitespace(software[key].key),
+			name: stripTrailingWhitespace(software[key]._name),
+			edited: false,
+			done: false,
+			desc: stripTrailingWhitespace(software[key]._desc),
+			bin: stripTrailingWhitespace(software[key]._bin),
+			short: stripTrailingWhitespace(software[key]._short),
+			home: stripTrailingWhitespace(software[key]._home),
+			docs: stripTrailingWhitespace(software[key]._docs),
+			github: stripTrailingWhitespace(software[key]._github),
+			whalebrew: stripTrailingWhitespace(software[key].whalebrew),
+			apt: stripTrailingWhitespace(software[key].apt),
+			brew: stripTrailingWhitespace(software[key].brew),
+			cask: stripTrailingWhitespace(software[key].cask),
+			cargo: stripTrailingWhitespace(software[key].cargo),
+			npm: stripTrailingWhitespace(software[key].npm),
+			pip: stripTrailingWhitespace(software[key].pip),
+			pipx: stripTrailingWhitespace(software[key].pipx),
+			gem: stripTrailingWhitespace(software[key].gem),
+			script: stripTrailingWhitespace(software[key].script),
+			choco: stripTrailingWhitespace(software[key].choco),
+			scoop: stripTrailingWhitespace(software[key].scoop),
+			winget: stripTrailingWhitespace(software[key].winget),
+			pkgdarwin: stripTrailingWhitespace(software[key].pkgdarwin),
+			ansible: stripTrailingWhitespace(software[key].ansible),
+			binary: stripTrailingWhitespace(software[key].binary),
+			yay: stripTrailingWhitespace(software[key].yay),
+			appstore: stripTrailingWhitespace(software[key].appstore),
+			pacman: stripTrailingWhitespace(software[key].pacman),
+			port: stripTrailingWhitespace(software[key].port),
+		});
+	}
+	return data;
+};
+
 const doSeedGroups = async () => {
 	const { groups } = _setupFileData();
+	if (!groups) {
+		return;
+	}
 	const groupData = Object.keys(groups).map((key) => {
-		if (key.indexOf("_" !== 0)) {
+		if (key.indexOf("_") !== 0) {
 			return {
 				name: key
 			};
