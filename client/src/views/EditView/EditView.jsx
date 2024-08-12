@@ -35,7 +35,6 @@ const EditView = forwardRef(function EditView(props, ref) {
 			radius="10"
 			size="auto"
 			shadow="xl"
-			fullScreen
 			transitionProps={{ transition: "pop", duration: 200 }}
 		>
 			<Card style={{ backgroundColor: "#222" }}>
