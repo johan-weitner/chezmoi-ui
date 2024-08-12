@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { log } from "../util/logger.js";
 
-const prisma = new PrismaClient(); // { errorFormat: "pretty" }
+const prisma = new PrismaClient();
 const APPLICATION = "application";
 
 const getAllApps = async () => {
@@ -99,14 +99,14 @@ const addApp = async (data) => {
   log.debug("Adding app: ", data);
   const { appGroups, appTags, id, done, ...appData } = data;
   const payload = {
-    appGroups: appGroups, // ?.map(g => Number.parseInt(g, 10)),
+    appGroups: appGroups,
     appTags: appTags,
     appData: appData
   };
-  log.debug("<<< Payload: ", payload);
+  log.debug("Payload: ", payload);
   try {
     const app = await createApplicationWithGroupsAndTags(payload);
-    log.info("Created app: ", app);
+    log.debug("Created app: ", app);
     return app;
   } catch (e) {
     log.error(e.message);
@@ -143,7 +143,7 @@ const createApplicationWithGroupsAndTags = async (payload) => {
 }
 
 const updateApp = async (data) => {
-  log.info("Updating app: ", data);
+  log.debug("Updating app: ", data);
   const { id, appGroups, appTags, ...rest } = data;
   const applicationId = Number.parseInt(id, 10);
 
@@ -164,7 +164,7 @@ const updateApp = async (data) => {
         appGroups: true
       }
     }).then((app) => {
-      log.info("Updated app: ", app);
+      log.debug("Updated app: ", app);
       return app;
     });
     return updatedApp;
@@ -175,7 +175,7 @@ const updateApp = async (data) => {
 }
 
 const updateAppField = async (data) => {
-  log.info("Updating app: ", data);
+  log.debug("Updating app: ", data);
   const { id, ...rest } = data;
   const applicationId = Number.parseInt(id, 10);
 
@@ -190,7 +190,7 @@ const updateAppField = async (data) => {
         appGroups: true
       }
     }).then((app) => {
-      log.info("Updated app: ", app);
+      log.debug("Updated app: ", app);
       return app;
     });
     return updatedApp;

@@ -175,7 +175,7 @@ export const useDataManager = () => {
 		saveNewApp({
 			...app,
 			appTags: tagIds || [],
-			ApplicationGroup: groups || [],
+			appGroups: groups || [],
 			edited: true,
 		})
 			.then((newApp) => {

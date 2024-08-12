@@ -2,7 +2,6 @@ import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } 
 import { log } from "./logger.js";
 
 export const getYamlExport = async () => {
-	// const apps = await getAllApps();
 	const apps = await getAllAppsWithTags();
 	log.debug(apps);
 	const output = formatYaml(apps);
@@ -18,7 +17,7 @@ export const getFilteredYamlExport = async (tags) => {
 
 export const getInstallDoctorExport = async () => {
 	const groups = await getGroupedApplications();
-	log.info("Groups: ", groups.length);
+	log.debug("Groups: ", groups.length);
 	return formatInstallDoctorYaml(groups);
 };
 
@@ -99,7 +98,7 @@ const formatYaml = (apps) => {
 
 const formatInstallDoctorYaml = (groups) => {
 	const softwareGroups = [];
-	log.info("Groups: ", groups.length);
+	log.debug("Groups: ", groups.length);
 
 	for (const group of groups) {
 		const {
@@ -114,6 +113,6 @@ const formatInstallDoctorYaml = (groups) => {
 			[name]: apps,
 		});
 	}
-	log.info("Software groups: ", softwareGroups);
+	log.debug("Software groups: ", softwareGroups);
 	return { softwareGroups: softwareGroups };
 };
