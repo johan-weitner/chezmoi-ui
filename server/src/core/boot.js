@@ -5,12 +5,10 @@ import {
 	getCount,
 	getTagCount,
 	isEmptyDb,
-	isEmptyTagsTable,
 	seedDb,
 	seedTags,
 	seedGroups,
-	getGroupCount,
-	getAllGroups
+	getGroupCount
 } from "../db/dbService.js";
 import { styles } from "../util/styles.js";
 import { softwareYamlPath, softwareGroupYamlPath } from "./config.js";
@@ -95,7 +93,6 @@ export const setupGroupData = () => {
 	let groupKeys = [];
 	const softwareGroupYaml = fs.readFileSync(softwareGroupYamlPath, "utf8");
 	groups = YAML.parse(softwareGroupYaml)?.softwareGroups;
-	log.info("Groups: ", groups);
 	groupKeys = groups && Object.keys(groups);
 	log.info(italic(`Group list size: ${groupKeys?.length}`));
 

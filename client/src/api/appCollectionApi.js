@@ -106,7 +106,6 @@ export const saveNewApp = async (data) => {
 	const groups = appGroups?.map((group) => {
 		return getGroupId(group);
 	});
-
 	return axios
 		.post(`${BASE_URL}/addNode`, {
 			data: {

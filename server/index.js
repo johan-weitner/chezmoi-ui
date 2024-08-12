@@ -238,7 +238,6 @@ app.get(ROUTES.filteredDownload, (req, res) => {
 
 		const filename = `software-custom-(${tagsArray.join("-")})-${new Date().getTime()}.yaml`;
 		log.debug(`Filename: - ${filename}`);
-		// const filename = `software-custom-${new Date().getTime()}.yaml`;
 		const mimetype = "text/x-yaml";
 
 		res.setHeader('Content-disposition', `attachment; filename=${filename}`);
