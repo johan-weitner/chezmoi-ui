@@ -128,7 +128,7 @@ Edit view: Only name, key (must be unique) and homepage are mandatory - (`NOT_NU
 
 This is only relevant If you're an Install.Doctor user, then you might want to edit the way the applications are grouped by type. The Group view enables this, but you can also assign an application to a group in the Application edit view.
 
-![](./assets/start - groups.png)
+![](./assets/start-groups.png)
 
 
 Selecting a group opens the edit view, where yu can move apps in and out of the group.
