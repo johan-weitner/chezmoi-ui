@@ -86,7 +86,7 @@ The database is located on a dedicated volume, so it's persisted between session
 
 Install.Doctor's curated list is a bit of "everything for everyone", meaning there's no way you'll be interested in all the fields the list covers. In my experience, when working through very large datasets like these it helps to do it in two or more passes, with increasing scrutiny: First weed out the obvious lemons, at a relatively high velocity, preferrably directly from the list view, using keyboard shortcuts. And so on, however many passes seem adequate, until it's reasonable to do a more precise review of the remaining applications. Once you're somewhat happy with the list you can start adding your own favourites. And once you have a list that is wholly your own, it should hopefully be a lot easier to maintain it. Again, the challenge here is to consciously deliberate over a very large list that hides a surprising amount of gems - without losing one's mind, or giving up.  Hopefully this UI makes it a little easier than reading through the YAML file...
 
-It's up to you how you value the metadata though: Functionally there is no need to fill in the empty fields, (unless name or installation method is missing). But you have the choice. The homepage field is mandatory though, (although it isn't validated for a URL). In general: No attempt has been made to make this fool proof. I figure if you're interested in this particular rabbit hole, you have a fairly good idea of what you're doing.
+It's up to you how you value the metadata though: Functionally there is no need for Chezmoi users to fill in the empty fields, (unless name or installation method is missing). But you have the choice. The homepage field is mandatory though, (although it isn't validated for a URL). In general: No attempt has been made to make this fool proof. I figure if you're interested in this particular rabbit hole, you have a fairly good idea of what you're doing...
 
 
 
@@ -97,7 +97,7 @@ After first starting Chezmoi UI, the backend takes a moment to seed the database
 ![](./assets/start.png)
 
 
-Selecting an app in the list, you should see the detail view. It shows the name, the short description and the longer description of the app. Click the app title to open its homepage/Github page in a new window. Iconography indicates if any of the homepage, Github and documentation URLs are missing, as well as the tags associated with the app.  Hitting the Edit button opens the edit view.
+Selecting an app in the list opens the detail view. It shows the name, the short description and the longer description of the app. Click the app title to open its homepage/Github page in a new window. Iconography indicates if any of the homepage, Github and documentation URLs are missing, as well as the tags associated with the app.  Hitting the Edit button opens the edit view.
 
 ![](./assets/app-selection.png)
 
@@ -112,10 +112,13 @@ Edit view: Only name, key (must be unique) and homepage are mandatory - (`NOT_NU
 
 1. Add a new application to the list
    ![](./assets/menu-1.png)
+
 2. Open the filter menu
    ![](./assets/menu-2.png)
+
 3. Search for an app
    ![](./assets/menu-3.png)
+
 4. Export YAML file
    ![](./assets/menu-4.png)
 
@@ -124,9 +127,12 @@ Edit view: Only name, key (must be unique) and homepage are mandatory - (`NOT_NU
 ### Groups
 
 This is only relevant If you're an Install.Doctor user, then you might want to edit the way the applications are grouped by type. The Group view enables this, but you can also assign an application to a group in the Application edit view.
+
 ![](./assets/start - groups.png)
 
+
 Selecting a group opens the edit view, where yu can move apps in and out of the group.
+
 ![](./assets/group-edit.png)
 
 
