@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
+import errsole from 'errsole';
+import ErrsoleSQLite from 'errsole-sqlite';
 import cors from "cors";
 import express from "express";
 import YAML from "yaml";
@@ -32,12 +34,17 @@ import {
 import { log } from "./src/util/logger.js";
 import { getYamlExport, getFilteredYamlExport, getInstallDoctorExport } from "./src/util/export.js";
 
-const app = express();
-const port = process.env.BACKEND_SRV_PORT || 3000;
+errsole.initialize({
+	storage: new ErrsoleSQLite('./.errsole/database.sqlite'),
+	collectLogs: ["error", "info", "warn", "debug"],
+});
 
 log.setLevel(process.env.LOG_LEVEL || "INFO");
+
 initialize(); // Set up auxillary infrastructure
 
+const app = express();
+const port = process.env.BACKEND_SRV_PORT || 3000;
 app.set("json spaces", 2);
 app.use(cors());
 app.use(express.json({ limit: process.env.MAX_FILE_SIZE || "10mb" }));

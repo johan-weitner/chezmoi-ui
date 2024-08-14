@@ -13,3 +13,4 @@ server/prisma/dev.db-journal
 .autodoc
 autodoc*
 .envrc
+server/.errsole

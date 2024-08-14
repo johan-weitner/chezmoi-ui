@@ -53,26 +53,9 @@ model Tag {
   Application Application[]
 }
 
-// model ApplicationTag {
-//   application   Application @relation(fields: [applicationId], references: [id])
-//   applicationId Int
-//   tag           Tag         @relation(fields: [tagId], references: [id])
-//   tagId         Int
-
-//   @@id([applicationId, tagId])
-// }
-
 model Group {
   id   Int                @id @default(autoincrement())
   name String             @unique
   Application Application[]
 }
 
-// model ApplicationGroup {
-//   application   Application @relation(fields: [applicationId], references: [id])
-//   applicationId Int
-//   group         Group       @relation(fields: [groupId], references: [id])
-//   groupId       Int
-
-//   @@id([applicationId, groupId])
-// }
