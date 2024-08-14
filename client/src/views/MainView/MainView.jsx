@@ -33,15 +33,24 @@ const MainView = (props) => {
 					minHeight: "100% !important",
 				}}
 			>
-				<Header setShowAppGroupView={setShowAppGroupView} />
-				<Group className={s.groupListHeader}>
+				<Header
+					setShowAppGroupView={setShowAppGroupView}
+					data-testid="main-header"
+				/>
+				<Group className={s.groupListHeader} data-testid="view-header">
 					<HeaderIcon
 						style={{ width: rem(50), height: rem(50) }}
 						stroke={2}
 						color="#238be6"
 						className={commonCss.cardTitleIcon}
 					/>
-					<Text fz="xl" fw={500} className={s.mainTitle} mt="md">
+					<Text
+						fz="xl"
+						fw={500}
+						className={s.mainTitle}
+						mt="md"
+						data-testid="view-header-text"
+					>
 						{showAppGroupView ? "Groups" : "Applications"}
 					</Text>
 					{showAppGroupView ? <GroupViewMenu /> : <AppViewMenu />}
