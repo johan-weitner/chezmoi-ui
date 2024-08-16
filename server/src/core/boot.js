@@ -166,13 +166,13 @@ const doSeedGroups = async () => {
 	if (!groups) {
 		return;
 	}
-	const groupData = Object.keys(groups).map((key) => {
-		if (key.indexOf("_") !== 0) {
+	const groupData = Object.keys(groups)
+		.filter((key) => key.indexOf("_") !== 0)
+		.map((key) => {
 			return {
 				name: key
 			};
-		}
-	});
+		});
 	await seedGroups(groupData);
 	getGroupCount().then((count) => {
 		log.info(`Done seeding Group table with ${count} groups`);
