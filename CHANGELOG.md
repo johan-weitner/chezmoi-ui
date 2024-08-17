@@ -1,5 +1,11 @@
 # chezmoi-ui
 
+## 1.0.1
+
+### Patch Changes
+
+- Fix bug in seeding of application groups
+
 ## 1.0.0
 
 ### Major Changes
