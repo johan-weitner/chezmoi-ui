@@ -1,6 +1,6 @@
 {
   "name": "chezmoi-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A local web UI for managing the software list in a Chezmoi installation",
   "main": "start.sh",
   "author": "Johan Weitner",
