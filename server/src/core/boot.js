@@ -11,7 +11,7 @@ import {
 	getGroupCount
 } from "../db/dbService.js";
 import { styles } from "../util/styles.js";
-import { softwareYamlPath, softwareGroupYamlPath } from "./config.js";
+import { dbUrl, softwareYamlPath, softwareGroupYamlPath } from "./config.js";
 import { printAppLogo } from "./logo.js";
 import { log } from "../util/log.js";
 
@@ -24,46 +24,52 @@ export const initialize = () => {
 	log.info(bold("\n\n-= STARTING BACKEND SERVER... =-\n"));
 
 	_checkEnvVars();
+	_checkDbExists();
 	const { sourceExists } = _checkFileExistence();
 
-	log.info(bold("Path to source file: ") + softwareYamlPath);
-	log.info(bold("Path to software groups file: ") + softwareGroupYamlPath);
+	log.info(bold("\nPath to apps source file: ") + softwareYamlPath);
+	log.info(bold("Path to groups source file: ") + softwareGroupYamlPath);
 	sourceExists
-		? log.success(`Found ${check} \n`)
-		: log.error(`Not found ${cross} \n`);
+		? log.success(`${check} Found \n`)
+		: log.warn("! One or both files missing - skipping seeding db\n");
 
-	_seedDbIfEmpty();
+	sourceExists && _seedDbIfEmpty();
 };
 
 export const _checkEnvVars = () => {
 	if (!softwareYamlPath || !softwareGroupYamlPath) {
-		log.error(error("Missing environment variable"));
-		log.error(
-			error(
+		log.warn(warn("Missing environment variable"));
+		log.warn(
+			warn(
 				"\x1b[31m%s\x1b[0m",
-				"Please set SOURCE_FILE and SOURCE_GRP_FILE in either a .env file or in your environment",
+				"If you want to seed the database, please set SOURCE_FILE and SOURCE_GRP_FILE \
+				in either a .env file or in your environment",
 			),
 		);
-		process.exit(1);
 	}
 };
 
 export const _checkFileExistence = () => {
 	const sourceExists =
 		fs.existsSync(softwareYamlPath) && fs.existsSync(softwareGroupYamlPath);
+	return { sourceExists };
+};
 
-	if (!sourceExists) {
-		log.error(error("Source file is missing"));
+const _checkDbExists = () => {
+	if (!fs.existsSync(dbUrl.replace("file:", ""))) {
+		log.error(error("Database is missing"));
 		log.error(
 			error(
 				"\x1b[31m%s\x1b[0m",
-				"Please point SOURCE_FILE and SOURCE_GRP_FILE to existing files",
+				"Could not find database file at",
+				dbUrl
 			),
 		);
+		log.info("Exiting...\n")
 		process.exit(1);
+	} else {
+		log.info(`${bold("Database URL is set to:")} ${dbUrl}`);
 	}
-
-	return { sourceExists };
 };
 
 export const _setupFileData = () => {

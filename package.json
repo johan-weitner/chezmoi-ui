@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.27.7",
-    "turbo": "^2.0.12"
+    "turbo": "^2.0.14"
   },
   "workspaces": [
     ".",
