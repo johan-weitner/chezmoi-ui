@@ -26,6 +26,7 @@ import {
 } from "store/store";
 import { usePageManager } from "./PageManager";
 import { useGroupManager } from "./GroupManager";
+import { useSelectionManager } from "./SelectionManager";
 import { log } from 'utils/logger';
 import { mapEntityToDb } from "api/helpers";
 import { setSelectedApp } from "../store/store";
@@ -36,6 +37,7 @@ export const useDataManager = () => {
 	const PAGE_SIZE = Number.parseInt(import.meta.env.VITE_PAGE_SIZE) || 20;
 	const { gotoPage, getPageContent } = usePageManager();
 	const { seedGroups } = useGroupManager();
+	const { selectNextApp } = useSelectionManager();
 
 	const useBootstrap = () => {
 		return useEffect(() => {
@@ -122,6 +124,7 @@ export const useDataManager = () => {
 				const newPage = pageContent.filter((app) => app.id !== appId);
 				dispatch(setAppCollection(newList));
 				dispatch(setPageContent(newPage));
+				selectNextApp(appId);
 				toggleLoading(false);
 				toast.success("App deleted successfully");
 			})

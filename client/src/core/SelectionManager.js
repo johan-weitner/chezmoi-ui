@@ -67,8 +67,10 @@ export const useSelectionManager = () => {
 		}
 	};
 
-	const selectNextApp = () => {
-		const currentKey = getState().selectedAppKey;
+	const selectNextApp = (appId) => {
+		const currentKey = appId ?
+			getState().pageContent.find((app) => app.id === appId)?.key :
+			getState().selectedAppKey;
 		const nextKey = getNextKey(getState());
 		const nextApp = selectAppByKey(nextKey);
 		dispatch(setSelectedApp(nextApp));

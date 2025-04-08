@@ -1,6 +1,6 @@
 import { ActionIcon, Text, Title, Tooltip, Modal } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { useClickOutside } from "@mantine/hooks";
 import { useClientManager } from "core/ClientManager";
@@ -20,6 +20,11 @@ const SearchWidget = (props) => {
 	useHotkeys("alt + f", () => setIsOpen(true));
 
 	const btnRef = useRef();
+	const searchFieldRef = useRef();
+
+	useEffect(() => {
+		searchFieldRef?.current?.focus();
+	}, [isOpen]);
 
 	const openApp = (key) => {
 		log.debug("Open app", key);
@@ -68,6 +73,7 @@ const SearchWidget = (props) => {
 						size="xl"
 						className="neubtn"
 						onClick={() => setIsOpen(!isOpen)}
+						autoFocus={false}
 					>
 						<IconSearch size={24} color="#999" />
 					</ActionIcon>
@@ -86,7 +92,7 @@ const SearchWidget = (props) => {
 				shadow="xl"
 				transitionProps={{ transition: "pop", duration: 300 }}
 			>
-				<Title mt={20} mb={10} size={30} fw={500}>
+				<Title mt={20} mb={10} size={30} fw={500} autoFocus={false}>
 					Search applications
 				</Title>
 				<ReactSearchAutocomplete
@@ -94,8 +100,9 @@ const SearchWidget = (props) => {
 					styling={styling}
 					resultStringKeyName="name"
 					onSelect={handleOnSelect}
-					autoFocus
 					formatResult={formatResult}
+					autoFocus={true}
+					ref={searchFieldRef}
 				/>
 			</Modal>
 			{/* {isOpen && (

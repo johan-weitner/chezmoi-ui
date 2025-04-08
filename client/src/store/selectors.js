@@ -45,10 +45,10 @@ export const getPreviousKey = (state) => {
 	return appCollection[0].key;
 };
 
-export const getNextKey = () => {
-	const index = getCurrentIndex();
+export const getNextKey = (appKey) => {
 	const totalCount = getState().totalCount;
 	const appCollection = getState().appCollection;
+	const index = appKey ? findIndexByKey(appKey, appCollection) : getCurrentIndex();
 	if (index < totalCount - 1) {
 		return appCollection[index + 1].key;
 	}

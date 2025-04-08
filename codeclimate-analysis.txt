@@ -1,0 +1,215 @@
+codeclimate analyze
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
+Starting analysis
+Running structure: Done!
+Running duplication: Done!
+
+== client/src/api/appCollectionApi.spec.js (2 issues) ==
+30-37: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+45-52: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/api/filterApi.js (3 issues) ==
+30-33: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+35-38: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+40-57: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/api/filterApi.spec.js (5 issues) ==
+17-22: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+57-60: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+70-79: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+81-90: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+94-111: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/api/helpers.js (1 issue) ==
+25-32: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/components/Header.jsx (1 issue) ==
+9-39: Function `Header` has 28 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/components/Indicator.jsx (2 issues) ==
+5-13: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+15-23: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/components/Toolbar.jsx (3 issues) ==
+10-89: Function `Toolbar` has 71 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+28-35: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+36-46: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/core/GroupManager.js (5 issues) ==
+20-157: Function `useGroupManager` has a Cognitive Complexity of 20 (exceeds 5 allowed). Consider refactoring. [structure]
+20-157: Function `useGroupManager` has 123 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+90-101: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+110-120: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+145-156: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/core/PageManager.js (1 issue) ==
+9-42: Function `usePageManager` has 28 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/core/SelectionManager.js (2 issues) ==
+20-114: Function `useSelectionManager` has a Cognitive Complexity of 9 (exceeds 5 allowed). Consider refactoring. [structure]
+20-114: Function `useSelectionManager` has 82 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/store/mockStore.js (1 issue) ==
+5-8: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/utils/groupUtils.js (3 issues) ==
+10-42: Function `processMetaGroups` has a Cognitive Complexity of 20 (exceeds 5 allowed). Consider refactoring. [structure]
+10-42: Function `processMetaGroups` has 27 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+45-53: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/utils/groupUtils.spec.js (1 issue) ==
+4-12: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/utils/pageUtils.js (1 issue) ==
+19-26: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/ApplicationGroupView/GroupDetailView.jsx (2 issues) ==
+20-95: Function `GroupDetailView` has 73 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+54-90: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/ApplicationGroupView/GroupList.jsx (3 issues) ==
+9-66: Function `GroupList` has 55 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+25-38: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+39-63: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/ApplicationGroupView/Legend.jsx (3 issues) ==
+6-79: Function `Legend` has 71 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+32-45: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+46-76: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/DetailView/DetailView.jsx (1 issue) ==
+14-58: Function `DetailView` has 41 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/DetailView/DetailsBox.jsx (4 issues) ==
+17-138: Function `DetailsBox` has a Cognitive Complexity of 12 (exceeds 5 allowed). Consider refactoring. [structure]
+17-138: Function `DetailsBox` has 118 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+104-114: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+121-131: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/DetailView/Legend.jsx (2 issues) ==
+7-53: Function `Legend` has 45 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+20-50: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/EditView/EditView.jsx (1 issue) ==
+13-52: Function `EditView` has 36 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/EditView/EditViewForm.jsx (2 issues) ==
+17-123: Function `EditViewForm` has a Cognitive Complexity of 9 (exceeds 5 allowed). Consider refactoring. [structure]
+17-123: Function `EditViewForm` has 93 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/EditView/GroupSection.jsx (1 issue) ==
+7-47: Function `GroupSection` has 34 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/EditView/InfoSection.jsx (2 issues) ==
+12-59: Function `InfoSection` has 45 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+27-38: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/EditView/InstallerSection.jsx (2 issues) ==
+6-34: Function `InstallerSection` has 26 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+19-28: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/EditView/TagSection.jsx (1 issue) ==
+18-112: Function `TagSection` has 85 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/ListView/List.jsx (3 issues) ==
+9-95: Function `List` has 79 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+59-72: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+76-89: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/ListView/ListItem.jsx (7 issues) ==
+11-119: Function `ListItem` has a Cognitive Complexity of 12 (exceeds 5 allowed). Consider refactoring. [structure]
+11-119: Function `ListItem` has 104 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+49-53: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+62-66: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+72-79: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+85-92: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+103-110: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+
+== client/src/views/ListView/ListView.jsx (3 issues) ==
+16-81: Function `ListView` has a Cognitive Complexity of 9 (exceeds 5 allowed). Consider refactoring. [structure]
+16-81: Function `ListView` has 57 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+19-30: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/ListView/Pagination.jsx (1 issue) ==
+6-51: Function `PaginationBar` has 43 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/MainView/AppViewMenu.jsx (3 issues) ==
+24-144: Function `AppViewHeader` has 115 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+94-104: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+105-115: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== client/src/views/MainView/MainView.jsx (1 issue) ==
+22-60: Function `MainView` has 36 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== client/src/views/MainView/SearchWidget.jsx (1 issue) ==
+15-131: Function `SearchWidget` has 108 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== server/index.js (12 issues) ==
+1-383: File `index.js` has 336 lines of code (exceeds 250 allowed). Consider refactoring. [structure]
+49-53: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+55-59: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+97-115: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+117-135: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+164-168: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+195-203: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+207-224: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+279-291: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+293-305: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+322-330: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+348-363: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/core/boot.js (2 issues) ==
+18-19: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+130-168: Function `mapDataSeed` has 37 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== server/src/core/mockData.js (3 issues) ==
+3-36: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+38-67: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+75-91: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/db/applicationService.js (7 issues) ==
+1-327: File `applicationService.js` has 305 lines of code (exceeds 250 allowed). Consider refactoring. [structure]
+125-133: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+145-175: Function `updateApp` has 28 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+153-161: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+229-261: Function `filterAppsByNoInstallers` has 31 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+280-293: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+295-308: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/db/dbService.js (2 issues) ==
+22-31: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+33-42: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/db/dbService.test.js (4 issues) ==
+34-39: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+88-94: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+98-104: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+106-112: Similar blocks of code found in 3 locations. Consider refactoring. [duplication]
+
+== server/src/db/groupService.js (4 issues) ==
+64-92: Function `addAppToGroup` has 27 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+64-92: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+94-122: Function `removeAppFromGroup` has 27 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+94-122: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/db/tagService.js (3 issues) ==
+14-27: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+41-54: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+93-131: Function `updateAllowedTags` has 34 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== server/src/mock/mockData.js (3 issues) ==
+3-36: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+38-67: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+75-91: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/util/export.js (1 issue) ==
+24-97: Function `formatYaml` has 68 lines of code (exceeds 25 allowed). Consider refactoring. [structure]
+
+== server/src/util/helpers.test.js (2 issues) ==
+11-16: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+26-31: Similar blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+== server/src/util/log.js (1 issue) ==
+3-4: Identical blocks of code found in 2 locations. Consider refactoring. [duplication]
+
+Analysis complete! Found 118 issues.
