@@ -1,5 +1,11 @@
 # chezmoi-ui-server
 
+## 1.0.2
+
+### Patch Changes
+
+- Fix vulneraility in Vite 5.4
+
 ## 1.0.1
 
 ### Patch Changes
