@@ -42,6 +42,11 @@ app.set("json spaces", 2);
 app.use(cors());
 app.use(express.json({ limit: process.env.MAX_FILE_SIZE || "10mb" }));
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
 app.get("/", (req, res) => {
 	res.redirect(ROUTES.software);
 });

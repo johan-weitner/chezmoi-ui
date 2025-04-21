@@ -1,4 +1,7 @@
-FROM node:latest
+FROM node:20-slim
+
+# Install curl for healthcheck and tini for signal handling
+RUN apt-get update && apt-get install -y curl tini && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -14,4 +17,7 @@ RUN pnpx prisma migrate deploy --schema=./prisma/schema.prisma;
 
 EXPOSE 3000
 
-CMD node index.js
+ENV NODE_ENV=development
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["node", "index.js"]
