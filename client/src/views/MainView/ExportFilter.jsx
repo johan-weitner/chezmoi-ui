@@ -1,15 +1,15 @@
 import {
 	ActionIcon,
 	Button,
-	Group,
-	Title,
-	Text,
-	Table,
-	Checkbox,
 	Card,
+	Checkbox,
+	Group,
+	Table,
+	Text,
+	Title,
 } from "@mantine/core";
-import { IconX } from "@tabler/icons-react";
 import { useClickOutside } from "@mantine/hooks";
+import { IconX } from "@tabler/icons-react";
 import { useState } from "react";
 import commonCss from "views/ListView/ListView.module.css";
 import "components/neumorphic.css";

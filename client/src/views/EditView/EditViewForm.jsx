@@ -1,5 +1,3 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "store/store";
 import { Button, Flex } from "@mantine/core";
 import btn from "components/Buttons.module.css";
 import { APP_FORM, EMPTY_APP } from "constants/appForm";
@@ -7,12 +5,14 @@ import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
+import { setEditMode } from "../../store/store";
 import css from "./EditView.module.css";
+import GroupSection from "./GroupSection";
 import InfoSection from "./InfoSection";
 import InstallerSection from "./InstallerSection";
 import TagSection from "./TagSection";
-import GroupSection from "./GroupSection";
-import { setEditMode } from "../../store/store";
 
 const EditViewForm = (props) => {
 	const dispatch = useDispatch();

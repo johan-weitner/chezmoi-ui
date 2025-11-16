@@ -1,19 +1,19 @@
 import fs from "node:fs";
 import YAML from "yaml";
-import { tags } from "../db/fixtures/tags.js";
 import {
 	getCount,
+	getGroupCount,
 	getTagCount,
 	isEmptyDb,
 	seedDb,
-	seedTags,
 	seedGroups,
-	getGroupCount
+	seedTags,
 } from "../db/dbService.js";
-import { styles } from "../util/styles.js";
-import { softwareYamlPath, softwareGroupYamlPath } from "./config.js";
-import { printAppLogo } from "./logo.js";
+import { tags } from "../db/fixtures/tags.js";
 import { log } from "../util/log.js";
+import { styles } from "../util/styles.js";
+import { softwareGroupYamlPath, softwareYamlPath } from "./config.js";
+import { printAppLogo } from "./logo.js";
 
 export const { success, warn, error, bold, italic, check, cross, wsign } =
 	styles;
@@ -106,7 +106,7 @@ export const stripTrailingWhitespace = (str) => {
 
 export const _seedDbIfEmpty = async (forceSeed) => {
 	log.info("Set up db connection...");
-	const emptyDb = forceSeed || await isEmptyDb();
+	const emptyDb = forceSeed || (await isEmptyDb());
 
 	if (emptyDb) {
 		log.info("Empty db - seeding tables...");
@@ -170,7 +170,7 @@ const doSeedGroups = async () => {
 		.filter((key) => key.indexOf("_") !== 0)
 		.map((key) => {
 			return {
-				name: key
+				name: key,
 			};
 		});
 	await seedGroups(groupData);

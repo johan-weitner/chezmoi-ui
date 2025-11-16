@@ -2,14 +2,10 @@ import { findIndexByKey } from "api/helpers";
 import { createSelector } from "reselect";
 const PAGE_SIZE = import.meta.env.VITE_PAGE_SIZE;
 const DEBUG = import.meta.env.VITE_DEBUG_MODE === "true";
+import { filterModel } from "api/filterApi";
 import { useDispatch } from "react-redux";
 import { useSelector } from "store/store";
-import {
-	getState,
-	store,
-	setSelectedAppKey,
-} from "store/store";
-import { filterModel } from "api/filterApi";
+import { getState, setSelectedAppKey, store } from "store/store";
 
 const { dispatch } = store;
 
@@ -31,7 +27,7 @@ export const getSearchBase = () => {
 		return {
 			id: app.key,
 			label: app.name,
-			description: app.short
+			description: app.short,
 		};
 	});
 };
@@ -64,7 +60,9 @@ export const selectPageContent = () => {
 			appCollection.length > 20 &&
 			appCollection.slice(skip, cutoff)) ||
 		[];
-	dispatch(setSelectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key));
+	dispatch(
+		setSelectedAppKey(inReverse ? slice[slice.length - 1]?.key : slice[0]?.key),
+	);
 	return slice;
 };
 
@@ -103,4 +101,3 @@ export const getSelectedGroupId = () => {
 	const group = appGroups.find((group) => group.name === selectedGroupKey);
 	return group?.id;
 };
-

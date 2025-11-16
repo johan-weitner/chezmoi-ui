@@ -1,6 +1,6 @@
-import { Group, Title, Container } from "@mantine/core";
-import { useSelector } from "store/store";
+import { Container, Group, Title } from "@mantine/core";
 import React from "react";
+import { useSelector } from "store/store";
 import GridSpinner from "./GridSpinner";
 import classes from "./Header.module.css";
 import Toolbar from "./Toolbar";

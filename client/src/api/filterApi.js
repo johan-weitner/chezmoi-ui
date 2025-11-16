@@ -1,6 +1,6 @@
-import { getState } from "store/store";
-import { log } from 'utils/logger';
 import { appHasInstaller } from "api/helpers";
+import { getState } from "store/store";
+import { log } from "utils/logger";
 
 export const isColumnEmpty = (column) => {
 	return column === "" || column === null;

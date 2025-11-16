@@ -1,11 +1,11 @@
-import { forwardRef, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "store/store";
 import { Card, Modal } from "@mantine/core";
 import { randomId, useForceUpdate } from "@mantine/hooks";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
+import { forwardRef, useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
+import { useDispatch } from "react-redux";
+import { useSelector } from "store/store";
 import EditViewForm from "./EditViewForm";
 import "../../App.css";
 import { setEditMode } from "store/store";

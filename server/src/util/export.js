@@ -1,4 +1,9 @@
-import { getAllApps, getAllAppsWithTags, getAppsByTag, getGroupedApplications } from "../db/dbService.js";
+import {
+	getAllApps,
+	getAllAppsWithTags,
+	getAppsByTag,
+	getGroupedApplications,
+} from "../db/dbService.js";
 import { log } from "./logger.js";
 
 export const getYamlExport = async () => {
@@ -54,7 +59,7 @@ const formatYaml = (apps) => {
 			appstore,
 			pacman,
 			port,
-			appTags
+			appTags,
 		} = app;
 
 		log.debug("App tags: ", appTags);
@@ -88,7 +93,7 @@ const formatYaml = (apps) => {
 				appstore,
 				pacman,
 				port,
-				tags: appTags?.map(tag => tag.name),
+				tags: appTags?.map((tag) => tag.name),
 			},
 		});
 	}
@@ -101,9 +106,7 @@ const formatInstallDoctorYaml = (groups) => {
 	log.debug("Groups: ", groups.length);
 
 	for (const group of groups) {
-		const {
-			name, Application
-		} = group;
+		const { name, Application } = group;
 
 		const apps = [];
 		for (const app of Application) {

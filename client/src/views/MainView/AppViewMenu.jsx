@@ -8,18 +8,18 @@ import {
 	rem,
 	useMantineTheme,
 } from "@mantine/core";
-import { IconDownload, IconFilter, IconCirclePlus } from "@tabler/icons-react";
+import { IconCirclePlus, IconDownload, IconFilter } from "@tabler/icons-react";
 import { filterModel } from "api/filterApi";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import s from "views/ListView//ListView.module.css";
-import SearchWidget from "./SearchWidget";
 import ExportFilter from "./ExportFilter";
+import SearchWidget from "./SearchWidget";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
+import { setHideCompleted, store, useSelector } from "store/store";
 import { log } from "utils/logger";
-import { useSelector, store, setHideCompleted } from "store/store";
 
 export const AppViewHeader = (props) => {
 	const theme = useMantineTheme();

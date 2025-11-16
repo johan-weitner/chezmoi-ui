@@ -1,17 +1,17 @@
 import { Card } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { useClientManager } from "core/ClientManager";
-import { useGroupManager } from "../../core/GroupManager";
 import { ErrorBoundary } from "react-error-boundary";
 import { useHotkeys } from "react-hotkeys-hook";
+import { useDispatch } from "react-redux";
+import { MAIN_VIEWS } from "store/store";
+import { useSelector } from "store/store";
+import { setSelectedGroup, setSelectedGroupKey } from "store/store";
+import { useGroupManager } from "../../core/GroupManager";
 import List from "./List";
 import commonCss from "./ListView.module.css";
 // import { ListViewHeader } from "./ListViewHeader";
 import PaginationBar from "./Pagination";
-import { MAIN_VIEWS } from "store/store";
-import { useDispatch } from "react-redux";
-import { useSelector } from "store/store";
-import { setSelectedGroup, setSelectedGroupKey } from "store/store";
 
 const ListView = (props) => {
 	const dispatch = useDispatch();

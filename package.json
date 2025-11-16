@@ -32,8 +32,13 @@
     "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
   },
   "dependencies": {
-    "@changesets/cli": "^2.27.7",
-    "turbo": "^2.0.12"
+    "@changesets/cli": "^2.29.7",
+    "turbo": "^2.6.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "js-yaml": ">=4.1.1"
+    }
   },
   "workspaces": [
     ".",

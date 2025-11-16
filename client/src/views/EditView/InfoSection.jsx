@@ -1,4 +1,3 @@
-import { nanoid } from "nanoid";
 import {
 	Fieldset,
 	Group,
@@ -7,6 +6,7 @@ import {
 	Text,
 	Textarea,
 } from "@mantine/core";
+import { nanoid } from "nanoid";
 import classes from "./EditView.module.css";
 
 const InfoSection = (props) => {

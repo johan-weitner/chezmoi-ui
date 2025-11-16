@@ -1,7 +1,7 @@
 import axios from "axios";
-import { mapEntityToDb, transformNullValues } from "./helpers";
-import { log } from 'utils/logger';
 import { useClientManager } from "core/ClientManager";
+import { log } from "utils/logger";
+import { mapEntityToDb, transformNullValues } from "./helpers";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 const DEBUG = import.meta.env.VITE_DEBNUG === "true";
@@ -72,7 +72,9 @@ export const fetchApp = async (key) => {
 
 export const updateApp = async (updatedData, tags, groups) => {
 	const { getGroupId } = useClientManager();
-	const groupIds = groups?.map((group) => { return getGroupId(group) });
+	const groupIds = groups?.map((group) => {
+		return getGroupId(group);
+	});
 	if (tags) {
 		updatedData.appTags = tags;
 	}
@@ -84,7 +86,7 @@ export const updateApp = async (updatedData, tags, groups) => {
 		.post(`${BASE_URL}/updateNode`, {
 			...updatedData,
 			appTags: tags,
-			appGroups: groupIds
+			appGroups: groupIds,
 		})
 		.then((response) => {
 			return response.data;
@@ -148,7 +150,7 @@ export const markAppDone = async (app, flag) => {
 
 	const updatedApp = await axios
 		.post(`${BASE_URL}/updateField`, {
-			...update
+			...update,
 		})
 		.then((response) => {
 			return response.data;

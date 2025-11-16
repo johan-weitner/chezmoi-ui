@@ -1,10 +1,10 @@
-import React, { useCallback } from "react";
 import { Card } from "@mantine/core";
-import { useEffect, useState } from "react";
 import { useClientManager } from "core/ClientManager";
+import React, { useCallback } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "store/store";
 import ListItem from "./ListItem";
 import classes from "./ListView.module.css";
-import { useSelector } from "store/store";
 
 const List = (props) => {
 	const { deleteItem, editItem } = props;

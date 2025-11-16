@@ -9,10 +9,10 @@ import {
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { nanoid } from "nanoid";
+import { useSelector } from "store/store";
 import { isNullOrEmpty } from "utils/pageUtils";
 import classes from "views/MainView/MainView.module.css";
 import s from "./DetailView.module.css";
-import { useSelector } from "store/store";
 
 const DetailsBox = (props) => {
 	const { selectedApp } = props;

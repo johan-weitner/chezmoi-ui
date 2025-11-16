@@ -1,7 +1,7 @@
 import { Fieldset, TagsInput } from "@mantine/core";
-import { useSelector } from "store/store";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "store/store";
 import { log } from "utils/logger";
 
 const GroupSection = (props) => {

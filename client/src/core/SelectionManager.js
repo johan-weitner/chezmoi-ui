@@ -1,21 +1,26 @@
 import { fetchApp } from "api/appCollectionApi";
+import { transformNullValues } from "api/helpers";
 import { toast } from "sonner";
-import { getNextKey, getPreviousKey, selectAppByKey, getSearchBase } from "store/selectors";
+import {
+	getNextKey,
+	getPreviousKey,
+	getSearchBase,
+	selectAppByKey,
+} from "store/selectors";
 import {
 	getState,
-	store,
+	setEditMode,
+	setInReverse,
 	setIsLoading,
+	setIsNewApp,
 	setSelectedApp,
 	setSelectedAppKey,
-	setSelectedGroupKey,
 	setSelectedGroup,
-	setIsNewApp,
-	setInReverse,
-	setEditMode
+	setSelectedGroupKey,
+	store,
 } from "store/store";
-import { transformNullValues } from "api/helpers";
+import { log } from "utils/logger";
 import { usePageManager } from "./PageManager";
-import { log } from 'utils/logger';
 
 export const useSelectionManager = () => {
 	const { dispatch } = store;
@@ -107,6 +112,6 @@ export const useSelectionManager = () => {
 		addItem,
 		clearAppSelection,
 		getSearchBase,
-		setSelectedGroupKey: selectGroup
+		setSelectedGroupKey: selectGroup,
 	};
 };

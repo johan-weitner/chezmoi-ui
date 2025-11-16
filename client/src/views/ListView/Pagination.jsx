@@ -1,6 +1,6 @@
-import { useSelector } from "react-redux";
 import { Pagination, Stack, Text } from "@mantine/core";
 import { filterModel } from "api/filterApi";
+import { useSelector } from "react-redux";
 import css from "./ListView.module.css";
 
 const PaginationBar = (props) => {

@@ -1,7 +1,7 @@
 import {
 	appHasInstaller,
-	findIndexByKey,
 	findIndexById,
+	findIndexByKey,
 	isEndOfPage,
 	isNullOrEmpty,
 	isStartOfPage,
@@ -128,7 +128,7 @@ describe("helpers", () => {
 				id: 1,
 				desc: "",
 				done: false,
-				edited: true
+				edited: true,
 			};
 
 			const expectedEntity = {
@@ -136,7 +136,7 @@ describe("helpers", () => {
 				id: 1,
 				desc: "",
 				done: false,
-				edited: true
+				edited: true,
 			};
 
 			expect(mapEntityToDb(appEntity)).toEqual(expectedEntity);

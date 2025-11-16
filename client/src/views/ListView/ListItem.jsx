@@ -2,11 +2,11 @@ import { Text, rem } from "@mantine/core";
 import FallbackComponent from "components/FallbackComponent";
 import { EditedIndicator } from "components/Indicator";
 import { ICON } from "constants/icons";
+import { useGroupManager } from "core/GroupManager";
 import React, { useEffect, useState, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import classes from "./ListView.module.css";
 import { MAIN_VIEWS, useSelector } from "store/store";
-import { useGroupManager } from "core/GroupManager";
+import classes from "./ListView.module.css";
 
 const ListItem = React.memo((props) => {
 	const { setSelectedAppKey, app, deleteItem, editItem, mainView, isSelected } =

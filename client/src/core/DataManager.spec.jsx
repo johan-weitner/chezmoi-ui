@@ -1,25 +1,25 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { useDataManager } from "./DataManager";
 import {
 	deleteApp,
+	fetchAppGroups,
 	getAllApps,
 	getAllTags,
 	updateTagWhiteList,
-	fetchAppGroups,
 } from "api/fetchApi";
+import { mockState } from "store/mockStore";
 import { selectPageContent } from "store/selectors";
 import {
 	getState,
-	store,
-	setAppCollection,
-	setPageContent,
-	setTotalCount,
-	setPageCount,
-	setPage,
 	setAllowedTags,
+	setAppCollection,
+	setPage,
+	setPageContent,
+	setPageCount,
 	setSelectedAppKey,
+	setTotalCount,
+	store,
 } from "store/store";
-import { mockState } from "store/mockStore";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+import { useDataManager } from "./DataManager";
 
 vi.mock("api/fetchApi", () => ({
 	deleteApp: vi.fn().mockResolvedValue(),

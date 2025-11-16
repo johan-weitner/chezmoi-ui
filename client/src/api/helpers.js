@@ -1,6 +1,6 @@
 import { appModelInstallerFields } from "api/appModel";
 import { APP_FORM } from "constants/appForm";
-import { log } from 'utils/logger';
+import { log } from "utils/logger";
 
 export const isStartOfPage = (index) => {
 	return index === 0;
@@ -35,15 +35,18 @@ export const mapEntityToDb = (app) => {
 	log.debug(
 		`Mapping app data to database entity:
 		- App:`,
-		app);
+		app,
+	);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
-	const validKeys = [...formPartOne, ...formPartTwo, "done"].map((item) => item.name);
+	const validKeys = [...formPartOne, ...formPartTwo, "done"].map(
+		(item) => item.name,
+	);
 	const entity = {
 		id: app.id,
 		desc: app.desc,
 		done: app.done,
-		edited: true
+		edited: true,
 	};
 	Object.keys(app).map((key) => {
 		if (validKeys.includes(key)) {

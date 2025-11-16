@@ -1,10 +1,10 @@
-import { Flex, Group, Button, rem } from "@mantine/core";
+import { Button, Flex, Group, rem } from "@mantine/core";
+import classes from "components/Toolbar.module.css";
 import { ICON } from "constants/icons";
 import { nanoid } from "nanoid";
-import classes from "components/Toolbar.module.css";
+import { useDispatch } from "react-redux";
 import { MAIN_VIEWS } from "store/store";
 import { setMainView } from "store/store";
-import { useDispatch } from "react-redux";
 import { useSelector } from "store/store";
 
 const Toolbar = (props) => {

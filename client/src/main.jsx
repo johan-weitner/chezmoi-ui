@@ -1,8 +1,8 @@
 import "utils/wdyr";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { store } from "store/store";
 import { Provider } from "react-redux";
+import { store } from "store/store";
 import "@mantine/core/styles.css";
 import "@mantine/spotlight/styles.css";
 import { MantineProvider, createTheme } from "@mantine/core";

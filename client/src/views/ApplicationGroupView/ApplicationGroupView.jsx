@@ -1,16 +1,16 @@
+import { Group, SimpleGrid, Text, rem } from "@mantine/core";
 import { useSelector } from "store/store";
-import { Group, rem, Text, SimpleGrid } from "@mantine/core";
 import "../../common.css";
-import GroupList from "./GroupList";
-import GroupDetailView from "./GroupDetailView";
 import FallbackComponent from "components/FallbackComponent";
-import ListView from "views/ListView/ListView";
-import Legend from "./Legend";
-import { ErrorBoundary } from "react-error-boundary";
-import commonCss from "views/ListView/ListView.module.css";
 import { ICON } from "constants/icons";
-import Toolbar from "./Toolbar";
+import { ErrorBoundary } from "react-error-boundary";
+import ListView from "views/ListView/ListView";
+import commonCss from "views/ListView/ListView.module.css";
+import GroupDetailView from "./GroupDetailView";
+import GroupList from "./GroupList";
 import s from "./GroupView.module.css";
+import Legend from "./Legend";
+import Toolbar from "./Toolbar";
 
 const ApplicationGroupView = (props) => {
 	const selectedGroupId = useSelector((state) => state.root.selectedGroupId);

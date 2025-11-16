@@ -4,12 +4,12 @@ import { useClientManager } from "core/ClientManager";
 import { useEffect, useRef, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import StickyBox from "react-sticky-box";
+import { useSelector } from "store/store";
 import EditView from "views/EditView/EditView";
 import commonCss from "views/MainView/MainView.module.css";
 import DetailViewHeader from "./DetailViewHeader";
 import DetailsBox from "./DetailsBox";
 import Legend from "./Legend";
-import { useSelector } from "store/store";
 
 const DetailView = (props) => {
 	const [currentApp, setCurrentApp] = useState(null);

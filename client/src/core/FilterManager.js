@@ -1,12 +1,8 @@
-import { filterModel } from "api/filterApi";
-import {
-	store,
-	setActiveFilter,
-	setFilteredList
-} from "store/store";
 import { fetchFilteredApps } from "api/fetchApi";
-import { log } from 'utils/logger';
+import { filterModel } from "api/filterApi";
 import { toast } from "sonner";
+import { setActiveFilter, setFilteredList, store } from "store/store";
+import { log } from "utils/logger";
 
 export const useFilterManager = () => {
 	const { dispatch } = store;
@@ -17,7 +13,8 @@ export const useFilterManager = () => {
 				dispatch(setActiveFilter(filter));
 				dispatch(setFilteredList(data));
 				return data;
-			}).catch((e) => {
+			})
+			.catch((e) => {
 				log.error(e.message);
 				toast.error(e.message);
 			});
