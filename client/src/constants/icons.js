@@ -1,9 +1,12 @@
 import {
 	IconAlertCircle,
+	IconArrowLeft,
+	IconArrowRight,
 	IconBarrel,
 	IconBeer,
 	IconBinary,
 	IconBook,
+	IconBox,
 	IconBrandApple,
 	IconBrandGit,
 	IconBrandGolang,
@@ -15,7 +18,9 @@ import {
 	IconDeviceFloppy,
 	IconDownload,
 	IconEdit,
+	IconEye,
 	IconFilter,
+	IconFolders,
 	IconMenu2,
 	IconPackages,
 	IconPlayerTrackNext,
@@ -27,11 +32,6 @@ import {
 	IconTrash,
 	IconWorldCode,
 	IconX,
-	IconFolders,
-	IconArrowRight,
-	IconArrowLeft,
-	IconEye,
-	IconBox
 } from "@tabler/icons-react";
 
 export const ICON = {
@@ -70,7 +70,7 @@ export const ICON = {
 	arrowRight: IconArrowRight,
 	arrowLeft: IconArrowLeft,
 	hide: IconEye,
-	box: IconBox
+	box: IconBox,
 };
 
 export const INDICATOR = {

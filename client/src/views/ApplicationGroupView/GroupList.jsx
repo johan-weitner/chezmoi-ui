@@ -1,10 +1,10 @@
-import { useSelector } from "store/store";
+import { Card, List, ThemeIcon, Title, rem } from "@mantine/core";
 import { nanoid } from "nanoid";
-import { rem, ThemeIcon, List, Card, Title } from "@mantine/core";
+import { useSelector } from "store/store";
 import "../../common.css";
 import { IconPackages } from "@tabler/icons-react";
-import s from "./GroupView.module.css";
 import { useClientManager } from "core/ClientManager";
+import s from "./GroupView.module.css";
 
 const GroupList = (props) => {
 	const { selectGroup } = useClientManager();

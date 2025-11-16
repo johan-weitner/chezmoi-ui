@@ -1,21 +1,21 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "store/store";
 import {
-	rem,
-	Container,
+	ActionIcon,
 	Card,
-	Title,
+	Container,
 	List,
 	ThemeIcon,
-	ActionIcon,
+	Title,
 	Tooltip,
+	rem,
 } from "@mantine/core";
 import { IconArrowLeft, IconPackages, IconTrash } from "@tabler/icons-react";
-import StickyBox from "react-sticky-box";
-import { nanoid } from "nanoid";
-import s from "./GroupView.module.css";
 import { useClientManager } from "core/ClientManager";
+import { nanoid } from "nanoid";
+import { useDispatch } from "react-redux";
+import StickyBox from "react-sticky-box";
+import { useSelector } from "store/store";
 import { setSelectedGroupId } from "store/store";
+import s from "./GroupView.module.css";
 
 const GroupDetailView = (props) => {
 	const dispatch = useDispatch();

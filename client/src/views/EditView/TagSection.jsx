@@ -1,19 +1,19 @@
 import {
-	Fieldset,
-	TagsInput,
 	ActionIcon,
-	Tooltip,
-	Card,
-	Title,
-	Flex,
 	Button,
+	Card,
+	Fieldset,
+	Flex,
+	TagsInput,
+	Title,
+	Tooltip,
 } from "@mantine/core";
-import { useSelector } from "store/store";
+import { getTagId } from "api/fetchApi";
 import { ICON } from "constants/icons";
 import { useClientManager } from "core/ClientManager";
 import { useState } from "react";
 import { useEffect } from "react";
-import { getTagId } from "api/fetchApi";
+import { useSelector } from "store/store";
 
 const TagSection = (props) => {
 	const { hoistAppTags } = props;

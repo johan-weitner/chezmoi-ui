@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
 	Container,
 	Group,
@@ -9,15 +8,16 @@ import {
 } from "@mantine/core";
 import { IconDownload } from "@tabler/icons-react";
 import Header from "components/Header.jsx";
+import { ICON } from "constants/icons";
+import { useState } from "react";
+import ApplicationGroupView from "views/ApplicationGroupView/ApplicationGroupView";
+import s from "views/ApplicationGroupView/GroupView.module.css";
 import DetailView from "views/DetailView/DetailView.jsx";
 import ListView from "views/ListView/ListView.jsx";
-import classes from "./MainView.module.css";
-import ApplicationGroupView from "views/ApplicationGroupView/ApplicationGroupView";
+import commonCss from "views/ListView/ListView.module.css";
 import AppViewMenu from "./AppViewMenu";
 import GroupViewMenu from "./GroupViewMenu";
-import { ICON } from "constants/icons";
-import s from "views/ApplicationGroupView/GroupView.module.css";
-import commonCss from "views/ListView/ListView.module.css";
+import classes from "./MainView.module.css";
 
 const MainView = (props) => {
 	const [showAppGroupView, setShowAppGroupView] = useState(false);

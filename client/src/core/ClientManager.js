@@ -1,8 +1,8 @@
 import { useDataManager } from "./DataManager";
 import { useFilterManager } from "./FilterManager";
+import { useGroupManager } from "./GroupManager";
 import { usePageManager } from "./PageManager";
 import { useSelectionManager } from "./SelectionManager";
-import { useGroupManager } from "./GroupManager";
 
 export const useClientManager = () => {
 	const dataManager = useDataManager();
@@ -18,6 +18,6 @@ export const useClientManager = () => {
 		...pageManager,
 		...selectionManager,
 		...filtermanager,
-		...groupManager
+		...groupManager,
 	};
 };

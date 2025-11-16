@@ -1,11 +1,11 @@
-import { ActionIcon, Text, Title, Tooltip, Modal } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
-import { useState, useRef } from "react";
-import { useHotkeys } from "react-hotkeys-hook";
+import { ActionIcon, Modal, Text, Title, Tooltip } from "@mantine/core";
 import { useClickOutside } from "@mantine/hooks";
-import { useClientManager } from "core/ClientManager";
-import { ErrorBoundary } from "react-error-boundary";
+import { IconSearch } from "@tabler/icons-react";
 import FallbackComponent from "components/FallbackComponent";
+import { useClientManager } from "core/ClientManager";
+import { useRef, useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
+import { useHotkeys } from "react-hotkeys-hook";
 import { useSelector } from "store/store";
 import { log } from "utils/logger";
 import "components/neumorphic.css";

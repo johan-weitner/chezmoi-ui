@@ -1,6 +1,6 @@
 {
   "name": "chezmoi-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A local web UI for managing the software list in a Chezmoi installation",
   "main": "start.sh",
   "author": "Johan Weitner",
@@ -32,8 +32,13 @@
     "url": "git+https://github.com/johan-weitner/chezmoi-ui.git"
   },
   "dependencies": {
-    "@changesets/cli": "^2.27.7",
-    "turbo": "^2.0.12"
+    "@changesets/cli": "^2.29.7",
+    "turbo": "^2.6.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "js-yaml": ">=4.1.1"
+    }
   },
   "workspaces": [
     ".",

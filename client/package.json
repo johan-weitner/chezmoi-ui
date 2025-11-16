@@ -1,6 +1,6 @@
 {
   "name": "chezmoi-ui-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -66,7 +66,7 @@
     "postcss-simple-vars": "^7.0.1",
     "react-hot-loader": "^4.13.1",
     "turbo": "^2.0.12",
-    "vite": "^5.4.17",
+    "vite": "^5.4.21",
     "vite-plugin-html": "^3.2.2",
     "vitest": "^3.1.1"
   },

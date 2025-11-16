@@ -1,10 +1,5 @@
 import { selectPageContent } from "store/selectors";
-import {
-	getState,
-	store,
-	setPage,
-	setPageContent,
-} from "store/store";
+import { getState, setPage, setPageContent, store } from "store/store";
 
 export const usePageManager = () => {
 	const { dispatch } = store;
