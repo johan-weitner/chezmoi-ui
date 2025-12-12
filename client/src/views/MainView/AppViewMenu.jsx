@@ -18,7 +18,7 @@ import ExportFilter from "./ExportFilter";
 import SearchWidget from "./SearchWidget";
 import "components/neumorphic.css";
 import { nanoid } from "nanoid";
-import { setHideCompleted, store, useSelector } from "store/store";
+import { setHideCompleted, setLibraryMode, store, useSelector } from "store/store";
 import { log } from "utils/logger";
 
 export const AppViewHeader = (props) => {
@@ -28,6 +28,7 @@ export const AppViewHeader = (props) => {
 		useClientManager();
 	const activeFilter = useSelector((state) => state.root.activeFilter);
 	const hideCompleted = useSelector((state) => state.root.hideCompleted);
+	const libraryMode = useSelector((state) => state.root.libraryMode);
 
 	const removeFilter = () => {
 		clearFilter();
@@ -39,6 +40,10 @@ export const AppViewHeader = (props) => {
 		removeFilter();
 		store.dispatch(setHideCompleted(true));
 		refreshAppCollection(true);
+	};
+
+	const toggleLibraryMode = () => {
+		store.dispatch(setLibraryMode(!libraryMode));
 	};
 
 	const doFilter = (filter) => {
@@ -102,17 +107,28 @@ export const AppViewHeader = (props) => {
 						>
 							Restore filter
 						</Menu.Item>
-						<Menu.Item
-							onClick={() => hideCompletedApps()}
-							leftSection={<ICON.hide size={16} />}
-							style={{
-								fontWeight: "bold",
-								borderTop: "1px solid #444",
-								borderBottom: "1px solid #444",
-							}}
-						>
-							Hide completed apps {hideCompleted ? <span> ✓</span> : null}
-						</Menu.Item>
+					<Menu.Item
+						onClick={() => hideCompletedApps()}
+						leftSection={<ICON.hide size={16} />}
+						style={{
+							fontWeight: "bold",
+							borderTop: "1px solid #444",
+							borderBottom: "1px solid #444",
+						}}
+					>
+						Hide completed apps {hideCompleted ? <span> ✓</span> : null}
+					</Menu.Item>
+					<Menu.Item
+						onClick={() => toggleLibraryMode()}
+						leftSection={<ICON.filter size={16} />}
+						style={{
+							fontWeight: "bold",
+							borderTop: "1px solid #444",
+							borderBottom: "1px solid #444",
+						}}
+					>
+						Library Mode {libraryMode ? <span> ✓</span> : null}
+					</Menu.Item>
 						{Object.keys(filterModel).map((key) => (
 							<Menu.Item
 								key={nanoid()}

@@ -27,6 +27,7 @@ const initialState = {
 	editMode: false,
 	isNewApp: false,
 	hideCompleted: false,
+	libraryMode: false,
 	isLoading: false,
 	error: null,
 };
@@ -98,6 +99,9 @@ const rootSlice = createSlice({
 		setHideCompleted: (state, action) => {
 			state.hideCompleted = action.payload;
 		},
+		setLibraryMode: (state, action) => {
+			state.libraryMode = action.payload;
+		},
 		setIsLoading: (state, action) => {
 			state.isLoading = action.payload;
 		},
@@ -130,6 +134,7 @@ export const {
 	setEditMode,
 	setIsNewApp,
 	setHideCompleted,
+	setLibraryMode,
 	setIsLoading,
 	setError,
 } = rootSlice.actions;

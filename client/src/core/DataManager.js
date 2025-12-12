@@ -4,6 +4,7 @@ import {
 	getAllApps,
 	getAllTags,
 	markAppDone,
+	markAppIncluded,
 	saveNewApp,
 	updateApp,
 	updateTagWhiteList,
@@ -208,6 +209,20 @@ export const useDataManager = () => {
 			});
 	};
 
+	const flagAppIncluded = async (app, flag = true) => {
+		markAppIncluded(app, flag)
+			.then((updatedApp) => {
+				updateAppInCollection({ ...app, included: flag });
+			})
+			.catch((err) => {
+				log.error(
+					"DataManager: Error toggling app included: ",
+					err.response.data.error,
+				);
+				toast.error("Error updating app included status");
+			});
+	};
+
 	const updateAllowedTags = async (tags) => {
 		dispatch(setIsLoading(true));
 		updateTagWhiteList(tags)
@@ -243,6 +258,7 @@ export const useDataManager = () => {
 		setIsLoading: toggleLoading,
 		setIsEditMode,
 		flagAppDone,
+		flagAppIncluded,
 		updateAllowedTags,
 	};
 };

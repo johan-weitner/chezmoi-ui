@@ -8,6 +8,7 @@ import {
 	getAllApps,
 	getPageSlice,
 	markAppDone,
+	markAppIncluded,
 	saveNewApp,
 	updateApp,
 } from "./appCollectionApi";
@@ -30,6 +31,7 @@ export {
 	saveNewApp,
 	deleteApp,
 	markAppDone,
+	markAppIncluded,
 	getAllApps,
 	fetchAppGroups,
 	fetchAppsInGroup,

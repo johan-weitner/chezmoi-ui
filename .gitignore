@@ -13,3 +13,14 @@ server/prisma/dev.db-journal
 .autodoc
 autodoc*
 .envrc
+docs/
+.vscode/
+client/playwright-report/
+client/test-results/
+client/coverage/
+server/test-results/
+server/coverage/
+.DS_Stores
+*.ps1
+vulnerabilities.md
+WARP.md

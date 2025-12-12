@@ -6,15 +6,21 @@ import {
 } from "../db/dbService.js";
 import { log } from "./logger.js";
 
-export const getYamlExport = async () => {
-	const apps = await getAllAppsWithTags();
+export const getYamlExport = async (libraryMode = false) => {
+	let apps = await getAllAppsWithTags();
+	if (libraryMode) {
+		apps = apps.filter(app => app.included === true);
+	}
 	log.debug(apps);
 	const output = formatYaml(apps);
 	return output;
 };
 
-export const getFilteredYamlExport = async (tags) => {
-	const apps = await getAppsByTag(tags);
+export const getFilteredYamlExport = async (tags, libraryMode = false) => {
+	let apps = await getAppsByTag(tags);
+	if (libraryMode) {
+		apps = apps.filter(app => app.included === true);
+	}
 	log.debug("Export: Filtered apps: ", apps?.length);
 	const output = formatYaml(apps);
 	return output;

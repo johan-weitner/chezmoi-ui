@@ -4,6 +4,7 @@ import {
 	Card,
 	Checkbox,
 	Group,
+	Switch,
 	Table,
 	Text,
 	Title,
@@ -21,8 +22,10 @@ import { log } from "utils/logger";
 const ExportFilter = (props) => {
 	const { setExportIsOpen } = props;
 	const [selectedTags, setSelectedTags] = useState([]);
+	const [useLibraryMode, setUseLibraryMode] = useState(false);
 	const ref = useClickOutside(() => setExportIsOpen(false));
 	const BASE_URL = import.meta.env.VITE_BACKEND_URL;
+	const libraryMode = useSelector((state) => state.root.libraryMode);
 
 	useEffect(() => {
 		log.debug("Selected tags: ", selectedTags);
@@ -38,8 +41,9 @@ const ExportFilter = (props) => {
 
 	const downloadYaml = () => {
 		log.debug("Download YAML filtered on tags: ", selectedTags);
-		if (selectedTags.length === 0) return window.open(`${BASE_URL}/download`);
-		window.open(`${BASE_URL}/filtered-download?tags=${selectedTags.join(",")}`);
+		const libraryParam = useLibraryMode ? '&libraryMode=true' : '';
+		if (selectedTags.length === 0) return window.open(`${BASE_URL}/download?libraryMode=${useLibraryMode}`);
+		window.open(`${BASE_URL}/filtered-download?tags=${selectedTags.join(",")}${libraryParam}`);
 	};
 
 	return (
@@ -47,9 +51,19 @@ const ExportFilter = (props) => {
 			<Title fw="normal" pt="20px" mb="20px">
 				YAML Export
 			</Title>
+			{libraryMode && (
+				<Switch
+					label="Library Mode: Only export apps marked as included"
+					checked={useLibraryMode}
+					onChange={(event) => setUseLibraryMode(event.currentTarget.checked)}
+					mb="20px"
+					size="md"
+				/>
+			)}
 			<Text size="lg" mb="40px">
-				Choose what tag(s) to filter the export on, or leave empty to export the
-				whole list.
+				{useLibraryMode 
+					? "Only apps you've marked for inclusion will be exported. Optionally filter by tag(s) below."
+					: "Choose what tag(s) to filter the export on, or leave empty to export the whole list."}
 			</Text>
 			<Table mb={30}>
 				<Table.Thead>

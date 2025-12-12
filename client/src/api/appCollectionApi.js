@@ -161,4 +161,21 @@ export const markAppDone = async (app, flag) => {
 	return updatedApp;
 };
 
+export const markAppIncluded = async (app, flag) => {
+	const update = { id: app.id, included: flag };
+	log.debug("Toggled app included: ", update);
+
+	const updatedApp = await axios
+		.post(`${BASE_URL}/updateField`, {
+			...update,
+		})
+		.then((response) => {
+			return response.data;
+		})
+		.catch((error) => {
+			throw error;
+		});
+	return updatedApp;
+};
+
 export const getAllApps = fetchApps;

@@ -45,6 +45,7 @@ model Application {
   port             String?            @default("")
   done             Boolean            @default(false)
   edited           Boolean            @default(false)
+  included         Boolean            @default(false)
   appTags          Tag[]
   appGroups        Group[]
 }

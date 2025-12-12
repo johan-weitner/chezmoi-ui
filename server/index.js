@@ -204,7 +204,9 @@ app.delete(ROUTES.deleteAppTag, (req, res) => {
 });
 
 app.get(ROUTES.download, (req, res) => {
-	getYamlExport().then(apps => {
+	const { libraryMode } = req.query;
+	const isLibraryMode = libraryMode === 'true';
+	getYamlExport(isLibraryMode).then(apps => {
 		const yamlFile = YAML.stringify(apps);
 
 		const filename = `software-custom-${new Date().getTime()}.yaml`;
@@ -225,15 +227,16 @@ app.get(ROUTES.download, (req, res) => {
 });
 
 app.get(ROUTES.filteredDownload, (req, res) => {
-	const { tags } = req.query;
+	const { tags, libraryMode } = req.query;
 	const tagsArray = tags.split(",");
 	log.debug(`Tags: - ${tagsArray} - isArray: ${Array.isArray(tagsArray)}`);
 	const tagIntArray = tagsArray.map(tag => {
 		return Number.parseInt(tag, 10);
 	});
 	log.debug(`TagIntArray: - ${tagIntArray} - isArray: ${Array.isArray(tagsArray)}`);
+	const isLibraryMode = libraryMode === 'true';
 
-	getFilteredYamlExport(tagIntArray).then(apps => {
+	getFilteredYamlExport(tagIntArray, isLibraryMode).then(apps => {
 		const yamlFile = YAML.stringify(apps);
 
 		const filename = `software-custom-(${tagsArray.join("-")})-${new Date().getTime()}.yaml`;

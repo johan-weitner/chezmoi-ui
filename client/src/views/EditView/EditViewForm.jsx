@@ -20,12 +20,14 @@ const EditViewForm = (props) => {
 	const [appTags, setAppTags] = useState();
 	const [appGroups, setAppGroups] = useState();
 	const [isDone, setIsDone] = useState(false);
-	const { updateItem, saveNewItem, setSelectedAppKey, flagAppDone } =
+	const [isIncluded, setIsIncluded] = useState(false);
+	const { updateItem, saveNewItem, setSelectedAppKey, flagAppDone, flagAppIncluded } =
 		useClientManager();
 
 	const selectedApp = useSelector((state) => state.root.selectedApp);
 	const selectedAppKey = useSelector((state) => state.root.selectedAppKey);
 	const isNewApp = useSelector((state) => state.root.isNewApp);
+	const libraryMode = useSelector((state) => state.root.libraryMode);
 
 	const defaultValues = newApp || !selectedApp ? EMPTY_APP : selectedApp;
 	const { register, handleSubmit, reset } = useForm({
@@ -36,17 +38,20 @@ const EditViewForm = (props) => {
 		if (!selectedAppKey) {
 			setNewApp(true);
 			setIsDone(false);
+			setIsIncluded(false);
 			resetForm();
 			return;
 		}
 
 		setNewApp(false);
 		setIsDone(selectedApp?.done);
+		setIsIncluded(selectedApp?.included);
 		reset(selectedApp);
 	}, [selectedApp]);
 
 	useEffect(() => {
 		setIsDone(selectedApp?.done);
+		setIsIncluded(selectedApp?.included);
 	}, []);
 
 	const { formPartOne, formPartTwo } = APP_FORM;
@@ -81,6 +86,12 @@ const EditViewForm = (props) => {
 		});
 	};
 
+	const flipIncludedFlag = () => {
+		flagAppIncluded(selectedApp, !isIncluded).then((app) => {
+			setIsIncluded(!isIncluded);
+		});
+	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={css.editForm}>
 			<h2 className={css.editDetailHeader}>
@@ -103,6 +114,15 @@ const EditViewForm = (props) => {
 				>
 					{isDone ? "Unmark" : "Mark"} as complete
 				</Button>
+				{libraryMode && (
+					<Button
+						onClick={() => flipIncludedFlag()}
+						className={isIncluded ? btn.greenBtn : btn.cancelBtn}
+						leftSection={isIncluded ? <ICON.check /> : null}
+					>
+						{isIncluded ? "Remove from" : "Include in"} collection
+					</Button>
+				)}
 				<Button onClick={() => closeModal()} className={btn.cancelBtn}>
 					Cancel
 				</Button>
