@@ -33,12 +33,7 @@
   },
   "dependencies": {
     "@changesets/cli": "^2.29.8",
-    "turbo": "^2.6.1"
-  },
-  "pnpm": {
-    "overrides": {
-      "esbuild": ">=0.25.0"
-    }
+    "turbo": "^2.9.16"
   },
   "type": "module"
 }
