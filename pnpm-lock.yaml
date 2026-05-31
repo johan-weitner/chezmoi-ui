@@ -17,9 +17,9 @@ overrides:
   lodash-es: 4.18.1
   qs: 6.15.2
   follow-redirects: 1.16.0
-  happy-dom: 20.9.0
-  vite: '>=6.4.2'
-  yaml: '>=2.8.3'
+  happy-dom: ^20.9.0
+  vite: ^6.4.2
+  yaml: ^2.8.3
 
 importers:
 
@@ -128,7 +128,7 @@ importers:
         specifier: ^0.1.1
         version: 0.1.1(vitest@3.2.4(@types/node@20.19.25)(happy-dom@20.9.0)(sugarss@5.0.1(postcss@8.5.15))(terser@5.44.1)(yaml@2.9.0))
       yaml:
-        specifier: '>=2.8.3'
+        specifier: ^2.8.3
         version: 2.9.0
     devDependencies:
       '@biomejs/biome':
@@ -156,7 +156,7 @@ importers:
         specifier: ^16.4.5
         version: 16.6.1
       happy-dom:
-        specifier: 20.9.0
+        specifier: ^20.9.0
         version: 20.9.0
       husky:
         specifier: ^9.1.7
@@ -180,7 +180,7 @@ importers:
         specifier: ^2.9.16
         version: 2.9.16
       vite:
-        specifier: '>=6.4.2'
+        specifier: ^6.4.2
         version: 6.4.2(@types/node@20.19.25)(sugarss@5.0.1(postcss@8.5.15))(terser@5.44.1)(yaml@2.9.0)
       vite-plugin-html:
         specifier: ^3.2.2
@@ -207,7 +207,7 @@ importers:
         specifier: ^4.20.0
         version: 4.22.1
       yaml:
-        specifier: '>=2.8.3'
+        specifier: ^2.8.3
         version: 2.9.0
     devDependencies:
       '@biomejs/biome':
@@ -1259,7 +1259,7 @@ packages:
     peerDependencies:
       '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
       babel-plugin-react-compiler: ^1.0.0
-      vite: '>=6.4.2'
+      vite: ^6.4.2
     peerDependenciesMeta:
       '@rolldown/plugin-babel':
         optional: true
@@ -1273,7 +1273,7 @@ packages:
     resolution: {integrity: sha512-46ryTE9RZO/rfDd7pEqFl7etuyzekzEhUbTW3BvmeO/BcCMEgq59BKhek3dXDWgAj4oMK6OZi+vRr1wPW6qjEQ==}
     peerDependencies:
       msw: ^2.4.9
-      vite: '>=6.4.2'
+      vite: ^6.4.2
     peerDependenciesMeta:
       msw:
         optional: true
@@ -3427,7 +3427,7 @@ packages:
   vite-plugin-html@3.2.2:
     resolution: {integrity: sha512-vb9C9kcdzcIo/Oc3CLZVS03dL5pDlOFuhGlZYDCJ840BhWl/0nGeZWf3Qy7NlOayscY4Cm/QRgULCQkEZige5Q==}
     peerDependencies:
-      vite: '>=6.4.2'
+      vite: ^6.4.2
 
   vite@6.4.2:
     resolution: {integrity: sha512-2N/55r4JDJ4gdrCvGgINMy+HH3iRpNIz8K6SFwVsA+JbQScLiC+clmAxBgwiSPgcG9U15QmvqCGWzMbqda5zGQ==}
@@ -3444,7 +3444,7 @@ packages:
       sugarss: '*'
       terser: ^5.16.0
       tsx: ^4.8.1
-      yaml: '>=2.8.3'
+      yaml: ^2.8.3
     peerDependenciesMeta:
       '@types/node':
         optional: true
@@ -3484,7 +3484,7 @@ packages:
       '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
       '@vitest/browser': 3.2.4
       '@vitest/ui': 3.2.4
-      happy-dom: 20.9.0
+      happy-dom: ^20.9.0
       jsdom: '*'
     peerDependenciesMeta:
       '@edge-runtime/vm':
