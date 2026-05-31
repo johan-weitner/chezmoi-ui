@@ -7,7 +7,9 @@ import path from "node:path";
 // https://vitejs.dev/config/ // add env varible specified in .env file
 /** @type {import('vite').UserConfig} */
 export default defineConfig({
-  sourcemap: true,
+  build: {
+    sourcemap: true,
+  },
   plugins: [
     react()
   ],
